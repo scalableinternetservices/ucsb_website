@@ -1,7 +1,7 @@
 ---
-layout: page
-title: Lecture Schedule
+layout: default
 permalink: /lecture/
+title: Lecture Schedule
 ---
 
 The following dates and topics are subject to change. Links to slides will be

@@ -1,7 +1,7 @@
 ---
-layout: page
-title: Course Project
+layout: default
 permalink: /project/
+title: Course Project
 ---
 
 ## Objective

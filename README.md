@@ -31,3 +31,9 @@ branch where the markdown sources live. Then use the ghp-import tool to publish
 the site.
 
     ghp-import _site -pm "COMMIT MESSAGE"
+
+---
+
+Site theme originally based on
+[jekyll-clean](https://github.com/scotte/jekyll-clean) by Scott
+Emmons. jekyll-clean was released under the Creative Commons Attribution.

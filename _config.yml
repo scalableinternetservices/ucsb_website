@@ -1,12 +1,16 @@
 # Site settings
-title: CS290B
-email: bboe@cs.ucsb.edu
+title: Computer Science 290B
+
 description: > # this means to ignore newlines until "baseurl:"
-  Course material for UCSB's CS290B, Scalable Internet Services
+  Scalable Internet Services, CS290B, Fall 2015
+
 baseurl: "/ucsb_website" # the subpath of your site, e.g. /blog/
+
 url: "" # the base hostname & protocol for your site
-# twitter_username: jekyllrb
+
 github_username:  scalableinternetservices
+
+instructor: "Bryce Boe"
 
 # Build settings
 markdown: kramdown
