@@ -4,7 +4,7 @@ title: Computer Science 290B
 description: > # this means to ignore newlines until "baseurl:"
   Scalable Internet Services, CS290B, Fall 2015
 
-baseurl: "/ucsb_website" # the subpath of your site, e.g. /blog/
+baseurl: "" # the subpath of your site, e.g. /blog/
 
 url: "" # the base hostname & protocol for your site
 
