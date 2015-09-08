@@ -14,3 +14,6 @@ instructor: "Bryce Boe"
 
 # Build settings
 markdown: kramdown
+
+gems:
+  - jekyll-sitemap
