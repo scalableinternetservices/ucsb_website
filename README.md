@@ -6,7 +6,7 @@ In order to build and update the website you will need two tools:
 
 Jekyll is a ruby gem that generates websites from markdown. To install it run:
 
-    gem install jekyll
+    gem install jekyll jekyll-sitemap
 
 ### ghp-import
 
