@@ -23,10 +23,10 @@ Phelps 3523
 
 ## Textbooks
 
-[Agile Web Development with Rails 4](http://www.amazon.com/Agile-Development-Rails-Facets-Ruby/dp/1937785564/)  
+[Agile Web Development with Rails 4](http://www.amazon.com/gp/product/1937785564/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=1937785564&linkCode=as2&tag=bryceboe-20&linkId=ZZQH7R6MHXNHU6VQ)  
 ISBN: 9781937785567  
 _A copy will be available in the library reserves._
 
-[High Performance Browser Networking](http://www.amazon.com/High-Performance-Browser-Networking-performance/dp/1449344763)  
+[High Performance Browser Networking](http://www.amazon.com/gp/product/1449344763/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=1449344763&linkCode=as2&tag=f-4-20&linkId=ZD3ZDBNOTM6C4OWS)  
 ISBN: 9781449344764  
 _[Available online](http://chimera.labs.oreilly.com/books/1230000000545/index.html)._
