@@ -12,7 +12,11 @@ body {
 }
 
 .footer a {
-    color: #ee4444;
+    color: #ffffff;
+}
+
+.footer a:hover {
+    color: #ffffff;
 }
 
 .sidebar h1 {
