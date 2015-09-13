@@ -11,6 +11,7 @@ url: "http://cs290.com" # the base hostname & protocol for your site
 github_username:  scalableinternetservices
 
 instructor: "Bryce Boe"
+instructor_url: "http://bryceboe.com"
 
 # Build settings
 markdown: kramdown
