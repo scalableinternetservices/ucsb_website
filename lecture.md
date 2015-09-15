@@ -93,7 +93,7 @@ __TODO__:
 * Placeholder for Guest Lecture
 
 #### November 12, 2015
-* Placeholder for Guest Lecture
+* Guest Lecture: Sean Maloney @ Riot Games
 
 __TODO__:
 
