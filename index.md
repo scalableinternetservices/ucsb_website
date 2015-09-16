@@ -48,7 +48,8 @@ By the end of this course CS290B students will be able to:
   their control
 * employ memcached to reduce the load on an uncached web service in order to
   handle a larger volume of traffic
-* utilize git to contribute to open source projects on github via pull requests
+* utilize git to contribute to open source projects on
+  [github](https://github.com/) via pull requests
 
 ## Grading
 

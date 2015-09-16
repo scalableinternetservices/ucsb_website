@@ -66,15 +66,15 @@ fundamental web technologies and the Ruby on Rails framework.
 All sprints end and begin with each week's lab session.
 
 #### Sprint -1: September 24, 2015 -- October 1, 2015
-* Install Rails.
-* Learn Ruby.
+* Install [Rails](http://rubyonrails.org/).
+* Learn [Ruby](https://www.ruby-lang.org/en/).
 * Complete [Ruby Code Academy](http://www.codecademy.com/en/tracks/ruby).
-* Read Chapter 1--8 in Agile Web Development with Rails.
+* Read Chapters 1 through 8 in Agile Web Development with Rails.
 * Form your team.
 
 #### Sprint 0: October 1, 2015 -- October 8, 2015
 * Determine your team's project, get approved by instructor.
-* Read chapters nine through seventeen in Agile Web Development with Rails.
+* Read chapters 9 through 17 in Agile Web Development with Rails.
 * Learn [git](http://rogerdudler.github.io/git-guide/).
 
 #### Sprint 1: October 8, 2015 -- October 15, 2015

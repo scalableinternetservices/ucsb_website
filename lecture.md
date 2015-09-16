@@ -23,7 +23,7 @@ __TODO__:
 
 * Read and follow along with chapters 1 and 2 from Agile Web Development with
   Rails.
-* Complete Ruby Code Academy
+* Complete [Ruby Code Academy](https://www.codecademy.com/tracks/ruby)
 
 #### October 1, 2015
 * Working Software Quickly: Agile/Scrum
