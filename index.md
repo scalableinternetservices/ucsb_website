@@ -16,13 +16,13 @@ Internet services today still requires an understanding of topics like caching,
 load balancing, security, and monitoring. In this course we will examine these
 topics and more: the state of the art in building scalable Internet services.
 
-## Course Lectures
+## Lectures
 
 Course lectures will be Tuesdays and Thursdays, from 3:00pm to 4:50pm in
 Phelps 2510. Lecture material will cover the essentials of building large scale
 Internet services. The lecture schedule and slides are available online.
 
-## Course Project
+## Project
 
 The goal of the course project is to gain hands-on experience in building and
 deploying a scalable web service on the Internet. Students will do this using
@@ -33,3 +33,42 @@ web technologies and the Ruby on Rails framework.
 
 Project-centric lab will meet every Thursday from 5:00pm to 6:50pm in
 Phelps 3525.
+
+## Grading
+
+At the end of the quarter each group's project will be assigned a grade based
+on their web service being of sufficient complexity, and the group's
+description of their methodological approach to load testing and subsequent
+scaling via various techniques as described in their project write-up and/or in
+their project presentation. Objectively these components break down into:
+
+* 20%: web service complexity
+* 50%: load testing and scaling (communicated through presentation and/or
+  write-up)
+* 15%: quality of project presentation
+* 15%: quality project write-up
+
+Individual grades will be computed by multiplying the group grade by an
+individual score. Individual scores are computed by suming the relative percent
+of _work_ each individual confidentially assigns other individuals in their
+group.
+
+For example, given a three person group with a group grade of 95% and the
+following peer-graded scores:
+
+|           | Alice     | Bob      | Chuck     |
+|:---------:|:---------:|:--------:|:---------:|
+| Alice     | -         | 55%      | 45%       |
+| Bob       | 60%       | -        | 40%       |
+| Chuck     | 52%       | 48%      | -         |
+|===========|===========|==========|===========|
+| __Total__ | __112%__  | __103%__ | __85%__   |
+{: class="table table-striped"}
+
+Then Alice would end with a 106.4% (A+), Bob with 97.85% (A+) and Chuck with
+80.75% (B-).
+
+So that everyone knows where they stand within their group, we will
+confidentially conduct the peer grading process at each quarter interval in the
+course. Only the outcome of the final peer-grade will be used to compute the
+final grade.
