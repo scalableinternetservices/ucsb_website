@@ -34,6 +34,21 @@ web technologies and the Ruby on Rails framework.
 Project-centric lab will meet every Thursday from 5:00pm to 6:50pm in
 Phelps 3525.
 
+## Learning Outcomes
+
+By the end of this course CS290B students will be able to:
+
+* create a [Ruby on Rails](http://rubyonrails.org/) web service and deploy it
+  to [Amazon's EC2](https://aws.amazon.com/ec2/)
+* detail a significant majority of the general _services_ and protocols that
+  are, or may be, involved when browsing to a high-traffic volume web service
+  such as [reddit.com](https://www.reddit.com)
+* determine via measurement where bottlenecks exist in a web service under
+  their control
+* employ memcached to reduce the load on an uncached web service in order to
+  handle a larger volume of traffic
+* utilize git to contribute to open source projects on github via pull requests
+
 ## Grading
 
 At the end of the quarter each group's project will be assigned a grade based
