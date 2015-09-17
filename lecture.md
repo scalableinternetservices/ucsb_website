@@ -116,7 +116,10 @@ Read chapter 15 in High Performance Browser Networking
 
 __TODO__:
 
-Read chapter 12 in High Performance Browser Networking
+* Read chapter 12 in High Performance Browser Networking (__Note__: The web
+  version of
+  [chapter 12](http://chimera.labs.oreilly.com/books/1230000000545/ch12.html)
+  is updated with more relevant information)
 
 #### December 1, 2015
 * Looking Forward: HTTP 2.0 and QUIC

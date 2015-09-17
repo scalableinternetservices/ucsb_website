@@ -29,4 +29,5 @@ _A copy will be available in the library reserves._
 
 [High Performance Browser Networking](http://www.amazon.com/gp/product/1449344763/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=1449344763&linkCode=as2&tag=f-4-20&linkId=ZD3ZDBNOTM6C4OWS)  
 ISBN: 9781449344764  
-_[Available online](http://chimera.labs.oreilly.com/books/1230000000545/index.html)._
+_[Available online](http://chimera.labs.oreilly.com/books/1230000000545/index.html)._  
+Note: The online version is slightly more [up-to-date](http://chimera.labs.oreilly.com/books/1230000000545/pr02.html#_may_23_2014).
