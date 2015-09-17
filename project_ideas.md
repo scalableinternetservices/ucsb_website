@@ -56,9 +56,9 @@ Classes:
 
 ### Fall 2014 (UCSB) Projects
 
-* [An electronic cabin guest book](https://github.com/scalableinternetservices/Team-Hytta)
 * [A competition tracking application](https://github.com/scalableinternetservices/Compete)
 * [A scalable automatic grading system](https://github.com/scalableinternetservices/Gradr)
+* [An electronic cabin guest book](https://github.com/scalableinternetservices/Team-Hytta)
 * [Find and compare nearby surf spots](https://github.com/scalableinternetservices/BaconWindshield)
 * [Find parties near you and share yours](https://github.com/scalableinternetservices/Xup)
 * [Questmaster: gamification of everyday tasks](https://github.com/scalableinternetservices/Motley-Crew)
