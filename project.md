@@ -23,7 +23,28 @@ fundamental web technologies and the Ruby on Rails framework.
 * Read the list of [project suggestions](#project_ideas).
 * Add your own project suggestions
 
-## Fall 2014 Projects
+## Spring 2015 (UCLA) Projects
+* [Reddit-style quote sharing website](https://github.com/scalableinternetservicesarchive/Quotopia)
+* [An Uber for Anything](https://github.com/scalableinternetservicesarchive/victorious-Secret)
+* [Visual voting for events](https://github.com/scalableinternetservicesarchive/Fantastic4)
+* [Yikyak meets Snapchat](https://github.com/scalableinternetservicesarchive/U1F44D)
+* [Online clothing and merchandise hub](https://github.com/scalableinternetservicesarchive/Atticus)
+* [Virtual waiting in line](https://github.com/scalableinternetservicesarchive/Team1024)
+* [Gift exchange coordination system](https://github.com/scalableinternetservicesarchive/GiftHub)
+* [Gathering activities](https://github.com/scalableinternetservicesarchive/ScalableMaster)
+* [Test bank for UCLA](https://github.com/scalableinternetservicesarchive/Gattlestar-Balactica)
+* [Univeristy admission application service](https://github.com/scalableinternetservicesarchive/RubyCoders)
+* [Multiplayer gaming platform](https://github.com/scalableinternetservicesarchive/yam)
+* [Music sharing website](https://github.com/scalableinternetservicesarchive/Michelangelo)
+* [Yelp for places](https://github.com/scalableinternetservicesarchive/Yeap)
+* [Musical instrument marketplace](https://github.com/scalableinternetservicesarchive/Arpeggio)
+* [Find events around you](https://github.com/scalableinternetservicesarchive/whatsup)
+* [A location-based note taking application](https://github.com/scalableinternetservicesarchive/MapKeep)
+* [Renting and borrowing books](https://github.com/scalableinternetservicesarchive/AirBooks)
+* [Food review, discount and discussion application](https://github.com/scalableinternetservicesarchive/Newbie)
+* [Delegate tasks as quests](https://github.com/scalableinternetservicesarchive/Questing-Adventurer)
+
+## Fall 2014 (UCSB) Projects
 
 * [An electronic cabin guest book](https://github.com/scalableinternetservices/Team-Hytta)
 * [A competition tracking application](https://github.com/scalableinternetservices/Compete)
