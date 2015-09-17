@@ -4,6 +4,8 @@ permalink: /lecture/
 title: Lecture Schedule
 ---
 
+# Lecture Schedule
+
 The following dates and topics are subject to change. Links to slides will be
 following each lecture if not sooner.
 

@@ -4,6 +4,8 @@ permalink: /project/
 title: Course Project
 ---
 
+# Course Project
+
 ## Objective
 
 The goal of the project is to gain hands-on experience in building and
