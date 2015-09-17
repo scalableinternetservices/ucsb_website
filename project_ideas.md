@@ -35,10 +35,6 @@ Classes:
 
 ### Spring 2015 (UCLA) Projects
 * [A location-based note taking application](https://github.com/scalableinternetservicesarchive/MapKeep)
-* [Renting and borrowing books](https://github.com/scalableinternetservicesarchive/AirBooks)
-* [Food review, discount and discussion application](https://github.com/scalableinternetservicesarchive/Newbie)
-* [Delegate tasks as quests](https://github.com/scalableinternetservicesarchive/Questing-Adventurer)
-* [A location-based note taking application](https://github.com/scalableinternetservicesarchive/MapKeep)
 * [An Uber for Anything](https://github.com/scalableinternetservicesarchive/victorious-Secret)
 * [Delegate tasks as quests](https://github.com/scalableinternetservicesarchive/Questing-Adventurer)
 * [Find events around you](https://github.com/scalableinternetservicesarchive/whatsup)
