@@ -73,7 +73,7 @@ __TODO__:
 
 * Read
   [CAP 12 years later](http://www.realtechsupport.org/UB/NP/Numeracy_CAP%2B12Years_2012.pdf)
-  by Eric qBrewer
+  by Eric Brewer
 * Read
   [Eventually Consistent](http://www.scalableinternetservices.com/slides/vogels.pdf)
   by Werner Vogels
