@@ -1,6 +1,6 @@
 #!/bin/sh
 
-DESTINATION="../slides/"
+DESTINATION="dst/"
 
 function process_file {
     # Process only files with .md extension
