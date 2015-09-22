@@ -63,7 +63,7 @@ by Cardellini, Colajanni, and Yu.
 * Database Concurrency Control and Query Analysis
 
 #### October 27, 2015
-* RDBMSes and Sharing
+* RDBMSes and Sharding
 * Service Oriented Architectures and Read Slaves
 
 #### October 29, 2015
