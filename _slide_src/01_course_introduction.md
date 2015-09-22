@@ -1,4 +1,4 @@
-# Course Introduciton
+# Course Introduction
 .fx: title
 
 __CS290B__  

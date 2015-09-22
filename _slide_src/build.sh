@@ -8,12 +8,11 @@ function process_file {
         return
     fi
     base=${1::${#1}-3}
-    landslide $1 -cro > "$DESTINATION/$base.html"
+    landslide $1 -ro > "$DESTINATION/$base.html"
     if [ $? -eq 0 ]; then
         echo "Built $1"
     else
         echo "Failed to build $1. Aborting!"
-        rm -rf theme/
         exit 3
     fi
 }
@@ -43,6 +42,5 @@ fi
 for arg in "$@"; do
     process_file "$arg"
 done
-rm -rf theme/
 
 exit 0;
