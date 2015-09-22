@@ -13,6 +13,16 @@ September 24, 2015
 
 ![Pull Requests! Pull Requests! Pull Requests!](img/developersdevelopers.gif)
 
+If you notice an issue with or wish to make an improvement to any of the course
+content (e.g., slides, web pages) please edit them and make a pull request.
+
+Website source:  
+[https://github.com/scalableinternetservices/ucsb_website/](https://github.com/scalableinternetservices/ucsb_website/)
+
+Slide source:  
+[https://github.com/scalableinternetservices/ucsb_website/tree/master/slides](https://github.com/scalableinternetservices/ucsb_website/tree/master/slides)
+
+
 
 ---
 
