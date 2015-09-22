@@ -92,7 +92,7 @@ __TODO__:
 * Security basics: Firewalls, XSS, CSRF, SQL Injection
 
 #### November 10, 2015
-* Placeholder for Guest Lecture
+* Guest Lecture: Darren Mutz @ AppFolio (formerly Amazon)
 
 #### November 12, 2015
 * Guest Lecture: Sean Maloney @ Riot Games
