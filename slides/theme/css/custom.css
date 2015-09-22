@@ -1,0 +1,26 @@
+.title header {
+    left: 0px;
+    top: 0px;
+    text-align: center;
+    display: table-cell;
+    width: 900px;
+    font-size: 50px;
+    margin-top:100px;
+}
+
+.title section {
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    height: 700px;
+    width: 900px;
+}
+
+.img-left img {
+    float: left;
+    padding-right: 30px;
+}
+
+table pre {
+    margin: 0px;
+}
