@@ -8,15 +8,22 @@ function process_file {
         return
     fi
     base=${1::${#1}-3}
-    landslide $1 -o > "$DESTINATION/$base.html"
+    landslide $1 -cro > "$DESTINATION/$base.html"
     if [ $? -eq 0 ]; then
         echo "Built $1"
     else
         echo "Failed to build $1. Aborting!"
+        rm -rf theme/
         exit 3
     fi
 }
 
+
+# Ensuring running from the script directory
+if [[ $(dirname $0) != "." ]]; then
+    echo "Must run $(basename $0) from its directory."
+    exit 1
+fi
 
 # Check arguments
 if [ $# -lt 1 ]; then
@@ -36,5 +43,6 @@ fi
 for arg in "$@"; do
     process_file "$arg"
 done
+rm -rf theme/
 
 exit 0;
