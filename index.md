@@ -65,13 +65,16 @@ their project presentation. Objectively these components break down into:
 * 15%: quality of project presentation
 * 15%: quality project write-up
 
-Individual grades will be computed by multiplying the group grade by an
-individual score. Individual scores are computed by suming the relative percent
-of _work_ each individual confidentially assigns other individuals in their
-group.
+5% of an individual's grade is based on their participation in-class and on
+piazza.
 
-For example, given a three person group with a group grade of 95% and the
-following peer-graded scores:
+The remaining 95% of an individual's grade will be computed by multiplying
+their group grade by an individual score. Individual scores are computed by
+suming the relative percent of _work_ each individual confidentially assigns
+other individuals in their group.
+
+For example, given a three person group with a group grade of 95%, everyone
+individually with 100% participation, and the following peer-graded scores:
 
 |           | Alice     | Bob      | Chuck     |
 |:---------:|:---------:|:--------:|:---------:|
