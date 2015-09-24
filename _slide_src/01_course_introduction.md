@@ -102,6 +102,12 @@ Communicate to me:
 ---
 
 
+# Course Motivation
+
+
+---
+
+
 # Thought Experiment #1
 
 How do you find a place to rent?
@@ -181,7 +187,82 @@ Internet traffic results in increased complexity of the Internet service.
 
 ---
 
-# Course Introduction
+
+# Internet Services, what's that?
+
+![Question Mark](img/question_mark.jpg)
+
+
+---
+
+
+# Internet Services, what's that?
+
+There are many application-level protocols that could be used to build out an
+Internet Service.
+
+For this class Internet services will refer to HTTP-based services.
+
+The interface to your web service may be the web browser (e.g., Chrome,
+Firefox), a REST-based API, or both.
+
+
+---
+
+
+# What about mobile?
+
+ We will discuss some optimizations
+ ([HPBN chapter 5](http://chimera.labs.oreilly.com/books/1230000000545/ch05.html))
+ designed for mobile users.
+
+Many native mobile apps are backed by Internet services via an API.
+
+![Mobile v. Desktop from 2010 through 2014](img/mobile_v_desktop.png)
+
+
+---
+
+
+# Scalable, what does that mean?
+
+![Question Mark](img/question_mark.jpg)
+
+
+---
+
+
+# Scalable, what does that mean?
+
+An Internet service is scalable if increasing demands can be effectively met
+with increasing capacity.
+
+Demands could be:
+
+* Web traffic quantity (typical association)
+* Dataset size
+
+
+---
+
+
+# Effectively meet demands: Explanation
+
+* Internet service remains available
+* Response time does not excessively degrade
+
+## Think about it
+
+Assume you have a web service designed to run on a single server with a plan to
+use a bigger server when it can no longer effectively meet demand.
+
+__Is this scalable?__
+
+
+---
+
+
+# What you will do:
 
 In this course you will learn and utilize some of the technologies behind
 building large-scale Internet services.
@@ -190,6 +271,31 @@ You will test and support to the best of your abilities one or more of:
 
 * Expontential growth in the amount of traffic to your web service
 * Expontential growth in the dataset your web service relies upon
+
+
+---
+
+
+# In Summary
+
+This course won't teach you how to build a web application that obtains
+worldwide attention and usage.
+
+However, this course will teach you how to build a web application __that can
+respond to__ worldwide attention and usage.
+
+
+---
+
+# Other Topics
+
+In addition to scaling, we will learn about:
+
+* Performance
+* Security
+* Agile software development
+* Test driven development
+* Web clients (e.g., web browsers)
 
 
 ---
