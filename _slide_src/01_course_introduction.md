@@ -437,8 +437,8 @@ Source (November 2014):
 
 ## "Agile Web Development with Rails 4"
 
-* by Sam, Ruby, Dave, Thomas, David Heinemeir Hansson
-* two copies availabie in Library Reserves for 2-hour check-outs
+* by Sam, Ruby, Dave, Thomas, David Heinemeier Hansson
+* two copies available in Library Reserves for 2-hour check-outs
 
 
 ---
@@ -579,7 +579,7 @@ A web browser is a process (at least one) that runs on an operating system. It:
 A web server is a process (at least one) that runs on an operating system. It:
 
 * responds to network requests
-* loads resources that may come from filesystem, database, other servers
+* loads resources that may come from file system, database, other servers
 
 ---
 
@@ -605,7 +605,7 @@ up with, and then write-down your combined lists. (~10 minutes)
 
 Alternating people from each larger group, one member will write one of their
 components on the whiteboard in-place and explain it. At the end we'll should
-have a pretty definiative list.
+have a pretty definitive list.
 
 
 ---
@@ -618,7 +618,7 @@ have a pretty definiative list.
 * Browser: Establishes a TCP connection to the IP address
 * Web server: Accept the TCP connection
 * Web server: Add TLS context to the TCP connection
-* Browser: Wraps a TLS session ontop of the TCP connection
+* Browser: Wraps a TLS session on-top of the TCP connection
 * Browser: Sends an HTTP request over the TLS session
 * Web server: Parse the request, fetch and send the requested resources
 
