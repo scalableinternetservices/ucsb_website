@@ -301,6 +301,161 @@ In addition to scaling, we will learn about:
 ---
 
 
+# Course Structure
+
+
+---
+
+
+# Lectures and Labs
+
+## Lectures
+
+* Meets Tuesday and Thursday from 3--4:40PM in Phelps 2510 (here)
+* The lectures and associated reading will cover the concepts you are expected
+  to learn in this class
+
+## Labs
+
+* Meets Thursday from 5--6:50PM in Phelps 3523 (upstairs)
+* The labs will focus on the course project
+* During the labs you will:
+     * Work with your team
+     * Demo your progress
+
+
+---
+
+
+# Course Project
+
+You will apply your learnings from this course to your course project. The
+project entails:
+
+* Working in teams of 4
+* Developing an _interesting_ Internet service
+* Deploying your service to Amazon EC2
+* Measuring your service's performance and scalability
+* Applying techniques presented in class to improve your service's performance
+  and scalability
+* Documenting these improvements via a detailed write-up and presenting the
+  results at the end of the quarter
+
+
+---
+
+
+# Course skills
+
+__This course is fairly demanding, but is one of the most industry-applicable
+courses you can take.__ You will learn and develop the following skills:
+
+* Programming in __Ruby__
+* Building web services using the __Rails__ framework
+* Experience with Amazon Web Services (__AWS__): __EC2__, __S3__,
+  __CloudFormation__
+* Load testing internet services via __Tsung__
+* Test-Driven Development (__TDD__)
+* __Agile__/__Scrum__ software development
+* Development using __Git__ with a _feature-branch_ flow via __github__ _pull
+  requests_
+
+
+---
+
+
+# This course is _not_
+
+a deep-dive into:
+
+* Cloud Computing
+* Distributed Systems
+* Networking
+* Relational Databases
+* Security
+
+
+But we will touch on all of the above.
+
+
+---
+
+
+# Industry Focused
+
+The skills you learn in this course are the same that I use everyday at work.
+
+The projects will all be open source so if you're proud of your team's work
+(you should be) then put a link to the project on your résumé.
+
+Industry related tools you will use:
+
+* Git via Github (project source version control)
+* Ruby on Rails (development _stack_)
+* Pivotal Tracker (project management)
+* Travis CI (automated testing)
+* NewRelic (performance metrics)
+
+
+---
+
+
+# Why Ruby on Rails?
+
+Ruby is an interpreted language, thus it is not terribly __fast__, nor is very
+__memory efficient__.
+
+However, it is very easily scalable, and for most Internet services developer
+time ($$$) is going to be much more significant than the efficiency of the
+service.
+
+Building Rails Internet services quickly with zero prior experience makes this
+class possible.
+
+
+---
+
+# $$$
+
+![Average Salary Value of a Skill](img/average_salary_value_of_skill.png)
+
+Source (November 2014):
+[http://qz.com/298635/these-programming-languages-will-earn-you-the-most-money/](http://qz.com/298635/these-programming-languages-will-earn-you-the-most-money/)
+
+
+---
+
+
+# Texts
+
+## "High Performance Browser Networking"
+
+* by Ilya Grigorik
+* Available free online (more recent updates)
+
+
+## "Agile Web Development with Rails 4"
+
+* by Sam, Ruby, Dave, Thomas, David Heinemeir Hansson
+* two copies availabie in Library Reserves for 2-hour check-outs
+
+
+---
+
+
+# Course Grading
+
+
+---
+
+
+# The Life Cycle of a Web Request
+
+
+---
+
+
+
 # TO-DO
 
 ## By next class
