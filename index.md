@@ -59,11 +59,11 @@ description of their methodological approach to load testing and subsequent
 scaling via various techniques as described in their project write-up and/or in
 their project presentation. Objectively these components break down into:
 
-* 20%: web service complexity
+* 30%: web service complexity
 * 50%: load testing and scaling (communicated through presentation and/or
   write-up)
-* 15%: quality of project presentation
-* 15%: quality project write-up
+* 10%: quality of project presentation
+* 10%: quality project write-up
 
 5% of an individual's grade is based on their participation in-class and on
 piazza.
