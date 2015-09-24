@@ -31,7 +31,7 @@ Please grab an index card and write:
 * UCSB CS Alum (BS: 2008, Ph.D.: 2014)
 * As a graduate student:
     * Taught 3 undergraduate CS courses
-    * TAed for numerous other courses
+    * TA-ed for numerous other courses
 * Took this course in Winter 2009 (CS290N at the time)
 * Senior Software Engineer @ AppFolio
 * Assisted with the Fall 2014 course
@@ -57,7 +57,7 @@ Please grab an index card and write:
     * Course Motivation
     * Course Structure
     * Course Grading
-* The Lifecycle of a Web Request
+* The Life Cycle of a Web Request
     * Group Exercise
     * Review
 
@@ -269,8 +269,8 @@ building large-scale Internet services.
 
 You will test and support to the best of your abilities one or more of:
 
-* Expontential growth in the amount of traffic to your web service
-* Expontential growth in the dataset your web service relies upon
+* Exponential growth in the amount of traffic to your web service
+* Exponential growth in the dataset your web service relies upon
 
 
 ---
@@ -301,7 +301,7 @@ In addition to scaling, we will learn about:
 ---
 
 
-# TODO
+# TO-DO
 
 ## By next class
 
