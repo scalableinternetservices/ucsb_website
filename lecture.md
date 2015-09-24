@@ -11,7 +11,7 @@ following each lecture if not sooner.
 
 #### September 24, 2015
 * Introduction to Scalable Internet Services
-* The lifecycle of a request on the web
+  ([slides](/slides/01_course_introduction.html#slide1))
 
 __TODO__:
 
