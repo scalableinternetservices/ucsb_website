@@ -57,6 +57,7 @@ Please grab an index card and write:
     * Course Motivation
     * Course Structure
     * Course Grading
+    * Course Info
 * The Life Cycle of a Web Request
     * Group Exercise
     * Review
@@ -448,11 +449,196 @@ Source (November 2014):
 
 ---
 
+# Project Grade (assigned to your group)
+
+* 30% web service complexity
+* 50% load testing and subsequent scaling (explained in presentation and
+  write-up)
+* 10% quality of presentation
+* 10% quality of write-up
+
+---
+
+
+# Individual Grade
+
+* 5% participation (in-class, on piazza, slide/material corrections)
+* 95% _Project grade_ * your relative group project involvement percent
+
+## How is relative involvement computed?
+
+* Privately, everyone has 100% to assign between the other members of their
+  group
+* The relative percent for each individual is the sum of what their group-mates
+  assign them (can go above 100%)
+
+We will compute these scores __four__ times during the quarter. Only the last
+score will be used for your grade.
+
+Any moderate deviations from near-equal grades will prompt communication from
+me.
+
+
+---
+
+# Course Info
+
+* [http://cs290.com](http://cs290.com)
+* [https://github.com/scalableinternetservices/](https://github.com/scalableinternetservices/)
+* [https://piazza.com/class/idgkoaxbvg14lx](https://piazza.com/class/idgkoaxbvg14lx)
+    * Set up email notifications
+    * It is strongly encouraged for you to respond to questions, and improve
+      upon the "student answer" by making edits.
+    * For clarifications on existing questions, please make a comment on an
+      existing post
+    * For related but separate questions, please create a "new post"
+
+
+---
+
+
+# First Five Weeks
+
+* The basics (HTTP and HTML)
+* _Industrial_ software engineering: _Agile_, _TDD_, _Continuous Integration
+  (CI), Pair Programming
+* HTTP Application Server architectures
+* High availability via load balancing: a share-nothing web stack
+* Client-side and server-side caching
+* Relational databases with web applications: concurrency control and query
+  analysis
+* Scaling via:
+    * Sharding
+    * Service-Oriented-Architecture (SOA)
+    * Read-slaves
+
+
+---
+
+
+# Later Course Topics
+
+* Web security: _firewalls_, _https_, _XSS_, _CSRF_
+* HTTP 2.0
+* Content-delivery networks
+* Non-relational data stores (NoSQL)
+* Client-side frameworks
+* And more (maybe):
+    * Asm.js, Emscripten, Webruby
+    * Elixir and Phoenix
+
+
+---
+
+
+# Guest Lectures
+
+
+## Confirmed (talk topics may vary)
+
+* __November 10__: Darren Mutz on Challenges with Content Delivery Networks  
+  Principal Software Engineer @ AppFolio  
+  (formerly SDE @ Amazon Web Services)
+* __November 12__: Sean Maloney on Analyzing Customer Metrics Using AWS  
+  Data Engineer @ Riot Games
+
+## Hopeful
+
+* Colin Kelley -- CTO @ Invoca
+* Vinod Kone -- Technical Lead for _Apache Mesos_ @ Twitter
+* Jonathan Kupferman -- Former Lead Developer @ Turntable.fm
+* Lead Programmer @ reddit
+* Software Engineer @ Google Photos
+
+
+---
+
+
+# Questions / Brief Break
+
+![Question Mark](img/question_mark.jpg)
+
+
+---
+
 
 # The Life Cycle of a Web Request
 
 
 ---
+
+
+# The Two Endpoint Basics
+
+A web browser is a process (at least one) that runs on an operating system. It:
+
+* responds to user input
+* renders the display
+* utilizes the network
+
+A web server is a process (at least one) that runs on an operating system. It:
+
+* responds to network requests
+* loads resources that may come from filesystem, database, other servers
+
+---
+
+
+# Web Request Life Cycle Group Exercise
+
+Prompt: What _things_ (e.g., events, protocols, actions) (might) occur when
+someone types [https://www.reddit.com](https://www.reddit.com) in their web
+browser and presses return.
+
+## Part 1 (~10 minutes)
+
+Discuss in pairs, and write down in-order the components you come up
+with. Start generic, and leave space to provide additional detail for
+sub-sequences.
+
+## Part 2 (~10 minutes)
+
+Merge your pair with a near-by pair. Start by comparing the lists you've come
+up with, and then write-down your combined lists. (~10 minutes)
+
+## Part 3 (as long as it takes)
+
+Alternating people from each larger group, one member will write one of their
+components on the whiteboard in-place and explain it. At the end we'll should
+have a pretty definiative list.
+
+
+---
+
+
+# Core Components of a Web request
+
+* Web server: Opens a TCP socket to listen for requests
+* Browser: Makes a DNS query to obtain an IP address for www.reddit.com
+* Browser: Establishes a TCP connection to the IP address
+* Web server: Accept the TCP connection
+* Web server: Add TLS context to the TCP connection
+* Browser: Wraps a TLS session ontop of the TCP connection
+* Browser: Sends an HTTP request over the TLS session
+* Web server: Parse the request, fetch and send the requested resources
+
+
+---
+
+
+# What about scalability?
+
+
+Let's add a load balancer in there!
+
+![Load balancer and three web servers](img/load_balancer_simple.jpg)
+
+Source:
+[http://www.laymance.com/blog/apache-load-balancers-and-log-files/](http://www.laymance.com/blog/apache-load-balancers-and-log-files/)
+
+
+---
+
 
 
 
