@@ -500,7 +500,7 @@ me.
 # First Five Weeks
 
 * The basics (HTTP and HTML)
-* _Industrial_ software engineering: _Agile_, _TDD_, _Continuous Integration
+* _Industrial_ software engineering: _Agile_, _TDD_, _Continuous Integration_
   (CI), Pair Programming
 * HTTP Application Server architectures
 * High availability via load balancing: a share-nothing web stack
