@@ -9,15 +9,16 @@ title: Lecture Schedule
 The following dates and topics are subject to change. Links to slides will be
 following each lecture if not sooner.
 
-#### September 24, 2015
+#### September 24, 2015 ([slides](/slides/01_course_introduction.html))
 * Introduction to Scalable Internet Services
-  ([slides](/slides/01_course_introduction.html#slide1))
+
+
 
 __TODO__:
 
 * Read chapters 1 and 2 in High Performance Browser Networking
 
-#### September 29, 2015
+#### September 29, 2015 ([slides](/slides/02_http_and_html.html))
 * Introduction to HTTP
 * Introduction to HTML and CSS
 
