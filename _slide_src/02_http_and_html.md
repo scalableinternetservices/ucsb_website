@@ -361,12 +361,88 @@ become _standardized_.
 The HTTP response status indicates the outcome of the request. Status codes
 fall into one of five categories:
 
-* 1XX - Informational (e.g., 100 Continue)
-* 2XX - Successful (e.g., 200 OK)
-* 3XX - Redirection (e.g., 301 Moved Permanently, 304 Not Modified)
-* 4XX - Client Error (e.g., 400 Bad Request, 404 Not Found)
-* 5XX - Server Error (e.g., 500 Internal Server Error, 505 HTTP Version Not
-  Supported)
-
+* 1XX - Informational
+* 2XX - Successful
+* 3XX - Redirection
+* 4XX - Client Error
+* 5XX - Server Error
 
 Ref: [HTTP Status Code Definitions](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html)
+
+
+---
+
+# Common HTTP Statuses
+
+* __200 OK__: The requested resource is being returned.
+* __301 Moved Permanently__: The resource has been moved and the browser should
+  always use the new url provided via the `Location: http://...` header.
+* __302 Found__: The resource can be found at another location.
+* __304 Not Modified__: Useful with `HEAD` requests containing a cache header
+  (e.g., `If-Modified-Since`) to see if a `GET` request is needed.
+* __403 Forbidden__: The request is not authorized to access the resource.
+* __404 Not Found__: The resource does not exist.
+* __500 Internal Server Error__: Something crashed on the server.
+* __503 Service Unavailable__: Temporary failure on the server-side.
+
+---
+
+# HTTP Request Body
+
+HTTP PUT and POST requests typically have a body associated with them. HTML
+_form_ elements usually result in a POST request with a `x-www-form-urlencoded`
+type.
+
+Example:
+
+`curl http://httpbin.org/post --data 'username=bboe&comment=Hi There' -v`
+
+    !http
+    POST /post HTTP/1.1
+    Host: httpbin.org
+    User-Agent: curl/7.43.0
+    Accept: */*
+    Content-Length: 30
+    Content-Type: application/x-www-form-urlencoded
+
+    username=bboe&comment=Hi There
+
+---
+
+# HTTP Response Body
+
+The body of a response usually contains the requested resource content.
+
+    !http
+    HTTP/1.1 200 OK
+    Content-Type: text/html; charset=utf-8
+    Content-Length: 9973
+
+    <!DOCTYPE html>
+    <html lang="en">
+    ...
+    </html>
+
+---
+
+# Try it! Dumb Server
+
+## Listen for a TCP connection
+
+`nc -l localhost 4000`
+
+## Browse to: [http://localhost:4000](http://localhost:4000)
+
+## Paste the following into your terminal:
+
+
+    !http
+    HTTP/1.1 200 OK
+    Content-Type: text/html; charset=utf-8
+    Content-Length: 106
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <h1>HTML is easy!</h1>
+    <img src="http://i.imgur.com/oXxTj5g.gif">
+    </html>
