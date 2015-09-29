@@ -615,3 +615,141 @@ of an existing system. Using these hacks makes deployment more complicated.
 ## The Future is Here!
 
 In a future lecture we'll talk about how HTTP 2.0 obviates all of these hacks.
+
+---
+
+# HTML
+
+---
+
+# HyperText Markup Language
+
+Plaintext language that uses SGML syntax with a defined set of _tags_.
+
+* Mark-up is provided by nesting text and other mark-up between `<open_tag>`
+  and `</close_tag>`
+* Tags are nestable
+* Some tags have key-value attributes
+
+Example:
+
+    !html
+    <h1>Header 1</h1>
+    <h3>Header 3</h3>
+    <p class="intro">A paragraph with some <em>emphasized text</em>.</p>
+
+---
+
+# HTML Document
+
+HTML documents single root-element _should_ be the `<html>` tag. It's forest of
+children are referred to as the _Document Object Model_ or __DOM__.
+
+Technically are should be only two children of an `<html>` tag:
+
+`<head>`: Encapsulates meta-data about the page including its title, and
+   references to external resources (css, javascript)
+
+`<body>`: Encapsulates everything to be displayed on the page
+
+__Note__: With HTML5 (and many browser-parsers for other variations of HTML)
+these first-level tags can be omitted as they can be inferred based on the tag
+being parsed.
+
+---
+
+# HTML5 Bootstrap Example
+
+    !html
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Bootstrap 101 Template</title>
+
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+      </head>
+
+      <body>
+        <h1>Hello, world!</h1>
+
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+      </body>
+    </html>
+
+---
+
+# Common HTML Tags
+
+Different HTML tags should be used for different elements on the page. There
+exist a handful of formatting and style tags, however, those should be avoided
+in-favor of using CSS (cascading style sheets) -- we will discuss CSS later.
+
+* __h1__ through __h6__: various header-level tags (h1 should be page title)
+* __p__: paragraph text
+* __ul__, __ol__: unordered and ordered list wrapper
+* __li__: list item (nested within ul, or ol)
+* __table__: begin a table
+* __tr__: begin a table row within a table
+* __td__: one entry in a table row
+* __span__: An inline grouping mechanism
+* __div__: A block-level grouping mechanism
+
+---
+
+# Anchor Tag
+
+The most innovative part about HTML is the __HyperText__ part provided by the
+anchor tag: `<a>`
+
+Using an anchor tag one can link to another document (resource) anywhere on the
+web.
+
+    !html
+    <a href="http://cs290.com">CS290</a>
+
+---
+
+# HTML Forms
+
+An HTML form provides a convenient way to collect input from a web browser.
+
+    !html
+    <form action="/communities" method="post">
+      <label for="cn">Name</label>
+      <br>
+      <input type="text" name="community" id="cn">
+      <input type="submit" name="commit" value="Submit">
+    </form>
+
+## Notes
+
+* `method` defaults to __GET__. Recall that __GET__ requests shouldn't
+  have side-effects so __POST__ is more-often more appropriate.
+* The default encoding is `application/x-www-form-urlencoded`
+
+---
+
+# Attributes `id` and `class`
+
+HTML elements have two ubiquitous tags:
+
+`id`: A unique identifier that makes it easy to find one element in the DOM
+
+`class`: Multiple classes can be assigned to DOM elements, and the same class
+can be applied to multiple dom elements (many-to-many relationship).
+
+    !html
+    <span class="alert,loud" id="flash_message">Error.</span>
+
+DOM IDs and classes are very useful for applying CSS, and adding javascript
+callback hooks to elements on the page.
+
+---
+
+# Thursday Lab
+
+Bring your laptop, with the battery fully charged.
