@@ -13,7 +13,8 @@ September 29, 2015
 
 * TODO
 * The Life Cycle of a Web Request
-* HTTP
+* HTTP Requests and Responses
+* HTTP Performance (HPBN, chapters 9-11)
 * HTML
 * Intro to CSS
 
@@ -24,7 +25,7 @@ September 29, 2015
 ## Before Thursday's Class:
 
 * Join the class on [Piazza](https://piazza.com/class/idgkoaxbvg14lx)
-* Read chapters 1 and 2 in
+* Read chapters 1 and 2 (skim 9 through 11 as needed) in
   [High Performance Browser Networking](http://chimera.labs.oreilly.com/books/1230000000545/ch01.html)
 * Read the list of project ideas: [http://cs290.com/project_ideas/](http://cs290.com/project_ideas/)
 * Post or comment on at least one idea on Piazza under the `project_idea`
@@ -446,3 +447,171 @@ The body of a response usually contains the requested resource content.
     <h1>HTML is easy!</h1>
     <img src="http://i.imgur.com/oXxTj5g.gif">
     </html>
+
+---
+
+# HTTP Performance
+
+Prior to HTTP 1.1, one TCP connection was used for a single HTTP session. Thus
+1 request per connection.
+
+> What performance implications does having 1 request per session have?
+
+---
+
+# TCP Connection Delay
+
+Establishing a TCP connection requires 1 round-trip.
+
+![TCP round trip visualized](img/tcp_round_trip.png)
+
+_Image Source: “High Performance Browser Networking,” by Ilya Grigorik_
+
+---
+
+# Slow Start and Congestion Avoidance
+
+The early phases of a TCP connection are bandwidth constrained.
+
+![TCP congestion mechanisms](img/tcp_congestion.png)
+
+_Image Source: “High Performance Browser Networking,” by Ilya Grigorik_
+
+---
+
+# TCP Congestion Window Size (cwnd)
+
+It takes a fair amount of time to get up-to-speed. Making new connections per
+HTTP request is not terribly efficient.
+
+![TCP connection window size](img/tcp_cwnd.png)
+
+_Image Source: “High Performance Browser Networking,” by Ilya Grigorik_
+
+---
+
+# HTTP Keep-Alive
+
+HTTP 1.1 officially added support for the `Connection` header most commonly
+used as:
+
+`Connection: keep-alive`
+
+In fact, with HTTP 1.1, the default is `keep-alive`. The alternative, and the
+way to signal the end of the HTTP session is:
+
+`Connection: close`
+
+With a keep-alive HTTP session, the server waits some amount of time for
+an additionl request after processing the most recent request.
+
+---
+
+# HTTP Keep-Alive Session
+
+![HTTP Session with Two Requests](img/http_session.png)
+
+_Image Source: “High Performance Browser Networking,” by Ilya Grigorik_
+
+---
+
+# HTTP Pipelining
+
+With HTTP keep-alive, we can make multiple requests on a single TCP connection. Success!
+
+But, we're still waiting for the current response before we can issue the next
+request. Why wait?
+
+---
+
+# HTTP Pipelining Session
+
+![HTTP Session with Two Requests](img/http_pipelining.png)
+
+_Image Source: “High Performance Browser Networking,” by Ilya Grigorik_
+
+---
+
+# Think About it
+
+> What sort of issues might occur with HTTP pipelining?
+
+---
+
+# Pipelining Issues
+
+## Head of Line Blocking
+
+Head of line blocking means that a request that takes a long time is blocking
+another request from occuring.
+
+## Extra work for the server
+
+Pipeling may require the server to buffer future responses while blocked on the
+head of the line. These extra resources can exhaust the server.
+
+Furthermore, if an error occurs the server may end up doing the same _work_
+twice.
+
+## Adoption
+
+Many intermediaries (proxies, caches) simply do not support HTTP piplining thus
+making the feature less appealing.
+
+---
+
+# More Speed
+
+A single web page may have tens of resources. In practice obtaining each
+resource serially over the same TCP connection is too slow.
+
+> What can be done to get more speed?
+
+---
+
+# Concurrent HTTP Sessions
+
+Most browsers will open up to __six__ concurrent connections to the same
+server.
+
+![Concurrent HTTP Sessions](img/concurrent_http.png)
+
+_Image Source: “High Performance Browser Networking,” by Ilya Grigorik_
+
+---
+
+# Even more speed
+
+According to HTTP Archive the average number of resources for websites they
+crawled is ~100. With up to six connections each HTTP session must fetch
+approximately 16 resources. With head-of-line blocking this may still be too
+slow.
+
+> What can we do?
+
+---
+
+# Domain Sharding
+
+_Domain sharding_ is the process of separating resources to different
+domains, e.g., i.ytimg.com, s.ytimg.com.
+
+The web browser will make up to 6 connections for each domain.
+
+Reduces page load time for some work-loads (test to see if it's right for you).
+
+---
+
+# Hacks that work
+
+Concurrent sessions and domain sharding are hacks to get more performance out
+of an existing system. Using these hacks makes deployment more complicated.
+
+## Other Performance Related Hacks
+
+* CSS/JS concatenation and minimization
+* Image spriting
+
+## The Future is Here!
+
+In a future lecture we'll talk about how HTTP 2.0 obviates all of these hacks.
