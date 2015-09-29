@@ -81,7 +81,7 @@ By the end of today's lecture, you should understand this output:
 
 # History
 
-The year is 1990. The Internet has exisited for ~20 years, email for ~8.
+The year is 1990. The Internet has existed for ~20 years, email for ~8.
 
 Tim Berners-Lee has the idea to combine __HyperText__ and the __Internet__. He
 creates the first version of __HTTP__ and __HTML__.
@@ -234,7 +234,7 @@ http://www.reddit.com/r/ucsantabarbara/?__sort=new&t=all__
 
 # HTTP Version
 
-Version strings are often used in protocols to make it easy to evole the
+Version strings are often used in protocols to make it easy to evolve the
 protocol.
 
 With HTTP different versions have different behavior:
@@ -292,7 +292,7 @@ Indicates the preferred language for the resource
 
 `Accept-Language: es,en-US`
 
-I prefer spanish, but will accept US-english.
+I prefer Spanish, but will accept US-English.
 
 ---
 
@@ -377,7 +377,7 @@ Ref: [HTTP Status Code Definitions](http://www.w3.org/Protocols/rfc2616/rfc2616-
 
 * __200 OK__: The requested resource is being returned.
 * __301 Moved Permanently__: The resource has been moved and the browser should
-  always use the new url provided via the `Location: http://...` header.
+  always use the new URL provided via the `Location: http://...` header.
 * __302 Found__: The resource can be found at another location.
 * __304 Not Modified__: Useful with `HEAD` requests containing a cache header
   (e.g., `If-Modified-Since`) to see if a `GET` request is needed.
@@ -503,7 +503,7 @@ way to signal the end of the HTTP session is:
 `Connection: close`
 
 With a keep-alive HTTP session, the server waits some amount of time for
-an additionl request after processing the most recent request.
+an additional request after processing the most recent request.
 
 ---
 
@@ -543,7 +543,7 @@ _Image Source: “High Performance Browser Networking,” by Ilya Grigorik_
 ## Head of Line Blocking
 
 Head of line blocking means that a request that takes a long time is blocking
-another request from occuring.
+another request from occurring.
 
 ## Extra work for the server
 
@@ -555,7 +555,7 @@ twice.
 
 ## Adoption
 
-Many intermediaries (proxies, caches) simply do not support HTTP piplining thus
+Many intermediaries (proxies, caches) simply do not support HTTP pipelining thus
 making the feature less appealing.
 
 ---
@@ -624,7 +624,7 @@ In a future lecture we'll talk about how HTTP 2.0 obviates all of these hacks.
 
 # HyperText Markup Language
 
-Plaintext language that uses SGML syntax with a defined set of _tags_.
+Plain text language that uses SGML syntax with a defined set of _tags_.
 
 * Mark-up is provided by nesting text and other mark-up between `<open_tag>`
   and `</close_tag>`
@@ -648,11 +648,11 @@ children are referred to as the _Document Object Model_ or __DOM__.
 Technically are should be only two children of an `<html>` tag:
 
 `<head>`: Encapsulates meta-data about the page including its title, and
-   references to external resources (css, javascript)
+   references to external resources (CSS, JavaScript)
 
 `<body>`: Encapsulates everything to be displayed on the page
 
-__Note__: With HTML5 (and many browser-parsers for other variations of HTML)
+__Note__: With HTML5 (and many browsers' parsers for other variations of HTML)
 these first-level tags can be omitted as they can be inferred based on the tag
 being parsed.
 
@@ -740,12 +740,12 @@ HTML elements have two ubiquitous tags:
 `id`: A unique identifier that makes it easy to find one element in the DOM
 
 `class`: Multiple classes can be assigned to DOM elements, and the same class
-can be applied to multiple dom elements (many-to-many relationship).
+can be applied to multiple DOM elements (many-to-many relationship).
 
     !html
     <span class="alert,loud" id="flash_message">Error.</span>
 
-DOM IDs and classes are very useful for applying CSS, and adding javascript
+DOM IDs and classes are very useful for applying CSS, and adding JavaScript
 callback hooks to elements on the page.
 
 ---
