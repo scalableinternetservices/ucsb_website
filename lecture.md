@@ -16,7 +16,7 @@ __TODO__:
 
 * Read chapters 1 and 2 in High Performance Browser Networking
 
-#### September 29, 2015 ([slides](/slides/02_http_and_html.html))
+#### September 29, 2015 ([slides](/slides/02_http.html))
 * Introduction to HTTP
 
 __TODO__:
