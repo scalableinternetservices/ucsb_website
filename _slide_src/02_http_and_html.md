@@ -16,7 +16,6 @@ September 29, 2015
 * HTTP Requests and Responses
 * HTTP Performance (HPBN, chapters 9-11)
 * HTML
-* Intro to CSS
 
 ---
 
