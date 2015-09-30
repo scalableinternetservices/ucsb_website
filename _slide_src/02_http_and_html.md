@@ -280,7 +280,7 @@ do.
 
 Indicates preferred encoding for the response body.
 
-`Accept-Encoding: bzip2,gzip,`
+`Accept-Encoding: bzip2,gzip`
 
 I prefer the data compressed via bzip2. If that cannot be done, please gzip the
 response.
