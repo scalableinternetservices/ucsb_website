@@ -12,15 +12,12 @@ following each lecture if not sooner.
 #### September 24, 2015 ([slides](/slides/01_course_introduction.html))
 * Introduction to Scalable Internet Services
 
-
-
 __TODO__:
 
 * Read chapters 1 and 2 in High Performance Browser Networking
 
 #### September 29, 2015 ([slides](/slides/02_http_and_html.html))
 * Introduction to HTTP
-* Introduction to HTML and CSS
 
 __TODO__:
 
@@ -29,6 +26,7 @@ __TODO__:
 * Complete [Ruby Code Academy](https://www.codecademy.com/tracks/ruby)
 
 #### October 1, 2015
+* Introduction to HTML and CSS
 * Working Software Quickly: Agile/Scrum
 * Working Software Quickly: TDD, CI, and Pairing
 
