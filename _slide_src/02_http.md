@@ -1,4 +1,4 @@
-# HTTP and HTML
+# HTTP
 .fx: title
 
 __CS290B__
