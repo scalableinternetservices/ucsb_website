@@ -390,7 +390,7 @@ Modern techniques are designed to optimize for your time.
 * Agile and Scrum
 * Test Driven Development (TDD)
 * Continuous Integration (CI)
-* Github workflow
+* Github work flow
 * Pair programming (pairing)
 
 ---
@@ -578,7 +578,7 @@ People building the software. Individual roles are intentionally vague.
 
 ## Scrum Master
 
-Responsible for making sure the _Scrum_ process is followed and helps to reolve
+Responsible for making sure the _Scrum_ process is followed and helps to resolve
 blocking issues (e.g., between members of the team, with the product owner, or
 with external dependencies)
 
@@ -602,7 +602,7 @@ For example:
 
 > As an authenticated student user, I am able to post a question such that my
 > instructor knows I am asking the question but my classmates do not, in order
-> increase my likliness of submitting questions.
+> increase my likeliness of submitting questions.
 
 ---
 
