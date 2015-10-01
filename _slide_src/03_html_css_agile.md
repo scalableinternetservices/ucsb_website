@@ -358,3 +358,314 @@ Twitter's Bootstrap: [http://getbootstrap.com/](http://getbootstrap.com/)
 # Agile Software Development
 
 ---
+
+# Talent Shortage
+
+![TC Talent Shortage Snippet](img/tc_talent.png)
+
+Source:
+[http://techcrunch.com/2013/05/05/there-is-in-fact-a-tech-talent-shortage-and-there-always-will-be/](http://techcrunch.com/2013/05/05/there-is-in-fact-a-tech-talent-shortage-and-there-always-will-be/)
+
+---
+
+# Talent Shortage
+
+![TT Talent Shortage Snippet](img/tt_talent.png)
+
+Source: [http://searchmobilecomputing.techtarget.com/news/2240241877/IT-jobs-market-booms-but-talent-in-short-supply](http://searchmobilecomputing.techtarget.com/news/2240241877/IT-jobs-market-booms-but-talent-in-short-supply)
+
+
+---
+
+# Scarce Resources
+
+Software Engineering requires judicious use of scarce resources.
+
+YOU are one of those scarce resources.
+
+Modern techniques are designed to optimize for your time.
+
+## Modern Software Development Techniques
+
+* Agile and Scrum
+* Test Driven Development (TDD)
+* Continuous Integration (CI)
+* Github workflow
+* Pair programming (pairing)
+
+---
+
+# Understanding Agile
+
+> ## Sprint 2: Starts October 15
+
+> * Conduct a __retrospective__ on how the last sprint went and how your group
+>   can improve.
+> * Decide on a sprint commitment.
+> * Implement stories from the current sprint.
+
+Soon guidelines like the above should make complete sense to you.
+
+---
+
+# Agile and Scrum
+
+> What is Agile software development?
+
+__Agile__ is a collection of different approaches for developing software that
+has emerged as dominant in the last ~15 years.
+
+__Scrum__ is a popular form of Agile software development.
+
+---
+
+# The World Before Agile
+
+---
+
+# Waterfall
+
+The origin of the _Waterfall_ model is generally misattributed to Winston
+Royce, from his paper: "Managing the Development of Large Software Systems"
+
+In reality, he wasn't the first, and didn't advocate for what became Waterfall
+software engineering.
+
+Herbert Benington would be a more accurate attribution.
+
+Reference: *1970, Proceedings of IEEE WESCON 26 (August): 1–9.
+
+---
+
+# Waterfall Diagram
+
+![Waterfall](img/waterfall.png)
+
+This diagram from Royce's paper is frequently cited.
+
+
+---
+
+# Waterfall Process
+
+Each stage performs its role and then passes its deliverable to the next stage.
+
+E.g., Design must be completed before coding, which in-turn must be completed
+before testing.
+
+Strength: This approach allows for deep specialization.
+
+Waterfall works great for areas like manufacturing where it is _expensive_ to
+alter the design due to issues detected in latter stages.
+
+With software it's incredibly cheap to adapt the process along the way.
+
+---
+
+# Waterfall Continued
+
+The Waterfall technique works best when you have complete knowledge. With
+respect to software development:
+
+* Software testers and developers know everything about how the software will
+  be deployed
+* Software developers have few if any _surprises_ during testing
+* Designers have complete understanding of the difficulty of each design
+  decision
+* Requirements team understands the impact on design and development
+
+In practice most of these items are not met, thus the waterfall model inhibits
+the software development process.
+
+---
+
+# Agile Manifesto
+
+In 2001, the “Agile Software Manifesto” was written by Kent Beck, Ken Schwaber,
+Jeff Sutherland, and Dave Thomas.
+
+## Agile Values
+
+* __Responding to change__ over following a plan
+* __Working software__ over comprehensive docs
+* __Customer collaboration__ over contract negotiation
+* __Individuals and interactions__ over processes and tools
+
+---
+
+# Responding to Change
+
+Unexpected issues will occur during the product development.
+
+Responding to change involves deciding how to best proceed when such issues
+occur.
+
+For example:
+
+> What do you do when half your team is suddenly out for a week sick?
+
+> What do you do when the _simple_ feature addition turns out to be
+> significantly more complicated?
+
+---
+
+# Working Software
+
+> * Demonstration to customer
+> * Automated acceptance tests
+> * Descriptive unit tests
+> * Centralized styling & view code
+
+vs.
+
+> * Description to customer
+> * Extensive documented requirements
+> * Code comments
+> * Style guide documentation
+
+---
+
+# Customer Collaboration
+
+![Three people looking at computer](img/stock_collaboration.png)
+
+"Here's what we've got so far."
+
+"Uh... Now that I see it in action, I've changed my mind."
+
+
+![Software Developer](img/cartoon_programmer.png)
+
+"I'm sure if I just build what they've asked for, they'll love it."
+
+.fx: img-left
+
+
+---
+
+# Individuals and Interactions
+
+![Rugby Scrum](img/rugby_scrum.jpg)
+
+---
+
+# Scrum
+
+Scrum is a specific type of Agile software development.
+
+It was developed in the early 1990s by Ken Schwaber and Jeff Sutherland.
+
+We will use a stripped down version of Scrum for this class.
+
+## Other Agile Alternatives
+
+* __Kanban__: Focus on controlling WIP (work in progress), no __sprints__
+* Extreme Programming (XP): Emphasis on feedback systems through automated
+testing and pair programming
+
+
+---
+
+# Scrum Roles
+
+## Product Owner
+
+Understands the needs of the customer and prioritizes those needs.
+
+## The Team
+
+People building the software. Individual roles are intentionally vague.
+
+## Scrum Master
+
+Responsible for making sure the _Scrum_ process is followed and helps to reolve
+blocking issues (e.g., between members of the team, with the product owner, or
+with external dependencies)
+
+__Note__: We will have neither a product owner nor scrum master on our teams.
+
+
+---
+
+# Scrum Story Defined
+
+A __story__ is a unit of functionality that exposes something new to the user
+(customer). Stories are often written like:
+
+> As a \_\_\_\_\_\_\_\_\_\_, I can \_\_\_\_\_\_\_\_\_\_, in order to
+> \_\_\_\_\_\_\_\_\_\_.
+
+For example:
+
+> As a github gold organization, I am permitted up to 50 private repositories,
+> in order to privately maintain a large number of distinct projects.
+
+> As an authenticated student user, I am able to post a question such that my
+> instructor knows I am asking the question but my classmates do not, in order
+> increase my likliness of submitting questions.
+
+---
+
+# Scrum Sprint Defined
+
+A __sprint__ is a specific length of time to accomplish some work.
+
+Sprints may operate on the same schedule as product releases (e.g., 2-week
+Sprints immediately followed by releasing whatever was accomplished) however,
+it's not necessary.
+
+---
+
+# Scrum Process
+
+![Scrum Process](img/scrum_process.png)
+
+---
+
+# Scrum Process
+
+At the start of each sprint is the __sprint planning meeting__ to decide the
+"sprint commitment".
+
+Stories are pulled from the prioritized product backlog into the sprint
+backlog. The team may decide to pull stories in a slightly different order
+depending on various constraints. So _agile_.
+
+The team decides how many stories to pull based on their prior estimate of
+those stories' effort (done in _grooming_) relative to their current
+_velocity_. Velocity is often the average amount of _work_ delivered over the
+last three weeks.
+
+After the sprint planning meeting the commitment is _frozen_ and the team works
+through the sprint backlog for the duration of the sprint.
+
+Each day the team has a __stand up__ meeting to discuss what is currently being
+worked on, and to discover any _blocking_ issues.
+
+---
+
+# End of Sprint
+
+A __sprint review__ is conducted at the end of the sprint to demo what was
+accomplished. Everything considered completed should be ready to be released to
+customers (also referred to as __shippable__).
+
+Finally a __sprint retrospective__ is conducted for the team to reflect on how
+well or poorly things went during the sprint. The team discusses how they can
+improve their process and (hopefully) comes out of the meeting with concrete
+idea to be acted upon in the next sprint.
+
+---
+
+# CS290 Scrum
+
+We will use an adapted version of scrum:
+
+* No product owner
+* No scrum master
+* At the start of each (future) lab the team will conduct a retrospective
+* Each team will demo their sprint's progress to me
+* After the retro and demo the next sprint will begin and teams will choose
+  their commitment
+* Throughout the week each team will work to complete their commitment, and
+  subsequently deploy their releasable code to AWS
