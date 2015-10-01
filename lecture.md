@@ -25,12 +25,12 @@ __TODO__:
   Rails.
 * Complete [Ruby Code Academy](https://www.codecademy.com/tracks/ruby)
 
-#### October 1, 2015
+#### October 1, 2015  ([slides](/slides/03_html_css_agile.html))
 * Introduction to HTML and CSS
-* Working Software Quickly: Agile/Scrum
-* Working Software Quickly: TDD, CI, and Pairing
+* Agile/Scrum
 
 #### October 6, 2015
+* TDD, CI, and Pairing
 * Efficient Use of Server Resources: Application Server Architectures
 
 __TODO__:
