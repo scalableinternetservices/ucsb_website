@@ -249,7 +249,7 @@ Classes are prefixed with the `.` symbol in CSS.
         </style>
       </head>
       <body>
-        <span id="alert">Hello World</span>
+        <span class="alert">Hello World</span>
       </body>
     </html>
 
