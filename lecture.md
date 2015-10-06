@@ -29,9 +29,9 @@ __TODO__:
 * Introduction to HTML and CSS
 * Agile/Scrum
 
-#### October 6, 2015
+#### October 6, 2015 ([slides](/slides/04_tdd_ci_pairing_servers.html))
 * TDD, CI, and Pairing
-* Efficient Use of Server Resources: Application Server Architectures
+* Application Server Architectures
 
 __TODO__:
 
