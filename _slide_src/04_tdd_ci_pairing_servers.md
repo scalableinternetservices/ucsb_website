@@ -604,3 +604,297 @@ should be able to sufficiently explain what was done.
 
 On the other hand, it is possible for there to be bad pairings amongst your
 group. If you don't feel it is working out, then simply don't do it.
+
+---
+
+# Web HTTP and Application Servers
+
+---
+
+# What does it mean?
+
+After this lecture (will likely continue into Thursday) you should understand
+the trade-offs in the following stack descriptions:
+
+## NGINX + Passenger (Recommended for regular testing)
+
+NGINX handles requests to port 80 and passes connections to instances of the
+app through Passenger. Multiple concurrent connections are supported.
+
+## Puma
+
+Puma allows both thread-based and process-based
+concurrency.
+
+
+## WEBrick (Use only for slow-performance testing)
+
+WEBrick handles requests to port 80 directly, permitting only a single
+connection at a time.
+
+---
+
+# Motivation
+
+We all should have a reasonable understanding of the HTTP protocol.
+
+Many browsers and clients exist that are able to:
+
+* Open a TCP socket
+* Send an HTTP request
+* Have the request processed
+* Receive the data in a response
+* Reuse the socket for multiple requests
+
+The software systems that handle the request are generally divided into two
+parts:
+
+* HTTP Servers
+* Application Servers
+
+---
+
+# Separation of Responsibilities
+
+> Why not use a single process to handle both the http request and the
+> application logic?
+
+The two components have separate concerns and design goals.
+
+## HTTP Server
+
+* Provides a high performance HTTP implementation (handles concurrency)
+* Extremely stable, and relatively static
+* Very configurable and language/framework agnostic
+
+## Application Server
+
+* Written to support a specific language (e.g., Ruby), as a result ofen
+  hindering performance
+* Contains _business logic_ and is extremely dynamic
+* Focus on optimizing human resources often via large MVC
+  (model-view-controller) framework
+
+---
+
+# HTTP Servers
+
+![Netcraft survey of HTTP servers](img/netcraft_web_servers.png)
+
+Source:
+[http://news.netcraft.com/archives/2015/08/13/august-2015-web-server-survey.html](http://news.netcraft.com/archives/2015/08/13/august-2015-web-server-survey.html)
+
+---
+
+# HTTP Server Responsibilities
+
+* Parse HTTP requests and craft HTTP responses _very_ fast
+* Dispatch to the appropriate handler and return response
+* Be stable and secure (lots of string parsing)
+* Provide clean abstraction for backing applications
+
+>  How do web servers provide concurrency?
+
+---
+
+# HTTP Server Architectures
+
+* Single Threaded (no concurrency)
+* Process per request
+* Process pool
+* Thread per request
+* Process/thread worker pool
+* Event-driven
+
+---
+
+# Single Threaded HTTP Servers
+
+    bind() to port 80 and listen()
+    loop forever
+        accept() a socket connection
+        while we can read from the socket
+            read() a request
+            process that request
+            write() its response
+        close() the socket connection
+
+> If another request comes in while we're within the loop what happens?
+
+---
+
+# Single Threaded Problem
+
+If a single threaded web service does not process the request quickly, other
+clients end up waiting or dropping their connections.
+
+We are building web application not web sites. As a result:
+
+* The requests are usually more complicated than serving a file from disk.
+* It is common to have a web request doing a significant amount of computation
+  and business logic.
+* It is common to have a web request result in connections to multiple external
+  services, e.g., databases, and caching stores
+* These requests can be anything: lightweight or heavyweight, IO intensive or
+  CPU intensive
+
+We can solve these problems if the thread of control that processes the request
+is separate from the thread that `listen()`s and `accept()`s new connections.
+
+---
+
+# Process per Request HTTP Server
+
+Handle each request as a subprocess:
+
+.fx: img-left
+
+![forking web server](img/server_forking.png)
+
+    bind() to port 80 and listen()
+    loop forever
+        accept() a socket connection
+        if fork() == 0  # child process
+            while we can read from the socket
+                read() a request
+                process that request
+                write() its response
+            close() the socket connection
+            exit()
+
+---
+
+# Process per Request HTTP Server
+
+## Strengths
+
+* Simple
+* Provides easy isolation between requests
+* No threading issues
+
+## Weaknesses
+
+* Does each request duplicate the process memory?
+* What happens as the CPU load increases?
+* How efficient is it to fire up a process on each request?
+    * How much setup and teardown work is necessary?
+
+---
+
+# Process Pool HTTP Server
+
+.fx: img-left
+
+![process pool web server](img/server_process_pool.png)
+
+Instead of spawning a process for each request create a pool of N processes at
+start-up and have them handle incoming requests when available.
+
+The children processes `accept()` the incoming connections and use shared
+memory to coordinate.
+
+The parent process watches the load on its children and can adjust the pool
+size as needed.
+
+---
+
+# Process Pool HTTP Server
+
+## Strengths
+
+* Provides easy isolation between requests
+* Children can die after _M_ requests to avoid memory leakage
+* Process setup and teardown costs are minimized
+* More predictable behavior under high load
+* No threading issues
+
+## Weaknesses
+
+* More complex than process per request
+* Many processes can still mean a large amount of memory consumption
+
+This web server architecture is provded by the Apache 2.x MPM "Prefork" module.
+
+---
+
+# Thread per Request HTTP Server
+
+Why use multiple processes at all? Instead we can use a single process and
+spawn new threads for each request.
+
+.fx: img-left
+
+![http server thread per request](img/server_threaded.png)
+
+    bind() to port 80 and listen()
+    loop forever
+        accept() a socket connection
+        pthread_create()  # function that...
+            while we can read from the socket
+                read() a request
+                process that request
+                write() its response
+            close() the socket connection
+            # thread dies
+
+
+---
+
+# Thread per Request HTTP Server
+
+## Strengths
+
+* Relatively simple
+* Reduced memory footprint compared to multi-processed
+
+## Weaknesses
+
+* Request handling code must be thread-safe
+* Pushing thread-safety to the application developer is not ideal
+* Setup and tear down needs to occur for each thread (or shared data
+  needs to be thread-safe)
+* Memory leaks?
+
+---
+
+# Process/Thread Worker Pool Server
+
+.fx: img-left
+
+![http process/thread worker pool](img/server_worker_pool.png)
+
+Combination of the two techniques.
+
+Master process spawns processes, each with many threads. Master maintains
+process pool.
+
+Processes coordinate through shared memory to `accept()` requests.
+
+Fixed threads per request, scaling is done at the process level.
+
+---
+
+# Process/Thread Worker Pool Server
+
+## Strengths
+
+* Faults isolated between processes, but not threads
+* Threads reduce memory footprint
+* Tunable level of isolation
+* Controlling the number of processes and threads allows for predictable
+  behavior under load
+
+## Weaknesses
+
+* Requires thread-safe code
+* Uses more meory than an all-thread based approach
+
+This web server architecture is provded by the Apache 2.x MPM "Worker" module.
+
+---
+
+# Next Time
+
+* The C10K problem
+* Event-driven architectures and nginx
+* Application servers
