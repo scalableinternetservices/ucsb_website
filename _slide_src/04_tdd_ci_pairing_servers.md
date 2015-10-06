@@ -15,6 +15,7 @@ October 6, 2015
 * Agile Review
 * Test Driven Development
 * Continuous Integration
+* Github Workflow
 * Pair Programming
 * Web Servers
 * Application Servers
@@ -453,3 +454,146 @@ more.
 
 ---
 
+# Workflow
+
+We know that we do not want our chagnes to diverge too far from the rest of
+the group.
+
+> What's the right way to use our source control system to accomplish this
+> goal?
+
+There are two popular git-based workflow systems:
+
+* [Git-flow](http://nvie.com/posts/a-successful-git-branching-model/)
+* [GitHub Flow](https://guides.github.com/introduction/flow/)
+
+GitHub Flow is simpler and recommended for this class.
+
+---
+
+# GitHub Flow
+
+1. Ensure your master branch is up-to-date with the remote (often called
+   `origin`)
+2. Create a new branch for your feature (often called a `feature branch`)
+3. Commit to the feature branch regularly
+4. Push changes to your branch to the remote (github) regularly
+5. Open a github pull request when the work on the feature branch is complete
+6. Have a group member perform a _code review_ of your changes
+7. If there are issues to address from _code review_, complete them
+8. If there are test failures (you've set up a CI system, right?) fix them
+9. Merge the branch to master when everything is good-to-go
+
+__Note__: We neglected the _deploy_ phase just prior to merging.
+
+---
+
+# GitHub Flow Commands
+
+## Ensure your master branch is up-to-date with the remote
+
+    git pull
+
+## Create a new branch for your feature
+
+    git checkout -b feature_name
+
+## Commit to the feature branch regularly
+
+    git add [files...]
+    git commit -m "Short useful description of changes."
+
+## Push changes to your branch to the remote
+
+    git push -u origin master
+
+---
+
+# Integration with Git
+
+Recall what we want to reconcile our changes regularly. Feature branches should
+be more than a day or two out-of-sync with its parent branch.
+
+If you want to reconcile your changes without merging to master, a __git
+rebase__ is very useful:
+
+    git rebase master feature_branch
+
+![git rebase](img/git_rebase.png)
+
+---
+
+# Git Interactive Rebase
+
+.fx: img-left
+
+![git interactive rebase](img/git_interactive_rebase.png)
+
+If you have been committing frequently and want to squash some commits, consider an interactive rebase:
+
+    git rebase -i master
+
+---
+
+# Pair Programming
+
+.fx: img-left
+
+![Pair programming](img/pair_programming.png)
+
+## Pair Programming
+
+Two developers share one computer and discuss all code that is being written.
+
+## Approaches
+
+### Driver-Navigator
+
+One person does most of the implementation while the other watches, discusses,
+thinks of consequences, and looks forward.
+
+### Ping-pong pairing
+
+One person writes the test, the other makes it pass. This approach is
+frequently used while learning TDD and pair programming.
+
+
+In both approaches, pairs should regularly switch roles (e.g., every twenty
+minutes).
+
+---
+
+# Pairing: Problem Complexity
+
+![pairing usefulness as a function of problem complexity](img/pairing_and_problem_complexity.png)
+
+Source: Dr. Andrew Mutz
+
+---
+
+# Pairing: Expertise Disparity
+
+![pairing usefulness as a function of expertise_disparity](img/pairing_and_expertise_disparity.png)
+
+Source: Dr. Andrew Mutz
+
+---
+
+# Pairing: Code Reading
+
+![pairing usefulness as a function of amount of time spent reading code](img/pairing_and_code_reading.png)
+
+Source: Dr. Andrew Mutz
+
+---
+
+# Pairing in this class
+
+Pair programming is __strongly__ encouraged, but not required.
+
+When you pair you will inevitably experience more of your project. This means
+you can claim you worked on that component in an interview, and as a result
+should be able to sufficiently explain what was done.
+
+On the other hand, it is possible for there to be bad pairings amongst your
+group. If you don't feel it is working out, then simply don't do it.
