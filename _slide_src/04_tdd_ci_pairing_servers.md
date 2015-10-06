@@ -194,6 +194,7 @@ necessarily 100%), how do we get there?__
         'Fizz'
       else
         'Buzz'
+      end
       # test_divisible_by_3 passes
       # test_divisible_by_5 passes
     end
@@ -217,6 +218,7 @@ necessarily 100%), how do we get there?__
         'Fizz'
       else
         'Buzz'
+      end
       # test_divisible_by_3 passes
       # test_divisible_by_5 passes
       # test_divisible_by_both fails
@@ -238,12 +240,14 @@ necessarily 100%), how do we get there?__
     !ruby
     def fizzbuzz(n)
       if n % 3 == 0
-        'Fizz'
         if n % 5 == 0
-          'Buzz'
+          'FizzBuzz'
+        else
+          'Fizz'
         end
       else
         'Buzz'
+      end
       # test_divisible_by_3 passes
       # test_divisible_by_5 passes
       # test_divisible_by_both passes
@@ -265,12 +269,14 @@ necessarily 100%), how do we get there?__
     !ruby
     def fizzbuzz(n)
       if n % 3 == 0
-        'Fizz'
         if n % 5 == 0
-          'Buzz'
+          'FizzBuzz'
+        else
+          'Fizz'
         end
       else
         'Buzz'
+      end
       # test_divisible_by_3 passes
       # test_divisible_by_5 passes
       # test_divisible_by_both passes
@@ -286,9 +292,10 @@ necessarily 100%), how do we get there?__
     !ruby
     def fizzbuzz(n)
       if n % 3 == 0
-        'Fizz'
         if n % 5 == 0
-          'Buzz'
+          'FizzBuzz'
+        else
+          'Fizz'
         end
       elsif n % 5 == 0
         'Buzz'
