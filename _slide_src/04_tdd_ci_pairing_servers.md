@@ -1,4 +1,4 @@
-# TDD, CI, Pairing, and Web/Application Servers
+# TDD, CI, Pairing, and Web Servers
 .fx: title
 
 __CS290B__
@@ -18,7 +18,6 @@ October 6, 2015
 * Github Workflow
 * Pair Programming
 * Web Servers
-* Application Servers
 
 ---
 
@@ -206,7 +205,7 @@ necessarily 100%), how do we get there?__
 ## Test
 
     !ruby
-    def test_divisisble_by_both
+    def test_divisible_by_both
       assert_equal 'FizzBuzz', fizzbuzz(15)
     end
 
@@ -231,7 +230,7 @@ necessarily 100%), how do we get there?__
 ## Test
 
     !ruby
-    def test_divisisble_by_both
+    def test_divisible_by_both
       assert_equal 'FizzBuzz', fizzbuzz(15)
     end
 
@@ -260,7 +259,7 @@ necessarily 100%), how do we get there?__
 ## Test
 
     !ruby
-    def test_divisisble_by_neither
+    def test_divisible_by_neither
       assert_equal 17, fizzbuzz(17)
     end
 
@@ -387,13 +386,13 @@ time between integrations."_
 
 # Reconcile Early and Often
 
-If we never let our changes diverage too much from the restof the group,
+If we never let our changes diverge too much from the rest of the group,
 reconciling our changes will never be too hard.
 
 __Conclusion__: commit early and often, and merge others' changes early and
 often
 
-> How do we ensure we have soccessfully reconciled?
+> How do we ensure we have successfully reconciled?
 
 ---
 
@@ -406,7 +405,7 @@ your source code.
 
 Whenever anyone checks in new code, run all the tests.
 
-* The sonner you find and fix integration problems, the better.
+* The sooner you find and fix integration problems, the better.
 * This also prevents defects unrelated to integration.
 
 The CI server can also test code quality and security, among other things.
@@ -444,7 +443,7 @@ with immediate feedback on your changes through GitHub:
 ## Coveralls
 
 Web service that provides view into code coverage that occurs during the
-testing phase. Integrates with github and travis ci and can be configured to
+testing phase. Integrates with github and Travis ci and can be configured to
 _fail_ pull requests that decrease code coverage.
 
 [https://coveralls.io/](https://coveralls.io/)
@@ -602,7 +601,7 @@ When you pair you will inevitably experience more of your project. This means
 you can claim you worked on that component in an interview, and as a result
 should be able to sufficiently explain what was done.
 
-On the other hand, it is possible for there to be bad pairings amongst your
+On the other hand, it is possible for there to be bad pairings among your
 group. If you don't feel it is working out, then simply don't do it.
 
 ---
@@ -669,7 +668,7 @@ The two components have separate concerns and design goals.
 
 ## Application Server
 
-* Written to support a specific language (e.g., Ruby), as a result ofen
+* Written to support a specific language (e.g., Ruby), as a result often
   hindering performance
 * Contains _business logic_ and is extremely dynamic
 * Focus on optimizing human resources often via large MVC
@@ -720,181 +719,3 @@ Source:
         close() the socket connection
 
 > If another request comes in while we're within the loop what happens?
-
----
-
-# Single Threaded Problem
-
-If a single threaded web service does not process the request quickly, other
-clients end up waiting or dropping their connections.
-
-We are building web application not web sites. As a result:
-
-* The requests are usually more complicated than serving a file from disk.
-* It is common to have a web request doing a significant amount of computation
-  and business logic.
-* It is common to have a web request result in connections to multiple external
-  services, e.g., databases, and caching stores
-* These requests can be anything: lightweight or heavyweight, IO intensive or
-  CPU intensive
-
-We can solve these problems if the thread of control that processes the request
-is separate from the thread that `listen()`s and `accept()`s new connections.
-
----
-
-# Process per Request HTTP Server
-
-Handle each request as a subprocess:
-
-.fx: img-left
-
-![forking web server](img/server_forking.png)
-
-    bind() to port 80 and listen()
-    loop forever
-        accept() a socket connection
-        if fork() == 0  # child process
-            while we can read from the socket
-                read() a request
-                process that request
-                write() its response
-            close() the socket connection
-            exit()
-
----
-
-# Process per Request HTTP Server
-
-## Strengths
-
-* Simple
-* Provides easy isolation between requests
-* No threading issues
-
-## Weaknesses
-
-* Does each request duplicate the process memory?
-* What happens as the CPU load increases?
-* How efficient is it to fire up a process on each request?
-    * How much setup and teardown work is necessary?
-
----
-
-# Process Pool HTTP Server
-
-.fx: img-left
-
-![process pool web server](img/server_process_pool.png)
-
-Instead of spawning a process for each request create a pool of N processes at
-start-up and have them handle incoming requests when available.
-
-The children processes `accept()` the incoming connections and use shared
-memory to coordinate.
-
-The parent process watches the load on its children and can adjust the pool
-size as needed.
-
----
-
-# Process Pool HTTP Server
-
-## Strengths
-
-* Provides easy isolation between requests
-* Children can die after _M_ requests to avoid memory leakage
-* Process setup and teardown costs are minimized
-* More predictable behavior under high load
-* No threading issues
-
-## Weaknesses
-
-* More complex than process per request
-* Many processes can still mean a large amount of memory consumption
-
-This web server architecture is provded by the Apache 2.x MPM "Prefork" module.
-
----
-
-# Thread per Request HTTP Server
-
-Why use multiple processes at all? Instead we can use a single process and
-spawn new threads for each request.
-
-.fx: img-left
-
-![http server thread per request](img/server_threaded.png)
-
-    bind() to port 80 and listen()
-    loop forever
-        accept() a socket connection
-        pthread_create()  # function that...
-            while we can read from the socket
-                read() a request
-                process that request
-                write() its response
-            close() the socket connection
-            # thread dies
-
-
----
-
-# Thread per Request HTTP Server
-
-## Strengths
-
-* Relatively simple
-* Reduced memory footprint compared to multi-processed
-
-## Weaknesses
-
-* Request handling code must be thread-safe
-* Pushing thread-safety to the application developer is not ideal
-* Setup and tear down needs to occur for each thread (or shared data
-  needs to be thread-safe)
-* Memory leaks?
-
----
-
-# Process/Thread Worker Pool Server
-
-.fx: img-left
-
-![http process/thread worker pool](img/server_worker_pool.png)
-
-Combination of the two techniques.
-
-Master process spawns processes, each with many threads. Master maintains
-process pool.
-
-Processes coordinate through shared memory to `accept()` requests.
-
-Fixed threads per request, scaling is done at the process level.
-
----
-
-# Process/Thread Worker Pool Server
-
-## Strengths
-
-* Faults isolated between processes, but not threads
-* Threads reduce memory footprint
-* Tunable level of isolation
-* Controlling the number of processes and threads allows for predictable
-  behavior under load
-
-## Weaknesses
-
-* Requires thread-safe code
-* Uses more meory than an all-thread based approach
-
-This web server architecture is provded by the Apache 2.x MPM "Worker" module.
-
----
-
-# Next Time
-
-* The C10K problem
-* Event-driven architectures and nginx
-* Application servers
