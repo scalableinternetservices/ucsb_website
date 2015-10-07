@@ -31,7 +31,7 @@ __TODO__:
 
 #### October 6, 2015 ([slides](/slides/04_tdd_ci_pairing_servers.html))
 * TDD, CI, and Pairing
-* Application Server Architectures
+* Web Server Architectures (very brief)
 
 __TODO__:
 
@@ -39,23 +39,20 @@ __TODO__:
 [Dynamic Load Balancing on Web-server Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf)
 by Cardellini, Colajanni, and Yu.
 
-
 #### October 8, 2015
+* Web Server and Application Server Architectures
+
+#### October 13, 2015
 * Vertical Scaling
 * Horizontal Scaling with Load Balancing
 
-#### October 13, 2015
-
+#### October 15, 2015
 * Architecting for High Availability
 * Client-side Caching
 
-#### October 15, 2015
+#### October 20, 2015
 * Service-side Caching
 * Deploying on AWS
-
-#### October 20, 2015
-* Placeholder for Guest Lecture
-* Technical Challenges in Content Delivery Networks
 
 #### October 22, 2015
 * A Stable Data Layer: Relational Databases
@@ -98,30 +95,30 @@ __TODO__:
 
 __TODO__:
 
-Read chapter 15 in High Performance Browser Networking
+* Read chapter 12 in High Performance Browser Networking (__Note__: The web
+  version of
+  [chapter 12](http://chimera.labs.oreilly.com/books/1230000000545/ch12.html)
+  is updated with more relevant information)
 
 #### Novemver 17, 2015
-* Looking Forward: Client-side Renaissance
-* Looking Forward: An Overview of ES 6
+* Looking Forward: HTTP 2.0 and QUIC
+
+__TODO__:
+
+* Read chapter 15 in High Performance Browser Networking
 
 #### Novemver 19, 2015
-* Beyond Javascript Clients: asm.js
-* Beyond Javascript Clients: Emscripten and Webruby
+* Looking Forward: Client-side Renaissance
+* Looking Forward: An Overview of ES 6
 
 #### November 24, 2015
 * Placeholder for Guest Lecture
 
 #### November 26, 2015 (Thanksgiving, no class nor lab)
 
-__TODO__:
-
-* Read chapter 12 in High Performance Browser Networking (__Note__: The web
-  version of
-  [chapter 12](http://chimera.labs.oreilly.com/books/1230000000545/ch12.html)
-  is updated with more relevant information)
-
 #### December 1, 2015
-* Looking Forward: HTTP 2.0 and QUIC
+* Beyond Javascript Clients: asm.js
+* Beyond Javascript Clients: Emscripten and Webruby
 
 #### December 3, 2015
 * Placeholder for spillover
