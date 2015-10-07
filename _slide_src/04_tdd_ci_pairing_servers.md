@@ -463,7 +463,7 @@ more.
 
 # Workflow
 
-We know that we do not want our chagnes to diverge too far from the rest of
+We know that we do not want our changes to diverge too far from the rest of
 the group.
 
 > What's the right way to use our source control system to accomplish this
