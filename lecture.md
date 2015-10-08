@@ -39,7 +39,7 @@ __TODO__:
 [Dynamic Load Balancing on Web-server Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf)
 by Cardellini, Colajanni, and Yu.
 
-#### October 8, 2015
+#### October 8, 2015 ([slides](/slides/05_web_and_application_servers.html))
 * Web Server and Application Server Architectures
 
 #### October 13, 2015
