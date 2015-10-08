@@ -119,7 +119,7 @@ Handle each request as a subprocess:
 * Does each request duplicate the process memory?
 * What happens as the CPU load increases?
 * How efficient is it to fire up a process on each request?
-    * How much setup and teardown work is necessary?
+    * How much setup and tear down work is necessary?
 
 ---
 
@@ -146,7 +146,7 @@ size as needed.
 
 * Provides easy isolation between requests
 * Children can die after _M_ requests to avoid memory leakage
-* Process setup and teardown costs are minimized
+* Process setup and tear down costs are minimized
 * More predictable behavior under high load
 * No threading issues
 
@@ -155,7 +155,7 @@ size as needed.
 * More complex than process per request
 * Many processes can still mean a large amount of memory consumption
 
-This web server architecture is provded by the Apache 2.x MPM "Prefork" module.
+This web server architecture is provided by the Apache 2.x MPM "Prefork" module.
 
 ---
 
@@ -229,9 +229,9 @@ Fixed threads per request, scaling is done at the process level.
 ## Weaknesses
 
 * Requires thread-safe code
-* Uses more meory than an all-thread based approach
+* Uses more memory than an all-thread based approach
 
-This web server architecture is provded by the Apache 2.x MPM "Worker" module.
+This web server architecture is provided by the Apache 2.x MPM "Worker" module.
 
 ---
 
@@ -239,16 +239,16 @@ This web server architecture is provded by the Apache 2.x MPM "Worker" module.
 
 Originally posed in 1999 by Dan Kegel.
 
-> Given a 1 GHz machine with 2GB of RAM, and a gigabit ethernet card, can we
+> Given a 1 GHz machine with 2GB of RAM, and a gigabit Ethernet card, can we
 > support 10,000 simultaneous connections?
 
 ## 20,000 clients means each gets:
 
 * 50 KHz of CPU
 * 100 KB of RAM
-* 50 KBits/second of network
+* 50 Kb/second of network
 
-"It shouldn't take any more horsepwoer than that to take four kilobytes from
+"It shouldn't take any more horsepower than that to take four kilobytes from
 the disk and send them to the network once a second for each of twenty thousand
 clients."
 
@@ -280,10 +280,10 @@ Source: [http://www.kegel.com/c10k.html](http://www.kegel.com/c10k.html)
 
 # Waiting on I/O
 
-Everytime a process is waiting on I/O it is not runnable, and it is not
+Every time a process is waiting on I/O it is not runnable, and it is not
 cost-free:
 
-* Process is considered everytime the scheduler makes a decision
+* Process is considered every time the scheduler makes a decision
 * Memory is occupied by the process, last load may have evicted other
   processes' memory from the cache
 
@@ -337,11 +337,11 @@ thread, of course more may be needed for CPU-bound segments.
 
 Well used examples:
 
-* nginx
-* Tengine (fork of nginx)
+* NGINX
+* Tengine (fork of NGINX)
 * lighttpd
 * netty (java)
-* node.js (javascript)
+* node.js (JavaScript)
 * eventmachine (ruby)
 * twisted (python)
 
@@ -352,12 +352,12 @@ Well used examples:
 ## Strengths
 
 * High performance under high load
-* Predicatable performance under high load
+* Predictable performance under high load
 * No need to be thread-proof (unless specifically adding thread-concurrency)
 
 # Weaknesses
 
-* Poor islation
+* Poor isolation
     * What happens if a bug causes an infinite loop?
 * Fewer extensions, since code cannot use blocking syscalls
 * Very complex
@@ -383,7 +383,7 @@ Event driven code is dominated by callbacks:
 
 # Callback Hell
 
-![Yo dawg, I heard you like javascript](img/callback_hell.png)
+![Yo dawg, I heard you like JavaScript](img/callback_hell.png)
 
 It _can_ very easily become complicated.
 
@@ -399,7 +399,7 @@ It _can_ very easily become complicated.
     * Less isolation
     * Smaller memory footprint
 * Process/thread worker pool
-    * Tuneable compromise between processes and threads
+    * Tunable compromise between processes and threads
 * Event-driven
     * Great performance under high load
     * Difficult to extend
@@ -438,7 +438,7 @@ response.
 
 ## FastCGI, SCGI
 
-Modications to CGI to allow for persistent application server processes
+Modifications to CGI to allow for persistent application server processes
 (amortizes setup time).
 
 ## HTTP
@@ -480,7 +480,7 @@ The Demo App is a link sharing website with:
 
 # Simulated Users
 
-Using Tsung (earlang-based test framework) we will simulate multiple users
+Using Tsung (erlang-based test framework) we will simulate multiple users
 visiting the Demo App web service. Each user will:
 
     Visit the homepage (/)
@@ -523,7 +523,7 @@ All tests were conducted on a single Amazon EC2 m3-medium instance.
 
 The tests used the `Puma` web application server (unless otherwise specified).
 
-The `database_optimizations` banch of the demo app was used to run the tests:
+The `database_optimizations` branch of the demo app was used to run the tests:
 [https://github.com/scalableinternetservices/demo/tree/database_optimizations](https://github.com/scalableinternetservices/demo/tree/database_optimizations)
 
 ---
@@ -605,7 +605,7 @@ Decrease in performance beginning around 300s (3.5 new users per second)
 
 ---
 
-# Sidenote: Ruby interpreters
+# Side note: Ruby interpreters
 
 There are different versions of the Ruby interpreter. Different workloads may
 benefit from using different interpreters.
@@ -626,7 +626,7 @@ benefit from using different interpreters.
 # Application Server Options
 
 In this class you will be able to compare the performance of a handful of
-appliction servers:
+application servers:
 
 ## via provided templates
 
@@ -645,7 +645,7 @@ appliction servers:
 
 # Puma
 
-Originally deisnged for Rubinius (GIL-less ruby interpreter).
+Originally designed for Rubinius (GIL-less ruby interpreter).
 
 Claims to require less memory than others (the server itself)
 
@@ -659,7 +659,7 @@ multiple processes each with a tunable number of threads.
 # Phusion Passenger
 
 Passenger is a ruby web application server that can be added as a module to
-either Apache or nginx.
+either Apache or NGINX.
 
 Passenger works as a worker pool adjusting the number of processes that
 handle requests. Originally did not support threads within the processes.

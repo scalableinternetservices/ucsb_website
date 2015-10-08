@@ -358,7 +358,7 @@ loop forever
 <li>Does each request duplicate the process memory?</li>
 <li>What happens as the CPU load increases?</li>
 <li>How efficient is it to fire up a process on each request?<ul>
-<li>How much setup and teardown work is necessary?</li>
+<li>How much setup and tear down work is necessary?</li>
 </ul>
 </li>
 </ul></section>
@@ -431,7 +431,7 @@ size as needed.</p></section>
 <ul>
 <li>Provides easy isolation between requests</li>
 <li>Children can die after <em>M</em> requests to avoid memory leakage</li>
-<li>Process setup and teardown costs are minimized</li>
+<li>Process setup and tear down costs are minimized</li>
 <li>More predictable behavior under high load</li>
 <li>No threading issues</li>
 </ul>
@@ -440,7 +440,7 @@ size as needed.</p></section>
 <li>More complex than process per request</li>
 <li>Many processes can still mean a large amount of memory consumption</li>
 </ul>
-<p>This web server architecture is provded by the Apache 2.x MPM "Prefork" module.</p></section>
+<p>This web server architecture is provided by the Apache 2.x MPM "Prefork" module.</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -601,9 +601,9 @@ process pool.</p>
 <h2>Weaknesses</h2>
 <ul>
 <li>Requires thread-safe code</li>
-<li>Uses more meory than an all-thread based approach</li>
+<li>Uses more memory than an all-thread based approach</li>
 </ul>
-<p>This web server architecture is provded by the Apache 2.x MPM "Worker" module.</p></section>
+<p>This web server architecture is provided by the Apache 2.x MPM "Worker" module.</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -635,16 +635,16 @@ process pool.</p>
             
             <section><p>Originally posed in 1999 by Dan Kegel.</p>
 <blockquote>
-<p>Given a 1 GHz machine with 2GB of RAM, and a gigabit ethernet card, can we
+<p>Given a 1 GHz machine with 2GB of RAM, and a gigabit Ethernet card, can we
 support 10,000 simultaneous connections?</p>
 </blockquote>
 <h2>20,000 clients means each gets:</h2>
 <ul>
 <li>50 KHz of CPU</li>
 <li>100 KB of RAM</li>
-<li>50 KBits/second of network</li>
+<li>50 Kb/second of network</li>
 </ul>
-<p>"It shouldn't take any more horsepwoer than that to take four kilobytes from
+<p>"It shouldn't take any more horsepower than that to take four kilobytes from
 the disk and send them to the network once a second for each of twenty thousand
 clients."</p>
 <blockquote>
@@ -752,10 +752,10 @@ clients."</p>
             <header><h1>Waiting on I/O</h1></header>
             
             
-            <section><p>Everytime a process is waiting on I/O it is not runnable, and it is not
+            <section><p>Every time a process is waiting on I/O it is not runnable, and it is not
 cost-free:</p>
 <ul>
-<li>Process is considered everytime the scheduler makes a decision</li>
+<li>Process is considered every time the scheduler makes a decision</li>
 <li>Memory is occupied by the process, last load may have evicted other
   processes' memory from the cache</li>
 </ul>
@@ -884,11 +884,11 @@ cost-free:</p>
 thread, of course more may be needed for CPU-bound segments.</p>
 <p>Well used examples:</p>
 <ul>
-<li>nginx</li>
-<li>Tengine (fork of nginx)</li>
+<li>NGINX</li>
+<li>Tengine (fork of NGINX)</li>
 <li>lighttpd</li>
 <li>netty (java)</li>
-<li>node.js (javascript)</li>
+<li>node.js (JavaScript)</li>
 <li>eventmachine (ruby)</li>
 <li>twisted (python)</li>
 </ul></section>
@@ -924,12 +924,12 @@ thread, of course more may be needed for CPU-bound segments.</p>
             <section><h2>Strengths</h2>
 <ul>
 <li>High performance under high load</li>
-<li>Predicatable performance under high load</li>
+<li>Predictable performance under high load</li>
 <li>No need to be thread-proof (unless specifically adding thread-concurrency)</li>
 </ul>
 <h1>Weaknesses</h1>
 <ul>
-<li>Poor islation<ul>
+<li>Poor isolation<ul>
 <li>What happens if a bug causes an infinite loop?</li>
 </ul>
 </li>
@@ -1014,7 +1014,7 @@ thread, of course more may be needed for CPU-bound segments.</p>
             <header><h1>Callback Hell</h1></header>
             
             
-            <section><p><img alt="Yo dawg, I heard you like javascript" src="img/callback_hell.png" /></p>
+            <section><p><img alt="Yo dawg, I heard you like JavaScript" src="img/callback_hell.png" /></p>
 <p>It <em>can</em> very easily become complicated.</p></section>
             
           </div>
@@ -1058,7 +1058,7 @@ thread, of course more may be needed for CPU-bound segments.</p>
 </ul>
 </li>
 <li>Process/thread worker pool<ul>
-<li>Tuneable compromise between processes and threads</li>
+<li>Tunable compromise between processes and threads</li>
 </ul>
 </li>
 <li>Event-driven<ul>
@@ -1146,7 +1146,7 @@ server(s).</p></section>
 <p>Spawn a process, pass HTTP headers as ENV variables and utilize STDOUT as the
 response.</p>
 <h2>FastCGI, SCGI</h2>
-<p>Modications to CGI to allow for persistent application server processes
+<p>Modifications to CGI to allow for persistent application server processes
 (amortizes setup time).</p>
 <h2>HTTP</h2>
 <p>Communicate via the HTTP protocol to a long-running process. (Essentially a
@@ -1257,7 +1257,7 @@ because Rails will not run on such application servers.</p></section>
             <header><h1>Simulated Users</h1></header>
             
             
-            <section><p>Using Tsung (earlang-based test framework) we will simulate multiple users
+            <section><p>Using Tsung (erlang-based test framework) we will simulate multiple users
 visiting the Demo App web service. Each user will:</p>
 <pre><code>Visit the homepage (/)
   Wait randomly between 0 and 2 seconds
@@ -1347,7 +1347,7 @@ seconds with the delays.</p></section>
 <li>3.75 GB RAM</li>
 </ul>
 <p>The tests used the <code>Puma</code> web application server (unless otherwise specified).</p>
-<p>The <code>database_optimizations</code> banch of the demo app was used to run the tests:
+<p>The <code>database_optimizations</code> branch of the demo app was used to run the tests:
 <a href="https://github.com/scalableinternetservices/demo/tree/database_optimizations">https://github.com/scalableinternetservices/demo/tree/database_optimizations</a></p></section>
             
           </div>
@@ -1713,7 +1713,7 @@ stable until then.</p>
         <div class="slide slide-44">
           <div class="inner">
             
-            <header><h1>Sidenote: Ruby interpreters</h1></header>
+            <header><h1>Side note: Ruby interpreters</h1></header>
             
             
             <section><p>There are different versions of the Ruby interpreter. Different workloads may
@@ -1759,7 +1759,7 @@ benefit from using different interpreters.</p>
             
             
             <section><p>In this class you will be able to compare the performance of a handful of
-appliction servers:</p>
+application servers:</p>
 <h2>via provided templates</h2>
 <ul>
 <li>WEBrick (single process, single thread)</li>
@@ -1802,7 +1802,7 @@ appliction servers:</p>
             <header><h1>Puma</h1></header>
             
             
-            <section><p>Originally deisnged for Rubinius (GIL-less ruby interpreter).</p>
+            <section><p>Originally designed for Rubinius (GIL-less ruby interpreter).</p>
 <p>Claims to require less memory than others (the server itself)</p>
 <p>Specifically made to work with thread-based parallelism, but also supports
 multiple processes each with a tunable number of threads.</p></section>
@@ -1836,7 +1836,7 @@ multiple processes each with a tunable number of threads.</p></section>
             
             
             <section><p>Passenger is a ruby web application server that can be added as a module to
-either Apache or nginx.</p>
+either Apache or NGINX.</p>
 <p>Passenger works as a worker pool adjusting the number of processes that
 handle requests. Originally did not support threads within the processes.</p></section>
             
@@ -2214,7 +2214,7 @@ thread safe.</p>
       
       
       <tr id="toc-row-44">
-        <th><a href="#slide44">Sidenote: Ruby interpreters</a></th>
+        <th><a href="#slide44">Side note: Ruby interpreters</a></th>
         <td><a href="#slide44">44</a></td>
       </tr>
       
