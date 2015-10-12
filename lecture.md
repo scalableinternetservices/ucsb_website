@@ -67,6 +67,14 @@ by Cardellini, Colajanni, and Yu.
 
 __TODO__:
 
+* Read chapter 4 in High Performance Browser Networking
+
+#### November 3, 2015
+* Security basics: intro to HTTPS
+* Security basics: Firewalls, XSS, CSRF, SQL Injection
+
+__TODO__:
+
 * Read
   [CAP 12 years later](http://www.realtechsupport.org/UB/NP/Numeracy_CAP%2B12Years_2012.pdf)
   by Eric Brewer
@@ -74,18 +82,8 @@ __TODO__:
   [Eventually Consistent](http://www.scalableinternetservices.com/slides/vogels.pdf)
   by Werner Vogels
 
-
-#### November 3, 2015
-* Placeholder for Guest Lecture
-* Beyond SQL: Non-Relational Data Stores
-
-__TODO__:
-
-* Read chapter 4 in High Performance Browser Networking
-
 #### November 5, 2015
-* Security basics: intro to HTTPS
-* Security basics: Firewalls, XSS, CSRF, SQL Injection
+* Guest Lecture: Jonathan Kupferman
 
 #### November 10, 2015
 * Guest Lecture: Darren Mutz @ AppFolio (formerly Amazon)
