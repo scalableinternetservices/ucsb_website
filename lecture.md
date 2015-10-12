@@ -42,7 +42,7 @@ by Cardellini, Colajanni, and Yu.
 #### October 8, 2015 ([slides](/slides/05_web_and_application_servers.html))
 * Web Server and Application Server Architectures
 
-#### October 13, 2015
+#### October 13, 2015 ([slides](/slides/06_vertical_and_horizontal_scaling.html))
 * Vertical Scaling
 * Horizontal Scaling with Load Balancing
 
