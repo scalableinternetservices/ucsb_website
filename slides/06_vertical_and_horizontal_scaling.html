@@ -89,7 +89,7 @@
             </aside>
             
             <aside class="page_number">
-              1/9
+              1/16
             </aside>
           </footer>
         </div>
@@ -106,6 +106,7 @@
             <section><ul>
 <li>TODO</li>
 <li>Server Architecture Review</li>
+<li>Motivation</li>
 <li>Vertical Scaling</li>
 <li>Horizontal Scaling</li>
 </ul></section>
@@ -124,7 +125,7 @@
             </aside>
             
             <aside class="page_number">
-              2/9
+              2/16
             </aside>
           </footer>
         </div>
@@ -170,7 +171,7 @@ the next few weeks.</p></section>
             </aside>
             
             <aside class="page_number">
-              3/9
+              3/16
             </aside>
           </footer>
         </div>
@@ -207,7 +208,7 @@ the next few weeks.</p></section>
             </aside>
             
             <aside class="page_number">
-              4/9
+              4/16
             </aside>
           </footer>
         </div>
@@ -235,7 +236,7 @@ the next few weeks.</p></section>
             </aside>
             
             <aside class="page_number">
-              5/9
+              5/16
             </aside>
           </footer>
         </div>
@@ -263,7 +264,7 @@ the next few weeks.</p></section>
             </aside>
             
             <aside class="page_number">
-              6/9
+              6/16
             </aside>
           </footer>
         </div>
@@ -291,7 +292,7 @@ the next few weeks.</p></section>
             </aside>
             
             <aside class="page_number">
-              7/9
+              7/16
             </aside>
           </footer>
         </div>
@@ -302,8 +303,12 @@ the next few weeks.</p></section>
         <div class="slide slide-8">
           <div class="inner">
             
-            <header><h1>Vertical Scaling</h1></header>
+            <header><h1>Scaling Goal</h1></header>
             
+            
+            <section><p><img alt="Load Balanced Topology" src="img/load_balanced_topology.png" /></p>
+<p>After today you will understand what load balancing is, and why the depicted
+architecture provides smooth cost-effective scaling.</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -319,7 +324,7 @@ the next few weeks.</p></section>
             </aside>
             
             <aside class="page_number">
-              8/9
+              8/16
             </aside>
           </footer>
         </div>
@@ -328,6 +333,284 @@ the next few weeks.</p></section>
       <!-- slide source: 06_vertical_and_horizontal_scaling.md -->
       <div class="slide-wrapper">
         <div class="slide slide-9">
+          <div class="inner">
+            
+            <header><h1>The Problem</h1></header>
+            
+            
+            <section><p>You've built something the world (or significant subset) is excited about.</p>
+<blockquote>
+<p>What do you do when your popularity doubles (again, and again)?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="06_vertical_and_horizontal_scaling.md">06_vertical_and_horizontal_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/16
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 06_vertical_and_horizontal_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-10">
+          <div class="inner">
+            
+            <header><h1>The Solutions</h1></header>
+            
+            
+            <section><h2>Vertical Scaling</h2>
+<p>Buying "bigger" hardware and scaling <em>up</em></p>
+<ul>
+<li><strong>PRO</strong>: Easy</li>
+<li><strong>CON</strong>: Limited</li>
+<li><strong>CON</strong>: Non-linear increase in cost when scaling</li>
+</ul>
+<h2>Horizontal Scaling</h2>
+<p>Buying move servers and scaling <em>out</em></p>
+<ul>
+<li><strong>PRO</strong>: Easy to add more servers (limited by datacenter space)</li>
+<li><strong>PRO</strong>: Linear increase in cost when scaling</li>
+<li><strong>CON</strong>: More moving parts makes things more complicated</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="06_vertical_and_horizontal_scaling.md">06_vertical_and_horizontal_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/16
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 06_vertical_and_horizontal_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-11">
+          <div class="inner">
+            
+            <header><h1>Vertical Scaling</h1></header>
+            
+            
+            <section><p>When needed, increase the resources of your current server, eventually buy a
+bigger server with:</p>
+<ul>
+<li>More memory</li>
+<li>More and/or faster CPUs and/or cores</li>
+<li>Higher bandwidth</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="06_vertical_and_horizontal_scaling.md">06_vertical_and_horizontal_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/16
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 06_vertical_and_horizontal_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-12">
+          <div class="inner">
+            
+            <header><h2>EC2 and Vertical Scaling</h2></header>
+            
+            
+            <section><p>With Amazon EC2 you rent virtual instances. There are clear vertical scaling
+paths. Each type of instance (below) has a few options ranging from lower
+resources/performance to higher resources/performance:</p>
+<ul>
+<li><strong>T</strong> and <strong>M</strong> prefixed instances: balanced mix of memory and CPU</li>
+<li><strong>C</strong> prefixed instances: CPU optimized</li>
+<li><strong>R</strong> prefixed instances: Memory optimized</li>
+<li><strong>G</strong> prefixed instances: GPU optimized</li>
+<li><strong>I</strong> prefixed instances: I/O optimized</li>
+<li><strong>D</strong> prefixed instances: Storage capacity optimized</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="06_vertical_and_horizontal_scaling.md">06_vertical_and_horizontal_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/16
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 06_vertical_and_horizontal_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-13">
+          <div class="inner">
+            
+            <header><h1>Scaling Test: Simulated Users</h1></header>
+            
+            
+            <section><p>We will use the same test setup explained in the last lecture.</p>
+<p>Using Tsung (erlang-based test framework) we will simulate multiple users
+visiting the Demo App web service. Each user will:</p>
+<pre><code>Visit the homepage (/)
+  Wait randomly between 0 and 2 seconds
+Request community creation form
+  Wait randomly between 0 and 2 seconds
+Submit new community form
+Request new link submission form
+  Wait randomly between 0 and 2 seconds
+Submit new link submission form
+  Wait randomly between 0 and 2 seconds
+Delete the link
+  Wait randomly between 0 and 2 seconds
+Delete the community
+</code></pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="06_vertical_and_horizontal_scaling.md">06_vertical_and_horizontal_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/16
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 06_vertical_and_horizontal_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-14">
+          <div class="inner">
+            
+            <header><h1>Scaling Test: Phases</h1></header>
+            
+            
+            <section><p>This time we have twelve phases of testing each lasting 60 seconds:</p>
+<pre><code> 1.    (0-59s) Every second a new simulated user arrives
+ 2.  (60-119s) Every second 1.5 new simulated users arrive
+ 3. (120-179s) Every second 2 new simulated users arrive
+ 4. (180-239s) Every second 4 new simulated users arrive
+ 5. (240-299s) Every second 6 new simulated users arrive
+ 6. (300-359s) Every second 10 new simulated users arrive
+ 7. (360-419s) Every second 16 new simulated users arrive
+ 8. (420-479s) Every second 20 new simulated users arrive
+ 9. (480-539s) Every second 25 new simulated users arrive
+10. (540-599s) Every second 35 new simulated users arrive
+11. (600-659s) Every second 45 new simulated users arrive
+12. (660-719s) Every second 55 new simulated users arrive
+</code></pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="06_vertical_and_horizontal_scaling.md">06_vertical_and_horizontal_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/16
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 06_vertical_and_horizontal_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-15">
+          <div class="inner">
+            
+            <header><h1>Vertical Scaling: M3 Large Instance</h1></header>
+            
+            
+            <section><p><img alt="M3 Large Instance Graph" src="img/vertical_scaling_m3_large.png" /></p>
+<ul>
+<li>2 vCPUs</li>
+<li>7.5 GB Memory</li>
+<li>SSD storage</li>
+<li>$100 per month</li>
+</ul>
+<p>Handles 6 new users per second (ups).</p>
+<p>Fails with 10 ups.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="06_vertical_and_horizontal_scaling.md">06_vertical_and_horizontal_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/16
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 06_vertical_and_horizontal_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-16">
           <div class="inner">
             
             <header><h1>Horizontal Scaling</h1></header>
@@ -347,7 +630,7 @@ the next few weeks.</p></section>
             </aside>
             
             <aside class="page_number">
-              9/9
+              16/16
             </aside>
           </footer>
         </div>
@@ -369,7 +652,7 @@ the next few weeks.</p></section>
           <footer>
             
             <aside class="page_number">
-              /9
+              /16
             </aside>
           </footer>
         </div>
@@ -426,14 +709,57 @@ the next few weeks.</p></section>
       
       
       <tr id="toc-row-8">
-        <th><a href="#slide8">Vertical Scaling</a></th>
+        <th><a href="#slide8">Scaling Goal</a></th>
         <td><a href="#slide8">8</a></td>
       </tr>
       
       
       <tr id="toc-row-9">
-        <th><a href="#slide9">Horizontal Scaling</a></th>
+        <th><a href="#slide9">The Problem</a></th>
         <td><a href="#slide9">9</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-10">
+        <th><a href="#slide10">The Solutions</a></th>
+        <td><a href="#slide10">10</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-11">
+        <th><a href="#slide11">Vertical Scaling</a></th>
+        <td><a href="#slide11">11</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-12" class="sub">
+          <th><a href="#slide12">EC2 and Vertical Scaling</a></th>
+          <td><a href="#slide12">12</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-13">
+        <th><a href="#slide13">Scaling Test: Simulated Users</a></th>
+        <td><a href="#slide13">13</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-14">
+        <th><a href="#slide14">Scaling Test: Phases</a></th>
+        <td><a href="#slide14">14</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-15">
+        <th><a href="#slide15">Vertical Scaling: M3 Large Instance</a></th>
+        <td><a href="#slide15">15</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-16">
+        <th><a href="#slide16">Horizontal Scaling</a></th>
+        <td><a href="#slide16">16</a></td>
       </tr>
       
       
