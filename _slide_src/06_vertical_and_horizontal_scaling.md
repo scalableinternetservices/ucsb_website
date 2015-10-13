@@ -183,9 +183,86 @@ Handles 6 new users per second (ups).
 
 Fails with 10 ups.
 
+---
+
+# Vertical Scaling: M3 X-Large Instance
+
+.fx: img-left
+
+![M3 X-Large Instance Graph](img/vertical_scaling_m3_xlarge.png)
+
+* 4 vCPUs
+* 15 GB Memory
+* SSD storage
+* $200 per month
+
+Handles 10 new users per second (ups).
+
+Fails with 16 ups.
 
 ---
 
-# Horizontal Scaling
+# Vertical Scaling: M3 XX-Large Instance
+
+.fx: img-left
+
+![M3 XX-Large Instance Graph](img/vertical_scaling_m3_xxlarge.png)
+
+* 8 vCPUs
+* 30 GB Memory
+* SSD storage
+* $400 per month
+* Largest available M-prefixed instance.
+
+Handles 16 new users per second (ups).
+
+Fails with 20 ups.
 
 ---
+
+# Vertical Scaling: C3 4XLarge Instance
+
+.fx: img-left
+
+![C3 4XLarge Instance Graph](img/vertical_scaling_c3_4xlarge.png)
+
+* 16 vCPUs
+* 30 GB Memory
+* SSD storage
+* $600 per month
+
+Handles 20 new users per second (ups).
+
+Fails with 25 ups.
+
+---
+
+# Load Balancing
+
+Vertical scaling has its place, but horizontal scaling is generally preferable.
+
+When horizontally scaling HTTP, this technique is referred to as __load
+balancing__.
+
+## Basic Idea
+
+* Have many servers that can server clients
+* Make these servers _appear_ as single endpoint to the outside world
+
+The users' experiences are the same regardless of which server ultimately
+handles the request.
+
+---
+
+# Think About It
+
+> How can we enable many servers to serve clients?
+
+Consider the following sequence of actions:
+
+1. GET /products
+2. POST /products
+3. GET /products
+
+> If these requests are handled by three different servers, will the third
+> request show the new product?
