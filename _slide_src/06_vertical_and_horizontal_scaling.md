@@ -266,3 +266,209 @@ Consider the following sequence of actions:
 
 > If these requests are handled by three different servers, will the third
 > request show the new product?
+
+---
+
+# Stateless Servers
+
+.fx: img-left
+
+![Load Balanced Topology](img/load_balanced_topology.png)
+
+In order for load balancing to work, the servers must be stateless.
+
+Statelessness can be accomplished by keeping the persistence layer separate
+from the application layer.
+
+---
+
+# Load Balancing (1): HTTP Redirects
+
+.fx: img-left
+
+![Load balancing via redirect](img/load_balancing_redirect.png)
+
+Discussed in section 6.1 of the reading.
+
+Implemented using multiple web servers with different domain names.
+
+A request for www.domain.com will use HTTP 301 or 302 to redirect the request
+to a pool of possible hosts.
+
+---
+
+# HTTP Redirect Example
+
+    !http
+    % nc www.domain.com 80
+    GET / HTTP/1.1
+    host: www.domain.com
+
+    HTTP/1.1 301 Moved Permanently
+    Date: Wed, 15 Oct 2014 21:08:22 GMT
+    Server: Apache/2.2.22 (Ubuntu)
+    Location: http://www2.domain.com/
+    Content-Type: text/html; charset=iso-8859-1
+    ...
+
+---
+
+# HTTP Redirects Trade-offs
+
+## Strengths
+
+* Simple
+* Complete control over load balancing algorithm
+* Location independent
+
+## Weaknesses
+
+* Not transparent to user
+* High load on www
+* May reduce local-network cache applicability
+
+---
+
+# Load Balancing (2): Round Robin DNS
+
+.fx: img-left
+
+![Load balancing via round-robin DNS](img/load_balancing_round_robin.png)
+
+Discussed in section 4.1 of the reading.
+
+When user's browser queries DNS for www.example.com, a list of IPs is
+returned. The DNS server rotates the list order for each query (or alters
+priorities).
+
+User's browser chooses which IP to connect to (generally picks the first, or
+highest priority).
+
+---
+
+# Round Robin DNS Example
+
+    % host www.google.com
+    www.google.com has address 74.125.224.48
+    www.google.com has address 74.125.224.51
+    www.google.com has address 74.125.224.52
+    www.google.com has address 74.125.224.49
+    www.google.com has address 74.125.224.50
+
+    % host www.google.com
+    www.google.com has address 74.125.224.49
+    www.google.com has address 74.125.224.52
+    www.google.com has address 74.125.224.51
+    www.google.com has address 74.125.224.50
+    www.google.com has address 74.125.224.48
+
+---
+
+# Round Robin DNS Trade-offs
+
+## Strengths
+
+* Simple
+* Cheap
+
+## Weaknesses
+
+* Less control over balancing
+* Modifying the list is inhibited by caching in the browser and proxies
+
+---
+
+# Load Balancing (3): TCP Load Balancing
+
+.fx: img-left
+
+![Load balancing via TCP](img/load_balancing_tcp.png)
+
+
+Discussed in section 5 of the reading.
+
+## General Idea
+
+Rewrite TCP packets to send them to the selected server. This includes
+addresses, sequence numbers, and checksums.
+
+
+## Commercial Products (use hardware ASICs to do this fast)
+
+* Cisco Content Services Switch
+* Citrix Netscaler
+* F5 Big IP
+
+---
+
+# TCP Load Balancing Example 1
+
+__ client -> switch : 216.64.159.149 -> 208.50.157.136
+IP D=208.50.157.136 S=216.64.159.149 LEN=60, ID=48397 2.94950 216.64.159.149 -> 208.50.157.136
+TCP D=80 S=1421 Syn Seq=899863543 Len=0 Win=32120 …
+
+__ switch -> client : 208.50.157.136 -> 216.64.159.149
+IP D=216.64.159.149 S=208.50.157.136 LEN=48, ID=26291 2.95125 208.50.157.136 -> 216.64.159.149
+TCP D=1421 S=80 Syn Ack=899863544 Seq=1908949446 Len=0 ...
+
+__ client -> switch : 216.64.159.149 -> 208.50.157.136
+IP D=208.50.157.136 S=216.64.159.149 LEN=40, ID=48400 2.98324 216.64.159.149 -> 208.50.157.136
+TCP D=80 S=1421 Ack=1908949447 Seq=899863544 Len=0 ...
+
+__ client -> switch : 216.64.159.149 -> 208.50.157.136
+IP D=208.50.157.136 S=216.64.159.149 LEN=154, ID=48401 2.98395 216.64.159.149 -> 208.50.157.136
+TCP D=80 S=1421 Ack=1908949447 Seq=899863544 Len=114 ... 2.98395 216.64.159.149 -> 208.50.157.136
+HTTP GET /eb/images/ec_home_logo_tag.gif HTTP/1.0
+
+---
+
+# TCP Load Balancing Example 2
+
+__ switch -> server : 216.64.159.149 -> 10.16.100.121
+IP D=10.16.100.121 S=216.64.159.149 LEN=48, ID=26292 0.00000 216.64.159.149 -> 10.16.100.121
+TCP D=80 S=1421 Syn Seq=899863543 Len=0 Win=32120 Options...
+
+__ server -> switch : 10.16.100.121 -> 216.64.159.149
+IP D=216.64.159.149 S=10.16.100.121 LEN=44, ID=22235 0.00001 10.16.100.121 -> 216.64.159.149
+TCP D=1421 S=80 Syn Ack=899863544 Seq=2156657894 Len=0 ...
+
+__ switch -> server : 216.64.159.149 -> 10.16.100.121
+IP D=10.16.100.121 S=216.64.159.149 LEN=154, ID=48401 0.00131 216.64.159.149 -> 10.16.100.121
+TCP D=80 S=1421 Ack=2156657895 Seq=899863544 Len=114 ... 0.00131 216.64.159.149 -> 10.16.100.121
+HTTP GET /eb/images/ec_home_logo_tag.gif HTTP/1.0
+
+---
+
+# TCP Load Balancing Example 3
+
+__ server -> switch : 10.16.100.121 -> 216.64.159.149
+IP D=216.64.159.149 S=10.16.100.121 LEN=40, ID=22236 0.00134 10.16.100.121 -> 216.64.159.149
+TCP D=1421 S=80 Ack=899863658 Seq=2156657895 Len=0 …
+
+__ switch -> client : 208.50.157.136 -> 216.64.159.149
+IP D=216.64.159.149 S=208.50.157.136 LEN=40, ID=22236 2.98619 208.50.157.136 -> 216.64.159.149
+TCP D=1421 S=80 Ack=899863658 Seq=1908949447 Len=0 ...
+
+__ server -> switch : 10.16.100.121 -> 216.64.159.149
+IP D=216.64.159.149 S=10.16.100.121 LEN=1500, ID=22237 0.00298 10.16.100.121 -> 216.64.159.149
+TCP D=1421 S=80 Ack=899863658 Seq=2156657895 Len=1460 ... 0.00298 10.16.100.121 -> 216.64.159.149
+HTTP HTTP/1.1 200 OK
+
+__ switch -> client : 208.50.157.136 -> 216.64.159.149
+IP D=216.64.159.149 S=208.50.157.136 LEN=1500, ID=22237 2.98828 208.50.157.136 -> 216.64.159.149
+TCP D=1421 S=80 Ack=899863658 Seq=1908949447 Len=1460 ... 2.98828 208.50.157.136 -> 216.64.159.149
+HTTP HTTP/1.1 200 OK
+
+---
+
+# TCP Load Balancing Trade-offs
+
+## Strengths
+
+* More control over which requests go to which servers
+* Works fine with HTTPs
+
+## Weaknesses
+
+* Constrains where the servers can be located (same network)
+* Complicated
