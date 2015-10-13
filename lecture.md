@@ -122,7 +122,8 @@ __TODO__:
 * Beyond Javascript Clients: Emscripten and Webruby
 
 #### December 3, 2015
-* Guest Lecture: Jonathan Kupferman @ [Ketchup](http://ketchup.is/)
+* Guest Lecture: Jonathan Kupferman, CTO @ [Ketchup](http://ketchup.is/)
+* "Scaling Up on the Cheap: Millions of Page Views for $40 a Month"
 
 #### December 10, 2015
 * Final presentations
