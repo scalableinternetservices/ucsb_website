@@ -384,7 +384,6 @@ highest priority).
 
 ![Load balancing via TCP](img/load_balancing_tcp.png)
 
-
 Discussed in section 5 of the reading.
 
 ## General Idea
@@ -472,3 +471,261 @@ HTTP HTTP/1.1 200 OK
 
 * Constrains where the servers can be located (same network)
 * Complicated
+
+---
+
+# Load Balancing (4): HTTP Proxy
+
+.fx: img-left
+
+![Load balancing via TCP](img/load_balancing_http_proxy.png)
+
+Also known as "Layer 6 load balancing"
+
+Terminate HTTP requests: act like a web server
+
+Issue _back-end_ HTTP request to the desired application server.
+
+Hardware products:
+
+* Citrix Netscaler
+* F5 Big-IP
+
+Many HTTP servers have modules to do this as well (Apache, NGINX)
+
+---
+
+# HTTP Proxy Trade-offs
+
+This is the most popular technique in use (#3 is also used).
+
+## Strengths
+
+* Cleaner implementation than packet rewriting
+
+## Weaknesses
+
+* Load balancer needs to do more work
+* HTTPs is more complicated
+
+---
+
+# Think About It
+
+Assume you are to design a load balancing HTTP proxy. You have insight into
+every incoming request and response.
+
+> How would you determine which server to forward a request to?
+
+---
+
+# Load Balancing Considerations
+
+> How would you determine which server to forward a request to?
+
+## Options
+
+* Random
+* Round robin
+* Least number of connections
+* Fastest response time
+* Bandwidth per server
+* URI-based mapping (e.g., `/images` to server1, `/admin` to server2)
+
+Amazon's ELB (elastic load balancer) uses round robin with cookie-based
+stickiness (send the same client to the same server).
+
+---
+
+# Load Balancing Challenges
+
+When working with and/or designing a load balancing proxy there are some
+challenges to consider.
+
+* Detecting and reacting to server failures
+* Session affinity and persistence
+* Connection pooling
+
+__Affinity__: Map a client to a server without application-level information
+(e.g., IP address, request time)
+
+__Persistence__: Use application-level
+information to map a client to a server (e.g., cookies)
+
+---
+
+# Detecting Server Failures
+
+> How do we know when a member of our application pool has died?
+
+Observe traffic. Are requests being processed? Are they just taking a long
+time?
+
+Probe the server through various means:
+
+* __ICMP ping__: tests the network and server kernel
+* __TCP connection__: the process is running and accepting connections
+* __HTTP HEAD__: the application is serving pages
+* __SNMP__: Provides insight into server load (and more if configured)
+
+---
+
+# Session Affinity and Persistence
+
+> Can we redirect users back to the same web server they used before?
+
+Doing so can provide some caching improvements.
+
+A few options:
+
+* Affinity based on client IP address (concerns: client IPs change, and IPs are
+shared)
+* HTTP Cookie (works but requires proxy configuration)
+* Session ID in URL (not a great solution)
+
+---
+
+# Connection Pooling
+
+We're used to the idea that one client reuses a TCP connection for many HTTP
+requests.
+
+We can reuse this mechanism for distinct clients.
+
+Saves on repeated TCP setup between the load balancer and application servers.
+
+Reduces idle waiting on server for reads and writes.
+
+---
+
+# Software Load Balancers
+
+* Apache
+* NGINX
+* HAProxy
+* Varnish
+* Pound
+* Squid
+
+---
+
+# Amazon Elastic Load Balancer
+
+Amazon provides load balancing as a service.
+
+* $0.025 per load balancer hour
+* $0.008 per GB of data processed
+* Works with EC2 autoscaling groups
+* Supports TLS termination
+* Supports load balancing between Availability Zones within a Region
+
+__Does not__: support load balancing between regions (e.g., between us-west-1
+and us-west-2). Consider using route 54 DNS for region failover.
+
+---
+
+# Horizontal Scaling Test
+
+In the vertical scaling tests, the database application ran on the same machine
+as the web server application.
+
+For these tests we are going to use a single machine for the database. This
+will make it easy to scale up the number of application servers.
+
+![Single Server Load Balanced Topology](img/load_balanced_topology_single.png)
+
+---
+
+# Horizontal Scaling: 1 M3 Large Instance
+
+.fx: img-left
+
+![Single M3 Large Instance Graph](img/horizontal_scaling_1.png)
+
+* 2 vCPUs
+* 7.5 GB Memory
+* SSD storage
+* DB is also M3 large
+* $200 per month ($100 each)
+
+Handles 10 new users per second (ups).
+
+Fails with 16 ups.
+
+Comparable to single M3 XLarge ($200/mo)
+
+---
+
+# Adding an App Server
+
+Let's scale horizontally by adding a second application server instance.
+
+![Dual Server Load Balanced Topology](img/load_balanced_topology_double.png)
+
+---
+
+# Horizontal Scaling: 2 M3 Large Instances
+
+.fx: img-left
+
+![Dual M3 Large Instance Graph](img/horizontal_scaling_2.png)
+
+* 2 vCPUs
+* 7.5 GB Memory
+* SSD storage
+* DB is also M3 large
+* $300 per month ($100 each)
+
+Handles 20 new users per second (ups).
+
+Fails with 25 ups.
+
+Comparable to single C3 4XLarge ($600/mo)
+
+---
+
+# More App Servers!
+
+.fx: img-left
+
+![5x Load Balanced Topology](img/load_balanced_topology_5x.png)
+
+Let’s see how the system performs if we scale out to 5 app servers.
+
+Total dollar cost will be comparable to the most expensive single instance we
+tested.
+
+---
+
+# Horizontal Scaling: 5 M3 Large Instances
+
+.fx: img-left
+
+![Five M3 Large Instance Graph](img/horizontal_scaling_5.png)
+
+* 2 vCPUs
+* 7.5 GB Memory
+* SSD storage
+* DB is also M3 large
+* $600 per month ($100 each)
+
+Handles 35 new users per second (ups).
+
+Handles 45 ups with an increase in response time.
+
+Fails with 55 ups.
+
+Single C3 4XLarge ($600/mo) failed at 25 ups!
+
+---
+
+# Horizontal Scaling FTW!
+
+Vertical scaling handled only 20 new users per second at a cost of about $600
+per month. There was no clear scaling path after that point.
+
+Horizontal scaling handled 45 new users per second at a cost of about $600 per
+month. The scaling path is clear. Add more servers for a linear increase in
+cost.
+
+_FTW_: For the Win
