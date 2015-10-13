@@ -86,10 +86,12 @@ __TODO__:
 * Placeholder for Guest Lecture
 
 #### November 10, 2015
-* Guest Lecture: Darren Mutz @ AppFolio (formerly Amazon)
+* Guest Lecture: Darren Mutz, Principal Software Engineer @
+  [AppFolio](http://www.appfolioinc.com/) (formerly worked for Amazon AWS)
 
 #### November 12, 2015
-* Guest Lecture: Sean Maloney @ Riot Games
+* Guest Lecture: Sean Maloney, Big Data Engineer @
+  [Riot Games](http://www.riotgames.com/)
 
 __TODO__:
 
@@ -110,7 +112,8 @@ __TODO__:
 * Looking Forward: An Overview of ES 6
 
 #### November 24, 2015
-* Placeholder for Guest Lecture
+* Guest Lecture: Josep Blanquer, Chief Architect @
+  [Rightscale](http://www.rightscale.com/)
 
 #### November 26, 2015 (Thanksgiving, no class nor lab)
 
