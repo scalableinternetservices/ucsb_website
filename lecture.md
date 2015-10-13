@@ -83,7 +83,7 @@ __TODO__:
   by Werner Vogels
 
 #### November 5, 2015
-* Guest Lecture: Jonathan Kupferman
+* Placeholder for Guest Lecture
 
 #### November 10, 2015
 * Guest Lecture: Darren Mutz @ AppFolio (formerly Amazon)
@@ -119,7 +119,7 @@ __TODO__:
 * Beyond Javascript Clients: Emscripten and Webruby
 
 #### December 3, 2015
-* Placeholder for spillover
+* Guest Lecture: Jonathan Kupferman @ [Ketchup](http://ketchup.is/)
 
 #### December 10, 2015
 * Final presentations
