@@ -95,7 +95,7 @@ Buying "bigger" hardware and scaling _up_
 
 Buying move servers and scaling _out_
 
-* __PRO__: Easy to add more servers (limited by datacenter space)
+* __PRO__: Easy to add more servers (limited by data center space)
 * __PRO__: Linear increase in cost when scaling
 * __CON__: More moving parts makes things more complicated
 
