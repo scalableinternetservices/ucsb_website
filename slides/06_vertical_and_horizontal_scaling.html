@@ -381,7 +381,7 @@ architecture provides smooth cost-effective scaling.</p></section>
 <h2>Horizontal Scaling</h2>
 <p>Buying move servers and scaling <em>out</em></p>
 <ul>
-<li><strong>PRO</strong>: Easy to add more servers (limited by datacenter space)</li>
+<li><strong>PRO</strong>: Easy to add more servers (limited by data center space)</li>
 <li><strong>PRO</strong>: Linear increase in cost when scaling</li>
 <li><strong>CON</strong>: More moving parts makes things more complicated</li>
 </ul></section>
@@ -736,7 +736,7 @@ Delete the community
 balancing</strong>.</p>
 <h2>Basic Idea</h2>
 <ul>
-<li>Have many servers that can server clients</li>
+<li>Have many servers that can serve clients</li>
 <li>Make these servers <em>appear</em> as single endpoint to the outside world</li>
 </ul>
 <p>The users' experiences are the same regardless of which server ultimately
@@ -1292,7 +1292,7 @@ HTTP HTTP/1.1 200 OK</p></section>
             
             
             <section><p><img alt="Load balancing via TCP" src="img/load_balancing_http_proxy.png" /></p>
-<p>Also known as "Layer 6 load balancing"</p>
+<p>Also known as "Layer 7 load balancing"</p>
 <p>Terminate HTTP requests: act like a web server</p>
 <p>Issue <em>back-end</em> HTTP request to the desired application server.</p>
 <p>Hardware products:</p>

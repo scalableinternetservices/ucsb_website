@@ -37,7 +37,11 @@
   </url>
   <url>
     <loc>http://cs290.com/slides/06_vertical_and_horizontal_scaling.html</loc>
-    <lastmod>2015-10-13T14:30:11-07:00</lastmod>
+    <lastmod>2015-10-14T09:20:10-07:00</lastmod>
+  </url>
+  <url>
+    <loc>http://cs290.com/slides/07_high_availability_and_client_side_caching.html</loc>
+    <lastmod>2015-10-14T12:15:03-07:00</lastmod>
   </url>
   <url>
     <loc>http://cs290.com/slides/theme/base.html</loc>
