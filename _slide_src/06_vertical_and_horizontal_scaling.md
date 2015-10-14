@@ -246,7 +246,7 @@ balancing__.
 
 ## Basic Idea
 
-* Have many servers that can server clients
+* Have many servers that can serve clients
 * Make these servers _appear_ as single endpoint to the outside world
 
 The users' experiences are the same regardless of which server ultimately
