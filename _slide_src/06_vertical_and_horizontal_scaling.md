@@ -480,7 +480,7 @@ HTTP HTTP/1.1 200 OK
 
 ![Load balancing via TCP](img/load_balancing_http_proxy.png)
 
-Also known as "Layer 6 load balancing"
+Also known as "Layer 7 load balancing"
 
 Terminate HTTP requests: act like a web server
 
