@@ -42,16 +42,18 @@ by Cardellini, Colajanni, and Yu.
 #### October 8, 2015 ([slides](/slides/05_web_and_application_servers.html))
 * Web Server and Application Server Architectures
 
-#### October 13, 2015 ([slides](/slides/06_vertical_and_horizontal_scaling.html))
+#### October 13, 2015
+     ([slides](/slides/06_vertical_and_horizontal_scaling.html))
 * Vertical Scaling
 * Horizontal Scaling with Load Balancing
 
 #### October 15, 2015
+     ([slides](/slides/07_high_availability_and_client_side_caching.html))
 * Architecting for High Availability
 * Client-side Caching
 
 #### October 20, 2015
-* Service-side Caching
+* Server-side Caching
 * Deploying on AWS
 
 #### October 22, 2015

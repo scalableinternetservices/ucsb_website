@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2010 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Original slides: Marcin Wichary (mwichary@google.com)
+  Modifications: Ernest Delgado (ernestd@google.com)
+                 Alex Russell (slightlyoff@chromium.org)
+
+  landslide modifications: Adam Zapletal (adamzap@gmail.com)
+                           Nicolas Perriault (nperriault@gmail.com)
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>High Availability and Client-side Caching</title>
+    <!-- Styles -->
+    
+    <link rel="stylesheet" media="print" href="theme/css/print.css">
+    <link rel="stylesheet" media="screen, projection" href="theme/css/screen.css">
+    
+    
+      
+      <link rel="stylesheet" href="theme/css/custom.css">
+      
+    
+    <!-- /Styles -->
+    <!-- Javascripts -->
+    
+    <script type="text/javascript" src="theme/js/slides.js"></script>
+    
+    
+    
+    <!-- /Javascripts -->
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-67332703-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+</head>
+<body>
+  <div id="blank"></div>
+  <div class="presentation">
+    <div id="current_presenter_notes">
+      <div id="presenter_note"></div>
+    </div>
+    <div class="slides">
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide title slide-1">
+          <div class="inner">
+            
+            <header><h1>High Availability and Client-side Caching</h1></header>
+            
+            
+            <section><p><strong>CS290B</strong></p>
+<p>Dr. Bryce Boe</p>
+<p>October 15, 2015</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              1/12
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-2">
+          <div class="inner">
+            
+            <header><h1>Today's Agenda</h1></header>
+            
+            
+            <section><ul>
+<li>TODO</li>
+<li>Scaling Review</li>
+<li>Corrections</li>
+<li>High Availability</li>
+<li>Client-side Caching</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              2/12
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-3">
+          <div class="inner">
+            
+            <header><h1>TODO</h1></header>
+            
+            
+            <section><h2>Should be done</h2>
+<ul>
+<li>Agile Web Development with Rails up through chapter 17</li>
+<li>As much progress on Sprint 1 commitment as possible</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/12
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-4">
+          <div class="inner">
+            
+            <header><h1>Scaling Review</h1></header>
+            
+            
+            <section><h2>Vertical Scaling</h2>
+<p>Buying "bigger" hardware and scaling <em>up</em></p>
+<ul>
+<li><strong>PRO</strong>: Easy</li>
+<li><strong>CON</strong>: Limited</li>
+<li><strong>CON</strong>: Non-linear increase in cost when scaling</li>
+</ul>
+<h2>Horizontal Scaling</h2>
+<p>Buying move servers and scaling <em>out</em></p>
+<ul>
+<li><strong>PRO</strong>: Easy to add more servers (limited by data center space)</li>
+<li><strong>PRO</strong>: Linear increase in cost when scaling</li>
+<li><strong>CON</strong>: More moving parts makes things more complicated</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/12
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-5">
+          <div class="inner">
+            
+            <header><h1>Last Lecture Corrections</h1></header>
+            
+            
+            <section><p>HTTP Reverse Proxies are Layer <strong>7</strong> (not layer <strong>6</strong>)</p>
+<p>The TCP session example demonstrates a TCP proxy version of load
+balancing. While this approach works, it requires a TCP connection from the
+client to the load balancer and another connection form the load balancer to
+the server.</p>
+<p>Of course the load balancer can maintain a pool of connections to
+each application server minimizing the overhead of TCP connection
+establishment.</p>
+<p>The other version of TCP load balancing simply rewrites packets (both incoming
+and outgoing). This process is similar to how NAT (network address translation)
+works.</p>
+<p>ELB's TCP-level load balancing does it via the TCP proxy method.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              5/12
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-6">
+          <div class="inner">
+            
+            <header><h1>High Availability Motivation</h1></header>
+            
+            
+            <section><p>Modern web applications power some very important parts of our lives.</p>
+<ul>
+<li>Banking</li>
+<li>Medical</li>
+<li>Telephony</li>
+</ul>
+<p>Having anytime access to these services (high availability) is increasingly
+important.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/12
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-7">
+          <div class="inner">
+            
+            <header><h1>Expressing Availability</h1></header>
+            
+            
+            <section><p>Companies offering services will often advertise some number of nines
+availability:</p>
+<ul>
+<li>Three nines: 99.9% uptime, 525.6 minutes of downtime a year (43.8/mo)</li>
+<li>Four nines: 99.99% uptime, 52.6 minutes of downtime a year (4.38/mo)<ul>
+<li>Desired by many business applications</li>
+</ul>
+</li>
+<li>Five nines: 99.999% uptime, 5.3 minutes of downtime a year (26.5s/mo)<ul>
+<li>Desired by communication companies</li>
+</ul>
+</li>
+</ul>
+<p>Downtime usually only includes unplanned outages. Scheduled outages, no matter
+how frequent, are usually not incorporated in marketing material.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/12
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-8">
+          <div class="inner">
+            
+            <header><h1>Question</h1></header>
+            
+            
+            <section><blockquote>
+<p>What are possible causes of failures?</p>
+</blockquote>
+<p><img alt="Full network topology" src="img/full_stack.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/12
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-9">
+          <div class="inner">
+            
+            <header><h1>What if...</h1></header>
+            
+            
+            <section><blockquote>
+<p>What are possible causes of failures?</p>
+</blockquote>
+<ul>
+<li>a server process hangs?</li>
+<li>a server process dies?</li>
+<li>an application server fails?</li>
+<li>the load balancer fails?</li>
+<li>the switch fails?</li>
+<li>the router fails?</li>
+<li>the Internet fails?</li>
+<li>the database fails?</li>
+<li>the entire datacenter fails?</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/12
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-10">
+          <div class="inner">
+            
+            <header><h1>Application Server Failure</h1></header>
+            
+            
+            <section><p><img alt="Single application server" src="img/application_server.png" /></p>
+<p>We've already discussed the components of this sort of failure.</p>
+<ul>
+<li>Process-level isolation reduces hanging, or dead processes by having other
+  processes to pick up the slack.</li>
+<li>A process in an infinite loop may add unnecessary load to the server, so it's
+  important to have monitoring to detect such issues.</li>
+<li>Having a load-balanced configuration permits failing servers (high load or
+dead) by having a pool of other servers to direct traffic to.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/12
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-11">
+          <div class="inner">
+            
+            <header><h1>Load Balancer Failure</h1></header>
+            
+            
+            <section><p><img alt="Single load balancer" src="img/single_load_balancer.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/12
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-12">
+          <div class="inner">
+            
+            <header><h1>Redundant Load Balancers</h1></header>
+            
+            
+            <section><p><img alt="Redundant load balancers" src="img/redundant_load_balancers.png" /></p>
+<p>Buy two load balancers. One is the primary, and the other is the failover.</p>
+<p>Load balancers communicate via a heartbeat to determine the health of each
+other.</p>
+<ul>
+<li><em>During a failover, what happens to established flows?</em></li>
+<li><em>During a failover, what happens to the IP address?</em></li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/12
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source:  -->
+      <div class="slide-wrapper">
+        <div class="slide slide-">
+          <div class="inner">
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="page_number">
+              /12
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="toc" class="sidebar hidden">
+    <h2>Table of Contents</h2>
+    <table>
+      <caption>Table of Contents</caption>
+      
+      <tr id="toc-row-1">
+        <th><a href="#slide1">High Availability and Client-side Caching</a></th>
+        <td><a href="#slide1">1</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-2">
+        <th><a href="#slide2">Today's Agenda</a></th>
+        <td><a href="#slide2">2</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-3">
+        <th><a href="#slide3">TODO</a></th>
+        <td><a href="#slide3">3</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-4">
+        <th><a href="#slide4">Scaling Review</a></th>
+        <td><a href="#slide4">4</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-5">
+        <th><a href="#slide5">Last Lecture Corrections</a></th>
+        <td><a href="#slide5">5</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-6">
+        <th><a href="#slide6">High Availability Motivation</a></th>
+        <td><a href="#slide6">6</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-7">
+        <th><a href="#slide7">Expressing Availability</a></th>
+        <td><a href="#slide7">7</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-8">
+        <th><a href="#slide8">Question</a></th>
+        <td><a href="#slide8">8</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-9">
+        <th><a href="#slide9">What if...</a></th>
+        <td><a href="#slide9">9</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-10">
+        <th><a href="#slide10">Application Server Failure</a></th>
+        <td><a href="#slide10">10</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-11">
+        <th><a href="#slide11">Load Balancer Failure</a></th>
+        <td><a href="#slide11">11</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-12">
+        <th><a href="#slide12">Redundant Load Balancers</a></th>
+        <td><a href="#slide12">12</a></td>
+      </tr>
+      
+      
+    </table>
+  </div>
+  
+  <div id="help" class="sidebar hidden">
+    <h2>Help</h2>
+    <table>
+      <caption>Help</caption>
+      <tr>
+        <th>Table of Contents</th>
+        <td>t</td>
+      </tr>
+      <tr>
+        <th>Exposé</th>
+        <td>ESC</td>
+      </tr>
+      <tr>
+        <th>Full screen slides</th>
+        <td>e</td>
+      </tr>
+      <tr>
+        <th>Presenter View</th>
+        <td>p</td>
+      </tr>
+      <tr>
+        <th>Source Files</th>
+        <td>s</td>
+      </tr>
+      <tr>
+        <th>Slide Numbers</th>
+        <td>n</td>
+      </tr>
+      <tr>
+        <th>Toggle screen blanking</th>
+        <td>b</td>
+      </tr>
+      <tr>
+        <th>Show/hide slide context</th>
+        <td>c</td>
+      </tr>
+      <tr>
+        <th>Notes</th>
+        <td>2</td>
+      </tr>
+      <tr>
+        <th>Help</th>
+        <td>h</td>
+      </tr>
+    </table>
+  </div>
+  <script>main()</script>
+</body>
+</html>
