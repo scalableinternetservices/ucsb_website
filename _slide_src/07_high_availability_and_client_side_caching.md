@@ -122,7 +122,7 @@ how frequent, are usually not incorporated in marketing material.
 
 ---
 
-# Application Server Failure
+# Handling Application Server Failure
 
 .fx: img-left
 
@@ -139,7 +139,7 @@ dead) by having a pool of other servers to direct traffic to.
 
 ---
 
-# Load Balancer Failure
+# How do we Handle Load Balancer Failure?
 
 ![Single load balancer](img/single_load_balancer.png)
 
@@ -161,4 +161,132 @@ other.
 
 ---
 
+# Load Balancer Failover
+
+When the failure determines it needs to become the primary (detected via lack
+of heartbeat), it issues a gratuitous ARP for the load balanced IP.
+
+The gratuitous ARP (layer 2) will inform the switch that traffic should be
+delivered to the port that leads to the former failover (now primary).
+
+All new packets will transparently be delivered to the new primary load
+balancer.
+
+Established flows can be supported depending on how much information sharing
+occurs between the load balancers.
+
+---
+
+# How do we Handle Switch Failure?
+
+![Redundant load balancers](img/redundant_load_balancers.png)
+
+
+---
+
+# Redundant Switches
+
+Buy two switches! Again with a primary and failover and a heartbeat.
+
+During failover similar issues occur but layer 2 should be stateles so no/less
+synchronization needed.
+
+![Redundant switches](img/redundant_switches.png)
+
+---
+
+# How do we Handle Router Failure?
+
+![Redundant switches](img/redundant_switches.png)
+
+---
+
+# Redundant Routers
+
+Buy two!
+
+Similar heartbeat and failover system, with slightly different problems.
+
+![Redundant routers](img/redundant_routers.png)
+
+---
+
+# How do we Handle Internet Failure?
+
+Buy two! Use separate internet service providers (ISPs).
+
+![Redundant routers](img/redundant_routers.png)
+
+---
+
+# Routing with Two ISPs
+
+> How do we handle routing when we have two ISPs?
+
+## Outgoing Traffic (easy)
+
+We control how we send outbound traffic so we have some options:
+
+* Pick the cheapest or most reliable link
+* Pick the _closer_ link
+
+## Incoming Traffic (hard)
+
+We cannot inform clients by which path to reach our IP.
+
+However, we can give hints by using BGP to persuade networks to prefer one path
+over another. (Path prepending, Community values)
+
+---
+
+# High Availability
+
+![High Availability Topology](img/high_availability.png)
+
+We will discuss database failover in another lecture.
+
+---
+
+# Redundancy Everywhere!
+
+So we have redundant systems in place.
+
+> Can anything go wrong?
+
+---
+
+# Disaster Strikes
+
+![Hurricane Sandy from Satellite](img/hurricane_sandy_satellite.png)
+
+---
+
+# Hurricane Sandy via Ars Technica
+
+![Hurrican Sandy Headline](img/hurricane_sandy_article.png)
+
+---
+
+# Availability Axiom (Pete Tenereillo)
+
+Source: [http://www.tenereillo.com/GSLBPageOfShame.htm](http://www.tenereillo.com/GSLBPageOfShame.htm)
+
+> The only way to achieve high-availability for browser based clients is to
+> include the use of multiple A records.
+
+
+An A record is an IP address associated with a DNS host.
+
+## Result
+
+* For performance we want to send the browser to one datacenter.
+* For availability we want to send the browser multiple A records.
+
+We end up having to make a choice between performance and availability.
+
+---
+
+# Multisite High Availability
+
+![High Availability in Two Sites](img/dual_site_availability.png)
 
