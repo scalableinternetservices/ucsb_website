@@ -376,8 +376,10 @@ The building blocks of caching are all provided via HTTP headers:
     * max-age
     * public | private
 * etag
-* if-modified-since
+* last-modified
 * if-none-match
+
+* if-modified-since
 
 ---
 
@@ -407,3 +409,88 @@ browser and intermediate proxy-caches:
 
 Useful to force the browser and intermediate chaches to check for updated
 content.
+
+---
+
+# cache-control: private
+
+When `cache-control: private` is provided as a header to a HTTP response the
+browser is free to cache the response (for the current user) but, intermediate
+proxy-caches should discard the data.
+
+This is the opposite of `cache-control: public`.
+
+Rails built-in caching safely assumes `cache-control: private`.
+
+---
+
+# cache-control: max-age=120
+
+
+When `cache-control: max-age=120` is provided as a header to a HTTP response
+the browser and intermediate proxy-caches should consider the information to be
+fresh until the specified number of seconds has passed.
+
+This is the modern version of the `expires` and `date` headers.
+
+---
+
+# etag: "5bf444d26f9f1c74"
+
+When an etag (entity tag) header is provided as a header to a HTTP response the
+browser will keep an association between the request, the etag, and the
+response information.
+
+When requesting the same resource in the future, the browser may add an
+`if-none-match` header along with the etag in the HTTP request.
+
+---
+
+# last-modified: Wed, 14 Oct 2015 23:47:36 GMT
+
+-
+
+When a `last-modified` header is provided in an HTTP response the browser may
+save the information to use in future requests for the same resource.
+
+When requesting the same resource in the future, the browser may add an
+`if-modifed-since` header along with the datetime in the HTTP request.
+
+---
+
+# if-none-match: "5bf444d26f9f1c74"
+
+When accompanying a HTTP request, the `if-none-match` HTTP header indicates
+that the client has a cached copy with the associated tag.  Multiple etags can
+be provided.
+
+If the server's current version of the resource maps to one of the provided
+etags, the server will return 304 (not modified) with the etag of the current
+resource included.
+
+Otherwise the server will return the full response body along with the
+appropriate etag for the updated resource.
+
+---
+
+# if-modified-since: Wed, 14 Oct 2015 23:47:36 GMT
+
+-
+
+When accompanying an HTTP request, the `if-modified-since` HTTP header
+indicates that the client already has a copy that was fresh as of the specified
+datetime.
+
+If the server's copy is newer than the specified datetime, it will be served to
+the client along with a new `last-modified` HTTP response header.
+
+If the server's copy has not changed since the specified date, the server will
+return 304 (not modified).
+
+---
+
+# HTTP Caching Summary
+
+![Defining optimal Cache-Control policy](img/http-cache-decision-tree.png)
+
+Source: [https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching)
