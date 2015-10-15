@@ -683,7 +683,7 @@ responses will return a 200 along with the body of the response.
       before_action :set_submission, only: [:show, ...]
 
       def show
-        frseh_when([@submission, @submission.community,
+        fresh_when([@submission, @submission.community,
                     @submission.comments])
       end
 
