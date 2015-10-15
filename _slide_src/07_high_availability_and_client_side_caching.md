@@ -494,3 +494,258 @@ return 304 (not modified).
 ![Defining optimal Cache-Control policy](img/http-cache-decision-tree.png)
 
 Source: [https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching)
+
+---
+
+# Applying Client-side Caching #1
+
+Assume we want to serve javascript that won't change over the next day, but it
+contains user-specific code.
+
+> What headers should the HTTP response include?
+
+---
+
+# Caching Reusable, Private Resources
+
+    Cache-control: private, max-age=86400
+
+Intermediate proxy-caches should not save a copy, and the browser can consider
+the resource fresh for up to a day since it was retrieved.
+
+---
+
+# Applying Client-side Caching #2
+
+Assume we are serving an image that may change in the future, and we never want
+a stale version shown. The image is not specific to the requester.
+
+> What headers should the HTTP response include?
+
+---
+
+# Caching Reusable, Public Resources
+
+    Cache-control: public, no-cache
+    ETag: "4d7a6ca05b5df656"
+
+Browser will store a copy to be used if a 304 (not modified) response is
+sent. In subsequent HTTP requests for the resource the browser will include:
+
+    if-none-match: "4d7a6ca05b5df656"
+
+---
+
+# Applying Client-side Caching #3
+
+Assume we are serving an image containing the user's social security and credit
+card numbers.
+
+> What headers should the HTTP response include?
+
+---
+
+# No Caching!
+
+    Cache-control: private, no-store
+
+The browser may keep a copy in memory for browser navigation, but __must__
+not save a copy to a non-volatile location.
+
+---
+
+# Implementing Caching In Rails
+
+Let's start with implementation client-side HTTP caching on the New Submission
+page in the demo app:
+
+![Demo App New Submission View](img/demo_new_submission.png)
+
+---
+
+# Initial Request: New Submission Page
+
+Initial page load fetches every resource (indicated via 200 response).
+
+![Initial Demo App New Submission Resources](img/demo_new_submission_resources.png)
+
+
+---
+
+# Subsequent Request: New Submission
+
+Refreshing the page doesn't require sending the asset bodies (304 responses),
+but the server sends the complete /submissions/new response body (200
+response).
+
+![Subsequent Demo App New Submissions Resources](img/demo_new_submission_resources_subsequent.png)
+
+---
+
+# Determining Staleness
+
+> When can this page be out-of-date?
+
+![Demo App New Submission View](img/demo_new_submission.png)
+
+---
+
+# SubmissionsController.new
+
+## Without Caching
+
+    !ruby
+    class SubmissionsController < ApplicationController
+
+      def new
+        @submission = Submission.new
+      end
+
+    end
+
+## With Caching
+
+    !ruby
+    class SubmissionsController < ApplicationController
+
+      def new
+        @submission = Submission.new if stale?(Community.all)
+      end
+
+    end
+
+---
+
+# ActionController::ConditionalGet.stale?
+
+[http://apidock.com/rails/ActionController/ConditionalGet/stale%3F](http://apidock.com/rails/ActionController/ConditionalGet/stale%3F)
+
+> What is `if stale?(Community.all)` actually doing?
+
+* Informs Rails to base the `etag` and/or `last_modified` response header on
+  all communities.
+* Compares the `last_modified` or `etag` value against `if-modified-since`
+  and/or `if-none-match` request headers.
+* `stale?` returns true when `Communities.all` is newer and/or differs
+* `stale?` implicitly affects the response such that a 304 HTTP status and no
+  body is returned when `stale?` returns false
+
+---
+
+# Cached: New Submission Page
+
+After making the above change, a second request to `/submissions/new` results
+in a 304 (not modified) response.
+
+If the list of communities change subsequent
+responses will return a 200 along with the body of the response.
+
+![Cached Demo App New Submissions Resources](img/demo_new_submission_resources_cached.png)
+
+---
+
+# Submission View
+
+.fx: img-left
+
+![Submission View](img/demo_submission_view.png)
+
+> What on the submission view can make the page stale?
+
+---
+
+# SubmissionController.show
+
+## Without Caching
+
+    !ruby
+    class SubmissionsController < ApplicationController
+      before_action :set_submission, only: [:show, ...]
+
+      def show
+      end
+
+      private
+
+      def set_submission
+        @submission = Submission.find(params[:id])
+      end
+    end
+
+---
+
+# SubmissionController.show
+
+## With Caching
+
+    !ruby
+    class SubmissionsController < ApplicationController
+      before_action :set_submission, only: [:show, ...]
+
+      def show
+        frseh_when([@submission, @submission.community,
+                    @submission.comments])
+      end
+
+      private
+
+      def set_submission
+        @submission = Submission.find(params[:id])
+      end
+    end
+
+---
+
+# Cached: SubmissionController.show
+
+The web console indicates our caching was successful.
+
+Adding a new comment, modifying the community or submission causes a 200
+response.
+
+![Cached Demo App Submission Show](img/demo_submission_view_cached.png)
+
+---
+
+# Submissions Index
+
+> What on the submissions index can make the page stale?
+
+![Submissions Index View](img/demo_submissions_index.png)
+
+---
+
+# SubmissionController.index
+
+## Without Caching
+
+    !ruby
+    class SubmissionsController < ApplicationController
+
+      def index
+        @submissions = Submission.all
+      end
+
+    end
+
+## With Caching
+
+    !ruby
+    class SubmissionsController < ApplicationController
+
+      def index
+        if stale?([Submission.all, Community.all, Comments.all])
+          @submissions = Submission.all
+        end
+      end
+
+    end
+
+---
+
+# Client Caching Example
+
+These changes can be viewed the `client_side_caching` branch on the demo app
+repository:
+
+[https://github.com/scalableinternetservices/demo/compare/client_side_caching](https://github.com/scalableinternetservices/demo/compare/client_side_caching)
