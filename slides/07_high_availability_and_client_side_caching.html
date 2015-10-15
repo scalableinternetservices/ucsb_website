@@ -383,7 +383,7 @@ how frequent, are usually not incorporated in marketing material.</p></section>
 <li>the router fails?</li>
 <li>the Internet fails?</li>
 <li>the database fails?</li>
-<li>the entire datacenter fails?</li>
+<li>the entire data center fails?</li>
 </ul></section>
             
           </div>
@@ -588,7 +588,7 @@ occurs between the load balancers.</p></section>
             
             
             <section><p>Buy two switches! Again with a primary and failover and a heartbeat.</p>
-<p>During failover similar issues occur but layer 2 should be stateles so no/less
+<p>During failover similar issues occur but layer 2 should be stateless so no/less
 synchronization needed.</p>
 <p><img alt="Redundant switches" src="img/redundant_switches.png" /></p></section>
             
@@ -849,7 +849,7 @@ over another. (Path prepending, Community values)</p></section>
             <header><h1>Hurricane Sandy via Ars Technica</h1></header>
             
             
-            <section><p><img alt="Hurrican Sandy Headline" src="img/hurricane_sandy_article.png" /></p></section>
+            <section><p><img alt="Hurricane Sandy Headline" src="img/hurricane_sandy_article.png" /></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -887,7 +887,7 @@ include the use of multiple A records.</p>
 <p>An A record is an IP address associated with a DNS host.</p>
 <h2>Result</h2>
 <ul>
-<li>For performance we want to send the browser to one datacenter.</li>
+<li>For performance we want to send the browser to one data center.</li>
 <li>For availability we want to send the browser multiple A records.</li>
 </ul>
 <p>We end up having to make a choice between performance and availability.</p></section>
@@ -917,7 +917,7 @@ include the use of multiple A records.</p>
         <div class="slide slide-25">
           <div class="inner">
             
-            <header><h1>Multisite High Availability</h1></header>
+            <header><h1>Multi-site High Availability</h1></header>
             
             
             <section><p><img alt="High Availability in Two Sites" src="img/dual_site_availability.png" /></p></section>
@@ -1008,7 +1008,7 @@ clients.</p>
         <div class="slide table-center slide-28">
           <div class="inner">
             
-            <header><h1>Reponse Time and Human Perception</h1></header>
+            <header><h1>Response Time and Human Perception</h1></header>
             
             
             <section><table>
@@ -1264,7 +1264,7 @@ for the same data can be served faster</p>
 browser and intermediate proxy-caches:</p>
 <ul>
 <li>must not save the information in any non-volatile storage</li>
-<li>must make a best effot attempt to remove the information from volatile
+<li>must make a best effort attempt to remove the information from volatile
   storage as promptly as possible</li>
 </ul>
 <p><strong>Note</strong>: The browser may retain a copy in memory (volatile storage) for use
@@ -1302,10 +1302,10 @@ with the browser's back/forward buttons.</p>
             <section><p>When <code>cache-control: no-cache</code> is provided as a header to a HTTP response the
 browser and intermediate proxy-caches:</p>
 <ul>
-<li>must not use the respose to satisfy a subsequent request without successful
+<li>must not use the response to satisfy a subsequent request without successful
   revalidation with the origin server</li>
 </ul>
-<p>Useful to force the browser and intermediate chaches to check for updated
+<p>Useful to force the browser and intermediate caches to check for updated
 content.</p></section>
             
           </div>
@@ -1441,7 +1441,7 @@ response information.</p>
 <p>When a <code>last-modified</code> header is provided in an HTTP response the browser may
 save the information to use in future requests for the same resource.</p>
 <p>When requesting the same resource in the future, the browser may add an
-<code>if-modifed-since</code> header along with the datetime in the HTTP request.</p></section>
+<code>if-modified-since</code> header along with the datetime in the HTTP request.</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -1576,7 +1576,7 @@ return 304 (not modified).</p></section>
             <header><h1>Applying Client-side Caching #1</h1></header>
             
             
-            <section><p>Assume we want to serve javascript that won't change over the next day, but it
+            <section><p>Assume we want to serve JavaScript that won't change over the next day, but it
 contains user-specific code.</p>
 <blockquote>
 <p>What headers should the HTTP response include?</p>
@@ -2076,7 +2076,7 @@ responses will return a 200 along with the body of the response.</p>
         <div class="slide has_code slide-56">
           <div class="inner">
             
-            <header><h1>SubmissionController.show</h1></header>
+            <header><h1>SubmissionsController.show</h1></header>
             
             
             <section><h2>Without Caching</h2>
@@ -2131,7 +2131,7 @@ responses will return a 200 along with the body of the response.</p>
         <div class="slide has_code slide-57">
           <div class="inner">
             
-            <header><h1>SubmissionController.show</h1></header>
+            <header><h1>SubmissionsController.show</h1></header>
             
             
             <section><h2>With Caching</h2>
@@ -2190,7 +2190,7 @@ responses will return a 200 along with the body of the response.</p>
         <div class="slide slide-58">
           <div class="inner">
             
-            <header><h1>Cached: SubmissionController.show</h1></header>
+            <header><h1>Cached: SubmissionsController.show</h1></header>
             
             
             <section><p>The web console indicates our caching was successful.</p>
@@ -2256,7 +2256,7 @@ response.</p>
         <div class="slide has_code slide-60">
           <div class="inner">
             
-            <header><h1>SubmissionController.index</h1></header>
+            <header><h1>SubmissionsController.index</h1></header>
             
             
             <section><h2>Without Caching</h2>
@@ -2501,7 +2501,7 @@ repository:</p>
       
       
       <tr id="toc-row-25">
-        <th><a href="#slide25">Multisite High Availability</a></th>
+        <th><a href="#slide25">Multi-site High Availability</a></th>
         <td><a href="#slide25">25</a></td>
       </tr>
       
@@ -2519,7 +2519,7 @@ repository:</p>
       
       
       <tr id="toc-row-28">
-        <th><a href="#slide28">Reponse Time and Human Perception</a></th>
+        <th><a href="#slide28">Response Time and Human Perception</a></th>
         <td><a href="#slide28">28</a></td>
       </tr>
       
@@ -2687,19 +2687,19 @@ repository:</p>
       
       
       <tr id="toc-row-56">
-        <th><a href="#slide56">SubmissionController.show</a></th>
+        <th><a href="#slide56">SubmissionsController.show</a></th>
         <td><a href="#slide56">56</a></td>
       </tr>
       
       
       <tr id="toc-row-57">
-        <th><a href="#slide57">SubmissionController.show</a></th>
+        <th><a href="#slide57">SubmissionsController.show</a></th>
         <td><a href="#slide57">57</a></td>
       </tr>
       
       
       <tr id="toc-row-58">
-        <th><a href="#slide58">Cached: SubmissionController.show</a></th>
+        <th><a href="#slide58">Cached: SubmissionsController.show</a></th>
         <td><a href="#slide58">58</a></td>
       </tr>
       
@@ -2711,7 +2711,7 @@ repository:</p>
       
       
       <tr id="toc-row-60">
-        <th><a href="#slide60">SubmissionController.index</a></th>
+        <th><a href="#slide60">SubmissionsController.index</a></th>
         <td><a href="#slide60">60</a></td>
       </tr>
       

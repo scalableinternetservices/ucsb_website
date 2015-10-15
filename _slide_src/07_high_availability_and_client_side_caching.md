@@ -118,7 +118,7 @@ how frequent, are usually not incorporated in marketing material.
 * the router fails?
 * the Internet fails?
 * the database fails?
-* the entire datacenter fails?
+* the entire data center fails?
 
 ---
 
@@ -188,7 +188,7 @@ occurs between the load balancers.
 
 Buy two switches! Again with a primary and failover and a heartbeat.
 
-During failover similar issues occur but layer 2 should be stateles so no/less
+During failover similar issues occur but layer 2 should be stateless so no/less
 synchronization needed.
 
 ![Redundant switches](img/redundant_switches.png)
@@ -263,7 +263,7 @@ So we have redundant systems in place.
 
 # Hurricane Sandy via Ars Technica
 
-![Hurrican Sandy Headline](img/hurricane_sandy_article.png)
+![Hurricane Sandy Headline](img/hurricane_sandy_article.png)
 
 ---
 
@@ -279,14 +279,14 @@ An A record is an IP address associated with a DNS host.
 
 ## Result
 
-* For performance we want to send the browser to one datacenter.
+* For performance we want to send the browser to one data center.
 * For availability we want to send the browser multiple A records.
 
 We end up having to make a choice between performance and availability.
 
 ---
 
-# Multisite High Availability
+# Multi-site High Availability
 
 ![High Availability in Two Sites](img/dual_site_availability.png)
 
@@ -307,7 +307,7 @@ Our access to the data needs to be fast.
 
 ---
 
-# Reponse Time and Human Perception
+# Response Time and Human Perception
 
 .fx: table-center
 
@@ -389,7 +389,7 @@ When `cache-control: no-store` is provided as a header to a HTTP response the
 browser and intermediate proxy-caches:
 
 * must not save the information in any non-volatile storage
-* must make a best effot attempt to remove the information from volatile
+* must make a best effort attempt to remove the information from volatile
   storage as promptly as possible
 
 __Note__: The browser may retain a copy in memory (volatile storage) for use
@@ -404,10 +404,10 @@ Generally used for sensitive information.
 When `cache-control: no-cache` is provided as a header to a HTTP response the
 browser and intermediate proxy-caches:
 
-* must not use the respose to satisfy a subsequent request without successful
+* must not use the response to satisfy a subsequent request without successful
   revalidation with the origin server
 
-Useful to force the browser and intermediate chaches to check for updated
+Useful to force the browser and intermediate caches to check for updated
 content.
 
 ---
@@ -454,7 +454,7 @@ When a `last-modified` header is provided in an HTTP response the browser may
 save the information to use in future requests for the same resource.
 
 When requesting the same resource in the future, the browser may add an
-`if-modifed-since` header along with the datetime in the HTTP request.
+`if-modified-since` header along with the datetime in the HTTP request.
 
 ---
 
@@ -499,7 +499,7 @@ Source: [https://developers.google.com/web/fundamentals/performance/optimizing-c
 
 # Applying Client-side Caching #1
 
-Assume we want to serve javascript that won't change over the next day, but it
+Assume we want to serve JavaScript that won't change over the next day, but it
 contains user-specific code.
 
 > What headers should the HTTP response include?
@@ -654,7 +654,7 @@ responses will return a 200 along with the body of the response.
 
 ---
 
-# SubmissionController.show
+# SubmissionsController.show
 
 ## Without Caching
 
@@ -674,7 +674,7 @@ responses will return a 200 along with the body of the response.
 
 ---
 
-# SubmissionController.show
+# SubmissionsController.show
 
 ## With Caching
 
@@ -696,7 +696,7 @@ responses will return a 200 along with the body of the response.
 
 ---
 
-# Cached: SubmissionController.show
+# Cached: SubmissionsController.show
 
 The web console indicates our caching was successful.
 
@@ -715,7 +715,7 @@ response.
 
 ---
 
-# SubmissionController.index
+# SubmissionsController.index
 
 ## Without Caching
 
