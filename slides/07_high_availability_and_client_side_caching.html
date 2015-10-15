@@ -89,7 +89,7 @@
             </aside>
             
             <aside class="page_number">
-              1/12
+              1/34
             </aside>
           </footer>
         </div>
@@ -125,7 +125,7 @@
             </aside>
             
             <aside class="page_number">
-              2/12
+              2/34
             </aside>
           </footer>
         </div>
@@ -159,7 +159,7 @@
             </aside>
             
             <aside class="page_number">
-              3/12
+              3/34
             </aside>
           </footer>
         </div>
@@ -202,7 +202,7 @@
             </aside>
             
             <aside class="page_number">
-              4/12
+              4/34
             </aside>
           </footer>
         </div>
@@ -243,7 +243,7 @@ works.</p>
             </aside>
             
             <aside class="page_number">
-              5/12
+              5/34
             </aside>
           </footer>
         </div>
@@ -280,7 +280,7 @@ important.</p></section>
             </aside>
             
             <aside class="page_number">
-              6/12
+              6/34
             </aside>
           </footer>
         </div>
@@ -324,7 +324,7 @@ how frequent, are usually not incorporated in marketing material.</p></section>
             </aside>
             
             <aside class="page_number">
-              7/12
+              7/34
             </aside>
           </footer>
         </div>
@@ -357,7 +357,7 @@ how frequent, are usually not incorporated in marketing material.</p></section>
             </aside>
             
             <aside class="page_number">
-              8/12
+              8/34
             </aside>
           </footer>
         </div>
@@ -400,7 +400,7 @@ how frequent, are usually not incorporated in marketing material.</p></section>
             </aside>
             
             <aside class="page_number">
-              9/12
+              9/34
             </aside>
           </footer>
         </div>
@@ -411,7 +411,7 @@ how frequent, are usually not incorporated in marketing material.</p></section>
         <div class="slide img-left slide-10">
           <div class="inner">
             
-            <header><h1>Application Server Failure</h1></header>
+            <header><h1>Handling Application Server Failure</h1></header>
             
             
             <section><p><img alt="Single application server" src="img/application_server.png" /></p>
@@ -439,7 +439,7 @@ dead) by having a pool of other servers to direct traffic to.</li>
             </aside>
             
             <aside class="page_number">
-              10/12
+              10/34
             </aside>
           </footer>
         </div>
@@ -450,7 +450,7 @@ dead) by having a pool of other servers to direct traffic to.</li>
         <div class="slide slide-11">
           <div class="inner">
             
-            <header><h1>Load Balancer Failure</h1></header>
+            <header><h1>How do we Handle Load Balancer Failure?</h1></header>
             
             
             <section><p><img alt="Single load balancer" src="img/single_load_balancer.png" /></p></section>
@@ -469,7 +469,7 @@ dead) by having a pool of other servers to direct traffic to.</li>
             </aside>
             
             <aside class="page_number">
-              11/12
+              11/34
             </aside>
           </footer>
         </div>
@@ -506,16 +506,448 @@ other.</p>
             </aside>
             
             <aside class="page_number">
-              12/12
+              12/34
             </aside>
           </footer>
         </div>
       </div>
       
-      <!-- slide source:  -->
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-">
+        <div class="slide slide-13">
           <div class="inner">
+            
+            <header><h1>Load Balancer Failover</h1></header>
+            
+            
+            <section><p>When the failure determines it needs to become the primary (detected via lack
+of heartbeat), it issues a gratuitous ARP for the load balanced IP.</p>
+<p>The gratuitous ARP (layer 2) will inform the switch that traffic should be
+delivered to the port that leads to the former failover (now primary).</p>
+<p>All new packets will transparently be delivered to the new primary load
+balancer.</p>
+<p>Established flows can be supported depending on how much information sharing
+occurs between the load balancers.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/34
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-14">
+          <div class="inner">
+            
+            <header><h1>How do we Handle Switch Failure?</h1></header>
+            
+            
+            <section><p><img alt="Redundant load balancers" src="img/redundant_load_balancers.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/34
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-15">
+          <div class="inner">
+            
+            <header><h1>Redundant Switches</h1></header>
+            
+            
+            <section><p>Buy two switches! Again with a primary and failover and a heartbeat.</p>
+<p>During failover similar issues occur but layer 2 should be stateles so no/less
+synchronization needed.</p>
+<p><img alt="Redundant switches" src="img/redundant_switches.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/34
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-16">
+          <div class="inner">
+            
+            <header><h1>How do we Handle Router Failure?</h1></header>
+            
+            
+            <section><p><img alt="Redundant switches" src="img/redundant_switches.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              16/34
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-17">
+          <div class="inner">
+            
+            <header><h1>Redundant Routers</h1></header>
+            
+            
+            <section><p>Buy two!</p>
+<p>Similar heartbeat and failover system, with slightly different problems.</p>
+<p><img alt="Redundant routers" src="img/redundant_routers.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              17/34
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-18">
+          <div class="inner">
+            
+            <header><h1>How do we Handle Internet Failure?</h1></header>
+            
+            
+            <section><p>Buy two! Use separate internet service providers (ISPs).</p>
+<p><img alt="Redundant routers" src="img/redundant_routers.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              18/34
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-19">
+          <div class="inner">
+            
+            <header><h1>Routing with Two ISPs</h1></header>
+            
+            
+            <section><blockquote>
+<p>How do we handle routing when we have two ISPs?</p>
+</blockquote>
+<h2>Outgoing Traffic (easy)</h2>
+<p>We control how we send outbound traffic so we have some options:</p>
+<ul>
+<li>Pick the cheapest or most reliable link</li>
+<li>Pick the <em>closer</em> link</li>
+</ul>
+<h2>Incoming Traffic (hard)</h2>
+<p>We cannot inform clients by which path to reach our IP.</p>
+<p>However, we can give hints by using BGP to persuade networks to prefer one path
+over another. (Path prepending, Community values)</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              19/34
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-20">
+          <div class="inner">
+            
+            <header><h1>High Availability</h1></header>
+            
+            
+            <section><p><img alt="High Availability Topology" src="img/high_availability.png" /></p>
+<p>We will discuss database failover in another lecture.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              20/34
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-21">
+          <div class="inner">
+            
+            <header><h1>Redundancy Everywhere!</h1></header>
+            
+            
+            <section><p>So we have redundant systems in place.</p>
+<blockquote>
+<p>Can anything go wrong?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              21/34
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-22">
+          <div class="inner">
+            
+            <header><h1>Disaster Strikes</h1></header>
+            
+            
+            <section><p><img alt="Hurricane Sandy from Satellite" src="img/hurricane_sandy_satellite.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              22/34
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-23">
+          <div class="inner">
+            
+            <header><h1>Hurricane Sandy via Ars Technica</h1></header>
+            
+            
+            <section><p><img alt="Hurrican Sandy Headline" src="img/hurricane_sandy_article.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              23/34
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-24">
+          <div class="inner">
+            
+            <header><h1>Availability Axiom (Pete Tenereillo)</h1></header>
+            
+            
+            <section><p>Source: <a href="http://www.tenereillo.com/GSLBPageOfShame.htm">http://www.tenereillo.com/GSLBPageOfShame.htm</a></p>
+<blockquote>
+<p>The only way to achieve high-availability for browser based clients is to
+include the use of multiple A records.</p>
+</blockquote>
+<p>An A record is an IP address associated with a DNS host.</p>
+<h2>Result</h2>
+<ul>
+<li>For performance we want to send the browser to one datacenter.</li>
+<li>For availability we want to send the browser multiple A records.</li>
+</ul>
+<p>We end up having to make a choice between performance and availability.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              24/34
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-25">
+          <div class="inner">
+            
+            <header><h1>Multisite High Availability</h1></header>
+            
+            
+            <section><p><img alt="High Availability in Two Sites" src="img/dual_site_availability.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              25/34
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-26">
+          <div class="inner">
+            
+            <header><h1>Client-side Caching</h1></header>
             
             
           </div>
@@ -527,8 +959,365 @@ other.</p>
           </div>
           <footer>
             
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
             <aside class="page_number">
-              /12
+              26/34
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-27">
+          <div class="inner">
+            
+            <header><h1>Client-side Caching Motivation</h1></header>
+            
+            
+            <section><p>We want our important application data persisted safely in our data center.</p>
+<p>This data will be regularly read and updated by geographically distributed
+clients.</p>
+<p>Our access to the data needs to be fast.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              27/34
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide table-center slide-28">
+          <div class="inner">
+            
+            <header><h1>Reponse Time and Human Perception</h1></header>
+            
+            
+            <section><table>
+<thead>
+<tr>
+<th align="right">Delay</th>
+<th align="center">User Reaction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">0 -  100 ms</td>
+<td align="center">Instant</td>
+</tr>
+<tr>
+<td align="right">100 -  300 ms</td>
+<td align="center">Small perceptible delay</td>
+</tr>
+<tr>
+<td align="right">300 - 1000 ms</td>
+<td align="center">Machine is working</td>
+</tr>
+<tr>
+<td align="right">1000+ ms</td>
+<td align="center">Likely mental context switch</td>
+</tr>
+<tr>
+<td align="right">10,000+ ms</td>
+<td align="center">Task is abandoned</td>
+</tr>
+</tbody>
+</table>
+<p>Source: High Performance Browser Networking</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              28/34
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide table-center slide-29">
+          <div class="inner">
+            
+            <header><h1>Minimum Latencies</h1></header>
+            
+            
+            <section><table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Distance</th>
+<th>Time, light in vacuum</th>
+<th>Time, light in fiber</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NYC to SF</td>
+<td>4,148 km</td>
+<td>14 ms</td>
+<td>21 ms</td>
+</tr>
+<tr>
+<td>NYC to London</td>
+<td>5,585 km</td>
+<td>19 ms</td>
+<td>28 ms</td>
+</tr>
+<tr>
+<td>NYC to Sydney</td>
+<td>15,993 km</td>
+<td>53 ms</td>
+<td>80 ms</td>
+</tr>
+<tr>
+<td>Equatorial circumference</td>
+<td>40,075 km</td>
+<td>133.7 ms</td>
+<td>200 ms</td>
+</tr>
+</tbody>
+</table>
+<p>Source: High Performance Browser Networking</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              29/34
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-30">
+          <div class="inner">
+            
+            <header><h1>Multiple HTTP Requests per Page</h1></header>
+            
+            
+            <section><p><img alt="Total Requests Per Page" src="img/httparchive_requests_per_page.png" /></p>
+<p>Source: <a href="http://httparchive.org/interesting.php#reqTotal">http://httparchive.org/interesting.php#reqTotal</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              30/34
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-31">
+          <div class="inner">
+            
+            <header><h1>Caching</h1></header>
+            
+            
+            <section><p>The fastest request is one that never happens.</p>
+<p><strong>Cache</strong>: a component that transparently stores data so that future requests
+for the same data can be served faster</p>
+<blockquote>
+<p>Where can we introduce caching?</p>
+</blockquote>
+<ul>
+<li>Inside the browser</li>
+<li>In "front" of the server (CDNs, ISP cache, etc.)</li>
+<li>Inside the application server</li>
+<li>Inside the database (query cache)</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              31/34
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-32">
+          <div class="inner">
+            
+            <header><h1>Client-side Caching</h1></header>
+            
+            
+            <section><blockquote>
+<p>How does the browser cache data?</p>
+<p>How does the browser know when it can or cannot use cached data?</p>
+</blockquote>
+<p>The building blocks of caching are all provided via HTTP headers:</p>
+<ul>
+<li>cache-control<ul>
+<li>no-store</li>
+<li>no-cache</li>
+<li>max-age</li>
+<li>public | private</li>
+</ul>
+</li>
+<li>etag</li>
+<li>if-modified-since</li>
+<li>if-none-match</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              32/34
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-33">
+          <div class="inner">
+            
+            <header><h1>cache-control: no-store</h1></header>
+            
+            
+            <section><p>When <code>cache-control: no-store</code> is provided as a header to a HTTP response the
+browser and intermediate proxy-caches:</p>
+<ul>
+<li>must not save the information in any non-volatile storage</li>
+<li>must make a best effot attempt to remove the information from volatile
+  storage as promptly as possible</li>
+</ul>
+<p><strong>Note</strong>: The browser may retain a copy in memory (volatile storage) for use
+with the browser's back/forward buttons.</p>
+<p>Generally used for sensitive information.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              33/34
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 07_high_availability_and_client_side_caching.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-34">
+          <div class="inner">
+            
+            <header><h1>cache-control: no-cache</h1></header>
+            
+            
+            <section><p>When <code>cache-control: no-cache</code> is provided as a header to a HTTP response the
+browser and intermediate proxy-caches:</p>
+<ul>
+<li>must not use the respose to satisfy a subsequent request without successful
+  revalidation with the origin server</li>
+</ul>
+<p>Useful to force the browser and intermediate chaches to check for updated
+content.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="07_high_availability_and_client_side_caching.md">07_high_availability_and_client_side_caching.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              34/34
             </aside>
           </footer>
         </div>
@@ -597,13 +1386,13 @@ other.</p>
       
       
       <tr id="toc-row-10">
-        <th><a href="#slide10">Application Server Failure</a></th>
+        <th><a href="#slide10">Handling Application Server Failure</a></th>
         <td><a href="#slide10">10</a></td>
       </tr>
       
       
       <tr id="toc-row-11">
-        <th><a href="#slide11">Load Balancer Failure</a></th>
+        <th><a href="#slide11">How do we Handle Load Balancer Failure?</a></th>
         <td><a href="#slide11">11</a></td>
       </tr>
       
@@ -611,6 +1400,138 @@ other.</p>
       <tr id="toc-row-12">
         <th><a href="#slide12">Redundant Load Balancers</a></th>
         <td><a href="#slide12">12</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-13">
+        <th><a href="#slide13">Load Balancer Failover</a></th>
+        <td><a href="#slide13">13</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-14">
+        <th><a href="#slide14">How do we Handle Switch Failure?</a></th>
+        <td><a href="#slide14">14</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-15">
+        <th><a href="#slide15">Redundant Switches</a></th>
+        <td><a href="#slide15">15</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-16">
+        <th><a href="#slide16">How do we Handle Router Failure?</a></th>
+        <td><a href="#slide16">16</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-17">
+        <th><a href="#slide17">Redundant Routers</a></th>
+        <td><a href="#slide17">17</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-18">
+        <th><a href="#slide18">How do we Handle Internet Failure?</a></th>
+        <td><a href="#slide18">18</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-19">
+        <th><a href="#slide19">Routing with Two ISPs</a></th>
+        <td><a href="#slide19">19</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-20">
+        <th><a href="#slide20">High Availability</a></th>
+        <td><a href="#slide20">20</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-21">
+        <th><a href="#slide21">Redundancy Everywhere!</a></th>
+        <td><a href="#slide21">21</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-22">
+        <th><a href="#slide22">Disaster Strikes</a></th>
+        <td><a href="#slide22">22</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-23">
+        <th><a href="#slide23">Hurricane Sandy via Ars Technica</a></th>
+        <td><a href="#slide23">23</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-24">
+        <th><a href="#slide24">Availability Axiom (Pete Tenereillo)</a></th>
+        <td><a href="#slide24">24</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-25">
+        <th><a href="#slide25">Multisite High Availability</a></th>
+        <td><a href="#slide25">25</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-26">
+        <th><a href="#slide26">Client-side Caching</a></th>
+        <td><a href="#slide26">26</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-27">
+        <th><a href="#slide27">Client-side Caching Motivation</a></th>
+        <td><a href="#slide27">27</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-28">
+        <th><a href="#slide28">Reponse Time and Human Perception</a></th>
+        <td><a href="#slide28">28</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-29">
+        <th><a href="#slide29">Minimum Latencies</a></th>
+        <td><a href="#slide29">29</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-30">
+        <th><a href="#slide30">Multiple HTTP Requests per Page</a></th>
+        <td><a href="#slide30">30</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-31">
+        <th><a href="#slide31">Caching</a></th>
+        <td><a href="#slide31">31</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-32">
+        <th><a href="#slide32">Client-side Caching</a></th>
+        <td><a href="#slide32">32</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-33">
+        <th><a href="#slide33">cache-control: no-store</a></th>
+        <td><a href="#slide33">33</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-34">
+        <th><a href="#slide34">cache-control: no-cache</a></th>
+        <td><a href="#slide34">34</a></td>
       </tr>
       
       

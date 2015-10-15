@@ -21,6 +21,28 @@
     padding-right: 30px;
 }
 
+.table-center table {
+    margin: auto;
+}
+
 table pre {
     margin: 0px;
+}
+
+.slide table {
+    border-collapse: collapse;
+}
+
+.slide td, .slide th {
+    font-size: 20px;
+    border: 1px solid #999;
+    padding: 0.5rem;
+}
+
+.slide th {
+    background: lightblue;
+}
+
+.slide tr:nth-child(odd) {
+    background: #eee;
 }
