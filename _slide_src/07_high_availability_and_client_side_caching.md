@@ -290,3 +290,120 @@ We end up having to make a choice between performance and availability.
 
 ![High Availability in Two Sites](img/dual_site_availability.png)
 
+---
+
+# Client-side Caching
+
+---
+
+# Client-side Caching Motivation
+
+We want our important application data persisted safely in our data center.
+
+This data will be regularly read and updated by geographically distributed
+clients.
+
+Our access to the data needs to be fast.
+
+---
+
+# Reponse Time and Human Perception
+
+.fx: table-center
+
+| Delay         | User Reaction                |
+| -------------:|:----------------------------:|
+|   0 -  100 ms | Instant                      |
+| 100 -  300 ms | Small perceptible delay      |
+| 300 - 1000 ms | Machine is working           |
+|      1000+ ms | Likely mental context switch |
+|    10,000+ ms | Task is abandoned            |
+
+Source: High Performance Browser Networking
+
+---
+
+# Minimum Latencies
+
+.fx: table-center
+
+| Route                    | Distance  | Time, light in vacuum | Time, light in fiber |
+| ------------------------ | --------- | --------------------- | -------------------- |
+| NYC to SF                | 4,148 km  | 14 ms                 | 21 ms                |
+| NYC to London            | 5,585 km  | 19 ms                 | 28 ms                |
+| NYC to Sydney            | 15,993 km | 53 ms                 | 80 ms                |
+| Equatorial circumference | 40,075 km | 133.7 ms              | 200 ms               |
+
+Source: High Performance Browser Networking
+
+---
+
+# Multiple HTTP Requests per Page
+
+![Total Requests Per Page](img/httparchive_requests_per_page.png)
+
+Source: [http://httparchive.org/interesting.php#reqTotal](http://httparchive.org/interesting.php#reqTotal)
+
+---
+
+# Caching
+
+The fastest request is one that never happens.
+
+__Cache__: a component that transparently stores data so that future requests
+for the same data can be served faster
+
+> Where can we introduce caching?
+
+* Inside the browser
+* In "front" of the server (CDNs, ISP cache, etc.)
+* Inside the application server
+* Inside the database (query cache)
+
+---
+
+# Client-side Caching
+
+> How does the browser cache data?
+
+> How does the browser know when it can or cannot use cached data?
+
+The building blocks of caching are all provided via HTTP headers:
+
+* cache-control
+    * no-store
+    * no-cache
+    * max-age
+    * public | private
+* etag
+* if-modified-since
+* if-none-match
+
+---
+
+# cache-control: no-store
+
+When `cache-control: no-store` is provided as a header to a HTTP response the
+browser and intermediate proxy-caches:
+
+* must not save the information in any non-volatile storage
+* must make a best effot attempt to remove the information from volatile
+  storage as promptly as possible
+
+__Note__: The browser may retain a copy in memory (volatile storage) for use
+with the browser's back/forward buttons.
+
+Generally used for sensitive information.
+
+---
+
+# cache-control: no-cache
+
+When `cache-control: no-cache` is provided as a header to a HTTP response the
+browser and intermediate proxy-caches:
+
+* must not use the respose to satisfy a subsequent request without successful
+  revalidation with the origin server
+
+Useful to force the browser and intermediate chaches to check for updated
+content.
