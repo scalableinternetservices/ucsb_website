@@ -745,7 +745,7 @@ response.
 
 # Client Caching Example
 
-These changes can be viewed the `client_side_caching` branch on the demo app
+These changes can be viewed on the `client_side_caching` branch on the demo app
 repository:
 
 [https://github.com/scalableinternetservices/demo/compare/client_side_caching](https://github.com/scalableinternetservices/demo/compare/client_side_caching)
