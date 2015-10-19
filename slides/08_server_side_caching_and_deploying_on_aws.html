@@ -89,7 +89,7 @@
             </aside>
             
             <aside class="page_number">
-              1/16
+              1/38
             </aside>
           </footer>
         </div>
@@ -124,7 +124,7 @@
             </aside>
             
             <aside class="page_number">
-              2/16
+              2/38
             </aside>
           </footer>
         </div>
@@ -154,7 +154,7 @@
             </aside>
             
             <aside class="page_number">
-              3/16
+              3/38
             </aside>
           </footer>
         </div>
@@ -185,7 +185,7 @@
             </aside>
             
             <aside class="page_number">
-              4/16
+              4/38
             </aside>
           </footer>
         </div>
@@ -223,7 +223,7 @@
             </aside>
             
             <aside class="page_number">
-              5/16
+              5/38
             </aside>
           </footer>
         </div>
@@ -259,7 +259,7 @@
             </aside>
             
             <aside class="page_number">
-              6/16
+              6/38
             </aside>
           </footer>
         </div>
@@ -298,7 +298,7 @@ are not identical, but similar.</p></section>
             </aside>
             
             <aside class="page_number">
-              7/16
+              7/38
             </aside>
           </footer>
         </div>
@@ -331,7 +331,7 @@ response are similar to responses for other resources?</p>
             </aside>
             
             <aside class="page_number">
-              8/16
+              8/38
             </aside>
           </footer>
         </div>
@@ -369,7 +369,7 @@ response are similar to responses for other resources?</p>
             </aside>
             
             <aside class="page_number">
-              9/16
+              9/38
             </aside>
           </footer>
         </div>
@@ -439,7 +439,7 @@ footer, sidebar, or even an item listing that may appear in multiple locations
             </aside>
             
             <aside class="page_number">
-              10/16
+              10/38
             </aside>
           </footer>
         </div>
@@ -474,7 +474,7 @@ footer, sidebar, or even an item listing that may appear in multiple locations
             </aside>
             
             <aside class="page_number">
-              11/16
+              11/38
             </aside>
           </footer>
         </div>
@@ -513,7 +513,7 @@ for a background worker due to hardware constraints on the application servers.<
             </aside>
             
             <aside class="page_number">
-              12/16
+              12/38
             </aside>
           </footer>
         </div>
@@ -552,7 +552,7 @@ how can we do it?</p>
             </aside>
             
             <aside class="page_number">
-              13/16
+              13/38
             </aside>
           </footer>
         </div>
@@ -585,7 +585,7 @@ how can we do it?</p>
             </aside>
             
             <aside class="page_number">
-              14/16
+              14/38
             </aside>
           </footer>
         </div>
@@ -616,7 +616,7 @@ how can we do it?</p>
             </aside>
             
             <aside class="page_number">
-              15/16
+              15/38
             </aside>
           </footer>
         </div>
@@ -647,7 +647,1020 @@ how can we do it?</p>
             </aside>
             
             <aside class="page_number">
-              16/16
+              16/38
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 08_server_side_caching_and_deploying_on_aws.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-17">
+          <div class="inner">
+            
+            <header><h1>Latency Numbers for Caching</h1></header>
+            
+            
+            <section><ul>
+<li>Storing in memory and reading later is fast<ul>
+<li>Random reads from memory is &lt; 0.1μs</li>
+<li>Reading 1MB is 9μs</li>
+</ul>
+</li>
+<li>Storing on disk is slow without SSD (solid state drive):<ul>
+<li>Disk seek is 4000μs</li>
+<li>Subsequent sequential read of 1MB is 2000μs</li>
+</ul>
+</li>
+<li>Storing on disk with SSD is much more reasonable<ul>
+<li>Random read is 16μs</li>
+<li>Sequential read of 1MB is 156μs</li>
+</ul>
+</li>
+<li>Storing on another machine is reasonable<ul>
+<li>Round trip within datacenter is 500μs</li>
+</ul>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="08_server_side_caching_and_deploying_on_aws.md">08_server_side_caching_and_deploying_on_aws.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              17/38
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 08_server_side_caching_and_deploying_on_aws.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-18">
+          <div class="inner">
+            
+            <header><h1>Latency Numbers Summary</h1></header>
+            
+            
+            <section><h2>Summary</h2>
+<ul>
+<li>In memory: tens of μs</li>
+<li>On SSD: hundreds of μs</li>
+<li>On magnetic disk: thousands of μs</li>
+<li>On remote machine: add hundreds of μs</li>
+</ul>
+<h2>Conclusions</h2>
+<ul>
+<li>Always use SSD over magnetic storage</li>
+<li>Memory &gt; SDD &gt; Remote</li>
+</ul>
+<blockquote>
+<p>Are these conclusions always true?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="08_server_side_caching_and_deploying_on_aws.md">08_server_side_caching_and_deploying_on_aws.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              18/38
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 08_server_side_caching_and_deploying_on_aws.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-19">
+          <div class="inner">
+            
+            <header><h1>Caching Locations</h1></header>
+            
+            
+            <section><blockquote>
+<p>What effect on the cache hit rate does each of these designs have?</p>
+</blockquote>
+<ul>
+<li>In memory: cache per process</li>
+<li>On SSD: Cache per machine</li>
+<li>On remote machine: Cache per application server pool (cluster)</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="08_server_side_caching_and_deploying_on_aws.md">08_server_side_caching_and_deploying_on_aws.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              19/38
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 08_server_side_caching_and_deploying_on_aws.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-20">
+          <div class="inner">
+            
+            <header><h1>Caching Location Trade-offs</h1></header>
+            
+            
+            <section><ul>
+<li>In memory<ul>
+<li>highest performance</li>
+<li>lowest hit rate</li>
+</ul>
+</li>
+<li>On SSD<ul>
+<li>lower performance</li>
+<li>higher hit rate</li>
+</ul>
+</li>
+<li>On remove machine<ul>
+<li>lowest performance</li>
+<li>highest hit rate</li>
+</ul>
+</li>
+</ul>
+<p>There is no silver bullet.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="08_server_side_caching_and_deploying_on_aws.md">08_server_side_caching_and_deploying_on_aws.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              20/38
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 08_server_side_caching_and_deploying_on_aws.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-21">
+          <div class="inner">
+            
+            <header><h1>Caching Trade-offs</h1></header>
+            
+            
+            <section><blockquote>
+<p>How will each of the following affect system performance:</p>
+</blockquote>
+<ul>
+<li>Number of processes per machine</li>
+<li>Concurrency model of application server</li>
+<li>Number of machines per cluster</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="08_server_side_caching_and_deploying_on_aws.md">08_server_side_caching_and_deploying_on_aws.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              21/38
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 08_server_side_caching_and_deploying_on_aws.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-22">
+          <div class="inner">
+            
+            <header><h1>Memcached</h1></header>
+            
+            
+            <section><p><strong>memcached</strong> is a commonly used remote cache server. It...</p>
+<ul>
+<li>keeps a cache in memory</li>
+<li>provides a simple TCP protocol to return responses to lookup requests</li>
+<li>is a distributed key-value store<ul>
+<li>keys can be up to 250 bytes</li>
+<li>values can be up to 1MB</li>
+<li>scales horizontally</li>
+</ul>
+</li>
+<li>uses a simple LRU (least recently used) to make space for new items when full</li>
+<li>performs all operations in constant time</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="08_server_side_caching_and_deploying_on_aws.md">08_server_side_caching_and_deploying_on_aws.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              22/38
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 08_server_side_caching_and_deploying_on_aws.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-23">
+          <div class="inner">
+            
+            <header><h1>Server-side Caching in Rails</h1></header>
+            
+            
+            <section><p>Rails provides excellent support for server-side caching.</p>
+<p>The three primary interfaces to caching in rails are:</p>
+<ul>
+<li>HTTP caching</li>
+<li>Fragment caching</li>
+<li>Low level caching</li>
+</ul>
+<p>We already covered HTTP caching. Today we'll discuss the latter two.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="08_server_side_caching_and_deploying_on_aws.md">08_server_side_caching_and_deploying_on_aws.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              23/38
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 08_server_side_caching_and_deploying_on_aws.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-24">
+          <div class="inner">
+            
+            <header><h1>Enabling Caching in Rails</h1></header>
+            
+            
+            <section><p>By default, caching is disabled in development and test modes, and enabled only
+in production mode.</p>
+<p>If you want to enable caching in development mode you must make the following
+change to your Rails environment:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">config</span><span class="o">.</span><span class="n">action_controller</span><span class="o">.</span><span class="n">perform_caching</span> <span class="o">=</span> <span class="kp">true</span>
+</pre></div>
+</td></tr></table>
+<p>Rails can be configured to store cached data in a few different places:</p>
+<ul>
+<li>In memory</li>
+<li>On a <em>local</em> file system</li>
+<li>In a remote in-memory store</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="08_server_side_caching_and_deploying_on_aws.md">08_server_side_caching_and_deploying_on_aws.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              24/38
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 08_server_side_caching_and_deploying_on_aws.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-25">
+          <div class="inner">
+            
+            <header><h1>Rails Cache Stores</h1></header>
+            
+            
+            <section><h2>ActiveSupport::Cache::MemoryStore</h2>
+<ul>
+<li>Cached data is storred in memory, in the same address space as the ruby
+  process.</li>
+<li>Defaults to 32MB, configurable</li>
+</ul>
+<h2>ActiveSupport::Cache::FileStore</h2>
+<ul>
+<li>Cached data is stored on the <em>local</em> file system.</li>
+<li>Can configure the location of the storage in the Rails environment:<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">config</span><span class="o">.</span><span class="n">cache_store</span> <span class="o">=</span> <span class="ss">:file_store</span><span class="p">,</span> <span class="s1">&#39;/path/to/cache/&#39;</span>
+</pre></div>
+</td></tr></table>
+</li>
+</ul>
+<h2>ActiveSupport::Cache::MemcacheStore</h2>
+<ul>
+<li>Cached data is stored in memory on another machine (could also be local).</li>
+<li>Can configure the location of the server in the Rails environment:<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">config</span><span class="o">.</span><span class="n">cache_store</span> <span class="o">=</span> <span class="ss">:mem_cache_store</span><span class="p">,</span> <span class="s1">&#39;cache-1.example.com&#39;</span>
+</pre></div>
+</td></tr></table>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="08_server_side_caching_and_deploying_on_aws.md">08_server_side_caching_and_deploying_on_aws.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              25/38
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 08_server_side_caching_and_deploying_on_aws.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-26">
+          <div class="inner">
+            
+            <header><h1>Rails: Fragment Caching</h1></header>
+            
+            
+            <section><p>Fragment caching caches a portion of a rendered view for reuse on future
+requeusts.</p>
+<p>Let's look at fragment caching in the context of the demo app.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="08_server_side_caching_and_deploying_on_aws.md">08_server_side_caching_and_deploying_on_aws.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              26/38
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 08_server_side_caching_and_deploying_on_aws.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-27">
+          <div class="inner">
+            
+            <header><h1>Fragment Caching Submission Partials</h1></header>
+            
+            
+            <section><p><img alt="Submissions Index View" src="img/demo_submissions_index.png" /></p>
+<p>We can cache each submission listing.</p>
+<p>With that done, then regardless of any other changes on the page, we can
+rerender the submission view for all submissions that haven't been updated.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="08_server_side_caching_and_deploying_on_aws.md">08_server_side_caching_and_deploying_on_aws.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              27/38
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 08_server_side_caching_and_deploying_on_aws.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-28">
+          <div class="inner">
+            
+            <header><h1>Submission Listing (without cache)</h1></header>
+            
+            
+            <section><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">&lt;%</span> <span class="vi">@submissions</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">submission</span><span class="o">|</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">  &lt;tr&gt;</span>
+<span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span><span class="p">(</span><span class="n">submission</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">submission</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+<span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">submission</span><span class="o">.</span><span class="n">url</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+<span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">submission</span><span class="o">.</span><span class="n">community</span><span class="o">.</span><span class="n">name</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+<span class="x">    &lt;td&gt;</span>
+<span class="x">      </span><span class="cp">&lt;%=</span> <span class="n">link_to</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">submission</span><span class="o">.</span><span class="n">comments</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s2"> comments&quot;</span><span class="p">,</span>
+                  <span class="n">submission</span><span class="p">,</span> <span class="ss">class</span><span class="p">:</span> <span class="s1">&#39;btn btn-primary btn-xs&#39;</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">    &lt;/td&gt;</span>
+<span class="x">  &lt;/tr&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</pre></div>
+</td></tr></table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="08_server_side_caching_and_deploying_on_aws.md">08_server_side_caching_and_deploying_on_aws.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              28/38
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 08_server_side_caching_and_deploying_on_aws.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-29">
+          <div class="inner">
+            
+            <header><h1>Submission Listing (with cache)</h1></header>
+            
+            
+            <section><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">&lt;%</span> <span class="vi">@submissions</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">submission</span><span class="o">|</span> <span class="cp">%&gt;</span><span class="x"></span>
+
+<span class="x">  </span><span class="cp">&lt;%</span> <span class="n">cache</span><span class="p">(</span><span class="n">cache_key_for_submission</span><span class="p">(</span><span class="n">submission</span><span class="p">))</span> <span class="k">do</span> <span class="cp">%&gt;</span><span class="x"></span>
+
+<span class="x">  &lt;tr&gt;</span>
+<span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span><span class="p">(</span><span class="n">submission</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">submission</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+<span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">submission</span><span class="o">.</span><span class="n">url</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+<span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">submission</span><span class="o">.</span><span class="n">community</span><span class="o">.</span><span class="n">name</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+<span class="x">    &lt;td&gt;</span>
+<span class="x">      </span><span class="cp">&lt;%=</span> <span class="n">link_to</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">submission</span><span class="o">.</span><span class="n">comments</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s2"> comments&quot;</span><span class="p">,</span>
+                  <span class="n">submission</span><span class="p">,</span> <span class="ss">class</span><span class="p">:</span> <span class="s1">&#39;btn btn-primary btn-xs&#39;</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">    &lt;/td&gt;</span>
+<span class="x">  &lt;/tr&gt;</span>
+
+<span class="x">  </span><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</pre></div>
+</td></tr></table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="08_server_side_caching_and_deploying_on_aws.md">08_server_side_caching_and_deploying_on_aws.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              29/38
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 08_server_side_caching_and_deploying_on_aws.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-30">
+          <div class="inner">
+            
+            <header><h1>Chosing a Cache Key</h1></header>
+            
+            
+            <section><blockquote>
+<p>How should we choose a cache key?</p>
+</blockquote>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">SubmissionHelper</span>
+  <span class="k">def</span> <span class="nf">cache_key_for_submission</span><span class="p">(</span><span class="n">submission</span><span class="p">)</span>
+    <span class="s2">&quot;submission/</span><span class="si">#{</span><span class="n">submission</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</td></tr></table>
+<blockquote>
+<p>What are the weaknesses with the above approach?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="08_server_side_caching_and_deploying_on_aws.md">08_server_side_caching_and_deploying_on_aws.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              30/38
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 08_server_side_caching_and_deploying_on_aws.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-31">
+          <div class="inner">
+            
+            
+            <section><blockquote>
+<p>How should we choose a cache key?</p>
+</blockquote>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">SubmissionHelper</span>
+  <span class="k">def</span> <span class="nf">cache_key_for_submission</span><span class="p">(</span><span class="n">submission</span><span class="p">)</span>
+    <span class="s2">&quot;submission/</span><span class="si">#{</span><span class="n">submission</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</td></tr></table>
+<blockquote>
+<p>What are the weaknesses with the above approach?</p>
+</blockquote>
+<ul>
+<li>Invalidation will need to be explicit as the submission ID will rarely, if
+  never, be updated for an object.</li>
+<li>Explicitly invalidating cache items can easily make a mess of the code.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="08_server_side_caching_and_deploying_on_aws.md">08_server_side_caching_and_deploying_on_aws.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              31/38
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 08_server_side_caching_and_deploying_on_aws.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-32">
+          <div class="inner">
+            
+            <header><h1>Chosing a Better Cache Key</h1></header>
+            
+            
+            <section><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">SubmissionHelper</span>
+  <span class="k">def</span> <span class="nf">cache_key_for_submission</span><span class="p">(</span><span class="nb">sub</span><span class="p">)</span>
+    <span class="s2">&quot;submission/</span><span class="si">#{</span><span class="nb">sub</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="nb">sub</span><span class="o">.</span><span class="n">updated_at</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="nb">sub</span><span class="o">.</span><span class="n">comments</span><span class="o">.</span><span class="n">count</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</td></tr></table>
+<p>With the above, a submission's fragment cache is invalidated anytime the
+submission is updated (<code>updated_at</code> is always updated), or when the number of
+comments assocaited with the submission changes.</p>
+<p><em>Note</em>: An Active Record model can be used directly as the key. It calls an
+overwritable method <code>cache_key</code> on the model. By default that method returns a
+key that "includes the model name, the id and finally the updated_at
+timestamp".</p>
+<p>Reference:
+<a href="http://guides.rubyonrails.org/caching_with_rails.html#fragment-caching">http://guides.rubyonrails.org/caching_with_rails.html#fragment-caching</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="08_server_side_caching_and_deploying_on_aws.md">08_server_side_caching_and_deploying_on_aws.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              32/38
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 08_server_side_caching_and_deploying_on_aws.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-33">
+          <div class="inner">
+            
+            <header><h1>More Fragment Caching</h1></header>
+            
+            
+            <section><p><img alt="Submissions Index View" src="img/demo_submissions_index.png" /></p>
+<p>Now we are caching a fragment for each submission.</p>
+<blockquote>
+<p>What else can we cache?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="08_server_side_caching_and_deploying_on_aws.md">08_server_side_caching_and_deploying_on_aws.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              33/38
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 08_server_side_caching_and_deploying_on_aws.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-34">
+          <div class="inner">
+            
+            <header><h1>More Fragment Caching</h1></header>
+            
+            
+            <section><p><img alt="Submissions Index View" src="img/demo_submissions_index.png" /></p>
+<p>Now we are caching a fragment for each submission.</p>
+<blockquote>
+<p>What else can we cache?</p>
+</blockquote>
+<p>We can cache the entire submission listing!</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="08_server_side_caching_and_deploying_on_aws.md">08_server_side_caching_and_deploying_on_aws.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              34/38
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 08_server_side_caching_and_deploying_on_aws.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-35">
+          <div class="inner">
+            
+            <header><h1>Community Listing (without cache)</h1></header>
+            
+            
+            <section><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span class="x">&lt;h3&gt;Submissions&lt;/h3&gt;</span>
+<span class="x">&lt;table class=&quot;table&quot;&gt;</span>
+<span class="x">  &lt;thead&gt;</span>
+<span class="x">    &lt;tr&gt;</span>
+<span class="x">      &lt;th&gt;Title&lt;/th&gt;</span>
+<span class="x">      &lt;th&gt;Url&lt;/th&gt;</span>
+<span class="x">      &lt;th&gt;Community&lt;/th&gt;</span>
+<span class="x">      &lt;th colspan=&quot;3&quot;&gt;&lt;/th&gt;</span>
+<span class="x">    &lt;/tr&gt;</span>
+<span class="x">  &lt;/thead&gt;</span>
+
+<span class="x">  &lt;tbody&gt;</span>
+<span class="x">    </span><span class="cp">&lt;%</span> <span class="vi">@submissions</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">submission</span><span class="o">|</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">      </span><span class="cp">&lt;%</span> <span class="n">cache</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="k">do</span> <span class="cp">%&gt;</span><span class="x"> ... </span><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">    </span><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">  &lt;/tbody&gt;</span>
+<span class="x">&lt;/table&gt;</span>
+
+<span class="x">...</span>
+</pre></div>
+</td></tr></table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="08_server_side_caching_and_deploying_on_aws.md">08_server_side_caching_and_deploying_on_aws.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              35/38
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 08_server_side_caching_and_deploying_on_aws.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-36">
+          <div class="inner">
+            
+            <header><h1>Community Listing (with cache)</h1></header>
+            
+            
+            <section><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">&lt;%</span> <span class="n">cache</span><span class="p">(</span><span class="n">cache_key_for_submission_table</span><span class="p">)</span> <span class="k">do</span> <span class="cp">%&gt;</span><span class="x"></span>
+
+<span class="x">&lt;h3&gt;Submissions&lt;/h3&gt;</span>
+<span class="x">&lt;table class=&quot;table&quot;&gt;</span>
+<span class="x">  &lt;thead&gt;</span>
+<span class="x">    &lt;tr&gt;...&lt;/tr&gt;</span>
+<span class="x">  &lt;/thead&gt;</span>
+
+<span class="x">  &lt;tbody&gt;</span>
+<span class="x">    </span><span class="cp">&lt;%</span> <span class="vi">@submissions</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">submission</span><span class="o">|</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">      </span><span class="cp">&lt;%</span> <span class="n">cache</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="k">do</span> <span class="cp">%&gt;</span><span class="x"> ... </span><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">    </span><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class="x">  &lt;/tbody&gt;</span>
+<span class="x">&lt;/table&gt;</span>
+
+<span class="x">...</span>
+
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</pre></div>
+</td></tr></table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="08_server_side_caching_and_deploying_on_aws.md">08_server_side_caching_and_deploying_on_aws.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              36/38
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 08_server_side_caching_and_deploying_on_aws.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-37">
+          <div class="inner">
+            
+            <header><h1>cache_key_for_submission_table</h1></header>
+            
+            
+            <section><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">SubmissionHelper</span>
+  <span class="k">def</span> <span class="nf">cache_key_for_submission</span><span class="p">(</span><span class="nb">sub</span><span class="p">)</span>
+    <span class="s2">&quot;submission/</span><span class="si">#{</span><span class="nb">sub</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="nb">sub</span><span class="o">.</span><span class="n">updated_at</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="nb">sub</span><span class="o">.</span><span class="n">comments</span><span class="o">.</span><span class="n">count</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">cache_key_for_submission_table</span>
+    <span class="p">(</span><span class="s2">&quot;submission_table/</span><span class="si">#{</span><span class="no">Submission</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="ss">:updated_at</span><span class="p">)</span><span class="si">}</span><span class="s2">/&quot;</span>
+     <span class="o">+</span> <span class="no">Comment</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="ss">:updated_at</span><span class="p">)</span><span class="o">.</span><span class="n">to_s</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</td></tr></table>
+<p>This technique of nesting cache fragments is known as <strong>Russian Doll Caching</strong>.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="08_server_side_caching_and_deploying_on_aws.md">08_server_side_caching_and_deploying_on_aws.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              37/38
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 08_server_side_caching_and_deploying_on_aws.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-38">
+          <div class="inner">
+            
+            <header><h1>Low-level Rails Caching</h1></header>
+            
+            
+            <section><p>You can use the same built-in mechanisms to manually cache anything:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Product</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="k">def</span> <span class="nf">competing_price</span>
+    <span class="no">Rails</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">cache_key</span><span class="si">}</span><span class="s2">/competing_price&quot;</span><span class="p">,</span>
+                      <span class="ss">expires_in</span><span class="p">:</span> <span class="mi">12</span><span class="o">.</span><span class="n">hours</span><span class="p">)</span> <span class="k">do</span>
+      <span class="no">Competitor</span><span class="o">::</span><span class="no">API</span><span class="o">.</span><span class="n">find_price</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</td></tr></table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="08_server_side_caching_and_deploying_on_aws.md">08_server_side_caching_and_deploying_on_aws.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              38/38
             </aside>
           </footer>
         </div>
@@ -754,6 +1767,138 @@ how can we do it?</p>
       <tr id="toc-row-16">
         <th><a href="#slide16">Latency Numbers (μs and ms)</a></th>
         <td><a href="#slide16">16</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-17">
+        <th><a href="#slide17">Latency Numbers for Caching</a></th>
+        <td><a href="#slide17">17</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-18">
+        <th><a href="#slide18">Latency Numbers Summary</a></th>
+        <td><a href="#slide18">18</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-19">
+        <th><a href="#slide19">Caching Locations</a></th>
+        <td><a href="#slide19">19</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-20">
+        <th><a href="#slide20">Caching Location Trade-offs</a></th>
+        <td><a href="#slide20">20</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-21">
+        <th><a href="#slide21">Caching Trade-offs</a></th>
+        <td><a href="#slide21">21</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-22">
+        <th><a href="#slide22">Memcached</a></th>
+        <td><a href="#slide22">22</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-23">
+        <th><a href="#slide23">Server-side Caching in Rails</a></th>
+        <td><a href="#slide23">23</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-24">
+        <th><a href="#slide24">Enabling Caching in Rails</a></th>
+        <td><a href="#slide24">24</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-25">
+        <th><a href="#slide25">Rails Cache Stores</a></th>
+        <td><a href="#slide25">25</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-26">
+        <th><a href="#slide26">Rails: Fragment Caching</a></th>
+        <td><a href="#slide26">26</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-27">
+        <th><a href="#slide27">Fragment Caching Submission Partials</a></th>
+        <td><a href="#slide27">27</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-28">
+        <th><a href="#slide28">Submission Listing (without cache)</a></th>
+        <td><a href="#slide28">28</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-29">
+        <th><a href="#slide29">Submission Listing (with cache)</a></th>
+        <td><a href="#slide29">29</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-30">
+        <th><a href="#slide30">Chosing a Cache Key</a></th>
+        <td><a href="#slide30">30</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-31">
+        <th><a href="#slide31">-</a></th>
+        <td><a href="#slide31">31</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-32">
+        <th><a href="#slide32">Chosing a Better Cache Key</a></th>
+        <td><a href="#slide32">32</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-33">
+        <th><a href="#slide33">More Fragment Caching</a></th>
+        <td><a href="#slide33">33</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-34">
+        <th><a href="#slide34">More Fragment Caching</a></th>
+        <td><a href="#slide34">34</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-35">
+        <th><a href="#slide35">Community Listing (without cache)</a></th>
+        <td><a href="#slide35">35</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-36">
+        <th><a href="#slide36">Community Listing (with cache)</a></th>
+        <td><a href="#slide36">36</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-37">
+        <th><a href="#slide37">cache_key_for_submission_table</a></th>
+        <td><a href="#slide37">37</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-38">
+        <th><a href="#slide38">Low-level Rails Caching</a></th>
+        <td><a href="#slide38">38</a></td>
       </tr>
       
       
