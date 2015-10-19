@@ -46,3 +46,8 @@ table pre {
 .slide tr:nth-child(odd) {
     background: #eee;
 }
+
+code {
+    background: #FFFFFF;
+    border: 1px solid #eeeed2;
+}
