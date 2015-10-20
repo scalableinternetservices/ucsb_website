@@ -408,6 +408,8 @@ rerender the submission view for all submissions that haven't been updated.
 
 ---
 
+# Chosing a Cache Key (answer)
+
 > How should we choose a cache key?
 
     !ruby
@@ -553,3 +555,71 @@ You can use the same built-in mechanisms to manually cache anything:
         end
       end
     end
+
+---
+
+# Performance Comparision
+
+Let's compare the performance of the demo app with and without caching.
+
+The subsequent graphs were generated using tsung against a deployment of the
+`master` branch (without caching) and against a deployment of the
+`server_side_caching` branch (with server-side caching) using the default rails
+caching mechanism (memory).
+
+The `master` branch intentionally includes no optimizations.
+
+---
+
+# Caching Test: Simulated Users
+
+We will use an m3-medium instance with the usual workload deployed using
+passenger as an nginx module.
+
+Using Tsung (erlang-based test framework) we will simulate multiple users
+visiting the Demo App web service. Each user will:
+
+    !text
+    Visit the homepage (/)
+      Wait randomly between 0 and 2 seconds
+    Request community creation form
+      Wait randomly between 0 and 2 seconds
+    Submit new community form
+    Request new link submission form
+      Wait randomly between 0 and 2 seconds
+    Submit new link submission form
+      Wait randomly between 0 and 2 seconds
+    Delete the link
+      Wait randomly between 0 and 2 seconds
+    Delete the community
+
+---
+
+# Caching Test: Phases
+
+This time we have six phases of testing each lasting 60 seconds:
+
+    !text
+       (0-59s) Every second a new simulated user arrives
+     (60-119s) Every second 1.5 new simulated users arrive
+    (120-179s) Every second 2 new simulated users arrive
+    (180-239s) Every second 4 new simulated users arrive
+    (240-299s) Every second 6 new simulated users arrive
+    (300-359s) Every second 10 new simulated users arrive
+
+---
+
+# Performance without Caching
+
+The application struggles to handle a single user arriving each second.
+
+![Performance without caching](img/performance_no_caching.png)
+
+---
+
+# Performance with Caching
+
+With server-side caching implemented, the server can easily handle up to two
+new users a second.
+
+![Performance with caching](img/performance_server_cache.png)
