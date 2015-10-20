@@ -163,7 +163,7 @@ queries can minimize the chance of a database bottleneck.
 
 Option 1: In memory on the application server
 
-Option 2: On the filesystem
+Option 2: On the file system
 
 Option 3: In memory on another machine
 
@@ -199,7 +199,7 @@ Source: http://www.eecs.berkeley.edu/~rcs/research/interactive_latency.html
     * Random read is 16μs
     * Sequential read of 1MB is 156μs
 * Storing on another machine is reasonable
-    * Round trip within datacenter is 500μs
+    * Round trip within data center is 500μs
 
 ---
 
@@ -215,7 +215,7 @@ Source: http://www.eecs.berkeley.edu/~rcs/research/interactive_latency.html
 ## Conclusions
 
 * Always use SSD over magnetic storage
-* Memory > SDD > Remote
+* Memory > SSD > Remote
 
 > Are these conclusions always true?
 
@@ -262,7 +262,7 @@ There is no silver bullet.
 __memcached__ is a commonly used remote cache server. It...
 
 * keeps a cache in memory
-* provides a simple TCP protocol to return responses to lookup requests
+* provides a simple TCP protocol to return responses to look up requests
 * is a distributed key-value store
     * keys can be up to 250 bytes
     * values can be up to 1MB
@@ -309,7 +309,7 @@ Rails can be configured to store cached data in a few different places:
 
 ## ActiveSupport::Cache::MemoryStore
 
-* Cached data is storred in memory, in the same address space as the ruby
+* Cached data is stored in memory, in the same address space as the ruby
   process.
 * Defaults to 32MB, configurable
 
@@ -334,7 +334,7 @@ Rails can be configured to store cached data in a few different places:
 # Rails: Fragment Caching
 
 Fragment caching caches a portion of a rendered view for reuse on future
-requeusts.
+requests.
 
 Let's look at fragment caching in the context of the demo app.
 
@@ -349,7 +349,7 @@ Let's look at fragment caching in the context of the demo app.
 We can cache each submission listing.
 
 With that done, then regardless of any other changes on the page, we can
-rerender the submission view for all submissions that haven't been updated.
+re-render the submission view for all submissions that haven't been updated.
 
 ---
 
@@ -393,7 +393,7 @@ rerender the submission view for all submissions that haven't been updated.
 
 ---
 
-# Chosing a Cache Key
+# Choosing a Cache Key
 
 > How should we choose a cache key?
 
@@ -408,7 +408,7 @@ rerender the submission view for all submissions that haven't been updated.
 
 ---
 
-# Chosing a Cache Key (answer)
+# Choosing a Cache Key (answer)
 
 > How should we choose a cache key?
 
@@ -427,7 +427,7 @@ rerender the submission view for all submissions that haven't been updated.
 
 ---
 
-# Chosing a Better Cache Key
+# Choosing a Better Cache Key
 
     !ruby
     module SubmissionHelper
@@ -438,10 +438,10 @@ rerender the submission view for all submissions that haven't been updated.
 
 With the above, a submission's fragment cache is invalidated anytime the
 submission is updated (`updated_at` is always updated), or when the number of
-comments assocaited with the submission changes.
+comments associated with the submission changes.
 
 _Note_: An Active Record model can be used directly as the key. It calls an
-overwritable method `cache_key` on the model. By default that method returns a
+over-writable method `cache_key` on the model. By default that method returns a
 key that "includes the model name, the id and finally the updated_at
 timestamp".
 
@@ -558,11 +558,11 @@ You can use the same built-in mechanisms to manually cache anything:
 
 ---
 
-# Performance Comparision
+# Performance Comparison
 
 Let's compare the performance of the demo app with and without caching.
 
-The subsequent graphs were generated using tsung against a deployment of the
+The subsequent graphs were generated using Tsung against a deployment of the
 `master` branch (without caching) and against a deployment of the
 `server_side_caching` branch (with server-side caching) using the default rails
 caching mechanism (memory).
@@ -574,7 +574,7 @@ The `master` branch intentionally includes no optimizations.
 # Caching Test: Simulated Users
 
 We will use an m3-medium instance with the usual workload deployed using
-passenger as an nginx module.
+passenger as an NGINX module.
 
 Using Tsung (erlang-based test framework) we will simulate multiple users
 visiting the Demo App web service. Each user will:
@@ -623,3 +623,284 @@ With server-side caching implemented, the server can easily handle up to two
 new users a second.
 
 ![Performance with caching](img/performance_server_cache.png)
+
+---
+
+# Deploying to AWS
+
+Now that you all have a start to your rails application on Github, it is time
+to learn how to deploy to AWS (Amazon Web Service).
+
+Amazon provides a tool called CloudFormation that we will be using to create
+various deployments.
+
+The various templates can be found at:
+[https://github.com/scalableinternetservices/utils](https://github.com/scalableinternetservices/utils).
+
+---
+
+# AWS Warnings and Rules
+
+The resources we have been granted via the _AWS in Education Grant award_ are
+limited for this class. Please:
+
+* Only launch instances when you are ready to test something.
+* Shutdown instances immediately when testing is done.
+* For deployment testing please only use the single-instance `t2.micro`
+  instances (once I get those working; `t1.micro` until then).
+* For vertical scaling tests, always start with the smallest instance type and
+  work your way up in order to minimize the larger instance launch time.
+* For horizontal scaling tests, try to consistently use the smallest instance
+  type.
+* Do not use any of the `micro` instances when performing scalability
+  tests they have a quota system that can affect results).
+
+__In general__: When it doubt, please ask.
+
+In order to enforce minimal instance usage, all instances will be automatically
+terminated after 4 hours. If you want to leave an always on `t2.micro` instance
+running please let me know and I can exclude it.
+
+---
+
+# AWS Instances and Data
+
+Because instances can only live for 4 hours it is important to:
+
+* Fetch any important data on the instances as soon as available (e.g., test
+  results)
+* Quickly load large amounts of testing data (test this process on smaller
+  instances)
+
+---
+
+# Signing into AWS
+
+This evening I will send a piazza message to each team containing your team's
+credentials to login to the AWS interface.
+
+To login visit:
+[https://bboe.signin.aws.amazon.com/console](https://bboe.signin.aws.amazon.com/console)
+
+![bboe AWS Sign-in](img/aws_signin.png)
+
+---
+
+# North Virginia Region
+
+Ensure that the __N. Virginia__ (us-east-1) region is selected in the upper
+right.
+
+![AWS N. Virginia](img/aws_region.png)
+
+---
+
+# CloudFormation
+
+Click the _CloudFormation_ service link in the middle column under the
+_Management Tools_ section.
+
+![AWS CloudFormation](img/aws_cloud_formation.png)
+
+---
+
+# CloudFormation (Subsequent Visits)
+
+On subsequent visits __CloudFormation__ will appear in your
+_Services/History_. Also note that the link is the fourth one under the __All
+AWS Services__ section.
+
+![AWS CloudFormation History](img/aws_cloud_formation_history.png)
+
+---
+
+# Stack Listing
+
+Observe the various stacks that are launched.
+
+Click the blue __Create Stack__ button to create a new stack.
+
+![AWS CloudFormation View](img/aws_cloud_formation_view.png)
+
+---
+
+# Find a Template to Launch
+
+Copy the URL for the desired UCSB CloudFormation template from the list at:
+[https://github.com/scalableinternetservices/utils/](https://github.com/scalableinternetservices/utils/)
+
+For now, the only available template is the Single Instance UCSB WEBrick
+template at:
+[https://cs290b.s3.amazonaws.com/SingleWEBrick.json](https://cs290b.s3.amazonaws.com/SingleWEBrick.json)
+
+![Template URLs](img/template_urls.png)
+
+
+__Note__: I will soon add the other URLs. I will also likely remove the WEBrick
+template altogether. At that point the SingleInstance PUMA template should be
+used for deployment testing.
+
+---
+
+# Specifying a CloudFormation Template
+
+Paste the URL of the template into the _Specify an Amazon S3 template URL_
+field, and click the blue__Next__ button when ready.
+
+![CloudFormation Template](img/aws_cloud_formation_template.png)
+
+---
+
+# Specifying CloudFormation Parameters
+
+1. Provide a stack name. Your stack name start exactly with your TeamName (case
+   sensitive). Following your stack name you should provide your name and maybe
+   the purpose of the stack, e.g. `demo-bboe-4apps`, and `demo-bboe-tsung`.
+2. Select the application server EC2 instance type. For now use only `t1.micro`
+   until that option disappears then use `t2.micro`.
+3. Specify the git branch of your application server to deploy.
+4. Select your team name.
+
+![CloudFormation parameters](img/aws_cloud_formation_parameters.png)
+
+---
+
+# Disable Rollback on Failure
+
+By default if a CloudFormation stack fails to deploy it will auto-rollback. In
+essence, this will prevent you from logging into the instance to see why it
+failed.
+
+We want to disable rollback on failure.
+
+1. Expand the _Advanced_ section
+
+    ![CloudFormation Advanced](img/aws_cloud_formation_advanced.png)
+
+2. Select __No__ for the "Rollback on failure" option.
+
+    ![CloudFormation Rollback](img/aws_cloud_formation_rollback.png)
+
+3. Deploy your stack!
+
+
+---
+
+# Accessing Your Server
+
+On successful stack creation, select the __Outputs__ tab in the lower left.
+
+![CloudFormation Outputs](img/aws_cloud_formation_outputs.png)
+
+The SSH output provides the SSH connect string you can use in order to SSH into
+the machine.
+
+You will either need to run this command from the same directory that contains
+your `TEAMNAME.pem` file, or you can modify the `-i TEAMNAME.pem` parameter to
+provide an appropriate path to your `pem` file.
+
+The URL output provides a link to access your deployment running in
+production mode.
+
+---
+
+# Deleting Your Stack
+
+When you are done with your instance delete your stack.
+
+![CloudFormation Delete Stack](img/aws_cloud_formation_delete_stack.png)
+
+__Be careful!__ While you will not be able to delete the stacks of other teams,
+you are able to delete your teammates' stacks. Double check that you are
+deleting the right stacks.
+
+---
+
+# Stack Helper Files
+
+There are two files that you may want to add to your repository:
+
+## .ec2_initialize
+
+This script runs before `bundle install` is run on the application
+server(s). It is useful if you need to install any packages (only use `sudo` if
+necessary)
+
+    sudo yum install -y ImageMagick
+
+## .rails_initialize
+
+This script runs after `rake db:create db:migrate` is run on the application
+server(s). One usefulness is to use it to pre-populate your database, i.e.:
+
+    rake db:seed
+
+
+Both files described in more detail at:
+[https://github.com/scalableinternetservices/utils/#running-your-own-instance-configuration](https://github.com/scalableinternetservices/utils/#running-your-own-instance-configuration)
+
+See the Demo app files here:
+[https://github.com/scalableinternetservices/demo](https://github.com/scalableinternetservices/demo)
+
+---
+
+# Failed Stacks
+
+The launching of your stack can fail for a number of reasons:
+
+* Application failed to launch (you do have automated testing configured,
+  right?)
+* Missing gem
+* Missing gem dependency (package to install via `sudo yum install -y ...`)
+* Stack creation Timeout
+
+Assuming you disabled "Rollback on Failure" then you will be able to SSH into
+the instance to see what went wrong.
+
+---
+
+# Finding the EC2 Instance
+
+When a stack failure occurs, you will not receive an output containing the SSH
+command(s). You will need to manually find the EC2 instance to log into.
+
+1. Note the failed stack name. Let's assume it is `demo-bboe`
+2. Browse to the EC2 console:
+   [https://console.aws.amazon.com/ec2/v2/home?region=us-east-1](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1)
+3. In the filter bar type in your stack name: `demo-bboe`.
+4. Select the instance and hit the __Connect__ button to obtain the connect
+string.
+
+![EC2 Filter](img/aws_ec2_filter.png)
+
+__Note__: If there are multiple results and you're not on a multi-machine stack
+you will need to manually inspect each instance's tags to find the right one.
+
+---
+
+# Inspecting the Instances' Log Files
+
+There are a few files of interest on the app server instances:
+
+* /var/log/cfn_init-cmd.log
+* /var/log/cfn_init.log
+* /var/log/cloud-init.log
+* /var/log/cloud-init-output.log **
+
+Use _less_, _tail_, _cat_, or your other favorite program to inspect these logs
+to check for failures.
+
+** __cloud-init-output.log__ will most likely contain the errors you are
+   looking for.
+
+---
+
+# By End of Thursday's Lab
+
+Demonstrate that you can successfully deploy your application to AWS.
+
+Bonus (virtual) points for any teams that demo using AWS on Thursday.
+
+__Note__: All teams will be expected to demo on AWS for all following labs.
+
+Credentials for AWS access will be sent this evening via Piazza.
