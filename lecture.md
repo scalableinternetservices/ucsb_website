@@ -54,9 +54,10 @@ by Cardellini, Colajanni, and Yu.
 * Server-side Caching
 * Deploying on AWS
 
-#### October 22, 2015
-* A Stable Data Layer: Relational Databases
-* Database Concurrency Control and Query Analysis
+#### October 22, 2015 ([slides](/slides/09_relational_databases_db_concurrency_and_query_analysis.html))
+* Relational Databases
+* Database Concurrency Control
+* Query Analysis
 
 #### October 27, 2015
 * RDBMSes and Sharding
