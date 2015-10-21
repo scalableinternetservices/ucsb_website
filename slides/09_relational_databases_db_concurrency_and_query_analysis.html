@@ -89,7 +89,7 @@
             </aside>
             
             <aside class="page_number">
-              1/5
+              1/17
             </aside>
           </footer>
         </div>
@@ -106,6 +106,7 @@
             <section><ul>
 <li>TODO</li>
 <li>Server-side Caching in Rails Review</li>
+<li>Motivation</li>
 <li>A Stable Data Layer</li>
 <li>Database Concurrency Control</li>
 <li>Query Analysis</li>
@@ -125,7 +126,7 @@
             </aside>
             
             <aside class="page_number">
-              2/5
+              2/17
             </aside>
           </footer>
         </div>
@@ -160,7 +161,7 @@
             </aside>
             
             <aside class="page_number">
-              3/5
+              3/17
             </aside>
           </footer>
         </div>
@@ -168,7 +169,35 @@
       
       <!-- slide source: 09_relational_databases_db_concurrency_and_query_analysis.md -->
       <div class="slide-wrapper">
-        <div class="slide has_code slide-4">
+        <div class="slide slide-4">
+          <div class="inner">
+            
+            <header><h1>Server-side Caching in Rails Review</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="09_relational_databases_db_concurrency_and_query_analysis.md">09_relational_databases_db_concurrency_and_query_analysis.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/17
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 09_relational_databases_db_concurrency_and_query_analysis.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-5">
           <div class="inner">
             
             <header><h1>Rails Russian Doll Caching</h1></header>
@@ -226,7 +255,7 @@
             </aside>
             
             <aside class="page_number">
-              4/5
+              5/17
             </aside>
           </footer>
         </div>
@@ -234,7 +263,7 @@
       
       <!-- slide source: 09_relational_databases_db_concurrency_and_query_analysis.md -->
       <div class="slide-wrapper">
-        <div class="slide has_code slide-5">
+        <div class="slide has_code slide-6">
           <div class="inner">
             
             <header><h1>Low-level Rails Caching</h1></header>
@@ -273,7 +302,508 @@
             </aside>
             
             <aside class="page_number">
-              5/5
+              6/17
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 09_relational_databases_db_concurrency_and_query_analysis.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-7">
+          <div class="inner">
+            
+            <header><h1>Motivation</h1></header>
+            
+            
+            <section><p>After today you should...</p>
+<ul>
+<li>understand the importance of relational databases in architecting scalable
+  Internet systems</li>
+<li>understand how to design with concurrency in mind</li>
+<li>have a basic idea regarding how to speed up your data layer<ul>
+<li>where to start</li>
+<li>Rails-specific techniques</li>
+<li>be able to identity the source of slowness in a SQL query</li>
+</ul>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="09_relational_databases_db_concurrency_and_query_analysis.md">09_relational_databases_db_concurrency_and_query_analysis.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/17
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 09_relational_databases_db_concurrency_and_query_analysis.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-8">
+          <div class="inner">
+            
+            <header><h1>Stateful Requests</h1></header>
+            
+            
+            <section><p><img alt="Database connectivity" src="img/app_server_to_database.png" /></p>
+<p>We have many stateless application servers responding to requests.</p>
+<p>Clients can be served by any application servers.</p>
+<p>Client requests regularly include data updates.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="09_relational_databases_db_concurrency_and_query_analysis.md">09_relational_databases_db_concurrency_and_query_analysis.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/17
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 09_relational_databases_db_concurrency_and_query_analysis.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code img-left slide-9">
+          <div class="inner">
+            
+            <header><h1>Application Server <em>Needs</em></h1></header>
+            
+            
+            <section><p><img alt="Database connectivity" src="img/app_server_to_database.png" /></p>
+<ul>
+<li>
+<p>Data needs to be shared between requests and servers</p>
+</li>
+<li>
+<p>Access to data shouldn't be slow</p>
+</li>
+<li>
+<p>High availability of shared data</p>
+</li>
+<li>
+<p>Utilizing the data layer should be intuitive:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">if</span> <span class="n">david</span><span class="o">.</span><span class="n">balance</span> <span class="o">&gt;</span> <span class="mi">100</span>
+  <span class="n">david</span><span class="o">.</span><span class="n">withdrawal</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+  <span class="n">mary</span><span class="o">.</span><span class="n">deposit</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</td></tr></table>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="09_relational_databases_db_concurrency_and_query_analysis.md">09_relational_databases_db_concurrency_and_query_analysis.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/17
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 09_relational_databases_db_concurrency_and_query_analysis.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-10">
+          <div class="inner">
+            
+            <header><h1>Data Layer Options</h1></header>
+            
+            
+            <section><p><img alt="Database connectivity" src="img/app_server_to_database.png" /></p>
+<p>There are quite a few existing solutions for a <em>stable</em> data layer.</p>
+<h2>Relational (SQL)</h2>
+<ul>
+<li>MySQL (MariaDB, Percona)</li>
+<li>Postgresql</li>
+<li>Oracle</li>
+<li>MS SQL</li>
+</ul>
+<h2>Non-relational (NoSQL)</h2>
+<ul>
+<li>Cassandra</li>
+<li>MongoDB</li>
+<li>Redis</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="09_relational_databases_db_concurrency_and_query_analysis.md">09_relational_databases_db_concurrency_and_query_analysis.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/17
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 09_relational_databases_db_concurrency_and_query_analysis.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-11">
+          <div class="inner">
+            
+            <header><h1>SQL v. NoSQL</h1></header>
+            
+            
+            <section><p><img alt="Database connectivity" src="img/app_server_to_database.png" /></p>
+<h2>Relational Databases...</h2>
+<ul>
+<li>are a general-purpose persistence layer</li>
+<li>offer more features</li>
+<li>have a limited ability to scale horizontally</li>
+</ul>
+<h2>Non-relational Databases...</h2>
+<ul>
+<li>often are more specialized</li>
+<li>require more from the application layer</li>
+<li>are better at scaling horizontally</li>
+</ul>
+<p>If your needs fit within a RDBMS's (relational database management system)
+ability to scale, they tend to be best. If your scaling needs exceed RDBMS
+capabilities, go non-relational.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="09_relational_databases_db_concurrency_and_query_analysis.md">09_relational_databases_db_concurrency_and_query_analysis.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/17
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 09_relational_databases_db_concurrency_and_query_analysis.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-12">
+          <div class="inner">
+            
+            <header><h1>Database Outline</h1></header>
+            
+            
+            <section><p><img alt="Database connectivity" src="img/app_server_to_database.png" /></p>
+<h2>Today we will discuss:</h2>
+<ul>
+<li>Relational databases</li>
+<li>Concurrency control</li>
+<li>SQL query analysis</li>
+</ul>
+<h2>Later we will discuss:</h2>
+<ul>
+<li>Scaling options for relational databases:<ul>
+<li>Sharding</li>
+<li>Service Oriented Architectures (SOA)</li>
+<li>Distinguishing reads from writes</li>
+</ul>
+</li>
+<li>A survey of NoSQL options</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="09_relational_databases_db_concurrency_and_query_analysis.md">09_relational_databases_db_concurrency_and_query_analysis.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/17
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 09_relational_databases_db_concurrency_and_query_analysis.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-13">
+          <div class="inner">
+            
+            <header><h1>Database Transactions</h1></header>
+            
+            
+            <section><p>Transactions are a database concept that allows a system to guarantee certain
+semantic properties.</p>
+<p>Transactions provide control over concurrency.</p>
+<p>Having rigorously defined guarantees means we can build correct systems using
+these databases.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="09_relational_databases_db_concurrency_and_query_analysis.md">09_relational_databases_db_concurrency_and_query_analysis.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/17
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 09_relational_databases_db_concurrency_and_query_analysis.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-14">
+          <div class="inner">
+            
+            <header><h1>Database Transaction History</h1></header>
+            
+            
+            <section><h2>Mid 1970's, IBM System R's Research Storage System (RSS)</h2>
+<ul>
+<li>First system to implement SQL</li>
+<li>Introduced formal notions of transactions and serializability</li>
+</ul>
+<p>Jim Gray (1998 Turing Award Winner) had a significant role in the project for
+the introduction of transactions.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="09_relational_databases_db_concurrency_and_query_analysis.md">09_relational_databases_db_concurrency_and_query_analysis.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/17
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 09_relational_databases_db_concurrency_and_query_analysis.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-15">
+          <div class="inner">
+            
+            <header><h1>Database ACID Properties</h1></header>
+            
+            
+            <section><h2>Atomicity</h2>
+<ul>
+<li>Complete everything, or do nothing</li>
+<li>No partial application of a transaction</li>
+</ul>
+<h2>Consistency</h2>
+<ul>
+<li>The database should be consistent both at the beginning and end of a
+  transaction</li>
+<li>Consistency is defined by the integrity constraints (e.g., foreign keys, <code>NOT
+  NULL</code>, etc.)</li>
+</ul>
+<h2>Isolation</h2>
+<ul>
+<li>A transaction should not see the effects of other uncommitted transactions</li>
+</ul>
+<h2>Durability</h2>
+<ul>
+<li>Once committed, the transaction's effects should not disappear</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="09_relational_databases_db_concurrency_and_query_analysis.md">09_relational_databases_db_concurrency_and_query_analysis.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/17
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 09_relational_databases_db_concurrency_and_query_analysis.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-16">
+          <div class="inner">
+            
+            <header><h1>Overlapping Concerns</h1></header>
+            
+            
+            <section><p><strong>Atomicity</strong> and <strong>Durability</strong> are related and are generally provided by
+<em>journalling</em>.</p>
+<p><strong>Consistency</strong> and <strong>Isolation</strong> are provided by concurrency control (usually
+implemented via locking).</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="09_relational_databases_db_concurrency_and_query_analysis.md">09_relational_databases_db_concurrency_and_query_analysis.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              16/17
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 09_relational_databases_db_concurrency_and_query_analysis.md -->
+      <div class="slide-wrapper">
+        <div class="slide table-center slide-17">
+          <div class="inner">
+            
+            <header><h1>Definition: Schedule</h1></header>
+            
+            
+            <section><p>A <strong>schedule</strong> is an abstract model used to describe the execution of
+transactions that run in a database.</p>
+<table>
+<thead>
+<tr>
+<th align="center">T1</th>
+<th align="center">T2</th>
+<th align="center">T3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">R(X)</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">W(X)</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Commit</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">R(Y)</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">W(Y)</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">Commit</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">R(Z)</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">W(Z)</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">Commit</td>
+</tr>
+</tbody>
+</table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="09_relational_databases_db_concurrency_and_query_analysis.md">09_relational_databases_db_concurrency_and_query_analysis.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              17/17
             </aside>
           </footer>
         </div>
@@ -306,14 +836,86 @@
       
       
       <tr id="toc-row-4">
-        <th><a href="#slide4">Rails Russian Doll Caching</a></th>
+        <th><a href="#slide4">Server-side Caching in Rails Review</a></th>
         <td><a href="#slide4">4</a></td>
       </tr>
       
       
       <tr id="toc-row-5">
-        <th><a href="#slide5">Low-level Rails Caching</a></th>
+        <th><a href="#slide5">Rails Russian Doll Caching</a></th>
         <td><a href="#slide5">5</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-6">
+        <th><a href="#slide6">Low-level Rails Caching</a></th>
+        <td><a href="#slide6">6</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-7">
+        <th><a href="#slide7">Motivation</a></th>
+        <td><a href="#slide7">7</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-8">
+        <th><a href="#slide8">Stateful Requests</a></th>
+        <td><a href="#slide8">8</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-9">
+        <th><a href="#slide9">Application Server <em>Needs</em></a></th>
+        <td><a href="#slide9">9</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-10">
+        <th><a href="#slide10">Data Layer Options</a></th>
+        <td><a href="#slide10">10</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-11">
+        <th><a href="#slide11">SQL v. NoSQL</a></th>
+        <td><a href="#slide11">11</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-12">
+        <th><a href="#slide12">Database Outline</a></th>
+        <td><a href="#slide12">12</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-13">
+        <th><a href="#slide13">Database Transactions</a></th>
+        <td><a href="#slide13">13</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-14">
+        <th><a href="#slide14">Database Transaction History</a></th>
+        <td><a href="#slide14">14</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-15">
+        <th><a href="#slide15">Database ACID Properties</a></th>
+        <td><a href="#slide15">15</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-16">
+        <th><a href="#slide16">Overlapping Concerns</a></th>
+        <td><a href="#slide16">16</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-17">
+        <th><a href="#slide17">Definition: Schedule</a></th>
+        <td><a href="#slide17">17</a></td>
       </tr>
       
       

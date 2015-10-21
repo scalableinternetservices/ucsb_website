@@ -21,6 +21,10 @@
     padding-right: 30px;
 }
 
+.img-left ul {
+    overflow: hidden;
+}
+
 .table-center table {
     margin: auto;
 }
