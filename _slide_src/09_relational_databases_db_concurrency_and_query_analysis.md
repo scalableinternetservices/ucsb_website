@@ -758,4 +758,388 @@ Request 2
 
 ---
 
-# Query Analysis
+# Next Step
+
+We now have a Rails app connected to MySQL and it is slower than you'd like.
+
+You think the bottleneck may be the database.
+
+> How do we find out?
+
+---
+
+# Demo App Database Optimizations
+
+.fx: img-left
+
+![Submissions Index View](img/demo_submissions_index.png)
+
+Let's use an example from the Demo app!
+
+By changing the way you interact with the Rails ORM (ActiveRecord) you can
+significantly improve performance.
+
+The following examples are all contained in the _database_optimizations_ branch
+on github.
+
+---
+
+# Demo App ActiveRecord Time
+
+.fx: img-left
+
+With the Demo app's _master_ branch deployed on a `m3_medium` instance
+with:
+
+![Submissions Index View](img/demo_submissions_index.png)
+
+
+* 20 Communities
+* 400 Submissions
+* 8000 Comments
+
+A request to `/` resulted in:
+
+Completed 200 OK
+ActiveRecord: 220.6ms.
+
+> Why so slow?
+
+---
+
+# Demo App Investigation
+
+__First Step__: Find out what Rails is doing.
+
+In _development_ mode, Rails will output the SQL it generates and executes to
+the application server log.
+
+To (temporarily) enable this in _production_ mode, change
+`config/environments/production.rb` to contain:
+
+    !ruby
+    config.log_level = :debug
+
+---
+
+# Submission Index Controller and View
+
+Controller
+
+    !ruby
+    class SubmissionsController < ApplicationController
+      def index
+        @submissions = Submission.all
+      end
+     end
+
+View
+
+    !erb
+    <% @submissions.each do |submission| %>
+      <tr>
+        <td><%= link_to(submission.title, submission.url) %></td>
+        <td><%= submission.url %></td>
+        <td><%= submission.community.name %></td>
+        <td>
+          <%= link_to("#{submission.comments.size} comments",
+                      submission, class: 'btn btn-primary btn-xs') %>
+        </td>
+      </tr>
+    <% end %>
+
+---
+
+# Generated SQL Statements
+
+    Processing by SubmissionsController#index as HTML
+    Submission Load (0.5ms)  SELECT `submissions`.* FROM `submissions`
+    Community Load (0.3ms)  SELECT  `communities`.* FROM `communities` WHERE `communities`.`id` = 1 LIMIT 1
+    SELECT COUNT(*) FROM `comments` WHERE `comments`.`submission_id` = 1
+    SELECT  `communities`.* FROM `communities` WHERE `communities`.`id` = 1 LIMIT 1  [["id", 1]]
+    SELECT COUNT(*) FROM `comments` WHERE `comments`.`submission_id` = 2
+    SELECT  `communities`.* FROM `communities` WHERE `communities`.`id` = 1 LIMIT 1  [["id", 1]]
+    SELECT COUNT(*) FROM `comments` WHERE `comments`.`submission_id` = 3
+    SELECT  `communities`.* FROM `communities` WHERE `communities`.`id` = 1 LIMIT 1  [["id", 1]]
+    ...
+    SELECT  `communities`.* FROM `communities` WHERE `communities`.`id` = 20 LIMIT 1  [["id", 20]]
+    SELECT COUNT(*) FROM `comments` WHERE `comments`.`submission_id` = 400
+
+That is a lot of `SELECT` queries!
+
+---
+
+# Number of Queries Bottleneck
+
+We are issuing a ton of `SELECT` queries. The overhead associated with each is
+slowing us down.
+
+> How can we fix this problem?
+
+---
+
+# Number of Queries Bottleneck
+
+We are issuing a ton of `SELECT` queries. The overhead associated with each is
+slowing us down.
+
+> How can we fix this problem?
+
+## Issue fewer queries.
+
+* Do not ask for the community each time
+* Do not ask for the number of comments each time
+
+---
+
+# Reducing Queries in Rails
+
+Without `includes`
+
+    !ruby
+    class SubmissionsController < ApplicationController
+      def index
+        @submissions = Submission.all
+      end
+     end
+
+With `includes`
+
+    !ruby
+    class SubmissionsController < ApplicationController
+      def index
+        @submissions = Submission.includes(:comments)
+                                 .includes(:community).all
+      end
+     end
+
+---
+
+# With Includes Result
+
+    Result: ActiveRecord 39.6ms
+
+    Submission Load (0.9ms)  SELECT `submissions`.* FROM `submissions`
+    Comment Load (38.3ms)  SELECT `comments`.* FROM `comments` WHERE `comments`.`submission_id` IN (1, 2,... 399, 400)
+    Community Load (0.4ms)  SELECT `communities`.* FROM `communities` WHERE `communities`.`id` IN (1, 2, ...19, 20)
+
+---
+
+# SQL Explain
+
+Sometimes things are still slow even when you have minimized the number of
+queries.
+
+SQL provides an `EXPLAIN` statement that can be used to analyze individual
+queries.
+
+When a query starts with `EXPLAIN`...
+
+* the query is not actually executed
+* the produced output will help us identify potential improvements
+
+---
+
+# SQL Explain Example
+
+    EXPLAIN SELECT COUNT(DISTINCT `submissions`.`id`) FROM `submissions`
+    JOIN `comments` WHERE `comments`.`submission_id` = `submissions`.`id`
+    AND `comments`.`message` = 'This is not a test!'\G
+
+    *************************** 1. row ***************************
+    id: 1
+    select_type: SIMPLE
+    table: submissions
+    type: index
+    possible_keys: PRIMARY
+    key: index_submissions_on_community_id
+    key_len: 5
+    ref: NULL
+    rows: 50
+    Extra: Using index
+    *************************** 2. row ***************************
+    id: 1
+    select_type: SIMPLE
+    table: comments
+    type: ref
+    possible_keys: index_comments_on_submission_id
+    key: index_comments_on_submission_id
+    key_len: 5
+    ref: rails_app.submissions.id
+    rows: 1
+    Extra: Using where
+    2 rows in set (0.00 sec)
+
+---
+
+# Understanding the Explain Output
+
+The following are the most important fields for performance analysis:
+
+| Field         | Meaning                            |
+|:--------------|:-----------------------------------|
+| select_type   | The SELECT type                    |
+| type          | The join type                      |
+| possible_keys | The indexes available to be chosen |
+| key           | The index actually chosen          |
+| rows          | Estimate number of rows to examine |
+
+---
+
+# Explain Field: select_type
+
+`select_type` indicates the type of select statement being performed.
+
+Most types are fine, but two indicate potential performance problems:
+
+* __Dependent Subquery__: reevaluated for every different value of the outer
+  query
+* __Uncacheable Subquery__: reevaluated for every value of the outer query
+
+---
+
+# Explain Field: type
+
+`type` indicates the type of JOIN being used. From best to worst:
+
+* __system__: The table only has one row
+* __const__: From uniqueness, we know only one row can match
+* __eq_ref__, __ref__: Only one row at most can match from the previous table
+* __fulltext__: MySQL fulltext index
+* __ref_or_null__: Like ref, but also includes _NULL_ values
+* __index_merge__: Uses multiple indexes to obtain the result
+* __unique_subquery__
+* __index_subquery__
+* __range__: Only rows in a given range are retrieved, but can use index
+* __index__: Full table scan, but can scan index instead of actual table
+* __ALL__: Full table scan
+
+---
+
+# Explain Fields: possible_keys & key
+
+`possible_keys` lists the indexes that could possibly be used to perform the
+query. `key` indicates which key was actually chosen to perform the query.
+
+If you don't like the index that the database is using, you can tell it to
+ignore the index by adding `IGNORE INDEX` to the query.
+
+When `possible_keys` is NULL, it's very likely one or more indexes should be
+added to the appropriate columns.
+
+---
+
+# Explain Field: rows
+
+The `rows` field indiciates the database's estimate of how many rows may need
+to be read to perform the query.
+
+The larger the number, the more time the query will take.
+
+---
+
+# SQL Optimizations
+
+There are three primary ways to optimize SQL queries:
+
+* Add or modify indexes
+* Modify the table structure
+* Directly optimize the query
+
+---
+
+# SQL Indexes
+
+> What is an index?
+
+An index is a fast, ordered, compact structure (B-tree) for identifying row
+locations.
+
+When an index is provided on a column that is to be filtered (searching for a
+particular item), the database is able to quickly find that information.
+
+Indexes can exist on a single column, or across multiple columns. Multi-column
+indexes are useful when filtering on two columns (e.g., CS classes that are not
+full).
+
+---
+
+# Adding Indexes in Rails
+
+To add an index on the `name` field of the `Product` table, create a migration
+containing:
+
+    !ruby
+    class AddNameIndexProducts < ActiveRecord::Migration
+      def change
+        add_index :products, :name
+      end
+    end
+
+---
+
+# Related: Foreign Keys
+
+By default, when dealing with relationships between ActiveRecord objects, Rails
+will validate the constraints in the application layer.
+
+For example, an `Employee` object should have a `Company` that they work for.
+
+Assuming the relationship is defined properly, Rails will enforce that when
+creating an `Employee`, the associated `Company` exists.
+
+Many databases, have built-in support for enforcing such constraints. With
+rails, one can use the `Foreigner` gem to take advantage of the database's
+foreign key support.
+
+After installing the gem, create a migration:
+
+    !ruby
+    class AddForeignKeyToOrders < ActiveRecord::Migration
+      def change
+        add_foreign_key :employees, :companies
+      end
+    end
+
+---
+
+# Optimize the Table Structure
+
+Indexes work best when they can be kept in memory.
+
+Sometimes changing the field type, or index length can provide significant
+memory savings.
+
+If appropriate some options are:
+
+* Reduce the length of a VARCHAR index if appropriate
+* Use a smaller unsigned integer type
+* Use an integer or enum field for statuses rather than a text-based value
+
+---
+
+# Directly Optimize the Query
+
+Before
+
+    !sql
+    explain select count(*) from txns where parent_id - 1600 = 16340;
+
+    select_type: SIMPLE
+    table: txns
+    type: index
+    key: index_txns_on_reverse_txn_id
+    rows: 439186
+    Extra: Using where; Using index
+
+After
+
+    !sql
+    explain select count(*) from txns where parent_id = 16340 + 1600
+
+    select_type: SIMPLE
+    table: txns
+    type: const
+    key: index_txns_on_reverse_txn_id
+    rows: 1
+    Extra: Using index

@@ -61,6 +61,7 @@ table pre {
 }
 
 code {
+    display: inline-block;
     background: #FFFFFF;
     border: 1px solid #eeeed2;
 }
