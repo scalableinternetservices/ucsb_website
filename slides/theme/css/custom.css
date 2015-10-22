@@ -21,7 +21,7 @@
     padding-right: 30px;
 }
 
-.img-left ul {
+.img-left ul, .img-left blockquote {
     overflow: hidden;
 }
 
@@ -35,6 +35,11 @@
 
 table pre {
     margin: 0px;
+}
+
+.table-left table {
+    float: left;
+    margin-right: 30px;
 }
 
 .slide table {
