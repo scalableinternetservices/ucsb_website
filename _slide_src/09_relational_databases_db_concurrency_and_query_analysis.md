@@ -135,7 +135,7 @@ There are quite a few existing solutions for a _stable_ data layer.
 ## Relational (SQL)
 
 * MySQL (MariaDB, Percona)
-* Postgresql
+* PostgreSQL
 * Oracle
 * MS SQL
 
@@ -244,7 +244,7 @@ the introduction of transactions.
 # Overlapping Concerns
 
 __Atomicity__ and __Durability__ are related and are generally provided by
-_journalling_.
+_journaling_.
 
 __Consistency__ and __Isolation__ are provided by concurrency control (usually
 implemented via locking).
@@ -335,7 +335,7 @@ __No__
 .fx: table-center
 
 A transaction (T2) reads a value written by another transaction (T1) that is
-later _aborted_ (its actions are rolledback).
+later _aborted_ (its actions are rolled back).
 
 The result of the T2 transaction will put the database in an incorrect state.
 
@@ -375,7 +375,7 @@ order of the transactions (T1 then T2, or T2 then T1).
 
 ## A schedule is _serial_ if
 
-* the transctions are executed non-interleaved
+* the transactions are executed non-interleaved
 
 ## Two schedules are _conflict equivalent_ if
 
@@ -505,7 +505,7 @@ The two phases are:
 * Each transaction must obtain a _shared_ lock on an object before reading.
 * Each transaction must obtain an _exclusive_ lock on an object before writing.
 * If a transaction holds an exclusive lock on an object, no other transaction
-  can obtaany lock on that object.
+  can obtain any lock on that object.
 * A transaction cannot request additional locks once it releases any locks.
 
 ---
@@ -541,7 +541,7 @@ SS2PL allows only conflict serializable schedules.
 * Each transaction must obtain a _shared_ lock on an object before reading.
 * Each transaction must obtain an _exclusive_ lock on an object before writing.
 * If a transaction holds an exclusive lock on an object, no other transaction
-  can obtaany lock on that object.
+  can obtain any lock on that object.
 * All locks held by a transaction are released when the transaction completes.
 
 This approach avoids the problem with cascading aborts.
@@ -622,7 +622,7 @@ nothing more than storing the `lock_version` values.
 ## Weaknesses
 
 * Have to write error handling code
-* (or) errors will propogate to your users
+* (or) errors will propagate to your users
 
 ---
 
@@ -1031,7 +1031,7 @@ added to the appropriate columns.
 
 # Explain Field: rows
 
-The `rows` field indiciates the database's estimate of how many rows may need
+The `rows` field indicates the database's estimate of how many rows may need
 to be read to perform the query.
 
 The larger the number, the more time the query will take.
