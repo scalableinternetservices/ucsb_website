@@ -25,7 +25,11 @@
     overflow: hidden;
 }
 
-.table-center table {
+.center {
+    text-align: center;
+}
+
+.center table, .table-center table {
     margin: auto;
 }
 

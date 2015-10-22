@@ -253,10 +253,11 @@ implemented via locking).
 
 # Definition: Schedule
 
+.fx: table-center
+
 A __schedule__ is an abstract model used to describe the execution of
 transactions that run in a database.
 
-.fx: table-center
 
 | T1     | T2     | T3     |
 |:------:|:------:|:------:|
@@ -269,3 +270,123 @@ transactions that run in a database.
 |        |        | R(Z)   |
 |        |        | W(Z)   |
 |        |        | Commit |
+
+---
+
+# Conflicting Actions
+
+Two actions are said to be in conflict if:
+
+* the actions belong to different transactions
+* at least one of the actions is a write operation
+* the actions access the same object (read or write)
+
+## Conflicting Actions
+
+| T1     | T2     | T3     |
+|:------:|:------:|:------:|
+| R(X)   |        |        |
+|        | W(X)   |        |
+|        |        | W(X)   |
+
+---
+
+# Non-Conflicting Examples
+
+.fx: center
+
+## All reads
+
+| T1     | T2     | T3     |
+|:------:|:------:|:------:|
+| R(X)   |        |        |
+|        | R(X)   |        |
+|        |        | R(X)   |
+
+## Write to different object
+
+| T1     | T2     | T3     |
+|:------:|:------:|:------:|
+| R(X)   |        |        |
+|        | W(Y)   |        |
+|        |        | R(X)   |
+
+---
+
+# Question
+
+> Can we blindly execute transaction in parallel?
+
+---
+
+# Answer
+
+> Can we blindly execute transaction in parallel?
+
+__No__
+
+* Dirty Read Problem
+* Incorrect Summary Problem
+
+---
+
+# Dirty Read Problem
+
+.fx: table-center
+
+A transaction (T2) reads a value written by another transaction (T1) that is
+later _aborted_ (its actions are rolledback).
+
+The result of the T2 transaction will put the database in an incorrect state.
+
+| T1     | T2     |
+|:------:|:------:|
+| W(X)   |        |
+|        | R(X)   |
+| Abort  |        |
+|        | W(Y)   |
+|        | Commit |
+
+---
+
+# Incorrect Summary Problem
+
+.fx: table-center
+
+A transaction (T1) computes a summary over the values of all the instances of a
+repeated data-item. While that occurs, another transaction (T2) updates some
+instances of data-item.
+
+The resulting summary will not reflect a correct result for any deterministic
+order of the transactions (T1 then T2, or T2 then T1).
+
+| T1     | T2     |
+|:------:|:------:|
+| R(X*)  |        |
+| R(X*)  | W(X^n) |
+| R(X*)  | Commit |
+| R(X*)  |        |
+| W(Y)   |        |
+| Commit |        |
+
+---
+
+# Schedule Types
+
+## A schedule is _serial_ if
+
+* the transctions are executed non-interleaved
+
+## Two schedules are _conflict equivalent_ if
+
+* they involve the same actions of the same transactions
+* every pair of conflicting actions are ordered in the same way
+
+## A schedule is _conflict serializable_ if
+
+* the schedule is __conflict equivalent__ to a __serial__ schedule
+
+## A schedule is _recoverable_ if
+
+* transactions commit only after all transactions whose changes they read,
+  commit

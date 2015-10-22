@@ -89,7 +89,7 @@
             </aside>
             
             <aside class="page_number">
-              1/17
+              1/24
             </aside>
           </footer>
         </div>
@@ -126,7 +126,7 @@
             </aside>
             
             <aside class="page_number">
-              2/17
+              2/24
             </aside>
           </footer>
         </div>
@@ -161,7 +161,7 @@
             </aside>
             
             <aside class="page_number">
-              3/17
+              3/24
             </aside>
           </footer>
         </div>
@@ -189,7 +189,7 @@
             </aside>
             
             <aside class="page_number">
-              4/17
+              4/24
             </aside>
           </footer>
         </div>
@@ -255,7 +255,7 @@
             </aside>
             
             <aside class="page_number">
-              5/17
+              5/24
             </aside>
           </footer>
         </div>
@@ -302,7 +302,7 @@
             </aside>
             
             <aside class="page_number">
-              6/17
+              6/24
             </aside>
           </footer>
         </div>
@@ -343,7 +343,7 @@
             </aside>
             
             <aside class="page_number">
-              7/17
+              7/24
             </aside>
           </footer>
         </div>
@@ -376,7 +376,7 @@
             </aside>
             
             <aside class="page_number">
-              8/17
+              8/24
             </aside>
           </footer>
         </div>
@@ -429,7 +429,7 @@
             </aside>
             
             <aside class="page_number">
-              9/17
+              9/24
             </aside>
           </footer>
         </div>
@@ -473,7 +473,7 @@
             </aside>
             
             <aside class="page_number">
-              10/17
+              10/24
             </aside>
           </footer>
         </div>
@@ -518,7 +518,7 @@ capabilities, go non-relational.</p></section>
             </aside>
             
             <aside class="page_number">
-              11/17
+              11/24
             </aside>
           </footer>
         </div>
@@ -564,7 +564,7 @@ capabilities, go non-relational.</p></section>
             </aside>
             
             <aside class="page_number">
-              12/17
+              12/24
             </aside>
           </footer>
         </div>
@@ -598,7 +598,7 @@ these databases.</p></section>
             </aside>
             
             <aside class="page_number">
-              13/17
+              13/24
             </aside>
           </footer>
         </div>
@@ -634,7 +634,7 @@ the introduction of transactions.</p></section>
             </aside>
             
             <aside class="page_number">
-              14/17
+              14/24
             </aside>
           </footer>
         </div>
@@ -683,7 +683,7 @@ the introduction of transactions.</p></section>
             </aside>
             
             <aside class="page_number">
-              15/17
+              15/24
             </aside>
           </footer>
         </div>
@@ -716,7 +716,7 @@ implemented via locking).</p></section>
             </aside>
             
             <aside class="page_number">
-              16/17
+              16/24
             </aside>
           </footer>
         </div>
@@ -803,7 +803,398 @@ transactions that run in a database.</p>
             </aside>
             
             <aside class="page_number">
-              17/17
+              17/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 09_relational_databases_db_concurrency_and_query_analysis.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-18">
+          <div class="inner">
+            
+            <header><h1>Conflicting Actions</h1></header>
+            
+            
+            <section><p>Two actions are said to be in conflict if:</p>
+<ul>
+<li>the actions belong to different transactions</li>
+<li>at least one of the actions is a write operation</li>
+<li>the actions access the same object (read or write)</li>
+</ul>
+<h2>Conflicting Actions</h2>
+<table>
+<thead>
+<tr>
+<th align="center">T1</th>
+<th align="center">T2</th>
+<th align="center">T3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">R(X)</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">W(X)</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">W(X)</td>
+</tr>
+</tbody>
+</table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="09_relational_databases_db_concurrency_and_query_analysis.md">09_relational_databases_db_concurrency_and_query_analysis.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              18/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 09_relational_databases_db_concurrency_and_query_analysis.md -->
+      <div class="slide-wrapper">
+        <div class="slide center slide-19">
+          <div class="inner">
+            
+            <header><h1>Non-Conflicting Examples</h1></header>
+            
+            
+            <section><h2>All reads</h2>
+<table>
+<thead>
+<tr>
+<th align="center">T1</th>
+<th align="center">T2</th>
+<th align="center">T3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">R(X)</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">R(X)</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">R(X)</td>
+</tr>
+</tbody>
+</table>
+<h2>Write to different object</h2>
+<table>
+<thead>
+<tr>
+<th align="center">T1</th>
+<th align="center">T2</th>
+<th align="center">T3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">R(X)</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">W(Y)</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">R(X)</td>
+</tr>
+</tbody>
+</table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="09_relational_databases_db_concurrency_and_query_analysis.md">09_relational_databases_db_concurrency_and_query_analysis.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              19/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 09_relational_databases_db_concurrency_and_query_analysis.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-20">
+          <div class="inner">
+            
+            <header><h1>Question</h1></header>
+            
+            
+            <section><blockquote>
+<p>Can we blindly execute transaction in parallel?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="09_relational_databases_db_concurrency_and_query_analysis.md">09_relational_databases_db_concurrency_and_query_analysis.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              20/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 09_relational_databases_db_concurrency_and_query_analysis.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-21">
+          <div class="inner">
+            
+            <header><h1>Answer</h1></header>
+            
+            
+            <section><blockquote>
+<p>Can we blindly execute transaction in parallel?</p>
+</blockquote>
+<p><strong>No</strong></p>
+<ul>
+<li>Dirty Read Problem</li>
+<li>Incorrect Summary Problem</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="09_relational_databases_db_concurrency_and_query_analysis.md">09_relational_databases_db_concurrency_and_query_analysis.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              21/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 09_relational_databases_db_concurrency_and_query_analysis.md -->
+      <div class="slide-wrapper">
+        <div class="slide table-center slide-22">
+          <div class="inner">
+            
+            <header><h1>Dirty Read Problem</h1></header>
+            
+            
+            <section><p>A transaction (T2) reads a value written by another transaction (T1) that is
+later <em>aborted</em> (its actions are rolledback).</p>
+<p>The result of the T2 transaction will put the database in an incorrect state.</p>
+<table>
+<thead>
+<tr>
+<th align="center">T1</th>
+<th align="center">T2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">W(X)</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">R(X)</td>
+</tr>
+<tr>
+<td align="center">Abort</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">W(Y)</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">Commit</td>
+</tr>
+</tbody>
+</table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="09_relational_databases_db_concurrency_and_query_analysis.md">09_relational_databases_db_concurrency_and_query_analysis.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              22/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 09_relational_databases_db_concurrency_and_query_analysis.md -->
+      <div class="slide-wrapper">
+        <div class="slide table-center slide-23">
+          <div class="inner">
+            
+            <header><h1>Incorrect Summary Problem</h1></header>
+            
+            
+            <section><p>A transaction (T1) computes a summary over the values of all the instances of a
+repeated data-item. While that occurs, another transaction (T2) updates some
+instances of data-item.</p>
+<p>The resulting summary will not reflect a correct result for any deterministic
+order of the transactions (T1 then T2, or T2 then T1).</p>
+<table>
+<thead>
+<tr>
+<th align="center">T1</th>
+<th align="center">T2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">R(X*)</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">R(X*)</td>
+<td align="center">W(X^n)</td>
+</tr>
+<tr>
+<td align="center">R(X*)</td>
+<td align="center">Commit</td>
+</tr>
+<tr>
+<td align="center">R(X*)</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">W(Y)</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Commit</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="09_relational_databases_db_concurrency_and_query_analysis.md">09_relational_databases_db_concurrency_and_query_analysis.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              23/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 09_relational_databases_db_concurrency_and_query_analysis.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-24">
+          <div class="inner">
+            
+            <header><h1>Schedule Types</h1></header>
+            
+            
+            <section><h2>A schedule is <em>serial</em> if</h2>
+<ul>
+<li>the transctions are executed non-interleaved</li>
+</ul>
+<h2>Two schedules are <em>conflict equivalent</em> if</h2>
+<ul>
+<li>they involve the same actions of the same transactions</li>
+<li>every pair of conflicting actions are ordered in the same way</li>
+</ul>
+<h2>A schedule is <em>conflict serializable</em> if</h2>
+<ul>
+<li>the schedule is <strong>conflict equivalent</strong> to a <strong>serial</strong> schedule</li>
+</ul>
+<h2>A schedule is <em>recoverable</em> if</h2>
+<ul>
+<li>transactions commit only after all transactions whose changes they read,
+  commit</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="09_relational_databases_db_concurrency_and_query_analysis.md">09_relational_databases_db_concurrency_and_query_analysis.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              24/24
             </aside>
           </footer>
         </div>
@@ -916,6 +1307,48 @@ transactions that run in a database.</p>
       <tr id="toc-row-17">
         <th><a href="#slide17">Definition: Schedule</a></th>
         <td><a href="#slide17">17</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-18">
+        <th><a href="#slide18">Conflicting Actions</a></th>
+        <td><a href="#slide18">18</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-19">
+        <th><a href="#slide19">Non-Conflicting Examples</a></th>
+        <td><a href="#slide19">19</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-20">
+        <th><a href="#slide20">Question</a></th>
+        <td><a href="#slide20">20</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-21">
+        <th><a href="#slide21">Answer</a></th>
+        <td><a href="#slide21">21</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-22">
+        <th><a href="#slide22">Dirty Read Problem</a></th>
+        <td><a href="#slide22">22</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-23">
+        <th><a href="#slide23">Incorrect Summary Problem</a></th>
+        <td><a href="#slide23">23</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-24">
+        <th><a href="#slide24">Schedule Types</a></th>
+        <td><a href="#slide24">24</a></td>
       </tr>
       
       
