@@ -21,12 +21,25 @@
     padding-right: 30px;
 }
 
-.table-center table {
+.img-left ul, .img-left blockquote {
+    overflow: hidden;
+}
+
+.center {
+    text-align: center;
+}
+
+.center table, .table-center table {
     margin: auto;
 }
 
 table pre {
     margin: 0px;
+}
+
+.table-left table {
+    float: left;
+    margin-right: 30px;
 }
 
 .slide table {
@@ -48,6 +61,7 @@ table pre {
 }
 
 code {
+    display: inline-block;
     background: #FFFFFF;
     border: 1px solid #eeeed2;
 }
