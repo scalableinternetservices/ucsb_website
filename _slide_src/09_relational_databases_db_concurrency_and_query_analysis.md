@@ -315,13 +315,13 @@ Two actions are said to be in conflict if:
 
 # Question
 
-> Can we blindly execute transaction in parallel?
+> Can we blindly execute transactions in parallel?
 
 ---
 
 # Answer
 
-> Can we blindly execute transaction in parallel?
+> Can we blindly execute transactions in parallel?
 
 __No__
 
