@@ -59,10 +59,13 @@ by Cardellini, Colajanni, and Yu.
 * Database Concurrency Control
 * Query Analysis
 
-#### October 27, 2015 ([slides](/slides/10_tsung.html))
+#### October 27, 2015 (No Class, Work Day)
+* Use the free time to improve on your projects.
+
+#### October 29, 2015 ([slides](/slides/10_tsung.html))
 * Load testing with Tsung
 
-#### October 29, 2015
+#### November 3, 2015
 * RDBMSes and Sharding
 * Service Oriented Architectures and Read Slaves
 
@@ -70,7 +73,7 @@ __TODO__:
 
 * Read chapter 4 in High Performance Browser Networking
 
-#### November 3, 2015
+#### November 5, 2015
 * Security basics: intro to HTTPS
 * Security basics: Firewalls, XSS, CSRF, SQL Injection
 
@@ -82,9 +85,6 @@ __TODO__:
 * Read
   [Eventually Consistent](http://www.scalableinternetservices.com/slides/vogels.pdf)
   by Werner Vogels
-
-#### November 5, 2015
-* Placeholder for Guest Lecture
 
 #### November 10, 2015
 * Guest Lecture: Darren Mutz, Principal Software Engineer @
