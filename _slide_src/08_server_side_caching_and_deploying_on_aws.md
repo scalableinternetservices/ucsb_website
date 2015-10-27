@@ -647,7 +647,7 @@ limited for this class. Please:
 * Only launch instances when you are ready to test something.
 * Shutdown instances immediately when testing is done.
 * For deployment testing please only use the single-instance `t2.micro`
-  instances (once I get those working; `t1.micro` until then).
+  instances
 * For vertical scaling tests, always start with the smallest instance type and
   work your way up in order to minimize the larger instance launch time.
 * For horizontal scaling tests, try to consistently use the smallest instance
@@ -735,10 +735,10 @@ template at:
 
 ![Template URLs](img/template_urls.png)
 
+## October 27 Update
 
-__Note__: I will soon add the other URLs. I will also likely remove the WEBrick
-template altogether. At that point the SingleInstance PUMA template should be
-used for deployment testing.
+Please use this template now:
+[https://cs290b.s3.amazonaws.com/SinglePassenger.json](https://cs290b.s3.amazonaws.com/SinglePassenger.json)
 
 ---
 
@@ -756,8 +756,8 @@ field, and click the blue__Next__ button when ready.
 1. Provide a stack name. Your stack name start exactly with your TeamName (case
    sensitive). Following your stack name you should provide your name and maybe
    the purpose of the stack, e.g. `demo-bboe-4apps`, and `demo-bboe-tsung`.
-2. Select the application server EC2 instance type. For now use only `t1.micro`
-   until that option disappears then use `t2.micro`.
+2. Select the application server EC2 instance type. Please use `t2.micro` for
+   deployment testing. You will use larger instances when load testing.
 3. Specify the git branch of your application server to deploy.
 4. Select your team name.
 
