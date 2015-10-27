@@ -448,7 +448,7 @@
 <h2>Relational (SQL)</h2>
 <ul>
 <li>MySQL (MariaDB, Percona)</li>
-<li>Postgresql</li>
+<li>PostgreSQL</li>
 <li>Oracle</li>
 <li>MS SQL</li>
 </ul>
@@ -698,7 +698,7 @@ the introduction of transactions.</p></section>
             
             
             <section><p><strong>Atomicity</strong> and <strong>Durability</strong> are related and are generally provided by
-<em>journalling</em>.</p>
+<em>journaling</em>.</p>
 <p><strong>Consistency</strong> and <strong>Isolation</strong> are provided by concurrency control (usually
 implemented via locking).</p></section>
             
@@ -963,7 +963,7 @@ transactions that run in a database.</p>
             
             
             <section><blockquote>
-<p>Can we blindly execute transaction in parallel?</p>
+<p>Can we blindly execute transactions in parallel?</p>
 </blockquote></section>
             
           </div>
@@ -995,7 +995,7 @@ transactions that run in a database.</p>
             
             
             <section><blockquote>
-<p>Can we blindly execute transaction in parallel?</p>
+<p>Can we blindly execute transactions in parallel?</p>
 </blockquote>
 <p><strong>No</strong></p>
 <ul>
@@ -1032,7 +1032,7 @@ transactions that run in a database.</p>
             
             
             <section><p>A transaction (T2) reads a value written by another transaction (T1) that is
-later <em>aborted</em> (its actions are rolledback).</p>
+later <em>aborted</em> (its actions are rolled back).</p>
 <p>The result of the T2 transaction will put the database in an incorrect state.</p>
 <table>
 <thead>
@@ -1163,7 +1163,7 @@ order of the transactions (T1 then T2, or T2 then T1).</p>
             
             <section><h2>A schedule is <em>serial</em> if</h2>
 <ul>
-<li>the transctions are executed non-interleaved</li>
+<li>the transactions are executed non-interleaved</li>
 </ul>
 <h2>Two schedules are <em>conflict equivalent</em> if</h2>
 <ul>
@@ -1531,7 +1531,7 @@ serializability.</p>
 <li>Each transaction must obtain a <em>shared</em> lock on an object before reading.</li>
 <li>Each transaction must obtain an <em>exclusive</em> lock on an object before writing.</li>
 <li>If a transaction holds an exclusive lock on an object, no other transaction
-  can obtaany lock on that object.</li>
+  can obtain any lock on that object.</li>
 <li>A transaction cannot request additional locks once it releases any locks.</li>
 </ul></section>
             
@@ -1638,7 +1638,7 @@ needed. This permits other transactions to obtain those locks.</p>
 <li>Each transaction must obtain a <em>shared</em> lock on an object before reading.</li>
 <li>Each transaction must obtain an <em>exclusive</em> lock on an object before writing.</li>
 <li>If a transaction holds an exclusive lock on an object, no other transaction
-  can obtaany lock on that object.</li>
+  can obtain any lock on that object.</li>
 <li>All locks held by a transaction are released when the transaction completes.</li>
 </ul>
 <p>This approach avoids the problem with cascading aborts.</p>
@@ -1811,7 +1811,7 @@ nothing more than storing the <code>lock_version</code> values.</p></section>
 <h2>Weaknesses</h2>
 <ul>
 <li>Have to write error handling code</li>
-<li>(or) errors will propogate to your users</li>
+<li>(or) errors will propagate to your users</li>
 </ul></section>
             
           </div>
@@ -2869,7 +2869,7 @@ added to the appropriate columns.</p></section>
             <header><h1>Explain Field: rows</h1></header>
             
             
-            <section><p>The <code>rows</code> field indiciates the database's estimate of how many rows may need
+            <section><p>The <code>rows</code> field indicates the database's estimate of how many rows may need
 to be read to perform the query.</p>
 <p>The larger the number, the more time the query will take.</p></section>
             
