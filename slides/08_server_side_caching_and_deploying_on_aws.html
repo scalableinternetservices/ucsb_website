@@ -1916,7 +1916,7 @@ limited for this class. Please:</p>
 <li>Only launch instances when you are ready to test something.</li>
 <li>Shutdown instances immediately when testing is done.</li>
 <li>For deployment testing please only use the single-instance <code>t2.micro</code>
-  instances (once I get those working; <code>t1.micro</code> until then).</li>
+  instances</li>
 <li>For vertical scaling tests, always start with the smallest instance type and
   work your way up in order to minimize the larger instance launch time.</li>
 <li>For horizontal scaling tests, try to consistently use the smallest instance
@@ -2162,9 +2162,9 @@ AWS Services</strong> section.</p>
 template at:
 <a href="https://cs290b.s3.amazonaws.com/SingleWEBrick.json">https://cs290b.s3.amazonaws.com/SingleWEBrick.json</a></p>
 <p><img alt="Template URLs" src="img/template_urls.png" /></p>
-<p><strong>Note</strong>: I will soon add the other URLs. I will also likely remove the WEBrick
-template altogether. At that point the SingleInstance PUMA template should be
-used for deployment testing.</p></section>
+<h2>October 27 Update</h2>
+<p>Please use this template now:
+<a href="https://cs290b.s3.amazonaws.com/SinglePassenger.json">https://cs290b.s3.amazonaws.com/SinglePassenger.json</a></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -2230,8 +2230,8 @@ field, and click the blue<strong>Next</strong> button when ready.</p>
 <li>Provide a stack name. Your stack name start exactly with your TeamName (case
    sensitive). Following your stack name you should provide your name and maybe
    the purpose of the stack, e.g. <code>demo-bboe-4apps</code>, and <code>demo-bboe-tsung</code>.</li>
-<li>Select the application server EC2 instance type. For now use only <code>t1.micro</code>
-   until that option disappears then use <code>t2.micro</code>.</li>
+<li>Select the application server EC2 instance type. Please use <code>t2.micro</code> for
+   deployment testing. You will use larger instances when load testing.</li>
 <li>Specify the git branch of your application server to deploy.</li>
 <li>Select your team name.</li>
 </ol>
