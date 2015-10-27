@@ -59,12 +59,12 @@ by Cardellini, Colajanni, and Yu.
 * Database Concurrency Control
 * Query Analysis
 
-#### October 27, 2015
-* RDBMSes and Sharding
-* Service Oriented Architectures and Read Slaves
+#### October 27, 2015 ([slides](/slides/10_tsung.html))
+* Load testing with Tsung
 
 #### October 29, 2015
-* Load testing with Tsung
+* RDBMSes and Sharding
+* Service Oriented Architectures and Read Slaves
 
 __TODO__:
 
