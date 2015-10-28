@@ -60,30 +60,30 @@ All sprints end and begin with each week's lab session.
 * Conduct a retrospective on how the last sprint went and how you can improve.
 * Decide on a sprint commitment.
 * Implement stories from the current sprint.
-* Deploy a tsung instance on EC2.
-* Write an initial tsung xml file to load test a simple action on your
-  application.
-* Load test your application with tsung running on a micro instance.
 
 #### Sprint 4: October 29, 2015 -- November 5, 2015
 * Conduct a retrospective on how the last sprint went and how you can improve.
 * Decide on a sprint commitment.
 * Implement stories from the current sprint.
+* Deploy a tsung instance on EC2.
+* Write an initial tsung xml file to load test a simple action on your
+  application.
 * Define the "critical path" through your application (the set of pages that a
   common user will go through).
 * Write a tsung xml file to exercise this critical path.
-* Test (and document) the effects of vertical scaling on your application with
-  the new critical path xml file.
-* Create a medium--large dataset (~10,000 records) using database seeds.
-* Perform the vertical scaling tests against your dataset.
+* Load test your application with tsung running on a m3.medium instance.
+* Produce an initial set of graphs with your application's performance.
 
 #### Sprint 5: November 5, 2015 -- November 19, 2015
 * Conduct a retrospective on how the last sprint went and how you can improve.
 * Decide on a sprint commitment.
 * Implement stories from the current sprint. Your application should be mostly
   feature complete at this time and subsequent work should focus on polish.
-* Deploy your application on a variety of load-balanced configurations, with
-  the medium--large dataset.
+* Create a medium--large dataset (~10,000 records) using database seeds.
+* Test (and document) the effects of vertical scaling on your application with
+  the critical path xml file.
+* Deploy and test your application on a variety of load-balanced
+  configurations, with the medium--large dataset.
 * Test using Tsung, measure, and document.
 
 #### Sprint 6: November 19, 2015 -- November 26, 2015
@@ -96,16 +96,15 @@ All sprints end and begin with each week's lab session.
   database. If necessary, write custom sql to optimize.
 * Deploy your data-related optimizations on a simple load-balanced
   configuration, with the medium--large dataset.
-* Test using Tsung, measure, and document.
+  * Test using Tsung, measure, and document.
 
 #### Sprint 7: November 26, 2015 -- December 3, 2015 (No lab on the 26th)
 * Conduct a retrospective on how the last sprint went and how you can improve.
 * Create a large dataset (more than 100,000 records).
-* Implement server-side caching.
+* Implement server-side caching (if you haven't already)
 * Deploy your caching optimizations on a simple load-balanced configuration,
   with the large dataset, both with and without memcache.
 * Test using Tsung, measure, and document.
-
 
 #### Sprint 8: December 3, 2015 -- December 10, 2015
 * Conduct a retrospective on how the last sprint went and how you can improve.
