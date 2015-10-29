@@ -89,7 +89,7 @@
             </aside>
             
             <aside class="page_number">
-              1/27
+              1/36
             </aside>
           </footer>
         </div>
@@ -126,7 +126,7 @@ exist.</p>
             </aside>
             
             <aside class="page_number">
-              2/27
+              2/36
             </aside>
           </footer>
         </div>
@@ -159,7 +159,7 @@ exist.</p>
             </aside>
             
             <aside class="page_number">
-              3/27
+              3/36
             </aside>
           </footer>
         </div>
@@ -181,7 +181,7 @@ exist.</p>
 <h2>In Lab</h2>
 <ul>
 <li>Deploy a Tsung instance on EC2</li>
-<li>Write an initial tsung xml file to load test a simple action on your
+<li>Write an initial Tsung xml file to load test a simple action on your
   application</li>
 </ul></section>
             
@@ -199,7 +199,7 @@ exist.</p>
             </aside>
             
             <aside class="page_number">
-              4/27
+              4/36
             </aside>
           </footer>
         </div>
@@ -232,7 +232,7 @@ follow-along.</p></section>
             </aside>
             
             <aside class="page_number">
-              5/27
+              5/36
             </aside>
           </footer>
         </div>
@@ -266,7 +266,7 @@ follow-along.</p></section>
             </aside>
             
             <aside class="page_number">
-              6/27
+              6/36
             </aside>
           </footer>
         </div>
@@ -307,7 +307,7 @@ making our changes.</p>
             </aside>
             
             <aside class="page_number">
-              7/27
+              7/36
             </aside>
           </footer>
         </div>
@@ -324,7 +324,7 @@ making our changes.</p>
             <section><p>Ideally <em>real</em> users would be used to compare an application's
 performance.</p>
 <p>Short of that, we want to create load-test flows that resemble
-real trafic. There are a few things to consider:</p>
+real traffic. There are a few things to consider:</p>
 <ul>
 <li>Ensuring flows contain a mixture of reads and writes</li>
 <li>Ensuring variance within the flows themselves (not all users have the same
@@ -350,7 +350,7 @@ requests (e.g., create a submission and make a comment on it)</li>
             </aside>
             
             <aside class="page_number">
-              8/27
+              8/36
             </aside>
           </footer>
         </div>
@@ -396,7 +396,7 @@ high performance. Today I will show you how to use it.</p></section>
             </aside>
             
             <aside class="page_number">
-              9/27
+              9/36
             </aside>
           </footer>
         </div>
@@ -441,7 +441,7 @@ decreases the performance of the instance.</p></section>
             </aside>
             
             <aside class="page_number">
-              10/27
+              10/36
             </aside>
           </footer>
         </div>
@@ -455,12 +455,12 @@ decreases the performance of the instance.</p></section>
             <header><h1>Testing EC2 instances from EC2</h1></header>
             
             
-            <section><p>We are going to launch the test instances in the same datacenter as our
+            <section><p>We are going to launch the test instances in the same data center as our
 stack. This decision provides us with:</p>
 <ul>
-<li>Lower cost: AWS charges for bandwidth outside of the datacenter)</li>
-<li>Predicitability: fewer moving parts between the test instance and the stack</li>
-<li>Less representative testing: none of our real users will be in the datacenter</li>
+<li>Lower cost: AWS charges for bandwidth outside of the data center)</li>
+<li>Predictability: fewer moving parts between the test instance and the stack</li>
+<li>Less representative testing: none of our real users will be in the data center</li>
 </ul>
 <p>The first two points are positive. The third point could be a concern, but
 since we are essentially using these sort of tests for comparison between code
@@ -480,7 +480,7 @@ changes, we're less concerned with being completely representative.</p></section
             </aside>
             
             <aside class="page_number">
-              11/27
+              11/36
             </aside>
           </footer>
         </div>
@@ -494,7 +494,7 @@ changes, we're less concerned with being completely representative.</p></section
             <header><h1>Launching a Tsung Stack</h1></header>
             
             
-            <section><p>Use the normal proceedure:</p>
+            <section><p>Use the normal procedure:</p>
 <ul>
 <li>The stack name must be prefixed with your team name</li>
 <li>Use the <code>m3.medium</code> instance type unless you have a specific reason to use
@@ -516,7 +516,7 @@ changes, we're less concerned with being completely representative.</p></section
             </aside>
             
             <aside class="page_number">
-              12/27
+              12/36
             </aside>
           </footer>
         </div>
@@ -530,7 +530,7 @@ changes, we're less concerned with being completely representative.</p></section
             <header><h1>Accessing the Tsung Instance</h1></header>
             
             
-            <section><p>When the stack launch complets, the <em>Outputs</em> tab will contain the SSH string
+            <section><p>When the stack launch completes, the <em>Outputs</em> tab will contain the SSH string
 and a URL.</p>
 <p><img alt="Tsung Outputs tab" src="img/tsung_outputs.png" /></p>
 <p>At first accessing the URL will result in an error. It will be useful once
@@ -551,7 +551,7 @@ Tsung is running.</p>
             </aside>
             
             <aside class="page_number">
-              13/27
+              13/36
             </aside>
           </footer>
         </div>
@@ -565,7 +565,7 @@ Tsung is running.</p>
             <header><h1>The Tsung Instance</h1></header>
             
             
-            <section><p>The home directory of the tsung instance contains one file:</p>
+            <section><p>The home directory of the Tsung instance contains one file:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span class="o">[</span>ec2-user@ip-10-140-200-96 ~<span class="o">]</span><span class="nv">$ </span>ls
 simple.xml
@@ -592,7 +592,7 @@ user each second to http://www.google.com.</p>
             </aside>
             
             <aside class="page_number">
-              14/27
+              14/36
             </aside>
           </footer>
         </div>
@@ -606,7 +606,7 @@ user each second to http://www.google.com.</p>
             <header><h1>Tsung Server</h1></header>
             
             
-            <section><p>While tsung runs (and continues to run after testing with the <code>-k</code> option) it
+            <section><p>While Tsung runs (and continues to run after testing with the <code>-k</code> option) it
 provides a simple web interface.</p>
 <p><img alt="Tsung Web Interface" src="img/tsung_interface.png" /></p></section>
             
@@ -624,7 +624,7 @@ provides a simple web interface.</p>
             </aside>
             
             <aside class="page_number">
-              15/27
+              15/36
             </aside>
           </footer>
         </div>
@@ -659,7 +659,7 @@ current run available via the web interface.</p></section>
             </aside>
             
             <aside class="page_number">
-              16/27
+              16/36
             </aside>
           </footer>
         </div>
@@ -676,7 +676,7 @@ current run available via the web interface.</p></section>
             <section><p>Aside from fetching files through the web interface. You may want to obtain all
 of the Tsung results.</p>
 <p>Assuming your SSH connect string is: <code>ssh -i demo.pem ec2-user@54.166.5.220</code>
-then the following command will synchronize all the tsung result files (from
+then the following command will synchronize all the Tsung result files (from
 all runs) to your local machine:</p>
 <pre><code>rsync -auve 'ssh -i demo.pem' ec2-user@54.166.5.220:.tsung/log/ .
 </code></pre>
@@ -697,7 +697,7 @@ run it from the same path). rsync is awesome!</p></section>
             </aside>
             
             <aside class="page_number">
-              17/27
+              17/36
             </aside>
           </footer>
         </div>
@@ -755,7 +755,7 @@ discussion please see Tsung's documentation:
             </aside>
             
             <aside class="page_number">
-              18/27
+              18/36
             </aside>
           </footer>
         </div>
@@ -794,7 +794,7 @@ use multiple machines as part of a single test, you probably won't need to.</p><
             </aside>
             
             <aside class="page_number">
-              19/27
+              19/36
             </aside>
           </footer>
         </div>
@@ -834,7 +834,7 @@ IP/domain.</p></section>
             </aside>
             
             <aside class="page_number">
-              20/27
+              20/36
             </aside>
           </footer>
         </div>
@@ -886,7 +886,7 @@ second.</p>
             </aside>
             
             <aside class="page_number">
-              21/27
+              21/36
             </aside>
           </footer>
         </div>
@@ -935,7 +935,7 @@ you probably will not need to modify these options.</p></section>
             </aside>
             
             <aside class="page_number">
-              22/27
+              22/36
             </aside>
           </footer>
         </div>
@@ -992,7 +992,7 @@ to the probabilities.</p></section>
             </aside>
             
             <aside class="page_number">
-              23/27
+              23/36
             </aside>
           </footer>
         </div>
@@ -1030,7 +1030,7 @@ to the probabilities.</p></section>
             </aside>
             
             <aside class="page_number">
-              24/27
+              24/36
             </aside>
           </footer>
         </div>
@@ -1038,11 +1038,31 @@ to the probabilities.</p></section>
       
       <!-- slide source: 10_tsung.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-25">
+        <div class="slide has_code slide-25">
           <div class="inner">
             
-            <header><h1>Dynamic Variables</h1></header>
+            <header><h1>Obtaining Dynamic Variables</h1></header>
             
+            
+            <section><p>Reference: <a href="http://tsung.erlang-projects.org/user_manual/conf-advanced-features.html">http://tsung.erlang-projects.org/user_manual/conf-advanced-features.html</a></p>
+<p>Assume this HTML form:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;/create&quot;</span> <span class="na">method=</span><span class="s">&quot;POST&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;auth_token&quot;</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">value=</span><span class="s">&quot;gDTI=&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</pre></div>
+</td></tr></table>
+<p>The value <code>gDTI=</code> can be obtained from the response via:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="nt">&lt;request&gt;</span>
+  <span class="nt">&lt;dyn_variable</span> <span class="na">name=</span><span class="s">&quot;auth_token&quot;</span><span class="nt">&gt;&lt;/dyn_variable&gt;</span>
+  <span class="nt">&lt;http</span> <span class="na">url=</span><span class="s">&quot;/new&quot;</span> <span class="na">method=</span><span class="s">&quot;GET&quot;</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span><span class="nt">&gt;&lt;/http&gt;</span>
+<span class="nt">&lt;/request&gt;</span>
+</pre></div>
+</td></tr></table></section>
             
           </div>
           <div class="presenter_notes">
@@ -1058,7 +1078,7 @@ to the probabilities.</p></section>
             </aside>
             
             <aside class="page_number">
-              25/27
+              25/36
             </aside>
           </footer>
         </div>
@@ -1066,18 +1086,64 @@ to the probabilities.</p></section>
       
       <!-- slide source: 10_tsung.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-26">
+        <div class="slide has_code slide-26">
           <div class="inner">
             
-            <header><h1>Tsung Output</h1></header>
+            <header><h1>Using Dynamic Variables</h1></header>
             
             
-            <section><ul>
-<li><strong>request</strong>: Response time for each request</li>
-<li><strong>page</strong>: Response time for each set of requests (a page is a group of
-  requests not separated by a thinktime)</li>
-<li><strong>connect</strong>: The duration of the connection establishment</li>
-<li><strong>session</strong>: The duration of a user's session</li>
+            <section><p>We previously set a variable named <code>auth_token</code>. Let's use it.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span class="nt">&lt;request</span> <span class="na">subst=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;http</span> <span class="na">url=</span><span class="s">&quot;/create&quot;</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span>
+        <span class="na">contents=</span><span class="s">&quot;user=bboe&amp;amp;auth_token=%%_auth_token%%&quot;</span>
+        <span class="na">content_type=</span><span class="s">&quot;application/x-www-form-urlencoded&quot;</span> <span class="na">method=</span><span class="s">&quot;POST&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/http&gt;</span>
+<span class="nt">&lt;/request&gt;</span>
+</pre></div>
+</td></tr></table>
+<p>Substitution is done via <code>%%_VARIABLE_NAME%%</code>.</p>
+<p>In rails CSRF protection values are usually stored in a hidden field named
+<code>authenticity_token</code>.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              26/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-27">
+          <div class="inner">
+            
+            <header><h1>Other Dynamic Variables</h1></header>
+            
+            
+            <section><p>The above example shows how to extract a variable from a form field. They can
+also be extracted from:</p>
+<ul>
+<li>HTML using <a href="http://tsung.erlang-projects.org/user_manual/conf-advanced-features.html#xpath">XPath</a></li>
+<li>arbitrary text using <a href="http://tsung.erlang-projects.org/user_manual/conf-advanced-features.html#regexp">Regexp</a></li>
+<li>JSON via <a href="http://tsung.erlang-projects.org/user_manual/conf-advanced-features.html#jsonpath">JSONPath</a></li>
 </ul></section>
             
           </div>
@@ -1094,7 +1160,7 @@ to the probabilities.</p></section>
             </aside>
             
             <aside class="page_number">
-              26/27
+              27/36
             </aside>
           </footer>
         </div>
@@ -1102,23 +1168,168 @@ to the probabilities.</p></section>
       
       <!-- slide source: 10_tsung.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-27">
+        <div class="slide has_code slide-28">
           <div class="inner">
             
-            <header><h1>Tsung HTTP Return Code</h1></header>
+            <header><h1>Generating Random Variables</h1></header>
+            
+            
+            <section><p>Variables can be explicitly set via a few functions and occur anywhere in a
+<code>&lt;session&gt;</code>.
+(<a href="http://tsung.erlang-projects.org/user_manual/conf-advanced-features.html#set-dynvars">ref</a>)</p>
+<h2>Random Number as <code>rndint</code></h2>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="nt">&lt;setdynvars</span> <span class="na">sourcetype=</span><span class="s">&quot;random_number&quot;</span> <span class="na">start=</span><span class="s">&quot;3&quot;</span> <span class="na">end=</span><span class="s">&quot;32&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;var</span> <span class="na">name=</span><span class="s">&quot;rndint&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/setdynvars&gt;</span>
+</pre></div>
+</td></tr></table>
+<h2>Random String as <code>rndstring1</code></h2>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="nt">&lt;setdynvars</span> <span class="na">sourcetype=</span><span class="s">&quot;random_string&quot;</span> <span class="na">length=</span><span class="s">&quot;13&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;var</span> <span class="na">name=</span><span class="s">&quot;rndstring1&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/setdynvars&gt;</span>
+</pre></div>
+</td></tr></table>
+<p>For a more complete example please see:
+<a href="https://github.com/scalableinternetservices/demo/blob/master/load_tests/critical.xml">Demo App's load_tests/critical.xml</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              28/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-29">
+          <div class="inner">
+            
+            <header><h1>Understanding Tsung's Output</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              29/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-30">
+          <div class="inner">
+            
+            <header><h1>Tsung Output</h1></header>
+            
+            
+            <section><ul>
+<li><strong>connect</strong>: The duration of the connection establishment</li>
+<li><strong>page</strong>: Response time for each set of requests (a page is a group of
+  requests not separated by a thinktime)</li>
+<li><strong>request</strong>: Response time for each request</li>
+<li><strong>session</strong>: The duration of a user's session</li>
+</ul>
+<p><img alt="Tsung Statistics" src="img/tsung_statistics.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              30/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-31">
+          <div class="inner">
+            
+            <header><h1>Response Time Graph</h1></header>
+            
+            
+            <section><p><img alt="Tsung Response Time Graph" src="img/tsung_response_time.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              31/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-32">
+          <div class="inner">
+            
+            <header><h1>Tsung HTTP Return Codes</h1></header>
             
             
             <section><p>Inspect the HTTP return code section:</p>
 <ul>
-<li>200 and 300 status codes are good</li>
-<li>400 and 500 status codes can indicate problems:<ul>
+<li>2XX and 3XX status codes are good</li>
+<li>4XX and 5XX status codes can indicate problems:<ul>
 <li>Too many requests?</li>
 <li>Server-side bugs?</li>
 <li>Bug in testing code?</li>
 </ul>
 </li>
 </ul>
-<p>Ideally you shouldn't see any 400 and 500 status codes in your tests unless you
+<p>Ideally you shouldn't see any 4XX and 5XX status codes in your tests unless you
 are certain they are due to exceeding the load on your web server's stack.</p></section>
             
           </div>
@@ -1135,7 +1346,123 @@ are certain they are due to exceeding the load on your web server's stack.</p></
             </aside>
             
             <aside class="page_number">
-              27/27
+              32/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-33">
+          <div class="inner">
+            
+            <header><h1>Error Rate Graph</h1></header>
+            
+            
+            <section><p><img alt="Tsung Error Rate Graph" src="img/tsung_error_rate.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              33/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-34">
+          <div class="inner">
+            
+            <header><h1>Users Graph</h1></header>
+            
+            
+            <section><p><img alt="Tsung Users Graph" src="img/tsung_users.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              34/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-35">
+          <div class="inner">
+            
+            <header><h1>Reminder: Fetch your Tsung data as soon as it is available</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              35/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-36">
+          <div class="inner">
+            
+            <header><h1>To The Lab!</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              36/36
             </aside>
           </footer>
         </div>
@@ -1294,20 +1621,74 @@ are certain they are due to exceeding the load on your web server's stack.</p></
       
       
       <tr id="toc-row-25">
-        <th><a href="#slide25">Dynamic Variables</a></th>
+        <th><a href="#slide25">Obtaining Dynamic Variables</a></th>
         <td><a href="#slide25">25</a></td>
       </tr>
       
       
       <tr id="toc-row-26">
-        <th><a href="#slide26">Tsung Output</a></th>
+        <th><a href="#slide26">Using Dynamic Variables</a></th>
         <td><a href="#slide26">26</a></td>
       </tr>
       
       
       <tr id="toc-row-27">
-        <th><a href="#slide27">Tsung HTTP Return Code</a></th>
+        <th><a href="#slide27">Other Dynamic Variables</a></th>
         <td><a href="#slide27">27</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-28">
+        <th><a href="#slide28">Generating Random Variables</a></th>
+        <td><a href="#slide28">28</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-29">
+        <th><a href="#slide29">Understanding Tsung's Output</a></th>
+        <td><a href="#slide29">29</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-30">
+        <th><a href="#slide30">Tsung Output</a></th>
+        <td><a href="#slide30">30</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-31">
+        <th><a href="#slide31">Response Time Graph</a></th>
+        <td><a href="#slide31">31</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-32">
+        <th><a href="#slide32">Tsung HTTP Return Codes</a></th>
+        <td><a href="#slide32">32</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-33">
+        <th><a href="#slide33">Error Rate Graph</a></th>
+        <td><a href="#slide33">33</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-34">
+        <th><a href="#slide34">Users Graph</a></th>
+        <td><a href="#slide34">34</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-35">
+        <th><a href="#slide35">Reminder: Fetch your Tsung data as soon as it is available</a></th>
+        <td><a href="#slide35">35</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-36">
+        <th><a href="#slide36">To The Lab!</a></th>
+        <td><a href="#slide36">36</a></td>
       </tr>
       
       
