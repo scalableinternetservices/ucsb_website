@@ -89,7 +89,7 @@
             </aside>
             
             <aside class="page_number">
-              1/5
+              1/27
             </aside>
           </footer>
         </div>
@@ -98,6 +98,43 @@
       <!-- slide source: 10_tsung.md -->
       <div class="slide-wrapper">
         <div class="slide slide-2">
+          <div class="inner">
+            
+            <header><h1>Peer Evaluation</h1></header>
+            
+            
+            <section><p>Please discretely complete one of the peer evaluation forms and submit to me
+when completed. Today's score is <em>only</em> to show you where you stand relative to
+your teammates.</p>
+<p>After I have gone through the results, I will post a table of scores to piazza
+using a one-way hash function of your perm number to the score only. I will
+discuss with teams/individuals where potential grade-effecting discrepancies
+exist.</p>
+<p>We will do this again on November 17.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              2/27
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-3">
           <div class="inner">
             
             <header><h1>Today's Agenda</h1></header>
@@ -122,7 +159,7 @@
             </aside>
             
             <aside class="page_number">
-              2/5
+              3/27
             </aside>
           </footer>
         </div>
@@ -130,7 +167,7 @@
       
       <!-- slide source: 10_tsung.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-3">
+        <div class="slide slide-4">
           <div class="inner">
             
             <header><h1>TODO</h1></header>
@@ -140,6 +177,12 @@
 <li>Keep making excellent progress on your project.</li>
 <li>Periodically ensure you can successfully deploy your project to AWS.</li>
 <li>Start thinking about what you want to test and how you will go about it.</li>
+</ul>
+<h2>In Lab</h2>
+<ul>
+<li>Deploy a Tsung instance on EC2</li>
+<li>Write an initial tsung xml file to load test a simple action on your
+  application</li>
 </ul></section>
             
           </div>
@@ -156,7 +199,7 @@
             </aside>
             
             <aside class="page_number">
-              3/5
+              4/27
             </aside>
           </footer>
         </div>
@@ -164,7 +207,7 @@
       
       <!-- slide source: 10_tsung.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-4">
+        <div class="slide slide-5">
           <div class="inner">
             
             <header><h1>Load Testing with Tsung</h1></header>
@@ -172,7 +215,7 @@
             
             <section><p>After today you will know how to evaluate the scalability of a deployed web
 application using Tsung.</p>
-<p>Today can be interactive, so if you've brought your laptop feel free to
+<p>Today will be interactive, so if you've brought your laptop feel free to
 follow-along.</p></section>
             
           </div>
@@ -189,7 +232,7 @@ follow-along.</p></section>
             </aside>
             
             <aside class="page_number">
-              4/5
+              5/27
             </aside>
           </footer>
         </div>
@@ -197,18 +240,57 @@ follow-along.</p></section>
       
       <!-- slide source: 10_tsung.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-5">
+        <div class="slide slide-6">
           <div class="inner">
             
-            <header><h1>Set Up</h1></header>
+            <header><h1>Load Testing Motivation</h1></header>
             
             
-            <section><p>We ideally want one single-instance stack, and one load testing instance per
-team.</p>
+            <section><p>Assume we are considering making a significant change to our web application.</p>
+<p>We suspect that this change will improve our scalability.</p>
+<blockquote>
+<p>How can we confirm our suspicion?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/27
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-7">
+          <div class="inner">
+            
+            <header><h1>Load Testing</h1></header>
+            
+            
+            <section><p>With load testing we can establish a baseline of expected performance of our
+application.</p>
+<p>We can then compare the results of previous load tests to those obtained after
+making our changes.</p>
+<blockquote>
+<p>What should we observe?</p>
+</blockquote>
 <ul>
-<li>If you can, sit near your team.</li>
-<li>Deploy one <code>SinglePassenger</code> stack on a <code>m3.medium</code> instance.</li>
-<li>Deploy one <code>Tsung</code> stack on a <code>m3.medium</code> instance.</li>
+<li>Response times</li>
+<li>Error rates</li>
+<li>Synthetic user success rate</li>
 </ul></section>
             
           </div>
@@ -225,7 +307,835 @@ team.</p>
             </aside>
             
             <aside class="page_number">
-              5/5
+              7/27
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-8">
+          <div class="inner">
+            
+            <header><h1>Modeling User Behavior</h1></header>
+            
+            
+            <section><p>Ideally <em>real</em> users would be used to compare an application's
+performance.</p>
+<p>Short of that, we want to create load-test flows that resemble
+real trafic. There are a few things to consider:</p>
+<ul>
+<li>Ensuring flows contain a mixture of reads and writes</li>
+<li>Ensuring variance within the flows themselves (not all users have the same
+  habits)</li>
+<li>The test framework should be able to utilize data returned from prior
+requests (e.g., create a submission and make a comment on it)</li>
+</ul>
+<blockquote>
+<p>Why are these considerations important?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/27
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-9">
+          <div class="inner">
+            
+            <header><h1>Load Testing Tools</h1></header>
+            
+            
+            <section><h2>High Performance Tools</h2>
+<ul>
+<li>apachebench (ab)</li>
+<li>httperf</li>
+<li>Tsung</li>
+</ul>
+<h2>Feature-rich Tools</h2>
+<ul>
+<li>Funkload</li>
+<li>Tsung</li>
+</ul>
+<h2>Others</h2>
+<ul>
+<li>Bees with Machine Guns</li>
+</ul>
+<p>Tsung is a good combination of the as it is extremely configurable and delivers
+high performance. Today I will show you how to use it.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/27
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-10">
+          <div class="inner">
+            
+            <header><h1>Set Up</h1></header>
+            
+            
+            <section><p>We ideally want one single-instance stack, and one load testing instance per
+team.</p>
+<ul>
+<li>If you can, sit near your team.</li>
+<li>Deploy one <code>SinglePassenger</code> stack on a <code>m3.medium</code> instance.<ul>
+<li><a href="https://cs290b.s3.amazonaws.com/SinglePassenger.json">https://cs290b.s3.amazonaws.com/SinglePassenger.json</a></li>
+</ul>
+</li>
+<li>Deploy one <code>Tsung</code> stack on a <code>m3.medium</code> instance.<ul>
+<li><a href="https://cs290b.s3.amazonaws.com/Tsung.json">https://cs290b.s3.amazonaws.com/Tsung.json</a></li>
+</ul>
+</li>
+</ul>
+<p><strong>Note</strong>: <code>t2.micro</code> instances shouldn't be used for either end of
+testing. These instances have a CPU quota, which when exceeded drastically
+decreases the performance of the instance.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/27
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-11">
+          <div class="inner">
+            
+            <header><h1>Testing EC2 instances from EC2</h1></header>
+            
+            
+            <section><p>We are going to launch the test instances in the same datacenter as our
+stack. This decision provides us with:</p>
+<ul>
+<li>Lower cost: AWS charges for bandwidth outside of the datacenter)</li>
+<li>Predicitability: fewer moving parts between the test instance and the stack</li>
+<li>Less representative testing: none of our real users will be in the datacenter</li>
+</ul>
+<p>The first two points are positive. The third point could be a concern, but
+since we are essentially using these sort of tests for comparison between code
+changes, we're less concerned with being completely representative.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/27
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-12">
+          <div class="inner">
+            
+            <header><h1>Launching a Tsung Stack</h1></header>
+            
+            
+            <section><p>Use the normal proceedure:</p>
+<ul>
+<li>The stack name must be prefixed with your team name</li>
+<li>Use the <code>m3.medium</code> instance type unless you have a specific reason to use
+  the larger types</li>
+<li>Select your team name</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/27
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-13">
+          <div class="inner">
+            
+            <header><h1>Accessing the Tsung Instance</h1></header>
+            
+            
+            <section><p>When the stack launch complets, the <em>Outputs</em> tab will contain the SSH string
+and a URL.</p>
+<p><img alt="Tsung Outputs tab" src="img/tsung_outputs.png" /></p>
+<p>At first accessing the URL will result in an error. It will be useful once
+Tsung is running.</p>
+<p>Use the SSH string to SSH into the Tsung instance.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/27
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-14">
+          <div class="inner">
+            
+            <header><h1>The Tsung Instance</h1></header>
+            
+            
+            <section><p>The home directory of the tsung instance contains one file:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="o">[</span>ec2-user@ip-10-140-200-96 ~<span class="o">]</span><span class="nv">$ </span>ls
+simple.xml
+</pre></div>
+</td></tr></table>
+<p><code>simple.xml</code> is a sample Tsung load-test configuration file that establishes 1
+user each second to http://www.google.com.</p>
+<p>Run this Tsung test via:</p>
+<pre><code>tsung -f simple.xml -k start
+</code></pre>
+<p>One Tsung starts, visit the URL listed in the outputs.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/27
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-15">
+          <div class="inner">
+            
+            <header><h1>Tsung Server</h1></header>
+            
+            
+            <section><p>While tsung runs (and continues to run after testing with the <code>-k</code> option) it
+provides a simple web interface.</p>
+<p><img alt="Tsung Web Interface" src="img/tsung_interface.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/27
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-16">
+          <div class="inner">
+            
+            <header><h1>Tsung Interface</h1></header>
+            
+            
+            <section><p>Out of the box, Tsung generates a report <code>/report.html</code>, and a handful of
+graphs <code>/graphs.html</code>.</p>
+<p>Additional graphs can be viewed directly at <code>/images/</code>.</p>
+<p>The server, and web-based access to these files ceases to be accessible once
+the Tsung process is stopped. Restarting Tsung only makes the graphs from the
+current run available via the web interface.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              16/27
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-17">
+          <div class="inner">
+            
+            <header><h1>Fetching Tsung results</h1></header>
+            
+            
+            <section><p>Aside from fetching files through the web interface. You may want to obtain all
+of the Tsung results.</p>
+<p>Assuming your SSH connect string is: <code>ssh -i demo.pem ec2-user@54.166.5.220</code>
+then the following command will synchronize all the tsung result files (from
+all runs) to your local machine:</p>
+<pre><code>rsync -auve 'ssh -i demo.pem' ec2-user@54.166.5.220:.tsung/log/ .
+</code></pre>
+<p>Running that command a second time will only fetch any new files (assuming you
+run it from the same path). rsync is awesome!</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              17/27
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-18">
+          <div class="inner">
+            
+            <header><h1>The Tsung XML File</h1></header>
+            
+            
+            <section><p>We will discuss some of the parts of the Tsung XML file. For a more complete
+discussion please see Tsung's documentation:
+<a href="http://tsung.erlang-projects.org/user_manual/configuration.html">http://tsung.erlang-projects.org/user_manual/configuration.html</a></p>
+<h1>Tsung File Structure</h1>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="cp">&lt;!DOCTYPE tsung SYSTEM &quot;/usr/share/tsung/tsung-1.0.dtd&quot;&gt;</span>
+<span class="nt">&lt;tsung</span> <span class="na">loglevel=</span><span class="s">&quot;notice&quot;</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
+
+  <span class="nt">&lt;clients&gt;</span>...<span class="nt">&lt;/clients&gt;</span>
+  <span class="nt">&lt;servers&gt;</span>...<span class="nt">&lt;/servers&gt;</span>
+  <span class="nt">&lt;load&gt;</span>...<span class="nt">&lt;/load&gt;</span>
+  <span class="nt">&lt;options&gt;</span>...<span class="nt">&lt;/options&gt;</span>
+  <span class="nt">&lt;sessions&gt;</span>...<span class="nt">&lt;/sessions&gt;</span>
+  ...
+
+<span class="nt">&lt;/tsung&gt;</span>
+</pre></div>
+</td></tr></table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              18/27
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-19">
+          <div class="inner">
+            
+            <header><h1>Tsung Clients Section</h1></header>
+            
+            
+            <section><p>Reference: <a href="http://tsung.erlang-projects.org/user_manual/conf-client-server.html">http://tsung.erlang-projects.org/user_manual/conf-client-server.html</a></p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="nt">&lt;clients&gt;</span>
+  <span class="nt">&lt;client</span> <span class="na">host=</span><span class="s">&quot;localhost&quot;</span> <span class="na">use_controller_vm=</span><span class="s">&quot;true&quot;</span> <span class="na">maxusers=</span><span class="s">&#39;30000&#39;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/clients&gt;</span>
+</pre></div>
+</td></tr></table>
+<p>The clients section specifies the clients to generate load from. While you can
+use multiple machines as part of a single test, you probably won't need to.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              19/27
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-20">
+          <div class="inner">
+            
+            <header><h1>Tsung Servers Section</h1></header>
+            
+            
+            <section><p>Reference: <a href="http://tsung.erlang-projects.org/user_manual/conf-client-server.html">http://tsung.erlang-projects.org/user_manual/conf-client-server.html</a></p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="nt">&lt;servers&gt;</span>
+  <span class="nt">&lt;server</span> <span class="na">host=</span><span class="s">&quot;www.google.com&quot;</span> <span class="na">port=</span><span class="s">&quot;80&quot;</span> <span class="na">type=</span><span class="s">&quot;tcp&quot;</span><span class="nt">&gt;&lt;/server&gt;</span>
+<span class="nt">&lt;/servers&gt;</span>
+</pre></div>
+</td></tr></table>
+<p>The servers section specifies where you intend to connect to. For your tests
+you will always want to modify the <code>host</code> value to match your stack's
+IP/domain.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              20/27
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-21">
+          <div class="inner">
+            
+            <header><h1>Tsung Load Section</h1></header>
+            
+            
+            <section><p>Reference: <a href="http://tsung.erlang-projects.org/user_manual/conf-load.html">http://tsung.erlang-projects.org/user_manual/conf-load.html</a></p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span class="nt">&lt;load&gt;</span>
+  <span class="nt">&lt;arrivalphase</span> <span class="na">phase=</span><span class="s">&quot;1&quot;</span> <span class="na">duration=</span><span class="s">&quot;60&quot;</span> <span class="na">unit=</span><span class="s">&quot;second&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;users</span> <span class="na">arrivalrate=</span><span class="s">&quot;2&quot;</span> <span class="na">unit=</span><span class="s">&quot;second&quot;</span><span class="nt">&gt;&lt;/users&gt;</span>
+  <span class="nt">&lt;/arrivalphase&gt;</span>
+  <span class="nt">&lt;arrivalphase</span> <span class="na">phase=</span><span class="s">&quot;2&quot;</span> <span class="na">duration=</span><span class="s">&quot;1&quot;</span> <span class="na">unit=</span><span class="s">&quot;minute&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;users</span> <span class="na">interarrival=</span><span class="s">&quot;2&quot;</span> <span class="na">unit=</span><span class="s">&quot;second&quot;</span><span class="nt">&gt;&lt;/users&gt;</span>
+  <span class="nt">&lt;/arrivalphase&gt;</span>
+<span class="nt">&lt;/load&gt;</span>
+</pre></div>
+</td></tr></table>
+<p>Here we describe two phases.</p>
+<p>The first phase lasts 60 seconds where 2 new users arrive (<code>arrivalrate</code>) each
+second.</p>
+<p>The second phase also lasts 60 seconds. Here 1 new user arrives
+(<code>interarrival</code>) every two seconds.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              21/27
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-22">
+          <div class="inner">
+            
+            <header><h1>Tsung Options Section</h1></header>
+            
+            
+            <section><p>Reference: <a href="http://tsung.erlang-projects.org/user_manual/conf-options.html">http://tsung.erlang-projects.org/user_manual/conf-options.html</a></p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span class="nt">&lt;options&gt;</span>
+  <span class="c">&lt;!-- Set connection timeout to 2 seconds --&gt;</span>
+  <span class="nt">&lt;option</span> <span class="na">name=</span><span class="s">&quot;global_ack_timeout&quot;</span> <span class="na">value=</span><span class="s">&quot;2000&quot;</span><span class="nt">&gt;&lt;/option&gt;</span>
+
+  <span class="nt">&lt;option</span> <span class="na">type=</span><span class="s">&quot;ts_http&quot;</span> <span class="na">name=</span><span class="s">&quot;user_agent&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;user_agent</span> <span class="na">probability=</span><span class="s">&quot;100&quot;</span><span class="nt">&gt;</span>Mozilla/5.0 ...<span class="nt">&lt;/user_agent&gt;</span>
+  <span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/options&gt;</span>
+</pre></div>
+</td></tr></table>
+<p>Unless you do something special with the user-agent in your web application,
+you probably will not need to modify these options.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              22/27
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-23">
+          <div class="inner">
+            
+            <header><h1>Tsung Sessions Section</h1></header>
+            
+            
+            <section><p>Reference: <a href="http://tsung.erlang-projects.org/user_manual/conf-sessions.html">http://tsung.erlang-projects.org/user_manual/conf-sessions.html</a></p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span class="nt">&lt;sessions&gt;</span>
+  <span class="nt">&lt;session</span> <span class="na">name=</span><span class="s">&quot;http-example&quot;</span> <span class="na">probability=</span><span class="s">&quot;100&quot;</span> <span class="na">type=</span><span class="s">&quot;ts_http&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;request&gt;</span>
+      <span class="nt">&lt;http</span> <span class="na">url=</span><span class="s">&#39;/&#39;</span> <span class="na">version=</span><span class="s">&#39;1.1&#39;</span> <span class="na">method=</span><span class="s">&#39;GET&#39;</span><span class="nt">&gt;&lt;/http&gt;</span>
+    <span class="nt">&lt;/request&gt;</span>
+    <span class="nt">&lt;thinktime</span> <span class="na">value=</span><span class="s">&quot;2&quot;</span> <span class="na">random=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;&lt;/thinktime&gt;</span>
+    <span class="nt">&lt;request&gt;</span>
+      <span class="nt">&lt;http</span> <span class="na">url=</span><span class="s">&#39;/login&#39;</span> <span class="na">version=</span><span class="s">&#39;1.1&#39;</span> <span class="na">method=</span><span class="s">&#39;POST&#39;</span>
+            <span class="na">contents=</span><span class="s">&quot;user=foo&quot;</span><span class="nt">&gt;&lt;/http&gt;</span>
+    <span class="nt">&lt;/request&gt;</span>
+  <span class="nt">&lt;/session&gt;</span>
+<span class="nt">&lt;/sessions&gt;</span>
+</pre></div>
+</td></tr></table>
+<p>You can define multiple sessions and for each user one will be chosen according
+to the probabilities.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              23/27
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-24">
+          <div class="inner">
+            
+            <header><h1>Load Testing Your Server</h1></header>
+            
+            
+            <section><ul>
+<li>Modify the <code>server</code> tag's <code>host</code> section to point to your web application
+  URL/IP.</li>
+<li>Add a <code>request</code> tag for each resource fetched when you load your
+  application's home page.</li>
+<li>Group requests to discrete <em>pages</em> in <code>&lt;transaction&gt;</code> if you want statistics
+  on the individual pages (don't include <code>&lt;thinktime&gt;</code> inside a transaction
+  section.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              24/27
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-25">
+          <div class="inner">
+            
+            <header><h1>Dynamic Variables</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              25/27
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-26">
+          <div class="inner">
+            
+            <header><h1>Tsung Output</h1></header>
+            
+            
+            <section><ul>
+<li><strong>request</strong>: Response time for each request</li>
+<li><strong>page</strong>: Response time for each set of requests (a page is a group of
+  requests not separated by a thinktime)</li>
+<li><strong>connect</strong>: The duration of the connection establishment</li>
+<li><strong>session</strong>: The duration of a user's session</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              26/27
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 10_tsung.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-27">
+          <div class="inner">
+            
+            <header><h1>Tsung HTTP Return Code</h1></header>
+            
+            
+            <section><p>Inspect the HTTP return code section:</p>
+<ul>
+<li>200 and 300 status codes are good</li>
+<li>400 and 500 status codes can indicate problems:<ul>
+<li>Too many requests?</li>
+<li>Server-side bugs?</li>
+<li>Bug in testing code?</li>
+</ul>
+</li>
+</ul>
+<p>Ideally you shouldn't see any 400 and 500 status codes in your tests unless you
+are certain they are due to exceeding the load on your web server's stack.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="10_tsung.md">10_tsung.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              27/27
             </aside>
           </footer>
         </div>
@@ -246,26 +1156,158 @@ team.</p>
       
       
       <tr id="toc-row-2">
-        <th><a href="#slide2">Today's Agenda</a></th>
+        <th><a href="#slide2">Peer Evaluation</a></th>
         <td><a href="#slide2">2</a></td>
       </tr>
       
       
       <tr id="toc-row-3">
-        <th><a href="#slide3">TODO</a></th>
+        <th><a href="#slide3">Today's Agenda</a></th>
         <td><a href="#slide3">3</a></td>
       </tr>
       
       
       <tr id="toc-row-4">
-        <th><a href="#slide4">Load Testing with Tsung</a></th>
+        <th><a href="#slide4">TODO</a></th>
         <td><a href="#slide4">4</a></td>
       </tr>
       
       
       <tr id="toc-row-5">
-        <th><a href="#slide5">Set Up</a></th>
+        <th><a href="#slide5">Load Testing with Tsung</a></th>
         <td><a href="#slide5">5</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-6">
+        <th><a href="#slide6">Load Testing Motivation</a></th>
+        <td><a href="#slide6">6</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-7">
+        <th><a href="#slide7">Load Testing</a></th>
+        <td><a href="#slide7">7</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-8">
+        <th><a href="#slide8">Modeling User Behavior</a></th>
+        <td><a href="#slide8">8</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-9">
+        <th><a href="#slide9">Load Testing Tools</a></th>
+        <td><a href="#slide9">9</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-10">
+        <th><a href="#slide10">Set Up</a></th>
+        <td><a href="#slide10">10</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-11">
+        <th><a href="#slide11">Testing EC2 instances from EC2</a></th>
+        <td><a href="#slide11">11</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-12">
+        <th><a href="#slide12">Launching a Tsung Stack</a></th>
+        <td><a href="#slide12">12</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-13">
+        <th><a href="#slide13">Accessing the Tsung Instance</a></th>
+        <td><a href="#slide13">13</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-14">
+        <th><a href="#slide14">The Tsung Instance</a></th>
+        <td><a href="#slide14">14</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-15">
+        <th><a href="#slide15">Tsung Server</a></th>
+        <td><a href="#slide15">15</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-16">
+        <th><a href="#slide16">Tsung Interface</a></th>
+        <td><a href="#slide16">16</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-17">
+        <th><a href="#slide17">Fetching Tsung results</a></th>
+        <td><a href="#slide17">17</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-18">
+        <th><a href="#slide18">The Tsung XML File</a></th>
+        <td><a href="#slide18">18</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-19">
+        <th><a href="#slide19">Tsung Clients Section</a></th>
+        <td><a href="#slide19">19</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-20">
+        <th><a href="#slide20">Tsung Servers Section</a></th>
+        <td><a href="#slide20">20</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-21">
+        <th><a href="#slide21">Tsung Load Section</a></th>
+        <td><a href="#slide21">21</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-22">
+        <th><a href="#slide22">Tsung Options Section</a></th>
+        <td><a href="#slide22">22</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-23">
+        <th><a href="#slide23">Tsung Sessions Section</a></th>
+        <td><a href="#slide23">23</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-24">
+        <th><a href="#slide24">Load Testing Your Server</a></th>
+        <td><a href="#slide24">24</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-25">
+        <th><a href="#slide25">Dynamic Variables</a></th>
+        <td><a href="#slide25">25</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-26">
+        <th><a href="#slide26">Tsung Output</a></th>
+        <td><a href="#slide26">26</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-27">
+        <th><a href="#slide27">Tsung HTTP Return Code</a></th>
+        <td><a href="#slide27">27</a></td>
       </tr>
       
       
