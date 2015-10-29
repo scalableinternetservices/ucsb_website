@@ -40,7 +40,7 @@ We will do this again on November 17.
 ## In Lab
 
 * Deploy a Tsung instance on EC2
-* Write an initial tsung xml file to load test a simple action on your
+* Write an initial Tsung xml file to load test a simple action on your
   application
 
 ---
@@ -87,7 +87,7 @@ Ideally _real_ users would be used to compare an application's
 performance.
 
 Short of that, we want to create load-test flows that resemble
-real trafic. There are a few things to consider:
+real traffic. There are a few things to consider:
 
 * Ensuring flows contain a mixture of reads and writes
 * Ensuring variance within the flows themselves (not all users have the same
@@ -141,12 +141,12 @@ decreases the performance of the instance.
 
 # Testing EC2 instances from EC2
 
-We are going to launch the test instances in the same datacenter as our
+We are going to launch the test instances in the same data center as our
 stack. This decision provides us with:
 
-* Lower cost: AWS charges for bandwidth outside of the datacenter)
-* Predicitability: fewer moving parts between the test instance and the stack
-* Less representative testing: none of our real users will be in the datacenter
+* Lower cost: AWS charges for bandwidth outside of the data center)
+* Predictability: fewer moving parts between the test instance and the stack
+* Less representative testing: none of our real users will be in the data center
 
 The first two points are positive. The third point could be a concern, but
 since we are essentially using these sort of tests for comparison between code
@@ -156,7 +156,7 @@ changes, we're less concerned with being completely representative.
 
 # Launching a Tsung Stack
 
-Use the normal proceedure:
+Use the normal procedure:
 
 * The stack name must be prefixed with your team name
 * Use the `m3.medium` instance type unless you have a specific reason to use
@@ -167,7 +167,7 @@ Use the normal proceedure:
 
 # Accessing the Tsung Instance
 
-When the stack launch complets, the _Outputs_ tab will contain the SSH string
+When the stack launch completes, the _Outputs_ tab will contain the SSH string
 and a URL.
 
 ![Tsung Outputs tab](img/tsung_outputs.png)
@@ -181,7 +181,7 @@ Use the SSH string to SSH into the Tsung instance.
 
 # The Tsung Instance
 
-The home directory of the tsung instance contains one file:
+The home directory of the Tsung instance contains one file:
 
     !sh
     [ec2-user@ip-10-140-200-96 ~]$ ls
@@ -200,7 +200,7 @@ One Tsung starts, visit the URL listed in the outputs.
 
 # Tsung Server
 
-While tsung runs (and continues to run after testing with the `-k` option) it
+While Tsung runs (and continues to run after testing with the `-k` option) it
 provides a simple web interface.
 
 ![Tsung Web Interface](img/tsung_interface.png)
@@ -226,7 +226,7 @@ Aside from fetching files through the web interface. You may want to obtain all
 of the Tsung results.
 
 Assuming your SSH connect string is: `ssh -i demo.pem ec2-user@54.166.5.220`
-then the following command will synchronize all the tsung result files (from
+then the following command will synchronize all the Tsung result files (from
 all runs) to your local machine:
 
     rsync -auve 'ssh -i demo.pem' ec2-user@54.166.5.220:.tsung/log/ .
@@ -367,29 +367,134 @@ to the probabilities.
 
 ---
 
-# Dynamic Variables
+# Obtaining Dynamic Variables
+
+Reference: [http://tsung.erlang-projects.org/user_manual/conf-advanced-features.html](http://tsung.erlang-projects.org/user_manual/conf-advanced-features.html)
+
+Assume this HTML form:
+
+    !html
+    <form action="/create" method="POST">
+      <input name="auth_token" type="hidden" value="gDTI=" />
+    </form>
+
+The value `gDTI=` can be obtained from the response via:
+
+    !xml
+    <request>
+      <dyn_variable name="auth_token"></dyn_variable>
+      <http url="/new" method="GET" version="1.1"></http>
+    </request>
+
+---
+
+# Using Dynamic Variables
+
+We previously set a variable named `auth_token`. Let's use it.
+
+    !xml
+    <request subst="true">
+      <http url="/create" version="1.1"
+            contents="user=bboe&amp;auth_token=%%_auth_token%%"
+            content_type="application/x-www-form-urlencoded" method="POST">
+      </http>
+    </request>
+
+Substitution is done via `%%_VARIABLE_NAME%%`.
+
+In rails CSRF protection values are usually stored in a hidden field named
+`authenticity_token`.
+
+---
+
+# Other Dynamic Variables
+
+The above example shows how to extract a variable from a form field. They can
+also be extracted from:
+
+* HTML using [XPath](http://tsung.erlang-projects.org/user_manual/conf-advanced-features.html#xpath)
+* arbitrary text using [Regexp](http://tsung.erlang-projects.org/user_manual/conf-advanced-features.html#regexp)
+* JSON via [JSONPath](http://tsung.erlang-projects.org/user_manual/conf-advanced-features.html#jsonpath)
+
+---
+
+# Generating Random Variables
+
+Variables can be explicitly set via a few functions and occur anywhere in a
+`<session>`.
+([ref](http://tsung.erlang-projects.org/user_manual/conf-advanced-features.html#set-dynvars))
+
+## Random Number as `rndint`
+
+    !xml
+    <setdynvars sourcetype="random_number" start="3" end="32">
+      <var name="rndint" />
+    </setdynvars>
+
+## Random String as `rndstring1`
+
+    !xml
+    <setdynvars sourcetype="random_string" length="13">
+      <var name="rndstring1" />
+    </setdynvars>
+
+
+For a more complete example please see:
+[Demo App's load_tests/critical.xml](https://github.com/scalableinternetservices/demo/blob/master/load_tests/critical.xml)
+
+---
+
+# Understanding Tsung's Output
 
 ---
 
 # Tsung Output
 
-* __request__: Response time for each request
+* __connect__: The duration of the connection establishment
 * __page__: Response time for each set of requests (a page is a group of
   requests not separated by a thinktime)
-* __connect__: The duration of the connection establishment
+* __request__: Response time for each request
 * __session__: The duration of a user's session
+
+![Tsung Statistics](img/tsung_statistics.png)
 
 ---
 
-# Tsung HTTP Return Code
+# Response Time Graph
+
+![Tsung Response Time Graph](img/tsung_response_time.png)
+
+---
+
+# Tsung HTTP Return Codes
 
 Inspect the HTTP return code section:
 
-* 200 and 300 status codes are good
-* 400 and 500 status codes can indicate problems:
+* 2XX and 3XX status codes are good
+* 4XX and 5XX status codes can indicate problems:
     * Too many requests?
     * Server-side bugs?
     * Bug in testing code?
 
-Ideally you shouldn't see any 400 and 500 status codes in your tests unless you
+Ideally you shouldn't see any 4XX and 5XX status codes in your tests unless you
 are certain they are due to exceeding the load on your web server's stack.
+
+---
+
+# Error Rate Graph
+
+![Tsung Error Rate Graph](img/tsung_error_rate.png)
+
+---
+
+# Users Graph
+
+![Tsung Users Graph](img/tsung_users.png)
+
+---
+
+# Reminder: Fetch your Tsung data as soon as it is available
+
+---
+
+# To The Lab!
