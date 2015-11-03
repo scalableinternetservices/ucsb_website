@@ -124,7 +124,7 @@ machines and introducing a load balancer to access them.
 
 ---
 
-# Non-trivial DB Horizontal Scaing
+# Non-trivial DB Horizontal Scaling
 
  > Can we horizontally scale the database by adding more database servers and
  > accessing them through a load balancer?
@@ -148,7 +148,7 @@ scale.
 In a future lecture we will discuss scaling the data layer using non-relational
 databases (NoSQL).
 
-Today we will discuss in what ways we __can__ horiztonally scale a relational
+Today we will discuss in what ways we __can__ horizontally scale a relational
 database.
 
 ---
@@ -183,7 +183,7 @@ databases such that everything still works.
 # Sharding: Joins
 
 Any particular database join connects a small part of your database. However,
-trasitively, database joins could connect everything together.
+transitively, database joins could connect everything together.
 
 ## E.g. Demo App
 
@@ -207,7 +207,7 @@ Once separated (_sharded_), your application cannot utilize the database to
 join across them.
 
 If you need to perform operations across sharded data, you will need to do it
-at the application level. Consider the performance tradeoffs. Could you shard
+at the application level. Consider the performance trade-offs. Could you shard
 another way?
 
 ---
@@ -289,7 +289,7 @@ Such mappings are limited by knowledge that the database can inspect:
 
 ![Sharding Across Load Balancers](img/sharding_region.png)
 
-Hostnames (DNS) can be configured to point to the correct load balancer for a
+Host names (DNS) can be configured to point to the correct load balancer for a
 given request.
 
 Examples:
@@ -304,7 +304,7 @@ __Note__: The above examples could involve only a single load balancer.
 
 # Finding Data: Trade-offs
 
-The approaches we just described are vary from provding more flexibility to
+The approaches we just described are vary from providing more flexibility to
 providing more scalability.
 
 * App Server (most flexible)
@@ -375,7 +375,7 @@ submissions by their community is mostly clean.
 We can use information in the url with any of the three load balancing
 approaches.
 
-* http://ucsb.demo.com (community subdomain)
+* http://ucsb.demo.com (community sub-domain)
 * http://demo.com/ucsb (community path)
 
 Either the application server connects to the right database for the `ucsb`
@@ -414,7 +414,7 @@ that always talks to the `ucsb` containing database.
   exist.
     * Can you get by with only providing the list of communities?
 * Alternatively periodically run an expensive background job keep a
-  semi-up-to-date global submission list aggregating results from accross
+  semi-up-to-date global submission list aggregating results from across
   databases.
 
 ---
@@ -422,7 +422,7 @@ that always talks to the `ucsb` containing database.
 # Sharding in Rails
 
 Rails does not have built-in support for sharding. However, thanks to the
-opensource community, there exists a great Rails sharding gem Octopus:
+open-source community, there exists a great Rails sharding gem Octopus:
 
 [https://github.com/tchandy/octopus](https://github.com/tchandy/octopus)
 
@@ -453,7 +453,7 @@ The above sends all actions to the Brazil controller to the `:brazil` shard.
   perfectly shardable today, but future features may change that.
 * Not easy to retroactively add sharding to an existing application.
 * Transactions across shards do not exist.
-* Consistent DB snapshots accross shards do not exist.
+* Consistent DB snapshots across shards do not exist.
 
 ---
 
@@ -478,7 +478,7 @@ The primary concept behind SOA is having many focused mini-applications.
 
 Each of these focused mini-applications is called a service.
 
-When a front-end appplication server needs data to satify a request, instead of
+When a front-end application server needs data to satisfy a request, instead of
 speaking to a database, it will request data from the appropriate service.
 
 ---
@@ -621,7 +621,7 @@ Jeff Bezos (Amazon CEO) circa 2002 (according to Steve Yegge)
 1. All teams will henceforth expose their data and functionality through
    service interfaces.
 2. Teams must communicate with each other through these interfaces.
-3. There will be no other form of interprocess communication allowed: no direct
+3. There will be no other form of inter-process communication allowed: no direct
    linking, no direct reads of another team's data store, no shared-memory
    model, no back-doors whatsoever. The only communication allowed is via
    service interface calls over the network.
@@ -642,7 +642,7 @@ Archived Source: [https://plus.google.com/+RipRowan/posts/eVeouesvaVX](https://p
 
 ## Strengths
 
-* Small encapsulated codebases
+* Small encapsulated code-bases
 * Scales well as application size scales
 * Scales well as number of teams scale
 
@@ -651,7 +651,7 @@ Archived Source: [https://plus.google.com/+RipRowan/posts/eVeouesvaVX](https://p
 * May not scale with the number of users (e.g., increased load to
   authentication service)
 * Transactions across services do not exist
-* Consistent DB snapshots accross services do not exist
+* Consistent DB snapshots across services do not exist
 
 ---
 
@@ -670,7 +670,7 @@ for your application.
 
 ![Database Master Follower](img/database_master_follower.png)
 
-In general a realational database is hard to horizontally scale.
+In general a relational database is hard to horizontally scale.
 
 However, when limited to a read-only copies, databases are very easy to
 horizontally scale.
@@ -823,12 +823,12 @@ transaction as the write.
 
 ---
 
-# At Appfolio
+# At AppFolio
 
 ## High usage of sharding
 
 * Each customer's data is stored in separate logical database.
-* Those logical databases can be moved between distinct phyicsal database
+* Those logical databases can be moved between distinct physical database
   servers as needed.
 
 ## Medium use of SOA
