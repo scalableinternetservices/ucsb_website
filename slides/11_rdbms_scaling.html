@@ -243,7 +243,8 @@ popular and performance is degrading.</p>
 scaling vertically.</p>
 <blockquote>
 <p>What do you do?</p>
-</blockquote></section>
+</blockquote>
+<p><img alt="Vertical Scaling" src="img/vertical_scaling.png" /></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -279,7 +280,8 @@ application servers.</p>
 scaling of the application servers does not solve the problem.</p>
 <blockquote>
 <p>What do you do?</p>
-</blockquote></section>
+</blockquote>
+<p><img alt="Horizontal Scaling" src="img/load_balanced_topology.png" /></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -427,7 +429,8 @@ What do you do?</p>
 machines and introducing a load balancer to access them.</p>
 <blockquote>
 <p>Can we do the same with the database?</p>
-</blockquote></section>
+</blockquote>
+<p><img alt="Horizontal Database Idea" src="img/horizontal_database_idea.png" /></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -491,10 +494,10 @@ scale.</p></section>
         <div class="slide slide-13">
           <div class="inner">
             
-            <header><h1>R(X), W(X), R(X)</h1></header>
+            <header><h1>Problem: R(X), W(X), R(X)</h1></header>
             
             
-            <section><p>TODO: Image of load balanced operations.</p></section>
+            <section><p><img alt="Database Horizontal Scaling Problem" src="img/database_horizontal_scaling_problem.png" /></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -689,13 +692,14 @@ trasitively, database joins could connect everything together.</p>
       
       <!-- slide source: 11_rdbms_scaling.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-19">
+        <div class="slide img-left slide-19">
           <div class="inner">
             
             <header><h1>Sharding: Separating Data</h1></header>
             
             
-            <section><p>Sharding a database requires finding some partition of your data that ideally
+            <section><p><img alt="Sharding" src="img/sharding_app_server.png" /></p>
+<p>Sharding a database requires finding some partition of your data that ideally
 produces unrelated (not joined across) <em>shards</em>.</p>
 <p>Once separated (<em>sharded</em>), your application cannot utilize the database to
 join across them.</p>
@@ -839,13 +843,14 @@ mapping to determine where to find that data.</p>
       
       <!-- slide source: 11_rdbms_scaling.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-23">
+        <div class="slide img-left slide-23">
           <div class="inner">
             
             <header><h1>At the App Server</h1></header>
             
             
-            <section><p>Each application server contains a configuration that informs it of where each
+            <section><p><img alt="App Server Sharding" src="img/sharding_app_server.png" /></p>
+<p>Each application server contains a configuration that informs it of where each
 database is (IP address, DNS name) and how to map data to the database.</p>
 <p>The mapping can be arbitrarily complex.</p>
 <p>The mapping itself may even be stored in a database.</p></section>
@@ -883,10 +888,10 @@ are configured to <em>talk</em> to the right database.</p>
 <p>Such mappings are limited by knowledge that the database can inspect:</p>
 <ul>
 <li>Resource URI</li>
-<li>Cookies</li>
-<li>Other Headers</li>
+<li>Headers</li>
 <li>Request Payload</li>
-</ul></section>
+</ul>
+<p><img alt="Load Balancer Sharding" src="img/sharding_load_balancer.png" /></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -910,13 +915,14 @@ are configured to <em>talk</em> to the right database.</p>
       
       <!-- slide source: 11_rdbms_scaling.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-25">
+        <div class="slide img-left slide-25">
           <div class="inner">
             
             <header><h1>Across Load Balancers</h1></header>
             
             
-            <section><p>Hostnames (DNS) can be configured to point to the correct load balancer for a
+            <section><p><img alt="Sharding Across Load Balancers" src="img/sharding_region.png" /></p>
+<p>Hostnames (DNS) can be configured to point to the correct load balancer for a
 given request.</p>
 <p>Examples:</p>
 <ul>
@@ -1476,7 +1482,7 @@ opensource community, there exists a great Rails sharding gem Octopus:</p>
       
       
       <tr id="toc-row-13">
-        <th><a href="#slide13">R(X), W(X), R(X)</a></th>
+        <th><a href="#slide13">Problem: R(X), W(X), R(X)</a></th>
         <td><a href="#slide13">13</a></td>
       </tr>
       

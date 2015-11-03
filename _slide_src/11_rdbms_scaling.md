@@ -53,6 +53,8 @@ scaling vertically.
 
 > What do you do?
 
+![Vertical Scaling](img/vertical_scaling.png)
+
 ---
 
 # Horizontal Scaling
@@ -64,6 +66,8 @@ Nevertheless, as the traffic continues to increase, additional horizontal
 scaling of the application servers does not solve the problem.
 
 > What do you do?
+
+![Horizontal Scaling](img/load_balanced_topology.png)
 
 ---
 
@@ -116,6 +120,8 @@ machines and introducing a load balancer to access them.
 
 > Can we do the same with the database?
 
+![Horizontal Database Idea](img/horizontal_database_idea.png)
+
 ---
 
 # Non-trivial DB Horizontal Scaing
@@ -131,9 +137,9 @@ scale.
 
 ---
 
-# R(X), W(X), R(X)
+# Problem: R(X), W(X), R(X)
 
-TODO: Image of load balanced operations.
+![Database Horizontal Scaling Problem](img/database_horizontal_scaling_problem.png)
 
 ---
 
@@ -190,6 +196,10 @@ trasitively, database joins could connect everything together.
 
 # Sharding: Separating Data
 
+.fx: img-left
+
+![Sharding](img/sharding_app_server.png)
+
 Sharding a database requires finding some partition of your data that ideally
 produces unrelated (not joined across) _shards_.
 
@@ -245,6 +255,10 @@ mapping to determine where to find that data.
 
 # At the App Server
 
+.fx: img-left
+
+![App Server Sharding](img/sharding_app_server.png)
+
 Each application server contains a configuration that informs it of where each
 database is (IP address, DNS name) and how to map data to the database.
 
@@ -262,13 +276,18 @@ are configured to _talk_ to the right database.
 Such mappings are limited by knowledge that the database can inspect:
 
 * Resource URI
-* Cookies
-* Other Headers
+* Headers
 * Request Payload
+
+![Load Balancer Sharding](img/sharding_load_balancer.png)
 
 ---
 
 # Across Load Balancers
+
+.fx: img-left
+
+![Sharding Across Load Balancers](img/sharding_region.png)
 
 Hostnames (DNS) can be configured to point to the correct load balancer for a
 given request.
