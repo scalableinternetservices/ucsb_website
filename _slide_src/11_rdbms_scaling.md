@@ -302,7 +302,7 @@ __Note__: The above examples could involve only a single load balancer.
 
 ---
 
-# Finding Data Trade-offs
+# Finding Data: Trade-offs
 
 The approaches we just described are vary from provding more flexibility to
 providing more scalability.
@@ -458,3 +458,197 @@ The above sends all actions to the Brazil controller to the `:brazil` shard.
 ---
 
 # Service Oriented Architecture
+
+_Sharding_ partitions data of the same type into separate, unrelated groups.
+
+_Service Oriented Architectures_ (SOA) do something different. They partition
+both the data and the code based on type and function.
+
+Like sharding, no relations will cross these partitions.
+
+---
+
+# SOA Stack
+
+.fx: img-left
+
+![Service Oriented Architecture](img/soa_stack.png)
+
+The primary concept behind SOA is having many focused mini-applications.
+
+Each of these focused mini-applications is called a service.
+
+When a front-end appplication server needs data to satify a request, instead of
+speaking to a database, it will request data from the appropriate service.
+
+---
+
+# SOA Functions
+
+.fx: img-left
+
+![Service Oriented Architecture](img/soa_stack.png)
+
+Each service is broken out by logical function. E.g.:
+
+* Users service that handles authentication and authorization
+* Billing service that handles credit cards and subscriptions
+* Account subsystem that tracks invoices
+
+---
+
+# SOA Communications
+
+.fx: img-left
+
+![Service Oriented Architecture](img/soa_stack.png)
+
+With _sharding_ the application server typically only talks to a single shard.
+
+With _SOA_ the front-end application server may communicate with many distinct
+services, and some of those services may talk to a handful of other services.
+
+---
+
+# Benefits of SOA
+
+.fx: img-left
+
+![Service Oriented Architecture](img/soa_stack.png)
+
+With SOA the deployment of services is decoupled. That means that each can be
+updated and scaled independently of the remainder of the system. This
+decoupling can provide isolated outages (billing is down for 5 minutes).
+
+Services lend themselves well to maintenance by a single development team thus
+minimizing conflicts between teams that would otherwise collectively work on a
+single monolithic application.
+
+---
+
+# SOA and the Demo App
+
+> How could we divide the Demo App into services?
+
+![Demo App](img/demo_submissions_index.png)
+
+---
+
+# SOA and the Demo App
+
+1. Comments service can track comments and replies for each submission.
+2. Submissions service can be responsible for all the links that are submitted.
+3. Communities service can store the list of communities along with their
+   creator.
+4. Users service can manage the users in the system.
+
+---
+
+# Demo App SOA Code
+
+## Before
+
+    !ruby
+    class CommunitiesController < ApplicationController
+      def create
+        if current_user.allowed_to_create_community?
+          Community.create!(params)
+          render :show and return
+        end
+        render :new
+      end
+    end
+
+---
+
+# Demo App SOA Code
+
+## After
+
+    !ruby
+    class CommunitiesController < ApplicationController
+      def create
+        user = UsersService.get_user_from_session(cookie)
+        if user.allowed_to_create_community?
+          CommunitiesService.create_submission!(params['title'],
+                                                params['community'],
+                                                user_id)
+          render :show and return
+        end
+        render :new
+      end
+    end
+
+---
+
+# SOA Implementation
+
+SOA is mostly implemented by JSON of HTTP. RESTful APIs are common.
+
+> Why JSON/HTTP/REST?
+
+It's very easy to do. In fact, rails makes you do work in order to __not__ have
+a JSON API (assuming you are using `rails generate`).
+
+JSON APIs over HTTP are easily discovered. This permits (but doesn't
+necessitate) less documentation as the API may be intuitive enough to use
+without knowing much more than the endpoints and their input.
+
+Using JSON/HTTP permits a shared technology stack. Rails on the front-end
+application servers, and Rails on the servers hosting the services.
+
+---
+
+# Alternatives to JSON/HTTP/Rest
+
+The primary issue with JSON/HTTP/REST is performance.
+
+For high-performance internal APIs there are a few excellent options:
+
+* Google Protocol Buffers
+* Apache Thrift (developed by Facebook)
+
+High performance APIs often trade flexibility for performance. For instance
+they may require strongly typed data and as a result require more
+documentation.
+
+---
+
+# SOA at Amazon
+
+Jeff Bezos (Amazon CEO) circa 2002 (according to Steve Yegge)
+
+1. All teams will henceforth expose their data and functionality through
+   service interfaces.
+2. Teams must communicate with each other through these interfaces.
+3. There will be no other form of interprocess communication allowed: no direct
+   linking, no direct reads of another team's data store, no shared-memory
+   model, no back-doors whatsoever. The only communication allowed is via
+   service interface calls over the network.
+4. It doesn't matter what technology they use. HTTP, Corba, Pubsub, custom
+   protocols -- doesn't matter. Bezos doesn't care.
+5. All service interfaces, without exception, must be designed from the ground
+   up to be externalizable. That is to say, the team must plan and design to be
+   able to expose the interface to developers in the outside world. No
+   exceptions.
+6. Anyone who doesn't do this will be fired.
+7. Thank you; have a nice day!
+
+Archived Source: [https://plus.google.com/+RipRowan/posts/eVeouesvaVX](https://plus.google.com/+RipRowan/posts/eVeouesvaVX)
+
+---
+
+# SOA Trade-offs
+
+## Strengths
+
+* Small encapsulated codebases
+* Scales well as application size scales
+* Scales well as number of teams scale
+
+## Weaknesses
+
+* May not scale with the number of users (e.g., increased load to
+  authentication service)
+* Transactions across services do not exist
+* Consistent DB snapshots accross services do not exist
