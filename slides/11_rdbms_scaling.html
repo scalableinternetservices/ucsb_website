@@ -1,0 +1,2776 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2010 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Original slides: Marcin Wichary (mwichary@google.com)
+  Modifications: Ernest Delgado (ernestd@google.com)
+                 Alex Russell (slightlyoff@chromium.org)
+
+  landslide modifications: Adam Zapletal (adamzap@gmail.com)
+                           Nicolas Perriault (nperriault@gmail.com)
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>RDBMS Scaling and Service Oriented Architectures</title>
+    <!-- Styles -->
+    
+    <link rel="stylesheet" media="print" href="theme/css/print.css">
+    <link rel="stylesheet" media="screen, projection" href="theme/css/screen.css">
+    
+    
+      
+      <link rel="stylesheet" href="theme/css/custom.css">
+      
+    
+    <!-- /Styles -->
+    <!-- Javascripts -->
+    
+    <script type="text/javascript" src="theme/js/slides.js"></script>
+    
+    
+    
+    <!-- /Javascripts -->
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-67332703-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+</head>
+<body>
+  <div id="blank"></div>
+  <div class="presentation">
+    <div id="current_presenter_notes">
+      <div id="presenter_note"></div>
+    </div>
+    <div class="slides">
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide title slide-1">
+          <div class="inner">
+            
+            <header><h1>RDBMS Scaling and Service Oriented Architectures</h1></header>
+            
+            
+            <section><p><strong>CS290B</strong></p>
+<p>Dr. Bryce Boe</p>
+<p>November 3, 2015</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              1/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-2">
+          <div class="inner">
+            
+            <header><h1>Today's Agenda</h1></header>
+            
+            
+            <section><ul>
+<li>TODO</li>
+<li>RDBMS</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              2/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-3">
+          <div class="inner">
+            
+            <header><h1>TODO</h1></header>
+            
+            
+            <section><ul>
+<li>Write Tsung xml file containing a single-complete session</li>
+<li>Use XML file to establish a baseline load test</li>
+<li>Read chapter 4 in High Performance Browser Networking</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-4">
+          <div class="inner">
+            
+            <header><h1>Motivation</h1></header>
+            
+            
+            <section><p>You have your web application running on EC2. It is becoming increasingly
+popular and performance is degrading.</p>
+<blockquote>
+<p>What do you do?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-5">
+          <div class="inner">
+            
+            <header><h1>Handling Concurrent Requests</h1></header>
+            
+            
+            <section><p>You have deployed application servers that can serve many concurrent requests.</p>
+<p>But as your site's popularity continues to grow that is not sufficient.</p>
+<blockquote>
+<p>What do you do?</p>
+</blockquote>
+<p><img alt="Concurrent Requests" src="img/server_process_pool.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              5/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-6">
+          <div class="inner">
+            
+            <header><h1>Vertical Scaling</h1></header>
+            
+            
+            <section><p>You have increased your instance sizes and handled more load.</p>
+<p>However, as the popularity continues to grow you are no longer able to continue
+scaling vertically.</p>
+<blockquote>
+<p>What do you do?</p>
+</blockquote>
+<p><img alt="Vertical Scaling" src="img/vertical_scaling.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-7">
+          <div class="inner">
+            
+            <header><h1>Horizontal Scaling</h1></header>
+            
+            
+            <section><p>You have introduced a load balancer that distributes traffic across a pool of
+application servers.</p>
+<p>Nevertheless, as the traffic continues to increase, additional horizontal
+scaling of the application servers does not solve the problem.</p>
+<blockquote>
+<p>What do you do?</p>
+</blockquote>
+<p><img alt="Horizontal Scaling" src="img/load_balanced_topology.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-8">
+          <div class="inner">
+            
+            <header><h1>Caching</h1></header>
+            
+            
+            <section><p>You have properly configured HTTP caching such that unnecessary requests never
+happen.</p>
+<p>You are also caching heavyweight database operations.</p>
+<p>But it is still not enough to handle the increased load of your popular site.</p>
+<blockquote>
+<p>What do you do?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-9">
+          <div class="inner">
+            
+            <header><h1>SQL Structure and Query Optimization</h1></header>
+            
+            
+            <section><p>You have reduced the number of queries your application servers makes to the
+database.</p>
+<p>You have used <code>EXPLAIN</code> to discover indexes to add, and to ensure your most
+common SQL queries are as optimal as possible.</p>
+<p>However, your database is still a bottleneck.</p>
+<blockquote>
+<p>What do you do?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-10">
+          <div class="inner">
+            
+            <header><h1>Database Vertical Scaling</h1></header>
+            
+            
+            <section><blockquote>
+<p>Is your database swapping (out of memory)?</p>
+</blockquote>
+<p>Scale up the amount of memory.</p>
+<blockquote>
+<p>Is your database load too high?</p>
+</blockquote>
+<p>Scale up the CPU.</p>
+<blockquote>
+<p>Are neither of those working?
+What do you do?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-11">
+          <div class="inner">
+            
+            <header><h1>Database Horizontal Scaling?</h1></header>
+            
+            
+            <section><p>With application servers we are able to scale horizontally by adding additional
+machines and introducing a load balancer to access them.</p>
+<blockquote>
+<p>Can we do the same with the database?</p>
+</blockquote>
+<p><img alt="Horizontal Database Idea" src="img/horizontal_database_idea.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-12">
+          <div class="inner">
+            
+            <header><h1>Non-trivial DB Horizontal Scaling</h1></header>
+            
+            
+            <section><blockquote>
+<p>Can we horizontally scale the database by adding more database servers and
+accessing them through a load balancer?</p>
+</blockquote>
+<p>Unfortunately, it's not that simple.</p>
+<p>Horizontal scaling works great for <em>stateless</em> services. However, the database
+contains the state of our application, thus is not trivial to horizontally
+scale.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-13">
+          <div class="inner">
+            
+            <header><h1>Problem: R(X), W(X), R(X)</h1></header>
+            
+            
+            <section><p><img alt="Database Horizontal Scaling Problem" src="img/database_horizontal_scaling_problem.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-14">
+          <div class="inner">
+            
+            <header><h1>Scaling Relational Databases</h1></header>
+            
+            
+            <section><p>In a future lecture we will discuss scaling the data layer using non-relational
+databases (NoSQL).</p>
+<p>Today we will discuss in what ways we <strong>can</strong> horizontally scale a relational
+database.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-15">
+          <div class="inner">
+            
+            <header><h1>Three Techniques</h1></header>
+            
+            
+            <section><p>Each of the following techniques partitions RDBMS in a different way:</p>
+<ul>
+<li>Sharding</li>
+<li>Service Oriented Architectures (SOA)</li>
+<li>Separating Reads from Writes</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-16">
+          <div class="inner">
+            
+            <header><h1>AKF Cube</h1></header>
+            
+            
+            <section><p><img alt="AKF Cube" src="img/akf_cube.png" /></p>
+<p>Reference: <a href="http://akfpartners.com/techblog/2008/05/08/splitting-applications-or-services-for-scale/">http://akfpartners.com/techblog/2008/05/08/splitting-applications-or-services-for-scale/</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              16/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-17">
+          <div class="inner">
+            
+            <header><h1>Sharding: Idea</h1></header>
+            
+            
+            <section><p>Take a single database and split (<strong>shard</strong>) it up into multiple smaller
+databases such that everything still works.</p>
+<blockquote>
+<p>How do we handle joins across sharded data?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              17/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-18">
+          <div class="inner">
+            
+            <header><h1>Sharding: Joins</h1></header>
+            
+            
+            <section><p>Any particular database join connects a small part of your database. However,
+transitively, database joins could connect everything together.</p>
+<h2>E.g. Demo App</h2>
+<ul>
+<li>Any comment is only related to its parent (if not top-level), its children
+  (replies), and its submission.</li>
+<li>Submissions relate to each other through communities.</li>
+<li>Transitively, all of these relationships could be joined across.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              18/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-19">
+          <div class="inner">
+            
+            <header><h1>Sharding: Separating Data</h1></header>
+            
+            
+            <section><p><img alt="Sharding" src="img/sharding_app_server.png" /></p>
+<p>Sharding a database requires finding some partition of your data that ideally
+produces unrelated (not joined across) <em>shards</em>.</p>
+<p>Once separated (<em>sharded</em>), your application cannot utilize the database to
+join across them.</p>
+<p>If you need to perform operations across sharded data, you will need to do it
+at the application level. Consider the performance trade-offs. Could you shard
+another way?</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              19/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-20">
+          <div class="inner">
+            
+            <header><h1>Sharding: Similar Data</h1></header>
+            
+            
+            <section><p>Sharding involves splitting data of the same time (e.g., the rows of the
+tables).</p>
+<p>For instance if we wanted to shard our <code>Comments</code> table into two partitions, we
+could store comments belonging to half the submissions in <em>shard1</em>, and
+those belonging to the other half in <em>shard2</em>.</p>
+<blockquote>
+<p>What is not sharding?</p>
+</blockquote>
+<p>Separating tables into their own databases is not sharding. While this approach
+may work for some applications, the ability to join across tables is lost.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              20/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-21">
+          <div class="inner">
+            
+            <header><h1>Finding the Data</h1></header>
+            
+            
+            <section><p>Assume we have sharded the data for our application. We need some sort of
+mapping to determine where to find that data.</p>
+<blockquote>
+<p>How can we find what shard our data is on?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              21/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-22">
+          <div class="inner">
+            
+            <header><h1>Finding the Shard</h1></header>
+            
+            
+            <section><h2>At the application server layer?</h2>
+<blockquote>
+<p>How would we implement this?</p>
+</blockquote>
+<h2>At the load balancer?</h2>
+<blockquote>
+<p>How would we implement this?</p>
+</blockquote>
+<h2>Across multiple load balancers?</h2>
+<blockquote>
+<p>How would we implement this?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              22/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-23">
+          <div class="inner">
+            
+            <header><h1>At the App Server</h1></header>
+            
+            
+            <section><p><img alt="App Server Sharding" src="img/sharding_app_server.png" /></p>
+<p>Each application server contains a configuration that informs it of where each
+database is (IP address, DNS name) and how to map data to the database.</p>
+<p>The mapping can be arbitrarily complex.</p>
+<p>The mapping itself may even be stored in a database.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              23/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-24">
+          <div class="inner">
+            
+            <header><h1>At the load balancer</h1></header>
+            
+            
+            <section><p>The load balancer could be configured to route requests to the app servers that
+are configured to <em>talk</em> to the right database.</p>
+<p>Such mappings are limited by knowledge that the database can inspect:</p>
+<ul>
+<li>Resource URI</li>
+<li>Headers</li>
+<li>Request Payload</li>
+</ul>
+<p><img alt="Load Balancer Sharding" src="img/sharding_load_balancer.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              24/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-25">
+          <div class="inner">
+            
+            <header><h1>Across Load Balancers</h1></header>
+            
+            
+            <section><p><img alt="Sharding Across Load Balancers" src="img/sharding_region.png" /></p>
+<p>Host names (DNS) can be configured to point to the correct load balancer for a
+given request.</p>
+<p>Examples:</p>
+<ul>
+<li>en.wikipedia.org vs. es.wikipedia.org (language based sharding)</li>
+<li>google.com vs. google.co.uk (location based sharding)</li>
+<li>na6.salesforce.com vs. naX.salesforce.com (customer based sharding)</li>
+</ul>
+<p><strong>Note</strong>: The above examples could involve only a single load balancer.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              25/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-26">
+          <div class="inner">
+            
+            <header><h1>Finding Data: Trade-offs</h1></header>
+            
+            
+            <section><p>The approaches we just described are vary from providing more flexibility to
+providing more scalability.</p>
+<ul>
+<li>App Server (most flexible)</li>
+<li>Load Balancer</li>
+<li>DNS (most scalable)</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              26/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-27">
+          <div class="inner">
+            
+            <header><h1>Sharding and Growth</h1></header>
+            
+            
+            <section><p>Ideally the number of your partitions increase as the usage of your application
+increases.</p>
+<p>Example:</p>
+<p>If each customer's data can be partitioned from the others, then doubling the
+number of customers doubles the number of shards.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              27/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-28">
+          <div class="inner">
+            
+            <header><h1>Real World Example</h1></header>
+            
+            
+            <section><h2>Gmail</h2>
+<p>The data that represents my email conceptually requires no relation to the data
+representing other people's email.</p>
+<p>When a request arrives to gmail, they apply some mapping function to determine
+which database the user's data is located on.</p>
+<p>Should Google need to take down a database, they can relocate the sharded data
+to another database, and update the mapping.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              28/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-29">
+          <div class="inner">
+            
+            <header><h1>Demo App Example</h1></header>
+            
+            
+            <section><ul>
+<li>Users can create and view communities.</li>
+<li>Users can create submissions in these communities.</li>
+<li>Each submission has a tree of comments.</li>
+</ul>
+<blockquote>
+<p>How can we shard this application?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              29/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-30">
+          <div class="inner">
+            
+            <header><h1>Sharding Demo App</h1></header>
+            
+            
+            <section><h2>By User?</h2>
+<p>This would have difficulty as logged in users will want to see communities,
+submissions, and comments made by other logged in users.</p>
+<h2>By Submission?</h2>
+<p>This would make generating submission lists for a single community difficult.</p>
+<h2>By Community?</h2>
+<p>Obtaining a community list may be tricky, but cleanly partitioning comments and
+submissions by their community is mostly clean.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              30/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-31">
+          <div class="inner">
+            
+            <header><h1>Community Sharding</h1></header>
+            
+            
+            <section><blockquote>
+<p>How could we make community based sharding work?</p>
+</blockquote>
+<p>We can use information in the url with any of the three load balancing
+approaches.</p>
+<ul>
+<li>http://ucsb.demo.com (community sub-domain)</li>
+<li>http://demo.com/ucsb (community path)</li>
+</ul>
+<p>Either the application server connects to the right database for the <code>ucsb</code>
+community, or DNS/loadbalancer directs the request to an application server
+that always talks to the <code>ucsb</code> containing database.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              31/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-32">
+          <div class="inner">
+            
+            <header><h1>Community Sharding Success</h1></header>
+            
+            
+            <section><p><img alt="Sharding Submission View" src="img/sharding_submission_view.png" />
+<img alt="Sharding New Submission View" src="img/sharding_new_submission_view.png" />
+<img alt="Sharding New Comment View" src="img/sharding_new_comment_view.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              32/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-33">
+          <div class="inner">
+            
+            <header><h1>Community Sharding Difficulty</h1></header>
+            
+            
+            <section><p><img alt="Sharding Global Submission View" src="img/sharding_index_view.png" /></p>
+<ul>
+<li>The global list of submissions.</li>
+<li>List of submissions by user.</li>
+<li>List of comments by user.</li>
+</ul>
+<blockquote>
+<p>What can we do to resolve these issues?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              33/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-34">
+          <div class="inner">
+            
+            <header><h1>Solving Sharding Problems</h1></header>
+            
+            
+            <section><ul>
+<li>Modify the user interface such that the difficult to shard page does not
+  exist.<ul>
+<li>Can you get by with only providing the list of communities?</li>
+</ul>
+</li>
+<li>Alternatively periodically run an expensive background job keep a
+  semi-up-to-date global submission list aggregating results from across
+  databases.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              34/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-35">
+          <div class="inner">
+            
+            <header><h1>Sharding in Rails</h1></header>
+            
+            
+            <section><p>Rails does not have built-in support for sharding. However, thanks to the
+open-source community, there exists a great Rails sharding gem Octopus:</p>
+<p><a href="https://github.com/tchandy/octopus">https://github.com/tchandy/octopus</a></p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">BrazilController</span> <span class="o">&lt;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">around_filter</span> <span class="ss">:select_shard</span>
+
+  <span class="k">def</span> <span class="nf">select_shard</span><span class="p">(</span><span class="o">&amp;</span><span class="n">block</span><span class="p">)</span>
+    <span class="no">Octopus</span><span class="o">.</span><span class="n">using</span><span class="p">(</span><span class="ss">:brazil</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</td></tr></table>
+<p>The above sends all actions to the Brazil controller to the <code>:brazil</code> shard.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              35/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-36">
+          <div class="inner">
+            
+            <header><h1>Sharding Trade-offs</h1></header>
+            
+            
+            <section><h2>Strengths</h2>
+<ul>
+<li>If you genuinely have zero relations across shard, this scaling path is very
+  powerful.</li>
+<li>Sharding works best when partitions grow with usage.</li>
+</ul>
+<h2>Weaknesses</h2>
+<ul>
+<li>Sharding can inhibit feature development. That is your application may be
+  perfectly shardable today, but future features may change that.</li>
+<li>Not easy to retroactively add sharding to an existing application.</li>
+<li>Transactions across shards do not exist.</li>
+<li>Consistent DB snapshots across shards do not exist.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              36/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-37">
+          <div class="inner">
+            
+            <header><h1>Service Oriented Architecture</h1></header>
+            
+            
+            <section><p><em>Sharding</em> partitions data of the same type into separate, unrelated groups.</p>
+<p><em>Service Oriented Architectures</em> (SOA) do something different. They partition
+both the data and the code based on type and function.</p>
+<p>Like sharding, no relations will cross these partitions.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              37/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-38">
+          <div class="inner">
+            
+            <header><h1>SOA Stack</h1></header>
+            
+            
+            <section><p><img alt="Service Oriented Architecture" src="img/soa_stack.png" /></p>
+<p>The primary concept behind SOA is having many focused mini-applications.</p>
+<p>Each of these focused mini-applications is called a service.</p>
+<p>When a front-end application server needs data to satisfy a request, instead of
+speaking to a database, it will request data from the appropriate service.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              38/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-39">
+          <div class="inner">
+            
+            <header><h1>SOA Functions</h1></header>
+            
+            
+            <section><p><img alt="Service Oriented Architecture" src="img/soa_stack.png" /></p>
+<p>Each service is broken out by logical function. E.g.:</p>
+<ul>
+<li>Users service that handles authentication and authorization</li>
+<li>Billing service that handles credit cards and subscriptions</li>
+<li>Account subsystem that tracks invoices</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              39/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-40">
+          <div class="inner">
+            
+            <header><h1>SOA Communications</h1></header>
+            
+            
+            <section><p><img alt="Service Oriented Architecture" src="img/soa_stack.png" /></p>
+<p>With <em>sharding</em> the application server typically only talks to a single shard.</p>
+<p>With <em>SOA</em> the front-end application server may communicate with many distinct
+services, and some of those services may talk to a handful of other services.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              40/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-41">
+          <div class="inner">
+            
+            <header><h1>Benefits of SOA</h1></header>
+            
+            
+            <section><p><img alt="Service Oriented Architecture" src="img/soa_stack.png" /></p>
+<p>With SOA the deployment of services is decoupled. That means that each can be
+updated and scaled independently of the remainder of the system. This
+decoupling can provide isolated outages (billing is down for 5 minutes).</p>
+<p>Services lend themselves well to maintenance by a single development team thus
+minimizing conflicts between teams that would otherwise collectively work on a
+single monolithic application.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              41/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-42">
+          <div class="inner">
+            
+            <header><h1>SOA and the Demo App</h1></header>
+            
+            
+            <section><blockquote>
+<p>How could we divide the Demo App into services?</p>
+</blockquote>
+<p><img alt="Demo App" src="img/demo_submissions_index.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              42/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-43">
+          <div class="inner">
+            
+            <header><h1>SOA and the Demo App</h1></header>
+            
+            
+            <section><ol>
+<li>Comments service can track comments and replies for each submission.</li>
+<li>Submissions service can be responsible for all the links that are submitted.</li>
+<li>Communities service can store the list of communities along with their
+   creator.</li>
+<li>Users service can manage the users in the system.</li>
+</ol></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              43/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-44">
+          <div class="inner">
+            
+            <header><h1>Demo App SOA Code</h1></header>
+            
+            
+            <section><h2>Before</h2>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">CommunitiesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="k">def</span> <span class="nf">create</span>
+    <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">allowed_to_create_community?</span>
+      <span class="no">Community</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="n">render</span> <span class="ss">:show</span> <span class="ow">and</span> <span class="k">return</span>
+    <span class="k">end</span>
+    <span class="n">render</span> <span class="ss">:new</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</td></tr></table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              44/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-45">
+          <div class="inner">
+            
+            <header><h1>Demo App SOA Code</h1></header>
+            
+            
+            <section><h2>After</h2>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">CommunitiesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="k">def</span> <span class="nf">create</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="no">UsersService</span><span class="o">.</span><span class="n">get_user_from_session</span><span class="p">(</span><span class="n">cookie</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">allowed_to_create_community?</span>
+      <span class="no">CommunitiesService</span><span class="o">.</span><span class="n">create_submission!</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="s1">&#39;title&#39;</span><span class="o">]</span><span class="p">,</span>
+                                            <span class="n">params</span><span class="o">[</span><span class="s1">&#39;community&#39;</span><span class="o">]</span><span class="p">,</span>
+                                            <span class="n">user_id</span><span class="p">)</span>
+      <span class="n">render</span> <span class="ss">:show</span> <span class="ow">and</span> <span class="k">return</span>
+    <span class="k">end</span>
+    <span class="n">render</span> <span class="ss">:new</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</td></tr></table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              45/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-46">
+          <div class="inner">
+            
+            <header><h1>SOA Implementation</h1></header>
+            
+            
+            <section><p>SOA is mostly implemented by JSON of HTTP. RESTful APIs are common.</p>
+<blockquote>
+<p>Why JSON/HTTP/REST?</p>
+</blockquote>
+<p>It's very easy to do. In fact, rails makes you do work in order to <strong>not</strong> have
+a JSON API (assuming you are using <code>rails generate</code>).</p>
+<p>JSON APIs over HTTP are easily discovered. This permits (but doesn't
+necessitate) less documentation as the API may be intuitive enough to use
+without knowing much more than the endpoints and their input.</p>
+<p>Using JSON/HTTP permits a shared technology stack. Rails on the front-end
+application servers, and Rails on the servers hosting the services.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              46/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-47">
+          <div class="inner">
+            
+            <header><h1>Alternatives to JSON/HTTP/Rest</h1></header>
+            
+            
+            <section><p>The primary issue with JSON/HTTP/REST is performance.</p>
+<p>For high-performance internal APIs there are a few excellent options:</p>
+<ul>
+<li>Google Protocol Buffers</li>
+<li>Apache Thrift (developed by Facebook)</li>
+</ul>
+<p>High performance APIs often trade flexibility for performance. For instance
+they may require strongly typed data and as a result require more
+documentation.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              47/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-48">
+          <div class="inner">
+            
+            <header><h1>SOA at Amazon</h1></header>
+            
+            
+            <section><p>Jeff Bezos (Amazon CEO) circa 2002 (according to Steve Yegge)</p>
+<ol>
+<li>All teams will henceforth expose their data and functionality through
+   service interfaces.</li>
+<li>Teams must communicate with each other through these interfaces.</li>
+<li>There will be no other form of inter-process communication allowed: no direct
+   linking, no direct reads of another team's data store, no shared-memory
+   model, no back-doors whatsoever. The only communication allowed is via
+   service interface calls over the network.</li>
+<li>It doesn't matter what technology they use. HTTP, Corba, Pubsub, custom
+   protocols -- doesn't matter. Bezos doesn't care.</li>
+<li>All service interfaces, without exception, must be designed from the ground
+   up to be externalizable. That is to say, the team must plan and design to be
+   able to expose the interface to developers in the outside world. No
+   exceptions.</li>
+<li>Anyone who doesn't do this will be fired.</li>
+<li>Thank you; have a nice day!</li>
+</ol>
+<p>Archived Source: <a href="https://plus.google.com/+RipRowan/posts/eVeouesvaVX">https://plus.google.com/+RipRowan/posts/eVeouesvaVX</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              48/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-49">
+          <div class="inner">
+            
+            <header><h1>SOA Trade-offs</h1></header>
+            
+            
+            <section><h2>Strengths</h2>
+<ul>
+<li>Small encapsulated code-bases</li>
+<li>Scales well as application size scales</li>
+<li>Scales well as number of teams scale</li>
+</ul>
+<h2>Weaknesses</h2>
+<ul>
+<li>May not scale with the number of users (e.g., increased load to
+  authentication service)</li>
+<li>Transactions across services do not exist</li>
+<li>Consistent DB snapshots across services do not exist</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              49/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-50">
+          <div class="inner">
+            
+            <header><h1>Database Operations</h1></header>
+            
+            
+            <section><p><img alt="Graph of Database Reads and Writes" src="img/database_reads_writes.png" /></p>
+<p>This graph shows significantly more <em>reads</em> than <em>writes</em>. This may be the case
+for your application.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              50/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-51">
+          <div class="inner">
+            
+            <header><h1>Database Horizontal Scaling</h1></header>
+            
+            
+            <section><p><img alt="Database Master Follower" src="img/database_master_follower.png" /></p>
+<p>In general a relational database is hard to horizontally scale.</p>
+<p>However, when limited to a read-only copies, databases are very easy to
+horizontally scale.</p>
+<ul>
+<li>Set up separate machines to act as <strong>read followers</strong></li>
+<li>Whenever any transaction commits to the <em>master</em> database, send a copy to
+  each <em>follower</em> and apply it</li>
+</ul>
+<p><strong>Note</strong>: The term <em>follower</em> more often appears as the term <em>slave</em> in the
+database context. However, I will try to exclusively use <em>follower</em>.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              51/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-52">
+          <div class="inner">
+            
+            <header><h1>Database Replication</h1></header>
+            
+            
+            <section><p><img alt="Database Master Follower" src="img/database_master_follower.png" /></p>
+<p>The sending of data from the master to its followers (replication) can happen
+either synchronously or asynchronously.</p>
+<h2>Synchronous</h2>
+<p>When a transaction is committed to mater, the master sends the transaction to
+its followers and waits until applied by all before completing.</p>
+<h2>Asynchronous</h2>
+<p>When a transaction is committed to master, the master sends the transaction to
+its followers but does not wait to see if the transaction is applied.</p>
+<blockquote>
+<p>What are the trade-offs?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              52/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-53">
+          <div class="inner">
+            
+            <header><h1>Database Replication Trade-offs</h1></header>
+            
+            
+            <section><p><img alt="Database Master Follower" src="img/database_master_follower.png" /></p>
+<blockquote>
+<p>What are the advantages of waiting until it is applied to all followers?</p>
+</blockquote>
+<p>Consistency. Subsequent read requests will see changes.</p>
+<blockquote>
+<p>What are the disadvantages of waiting until it is applied to all followers?</p>
+</blockquote>
+<p>Performance. There may be many read followers to apply changes to.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              53/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-54">
+          <div class="inner">
+            
+            <header><h1>Database Replication Levels</h1></header>
+            
+            
+            <section><p><img alt="Database Master Follower" src="img/database_master_follower.png" /></p>
+<h2>Statement-level</h2>
+<p>Similar to streaming the journal from the master to its followers.</p>
+<h2>Block-level</h2>
+<p>Instead of sending the SQL statements to the followers, send the consequences
+of those statements.</p>
+<blockquote>
+<p>What are the advantages of each?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              54/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-55">
+          <div class="inner">
+            
+            <header><h1>Database Statement-level Replication</h1></header>
+            
+            
+            <section><p>Statement-level is faster than block-level, with a catch.</p>
+<p>An SQL statement is generally more compact than its consequences.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">UPDATE</span> <span class="n">txns</span> <span class="k">SET</span> <span class="n">amount</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span>
+</pre></div>
+</td></tr></table>
+<p>The above query acts on all rows which may require a lot of data to transmit
+the consequences.</p>
+<p>However, SQL statements must now be deterministic:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">UPDATE</span> <span class="n">txns</span> <span class="k">SET</span> <span class="n">amount</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">updated_at</span><span class="o">=</span><span class="n">NOW</span><span class="p">();</span>
+</pre></div>
+</td></tr></table>
+<blockquote>
+<p>What is the value of <code>NOW()</code>?</p>
+</blockquote>
+<p>Such values must be communicated from the master to its followers.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              55/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-56">
+          <div class="inner">
+            
+            <header><h1>Demo App and Read Followers</h1></header>
+            
+            
+            <section><p>The following pages would be served from read followers:</p>
+<p><img alt="Global Submission View" src="img/small_demo_index_view.png" />
+<img alt="Submissions View" src="img/sharding_submission_view.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              56/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-57">
+          <div class="inner">
+            
+            <header><h1>Demo App DB Master Pages</h1></header>
+            
+            
+            <section><p>The controllers associated with the following pages would need to talk to the
+master database.</p>
+<p><img alt="Demo New Submission View" src="img/demo_half_new_submission_view.png" />
+<img alt="Demo New Comment View" src="img/demo_half_new_comment_view.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              57/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-58">
+          <div class="inner">
+            
+            <header><h1>Rails Read Follower Support</h1></header>
+            
+            
+            <section><p>Like with sharding, rails does not provide build-in support.</p>
+<p>However, the Octopus gem does support read followers:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span class="no">Octopus</span><span class="o">.</span><span class="n">using</span><span class="p">(</span><span class="ss">:read_follower</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">num_users</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">count</span>
+<span class="k">end</span>
+
+<span class="no">Octopus</span><span class="o">.</span><span class="n">using</span><span class="p">(</span><span class="ss">:master</span><span class="p">)</span> <span class="k">do</span>
+  <span class="no">User</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Mike&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</td></tr></table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              58/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-59">
+          <div class="inner">
+            
+            <header><h1>Trade-offs of Read Followers</h1></header>
+            
+            
+            <section><h2>Strengths</h2>
+<p>For applications with a high read-to-write ratio:</p>
+<ul>
+<li>the load on the master database can be dramatically reduced.</li>
+<li>read followers can be horizontally scaled (even with a load balancer)</li>
+</ul>
+<h2>Weaknesses</h2>
+<p>Application developer needs to think about reads that affect writes vs. reads
+that do not affect writes as such dependent reads should occur in the same
+transaction as the write.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              59/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-60">
+          <div class="inner">
+            
+            <header><h1>At AppFolio</h1></header>
+            
+            
+            <section><h2>High usage of sharding</h2>
+<ul>
+<li>Each customer's data is stored in separate logical database.</li>
+<li>Those logical databases can be moved between distinct physical database
+  servers as needed.</li>
+</ul>
+<h2>Medium use of SOA</h2>
+<ul>
+<li>Some functionality broken out into services, but the primary benefit is for
+  scaling engineers than scaling load.</li>
+</ul>
+<h2>Low use of Read vs. Write distinction</h2>
+<ul>
+<li>We utilize read followers for backup and offline analysis.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              60/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 11_rdbms_scaling.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-61">
+          <div class="inner">
+            
+            <header><h1>Summary</h1></header>
+            
+            
+            <section><p>Horizontal scaling of relational databases is hard.</p>
+<p>There is no silver bullet, but by combining sharding, SOA and read followers
+you can get very far.</p>
+<p>For applications that need to scale writes beyond what RDBMS can offer, you
+need non-relational databases.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="11_rdbms_scaling.md">11_rdbms_scaling.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              61/61
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="toc" class="sidebar hidden">
+    <h2>Table of Contents</h2>
+    <table>
+      <caption>Table of Contents</caption>
+      
+      <tr id="toc-row-1">
+        <th><a href="#slide1">RDBMS Scaling and Service Oriented Architectures</a></th>
+        <td><a href="#slide1">1</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-2">
+        <th><a href="#slide2">Today's Agenda</a></th>
+        <td><a href="#slide2">2</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-3">
+        <th><a href="#slide3">TODO</a></th>
+        <td><a href="#slide3">3</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-4">
+        <th><a href="#slide4">Motivation</a></th>
+        <td><a href="#slide4">4</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-5">
+        <th><a href="#slide5">Handling Concurrent Requests</a></th>
+        <td><a href="#slide5">5</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-6">
+        <th><a href="#slide6">Vertical Scaling</a></th>
+        <td><a href="#slide6">6</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-7">
+        <th><a href="#slide7">Horizontal Scaling</a></th>
+        <td><a href="#slide7">7</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-8">
+        <th><a href="#slide8">Caching</a></th>
+        <td><a href="#slide8">8</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-9">
+        <th><a href="#slide9">SQL Structure and Query Optimization</a></th>
+        <td><a href="#slide9">9</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-10">
+        <th><a href="#slide10">Database Vertical Scaling</a></th>
+        <td><a href="#slide10">10</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-11">
+        <th><a href="#slide11">Database Horizontal Scaling?</a></th>
+        <td><a href="#slide11">11</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-12">
+        <th><a href="#slide12">Non-trivial DB Horizontal Scaling</a></th>
+        <td><a href="#slide12">12</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-13">
+        <th><a href="#slide13">Problem: R(X), W(X), R(X)</a></th>
+        <td><a href="#slide13">13</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-14">
+        <th><a href="#slide14">Scaling Relational Databases</a></th>
+        <td><a href="#slide14">14</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-15">
+        <th><a href="#slide15">Three Techniques</a></th>
+        <td><a href="#slide15">15</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-16">
+        <th><a href="#slide16">AKF Cube</a></th>
+        <td><a href="#slide16">16</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-17">
+        <th><a href="#slide17">Sharding: Idea</a></th>
+        <td><a href="#slide17">17</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-18">
+        <th><a href="#slide18">Sharding: Joins</a></th>
+        <td><a href="#slide18">18</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-19">
+        <th><a href="#slide19">Sharding: Separating Data</a></th>
+        <td><a href="#slide19">19</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-20">
+        <th><a href="#slide20">Sharding: Similar Data</a></th>
+        <td><a href="#slide20">20</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-21">
+        <th><a href="#slide21">Finding the Data</a></th>
+        <td><a href="#slide21">21</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-22">
+        <th><a href="#slide22">Finding the Shard</a></th>
+        <td><a href="#slide22">22</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-23">
+        <th><a href="#slide23">At the App Server</a></th>
+        <td><a href="#slide23">23</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-24">
+        <th><a href="#slide24">At the load balancer</a></th>
+        <td><a href="#slide24">24</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-25">
+        <th><a href="#slide25">Across Load Balancers</a></th>
+        <td><a href="#slide25">25</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-26">
+        <th><a href="#slide26">Finding Data: Trade-offs</a></th>
+        <td><a href="#slide26">26</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-27">
+        <th><a href="#slide27">Sharding and Growth</a></th>
+        <td><a href="#slide27">27</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-28">
+        <th><a href="#slide28">Real World Example</a></th>
+        <td><a href="#slide28">28</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-29">
+        <th><a href="#slide29">Demo App Example</a></th>
+        <td><a href="#slide29">29</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-30">
+        <th><a href="#slide30">Sharding Demo App</a></th>
+        <td><a href="#slide30">30</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-31">
+        <th><a href="#slide31">Community Sharding</a></th>
+        <td><a href="#slide31">31</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-32">
+        <th><a href="#slide32">Community Sharding Success</a></th>
+        <td><a href="#slide32">32</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-33">
+        <th><a href="#slide33">Community Sharding Difficulty</a></th>
+        <td><a href="#slide33">33</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-34">
+        <th><a href="#slide34">Solving Sharding Problems</a></th>
+        <td><a href="#slide34">34</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-35">
+        <th><a href="#slide35">Sharding in Rails</a></th>
+        <td><a href="#slide35">35</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-36">
+        <th><a href="#slide36">Sharding Trade-offs</a></th>
+        <td><a href="#slide36">36</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-37">
+        <th><a href="#slide37">Service Oriented Architecture</a></th>
+        <td><a href="#slide37">37</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-38">
+        <th><a href="#slide38">SOA Stack</a></th>
+        <td><a href="#slide38">38</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-39">
+        <th><a href="#slide39">SOA Functions</a></th>
+        <td><a href="#slide39">39</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-40">
+        <th><a href="#slide40">SOA Communications</a></th>
+        <td><a href="#slide40">40</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-41">
+        <th><a href="#slide41">Benefits of SOA</a></th>
+        <td><a href="#slide41">41</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-42">
+        <th><a href="#slide42">SOA and the Demo App</a></th>
+        <td><a href="#slide42">42</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-43">
+        <th><a href="#slide43">SOA and the Demo App</a></th>
+        <td><a href="#slide43">43</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-44">
+        <th><a href="#slide44">Demo App SOA Code</a></th>
+        <td><a href="#slide44">44</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-45">
+        <th><a href="#slide45">Demo App SOA Code</a></th>
+        <td><a href="#slide45">45</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-46">
+        <th><a href="#slide46">SOA Implementation</a></th>
+        <td><a href="#slide46">46</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-47">
+        <th><a href="#slide47">Alternatives to JSON/HTTP/Rest</a></th>
+        <td><a href="#slide47">47</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-48">
+        <th><a href="#slide48">SOA at Amazon</a></th>
+        <td><a href="#slide48">48</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-49">
+        <th><a href="#slide49">SOA Trade-offs</a></th>
+        <td><a href="#slide49">49</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-50">
+        <th><a href="#slide50">Database Operations</a></th>
+        <td><a href="#slide50">50</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-51">
+        <th><a href="#slide51">Database Horizontal Scaling</a></th>
+        <td><a href="#slide51">51</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-52">
+        <th><a href="#slide52">Database Replication</a></th>
+        <td><a href="#slide52">52</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-53">
+        <th><a href="#slide53">Database Replication Trade-offs</a></th>
+        <td><a href="#slide53">53</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-54">
+        <th><a href="#slide54">Database Replication Levels</a></th>
+        <td><a href="#slide54">54</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-55">
+        <th><a href="#slide55">Database Statement-level Replication</a></th>
+        <td><a href="#slide55">55</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-56">
+        <th><a href="#slide56">Demo App and Read Followers</a></th>
+        <td><a href="#slide56">56</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-57">
+        <th><a href="#slide57">Demo App DB Master Pages</a></th>
+        <td><a href="#slide57">57</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-58">
+        <th><a href="#slide58">Rails Read Follower Support</a></th>
+        <td><a href="#slide58">58</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-59">
+        <th><a href="#slide59">Trade-offs of Read Followers</a></th>
+        <td><a href="#slide59">59</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-60">
+        <th><a href="#slide60">At AppFolio</a></th>
+        <td><a href="#slide60">60</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-61">
+        <th><a href="#slide61">Summary</a></th>
+        <td><a href="#slide61">61</a></td>
+      </tr>
+      
+      
+    </table>
+  </div>
+  
+  <div id="help" class="sidebar hidden">
+    <h2>Help</h2>
+    <table>
+      <caption>Help</caption>
+      <tr>
+        <th>Table of Contents</th>
+        <td>t</td>
+      </tr>
+      <tr>
+        <th>Exposé</th>
+        <td>ESC</td>
+      </tr>
+      <tr>
+        <th>Full screen slides</th>
+        <td>e</td>
+      </tr>
+      <tr>
+        <th>Presenter View</th>
+        <td>p</td>
+      </tr>
+      <tr>
+        <th>Source Files</th>
+        <td>s</td>
+      </tr>
+      <tr>
+        <th>Slide Numbers</th>
+        <td>n</td>
+      </tr>
+      <tr>
+        <th>Toggle screen blanking</th>
+        <td>b</td>
+      </tr>
+      <tr>
+        <th>Show/hide slide context</th>
+        <td>c</td>
+      </tr>
+      <tr>
+        <th>Notes</th>
+        <td>2</td>
+      </tr>
+      <tr>
+        <th>Help</th>
+        <td>h</td>
+      </tr>
+    </table>
+  </div>
+  <script>main()</script>
+</body>
+</html>
