@@ -294,9 +294,9 @@ given request.
 
 Examples:
 
-* en.wikipedia.org v. es.wikipedia.org (language based sharding)
-* google.com v. google.co.uk (location based sharding)
-* na6.salesforce.com v. naX.salesforce.com (customer based sharding)
+* en.wikipedia.org vs. es.wikipedia.org (language based sharding)
+* google.com vs. google.co.uk (location based sharding)
+* na6.salesforce.com vs. naX.salesforce.com (customer based sharding)
 
 __Note__: The above examples could involve only a single load balancer.
 
@@ -652,3 +652,203 @@ Archived Source: [https://plus.google.com/+RipRowan/posts/eVeouesvaVX](https://p
   authentication service)
 * Transactions across services do not exist
 * Consistent DB snapshots accross services do not exist
+
+---
+
+# Database Operations
+
+![Graph of Database Reads and Writes](img/database_reads_writes.png)
+
+This graph shows significantly more _reads_ than _writes_. This may be the case
+for your application.
+
+---
+
+# Database Horizontal Scaling
+
+.fx: img-left
+
+![Database Master Follower](img/database_master_follower.png)
+
+In general a realational database is hard to horizontally scale.
+
+However, when limited to a read-only copies, databases are very easy to
+horizontally scale.
+
+* Set up separate machines to act as __read followers__
+* Whenever any transaction commits to the _master_ database, send a copy to
+  each _follower_ and apply it
+
+__Note__: The term _follower_ more often appears as the term _slave_ in the
+database context. However, I will try to exclusively use _follower_.
+
+---
+
+# Database Replication
+
+.fx: img-left
+
+![Database Master Follower](img/database_master_follower.png)
+
+The sending of data from the master to its followers (replication) can happen
+either synchronously or asynchronously.
+
+## Synchronous
+
+When a transaction is committed to mater, the master sends the transaction to
+its followers and waits until applied by all before completing.
+
+## Asynchronous
+
+When a transaction is committed to master, the master sends the transaction to
+its followers but does not wait to see if the transaction is applied.
+
+
+> What are the trade-offs?
+
+---
+
+# Database Replication Trade-offs
+
+.fx: img-left
+
+![Database Master Follower](img/database_master_follower.png)
+
+> What are the advantages of waiting until it is applied to all followers?
+
+Consistency. Subsequent read requests will see changes.
+
+> What are the disadvantages of waiting until it is applied to all followers?
+
+Performance. There may be many read followers to apply changes to.
+
+---
+
+# Database Replication Levels
+
+.fx: img-left
+
+![Database Master Follower](img/database_master_follower.png)
+
+## Statement-level
+
+Similar to streaming the journal from the master to its followers.
+
+## Block-level
+
+Instead of sending the SQL statements to the followers, send the consequences
+of those statements.
+
+> What are the advantages of each?
+
+---
+
+# Database Statement-level Replication
+
+Statement-level is faster than block-level, with a catch.
+
+An SQL statement is generally more compact than its consequences.
+
+    !sql
+    UPDATE txns SET amount=5;
+
+The above query acts on all rows which may require a lot of data to transmit
+the consequences.
+
+However, SQL statements must now be deterministic:
+
+    !sql
+    UPDATE txns SET amount=5, updated_at=NOW();
+
+> What is the value of `NOW()`?
+
+Such values must be communicated from the master to its followers.
+
+---
+
+# Demo App and Read Followers
+
+.fx: img-left
+
+The following pages would be served from read followers:
+
+![Global Submission View](img/small_demo_index_view.png)
+![Submissions View](img/sharding_submission_view.png)
+
+---
+
+# Demo App DB Master Pages
+
+.fx: img-left
+
+The controllers associated with the following pages would need to talk to the
+master database.
+
+![Demo New Submission View](img/demo_half_new_submission_view.png)
+![Demo New Comment View](img/demo_half_new_comment_view.png)
+
+---
+
+# Rails Read Follower Support
+
+Like with sharding, rails does not provide build-in support.
+
+However, the Octopus gem does support read followers:
+
+    !ruby
+    Octopus.using(:read_follower) do
+      num_users = User.count
+    end
+
+    Octopus.using(:master) do
+      User.create(:name => "Mike")
+    end
+
+---
+
+# Trade-offs of Read Followers
+
+## Strengths
+
+For applications with a high read-to-write ratio:
+
+* the load on the master database can be dramatically reduced.
+* read followers can be horizontally scaled (even with a load balancer)
+
+## Weaknesses
+
+Application developer needs to think about reads that affect writes vs. reads
+that do not affect writes as such dependent reads should occur in the same
+transaction as the write.
+
+---
+
+# At Appfolio
+
+## High usage of sharding
+
+* Each customer's data is stored in separate logical database.
+* Those logical databases can be moved between distinct phyicsal database
+  servers as needed.
+
+## Medium use of SOA
+
+* Some functionality broken out into services, but the primary benefit is for
+  scaling engineers than scaling load.
+
+
+## Low use of Read vs. Write distinction
+
+* We utilize read followers for backup and offline analysis.
+
+---
+
+# Summary
+
+Horizontal scaling of relational databases is hard.
+
+There is no silver bullet, but by combining sharding, SOA and read followers
+you can get very far.
+
+For applications that need to scale writes beyond what RDBMS can offer, you
+need non-relational databases.
