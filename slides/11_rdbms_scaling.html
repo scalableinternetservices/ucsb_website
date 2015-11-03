@@ -457,7 +457,7 @@ machines and introducing a load balancer to access them.</p>
         <div class="slide slide-12">
           <div class="inner">
             
-            <header><h1>Non-trivial DB Horizontal Scaing</h1></header>
+            <header><h1>Non-trivial DB Horizontal Scaling</h1></header>
             
             
             <section><blockquote>
@@ -529,7 +529,7 @@ scale.</p></section>
             
             <section><p>In a future lecture we will discuss scaling the data layer using non-relational
 databases (NoSQL).</p>
-<p>Today we will discuss in what ways we <strong>can</strong> horiztonally scale a relational
+<p>Today we will discuss in what ways we <strong>can</strong> horizontally scale a relational
 database.</p></section>
             
           </div>
@@ -661,7 +661,7 @@ databases such that everything still works.</p>
             
             
             <section><p>Any particular database join connects a small part of your database. However,
-trasitively, database joins could connect everything together.</p>
+transitively, database joins could connect everything together.</p>
 <h2>E.g. Demo App</h2>
 <ul>
 <li>Any comment is only related to its parent (if not top-level), its children
@@ -704,7 +704,7 @@ produces unrelated (not joined across) <em>shards</em>.</p>
 <p>Once separated (<em>sharded</em>), your application cannot utilize the database to
 join across them.</p>
 <p>If you need to perform operations across sharded data, you will need to do it
-at the application level. Consider the performance tradeoffs. Could you shard
+at the application level. Consider the performance trade-offs. Could you shard
 another way?</p></section>
             
           </div>
@@ -922,7 +922,7 @@ are configured to <em>talk</em> to the right database.</p>
             
             
             <section><p><img alt="Sharding Across Load Balancers" src="img/sharding_region.png" /></p>
-<p>Hostnames (DNS) can be configured to point to the correct load balancer for a
+<p>Host names (DNS) can be configured to point to the correct load balancer for a
 given request.</p>
 <p>Examples:</p>
 <ul>
@@ -960,7 +960,7 @@ given request.</p>
             <header><h1>Finding Data: Trade-offs</h1></header>
             
             
-            <section><p>The approaches we just described are vary from provding more flexibility to
+            <section><p>The approaches we just described are vary from providing more flexibility to
 providing more scalability.</p>
 <ul>
 <li>App Server (most flexible)</li>
@@ -1146,7 +1146,7 @@ submissions by their community is mostly clean.</p></section>
 <p>We can use information in the url with any of the three load balancing
 approaches.</p>
 <ul>
-<li>http://ucsb.demo.com (community subdomain)</li>
+<li>http://ucsb.demo.com (community sub-domain)</li>
 <li>http://demo.com/ucsb (community path)</li>
 </ul>
 <p>Either the application server connects to the right database for the <code>ucsb</code>
@@ -1258,7 +1258,7 @@ that always talks to the <code>ucsb</code> containing database.</p></section>
 </ul>
 </li>
 <li>Alternatively periodically run an expensive background job keep a
-  semi-up-to-date global submission list aggregating results from accross
+  semi-up-to-date global submission list aggregating results from across
   databases.</li>
 </ul></section>
             
@@ -1291,7 +1291,7 @@ that always talks to the <code>ucsb</code> containing database.</p></section>
             
             
             <section><p>Rails does not have built-in support for sharding. However, thanks to the
-opensource community, there exists a great Rails sharding gem Octopus:</p>
+open-source community, there exists a great Rails sharding gem Octopus:</p>
 <p><a href="https://github.com/tchandy/octopus">https://github.com/tchandy/octopus</a></p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -1350,7 +1350,7 @@ opensource community, there exists a great Rails sharding gem Octopus:</p>
   perfectly shardable today, but future features may change that.</li>
 <li>Not easy to retroactively add sharding to an existing application.</li>
 <li>Transactions across shards do not exist.</li>
-<li>Consistent DB snapshots accross shards do not exist.</li>
+<li>Consistent DB snapshots across shards do not exist.</li>
 </ul></section>
             
           </div>
@@ -1417,7 +1417,7 @@ both the data and the code based on type and function.</p>
             <section><p><img alt="Service Oriented Architecture" src="img/soa_stack.png" /></p>
 <p>The primary concept behind SOA is having many focused mini-applications.</p>
 <p>Each of these focused mini-applications is called a service.</p>
-<p>When a front-end appplication server needs data to satify a request, instead of
+<p>When a front-end application server needs data to satisfy a request, instead of
 speaking to a database, it will request data from the appropriate service.</p></section>
             
           </div>
@@ -1809,7 +1809,7 @@ documentation.</p></section>
 <li>All teams will henceforth expose their data and functionality through
    service interfaces.</li>
 <li>Teams must communicate with each other through these interfaces.</li>
-<li>There will be no other form of interprocess communication allowed: no direct
+<li>There will be no other form of inter-process communication allowed: no direct
    linking, no direct reads of another team's data store, no shared-memory
    model, no back-doors whatsoever. The only communication allowed is via
    service interface calls over the network.</li>
@@ -1854,7 +1854,7 @@ documentation.</p></section>
             
             <section><h2>Strengths</h2>
 <ul>
-<li>Small encapsulated codebases</li>
+<li>Small encapsulated code-bases</li>
 <li>Scales well as application size scales</li>
 <li>Scales well as number of teams scale</li>
 </ul>
@@ -1863,7 +1863,7 @@ documentation.</p></section>
 <li>May not scale with the number of users (e.g., increased load to
   authentication service)</li>
 <li>Transactions across services do not exist</li>
-<li>Consistent DB snapshots accross services do not exist</li>
+<li>Consistent DB snapshots across services do not exist</li>
 </ul></section>
             
           </div>
@@ -1927,7 +1927,7 @@ for your application.</p></section>
             
             
             <section><p><img alt="Database Master Follower" src="img/database_master_follower.png" /></p>
-<p>In general a realational database is hard to horizontally scale.</p>
+<p>In general a relational database is hard to horizontally scale.</p>
 <p>However, when limited to a read-only copies, databases are very easy to
 horizontally scale.</p>
 <ul>
@@ -2274,13 +2274,13 @@ transaction as the write.</p></section>
         <div class="slide slide-60">
           <div class="inner">
             
-            <header><h1>At Appfolio</h1></header>
+            <header><h1>At AppFolio</h1></header>
             
             
             <section><h2>High usage of sharding</h2>
 <ul>
 <li>Each customer's data is stored in separate logical database.</li>
-<li>Those logical databases can be moved between distinct phyicsal database
+<li>Those logical databases can be moved between distinct physical database
   servers as needed.</li>
 </ul>
 <h2>Medium use of SOA</h2>
@@ -2422,7 +2422,7 @@ need non-relational databases.</p></section>
       
       
       <tr id="toc-row-12">
-        <th><a href="#slide12">Non-trivial DB Horizontal Scaing</a></th>
+        <th><a href="#slide12">Non-trivial DB Horizontal Scaling</a></th>
         <td><a href="#slide12">12</a></td>
       </tr>
       
@@ -2710,7 +2710,7 @@ need non-relational databases.</p></section>
       
       
       <tr id="toc-row-60">
-        <th><a href="#slide60">At Appfolio</a></th>
+        <th><a href="#slide60">At AppFolio</a></th>
         <td><a href="#slide60">60</a></td>
       </tr>
       
