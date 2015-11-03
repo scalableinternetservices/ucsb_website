@@ -65,9 +65,11 @@ by Cardellini, Colajanni, and Yu.
 #### October 29, 2015 ([slides](/slides/10_tsung.html))
 * Load testing with Tsung
 
-#### November 3, 2015
-* RDBMSes and Sharding
-* Service Oriented Architectures and Read Slaves
+#### November 3, 2015 ([slides](/slides/11_rdbms_scaling.html))
+* Database Scaling
+    * Sharding
+    * Service Oriented Architectures
+    * Read-only Followers
 
 __TODO__:
 
