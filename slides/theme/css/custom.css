@@ -19,6 +19,7 @@
 .img-left img {
     float: left;
     padding-right: 30px;
+    padding-bottom: 30px;
 }
 
 .img-left ul, .img-left blockquote {
