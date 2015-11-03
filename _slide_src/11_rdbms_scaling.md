@@ -20,6 +20,7 @@ November 3, 2015
 
 * Write Tsung xml file containing a single-complete session
 * Use XML file to establish a baseline load test
+* Read chapter 4 in High Performance Browser Networking
 
 ---
 
