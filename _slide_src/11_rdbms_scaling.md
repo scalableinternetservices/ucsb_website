@@ -215,7 +215,7 @@ another way?
 
 # Sharding: Similar Data
 
-Sharding involves splitting data of the same time (e.g., the rows of the
+Sharding involves splitting data of the same type (e.g., the rows of the
 tables).
 
 For instance if we wanted to shard our `Comments` table into two partitions, we
