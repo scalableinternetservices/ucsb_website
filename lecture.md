@@ -75,9 +75,13 @@ __TODO__:
 
 * Read chapter 4 in High Performance Browser Networking
 
-#### November 5, 2015
-* Security basics: Intro to HTTPS
-* Security basics: Firewalls, XSS, CSRF, SQL Injection
+#### November 5, 2015 ([slides](/slides/12_web_security.html))
+* An Introduction to Web Security
+    * HTTPS
+    * Firewalls
+    * SQL Injection
+    * XSS
+    * CSRF
 
 #### November 10, 2015
 * Guest Lecture: Darren Mutz, Principal Software Engineer @
