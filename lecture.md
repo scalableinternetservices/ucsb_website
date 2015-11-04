@@ -76,21 +76,13 @@ __TODO__:
 * Read chapter 4 in High Performance Browser Networking
 
 #### November 5, 2015
-* Security basics: intro to HTTPS
+* Security basics: Intro to HTTPS
 * Security basics: Firewalls, XSS, CSRF, SQL Injection
-
-__TODO__:
-
-* Read
-  [CAP 12 years later](http://www.realtechsupport.org/UB/NP/Numeracy_CAP%2B12Years_2012.pdf)
-  by Eric Brewer
-* Read
-  [Eventually Consistent](http://www.scalableinternetservices.com/slides/vogels.pdf)
-  by Werner Vogels
 
 #### November 10, 2015
 * Guest Lecture: Darren Mutz, Principal Software Engineer @
   [AppFolio](http://www.appfolioinc.com/) (formerly worked for Amazon AWS)
+* "Technical Challenges in Content Delivery Networks"
 
 #### November 12, 2015
 * Guest Lecture: Sean Maloney, Big Data Engineer @
@@ -114,9 +106,19 @@ __TODO__:
 * Looking Forward: Client-side Renaissance
 * Looking Forward: An Overview of ES 6
 
+__TODO__:
+
+* Read
+  [CAP 12 years later](http://www.realtechsupport.org/UB/NP/Numeracy_CAP%2B12Years_2012.pdf)
+  by Eric Brewer
+* Read
+  [Eventually Consistent](http://www.scalableinternetservices.com/slides/vogels.pdf)
+  by Werner Vogels
+
 #### November 24, 2015
 * Guest Lecture: Josep Blanquer, Chief Architect @
   [Rightscale](http://www.rightscale.com/)
+* "NoSQL Datastores"
 
 #### November 26, 2015 (Thanksgiving, no class nor lab)
 
