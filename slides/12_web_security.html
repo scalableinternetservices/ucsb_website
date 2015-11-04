@@ -89,7 +89,7 @@
             </aside>
             
             <aside class="page_number">
-              1/2
+              1/9
             </aside>
           </footer>
         </div>
@@ -104,6 +104,7 @@
             
             
             <section><ul>
+<li>Security Motivation</li>
 <li>HTTPS</li>
 <li>Firewalls</li>
 <li>SQL Injection</li>
@@ -125,7 +126,253 @@
             </aside>
             
             <aside class="page_number">
-              2/2
+              2/9
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 12_web_security.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-3">
+          <div class="inner">
+            
+            <header><h1>Security Motivation</h1></header>
+            
+            
+            <section><p>Internet services increasingly mediate more and more interactions in modern
+society.</p>
+<ul>
+<li>I want to buy dinner.</li>
+<li>I want to save important documents.</li>
+<li>I want to find a job.</li>
+<li>I want to manage my investments.</li>
+</ul>
+<p>Every day billions of people use the same suite of technologies to solve these
+problems.</p>
+<blockquote>
+<p>How do we keep these interactions secure?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="12_web_security.md">12_web_security.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/9
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 12_web_security.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-4">
+          <div class="inner">
+            
+            <header><h1>Malice Online</h1></header>
+            
+            
+            <section><blockquote>
+<p>What sort of <em>bad actors</em> can exist in this system?</p>
+</blockquote>
+<p><img alt="Browser to Client" src="img/no_malicious_users.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="12_web_security.md">12_web_security.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/9
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 12_web_security.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-5">
+          <div class="inner">
+            
+            <header><h1>Malicious Client</h1></header>
+            
+            
+            <section><p>A malicious client may be a compromised host (browser, server, operating
+system), or a direct attacker.</p>
+<p><img alt="Malcious Client" src="img/malicious_client.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="12_web_security.md">12_web_security.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              5/9
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 12_web_security.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-6">
+          <div class="inner">
+            
+            <header><h1>Malicious Server</h1></header>
+            
+            
+            <section><p>A malicious server may be impersonating a real server (therealgoogle.com) in
+attempt to phish unsuspecting users, or it could be a compromised high-traffic
+web service serving up drive-by-downloads.</p>
+<p><img alt="Malcious Server" src="img/malicious_server.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="12_web_security.md">12_web_security.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/9
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 12_web_security.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-7">
+          <div class="inner">
+            
+            <header><h1>Malicious Observer</h1></header>
+            
+            
+            <section><p>A malicious observer may be your neighbor or even your government NSA that is
+recording your actions for nefarious purposes such as obtaining sensitive
+information (credentials, bank account numbers, credit cards), blackmail
+(ransomware).</p>
+<p><img alt="Malcious Observer" src="img/malicious_observer.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="12_web_security.md">12_web_security.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/9
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 12_web_security.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-8">
+          <div class="inner">
+            
+            <header><h1>Malicious Intermediary</h1></header>
+            
+            
+            <section><p>A malicious intermediary is similar to a malicious observer, but requires more
+than passive collection of web traffic. Intermediaries may perform a
+man-in-the-middle attack, DNS poisioning, or a handful of other types of
+attacks.</p>
+<p><img alt="Malcious Intermediary" src="img/malicious_intermediary.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="12_web_security.md">12_web_security.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/9
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 12_web_security.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-9">
+          <div class="inner">
+            
+            <header><h1>Online Security Goals</h1></header>
+            
+            
+            <section><blockquote>
+<p>What do we want?</p>
+</blockquote>
+<h2>Privacy</h2>
+<p>My data cannot be read by by third parties.</p>
+<h2>Authenticity</h2>
+<p>I am communicating with whom I expect to be communicating with.</p>
+<h2>Integrity</h2>
+<p>Neither my messages, nor the other party's messages have been tampered with.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="12_web_security.md">12_web_security.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/9
             </aside>
           </footer>
         </div>
@@ -148,6 +395,48 @@
       <tr id="toc-row-2">
         <th><a href="#slide2">Today's Agenda</a></th>
         <td><a href="#slide2">2</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-3">
+        <th><a href="#slide3">Security Motivation</a></th>
+        <td><a href="#slide3">3</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-4">
+        <th><a href="#slide4">Malice Online</a></th>
+        <td><a href="#slide4">4</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-5">
+        <th><a href="#slide5">Malicious Client</a></th>
+        <td><a href="#slide5">5</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-6">
+        <th><a href="#slide6">Malicious Server</a></th>
+        <td><a href="#slide6">6</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-7">
+        <th><a href="#slide7">Malicious Observer</a></th>
+        <td><a href="#slide7">7</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-8">
+        <th><a href="#slide8">Malicious Intermediary</a></th>
+        <td><a href="#slide8">8</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-9">
+        <th><a href="#slide9">Online Security Goals</a></th>
+        <td><a href="#slide9">9</a></td>
       </tr>
       
       
