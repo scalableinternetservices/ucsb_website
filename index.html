@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Computer Science 290B</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link href="/css/theme.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-67332703-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+
+  <body>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Computer Science 290B</a>
+          </div>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              
+              
+              
+              
+              
+              
+              <li class="active"><a href="/lecture/">Lecture Schedule</a></li>
+              
+              
+              
+              <li class="active"><a href="/project/">Course Project</a></li>
+              
+              
+              
+              <li class="active"><a href="/project_ideas/">Project Ideas</a></li>
+              
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<div class="container container-left">
+  <div class="row">
+    <div class="col-md-3 hidden-xs">
+      <div class="sidebar well">
+  Scalable Internet Services, CS290B, Fall 2015
+
+</div>
+
+<div class="sidebar well">
+  <h1 id="course-information">Course Information</h1>
+
+<h2 id="instructor">Instructor</h2>
+
+<p><a href="http://cs.ucsb.edu/~bboe">Dr. Bryce Boe</a><br />
+<a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#098;&#098;&#111;&#101;&#064;&#099;&#115;&#046;&#117;&#099;&#115;&#098;&#046;&#101;&#100;&#117;">&#098;&#098;&#111;&#101;&#064;&#099;&#115;&#046;&#117;&#099;&#115;&#098;&#046;&#101;&#100;&#117;</a></p>
+
+<h2 id="lecture">Lecture</h2>
+<p>Tuesday and Thursday<br />
+3:00pm – 4:50pm<br />
+Phelps 2510</p>
+
+<h2 id="lab">Lab</h2>
+<p>Thursday<br />
+5:00pm – 6:50pm<br />
+Phelps 3523</p>
+
+<h2 id="resources">Resources</h2>
+
+<p><a href="https://piazza.com/class/idgkoaxbvg14lx">Piazza</a> (class discussion)</p>
+
+<p><a href="https://github.com/scalableinternetservices"><i class="fa fa-github"></i> Github</a></p>
+
+<h2 id="textbooks">Textbooks</h2>
+
+<p><a href="http://www.amazon.com/gp/product/1937785564/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1937785564&amp;linkCode=as2&amp;tag=bryceboe-20&amp;linkId=ZZQH7R6MHXNHU6VQ">Agile Web Development with Rails 4</a><br />
+ISBN: 9781937785567<br />
+<em>A copy will be available in the library reserves.</em></p>
+
+<p><a href="http://www.amazon.com/gp/product/1449344763/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1449344763&amp;linkCode=as2&amp;tag=f-4-20&amp;linkId=ZD3ZDBNOTM6C4OWS">High Performance Browser Networking</a><br />
+ISBN: 9781449344764<br />
+<em><a href="http://chimera.labs.oreilly.com/books/1230000000545/index.html">Available online</a>.</em><br />
+Note: The online version is slightly more <a href="http://chimera.labs.oreilly.com/books/1230000000545/pr02.html#_may_23_2014">up-to-date</a>.</p>
+
+</div>
+
+    </div>
+    <div class="col-md-9">
+      <h2 id="course-description">Course Description</h2>
+
+<p>This course explores advanced topics in highly scalable Internet services and
+their underlying systems architecture. Software today is increasingly being
+delivered as a service: accessible globally via web browsers and mobile
+applications and backed by millions of servers. Modern frameworks and platforms
+are making it easier to build and deploy these systems, such as
+<a href="http://rubyonrails.org/">Ruby on Rails</a> and
+<a href="https://aws.amazon.com/ec2/">Amazon’s EC2</a>.</p>
+
+<p>Yet despite these advances, some concerns just don’t go away. Building scalable
+Internet services today still requires an understanding of topics like caching,
+load balancing, security, and monitoring. In this course we will examine these
+topics and more: the state of the art in building scalable Internet services.</p>
+
+<h2 id="lectures">Lectures</h2>
+
+<p>Course lectures will be Tuesdays and Thursdays, from 3:00pm to 4:50pm in
+Phelps 2510. Lecture material will cover the essentials of building large scale
+Internet services. The lecture schedule and slides are available online.</p>
+
+<h2 id="project">Project</h2>
+
+<p>The goal of the course project is to gain hands-on experience in building and
+deploying a scalable web service on the Internet. Students will do this using
+the latest web technologies in order to learn how to tackle scalability and
+fault-tolerance concerns. Projects will be conducted in agile teams, and
+students will build their own scalable, redundant web site using fundamental
+web technologies and the <a href="http://rubyonrails.org/">Ruby on Rails</a> framework.</p>
+
+<p>Project-centric lab will meet every Thursday from 5:00pm to 6:50pm in
+Phelps 3525.</p>
+
+<h2 id="learning-outcomes">Learning Outcomes</h2>
+
+<p>By the end of this course CS290B students will be able to:</p>
+
+<ul>
+  <li>create a <a href="http://rubyonrails.org/">Ruby on Rails</a> web service and deploy it
+to <a href="https://aws.amazon.com/ec2/">Amazon’s EC2</a></li>
+  <li>detail a significant majority of the general <em>services</em> and protocols that
+are, or may be, involved when browsing to a high-traffic volume web service
+such as <a href="https://www.reddit.com">reddit.com</a></li>
+  <li>determine via measurement where bottlenecks exist in a web service under
+their control</li>
+  <li>employ memcached to reduce the load on an uncached web service in order to
+handle a larger volume of traffic</li>
+  <li>utilize git to contribute to open source projects on
+<a href="https://github.com/">github</a> via pull requests</li>
+</ul>
+
+<h2 id="grading">Grading</h2>
+
+<p>At the end of the quarter each group’s project will be assigned a grade based
+on their web service being of sufficient complexity, and the group’s
+description of their methodological approach to load testing and subsequent
+scaling via various techniques as described in their project write-up and/or in
+their project presentation. Objectively these components break down into:</p>
+
+<ul>
+  <li>30%: web service complexity</li>
+  <li>50%: load testing and scaling (communicated through presentation and/or
+write-up)</li>
+  <li>10%: quality of project presentation</li>
+  <li>10%: quality project write-up</li>
+</ul>
+
+<p>5% of an individual’s grade is based on their participation in-class and on
+piazza.</p>
+
+<p>The remaining 95% of an individual’s grade will be computed by multiplying
+their group grade by an individual score. Individual scores are computed by
+suming the relative percent of <em>work</em> each individual confidentially assigns
+other individuals in their group.</p>
+
+<p>For example, given a three person group with a group grade of 95%, everyone
+individually with 100% participation, and the following peer-graded scores:</p>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">Alice</th>
+      <th style="text-align: center">Bob</th>
+      <th style="text-align: center">Chuck</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Alice</td>
+      <td style="text-align: center">-</td>
+      <td style="text-align: center">55%</td>
+      <td style="text-align: center">45%</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Bob</td>
+      <td style="text-align: center">60%</td>
+      <td style="text-align: center">-</td>
+      <td style="text-align: center">40%</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Chuck</td>
+      <td style="text-align: center">52%</td>
+      <td style="text-align: center">48%</td>
+      <td style="text-align: center">-</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td style="text-align: center"><strong>Total</strong></td>
+      <td style="text-align: center"><strong>112%</strong></td>
+      <td style="text-align: center"><strong>103%</strong></td>
+      <td style="text-align: center"><strong>85%</strong></td>
+    </tr>
+  </tfoot>
+</table>
+
+<p>Then Alice would end with a 106.4% (A+), Bob with 97.85% (A+) and Chuck with
+80.75% (B-).</p>
+
+<p>So that everyone knows where they stand within their group, we will
+confidentially conduct the peer grading process at each quarter interval in the
+course. Only the outcome of the final peer-grade will be used to compute the
+final grade.</p>
+
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12 footer navbar-inverse navbar-fixed-bottom">
+      <p class="copyright">&copy;2015
+        <a href="http://bryceboe.com">Bryce Boe</a>.
+        (<a href="/disclosure">Disclosure</a>)</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
