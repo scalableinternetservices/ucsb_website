@@ -499,7 +499,7 @@ encrypt(data, pub_key) = encrypted      decrypt(encrypted, priv_key) = data
 # Only those with the private key can create
 encrypt(data, priv_key) = encrypted      decrypt(encrypted, pub_key) = data
 </code></pre>
-<p>Common implementations: <strong>RSA</strong>, <strong>RSA</strong></p></section>
+<p>Common implementations: <strong>RSA</strong>, <strong>DSA</strong></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -570,8 +570,8 @@ encrypt(data, priv_key) = encrypted      decrypt(encrypted, pub_key) = data
 unreadable.</p>
 <p><strong>Integrity</strong>: Assuming no intermediary has the secret key, the data we decrypt
 is guaranteed to be the data that was encrypted on the server-side.</p>
-<p>Authenticity: We have no guarantee that we are actually communicating
-with whom we intend to be. :(</p></section>
+<p>Authenticity: We generally have some level of guarantee that we are actually communicating
+with whom we intend to be, as long as no intermediary has the secret key.</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -798,9 +798,9 @@ not been tampered with?</p>
 <ul>
 <li>Alice trusts Bob and as a result already has Bob's public key.</li>
 <li>Bob trusts Chelsea and has even <em>signed</em> Chelsea's public key.</li>
-<li>Alice doesn't know Chelsea but wants to talk to him.<ul>
-<li>Alice asks Chelsea for his public key.</li>
-<li>Chelsea presents his public key along with the signature from Bob.</li>
+<li>Alice doesn't know Chelsea but wants to talk to her.<ul>
+<li>Alice asks Chelsea for her public key.</li>
+<li>Chelsea presents her public key along with the signature from Bob.</li>
 <li>Alice verifies that Chelsea's key has indeed been signed with Bob's key,
   someone she trusts, and as a result accepts that she is really talking to
   Chelsea.</li>
@@ -1225,7 +1225,7 @@ all future communication to use HTTPS.</p>
         <div class="slide slide-32">
           <div class="inner">
             
-            <header><h1>Common Web Vulunerabilties</h1></header>
+            <header><h1>Common Web Vulnerabilties</h1></header>
             
             
             <section><p>Now we will look at three common security vulnerabilities on the web and how to
