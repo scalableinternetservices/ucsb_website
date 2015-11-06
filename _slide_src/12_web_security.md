@@ -50,7 +50,7 @@ problems.
 A malicious client may be a compromised host (browser, server, operating
 system), or a direct attacker.
 
-![Malcious Client](img/malicious_client.png)
+![Malicious Client](img/malicious_client.png)
 
 ---
 
@@ -60,18 +60,18 @@ A malicious server may be impersonating a real server (therealgoogle.com) in
 attempt to phish unsuspecting users, or it could be a compromised high-traffic
 web service serving up drive-by-downloads.
 
-![Malcious Server](img/malicious_server.png)
+![Malicious Server](img/malicious_server.png)
 
 ---
 
 # Malicious Observer
 
-A malicious observer may be your neighbor or even your government NSA that is
+A malicious observer may be your neighbor or even your government (NSA) that is
 recording your actions for nefarious purposes such as obtaining sensitive
 information (credentials, bank account numbers, credit cards), blackmail
-(ransomware).
+(ransom ware).
 
-![Malcious Observer](img/malicious_observer.png)
+![Malicious Observer](img/malicious_observer.png)
 
 ---
 
@@ -79,10 +79,10 @@ information (credentials, bank account numbers, credit cards), blackmail
 
 A malicious intermediary is similar to a malicious observer, but requires more
 than passive collection of web traffic. Intermediaries may perform a
-man-in-the-middle attack, DNS poisioning, or a handful of other types of
+man-in-the-middle attack, DNS poisoning, or a handful of other types of
 attacks.
 
-![Malcious Intermediary](img/malicious_intermediary.png)
+![Malicious Intermediary](img/malicious_intermediary.png)
 
 ---
 
@@ -153,7 +153,7 @@ key can be used to encrypt data, and the other used to decrypt.
     # Only those with the private key can create
     encrypt(data, priv_key) = encrypted      decrypt(encrypted, pub_key) = data
 
-Common implementations: __RSA__, __RSA__
+Common implementations: __RSA__, __DSA__
 
 ---
 
@@ -177,8 +177,9 @@ unreadable.
 __Integrity__: Assuming no intermediary has the secret key, the data we decrypt
 is guaranteed to be the data that was encrypted on the server-side.
 
-Authenticity: We have no guarantee that we are actually communicating
-with whom we intend to be. :(
+__Authenticity__: We generally have some level of guarantee that we are
+actually communicating with whom we intend to be, as long as no intermediary
+has the secret key.
 
 ---
 
@@ -194,7 +195,7 @@ between our browser and whatever server we want to talk to.
 
 # Asymmetric Cryptography on the Web
 
-Use asymmetric crypto to communicate a shared secret key.
+Use asymmetric cryptography to communicate a shared secret key.
 
 ![HTTP Shared Secret](img/http_shared_secret.png)
 
@@ -204,7 +205,7 @@ Use asymmetric crypto to communicate a shared secret key.
 
 # Man in the Middle Attack
 
-Malicious itermediary can:
+Malicious intermediary can:
 
 * Create their own asymmetric key pair
 * Present their public key to the server as the client's public key
@@ -258,9 +259,9 @@ We can use public key signatures to transitively authenticate someone.
 
 * Alice trusts Bob and as a result already has Bob's public key.
 * Bob trusts Chelsea and has even _signed_ Chelsea's public key.
-* Alice doesn't know Chelsea but wants to talk to him.
-    * Alice asks Chelsea for his public key.
-    * Chelsea presents his public key along with the signature from Bob.
+* Alice doesn't know Chelsea but wants to talk to her.
+    * Alice asks Chelsea for her public key.
+    * Chelsea presents her public key along with the signature from Bob.
     * Alice verifies that Chelsea's key has indeed been signed with Bob's key,
       someone she trusts, and as a result accepts that she is really talking to
       Chelsea.
@@ -303,9 +304,9 @@ with different combinations of cipher suites.
 
 ## After TCP setup
 
-1. Client initiates TLS handshake with a list of CipherSuites and a random
+1. Client initiates TLS handshake with a list of cipher suites and a random
    number
-2. Server responds with its cert, selected CipherSuite, and a random number
+2. Server responds with its cert, selected cipher suite, and a random number
 3. Client responds with more randomness, encrypted with the server's public key
 4. Each side computes session key based on the three random numbers
 5. Both sides use the symmetric session key to communicate
@@ -343,7 +344,7 @@ optimization.
 
 # TLS Goals
 
-> Have we acheived our goals?
+> Have we achieved our goals?
 
 ## Privacy
 
@@ -428,7 +429,7 @@ Informs the browser to only use HTTPS to access the domain for the next year.
 
 ---
 
-# Common Web Vulunerabilties
+# Common Web Vulnerabilities
 
 Now we will look at three common security vulnerabilities on the web and how to
 mitigate them:
@@ -439,7 +440,7 @@ Attacker can execute arbitrary SQL on the database
 
 ## Cross-site Scripting
 
-Attacker can execute arbitrary javascript on a user's browser
+Attacker can execute arbitrary JavaScript on a user's browser
 
 ## Cross-site Request Forgery
 
@@ -447,24 +448,24 @@ Attacker can trick user into performing an action on a targeted site
 
 ---
 
-# SQL Inejection
+# SQL Injection
 
 An SQL injection attack is when a malicious user submits a carefully crafted
 HTTP request that directly or indirectly causes your application server to
-interact with the database in a manner you did not indend.
+interact with the database in a manner you did not indent.
 
 ---
 
 # SQL Injection Example
 
-> How could we maniuplate the following controller?
+> How could we manipulate the following controller?
 
     !ruby
     def create
       sql = <<-SQL
         INSERT INTO comments
         user_id=#{params['user_id']},
-        comment=#{params['comment_text']}
+        comment='#{params['comment_text']}';
       SQL
       ActiveRecord::Base.connection.execute(sql)
     end
@@ -478,7 +479,7 @@ interact with the database in a manner you did not indend.
       sql = <<-SQL
         INSERT INTO comments
         user_id=#{params['user_id']},
-        comment=#{params['comment_text']}
+        comment='#{params['comment_text']}';
       SQL
       ActiveRecord::Base.connection.execute(sql)
     end
@@ -496,13 +497,13 @@ interact with the database in a manner you did not indend.
 What was templated as:
 
     !sql
-    INSERT INTO comments user_id=#{user_id}, comment='#{comment_text}'
+    INSERT INTO comments user_id=#{user_id}, comment='#{comment_text}';
 
 will become:
 
     !sql
     INSERT INTO comments user_id=5, comment='';
-    UPDATE users SET admin=1 WHERE user_id=5 and '1'='1'
+    UPDATE users SET admin=1 WHERE user_id=5 and '1'='1';
 
 ---
 
@@ -533,16 +534,16 @@ Rails does a lot of the work here for you:
 
 # Cross-site Scripting (XSS)
 
-__Javascript is powerful.__
+__JavaScript is powerful.__
 
-If an attacker can get a user to execute arbitrary javascript on a target site,
+If an attacker can get a user to execute arbitrary JavaScript on a target site,
 it can issue arbitrary AJAX HTTP requests to that site and GET requests to
 other sites.
 
 AJAX requests are restricted by browsers' same origin policy, but any requests
 to the same domain will include all relevant cookies.
 
-However, Javascript can still be used to read cookies and send secrets to other
+However, JavaScript can still be used to read cookies and send secrets to other
 domains via GET requests.
 
     !javascript
@@ -560,8 +561,8 @@ application (e.g., add a comment to a submission).
 When another user visits the page, the server includes this data as part of the
 body of the webpage.
 
-When the victim's browser encounters the data, it executes it inthe same way it
-executes all javascript that is embedded within the HTML document.
+When the victim's browser encounters the data, it executes it in the same way it
+executes all JavaScript that is embedded within the HTML document.
 
 ---
 
@@ -569,7 +570,7 @@ executes all javascript that is embedded within the HTML document.
 
 ![XSS Example](img/xss_example.png)
 
-> How can we prevent XSS from occuring?
+> How can we prevent XSS from occurring?
 
 ---
 
@@ -585,7 +586,7 @@ and rendering via `<%= submission.title %>` will produce:
 
     &lt;script&gt;alert(&quot;oops&quot;);&lt;/script&gt;
 
-__Note__: XSS can also be prevented by disabling inline javascript with a
+__Note__: XSS can also be prevented by disabling inline JavaScript with a
 Content Security Policy by trading convenience for security.
 
 ---
@@ -598,7 +599,7 @@ Content Security Policy by trading convenience for security.
 One method is by __fuzzing__.
 
 Fuzzing is the process of automatically submitting semi-random input to an
-appliation and watching for subsequent problematic side-effects.
+application and watching for subsequent problematic side-effects.
 
 __Tarantula__ is an automated tool to crawl and fuzz older rails applications
 (doesn't officially support rails 4).
@@ -609,7 +610,7 @@ __Tarantula__ is an automated tool to crawl and fuzz older rails applications
 
 ## Ingredients for this attack:
 
-* One malicous server
+* One malicious server
 * One target web site
 * One unsuspecting user of the target web site who happens to visit the
   malicious server
@@ -630,7 +631,7 @@ site using that site's cookies.
 CSRF could be used to:
 
 * Automatically post a tweet
-* Add a facebook friend
+* Add a Facebook friend
 * Change a password
 
 The possibilities are endless.
@@ -646,7 +647,7 @@ benign.
 
 ## Add a CRSF Protection Token to every request with side effects
 
-Generally every action with side effects originates with the preceeding page
+Generally every action with side effects originates with the preceding page
 load.
 
 On those pages insert a hidden CRSF protection token into the form.
@@ -712,7 +713,7 @@ values of course):
 
 Scalability Rules, by Martin Abbott
 
-* Can create difficult to scale chokepoint for either network traffic or transaction volume
+* Can create difficult to scale choke-point for either network traffic or transaction volume
 
 * May have impact on availability
      * DDoS attacks on session state memory
