@@ -217,7 +217,7 @@ problems.</p>
             
             <section><p>A malicious client may be a compromised host (browser, server, operating
 system), or a direct attacker.</p>
-<p><img alt="Malcious Client" src="img/malicious_client.png" /></p></section>
+<p><img alt="Malicious Client" src="img/malicious_client.png" /></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -250,7 +250,7 @@ system), or a direct attacker.</p>
             <section><p>A malicious server may be impersonating a real server (therealgoogle.com) in
 attempt to phish unsuspecting users, or it could be a compromised high-traffic
 web service serving up drive-by-downloads.</p>
-<p><img alt="Malcious Server" src="img/malicious_server.png" /></p></section>
+<p><img alt="Malicious Server" src="img/malicious_server.png" /></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -280,11 +280,11 @@ web service serving up drive-by-downloads.</p>
             <header><h1>Malicious Observer</h1></header>
             
             
-            <section><p>A malicious observer may be your neighbor or even your government NSA that is
+            <section><p>A malicious observer may be your neighbor or even your government (NSA) that is
 recording your actions for nefarious purposes such as obtaining sensitive
 information (credentials, bank account numbers, credit cards), blackmail
-(ransomware).</p>
-<p><img alt="Malcious Observer" src="img/malicious_observer.png" /></p></section>
+(ransom ware).</p>
+<p><img alt="Malicious Observer" src="img/malicious_observer.png" /></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -316,9 +316,9 @@ information (credentials, bank account numbers, credit cards), blackmail
             
             <section><p>A malicious intermediary is similar to a malicious observer, but requires more
 than passive collection of web traffic. Intermediaries may perform a
-man-in-the-middle attack, DNS poisioning, or a handful of other types of
+man-in-the-middle attack, DNS poisoning, or a handful of other types of
 attacks.</p>
-<p><img alt="Malcious Intermediary" src="img/malicious_intermediary.png" /></p></section>
+<p><img alt="Malicious Intermediary" src="img/malicious_intermediary.png" /></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -499,7 +499,7 @@ encrypt(data, pub_key) = encrypted      decrypt(encrypted, priv_key) = data
 # Only those with the private key can create
 encrypt(data, priv_key) = encrypted      decrypt(encrypted, pub_key) = data
 </code></pre>
-<p>Common implementations: <strong>RSA</strong>, <strong>RSA</strong></p></section>
+<p>Common implementations: <strong>RSA</strong>, <strong>DSA</strong></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -570,8 +570,9 @@ encrypt(data, priv_key) = encrypted      decrypt(encrypted, pub_key) = data
 unreadable.</p>
 <p><strong>Integrity</strong>: Assuming no intermediary has the secret key, the data we decrypt
 is guaranteed to be the data that was encrypted on the server-side.</p>
-<p>Authenticity: We have no guarantee that we are actually communicating
-with whom we intend to be. :(</p></section>
+<p><strong>Authenticity</strong>: We generally have some level of guarantee that we are
+actually communicating with whom we intend to be, as long as no intermediary
+has the secret key.</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -636,7 +637,7 @@ between our browser and whatever server we want to talk to.</p>
             <header><h1>Asymmetric Cryptography on the Web</h1></header>
             
             
-            <section><p>Use asymmetric crypto to communicate a shared secret key.</p>
+            <section><p>Use asymmetric cryptography to communicate a shared secret key.</p>
 <p><img alt="HTTP Shared Secret" src="img/http_shared_secret.png" /></p>
 <blockquote>
 <p>Does this solve all of our malicious actor problems?</p>
@@ -670,7 +671,7 @@ between our browser and whatever server we want to talk to.</p>
             <header><h1>Man in the Middle Attack</h1></header>
             
             
-            <section><p>Malicious itermediary can:</p>
+            <section><p>Malicious intermediary can:</p>
 <ul>
 <li>Create their own asymmetric key pair</li>
 <li>Present their public key to the server as the client's public key</li>
@@ -798,9 +799,9 @@ not been tampered with?</p>
 <ul>
 <li>Alice trusts Bob and as a result already has Bob's public key.</li>
 <li>Bob trusts Chelsea and has even <em>signed</em> Chelsea's public key.</li>
-<li>Alice doesn't know Chelsea but wants to talk to him.<ul>
-<li>Alice asks Chelsea for his public key.</li>
-<li>Chelsea presents his public key along with the signature from Bob.</li>
+<li>Alice doesn't know Chelsea but wants to talk to her.<ul>
+<li>Alice asks Chelsea for her public key.</li>
+<li>Chelsea presents her public key along with the signature from Bob.</li>
 <li>Alice verifies that Chelsea's key has indeed been signed with Bob's key,
   someone she trusts, and as a result accepts that she is really talking to
   Chelsea.</li>
@@ -912,9 +913,9 @@ with different combinations of cipher suites.</p></section>
             <section><p><img alt="TLS Handshake" src="img/tls_handshake.png" /></p>
 <h2>After TCP setup</h2>
 <ol>
-<li>Client initiates TLS handshake with a list of CipherSuites and a random
+<li>Client initiates TLS handshake with a list of cipher suites and a random
    number</li>
-<li>Server responds with its cert, selected CipherSuite, and a random number</li>
+<li>Server responds with its cert, selected cipher suite, and a random number</li>
 <li>Client responds with more randomness, encrypted with the server's public key</li>
 <li>Each side computes session key based on the three random numbers</li>
 <li>Both sides use the symmetric session key to communicate</li>
@@ -1020,7 +1021,7 @@ optimization.</p></section>
             
             
             <section><blockquote>
-<p>Have we acheived our goals?</p>
+<p>Have we achieved our goals?</p>
 </blockquote>
 <h2>Privacy</h2>
 <p>No other party can know the three random numbers with which we generated the
@@ -1225,7 +1226,7 @@ all future communication to use HTTPS.</p>
         <div class="slide slide-32">
           <div class="inner">
             
-            <header><h1>Common Web Vulunerabilties</h1></header>
+            <header><h1>Common Web Vulnerabilities</h1></header>
             
             
             <section><p>Now we will look at three common security vulnerabilities on the web and how to
@@ -1233,7 +1234,7 @@ mitigate them:</p>
 <h2>SQL Injection</h2>
 <p>Attacker can execute arbitrary SQL on the database</p>
 <h2>Cross-site Scripting</h2>
-<p>Attacker can execute arbitrary javascript on a user's browser</p>
+<p>Attacker can execute arbitrary JavaScript on a user's browser</p>
 <h2>Cross-site Request Forgery</h2>
 <p>Attacker can trick user into performing an action on a targeted site</p></section>
             
@@ -1262,12 +1263,12 @@ mitigate them:</p>
         <div class="slide slide-33">
           <div class="inner">
             
-            <header><h1>SQL Inejection</h1></header>
+            <header><h1>SQL Injection</h1></header>
             
             
             <section><p>An SQL injection attack is when a malicious user submits a carefully crafted
 HTTP request that directly or indirectly causes your application server to
-interact with the database in a manner you did not indend.</p></section>
+interact with the database in a manner you did not indent.</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -1298,7 +1299,7 @@ interact with the database in a manner you did not indend.</p></section>
             
             
             <section><blockquote>
-<p>How could we maniuplate the following controller?</p>
+<p>How could we manipulate the following controller?</p>
 </blockquote>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -1311,7 +1312,7 @@ interact with the database in a manner you did not indend.</p></section>
   <span class="n">sql</span> <span class="o">=</span> <span class="o">&lt;&lt;-</span><span class="no">SQL</span>
 <span class="sh">    INSERT INTO comments</span>
 <span class="sh">    user_id=#{params[&#39;user_id&#39;]},</span>
-<span class="sh">    comment=#{params[&#39;comment_text&#39;]}</span>
+<span class="sh">    comment=&#39;#{params[&#39;comment_text&#39;]}&#39;;</span>
 <span class="no">  SQL</span>
   <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
 <span class="k">end</span>
@@ -1357,7 +1358,7 @@ interact with the database in a manner you did not indend.</p></section>
   <span class="n">sql</span> <span class="o">=</span> <span class="o">&lt;&lt;-</span><span class="no">SQL</span>
 <span class="sh">    INSERT INTO comments</span>
 <span class="sh">    user_id=#{params[&#39;user_id&#39;]},</span>
-<span class="sh">    comment=#{params[&#39;comment_text&#39;]}</span>
+<span class="sh">    comment=&#39;#{params[&#39;comment_text&#39;]}&#39;;</span>
 <span class="no">  SQL</span>
   <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
 <span class="k">end</span>
@@ -1399,13 +1400,13 @@ comment_text='; UPDATE users SET admin=1 WHERE user_id=5 and '1'='1
             
             
             <section><p>What was templated as:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">comments</span> <span class="n">user_id</span><span class="o">=#</span><span class="err">{</span><span class="n">user_id</span><span class="err">}</span><span class="p">,</span> <span class="k">comment</span><span class="o">=</span><span class="s1">&#39;#{comment_text}&#39;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">comments</span> <span class="n">user_id</span><span class="o">=#</span><span class="err">{</span><span class="n">user_id</span><span class="err">}</span><span class="p">,</span> <span class="k">comment</span><span class="o">=</span><span class="s1">&#39;#{comment_text}&#39;</span><span class="p">;</span>
 </pre></div>
 </td></tr></table>
 <p>will become:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">comments</span> <span class="n">user_id</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="k">comment</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">;</span>
-<span class="k">UPDATE</span> <span class="n">users</span> <span class="k">SET</span> <span class="k">admin</span><span class="o">=</span><span class="mi">1</span> <span class="k">WHERE</span> <span class="n">user_id</span><span class="o">=</span><span class="mi">5</span> <span class="k">and</span> <span class="s1">&#39;1&#39;</span><span class="o">=</span><span class="s1">&#39;1&#39;</span>
+<span class="k">UPDATE</span> <span class="n">users</span> <span class="k">SET</span> <span class="k">admin</span><span class="o">=</span><span class="mi">1</span> <span class="k">WHERE</span> <span class="n">user_id</span><span class="o">=</span><span class="mi">5</span> <span class="k">and</span> <span class="s1">&#39;1&#39;</span><span class="o">=</span><span class="s1">&#39;1&#39;</span><span class="p">;</span>
 </pre></div>
 </td></tr></table></section>
             
@@ -1508,13 +1509,13 @@ first.</p>
             <header><h1>Cross-site Scripting (XSS)</h1></header>
             
             
-            <section><p><strong>Javascript is powerful.</strong></p>
-<p>If an attacker can get a user to execute arbitrary javascript on a target site,
+            <section><p><strong>JavaScript is powerful.</strong></p>
+<p>If an attacker can get a user to execute arbitrary JavaScript on a target site,
 it can issue arbitrary AJAX HTTP requests to that site and GET requests to
 other sites.</p>
 <p>AJAX requests are restricted by browsers' same origin policy, but any requests
 to the same domain will include all relevant cookies.</p>
-<p>However, Javascript can still be used to read cookies and send secrets to other
+<p>However, JavaScript can still be used to read cookies and send secrets to other
 domains via GET requests.</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -1556,8 +1557,8 @@ domains via GET requests.</p>
 application (e.g., add a comment to a submission).</p>
 <p>When another user visits the page, the server includes this data as part of the
 body of the webpage.</p>
-<p>When the victim's browser encounters the data, it executes it inthe same way it
-executes all javascript that is embedded within the HTML document.</p></section>
+<p>When the victim's browser encounters the data, it executes it in the same way it
+executes all JavaScript that is embedded within the HTML document.</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -1589,7 +1590,7 @@ executes all javascript that is embedded within the HTML document.</p></section>
             
             <section><p><img alt="XSS Example" src="img/xss_example.png" /></p>
 <blockquote>
-<p>How can we prevent XSS from occuring?</p>
+<p>How can we prevent XSS from occurring?</p>
 </blockquote></section>
             
           </div>
@@ -1627,7 +1628,7 @@ this for you:</p>
 and rendering via <code>&lt;%= submission.title %&gt;</code> will produce:</p>
 <pre><code>&amp;lt;script&amp;gt;alert(&amp;quot;oops&amp;quot;);&amp;lt;/script&amp;gt;
 </code></pre>
-<p><strong>Note</strong>: XSS can also be prevented by disabling inline javascript with a
+<p><strong>Note</strong>: XSS can also be prevented by disabling inline JavaScript with a
 Content Security Policy by trading convenience for security.</p></section>
             
           </div>
@@ -1664,7 +1665,7 @@ application?</p>
 </blockquote>
 <p>One method is by <strong>fuzzing</strong>.</p>
 <p>Fuzzing is the process of automatically submitting semi-random input to an
-appliation and watching for subsequent problematic side-effects.</p>
+application and watching for subsequent problematic side-effects.</p>
 <p><strong>Tarantula</strong> is an automated tool to crawl and fuzz older rails applications
 (doesn't officially support rails 4).</p></section>
             
@@ -1698,7 +1699,7 @@ appliation and watching for subsequent problematic side-effects.</p>
             
             <section><h2>Ingredients for this attack:</h2>
 <ul>
-<li>One malicous server</li>
+<li>One malicious server</li>
 <li>One target web site</li>
 <li>One unsuspecting user of the target web site who happens to visit the
   malicious server</li>
@@ -1741,7 +1742,7 @@ site using that site's cookies.</p>
 <p>CSRF could be used to:</p>
 <ul>
 <li>Automatically post a tweet</li>
-<li>Add a facebook friend</li>
+<li>Add a Facebook friend</li>
 <li>Change a password</li>
 </ul>
 <p>The possibilities are endless.</p></section>
@@ -1778,7 +1779,7 @@ site using that site's cookies.</p>
 <p>This step ensures any CSRF via image tag, or other resource auto-loading tag is
 benign.</p>
 <h2>Add a CRSF Protection Token to every request with side effects</h2>
-<p>Generally every action with side effects originates with the preceeding page
+<p>Generally every action with side effects originates with the preceding page
 load.</p>
 <p>On those pages insert a hidden CRSF protection token into the form.</p>
 <p>Side-effect requests submitted without a valid token are rejected.</p></section>
@@ -1954,7 +1955,7 @@ values of course):</p>
 <p>Scalability Rules, by Martin Abbott</p>
 <ul>
 <li>
-<p>Can create difficult to scale chokepoint for either network traffic or transaction volume</p>
+<p>Can create difficult to scale choke-point for either network traffic or transaction volume</p>
 </li>
 <li>
 <p>May have impact on availability</p>
@@ -2258,13 +2259,13 @@ values of course):</p>
       
       
       <tr id="toc-row-32">
-        <th><a href="#slide32">Common Web Vulunerabilties</a></th>
+        <th><a href="#slide32">Common Web Vulnerabilities</a></th>
         <td><a href="#slide32">32</a></td>
       </tr>
       
       
       <tr id="toc-row-33">
-        <th><a href="#slide33">SQL Inejection</a></th>
+        <th><a href="#slide33">SQL Injection</a></th>
         <td><a href="#slide33">33</a></td>
       </tr>
       
