@@ -91,6 +91,7 @@ __TODO__:
 #### November 12, 2015
 * Guest Lecture: Sean Maloney, Big Data Engineer @
   [Riot Games](http://www.riotgames.com/)
+* "Moving Mountains of Player Data"
 
 __TODO__:
 
