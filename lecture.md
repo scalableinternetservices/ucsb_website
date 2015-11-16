@@ -100,7 +100,7 @@ __TODO__:
   [chapter 12](http://chimera.labs.oreilly.com/books/1230000000545/ch12.html)
   is updated with more relevant information)
 
-#### Novemver 17, 2015
+#### Novemver 17, 2015 ([slides](/slides/13_http2_quic.html))
 * HTTP 2.0
 * QUIC
 
