@@ -101,15 +101,16 @@ __TODO__:
   is updated with more relevant information)
 
 #### Novemver 17, 2015
-* Looking Forward: HTTP 2.0 and QUIC
+* HTTP 2.0
+* QUIC
 
 __TODO__:
 
 * Read chapter 15 in High Performance Browser Networking
 
 #### Novemver 19, 2015
-* Looking Forward: Client-side Renaissance
-* Looking Forward: An Overview of ES 6
+* Client-side Renaissance
+* An Overview of ES 6
 
 __TODO__:
 
@@ -128,8 +129,8 @@ __TODO__:
 #### November 26, 2015 (Thanksgiving, no class nor lab)
 
 #### December 1, 2015
-* Beyond Javascript Clients: asm.js
-* Beyond Javascript Clients: Emscripten and Webruby
+* Guest Lecture: Neil Williams, Lead Programmer @
+  [Reddit](https://www.reddit.com)
 
 #### December 3, 2015
 * Guest Lecture: Jonathan Kupferman, CTO @ [Ketchup](http://ketchup.is/)
