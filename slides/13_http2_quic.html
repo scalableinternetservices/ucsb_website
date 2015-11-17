@@ -25,7 +25,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>HTTP 2.0 and QUIC</title>
+    <title>HTTP/2 and QUIC</title>
     <!-- Styles -->
     
     <link rel="stylesheet" media="print" href="theme/css/print.css">
@@ -68,7 +68,7 @@
         <div class="slide title slide-1">
           <div class="inner">
             
-            <header><h1>HTTP 2.0 and QUIC</h1></header>
+            <header><h1>HTTP/2 and QUIC</h1></header>
             
             
             <section><p><strong>CS290B</strong></p>
@@ -89,7 +89,7 @@
             </aside>
             
             <aside class="page_number">
-              1/6
+              1/26
             </aside>
           </footer>
         </div>
@@ -105,7 +105,7 @@
             
             <section><ul>
 <li>HTTP Optimization Hacks</li>
-<li>HTTP 2.0</li>
+<li>HTTP/2</li>
 <li>QUIC</li>
 </ul></section>
             
@@ -123,7 +123,7 @@
             </aside>
             
             <aside class="page_number">
-              2/6
+              2/26
             </aside>
           </footer>
         </div>
@@ -160,7 +160,7 @@
             </aside>
             
             <aside class="page_number">
-              3/6
+              3/26
             </aside>
           </footer>
         </div>
@@ -192,7 +192,7 @@
             </aside>
             
             <aside class="page_number">
-              4/6
+              4/26
             </aside>
           </footer>
         </div>
@@ -223,7 +223,7 @@
             </aside>
             
             <aside class="page_number">
-              5/6
+              5/26
             </aside>
           </footer>
         </div>
@@ -258,17 +258,21 @@ request can starve all others.</p>
             </aside>
             
             <aside class="page_number">
-              6/6
+              6/26
             </aside>
           </footer>
         </div>
       </div>
       
-      <!-- slide source:  -->
+      <!-- slide source: 13_http2_quic.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-">
+        <div class="slide slide-7">
           <div class="inner">
             
+            <header><h1>HTTP Request Header</h1></header>
+            
+            
+            <section><p><img alt="HTTP Header 1" src="img/http_header_1.png" /></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -279,8 +283,674 @@ request can starve all others.</p>
           </div>
           <footer>
             
+            <aside class="source">
+              Source: <a href="13_http2_quic.md">13_http2_quic.md</a>
+            </aside>
+            
             <aside class="page_number">
-              /6
+              7/26
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 13_http2_quic.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-8">
+          <div class="inner">
+            
+            <header><h1>HTTP Request Header Repetition</h1></header>
+            
+            
+            <section><p><img alt="HTTP Header 2" src="img/http_header_2.png" /></p>
+<p>The highlighted sections show the differences from this request to the previous
+request. All other bytes are duplicates.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="13_http2_quic.md">13_http2_quic.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/26
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 13_http2_quic.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-9">
+          <div class="inner">
+            
+            <header><h1>HTTP Request Header Repetition</h1></header>
+            
+            
+            <section><p><img alt="HTTP Header 3" src="img/http_header_3.png" /></p>
+<p>In this case the only thing that changed from the previous request were 14 new
+bytes out of 683.</p>
+<blockquote>
+<p>How do we minimize this header overhead with HTTP/1.1?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="13_http2_quic.md">13_http2_quic.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/26
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 13_http2_quic.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-10">
+          <div class="inner">
+            
+            <header><h1>Asset Concatenation</h1></header>
+            
+            
+            <section><p>To minimize header overhead in HTTP/1.1 we concatenate files together (e.g.,
+Javascript, and CSS).</p>
+<p>In Rails, that is one of the purposes of the asset pipeline.</p>
+<p>This technique can also be applied to images.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="13_http2_quic.md">13_http2_quic.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/26
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 13_http2_quic.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-11">
+          <div class="inner">
+            
+            <header><h1>Image Spriting</h1></header>
+            
+            
+            <section><p><img alt="Image Sprite" src="img/image_sprite.jpg" /></p>
+<p>A sprite is an image that is comprised of many smaller images.</p>
+<p>CSS is used to extract the individual image based on its position and size in
+the sprite.</p>
+<p>Spriting is cumbersome to work with, and is a hack used to obtain better
+performance.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="13_http2_quic.md">13_http2_quic.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/26
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 13_http2_quic.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-12">
+          <div class="inner">
+            
+            <header><h1>Concurrent TCP Connections</h1></header>
+            
+            
+            <section><p>The browser will utilize up to 6 concurrent TCP connections to a single host in
+order to speed up the time to obtain a page's resources.</p>
+<p>For better performance domain sharding is utilized with HTTP/1.1.</p>
+<p><img alt="Concurrent TCP Connections" src="img/concurrent_http.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="13_http2_quic.md">13_http2_quic.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/26
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 13_http2_quic.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-13">
+          <div class="inner">
+            
+            <header><h1>Performance Goals</h1></header>
+            
+            
+            <section><p>We want fewer TCP connections, but</p>
+<ul>
+<li>we don't want head-of-line blocking</li>
+<li>we don't want to have to concatenate our CSS and Javascript</li>
+<li>we don't want to have to use image sprites</li>
+<li>we don't want to have to split our resources to trick the browser</li>
+</ul>
+<blockquote>
+<p>What do we do?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="13_http2_quic.md">13_http2_quic.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/26
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 13_http2_quic.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-14">
+          <div class="inner">
+            
+            <header><h1>HTTP/2</h1></header>
+            
+            
+            <section><p>HTTP/2 addresses all of these issues.</p>
+<h2>History</h2>
+<ul>
+<li>Google internally announced the SPDY protcol (Nov 2009).</li>
+<li>Google released SPDY in Chrome for (Sept 2010).</li>
+<li>Google deployed SPDY on all their servers (Jan 2011).</li>
+<li>Twitter deployed SPDY on its servers (March 2012).</li>
+<li>Apache support for SPDY (April 2012)</li>
+<li>NGINX support for SPDY (June 2012)</li>
+<li>Firefox support for SPDY (June 2012)</li>
+<li>First draft of HTTP/2.0 based on SPDY (Nov 2012)</li>
+<li>RFC 7540: HTTP/2.0 published (May 2015)</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="13_http2_quic.md">13_http2_quic.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/26
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 13_http2_quic.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-15">
+          <div class="inner">
+            
+            <header><h1>HTTP/2 Features</h1></header>
+            
+            
+            <section><ul>
+<li>Multiplexed TCP connection permits concurrent streams over a single TCP
+  connection with the ability to prioritize streams.</li>
+<li>Header compression minimizes request and response overhead.</li>
+<li>Server push provides a way for the server to send responses prior to
+  receiving a request for the associated resource.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="13_http2_quic.md">13_http2_quic.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/26
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 13_http2_quic.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-16">
+          <div class="inner">
+            
+            <header><h1>HTTP/2 Binary Frames</h1></header>
+            
+            
+            <section><p><img alt="HTTP/2 Frame" src="img/http2_frame.png" /></p>
+<p>Note that the headers and data are in separate frames.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="13_http2_quic.md">13_http2_quic.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              16/26
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 13_http2_quic.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-17">
+          <div class="inner">
+            
+            <header><h1>HTTP/2 Binary Framed Connection</h1></header>
+            
+            
+            <section><p><img alt="HTTP/2 Connection" src="img/http2_connection.png" /></p>
+<p>Note that different streams are interleaved over a single TCP connection.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="13_http2_quic.md">13_http2_quic.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              17/26
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 13_http2_quic.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-18">
+          <div class="inner">
+            
+            <header><h1>Header Compression</h1></header>
+            
+            
+            <section><p>With binary framing, header compression becomes easy.</p>
+<p>Initially implemented using GZIP, but CRIME attack revealked weaknesses.</p>
+<ul>
+<li>If an attacker can inject data, compressed size can leak information.</li>
+</ul>
+<p>Now implemented using HPACK.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="13_http2_quic.md">13_http2_quic.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              18/26
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 13_http2_quic.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-19">
+          <div class="inner">
+            
+            <header><h1>HPACK</h1></header>
+            
+            
+            <section><p><img alt="HPACK" src="img/hpack.png" /></p>
+<ol>
+<li>HPACK allows the transmitted header fields to be encoded via a static
+   Huffman code, which reduces their individual transfer size.</li>
+<li>HPACK requires that both the client and server maintain and update an
+   indexed list of previously seen header fields (i.e. establishes a shared
+   compression context), which is then used as a reference to efficiently
+   encode previously transmitted values.</li>
+</ol>
+<p>Source:
+<a href="http://chimera.labs.oreilly.com/books/1230000000545/ch12.html#HTTP2_HEADER_COMPRESSION">High Performance Browser Networking</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="13_http2_quic.md">13_http2_quic.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              19/26
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 13_http2_quic.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-20">
+          <div class="inner">
+            
+            <header><h1>Binary Framing Benefits</h1></header>
+            
+            
+            <section><p><img alt="Binary Framing Flexibility" src="img/http2_flexibility.png" /></p>
+<p>With binary framing the ordering of resources is flexible.</p>
+<ul>
+<li>Handling of many small resources is efficient</li>
+<li>Headers are compressed, so they are lightweight</li>
+<li>Head of line blocking no longer exists</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="13_http2_quic.md">13_http2_quic.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              20/26
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 13_http2_quic.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-21">
+          <div class="inner">
+            
+            <header><h1>HTTP/2 Prioritization and Flow Control</h1></header>
+            
+            
+            <section><p>With resource ordering not being an issue, we can implement resource
+prioritization.</p>
+<h2>Request Priority Example</h2>
+<ol>
+<li>Requests that interact with the DOM</li>
+<li>CSS</li>
+<li>Javascript</li>
+<li>Images</li>
+</ol>
+<h2>Flow Control</h2>
+<p>A <code>WINDOW_UPDATE</code> flag exists to control the number of frames <em>in flight</em>.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="13_http2_quic.md">13_http2_quic.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              21/26
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 13_http2_quic.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-22">
+          <div class="inner">
+            
+            <header><h1>HTTP/2 Saves the Day</h1></header>
+            
+            
+            <section><p>HTTP/2 obviates the HTTP/1.1 hacks used over the last twenty years.</p>
+<ul>
+<li>
+<p>Spriting and asset compilation are no longer needed since we can effectively
+  handle many small resources without worrying about head-of-line blocking.</p>
+</li>
+<li>
+<p>Domain sharing is irrelevant since all content is delivered over a single
+  connection.</p>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="13_http2_quic.md">13_http2_quic.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              22/26
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 13_http2_quic.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-23">
+          <div class="inner">
+            
+            <header><h1>Server Push</h1></header>
+            
+            
+            <section><p><img alt="HTTP/2 Server Push" src="img/http2_server_push.png" /></p>
+<p>When a resource is requested (e.g., <code>/</code>) the server can proactively send
+additional resources using <code>PUSH_PROMISE</code> (e.g., favicon.ico, style.css).</p>
+<p>The client can indicate that it does not want the additional content. This
+feature is useful if the client already has a cached copy.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="13_http2_quic.md">13_http2_quic.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              23/26
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 13_http2_quic.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-24">
+          <div class="inner">
+            
+            <header><h1>HTTP/2 Results</h1></header>
+            
+            
+            <section><p><img alt="HTTP/2 Page Load Time" src="img/http2_results.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="13_http2_quic.md">13_http2_quic.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              24/26
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 13_http2_quic.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-25">
+          <div class="inner">
+            
+            <header><h1>HTTP/2 Low Latency Results</h1></header>
+            
+            
+            <section><p><img alt="HTTP/2 Low Latency Results" src="img/http2_low_latency_results.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="13_http2_quic.md">13_http2_quic.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              25/26
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 13_http2_quic.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-26">
+          <div class="inner">
+            
+            <header><h1>HTTP/2 High Latency Results</h1></header>
+            
+            
+            <section><p><img alt="HTTP/2 High Latency Results" src="img/http2_high_latency_results.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="13_http2_quic.md">13_http2_quic.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              26/26
             </aside>
           </footer>
         </div>
@@ -295,7 +965,7 @@ request can starve all others.</p>
       <caption>Table of Contents</caption>
       
       <tr id="toc-row-1">
-        <th><a href="#slide1">HTTP 2.0 and QUIC</a></th>
+        <th><a href="#slide1">HTTP/2 and QUIC</a></th>
         <td><a href="#slide1">1</a></td>
       </tr>
       
@@ -327,6 +997,126 @@ request can starve all others.</p>
       <tr id="toc-row-6">
         <th><a href="#slide6">HTTP Keepalive</a></th>
         <td><a href="#slide6">6</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-7">
+        <th><a href="#slide7">HTTP Request Header</a></th>
+        <td><a href="#slide7">7</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-8">
+        <th><a href="#slide8">HTTP Request Header Repetition</a></th>
+        <td><a href="#slide8">8</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-9">
+        <th><a href="#slide9">HTTP Request Header Repetition</a></th>
+        <td><a href="#slide9">9</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-10">
+        <th><a href="#slide10">Asset Concatenation</a></th>
+        <td><a href="#slide10">10</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-11">
+        <th><a href="#slide11">Image Spriting</a></th>
+        <td><a href="#slide11">11</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-12">
+        <th><a href="#slide12">Concurrent TCP Connections</a></th>
+        <td><a href="#slide12">12</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-13">
+        <th><a href="#slide13">Performance Goals</a></th>
+        <td><a href="#slide13">13</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-14">
+        <th><a href="#slide14">HTTP/2</a></th>
+        <td><a href="#slide14">14</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-15">
+        <th><a href="#slide15">HTTP/2 Features</a></th>
+        <td><a href="#slide15">15</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-16">
+        <th><a href="#slide16">HTTP/2 Binary Frames</a></th>
+        <td><a href="#slide16">16</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-17">
+        <th><a href="#slide17">HTTP/2 Binary Framed Connection</a></th>
+        <td><a href="#slide17">17</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-18">
+        <th><a href="#slide18">Header Compression</a></th>
+        <td><a href="#slide18">18</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-19">
+        <th><a href="#slide19">HPACK</a></th>
+        <td><a href="#slide19">19</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-20">
+        <th><a href="#slide20">Binary Framing Benefits</a></th>
+        <td><a href="#slide20">20</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-21">
+        <th><a href="#slide21">HTTP/2 Prioritization and Flow Control</a></th>
+        <td><a href="#slide21">21</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-22">
+        <th><a href="#slide22">HTTP/2 Saves the Day</a></th>
+        <td><a href="#slide22">22</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-23">
+        <th><a href="#slide23">Server Push</a></th>
+        <td><a href="#slide23">23</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-24">
+        <th><a href="#slide24">HTTP/2 Results</a></th>
+        <td><a href="#slide24">24</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-25">
+        <th><a href="#slide25">HTTP/2 Low Latency Results</a></th>
+        <td><a href="#slide25">25</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-26">
+        <th><a href="#slide26">HTTP/2 High Latency Results</a></th>
+        <td><a href="#slide26">26</a></td>
       </tr>
       
       
