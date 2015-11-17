@@ -65,7 +65,7 @@ We will conduct the final peer evaluation during a 20 minute break after the
 Many requests are required for today's web pages:
 
 * CSS
-* Javascript
+* JavaScript
 * Images
 
 Source: [http://httparchive.org](http://httparchive.org)
@@ -90,16 +90,16 @@ TCP was designed for long-lived flows. HTTP is short and bursty.
 
 ---
 
-# HTTP Keepalive
+# HTTP Keep-alive
 
 .fx: img-left
 
 ![Head of Line Blocking](img/tcp_head_of_line_blocking.png)
 
-HTTP Keepalive was introduced to help reuse TCP connections for HTTP, but there
+HTTP Keep-alive was introduced to help reuse TCP connections for HTTP, but there
 are issues.
 
-While we can resuse a TCP socket for multiple HTTP requests, one heavyweight
+While we can reuse a TCP socket for multiple HTTP requests, one heavyweight
 request can starve all others.
 
 This is called __Head-of-line blocking__.
@@ -135,7 +135,7 @@ bytes out of 683.
 # Asset Concatenation
 
 To minimize header overhead in HTTP/1.1 we concatenate files together (e.g.,
-Javascript, and CSS).
+JavaScript, and CSS).
 
 In Rails, that is one of the purposes of the asset pipeline.
 
@@ -173,7 +173,7 @@ For better performance domain sharding is utilized with HTTP/1.1.
 We want fewer TCP connections, but
 
 * we don't want head-of-line blocking
-* we don't want to have to concatenate our CSS and Javascript
+* we don't want to have to concatenate our CSS and JavaScript
 * we don't want to have to use image sprites
 * we don't want to have to split our resources to trick the browser
 
@@ -187,7 +187,7 @@ HTTP/2 addresses all of these issues.
 
 ## History
 
-* Google internally announced the SPDY protcol (Nov 2009).
+* Google internally announced the SPDY protocol (Nov 2009).
 * Google released SPDY in Chrome for (Sept 2010).
 * Google deployed SPDY on all their servers (Jan 2011).
 * Twitter deployed SPDY on its servers (March 2012).
@@ -229,7 +229,7 @@ Note that different streams are interleaved over a single TCP connection.
 
 With binary framing, header compression becomes easy.
 
-Initially implemented using GZIP, but CRIME attack revealked weaknesses.
+Initially implemented using GZIP, but CRIME attack revealed weaknesses.
 
 * If an attacker can inject data, compressed size can leak information.
 
@@ -276,7 +276,7 @@ prioritization.
 
 1. Requests that interact with the DOM
 2. CSS
-3. Javascript
+3. JavaScript
 4. Images
 
 ## Flow Control
@@ -356,7 +356,7 @@ any application data can be sent.
 
 ---
 
-# HTTP/2 (SPDY) and Droped Packets
+# HTTP/2 (SPDY) and Dropped Packets
 
 ![HTTP/2 with dropped packet](img/http2_dropped_packet.png)
 
@@ -417,7 +417,7 @@ Inspect via: chrome://net-internals/
     * cookie
     * proposed encrypted session key
     * encryption algorithm
-* Client can immediatley send requests
+* Client can immediately send requests
 
 ---
 
@@ -438,7 +438,7 @@ Inspect via: chrome://net-internals/
 
 # QUIC and IP Spoofing
 
-TCP's threeway handshake makes it immune to IP spoofing related
+TCP's three-way handshake makes it immune to IP spoofing related
 attacks. UDP by-default is vulnerable.
 
 QUIC is engineered to avoid such attacks through the use of the CID.
@@ -464,7 +464,7 @@ without retransmission.
 
 ![Forward Error Correction](img/forward_error_correction.png)
 
-With forward error correction we trade bandwidith (extra data) for latency
+With forward error correction we trade bandwidth (extra data) for latency
 (retransmissions).
 
 ---

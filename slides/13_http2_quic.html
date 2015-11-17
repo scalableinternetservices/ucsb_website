@@ -228,7 +228,7 @@ the presentations.</p>
 <p>Many requests are required for today's web pages:</p>
 <ul>
 <li>CSS</li>
-<li>Javascript</li>
+<li>JavaScript</li>
 <li>Images</li>
 </ul>
 <p>Source: <a href="http://httparchive.org">http://httparchive.org</a></p></section>
@@ -321,13 +321,13 @@ the presentations.</p>
         <div class="slide img-left slide-8">
           <div class="inner">
             
-            <header><h1>HTTP Keepalive</h1></header>
+            <header><h1>HTTP Keep-alive</h1></header>
             
             
             <section><p><img alt="Head of Line Blocking" src="img/tcp_head_of_line_blocking.png" /></p>
-<p>HTTP Keepalive was introduced to help reuse TCP connections for HTTP, but there
+<p>HTTP Keep-alive was introduced to help reuse TCP connections for HTTP, but there
 are issues.</p>
-<p>While we can resuse a TCP socket for multiple HTTP requests, one heavyweight
+<p>While we can reuse a TCP socket for multiple HTTP requests, one heavyweight
 request can starve all others.</p>
 <p>This is called <strong>Head-of-line blocking</strong>.</p></section>
             
@@ -457,7 +457,7 @@ bytes out of 683.</p>
             
             
             <section><p>To minimize header overhead in HTTP/1.1 we concatenate files together (e.g.,
-Javascript, and CSS).</p>
+JavaScript, and CSS).</p>
 <p>In Rails, that is one of the purposes of the asset pipeline.</p>
 <p>This technique can also be applied to images.</p></section>
             
@@ -560,7 +560,7 @@ order to speed up the time to obtain a page's resources.</p>
             <section><p>We want fewer TCP connections, but</p>
 <ul>
 <li>we don't want head-of-line blocking</li>
-<li>we don't want to have to concatenate our CSS and Javascript</li>
+<li>we don't want to have to concatenate our CSS and JavaScript</li>
 <li>we don't want to have to use image sprites</li>
 <li>we don't want to have to split our resources to trick the browser</li>
 </ul>
@@ -599,7 +599,7 @@ order to speed up the time to obtain a page's resources.</p>
             <section><p>HTTP/2 addresses all of these issues.</p>
 <h2>History</h2>
 <ul>
-<li>Google internally announced the SPDY protcol (Nov 2009).</li>
+<li>Google internally announced the SPDY protocol (Nov 2009).</li>
 <li>Google released SPDY in Chrome for (Sept 2010).</li>
 <li>Google deployed SPDY on all their servers (Jan 2011).</li>
 <li>Twitter deployed SPDY on its servers (March 2012).</li>
@@ -737,7 +737,7 @@ order to speed up the time to obtain a page's resources.</p>
             
             
             <section><p>With binary framing, header compression becomes easy.</p>
-<p>Initially implemented using GZIP, but CRIME attack revealked weaknesses.</p>
+<p>Initially implemented using GZIP, but CRIME attack revealed weaknesses.</p>
 <ul>
 <li>If an attacker can inject data, compressed size can leak information.</li>
 </ul>
@@ -853,7 +853,7 @@ prioritization.</p>
 <ol>
 <li>Requests that interact with the DOM</li>
 <li>CSS</li>
-<li>Javascript</li>
+<li>JavaScript</li>
 <li>Images</li>
 </ol>
 <h2>Flow Control</h2>
@@ -1145,7 +1145,7 @@ any application data can be sent.</p></section>
         <div class="slide slide-32">
           <div class="inner">
             
-            <header><h1>HTTP/2 (SPDY) and Droped Packets</h1></header>
+            <header><h1>HTTP/2 (SPDY) and Dropped Packets</h1></header>
             
             
             <section><p><img alt="HTTP/2 with dropped packet" src="img/http2_dropped_packet.png" /></p>
@@ -1296,7 +1296,7 @@ services.</p>
 <li>encryption algorithm</li>
 </ul>
 </li>
-<li>Client can immediatley send requests</li>
+<li>Client can immediately send requests</li>
 </ul></section>
             
           </div>
@@ -1367,7 +1367,7 @@ services.</p>
             <header><h1>QUIC and IP Spoofing</h1></header>
             
             
-            <section><p>TCP's threeway handshake makes it immune to IP spoofing related
+            <section><p>TCP's three-way handshake makes it immune to IP spoofing related
 attacks. UDP by-default is vulnerable.</p>
 <p>QUIC is engineered to avoid such attacks through the use of the CID.</p></section>
             
@@ -1437,7 +1437,7 @@ without retransmission.</p>
             
             
             <section><p><img alt="Forward Error Correction" src="img/forward_error_correction.png" /></p>
-<p>With forward error correction we trade bandwidith (extra data) for latency
+<p>With forward error correction we trade bandwidth (extra data) for latency
 (retransmissions).</p></section>
             
           </div>
@@ -1581,7 +1581,7 @@ their connections.</p></section>
       
       
       <tr id="toc-row-8">
-        <th><a href="#slide8">HTTP Keepalive</a></th>
+        <th><a href="#slide8">HTTP Keep-alive</a></th>
         <td><a href="#slide8">8</a></td>
       </tr>
       
@@ -1725,7 +1725,7 @@ their connections.</p></section>
       
       
       <tr id="toc-row-32">
-        <th><a href="#slide32">HTTP/2 (SPDY) and Droped Packets</a></th>
+        <th><a href="#slide32">HTTP/2 (SPDY) and Dropped Packets</a></th>
         <td><a href="#slide32">32</a></td>
       </tr>
       
