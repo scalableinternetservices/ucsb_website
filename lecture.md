@@ -88,7 +88,7 @@ __TODO__:
   [AppFolio](http://www.appfolioinc.com/) (formerly worked for Amazon AWS)
 * "Technical Challenges in Content Delivery Networks"
 
-#### November 12, 2015
+#### November 12, 2015 ([slides](http://www.slideshare.net/sean_seannery/riot-games-scalable-data-warehouse-lecture-at-ucsb-ucla))
 * Guest Lecture: Sean Maloney, Big Data Engineer @
   [Riot Games](http://www.riotgames.com/)
 * "Moving Mountains of Player Data"
