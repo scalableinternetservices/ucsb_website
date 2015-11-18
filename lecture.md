@@ -108,9 +108,10 @@ __TODO__:
 
 * Read chapter 15 in High Performance Browser Networking
 
-#### Novemver 19, 2015
-* Client-side Renaissance
-* An Overview of ES 6
+#### Novemver 19, 2015 ([slides](/slides/14_clients_javascript_client-side_mvc.html))
+* Clients
+* JavaScript
+* Client-side MVC
 
 __TODO__:
 
