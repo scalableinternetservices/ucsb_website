@@ -1748,7 +1748,7 @@ conflict.</p></section>
             
             <section><p>Any ActiveRecord model will automatically utilize optimistic locking if an
 integer <code>lock_version</code> field is added to the object's table.</p>
-<p>Whenever an such an ActiveRecord object is read from the database, that object
+<p>Whenever such an ActiveRecord object is read from the database, that object
 contains its associated <code>lock_version</code>.</p>
 <p>When an update for the object occurs, Rails compares the object's
 <code>lock_version</code> to the most recent one in the database.</p>

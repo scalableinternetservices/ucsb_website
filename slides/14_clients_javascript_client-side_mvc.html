@@ -1,0 +1,2061 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2010 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Original slides: Marcin Wichary (mwichary@google.com)
+  Modifications: Ernest Delgado (ernestd@google.com)
+                 Alex Russell (slightlyoff@chromium.org)
+
+  landslide modifications: Adam Zapletal (adamzap@gmail.com)
+                           Nicolas Perriault (nperriault@gmail.com)
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Clients, JavaScript, and Client-side MVC</title>
+    <!-- Styles -->
+    
+    <link rel="stylesheet" media="print" href="theme/css/print.css">
+    <link rel="stylesheet" media="screen, projection" href="theme/css/screen.css">
+    
+    
+      
+      <link rel="stylesheet" href="theme/css/custom.css">
+      
+    
+    <!-- /Styles -->
+    <!-- Javascripts -->
+    
+    <script type="text/javascript" src="theme/js/slides.js"></script>
+    
+    
+    
+    <!-- /Javascripts -->
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-67332703-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+</head>
+<body>
+  <div id="blank"></div>
+  <div class="presentation">
+    <div id="current_presenter_notes">
+      <div id="presenter_note"></div>
+    </div>
+    <div class="slides">
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide title slide-1">
+          <div class="inner">
+            
+            <header><h1>Clients, JavaScript, and Client-side MVC</h1></header>
+            
+            
+            <section><p><strong>CS290B</strong></p>
+<p>Dr. Bryce Boe</p>
+<p>November 19, 2015</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              1/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-2">
+          <div class="inner">
+            
+            <header><h1>Today's Agenda</h1></header>
+            
+            
+            <section><ul>
+<li>Browser Wars</li>
+<li>XMLHttpRequest (AJAX)</li>
+<li>Fast JavaScript</li>
+<li>Client-side MVC<ul>
+<li>Backbone</li>
+<li>Angular</li>
+<li>Ember</li>
+<li>React</li>
+</ul>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              2/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-3">
+          <div class="inner">
+            
+            <header><h1>Browser Wars</h1></header>
+            
+            
+            <section><ul>
+<li>Mid-90s Nescape reigns supreme</li>
+<li>1995 - Microsoft releases initial version of Internet Explorer</li>
+</ul>
+<p>Competition between Netscape and Microsoft produces significant innovation in
+browsers:</p>
+<ul>
+<li>JavaScript</li>
+<li>Cookies</li>
+<li>CSS</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-4">
+          <div class="inner">
+            
+            <header><h1>Browser Wars</h1></header>
+            
+            
+            <section><p>Microsoft bundles Internet Explorer with Windows 98
+<em> Every file management window is a browser
+</em> Results in an antitrust lawsuit against Microsoft</p>
+<p>Meanwhile, Netscape focuses on open-sourcing its browser.
+<em> Creates Mozilla Organization
+</em> Is acquired by AOL in 1999
+* AOL closes down Netscape division in 2003, and Mozilla Foundation is born.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-5">
+          <div class="inner">
+            
+            <header><h1>Browser Market Share</h1></header>
+            
+            
+            <section><p><img alt="Browser Market Share to 2009" src="img/browser_market_share.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              5/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide table-left slide-6">
+          <div class="inner">
+            
+            <header><h1>Innovation Lull</h1></header>
+            
+            
+            <section><table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1995</td>
+<td>IE 1</td>
+</tr>
+<tr>
+<td>1995</td>
+<td>IE 2</td>
+</tr>
+<tr>
+<td>1996</td>
+<td>IE 3</td>
+</tr>
+<tr>
+<td>1997</td>
+<td>IE 4</td>
+</tr>
+<tr>
+<td>1999</td>
+<td>IE 5</td>
+</tr>
+<tr>
+<td>2001</td>
+<td>IE 6</td>
+</tr>
+<tr>
+<td>2006</td>
+<td>IE 7</td>
+</tr>
+<tr>
+<td>2009</td>
+<td>IE 8</td>
+</tr>
+</tbody>
+</table>
+<p>Microsoft's significant marketshare results in a lack of competition, and a
+lull in innovation.</p>
+<p>Time between releases increases:</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-7">
+          <div class="inner">
+            
+            <header><h1>Browser Market Share Shift</h1></header>
+            
+            
+            <section><p>Around 2002, Microsoft starts losing market share to Firefox due to:
+<em> Security
+</em> Performance</p>
+<p>In 2008 Google announces Chrome.</p>
+<p>Browser innovation reignites and today there are 4 popular browsers:</p>
+<ul>
+<li>Internet Explorer</li>
+<li>Chrome</li>
+<li>Firefox</li>
+<li>Safari</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-8">
+          <div class="inner">
+            
+            <header><h1>Current Global Browser Market Share</h1></header>
+            
+            
+            <section><p><img alt="Browser Market Share between 2009 and 2015" src="img/browser_market_share2.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-9">
+          <div class="inner">
+            
+            <header><h1>Major Client-side Improvements</h1></header>
+            
+            
+            <section><ul>
+<li>XMLHTTPRequest</li>
+<li>DOM Manipulation</li>
+<li>V8</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-10">
+          <div class="inner">
+            
+            <header><h1>XMLHttpRequest (AJAX)</h1></header>
+            
+            
+            <section><p>Allows JavaScript on the page to asynchronously request resources from the
+server.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+<span class="nx">request</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;I&#39;m a callback!&quot;</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="nx">request</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;/comments&quot;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+<span class="nx">request</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+</pre></div>
+</td></tr></table>
+<p><code>XMLHttpRequest</code> was originally added to IE to enable the Outlook Web Access
+team to asynchronously communicate between a browser viewing their web page,
+and the server hosting the web page (around year 2000).</p>
+<p><code>XMLHttpRequest</code> has nothing to do with XML (it can transport XML documents).</p>
+<p><code>XMLHttpRequest</code> was a de facto standard by ~2004.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-11">
+          <div class="inner">
+            
+            <header><h1>XMLHttpRequest</h1></header>
+            
+            
+            <section><p>Prior to the introduction of <code>XMLHttpRequest</code>, two-way communication between
+the browser and the server required a full page refresh triggers by the click
+of a link, or the submission of a form.</p>
+<p><code>XMLHttpRequest</code> allows JavaScript that runs in the context of the browser to
+send requests and receive responses in whatever way programmed to do so.</p>
+<p>For instance, Google shows suggested search terms as you type in your search
+phrase.</p>
+<p>These days, many developers avoid calling <code>XMLHttpRequest</code> directly and use
+<strong>jQuery</strong> instead:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/comments&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;I&#39;m a callback!&quot;</span><span class="p">);</span> <span class="p">});</span>
+</pre></div>
+</td></tr></table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-12">
+          <div class="inner">
+            
+            <header><h1>Restricted Headers</h1></header>
+            
+            
+            <section><p>For security purposes, <code>XMLHttpRequest</code> does not permit the caller from
+modifying the following HTTP request headers:</p>
+<ul>
+<li>Accept-Charset, Accept-Encoding, Access-Control-*</li>
+<li>Host</li>
+<li>Upgrade</li>
+<li>Connection</li>
+<li>Referer</li>
+<li>Origin</li>
+<li>Cookie</li>
+<li>...</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-13">
+          <div class="inner">
+            
+            <header><h1>Same Origin Policy</h1></header>
+            
+            
+            <section><p>An origin is defined as a triple containing <em>protocol</em>, <em>domain</em>, and <em>port</em>
+(e.g., <code>[http, google.com, 80]</code>).</p>
+<p>By default (and the only original option) <code>XMLHttpRequest</code>s can only be sent to
+the same origin.</p>
+<p>The same origin security policy prevents some_malicious_site.com from making
+requests to any other site (e.g., gmail) on your behalf.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-14">
+          <div class="inner">
+            
+            <header><h1>Cross-Origin Resource Sharing (CORS)</h1></header>
+            
+            
+            <section><p>CORS is a protocol that permits the browser to make cross-origin requests for
+<code>GET</code>, <code>POST</code>, and <code>HEAD</code> requests.</p>
+<p>By default the browser will actually always make the request with the addition
+of a <code>Origin: http://request.origin</code> header</p>
+<p>The browser will only return the response back to JavaScript if the HTTP
+response contains a header like:</p>
+<pre><code>Access-Control-Allow-Origin: http://request.origin
+</code></pre>
+<p>While the broswer always issues the requests, it omits the cookies for the
+domain, and any HTTP authentication.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-15">
+          <div class="inner">
+            
+            <header><h1>CORS with Credentials</h1></header>
+            
+            
+            <section><p>To enable cookies and/or HTTP authentication the browser must first ask for
+permission from the server.</p>
+<p>On the client side the code need only add <code>xhr.withCredentials = true;</code>.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;http://other.domain/data&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">withCredentials</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+</pre></div>
+</td></tr></table>
+<p>Behind the scenes the browser makes an <code>OPTIONS</code> request to other.domain:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="nf">OPTIONS</span> <span class="nn">/data</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">other.domain</span>
+<span class="na">Origin</span><span class="o">:</span> <span class="l">http://my.domain</span>
+<span class="na">Access-Control-Request-Method</span><span class="o">:</span> <span class="l">POST</span>
+</pre></div>
+</td></tr></table>
+<p>The browser expects the server to respond with headers like:</p>
+<pre><code>Access-Control-Allow-Origin: http://my.domain
+Access-Control-Allow-Methods: POST
+</code></pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-16">
+          <div class="inner">
+            
+            <header><h1>DOM Manipulation</h1></header>
+            
+            
+            <section><h2>Document Object Model</h2>
+<p>The DOM is a standardized way of representing the structure of a web page as a
+tree of in-memory objects.</p>
+<p>These objects are accessed via JavaScript in order to be queried and
+manipulated.</p>
+<h2>Example</h2>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">newDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">newContent</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createTextNode</span><span class="p">(</span><span class="s2">&quot;Hello World!&quot;</span><span class="p">);</span>
+<span class="nx">newDiv</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">newContent</span><span class="p">);</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">newDiv</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              16/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-17">
+          <div class="inner">
+            
+            <header><h1>DOM Manipulation Progression</h1></header>
+            
+            
+            <section><h2>(~1995) DOM Level 0: Navigator 2, IE 3</h2>
+<ul>
+<li>Allowed reading the values of forms and links</li>
+<li>Not standardized (called legacy DOM)</li>
+</ul>
+<h2>(~1998) DOM Level 1: Navigator 4, IE 5</h2>
+<ul>
+<li>Allowed access and modification of anything by index<pre><code>document.forms[1].elements[2]
+</code></pre>
+</li>
+</ul>
+<h2>(~2000) DOM Level 2</h2>
+<ul>
+<li>Added <code>getElementById</code>, DOM event model</li>
+</ul>
+<h2>(~2004) DOM Level 3 (current)</h2>
+<ul>
+<li>XPath support</li>
+<li>Keyboard event handling</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              17/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-18">
+          <div class="inner">
+            
+            <header><h1>V8: Fast JavaScript</h1></header>
+            
+            
+            <section><p>Google releases Chrome in September 2008.</p>
+<p>In addition to other novel features (e.g., process per tab), Chrome includes
+the V8 JavaScript engine.</p>
+<p>V8 applies modern, state-of-the-art virtual machine techniques to JavaScript.
+<em> With V8, JavaScript is not interpreted, but dynamically compiled to machine
+  code
+    * Re-compiled and re-optimized at runtime
+</em> Garbage collection is fast
+    * Generational: separates allowed memory into young and old groups and
+      treats them differently
+    * Incremental: doesn't need to perform all GC at once
+* Other optimizations:
+    * Inlining
+    * Copy Elision
+    * Inline caching</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              18/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-19">
+          <div class="inner">
+            
+            <header><h1>JavaScript VM Wars!</h1></header>
+            
+            
+            <section><p>The release of V8 resulted in tremendous performance improvements in other
+JavaScript VMs:</p>
+<ul>
+<li>Safari's JavaScriptCore</li>
+<li>IE's Chakra</li>
+<li>Firefox's SpiderMonkey</li>
+</ul>
+<p>Today these VMs are all evenly matched. The performance leader frequently
+switches, but together they continue to push the boundaries of performance.</p>
+<p><strong>Aside</strong>: V8 was also designed to work outside of the browser. Node.js is
+built on top of the V8 engine.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              19/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-20">
+          <div class="inner">
+            
+            <header><h1>Engine Comparison: Kraken</h1></header>
+            
+            
+            <section><p><a href="http://krakenbenchmark.mozilla.org/">http://krakenbenchmark.mozilla.org/</a></p>
+<ul>
+<li>Green: Chrome</li>
+<li>Orange: Firefox</li>
+</ul>
+<p><img alt="Kraken Time" src="img/js_engine_kraken.png" /></p>
+<p>Source:
+<a href="http://arewefastyet.com/#machine=28">http://arewefastyet.com/#machine=28</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              20/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-21">
+          <div class="inner">
+            
+            <header><h1>Engine Comparison: Octane</h1></header>
+            
+            
+            <section><p><a href="http://chromium.github.io/octane/">http://chromium.github.io/octane/</a></p>
+<ul>
+<li>Green: Chrome</li>
+<li>Orange: Firefox</li>
+</ul>
+<p><img alt="Octane Time" src="img/js_engine_octane.png" /></p>
+<p>Source:
+<a href="http://arewefastyet.com/#machine=28">http://arewefastyet.com/#machine=28</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              21/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-22">
+          <div class="inner">
+            
+            <header><h1>Engine Comparison: Octane</h1></header>
+            
+            
+            <section><p><a href="https://www.webkit.org/perf/sunspider/sunspider.html">https://www.webkit.org/perf/sunspider/sunspider.html</a></p>
+<ul>
+<li>Green: Chrome</li>
+<li>Orange: Firefox</li>
+</ul>
+<p><img alt="Sunspider Time" src="img/js_engine_sunspider.png" /></p>
+<p>Source:
+<a href="http://arewefastyet.com/#machine=28">http://arewefastyet.com/#machine=28</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              22/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-23">
+          <div class="inner">
+            
+            <header><h1>Client-side Renaissance</h1></header>
+            
+            
+            <section><p>By 2008, we have all the ingredients ready for a "client-side renaissance". We
+have globally installed virtual machines that:</p>
+<ul>
+<li>presents content that can communicate via Ajax to the web service they
+  originated from</li>
+<li>have full programmatic control of the user interface (DOM + events)</li>
+<li>use modern, high performance VM techniques</li>
+<li>exist in a competitive marketplace<ul>
+<li>four viable browsers, available on multiple OSes</li>
+<li>being standards-compliant is a competitive advantage</li>
+</ul>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              23/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-24">
+          <div class="inner">
+            
+            <header><h1>Modern Client-side Applications</h1></header>
+            
+            
+            <section><p>Instead of being a series of pages requested from a web server, we can serve up
+a running JavaScript application that:</p>
+<ul>
+<li>regularly sends user input back to the server</li>
+<li>receives structured data rather than rendered markup (JSON instead of HTML)</li>
+</ul>
+<p>These applications generally persist through user interactions.</p>
+<ul>
+<li>Clicks no longer necessarily mean full-page refreshes.</li>
+</ul>
+<p>Communication with the server is decoupled from user interaction.</p>
+<ul>
+<li>While the browser sits open, a JavaScript timer can trigger a check for new
+  data, and update the page as needed.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              24/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-25">
+          <div class="inner">
+            
+            <header><h1>Consequences of this Shift</h1></header>
+            
+            
+            <section><ul>
+<li>Client side becomes significantly more complex</li>
+<li>Full page refreshes become less common</li>
+<li>Does your application work "offline"?</li>
+<li>How real-time is your application?</li>
+<li>The "running application" is more static and cacheable</li>
+<li>The web server acts more like an API than a web service</li>
+<li>The structured data can be used by mobile applications and other Internet
+  services</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              25/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-26">
+          <div class="inner">
+            
+            <header><h1>Demo App: Server-side</h1></header>
+            
+            
+            <section><p>In a traditional web application:</p>
+<ul>
+<li>
+<p>When you click the "New Submission" button, the browser makes a HTTP request,
+and loads the response.</p>
+</li>
+<li>
+<p>The response is an entire web page along with its associated assets.</p>
+</li>
+<li>
+<p>The page returned has form elements.</p>
+</li>
+<li>
+<p>When you complete the form and submit it, the sever may find it invalid and
+  subsequently send back an entire web page.</p>
+</li>
+<li>
+<p>The list of submissions only changes when the page is refreshed/changed.</p>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              26/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-27">
+          <div class="inner">
+            
+            <header><h1>Demo App: Client-side</h1></header>
+            
+            
+            <section><p>In a client-side web application:</p>
+<ul>
+<li>When you click the "New Submission" button, JavaScript executes and redraws
+  the page to show a form. No HTTP request occurs.</li>
+<li>When you fill out the form and submit it, the input is validated in the
+  browser using JavaScript (of course it also needs to be validated on the
+  server-side in the event of misbehaving clients).</li>
+<li>If valid, an Ajax request is sent to the server.</li>
+<li>The list of submissions changes as new submissions are made (or thereabouts).</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              27/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-28">
+          <div class="inner">
+            
+            <header><h1>Client-side Trade-offs</h1></header>
+            
+            
+            <section><h2>Benefits</h2>
+<ul>
+<li>UI is extremely responsive</li>
+<li>Less network traffic</li>
+<li>Live updates</li>
+</ul>
+<h2>Weaknesses</h2>
+<ul>
+<li>Client side code if much more complex</li>
+<li>First requests are significantly more expensive (lots more JavaScript to
+send)</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              28/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-29">
+          <div class="inner">
+            
+            <header><h1>Complex Client-side Code</h1></header>
+            
+            
+            <section><p>Before this shift, the client mostly displayed static pages.</p>
+<p>Now the client must:</p>
+<ul>
+<li>Understand the relationship between input events and corresponding DOM
+  updates.</li>
+<li>Understand enough application logic to distinguish valid input from invalid
+  input.</li>
+<li>Keep a persistent connection to the server and display updates as they come
+  in.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              29/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-30">
+          <div class="inner">
+            
+            <header><h1>Application Design</h1></header>
+            
+            
+            <section><blockquote>
+<p>How should our application design adjust to this shift in complexity?</p>
+</blockquote>
+<h2>Naïve Approach</h2>
+<p>Develop "JavaScript applications that end up as tangled piles of jQuery
+selectors and callbacks, all trying frantically to keep data in sync between
+the HTML UI, your JavaScript logic, and the database on your server."</p>
+<p>UUUGHHHH!</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              30/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-31">
+          <div class="inner">
+            
+            <header><h1>Client-side MVC</h1></header>
+            
+            
+            <section><p>When something feels painful there is probably a better way to do it.</p>
+<p>Enter client-side MVC frameworks.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              31/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-32">
+          <div class="inner">
+            
+            <header><h1>Client-side MVC Frameworks</h1></header>
+            
+            
+            <section><h2>MVC: Model-View-Controller</h2>
+<ul>
+<li>Rails is a server-side MVC.</li>
+<li>The presentation (view) of the data is separated from the data itself
+  (model).</li>
+<li>Controllers exist to accept and coordinate updates to the models.</li>
+<li>Models encapsulate business logic and state.</li>
+</ul>
+<p>There are many client-side frameworks that implement variations of the MVC
+concept. We will introduce four:</p>
+<ul>
+<li>Backbone.js</li>
+<li>Angular</li>
+<li>Ember</li>
+<li>React</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              32/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-33">
+          <div class="inner">
+            
+            <header><h1>Backbone.js</h1></header>
+            
+            
+            <section><p><img alt="Backbone" src="img/backbone.png" /></p>
+<ul>
+<li>Developed by Jeremy Ashkenas (creator of CoffeeScript and Underscore.js)</li>
+<li>Most lightweight of the four libraries we will discuss</li>
+<li>Model-View-Router</li>
+<li>Router maps URL fragments to functions</li>
+</ul>
+<h2>Websites using Backbone:</h2>
+<ul>
+<li>Airbnb</li>
+<li>Hulu</li>
+<li>Groupon</li>
+<li>Pinterest</li>
+<li>LinkedIn</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              33/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-34">
+          <div class="inner">
+            
+            <header><h1>Backbone Model-View</h1></header>
+            
+            
+            <section><p><img alt="Backbone Model View" src="img/backbone_model_view.png" /></p>
+<p><img alt="Backbone Views" src="img/backbone_views.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              34/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-35">
+          <div class="inner">
+            
+            <header><h1>Backbone Model Sample</h1></header>
+            
+            
+            <section><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">Sidebar</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+  <span class="nx">promptColor</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">cssColor</span> <span class="o">=</span> <span class="nx">prompt</span><span class="p">(</span><span class="s2">&quot;Please enter a CSS color:&quot;</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span><span class="nx">color</span><span class="o">:</span> <span class="nx">cssColor</span><span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">sidebar</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Sidebar</span><span class="p">;</span>
+<span class="nx">sidebar</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change:color&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">model</span><span class="p">,</span> <span class="nx">color</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#sidebar&#39;</span><span class="p">).</span><span class="nx">css</span><span class="p">({</span><span class="nx">background</span><span class="o">:</span> <span class="nx">color</span><span class="p">});</span>
+<span class="p">});</span>
+<span class="nx">sidebar</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span><span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;white&#39;</span><span class="p">});</span>
+<span class="nx">sidebar</span><span class="p">.</span><span class="nx">promptColor</span><span class="p">();</span>
+</pre></div>
+</td></tr></table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              35/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-36">
+          <div class="inner">
+            
+            <header><h1>Backbone View Sample</h1></header>
+            
+            
+            <section><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">DocumentRow</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+  <span class="nx">tagName</span><span class="o">:</span> <span class="s2">&quot;li&quot;</span><span class="p">,</span>
+  <span class="nx">className</span><span class="o">:</span> <span class="s2">&quot;document-row&quot;</span><span class="p">,</span>
+  <span class="nx">events</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;click .button.edit&quot;</span><span class="o">:</span> <span class="s2">&quot;openEditDialog&quot;</span>
+  <span class="p">},</span>
+  <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">listenTo</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">model</span><span class="p">,</span> <span class="s2">&quot;change&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">render</span><span class="p">);</span>
+  <span class="p">},</span>
+  <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">$el</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">model</span><span class="p">.</span><span class="nx">attributes</span><span class="p">));</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</td></tr></table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              36/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-37">
+          <div class="inner">
+            
+            <header><h1>Backbone Router Sample</h1></header>
+            
+            
+            <section><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">Workspace</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Router</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+
+  <span class="nx">routes</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;help&quot;</span><span class="o">:</span>                 <span class="s2">&quot;help&quot;</span><span class="p">,</span>    <span class="c1">// #help</span>
+    <span class="s2">&quot;search/:query&quot;</span><span class="o">:</span>        <span class="s2">&quot;search&quot;</span><span class="p">,</span>  <span class="c1">// #search/kiwis</span>
+    <span class="s2">&quot;search/:query/p:page&quot;</span><span class="o">:</span> <span class="s2">&quot;search&quot;</span>   <span class="c1">// #search/kiwis/p7</span>
+  <span class="p">},</span>
+
+  <span class="nx">help</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">...</span>
+  <span class="p">},</span>
+
+  <span class="nx">search</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">query</span><span class="p">,</span> <span class="nx">page</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">...</span>
+  <span class="p">}</span>
+
+<span class="p">});</span>
+</pre></div>
+</td></tr></table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              37/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-38">
+          <div class="inner">
+            
+            <header><h1>Backbone Highlights</h1></header>
+            
+            
+            <section><ul>
+<li>Lightweight (1700 lines)</li>
+<li>Templating agnostic</li>
+<li>Doesn’t handle unbinding events</li>
+<li>Can lead to memory leaks</li>
+<li>For full-blown Single Page Apps, you might be better off with one of the
+  larger frameworks</li>
+</ul>
+<p><a href="http://backbonejs.org/">http://backbonejs.org/</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              38/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-39">
+          <div class="inner">
+            
+            <header><h1>Angular.js</h1></header>
+            
+            
+            <section><p><img alt="Angular Logo" src="img/angular.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              39/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-40">
+          <div class="inner">
+            
+            <header><h1>Ember.js</h1></header>
+            
+            
+            <section><p><img alt="Ember Logo" src="img/ember.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              40/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 14_clients_javascript_client-side_mvc.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-41">
+          <div class="inner">
+            
+            <header><h1>React</h1></header>
+            
+            
+            <section><p><img alt="React" src="img/react.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="14_clients_javascript_client-side_mvc.md">14_clients_javascript_client-side_mvc.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              41/41
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="toc" class="sidebar hidden">
+    <h2>Table of Contents</h2>
+    <table>
+      <caption>Table of Contents</caption>
+      
+      <tr id="toc-row-1">
+        <th><a href="#slide1">Clients, JavaScript, and Client-side MVC</a></th>
+        <td><a href="#slide1">1</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-2">
+        <th><a href="#slide2">Today's Agenda</a></th>
+        <td><a href="#slide2">2</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-3">
+        <th><a href="#slide3">Browser Wars</a></th>
+        <td><a href="#slide3">3</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-4">
+        <th><a href="#slide4">Browser Wars</a></th>
+        <td><a href="#slide4">4</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-5">
+        <th><a href="#slide5">Browser Market Share</a></th>
+        <td><a href="#slide5">5</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-6">
+        <th><a href="#slide6">Innovation Lull</a></th>
+        <td><a href="#slide6">6</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-7">
+        <th><a href="#slide7">Browser Market Share Shift</a></th>
+        <td><a href="#slide7">7</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-8">
+        <th><a href="#slide8">Current Global Browser Market Share</a></th>
+        <td><a href="#slide8">8</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-9">
+        <th><a href="#slide9">Major Client-side Improvements</a></th>
+        <td><a href="#slide9">9</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-10">
+        <th><a href="#slide10">XMLHttpRequest (AJAX)</a></th>
+        <td><a href="#slide10">10</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-11">
+        <th><a href="#slide11">XMLHttpRequest</a></th>
+        <td><a href="#slide11">11</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-12">
+        <th><a href="#slide12">Restricted Headers</a></th>
+        <td><a href="#slide12">12</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-13">
+        <th><a href="#slide13">Same Origin Policy</a></th>
+        <td><a href="#slide13">13</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-14">
+        <th><a href="#slide14">Cross-Origin Resource Sharing (CORS)</a></th>
+        <td><a href="#slide14">14</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-15">
+        <th><a href="#slide15">CORS with Credentials</a></th>
+        <td><a href="#slide15">15</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-16">
+        <th><a href="#slide16">DOM Manipulation</a></th>
+        <td><a href="#slide16">16</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-17">
+        <th><a href="#slide17">DOM Manipulation Progression</a></th>
+        <td><a href="#slide17">17</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-18">
+        <th><a href="#slide18">V8: Fast JavaScript</a></th>
+        <td><a href="#slide18">18</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-19">
+        <th><a href="#slide19">JavaScript VM Wars!</a></th>
+        <td><a href="#slide19">19</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-20">
+        <th><a href="#slide20">Engine Comparison: Kraken</a></th>
+        <td><a href="#slide20">20</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-21">
+        <th><a href="#slide21">Engine Comparison: Octane</a></th>
+        <td><a href="#slide21">21</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-22">
+        <th><a href="#slide22">Engine Comparison: Octane</a></th>
+        <td><a href="#slide22">22</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-23">
+        <th><a href="#slide23">Client-side Renaissance</a></th>
+        <td><a href="#slide23">23</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-24">
+        <th><a href="#slide24">Modern Client-side Applications</a></th>
+        <td><a href="#slide24">24</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-25">
+        <th><a href="#slide25">Consequences of this Shift</a></th>
+        <td><a href="#slide25">25</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-26">
+        <th><a href="#slide26">Demo App: Server-side</a></th>
+        <td><a href="#slide26">26</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-27">
+        <th><a href="#slide27">Demo App: Client-side</a></th>
+        <td><a href="#slide27">27</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-28">
+        <th><a href="#slide28">Client-side Trade-offs</a></th>
+        <td><a href="#slide28">28</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-29">
+        <th><a href="#slide29">Complex Client-side Code</a></th>
+        <td><a href="#slide29">29</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-30">
+        <th><a href="#slide30">Application Design</a></th>
+        <td><a href="#slide30">30</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-31">
+        <th><a href="#slide31">Client-side MVC</a></th>
+        <td><a href="#slide31">31</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-32">
+        <th><a href="#slide32">Client-side MVC Frameworks</a></th>
+        <td><a href="#slide32">32</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-33">
+        <th><a href="#slide33">Backbone.js</a></th>
+        <td><a href="#slide33">33</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-34">
+        <th><a href="#slide34">Backbone Model-View</a></th>
+        <td><a href="#slide34">34</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-35">
+        <th><a href="#slide35">Backbone Model Sample</a></th>
+        <td><a href="#slide35">35</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-36">
+        <th><a href="#slide36">Backbone View Sample</a></th>
+        <td><a href="#slide36">36</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-37">
+        <th><a href="#slide37">Backbone Router Sample</a></th>
+        <td><a href="#slide37">37</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-38">
+        <th><a href="#slide38">Backbone Highlights</a></th>
+        <td><a href="#slide38">38</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-39">
+        <th><a href="#slide39">Angular.js</a></th>
+        <td><a href="#slide39">39</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-40">
+        <th><a href="#slide40">Ember.js</a></th>
+        <td><a href="#slide40">40</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-41">
+        <th><a href="#slide41">React</a></th>
+        <td><a href="#slide41">41</a></td>
+      </tr>
+      
+      
+    </table>
+  </div>
+  
+  <div id="help" class="sidebar hidden">
+    <h2>Help</h2>
+    <table>
+      <caption>Help</caption>
+      <tr>
+        <th>Table of Contents</th>
+        <td>t</td>
+      </tr>
+      <tr>
+        <th>Exposé</th>
+        <td>ESC</td>
+      </tr>
+      <tr>
+        <th>Full screen slides</th>
+        <td>e</td>
+      </tr>
+      <tr>
+        <th>Presenter View</th>
+        <td>p</td>
+      </tr>
+      <tr>
+        <th>Source Files</th>
+        <td>s</td>
+      </tr>
+      <tr>
+        <th>Slide Numbers</th>
+        <td>n</td>
+      </tr>
+      <tr>
+        <th>Toggle screen blanking</th>
+        <td>b</td>
+      </tr>
+      <tr>
+        <th>Show/hide slide context</th>
+        <td>c</td>
+      </tr>
+      <tr>
+        <th>Notes</th>
+        <td>2</td>
+      </tr>
+      <tr>
+        <th>Help</th>
+        <td>h</td>
+      </tr>
+    </table>
+  </div>
+  <script>main()</script>
+</body>
+</html>
