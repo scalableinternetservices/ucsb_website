@@ -24,7 +24,7 @@ November 19, 2015
 
 # Browser Wars
 
-* Mid-90s Nescape reigns supreme
+* Mid-90s Netscape reigns supreme
 * 1995 - Microsoft releases initial version of Internet Explorer
 
 Competition between Netscape and Microsoft produces significant innovation in
@@ -71,7 +71,7 @@ Meanwhile, Netscape focuses on open-sourcing its browser.
 | 2006 | IE 7  |
 | 2009 | IE 8  |
 
-Microsoft's significant marketshare results in a lack of competition, and a
+Microsoft's significant market share results in a lack of competition, and a
 lull in innovation.
 
 Time between releases increases:
@@ -103,7 +103,7 @@ Browser innovation reignites and today there are 4 popular browsers:
 
 # Major Client-side Improvements
 
-* XMLHTTPRequest
+* XMLHttpRequest
 * DOM Manipulation
 * V8
 
@@ -195,7 +195,7 @@ response contains a header like:
 
     Access-Control-Allow-Origin: http://request.origin
 
-While the broswer always issues the requests, it omits the cookies for the
+While the browser always issues the requests, it omits the cookies for the
 domain, and any HTTP authentication.
 
 ---
@@ -282,7 +282,7 @@ the V8 JavaScript engine.
 V8 applies modern, state-of-the-art virtual machine techniques to JavaScript.
 * With V8, JavaScript is not interpreted, but dynamically compiled to machine
   code
-    * Re-compiled and re-optimized at runtime
+    * Re-compiled and re-optimized at run time
 * Garbage collection is fast
     * Generational: separates allowed memory into young and old groups and
       treats them differently
@@ -748,3 +748,37 @@ Instead of updating the DOM directly, keep track of modifications in a
 "VirtualDOM", and only actually re-render what is needed.
 
 ---
+
+# React: Simple Code
+
+By giving the software engineer the ability to code as though he is
+re-rendering everything each time, we get simple UI code:
+
+    !javascript
+    var HelloMessage = React.createClass({displayName: "HelloMessage",
+      render: function() {
+        return React.createElement("div", null, "Hello ", this.props.name);
+      }
+    });
+
+    React.render(React.createElement(HelloMessage, {name: "John"}), mountNode);
+
+---
+
+# React Uses
+
+.fx: img-left
+
+![React](img/react.png)
+
+Currently in production use at:
+
+* Facebook
+* Instagram
+* Khan Academy
+
+## React-native
+
+* Build native mobile apps using these same techniques
+* Not significant code-reuse from web to mobile, but tool-chain reuse.
+* Available now for iOS, Android is in the works.
