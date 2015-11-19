@@ -350,3 +350,276 @@ Source:
 
 Source:
 [http://arewefastyet.com/#machine=28](http://arewefastyet.com/#machine=28)
+
+---
+
+# Client-side Renaissance
+
+By 2008, we have all the ingredients ready for a "client-side renaissance". We
+have globally installed virtual machines that:
+
+* presents content that can communicate via Ajax to the web service they
+  originated from
+* have full programmatic control of the user interface (DOM + events)
+* use modern, high performance VM techniques
+* exist in a competitive marketplace
+    * four viable browsers, available on multiple OSes
+    * being standards-compliant is a competitive advantage
+
+---
+
+# Modern Client-side Applications
+
+Instead of being a series of pages requested from a web server, we can serve up
+a running JavaScript application that:
+
+* regularly sends user input back to the server
+* receives structured data rather than rendered markup (JSON instead of HTML)
+
+These applications generally persist through user interactions.
+
+* Clicks no longer necessarily mean full-page refreshes.
+
+Communication with the server is decoupled from user interaction.
+
+* While the browser sits open, a JavaScript timer can trigger a check for new
+  data, and update the page as needed.
+
+---
+
+# Consequences of this Shift
+
+* Client side becomes significantly more complex
+* Full page refreshes become less common
+* Does your application work "offline"?
+* How real-time is your application?
+* The "running application" is more static and cacheable
+* The web server acts more like an API than a web service
+* The structured data can be used by mobile applications and other Internet
+  services
+
+---
+
+# Demo App: Server-side
+
+In a traditional web application:
+
+* When you click the "New Submission" button, the browser makes a HTTP request,
+and loads the response.
+
+* The response is an entire web page along with its associated assets.
+
+* The page returned has form elements.
+
+* When you complete the form and submit it, the sever may find it invalid and
+  subsequently send back an entire web page.
+
+* The list of submissions only changes when the page is refreshed/changed.
+
+---
+
+# Demo App: Client-side
+
+In a client-side web application:
+
+* When you click the "New Submission" button, JavaScript executes and redraws
+  the page to show a form. No HTTP request occurs.
+* When you fill out the form and submit it, the input is validated in the
+  browser using JavaScript (of course it also needs to be validated on the
+  server-side in the event of misbehaving clients).
+* If valid, an Ajax request is sent to the server.
+* The list of submissions changes as new submissions are made (or thereabouts).
+
+---
+
+# Client-side Trade-offs
+
+## Benefits
+
+* UI is extremely responsive
+* Less network traffic
+* Live updates
+
+## Weaknesses
+
+* Client side code if much more complex
+* First requests are significantly more expensive (lots more JavaScript to
+send)
+
+---
+
+# Complex Client-side Code
+
+Before this shift, the client mostly displayed static pages.
+
+Now the client must:
+
+* Understand the relationship between input events and corresponding DOM
+  updates.
+* Understand enough application logic to distinguish valid input from invalid
+  input.
+* Keep a persistent connection to the server and display updates as they come
+  in.
+
+---
+
+# Application Design
+
+> How should our application design adjust to this shift in complexity?
+
+## Naïve Approach
+
+Develop "JavaScript applications that end up as tangled piles of jQuery
+selectors and callbacks, all trying frantically to keep data in sync between
+the HTML UI, your JavaScript logic, and the database on your server."
+
+UUUGHHHH!
+
+---
+
+# Client-side MVC
+
+When something feels painful there is probably a better way to do it.
+
+Enter client-side MVC frameworks.
+
+---
+
+# Client-side MVC Frameworks
+
+## MVC: Model-View-Controller
+
+* Rails is a server-side MVC.
+* The presentation (view) of the data is separated from the data itself
+  (model).
+* Controllers exist to accept and coordinate updates to the models.
+* Models encapsulate business logic and state.
+
+There are many client-side frameworks that implement variations of the MVC
+concept. We will introduce four:
+
+* Backbone.js
+* Angular
+* Ember
+* React
+
+---
+
+# Backbone.js
+
+.fx: img-left
+
+![Backbone](img/backbone.png)
+
+* Developed by Jeremy Ashkenas (creator of CoffeeScript and Underscore.js)
+* Most lightweight of the four libraries we will discuss
+* Model-View-Router
+* Router maps URL fragments to functions
+
+## Websites using Backbone:
+
+* Airbnb
+* Hulu
+* Groupon
+* Pinterest
+* LinkedIn
+
+---
+
+# Backbone Model-View
+
+![Backbone Model View](img/backbone_model_view.png)
+
+![Backbone Views](img/backbone_views.png)
+
+---
+
+# Backbone Model Sample
+
+    !javascript
+    var Sidebar = Backbone.Model.extend({
+      promptColor: function() {
+        var cssColor = prompt("Please enter a CSS color:");
+        this.set({color: cssColor});
+      }
+    });
+    window.sidebar = new Sidebar;
+    sidebar.on('change:color', function(model, color) {
+      $('#sidebar').css({background: color});
+    });
+    sidebar.set({color: 'white'});
+    sidebar.promptColor();
+
+---
+
+# Backbone View Sample
+
+    !javascript
+    var DocumentRow = Backbone.View.extend({
+      tagName: "li",
+      className: "document-row",
+      events: {
+        "click .button.edit": "openEditDialog"
+      },
+      initialize: function() {
+        this.listenTo(this.model, "change", this.render);
+      },
+      render: function() {
+        this.$el.html(this.template(this.model.attributes));
+        return this;
+      }
+    });
+
+---
+
+# Backbone Router Sample
+
+    !javascript
+    var Workspace = Backbone.Router.extend({
+
+      routes: {
+        "help":                 "help",    // #help
+        "search/:query":        "search",  // #search/kiwis
+        "search/:query/p:page": "search"   // #search/kiwis/p7
+      },
+
+      help: function() {
+        ...
+      },
+
+      search: function(query, page) {
+        ...
+      }
+
+    });
+
+---
+
+# Backbone Highlights
+
+* Lightweight (1700 lines)
+* Templating agnostic
+* Doesn’t handle unbinding events
+* Can lead to memory leaks
+* For full-blown Single Page Apps, you might be better off with one of the
+  larger frameworks
+
+[http://backbonejs.org/](http://backbonejs.org/)
+
+---
+
+# Angular.js
+
+![Angular Logo](img/angular.png)
+
+---
+
+# Ember.js
+
+![Ember Logo](img/ember.png)
+
+---
+
+# React
+
+![React](img/react.png)
