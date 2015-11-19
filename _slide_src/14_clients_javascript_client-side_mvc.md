@@ -610,16 +610,141 @@ concept. We will introduce four:
 
 # Angular.js
 
+.fx: img-left
+
 ![Angular Logo](img/angular.png)
+
+* MVC framework supported and promoted by Google.
+* Much larger and more complex than Backbone.
+* Suitable for Single Page Applications.
+* Emphasis on declarative style for building UI.
+* Uses two-way data binding.
+
+## Websites using Angular
+
+* AWS console
+* HBO
+* VirginAmerica
+
+---
+
+# Angular Two-Way Data Binding
+
+![Angular Two Way Data Binding](img/angular_two_way.png)
+
+---
+
+# Angular Data Binding Example
+
+    !html
+    <div ng-app ng-init="qty=1;cost=2">
+      <div>
+        Quantity: <input type="number" min="0" ng-model="qty">
+      </div>
+      <div>
+        Costs: <input type="number" min="0" ng-model="cost">
+      </div>
+      <div><b>Total:</b> {{qty * cost | currency}}</div>
+    </div>
+
+---
+
+# Angular Model Example
+
+    !html
+    <div ng-controller="Controller">
+      Hello <input ng-model='name'> <hr/>
+      <span ng-bind="name"></span> <br/>
+    </div>
+
+.
+
+    !javascript
+    angular.module('docsBindExample', [])
+           .controller('Controller', ['$scope', function($scope) {
+             $scope.name = 'Bryce';
+           }]);
+
+---
+
+# Angular Highlights:
+
+.fx: img-left
+
+![Angular Logo](img/angular.png)
+
+* Ambitious and large framework that really turns the page into an application
+* Data binding provides a lot of magic
+* A framework you adopt wholesale
+* Declarative style retains HTML traditional nature
 
 ---
 
 # Ember.js
 
+.fx: img-left
+
 ![Ember Logo](img/ember.png)
+
+* Created by prominent members of the Rails community
+  (e.g., Yehuda Katz)
+
+* Has much in common with Angular
+    * All-in framework
+    * Two way binding
+    * Templating has similar flavor
+
+---
+
+# Ember Highlights
+
+.fx: img-left
+
+![Ember Logo](img/ember.png)
+
+* Focus on convention over configuration
+* Focus on standards compliance
+* ES6 modules over custom modules
+* ES6 polyfills in places
 
 ---
 
 # React
 
+.fx: img-left
+
 ![React](img/react.png)
+
+* Developed at Facebook
+* Observation: Event handling systems can be hard to reason about
+    * Two-way binding helps take care of some of this automatically, but it can
+      still be complex
+
+> Why are server-side rendered systems simple to reason about?
+
+---
+
+# React Concept
+
+.fx: img-left
+
+![React](img/react.png)
+
+If we could completely re-render the entire UI whenever anything changes, we
+could develop systems that were very simple to reason about.
+
+We can't re-render the entire UI because it would be too slow.
+
+React allows you to build simple-to-reason-about UI code by making these
+operations fast.
+
+---
+
+# React VirtualDOM
+
+![React VirtualDOM](img/react_virtual_dom.png)
+
+Instead of updating the DOM directly, keep track of modifications in a
+"VirtualDOM", and only actually re-render what is needed.
+
+---
