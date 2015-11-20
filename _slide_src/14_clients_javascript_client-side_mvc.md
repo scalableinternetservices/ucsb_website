@@ -39,10 +39,12 @@ browsers:
 # Browser Wars
 
 Microsoft bundles Internet Explorer with Windows 98
+
 * Every file management window is a browser
 * Results in an antitrust lawsuit against Microsoft
 
 Meanwhile, Netscape focuses on open-sourcing its browser.
+
 * Creates Mozilla Organization
 * Is acquired by AOL in 1999
 * AOL closes down Netscape division in 2003, and Mozilla Foundation is born.
@@ -81,6 +83,7 @@ Time between releases increases:
 # Browser Market Share Shift
 
 Around 2002, Microsoft starts losing market share to Firefox due to:
+
 * Security
 * Performance
 
@@ -280,6 +283,7 @@ In addition to other novel features (e.g., process per tab), Chrome includes
 the V8 JavaScript engine.
 
 V8 applies modern, state-of-the-art virtual machine techniques to JavaScript.
+
 * With V8, JavaScript is not interpreted, but dynamically compiled to machine
   code
     * Re-compiled and re-optimized at run time
