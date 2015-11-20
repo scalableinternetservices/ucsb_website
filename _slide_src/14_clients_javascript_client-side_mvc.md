@@ -339,7 +339,7 @@ Source:
 
 ---
 
-# Engine Comparison: Octane
+# Engine Comparison: Sunspider
 
 [https://www.webkit.org/perf/sunspider/sunspider.html](https://www.webkit.org/perf/sunspider/sunspider.html)
 
