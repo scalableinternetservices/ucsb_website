@@ -130,8 +130,10 @@ __TODO__:
 #### November 26, 2015 (Thanksgiving, no class nor lab)
 
 #### December 1, 2015
-* Guest Lecture: Neil Williams, Lead Programmer @
-  [Reddit](https://www.reddit.com)
+
+* Real Time Notifications
+    * Web Sockets
+    * Server Sent Events
 
 #### December 3, 2015
 * Guest Lecture: Jonathan Kupferman, CTO @ [Ketchup](http://ketchup.is/)
