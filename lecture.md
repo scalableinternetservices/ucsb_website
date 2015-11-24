@@ -131,9 +131,7 @@ __TODO__:
 
 #### December 1, 2015
 
-* Real Time Notifications
-    * Web Sockets
-    * Server Sent Events
+* Work Session (come to class with your questions)
 
 #### December 3, 2015
 * Guest Lecture: Jonathan Kupferman, CTO @ [Ketchup](http://ketchup.is/)
