@@ -1,78 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>http://cs290.com/disclosure/</loc>
-  </url>
-  <url>
-    <loc>http://cs290.com/</loc>
-  </url>
-  <url>
-    <loc>http://cs290.com/lecture/</loc>
-  </url>
-  <url>
-    <loc>http://cs290.com/project/</loc>
-  </url>
-  <url>
-    <loc>http://cs290.com/project_ideas/</loc>
-  </url>
-  <url>
-    <loc>http://cs290.com/slides/01_course_introduction.html</loc>
-    <lastmod>2015-11-20T14:26:06-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://cs290.com/slides/02_http.html</loc>
-    <lastmod>2015-11-20T14:26:07-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://cs290.com/slides/03_html_css_agile.html</loc>
-    <lastmod>2015-11-20T14:26:07-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://cs290.com/slides/04_tdd_ci_pairing_servers.html</loc>
-    <lastmod>2015-11-20T14:26:07-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://cs290.com/slides/05_web_and_application_servers.html</loc>
-    <lastmod>2015-11-20T14:26:08-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://cs290.com/slides/06_vertical_and_horizontal_scaling.html</loc>
-    <lastmod>2015-11-20T14:26:08-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://cs290.com/slides/07_high_availability_and_client_side_caching.html</loc>
-    <lastmod>2015-11-20T14:26:08-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://cs290.com/slides/08_server_side_caching_and_deploying_on_aws.html</loc>
-    <lastmod>2015-11-20T14:26:08-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://cs290.com/slides/09_relational_databases_db_concurrency_and_query_analysis.html</loc>
-    <lastmod>2015-11-20T14:26:09-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://cs290.com/slides/10_tsung.html</loc>
-    <lastmod>2015-11-20T14:26:09-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://cs290.com/slides/11_rdbms_scaling.html</loc>
-    <lastmod>2015-11-20T14:26:09-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://cs290.com/slides/12_web_security.html</loc>
-    <lastmod>2015-11-20T14:26:09-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://cs290.com/slides/13_http2_quic.html</loc>
-    <lastmod>2015-11-20T14:26:10-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://cs290.com/slides/14_clients_javascript_client-side_mvc.html</loc>
-    <lastmod>2015-11-20T14:26:10-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://cs290.com/slides/theme/base.html</loc>
-    <lastmod>2015-10-21T23:45:02-07:00</lastmod>
-  </url>
+<url>
+<loc>http://cs291.com/disclosure/</loc>
+</url>
+<url>
+<loc>http://cs291.com/</loc>
+</url>
+<url>
+<loc>http://cs291.com/lecture/</loc>
+</url>
+<url>
+<loc>http://cs291.com/project/</loc>
+</url>
+<url>
+<loc>http://cs291.com/project_ideas/</loc>
+</url>
+<url>
+<loc>http://cs291.com/slides/01_course_introduction.html</loc>
+<lastmod>2015-11-20T14:26:06-08:00</lastmod>
+</url>
+<url>
+<loc>http://cs291.com/slides/02_http.html</loc>
+<lastmod>2015-11-20T14:26:07-08:00</lastmod>
+</url>
+<url>
+<loc>http://cs291.com/slides/03_html_css_agile.html</loc>
+<lastmod>2015-11-20T14:26:07-08:00</lastmod>
+</url>
+<url>
+<loc>http://cs291.com/slides/04_tdd_ci_pairing_servers.html</loc>
+<lastmod>2015-11-20T14:26:07-08:00</lastmod>
+</url>
+<url>
+<loc>http://cs291.com/slides/05_web_and_application_servers.html</loc>
+<lastmod>2015-11-20T14:26:08-08:00</lastmod>
+</url>
+<url>
+<loc>http://cs291.com/slides/06_vertical_and_horizontal_scaling.html</loc>
+<lastmod>2015-11-20T14:26:08-08:00</lastmod>
+</url>
+<url>
+<loc>http://cs291.com/slides/07_high_availability_and_client_side_caching.html</loc>
+<lastmod>2015-11-20T14:26:08-08:00</lastmod>
+</url>
+<url>
+<loc>http://cs291.com/slides/08_server_side_caching_and_deploying_on_aws.html</loc>
+<lastmod>2015-11-20T14:26:08-08:00</lastmod>
+</url>
+<url>
+<loc>http://cs291.com/slides/09_relational_databases_db_concurrency_and_query_analysis.html</loc>
+<lastmod>2015-11-20T14:26:09-08:00</lastmod>
+</url>
+<url>
+<loc>http://cs291.com/slides/10_tsung.html</loc>
+<lastmod>2015-11-20T14:26:09-08:00</lastmod>
+</url>
+<url>
+<loc>http://cs291.com/slides/11_rdbms_scaling.html</loc>
+<lastmod>2015-11-20T14:26:09-08:00</lastmod>
+</url>
+<url>
+<loc>http://cs291.com/slides/12_web_security.html</loc>
+<lastmod>2015-11-20T14:26:09-08:00</lastmod>
+</url>
+<url>
+<loc>http://cs291.com/slides/13_http2_quic.html</loc>
+<lastmod>2015-11-20T14:26:10-08:00</lastmod>
+</url>
+<url>
+<loc>http://cs291.com/slides/14_clients_javascript_client-side_mvc.html</loc>
+<lastmod>2015-11-20T14:26:10-08:00</lastmod>
+</url>
+<url>
+<loc>http://cs291.com/slides/theme/base.html</loc>
+<lastmod>2015-10-21T23:45:02-07:00</lastmod>
+</url>
 </urlset>
