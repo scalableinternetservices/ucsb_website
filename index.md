@@ -37,7 +37,7 @@ Phelps 3525.
 
 ## Learning Outcomes
 
-By the end of this course CS290B students will be able to:
+By the end of this course CS291A students will be able to:
 
 * create a [Ruby on Rails](http://rubyonrails.org/) web service and deploy it
   to [Amazon's EC2](https://aws.amazon.com/ec2/)
