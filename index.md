@@ -27,10 +27,11 @@ Internet services. The lecture schedule and slides are available online.
 
 The goal of the course project is to gain hands-on experience in building and
 deploying a scalable web service on the Internet. Students will do this using
-the latest web technologies in order to learn how to tackle scalability and
-fault-tolerance concerns. Projects will be conducted in agile teams, and
-students will build their own scalable, redundant web site using fundamental
-web technologies and the [Ruby on Rails](http://rubyonrails.org/) framework.
+some of the latest web technologies in order to learn how to tackle scalability
+and fault-tolerance concerns. Projects will be conducted in agile teams of no
+more than four students, and team will build their own scalable web site using
+fundamental web technologies and the [Ruby on Rails](http://rubyonrails.org/)
+framework.
 
 Project-centric lab will meet every Wednesday from 5:00pm to 6:30pm in
 Phelps 3525.
@@ -65,13 +66,13 @@ their project presentation. Objectively these components break down into:
 * 10%: quality of project presentation
 * 10%: quality project write-up
 
-5% of an individual's grade is based on their participation in-class and on
-piazza.
+On an individual basis, 5% of one's grade is based on their
+participation in-class and on piazza.
 
 The remaining 95% of an individual's grade will be computed by multiplying
-their group grade by an individual score. Individual scores are computed by
-suming the relative percent of _work_ each individual confidentially assigns
-other individuals in their group.
+their group's project grade by an individual score. Individual scores are
+computed by suming the relative percent of _work_ each individual
+confidentially assigns other individuals in their group.
 
 For example, given a three person group with a group grade of 95%, everyone
 individually with 100% participation, and the following peer-graded scores:
@@ -92,3 +93,22 @@ So that everyone knows where they stand within their group, we will
 confidentially conduct the peer grading process at each quarter interval in the
 course. Only the outcome of the final peer-grade will be used to compute the
 final grade.
+
+### Letter Grades
+
+Letter grades will be assigned as follows:
+
+    A+ 96 2/3
+    A  93 1/3
+    A- 90
+    B+ 86 2/3
+    B  83 1/3
+    B- 80
+    C+ 76 2/3
+    C  73 1/3
+    F  0
+
+The number listed is the lower bound of the percent grade for the given
+range. It is expected that you are a relatively equal contributor in your
+group, with adjustments for significant positive outliers. Thus, please take
+note of the drop directly from C to F.
