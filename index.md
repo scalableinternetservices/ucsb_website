@@ -19,8 +19,8 @@ topics and more: the state of the art in building scalable Internet services.
 
 ## Lectures
 
-Course lectures will be Tuesdays and Thursdays, from 3:00pm to 4:50pm in
-Phelps 2510. Lecture material will cover the essentials of building large scale
+Course lectures will be Tuesdays and Thursdays, from 1:00pm to 2:50pm in
+Phelps 3526. Lecture material will cover the essentials of building large scale
 Internet services. The lecture schedule and slides are available online.
 
 ## Project
@@ -32,7 +32,7 @@ fault-tolerance concerns. Projects will be conducted in agile teams, and
 students will build their own scalable, redundant web site using fundamental
 web technologies and the [Ruby on Rails](http://rubyonrails.org/) framework.
 
-Project-centric lab will meet every Thursday from 5:00pm to 6:50pm in
+Project-centric lab will meet every Wednesday from 5:00pm to 6:30pm in
 Phelps 3525.
 
 ## Learning Outcomes

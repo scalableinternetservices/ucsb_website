@@ -13,7 +13,7 @@ Phelps 3526
 ## Lab
 Wednesday  
 5:00pm -- 6:30pm  
-Phelps 3523
+Phelps 3525
 
 ## Resources
 
