@@ -24,7 +24,7 @@ Phelps 3525
 ## Textbooks
 
 [The Ruby On Rails Tutorial](https://www.railstutorial.org/)  
-_[Available online](https://www.railstutorial.org/book)
+_[Available online](https://www.railstutorial.org/book)._
 
 [High Performance Browser Networking](http://www.amazon.com/gp/product/1449344763/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=1449344763&linkCode=as2&tag=f-4-20&linkId=ZD3ZDBNOTM6C4OWS)  
 ISBN: 9781449344764  
