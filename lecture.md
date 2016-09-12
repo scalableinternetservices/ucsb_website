@@ -4,7 +4,7 @@ permalink: /lecture/
 title: Lecture Schedule
 ---
 
-# Lecture Schedule
+# 2015 Lecture Schedule (to be updated for 2016)
 
 The following dates and topics are subject to change. Links to slides will be
 following each lecture if not sooner.
