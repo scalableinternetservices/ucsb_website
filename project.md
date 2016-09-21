@@ -29,18 +29,18 @@ fundamental web technologies and the Ruby on Rails framework.
 
 All sprints end and begin with each week's lab session.
 
-#### Sprint -1: September 24, 2015 -- October 1, 2015
+#### Sprint -1: September 22, 2016 -- September 28, 2016
 * Install [Rails](http://rubyonrails.org/).
 * Learn [Ruby](https://www.ruby-lang.org/en/).
 * Complete [Ruby Code Academy](http://www.codecademy.com/en/tracks/ruby).
 * Form your team.
 
-#### Sprint 0: October 1, 2015 -- October 8, 2015
+#### Sprint 0: September 28, 2016 -- October 5, 2016
 * Read Chapters 1 through 8 in Agile Web Development with Rails.
 * Determine your team's project, get approved by instructor.
 * Learn [git](http://rogerdudler.github.io/git-guide/).
 
-#### Sprint 1: October 8, 2015 -- October 15, 2015
+#### Sprint 1: October 5, 2016 -- October 12, 2016
 * Read chapters 9 through 17 in Agile Web Development with Rails.
 * Create and push the base rails application to your team's github repository.
 * Learn TDD: get [Travis CI](http://docs.travis-ci.com) working with your
@@ -49,19 +49,19 @@ All sprints end and begin with each week's lab session.
 * Decide on a sprint commitment.
 * Learn pair programming through pairing up on the first few stories.
 
-#### Sprint 2: October 15, 2015 -- October 22, 2015
+#### Sprint 2: October 12, 2016 -- October 19, 2016
 * Conduct a retrospective on how the last sprint went and how you can improve.
 * Decide on a sprint commitment.
 * Implement stories from the current sprint.
 * Learn EC2 and Amazon Web Console by deploying your initial application on
   Amazon EC2.
 
-#### Sprint 3: October 22, 2015 -- October 29, 2015
+#### Sprint 3: October 19, 2016 -- October 26, 2016
 * Conduct a retrospective on how the last sprint went and how you can improve.
 * Decide on a sprint commitment.
 * Implement stories from the current sprint.
 
-#### Sprint 4: October 29, 2015 -- November 5, 2015
+#### Sprint 4: October 26, 2016 -- November 2, 2016
 * Conduct a retrospective on how the last sprint went and how you can improve.
 * Decide on a sprint commitment.
 * Implement stories from the current sprint.
@@ -74,7 +74,7 @@ All sprints end and begin with each week's lab session.
 * Load test your application with tsung running on a m3.medium instance.
 * Produce an initial set of graphs with your application's performance.
 
-#### Sprint 5: November 5, 2015 -- November 12, 2015
+#### Sprint 5: November 2, 2016 -- November 9, 2016
 * Conduct a retrospective on how the last sprint went and how you can improve.
 * Decide on a sprint commitment.
 * Implement stories from the current sprint. Your application should be mostly
@@ -85,7 +85,7 @@ All sprints end and begin with each week's lab session.
   configurations, with the medium--large dataset.
 * Test using Tsung, measure, and document.
 
-#### Sprint 6: November 12, 2015 -- November 19, 2015
+#### Sprint 6: November 9, 2016 -- November 16, 2016
 * Conduct a retrospective on how the last sprint went and how you can improve.
 * Decide on a sprint commitment.
 * Implement stories from the current sprint. Only polish is appropriate at this
@@ -94,7 +94,7 @@ All sprints end and begin with each week's lab session.
 * Test (and document) the effects of horizontal scaling on your application
   with the critical path xml file.
 
-#### Sprint 7: November 19, 2015 -- November 26, 2015
+#### Sprint 7: November 16, 2016 -- November 23, 2016
 * Conduct a retrospective on how the last sprint went and how you can improve.
 * Decide on a sprint commitment.
 * Implement stories from the current sprint. Only polish is appropriate at this
@@ -106,7 +106,7 @@ All sprints end and begin with each week's lab session.
 * Continue testing using Tsung, measure, and document.
 * How many users can you handle?
 
-#### Sprint 8: November 26, 2015 -- December 3, 2015 (No lab on the 26th)
+#### Sprint 8: November 23, 2016 -- November 30, 2016 (No lab on the 23rd)
 * Conduct a retrospective on how the last sprint went and how you can improve.
 * If appropriate, create as large of a dataset as possible. How big can it be?
 * Implement server-side caching (if you haven't already)
@@ -115,7 +115,7 @@ All sprints end and begin with each week's lab session.
 *  Continue testing using Tsung, measure, and document.
 * How many users can you handle?
 
-#### Sprint 9: December 3, 2015 -- December 10, 2015
+#### Sprint 9: November 30, 2016 -- December 5, 2016 (Monday)
 * Conduct a retrospective on how the last sprint went and how you can improve.
-* Complete the project write-up (due December 8).
-* Prepare final presentation (present December 10).
+* Complete the project write-up (due Thursday, December 1).
+* Prepare final presentation (present Monday, December 5).
