@@ -98,15 +98,17 @@ final grade.
 
 Letter grades will be assigned as follows:
 
-    A+ 96 ⅔
-    A  93 ⅓
-    A- 90
-    B+ 86 ⅔
-    B  83 ⅓
-    B- 80
-    C+ 76 ⅔
-    C  73 ⅓
-    F  0
+| Percent | Grade |
+|:-------:|:-----:|
+|   96 ⅔  |   A+  |
+|   93 ⅓  |   A   |
+|   90    |   A-  |
+|   86 ⅔  |   B+  |
+|   83 ⅓  |   B   |
+|   80    |   B-  |
+|   76 ⅔  |   C+  |
+|   73 ⅓  |   C   |
+|    0    |   F   |
 
 The number listed is the lower bound of the percent grade for the given
 range. It is expected that you are a relatively equal contributor in your
