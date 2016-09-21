@@ -109,6 +109,7 @@ Letter grades will be assigned as follows:
 |   76 ⅔  |   C+  |
 |   73 ⅓  |   C   |
 |    0    |   F   |
+{: class="table table-striped"}
 
 The number listed is the lower bound of the percent grade for the given
 range. It is expected that you are a relatively equal contributor in your
