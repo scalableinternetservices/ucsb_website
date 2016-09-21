@@ -99,7 +99,7 @@ final grade.
 Letter grades will be assigned as follows:
 
 | Percent | Grade |
-|:-------:|:-----:|
+|:-------:|:------|
 |   96 ⅔  |   A+  |
 |   93 ⅓  |   A   |
 |   90    |   A-  |
