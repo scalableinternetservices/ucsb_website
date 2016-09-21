@@ -6,7 +6,9 @@ title: Lecture Schedule
 
 # 2016 Lecture Schedule
 
-The following dates and topics are subject to change.
+Below you can find the mostly set schedule for the course. Note that the guest
+lecture dates are subject to change, but the topic order should remain
+consistent.
 
 #### September 22, 2016 ([slides](/slides/01_course_introduction.html))
 * Introduction to Scalable Internet Services
@@ -58,8 +60,8 @@ by Cardellini, Colajanni, and Yu.
 * Database Concurrency Control
 * Query Analysis
 
-#### October 25, 2016 (No Class, Work Day)
-* Use the free time to improve on your projects.
+#### October 25, 2016
+* Guest lecture placeholder
 
 #### October 27, 2016 ([slides](/slides/10_tsung.html))
 * Load testing with Tsung
@@ -83,14 +85,10 @@ __TODO__:
     * CSRF
 
 #### November 8, 2016
-* Guest Lecture: Darren Mutz, Principal Software Engineer @
-  [AppFolio](http://www.appfolioinc.com/) (formerly worked for Amazon AWS)
-* "Technical Challenges in Content Delivery Networks"
+* Guest lecture placeholder
 
 #### November 10, 2016 ([slides](http://www.slideshare.net/sean_seannery/riot-games-scalable-data-warehouse-lecture-at-ucsb-ucla))
-* Guest Lecture: Sean Maloney, Big Data Engineer @
-  [Riot Games](http://www.riotgames.com/)
-* "Moving Mountains of Player Data"
+* Guest lecture placeholder
 
 __TODO__:
 
@@ -122,19 +120,15 @@ __TODO__:
   by Werner Vogels
 
 #### November 22, 2016
-* Guest Lecture: Josep Blanquer, Chief Architect @
-  [Rightscale](http://www.rightscale.com/)
-* "NoSQL Datastores"
+* Guest lecture placeholder
 
-#### November 24, 2016 (Thanksgiving, no class nor lab)
+#### November 24, 2016 (Thanksgiving, no class)
 
 #### November 29, 2016
-
-* Work Session (come to class with your questions)
+* Guest lecture placeholder
 
 #### December 1, 2016
-* Guest Lecture: Jonathan Kupferman, CTO @ [Ketchup](http://ketchup.is/)
-* "Scaling Up on the Cheap: Millions of Page Views for $40 a Month"
+* Guest lecture placeholder
 
 #### December 5, 2016 (Monday)
 * Final presentations
