@@ -26,7 +26,7 @@ Phelps 3525
 [The Ruby On Rails Tutorial](https://www.railstutorial.org/)  
 _[Available online](https://www.railstutorial.org/book)._
 
-[High Performance Browser Networking](http://www.amazon.com/gp/product/1449344763/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=1449344763&linkCode=as2&tag=f-4-20&linkId=ZD3ZDBNOTM6C4OWS)  
+[High Performance Browser Networking](https://www.amazon.com/High-Performance-Browser-Networking-performance/dp/1449344763)  
 ISBN: 9781449344764  
-_[Available online](http://chimera.labs.oreilly.com/books/1230000000545/index.html)._  
-Note: The online version is slightly more [up-to-date](http://chimera.labs.oreilly.com/books/1230000000545/pr02.html#_may_23_2014).
+_[Available online](https://hpbn.co/)._  
+Note: The online version is slightly more up-to-date.

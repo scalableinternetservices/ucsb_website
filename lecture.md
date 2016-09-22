@@ -15,7 +15,9 @@ consistent.
 
 __TODO__:
 
-* Read chapters 1 and 2 in High Performance Browser Networking
+* Read chapters [1](https://hpbn.co/primer-on-latency-and-bandwidth/) and
+  [2](https://hpbn.co/building-blocks-of-tcp/) in High Performance Browser
+  Networking
 
 #### September 27, 2016 ([slides](/slides/02_http.html))
 * Introduction to HTTP
@@ -74,7 +76,9 @@ by Cardellini, Colajanni, and Yu.
 
 __TODO__:
 
-* Read chapter 4 in High Performance Browser Networking
+* Read Chapter 4:
+  [Transport Layer Security](https://hpbn.co/transport-layer-security-tls/) in
+  High Performance Browser Networking
 
 #### November 3, 2016 ([slides](/slides/12_web_security.html))
 * An Introduction to Web Security
@@ -87,15 +91,13 @@ __TODO__:
 #### November 8, 2016
 * Guest lecture placeholder
 
-#### November 10, 2016 ([slides](http://www.slideshare.net/sean_seannery/riot-games-scalable-data-warehouse-lecture-at-ucsb-ucla))
+#### November 10, 2016
 * Guest lecture placeholder
 
 __TODO__:
 
-* Read chapter 12 in High Performance Browser Networking (__Note__: The web
-  version of
-  [chapter 12](http://chimera.labs.oreilly.com/books/1230000000545/ch12.html)
-  is updated with more relevant information)
+* Read Chapter 12: [HTTP/2](https://hpbn.co/http2/) in High Performance Browser
+  Networking
 
 #### Novemver 15, 2016 ([slides](/slides/13_http2_quic.html))
 * HTTP 2.0
@@ -103,7 +105,8 @@ __TODO__:
 
 __TODO__:
 
-* Read chapter 15 in High Performance Browser Networking
+* Read chapter 15: [XMLHttpRequest](https://hpbn.co/xmlhttprequest/) in High
+  Performance Browser Networking
 
 #### Novemver 17, 2016 ([slides](/slides/14_clients_javascript_client-side_mvc.html))
 * Clients
