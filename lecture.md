@@ -18,15 +18,21 @@ __TODO__:
 * Read chapters [1](https://hpbn.co/primer-on-latency-and-bandwidth/) and
   [2](https://hpbn.co/building-blocks-of-tcp/) in High Performance Browser
   Networking
+* Begin [Ruby Code Academy](https://www.codecademy.com/tracks/ruby)
+* Begin chapter 1 in the
+  [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
 
 #### September 27, 2016 ([slides](/slides/02_http.html))
 * Introduction to HTTP
 
 __TODO__:
 
-* Read and follow along with chapters 1 and 2 from Agile Web Development with
-  Rails.
 * Complete [Ruby Code Academy](https://www.codecademy.com/tracks/ruby)
+* Complete chapter 1 in the
+  [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
+* Begin chapter 2 in the
+  [Ruby on Rails Tutorial](https://www.railstutorial.org/book/toy_app)
+
 
 #### September 29, 2016  ([slides](/slides/03_html_css_agile.html))
 * Introduction to HTML and CSS

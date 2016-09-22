@@ -20,8 +20,8 @@ fundamental web technologies and the Ruby on Rails framework.
 
 ## Getting Started
 
-* Follow Chapter 1 of the book (Agile Web Development with Rails 4) for
-  installation instructions of Rails for Windows, Mac, or Linux.
+* Complete chapter 1 in the
+  [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
 * Read the list of [project ideas](/project_ideas/).
 * Add your own project suggestions.
 
@@ -32,16 +32,20 @@ All sprints end and begin with each week's lab session.
 #### Sprint -1: September 22, 2016 -- September 28, 2016
 * Install [Rails](http://rubyonrails.org/).
 * Learn [Ruby](https://www.ruby-lang.org/en/).
-* Complete [Ruby Code Academy](http://www.codecademy.com/en/tracks/ruby).
+* Complete [Ruby Code Academy](https://www.codecademy.com/tracks/ruby).
+* Complete chapter 1 in the
+  [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning).
+* Begin chapter 2 in the
+  [Ruby on Rails Tutorial](https://www.railstutorial.org/book/toy_app).
 * Form your team.
 
 #### Sprint 0: September 28, 2016 -- October 5, 2016
-* Read Chapters 1 through 8 in Agile Web Development with Rails.
+* Complete Chapters 2 through 6 in the Ruby on Rails Tutorial.
 * Determine your team's project, get approved by instructor.
 * Learn [git](http://rogerdudler.github.io/git-guide/).
 
 #### Sprint 1: October 5, 2016 -- October 12, 2016
-* Read chapters 9 through 17 in Agile Web Development with Rails.
+* Complete chapters 7 through 10 in the Ruby on Rails Tutorial.
 * Create and push the base rails application to your team's github repository.
 * Learn TDD: get [Travis CI](http://docs.travis-ci.com) working with your
   github repository.
@@ -50,6 +54,7 @@ All sprints end and begin with each week's lab session.
 * Learn pair programming through pairing up on the first few stories.
 
 #### Sprint 2: October 12, 2016 -- October 19, 2016
+* Complete chapters 13 and 14 in the Ruby on Rails Tutorial.
 * Conduct a retrospective on how the last sprint went and how you can improve.
 * Decide on a sprint commitment.
 * Implement stories from the current sprint.
