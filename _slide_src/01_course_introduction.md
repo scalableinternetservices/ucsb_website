@@ -22,7 +22,7 @@ If that does not work, please write on a piece of paper:
 * Name and email address
 * Your education level and year (e.g., 2nd year MS)
 * What is your prior experience with Internet technology?
-* What you hope to gain from this class?
+* What do you hope to gain from this class?
 
 
 ---
@@ -128,6 +128,7 @@ How do you find a place to rent?
 * [Realtor](http://www.realtor.com/apartments/Goleta_CA)
 * [Trulia](http://www.trulia.com/for_rent/Goleta,CA)
 * [PadMapper](http://www.padmapper.com/)
+* [Craigslist](https://santabarbara.craigslist.org/)
 
 
 ---
