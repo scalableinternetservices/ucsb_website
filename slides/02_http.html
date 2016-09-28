@@ -780,7 +780,7 @@ request, this contains the resource content)</li>
 <li>Multiple values can be concatenated via ampersand (<code>&amp;</code>)</li>
 </ul>
 <p>Example:</p>
-<p>http://www.reddit.com/r/ucsantabarbara/?<strong>sort=new&amp;t=all</strong></p></section>
+<p>http://www.reddit.com/r/ucsantabarbara/?<strong>sort=top&amp;t=all</strong></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -815,7 +815,7 @@ protocol.</p>
 <p>With HTTP different versions have different behavior:</p>
 <ul>
 <li>(1991) HTTP 0.9 (retroactively versioned): Single line protocol with no
-  headers. <code>GET index.html</code></li>
+  headers. Only GET supported: <code>GET index.html</code></li>
 <li>(1996) HTTP 1.0: Added headers, and a version string</li>
 <li>(1999) HTTP 1.1: Connection keep-alive by default, additional caching
   mechanisms. <strong>Primary HTTP version used today</strong></li>
@@ -1020,9 +1020,9 @@ subsequent requests to the server.</p>
 </ul>
 <h2>Security Related Headers</h2>
 <ul>
+<li>Content-Security-Policy</li>
 <li>Strict-Transport-Security</li>
 <li>X-Frame-Options</li>
-<li>X-Forwarded-Proto</li>
 </ul>
 <p><code>X-</code> prefixed headers are not part of the official specification and may later
 become <em>standardized</em>.</p></section>
@@ -1230,7 +1230,7 @@ username=bboe&amp;comment=Hi There
         <div class="slide has_code slide-31">
           <div class="inner">
             
-            <header><h1>Try it! Dumb Server</h1></header>
+            <header><h1>Try it! Direct Input Server</h1></header>
             
             
             <section><h2>Listen for a TCP connection</h2>
@@ -2015,7 +2015,7 @@ of an existing system. Using these hacks makes deployment more complicated.</p>
       
       
       <tr id="toc-row-31">
-        <th><a href="#slide31">Try it! Dumb Server</a></th>
+        <th><a href="#slide31">Try it! Direct Input Server</a></th>
         <td><a href="#slide31">31</a></td>
       </tr>
       
