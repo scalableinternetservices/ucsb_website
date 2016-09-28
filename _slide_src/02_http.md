@@ -244,7 +244,7 @@ Specifies a logical hierarchy to access a resource:
 
 Example:
 
-http://www.reddit.com/r/ucsantabarbara/?__sort=new&t=all__
+http://www.reddit.com/r/ucsantabarbara/?__sort=top&t=all__
 
 ---
 
@@ -256,7 +256,7 @@ protocol.
 With HTTP different versions have different behavior:
 
 * (1991) HTTP 0.9 (retroactively versioned): Single line protocol with no
-  headers. `GET index.html`
+  headers. Only GET supported: `GET index.html`
 * (1996) HTTP 1.0: Added headers, and a version string
 * (1999) HTTP 1.1: Connection keep-alive by default, additional caching
   mechanisms. __Primary HTTP version used today__
@@ -363,9 +363,9 @@ A request header containing the data previously set by the server via a
 
 ## Security Related Headers
 
+* Content-Security-Policy
 * Strict-Transport-Security
 * X-Frame-Options
-* X-Forwarded-Proto
 
 `X-` prefixed headers are not part of the official specification and may later
 become _standardized_.
@@ -442,7 +442,7 @@ The body of a response usually contains the requested resource content.
 
 ---
 
-# Try it! Dumb Server
+# Try it! Direct Input Server
 
 ## Listen for a TCP connection
 
