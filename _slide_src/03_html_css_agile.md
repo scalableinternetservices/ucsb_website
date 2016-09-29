@@ -425,7 +425,9 @@ Soon guidelines like the above should make complete sense to you.
 > What is Agile software development?
 
 __Agile__ is a collection of different approaches for developing software that
-has emerged as dominant in the last ~16 years.
+has emerged as dominant in the last ~15 years.
+
+Agile has evolved: [Modern Agile](http://modernagile.org/).
 
 __Scrum__ is a popular form of Agile software development.
 
