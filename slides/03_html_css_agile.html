@@ -25,7 +25,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>PLACEHOLDER</title>
+    <title>HTML, CSS and Agile</title>
     <!-- Styles -->
     
     <link rel="stylesheet" media="print" href="theme/css/print.css">
@@ -68,11 +68,12 @@
         <div class="slide title slide-1">
           <div class="inner">
             
-            <header><h1>PLACEHOLDER</h1></header>
+            <header><h1>HTML, CSS and Agile</h1></header>
             
             
-            <section><p>Slides not yet prepared.</p>
-<p><img alt="Under Construction" src="img/construction.gif" /></p></section>
+            <section><p><strong>CS291A</strong></p>
+<p>Dr. Bryce Boe</p>
+<p>September 29, 2016</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -88,7 +89,1876 @@
             </aside>
             
             <aside class="page_number">
-              1/1
+              1/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-2">
+          <div class="inner">
+            
+            <header><h1>Today's Agenda</h1></header>
+            
+            
+            <section><ul>
+<li>TODO</li>
+<li>HTTP Review / <a href="/slides/02_http.html#slide41">Finish HTTP Lecture</a></li>
+<li>Introduction to HTML</li>
+<li>Introduction to CSS</li>
+<li>Agile Software Development</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              2/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-3">
+          <div class="inner">
+            
+            <header><h1>TO-DO</h1></header>
+            
+            
+            <section><h2>Should be done</h2>
+<ul>
+<li><a href="https://piazza.com/class/idgkoaxbvg14lx">Piazza</a> / <a href="https://www.codecademy.com/tracks/ruby">Ruby Code Academy</a></li>
+<li>Chapters 1 &amp; 2 in <a href="https://hpbn.co/primer-on-latency-and-bandwidth/">HPBN</a> /
+  Chapter 1 in the
+  <a href="https://www.railstutorial.org/book/beginning">Ruby on Rails Tutorial</a></li>
+</ul>
+<h2>Before Tuesday's Lecture</h2>
+<ul>
+<li>Read/review Chapters 9 through 11 in
+  <a href="https://hpbn.co/brief-history-of-http/">HPBN</a></li>
+</ul>
+<h2>Before Next Lab:</h2>
+<ul>
+<li>Complete Chapters 2 through 6 in the
+  <a href="https://www.railstutorial.org/book/toy_app">Ruby on Rails Tutorial</a></li>
+<li>Learn <a href="http://rogerdudler.github.io/git-guide/">git</a></li>
+<li>Your team's github should have a single-controller app and a README with
+  project description, and team member photos.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-4">
+          <div class="inner">
+            
+            <header><h1>HTTP Components Review</h1></header>
+            
+            
+            <section><p><img alt="Components of HTTP request and response" src="img/http_components.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-5">
+          <div class="inner">
+            
+            <header><h1>Chrome Network Table</h1></header>
+            
+            
+            <section><p><img alt="Chrome Network Table" src="img/chrome_network_table.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              5/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-6">
+          <div class="inner">
+            
+            <header><h1>Review</h1></header>
+            
+            
+            <section><blockquote>
+<p>Why is the HOST header required in HTTP 1.1?</p>
+<p>What are the issues with using a TCP connection for each HTTP request?</p>
+<p>What is domain sharding?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-7">
+          <div class="inner">
+            
+            <header><h1>Introduction to HTML</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-8">
+          <div class="inner">
+            
+            <header><h1>HyperText Markup Language</h1></header>
+            
+            
+            <section><p>Plain text language that uses SGML syntax with a defined set of <em>tags</em>.</p>
+<ul>
+<li>Mark-up is provided by nesting text and other mark-up between <code>&lt;open_tag&gt;</code>
+  and <code>&lt;/close_tag&gt;</code></li>
+<li>Tags are nestable</li>
+<li>Some tags have key-value attributes</li>
+</ul>
+<p>Example:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Header 1<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>Header 3<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;intro&quot;</span><span class="p">&gt;</span>A paragraph with some <span class="p">&lt;</span><span class="nt">em</span><span class="p">&gt;</span>emphasized text<span class="p">&lt;/</span><span class="nt">em</span><span class="p">&gt;</span>.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-9">
+          <div class="inner">
+            
+            <header><h1>HTML Document</h1></header>
+            
+            
+            <section><p>HTML documents single root-element <em>should</em> be the <code>&lt;html&gt;</code> tag. It's forest of
+children are referred to as the <em>Document Object Model</em> or <strong>DOM</strong>.</p>
+<p>Technically there should be only two children of an <code>&lt;html&gt;</code> tag:</p>
+<p><code>&lt;head&gt;</code>: Encapsulates meta-data about the page including its title, and
+   references to external resources (CSS, JavaScript)</p>
+<p><code>&lt;body&gt;</code>: Encapsulates everything to be displayed on the page</p>
+<p><strong>Note</strong>: With HTML5 (and many browsers' parsers for other variations of HTML)
+these first-level tags can be omitted as they can be inferred based on the tag
+being parsed.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-10">
+          <div class="inner">
+            
+            <header><h1>HTML5 Bootstrap Example</h1></header>
+            
+            
+            <section><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;X-UA-Compatible&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;IE=edge&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Bootstrap 101 Template<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;css/bootstrap.min.css&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Hello, world!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;js/jquery.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;js/bootstrap.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-11">
+          <div class="inner">
+            
+            <header><h1>Common HTML Tags</h1></header>
+            
+            
+            <section><p>Different HTML tags should be used for different elements on the page. There
+exist a handful of formatting and style tags, however, those should be avoided
+in-favor of using CSS (cascading style sheets) -- we will discuss CSS later.</p>
+<ul>
+<li><strong>h1</strong> through <strong>h6</strong>: various header-level tags (h1 should be page title)</li>
+<li><strong>p</strong>: paragraph text</li>
+<li><strong>ul</strong>, <strong>ol</strong>: unordered and ordered list wrapper</li>
+<li><strong>li</strong>: list item (nested within ul, or ol)</li>
+<li><strong>table</strong>: begin a table</li>
+<li><strong>tr</strong>: begin a table row within a table</li>
+<li><strong>td</strong>: one entry in a table row</li>
+<li><strong>span</strong>: An inline grouping mechanism</li>
+<li><strong>div</strong>: A block-level grouping mechanism</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-12">
+          <div class="inner">
+            
+            <header><h1>Anchor Tag</h1></header>
+            
+            
+            <section><p>The most innovative part about HTML is the <strong>HyperText</strong> part provided by the
+anchor tag: <code>&lt;a&gt;</code></p>
+<p>Using an anchor tag one can link to another document (resource) anywhere on the
+web.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;http://cs291.com&quot;</span><span class="p">&gt;</span>CS291A<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-13">
+          <div class="inner">
+            
+            <header><h1>HTML Forms</h1></header>
+            
+            
+            <section><p>An HTML form provides a convenient way to collect input from a web browser.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;/communities&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;cn&quot;</span><span class="p">&gt;</span>Name<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;community&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;cn&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;commit&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Submit&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table>
+<h2>Notes</h2>
+<ul>
+<li><code>method</code> defaults to <strong>GET</strong>. Recall that <strong>GET</strong> requests shouldn't
+  have side-effects so <strong>POST</strong> is more-often more appropriate.</li>
+<li>The default encoding is <code>application/x-www-form-urlencoded</code></li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-14">
+          <div class="inner">
+            
+            <header><h1>Attributes <code>id</code> and <code>class</code></h1></header>
+            
+            
+            <section><p>HTML elements have two ubiquitous tags:</p>
+<p><code>id</code>: A unique identifier that makes it easy to find one element in the DOM</p>
+<p><code>class</code>: Multiple classes can be assigned to DOM elements, and the same class
+can be applied to multiple DOM elements (many-to-many relationship).</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert,loud&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;flash_message&quot;</span><span class="p">&gt;</span>Error.<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table>
+<p>DOM IDs and classes are very useful for applying CSS, and adding JavaScript
+callback hooks to elements on the page.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-15">
+          <div class="inner">
+            
+            <header><h1>Introduction to Cascading Style Sheets (CSS)</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-16">
+          <div class="inner">
+            
+            <header><h1>The <code>&lt;style&gt;</code> tag</h1></header>
+            
+            
+            <section><p>Inside the HTML <code>&lt;head&gt;</code> section we can use the <code>&lt;style&gt;</code> tag to add CSS
+directly to the HTML.</p>
+<p>Here we are styling all <code>h1</code> tags.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+      <span class="nt">h1</span> <span class="p">{</span><span class="nb">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;}</span>
+    <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Hello World<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              16/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-17">
+          <div class="inner">
+            
+            <header><h1>Style via ID</h1></header>
+            
+            
+            <section><p>DOM elements can be styled multiple ways.</p>
+<p>Here we are styling all DOM elements with ID <code>header</code> (there should be at most
+one per page).</p>
+<p>IDs are prefixed with the <code>#</code> symbol in CSS.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+      <span class="nn">#header</span> <span class="p">{</span><span class="nb">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;}</span>
+    <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;header&quot;</span><span class="p">&gt;</span>Hello World<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              17/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-18">
+          <div class="inner">
+            
+            <header><h1>Style via Class</h1></header>
+            
+            
+            <section><p>Here we are styling all DOM elements with class <code>alert</code>.</p>
+<p>Classes are prefixed with the <code>.</code> symbol in CSS.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+      <span class="nc">.alert</span> <span class="p">{</span><span class="nb">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;}</span>
+    <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert&quot;</span><span class="p">&gt;</span>Hello World<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              18/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-19">
+          <div class="inner">
+            
+            <header><h1>Inline Styles</h1></header>
+            
+            
+            <section><p>We can use the <code>style</code> attribute on HTML tags to directly style
+DOM elements.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+     <span class="c">/* nothing added here */</span>
+    <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;color: blue;&quot;</span><span class="p">&gt;</span>Hello World<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              19/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-20">
+          <div class="inner">
+            
+            <header><h1>Contradictory Styles</h1></header>
+            
+            
+            <section><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+      <span class="nt">span</span> <span class="p">{</span><span class="nb">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;}</span>
+      <span class="nc">.a</span> <span class="p">{</span><span class="nb">color</span><span class="o">:</span> <span class="nb">yellow</span><span class="p">;}</span>
+      <span class="nn">#b</span> <span class="p">{</span><span class="nb">color</span><span class="o">:</span> <span class="nb">green</span><span class="p">;}</span>
+    <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;a&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;b&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;color: red;&quot;</span><span class="p">&gt;</span>Hello World<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table>
+<blockquote>
+<p>What color is Hello World?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              20/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-21">
+          <div class="inner">
+            
+            <header><h1>Simplified Rule Precedence</h1></header>
+            
+            
+            <section><p>In general more specific rules have higher precedence than less specific rules.</p>
+<p>Precedence order (highest first):</p>
+<ul>
+<li><code>!important</code> rules (e.g., <code>span {color: blue !important};</code>)</li>
+<li>Inline style</li>
+<li>ID</li>
+<li>Class</li>
+<li>HTML Tag</li>
+</ul>
+<p>It gets more complicated, but understanding these rules will go a long way.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              21/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code slide-22">
+          <div class="inner">
+            
+            <header><h1>External Style Sheets</h1></header>
+            
+            
+            <section><p>Style definitions are most often provided through separate CSS files, rather
+than <code>&lt;style&gt;</code> blocks.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;style.css&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/css&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>Hello World<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table>
+<blockquote>
+<p>Why might external styles be better than using the <code>&lt;style&gt;</code> tag, or inline
+styles?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              22/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-23">
+          <div class="inner">
+            
+            <header><h1>Visually Powerful</h1></header>
+            
+            
+            <section><p>CSS is incredibly powerful. Changing a site's stylesheet can completely impact
+how the site's users interact with the site.</p>
+<p>This ends the brief overview of CSS.</p>
+<p>To get started, it's definitely recommended to use a CSS framework like
+Twitter's Bootstrap: <a href="http://getbootstrap.com/">http://getbootstrap.com/</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              23/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-24">
+          <div class="inner">
+            
+            <header><h1>Bootstrap Alert Example</h1></header>
+            
+            
+            <section><p><img alt="Bootstrap Alert Example" src="img/bootstrap_alerts.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              24/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-25">
+          <div class="inner">
+            
+            <header><h1>Bootstrap Form Example</h1></header>
+            
+            
+            <section><p><img alt="Bootstrap Form Example" src="img/bootstrap_form.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              25/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-26">
+          <div class="inner">
+            
+            <header><h1>Agile Software Development</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              26/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-27">
+          <div class="inner">
+            
+            <header><h1>Talent Shortage</h1></header>
+            
+            
+            <section><p><img alt="TC Talent Shortage Snippet" src="img/tc_talent.png" /></p>
+<p>Source:
+<a href="http://techcrunch.com/2013/05/05/there-is-in-fact-a-tech-talent-shortage-and-there-always-will-be/">http://techcrunch.com/2013/05/05/there-is-in-fact-a-tech-talent-shortage-and-there-always-will-be/</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              27/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-28">
+          <div class="inner">
+            
+            <header><h1>Talent Shortage</h1></header>
+            
+            
+            <section><p><img alt="TT Talent Shortage Snippet" src="img/tt_talent.png" /></p>
+<p>Source: <a href="http://searchmobilecomputing.techtarget.com/news/2240241877/IT-jobs-market-booms-but-talent-in-short-supply">http://searchmobilecomputing.techtarget.com/news/2240241877/IT-jobs-market-booms-but-talent-in-short-supply</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              28/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-29">
+          <div class="inner">
+            
+            <header><h1>Scarce Resources</h1></header>
+            
+            
+            <section><p>Software Engineering requires judicious use of scarce resources.</p>
+<p>YOU are one of those scarce resources.</p>
+<p>Modern techniques are designed to optimize for your time.</p>
+<h2>Modern Software Development Techniques</h2>
+<ul>
+<li>Agile and Scrum</li>
+<li>Test Driven Development (TDD)</li>
+<li>Continuous Integration (CI)</li>
+<li>Github work flow</li>
+<li>Pair programming (pairing)</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              29/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-30">
+          <div class="inner">
+            
+            <header><h1>Understanding Agile</h1></header>
+            
+            
+            <section><blockquote>
+<h2>Sprint 2: Starts October 12</h2>
+<ul>
+<li>Conduct a <strong>retrospective</strong> on how the last sprint went and how your group
+  can improve.</li>
+<li>Decide on a sprint commitment.</li>
+<li>Implement stories from the current sprint.</li>
+</ul>
+</blockquote>
+<p>Soon guidelines like the above should make complete sense to you.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              30/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-31">
+          <div class="inner">
+            
+            <header><h1>Agile and Scrum</h1></header>
+            
+            
+            <section><blockquote>
+<p>What is Agile software development?</p>
+</blockquote>
+<p><strong>Agile</strong> is a collection of different approaches for developing software that
+has emerged as dominant in the last ~16 years.</p>
+<p><strong>Scrum</strong> is a popular form of Agile software development.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              31/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-32">
+          <div class="inner">
+            
+            <header><h1>The World Before Agile</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              32/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-33">
+          <div class="inner">
+            
+            <header><h1>Waterfall</h1></header>
+            
+            
+            <section><p>The origin of the <em>Waterfall</em> model is generally misattributed to Winston
+Royce, from his paper: "Managing the Development of Large Software Systems"</p>
+<p>In reality, he wasn't the first, and didn't advocate for what became Waterfall
+software engineering.</p>
+<p>Herbert Benington would be a more accurate attribution.</p>
+<p>Reference: *1970, Proceedings of IEEE WESCON 26 (August): 1–9.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              33/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-34">
+          <div class="inner">
+            
+            <header><h1>Waterfall Diagram</h1></header>
+            
+            
+            <section><p><img alt="Waterfall" src="img/waterfall.png" /></p>
+<p>This diagram from Royce's paper is frequently cited.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              34/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-35">
+          <div class="inner">
+            
+            <header><h1>Waterfall Process</h1></header>
+            
+            
+            <section><p>Each stage performs its role and then passes its deliverable to the next stage.</p>
+<p>E.g., Design must be completed before coding, which in-turn must be completed
+before testing.</p>
+<p>Strength: This approach allows for deep specialization.</p>
+<p>Waterfall works great for areas like manufacturing where it is <em>expensive</em> to
+alter the design due to issues detected in latter stages.</p>
+<p>With software it's incredibly cheap to adapt the process along the way.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              35/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-36">
+          <div class="inner">
+            
+            <header><h1>Waterfall Continued</h1></header>
+            
+            
+            <section><p>The Waterfall technique works best when you have complete knowledge. With
+respect to software development:</p>
+<ul>
+<li>Software testers and developers know everything about how the software will
+  be deployed</li>
+<li>Software developers have few if any <em>surprises</em> during testing</li>
+<li>Designers have complete understanding of the difficulty of each design
+  decision</li>
+<li>Requirements team understands the impact on design and development</li>
+</ul>
+<p>In practice most of these items are not met, thus the waterfall model inhibits
+the software development process.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              36/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-37">
+          <div class="inner">
+            
+            <header><h1>Agile Manifesto</h1></header>
+            
+            
+            <section><p>In 2001, the “Agile Software Manifesto” was written by Kent Beck, Ken Schwaber,
+Jeff Sutherland, and Dave Thomas.</p>
+<h2>Agile Values</h2>
+<ul>
+<li><strong>Responding to change</strong> over following a plan</li>
+<li><strong>Working software</strong> over comprehensive docs</li>
+<li><strong>Customer collaboration</strong> over contract negotiation</li>
+<li><strong>Individuals and interactions</strong> over processes and tools</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              37/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-38">
+          <div class="inner">
+            
+            <header><h1>Responding to Change</h1></header>
+            
+            
+            <section><p>... over following a plan</p>
+<ul>
+<li>Unexpected issues will occur during the product development.</li>
+<li>Responding to change involves deciding how to best proceed when such issues
+  occur.</li>
+</ul>
+<p>For example:</p>
+<blockquote>
+<p>What do you do when half your team is suddenly out sick?</p>
+<p>What do you do when a simple feature addition turns out to be
+significantly more complicated?</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              38/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-39">
+          <div class="inner">
+            
+            <header><h1>Working Software</h1></header>
+            
+            
+            <section><p>... over comprehensive documentation</p>
+<h2>Agile</h2>
+<ul>
+<li>Focus on deliverable features</li>
+<li>Automated acceptance, unit, functional, and integration tests</li>
+</ul>
+<h2>Waterfall</h2>
+<ul>
+<li>Extensive documented requirements (before any prototype)<ul>
+<li>Style guide</li>
+<li>Commenting rules</li>
+<li>Component interaction</li>
+<li>User interface requirements</li>
+</ul>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              39/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide img-left slide-40">
+          <div class="inner">
+            
+            <header><h1>Customer Collaboration</h1></header>
+            
+            
+            <section><p>... over contract negotiation</p>
+<p><img alt="Three people looking at computer" src="img/stock_collaboration.png" /></p>
+<p>"Here's what we've got so far."</p>
+<p>"Uh... Now that I see it in action, I've changed my mind."</p>
+<p><img alt="Software Developer" src="img/cartoon_programmer.png" /></p>
+<p>"I'm sure if I just build what they've asked for, they'll love it."</p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              40/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-41">
+          <div class="inner">
+            
+            <header><h1>Individuals and Interactions</h1></header>
+            
+            
+            <section><p>... over processes and tools</p>
+<p><img alt="Rugby Scrum" src="img/rugby_scrum.jpg" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              41/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-42">
+          <div class="inner">
+            
+            <header><h1>Scrum</h1></header>
+            
+            
+            <section><p>Scrum is a specific type of Agile software development.</p>
+<p>It was developed in the early 1990s by Ken Schwaber and Jeff Sutherland.</p>
+<p>We will use a stripped down version of Scrum for this class.</p>
+<h2>Other Agile Alternatives</h2>
+<ul>
+<li><strong>Kanban</strong>: Focus on controlling WIP (work in progress), no <strong>sprints</strong></li>
+<li>Extreme Programming (XP): Emphasis on feedback systems through automated
+testing and pair programming</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              42/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-43">
+          <div class="inner">
+            
+            <header><h1>Scrum Roles</h1></header>
+            
+            
+            <section><h2>Product Owner</h2>
+<p>Understands the needs of the customer and prioritizes those needs.</p>
+<h2>The Team</h2>
+<p>People building the software. Individual roles are intentionally vague.</p>
+<h2>Scrum Master</h2>
+<p>Responsible for making sure the <em>Scrum</em> process is followed and helps to resolve
+blocking issues (e.g., between members of the team, with the product owner, or
+with external dependencies)</p>
+<p><strong>Note</strong>: We will have neither a product owner nor scrum master on our teams.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              43/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-44">
+          <div class="inner">
+            
+            <header><h1>Scrum User Story Defined</h1></header>
+            
+            
+            <section><p>A <strong>story</strong> is a unit of functionality that exposes something new to the user
+(customer). Stories are often written like:</p>
+<blockquote>
+<p>As a __________, I can __________, in order to
+__________.</p>
+</blockquote>
+<p>For example:</p>
+<blockquote>
+<p>As a github gold organization, I am permitted up to 50 private repositories,
+in order to privately maintain a large number of distinct projects.</p>
+<p>As an authenticated student user, I am able to post a question such that my
+instructor knows I am asking the question but my classmates do not, in order
+increase my likeliness of submitting questions.</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              44/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-45">
+          <div class="inner">
+            
+            <header><h1>Scrum Sprint Defined</h1></header>
+            
+            
+            <section><p>A <strong>sprint</strong> is a specific length of time to accomplish some work.</p>
+<p>Sprints may operate on the same schedule as product releases (e.g., 2-week
+Sprints immediately followed by releasing whatever was accomplished) however,
+it's not necessary.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              45/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-46">
+          <div class="inner">
+            
+            <header><h1>Scrum Process</h1></header>
+            
+            
+            <section><p><img alt="Scrum Process" src="img/scrum_process.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              46/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-47">
+          <div class="inner">
+            
+            <header><h1>Scrum Process</h1></header>
+            
+            
+            <section><p>At the start of each sprint is the <strong>sprint planning meeting</strong> to decide the
+"sprint commitment".</p>
+<p>Stories are pulled from the prioritized product backlog into the sprint
+backlog. The team may decide to pull stories in a slightly different order
+depending on various constraints. So <em>agile</em>.</p>
+<p>The team decides how many stories to pull based on their prior estimate of
+those stories' effort (done in <em>grooming</em>) relative to their current
+<em>velocity</em>. Velocity is often the average amount of <em>work</em> delivered over the
+last three weeks.</p>
+<p>After the sprint planning meeting the commitment is <em>frozen</em> and the team works
+through the sprint backlog for the duration of the sprint.</p>
+<p>Each day the team has a <strong>stand up</strong> meeting to discuss what is currently being
+worked on, and to discover any <em>blocking</em> issues.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              47/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-48">
+          <div class="inner">
+            
+            <header><h1>End of Sprint</h1></header>
+            
+            
+            <section><p>A <strong>sprint review</strong> is conducted at the end of the sprint to demo what was
+accomplished. Everything considered completed should be ready to be released to
+customers (also referred to as <strong>shippable</strong>).</p>
+<p>Finally a <strong>sprint retrospective</strong> is conducted for the team to reflect on how
+well or poorly things went during the sprint. The team discusses how they can
+improve their process and (hopefully) comes out of the meeting with concrete
+idea to be acted upon in the next sprint.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              48/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: 03_html_css_agile.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-49">
+          <div class="inner">
+            
+            <header><h1>CS291 Scrum</h1></header>
+            
+            
+            <section><p>We will use an adapted version of scrum:</p>
+<ul>
+<li>No product owner</li>
+<li>No scrum master</li>
+<li>At the start of each lab the team will conduct a retrospective</li>
+<li>Each team will demo their sprint's progress to me</li>
+<li>After the retro and demo the next sprint will begin and teams will choose
+  their commitment</li>
+<li>Throughout the week each team will work to complete their commitment, and
+  subsequently deploy their releasable code to AWS</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="03_html_css_agile.md">03_html_css_agile.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              49/49
             </aside>
           </footer>
         </div>
@@ -103,8 +1973,296 @@
       <caption>Table of Contents</caption>
       
       <tr id="toc-row-1">
-        <th><a href="#slide1">PLACEHOLDER</a></th>
+        <th><a href="#slide1">HTML, CSS and Agile</a></th>
         <td><a href="#slide1">1</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-2">
+        <th><a href="#slide2">Today's Agenda</a></th>
+        <td><a href="#slide2">2</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-3">
+        <th><a href="#slide3">TO-DO</a></th>
+        <td><a href="#slide3">3</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-4">
+        <th><a href="#slide4">HTTP Components Review</a></th>
+        <td><a href="#slide4">4</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-5">
+        <th><a href="#slide5">Chrome Network Table</a></th>
+        <td><a href="#slide5">5</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-6">
+        <th><a href="#slide6">Review</a></th>
+        <td><a href="#slide6">6</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-7">
+        <th><a href="#slide7">Introduction to HTML</a></th>
+        <td><a href="#slide7">7</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-8">
+        <th><a href="#slide8">HyperText Markup Language</a></th>
+        <td><a href="#slide8">8</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-9">
+        <th><a href="#slide9">HTML Document</a></th>
+        <td><a href="#slide9">9</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-10">
+        <th><a href="#slide10">HTML5 Bootstrap Example</a></th>
+        <td><a href="#slide10">10</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-11">
+        <th><a href="#slide11">Common HTML Tags</a></th>
+        <td><a href="#slide11">11</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-12">
+        <th><a href="#slide12">Anchor Tag</a></th>
+        <td><a href="#slide12">12</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-13">
+        <th><a href="#slide13">HTML Forms</a></th>
+        <td><a href="#slide13">13</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-14">
+        <th><a href="#slide14">Attributes <code>id</code> and <code>class</code></a></th>
+        <td><a href="#slide14">14</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-15">
+        <th><a href="#slide15">Introduction to Cascading Style Sheets (CSS)</a></th>
+        <td><a href="#slide15">15</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-16">
+        <th><a href="#slide16">The <code>&lt;style&gt;</code> tag</a></th>
+        <td><a href="#slide16">16</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-17">
+        <th><a href="#slide17">Style via ID</a></th>
+        <td><a href="#slide17">17</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-18">
+        <th><a href="#slide18">Style via Class</a></th>
+        <td><a href="#slide18">18</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-19">
+        <th><a href="#slide19">Inline Styles</a></th>
+        <td><a href="#slide19">19</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-20">
+        <th><a href="#slide20">Contradictory Styles</a></th>
+        <td><a href="#slide20">20</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-21">
+        <th><a href="#slide21">Simplified Rule Precedence</a></th>
+        <td><a href="#slide21">21</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-22">
+        <th><a href="#slide22">External Style Sheets</a></th>
+        <td><a href="#slide22">22</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-23">
+        <th><a href="#slide23">Visually Powerful</a></th>
+        <td><a href="#slide23">23</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-24">
+        <th><a href="#slide24">Bootstrap Alert Example</a></th>
+        <td><a href="#slide24">24</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-25">
+        <th><a href="#slide25">Bootstrap Form Example</a></th>
+        <td><a href="#slide25">25</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-26">
+        <th><a href="#slide26">Agile Software Development</a></th>
+        <td><a href="#slide26">26</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-27">
+        <th><a href="#slide27">Talent Shortage</a></th>
+        <td><a href="#slide27">27</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-28">
+        <th><a href="#slide28">Talent Shortage</a></th>
+        <td><a href="#slide28">28</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-29">
+        <th><a href="#slide29">Scarce Resources</a></th>
+        <td><a href="#slide29">29</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-30">
+        <th><a href="#slide30">Understanding Agile</a></th>
+        <td><a href="#slide30">30</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-31">
+        <th><a href="#slide31">Agile and Scrum</a></th>
+        <td><a href="#slide31">31</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-32">
+        <th><a href="#slide32">The World Before Agile</a></th>
+        <td><a href="#slide32">32</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-33">
+        <th><a href="#slide33">Waterfall</a></th>
+        <td><a href="#slide33">33</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-34">
+        <th><a href="#slide34">Waterfall Diagram</a></th>
+        <td><a href="#slide34">34</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-35">
+        <th><a href="#slide35">Waterfall Process</a></th>
+        <td><a href="#slide35">35</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-36">
+        <th><a href="#slide36">Waterfall Continued</a></th>
+        <td><a href="#slide36">36</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-37">
+        <th><a href="#slide37">Agile Manifesto</a></th>
+        <td><a href="#slide37">37</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-38">
+        <th><a href="#slide38">Responding to Change</a></th>
+        <td><a href="#slide38">38</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-39">
+        <th><a href="#slide39">Working Software</a></th>
+        <td><a href="#slide39">39</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-40">
+        <th><a href="#slide40">Customer Collaboration</a></th>
+        <td><a href="#slide40">40</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-41">
+        <th><a href="#slide41">Individuals and Interactions</a></th>
+        <td><a href="#slide41">41</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-42">
+        <th><a href="#slide42">Scrum</a></th>
+        <td><a href="#slide42">42</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-43">
+        <th><a href="#slide43">Scrum Roles</a></th>
+        <td><a href="#slide43">43</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-44">
+        <th><a href="#slide44">Scrum User Story Defined</a></th>
+        <td><a href="#slide44">44</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-45">
+        <th><a href="#slide45">Scrum Sprint Defined</a></th>
+        <td><a href="#slide45">45</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-46">
+        <th><a href="#slide46">Scrum Process</a></th>
+        <td><a href="#slide46">46</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-47">
+        <th><a href="#slide47">Scrum Process</a></th>
+        <td><a href="#slide47">47</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-48">
+        <th><a href="#slide48">End of Sprint</a></th>
+        <td><a href="#slide48">48</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-49">
+        <th><a href="#slide49">CS291 Scrum</a></th>
+        <td><a href="#slide49">49</a></td>
       </tr>
       
       
