@@ -192,7 +192,7 @@ HTML elements have two ubiquitous tags:
 can be applied to multiple DOM elements (many-to-many relationship).
 
     !html
-    <span class="alert,loud" id="flash_message">Error.</span>
+    <span class="alert loud" id="flash_message">Error.</span>
 
 DOM IDs and classes are very useful for applying CSS, and adding JavaScript
 callback hooks to elements on the page.
