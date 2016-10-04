@@ -5,7 +5,7 @@ __CS291A__
 
 Dr. Bryce Boe
 
-October 3, 2016
+October 4, 2016
 
 ---
 
@@ -36,12 +36,6 @@ October 3, 2016
 * Learn [git](http://rogerdudler.github.io/git-guide/)
 * Your team's github should have a single-controller app and a README with
   project description, and team member photos.
-
-## Before Thursday's Class:
-
-* Read
-  [Dynamic Load Balancing on Web-server Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf)
-  by Cardellini, Colajanni, and Yu.
 
 ---
 

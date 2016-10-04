@@ -42,14 +42,14 @@ __TODO__:
 * TDD, CI, and Pairing
 * Web Server Architectures (very brief)
 
+#### October 6, 2016 ([slides](/slides/05_web_and_application_servers.html))
+* Web Server and Application Server Architectures
+
 __TODO__:
 
 * Read
 [Dynamic Load Balancing on Web-server Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf)
 by Cardellini, Colajanni, and Yu.
-
-#### October 6, 2016 ([slides](/slides/05_web_and_application_servers.html))
-* Web Server and Application Server Architectures
 
 #### October 11, 2016 ([slides](/slides/06_vertical_and_horizontal_scaling.html))
 * Vertical Scaling
