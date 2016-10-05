@@ -98,7 +98,9 @@ __TODO__:
 * Guest lecture placeholder
 
 #### November 10, 2016
-* Guest lecture placeholder
+* Guest Lecture: Sean Maloney, Big Data Engineer @
+  [Riot Games](http://www.riotgames.com/)
+* "Moving Mountains of Player Data"
 
 __TODO__:
 
