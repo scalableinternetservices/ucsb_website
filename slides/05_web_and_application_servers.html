@@ -145,14 +145,20 @@
   the <a href="https://www.railstutorial.org/book/beginning">Ruby on Rails Tutorial</a></li>
 <li>Familiarity with <a href="http://rogerdudler.github.io/git-guide/">git</a></li>
 <li>Have at least 20 user stories (40 would be better) for your project</li>
-<li>Have a goal of completing at least #TEAM_MEMBERS stories that deliver value
-  by next lab</li>
 </ul>
 <h2>Before Tuesday's Class:</h2>
 <ul>
 <li>Read
   <a href="http://www.ics.uci.edu/~cs230/reading/DLB.pdf">Dynamic Load Balancing on Web-server Systems</a>
   by Cardellini, Colajanni, and Yu.</li>
+</ul>
+<h2>Before Next Lab</h2>
+<ul>
+<li>Complete at least #TEAM_MEMBERS stories that deliver value to your users
+  (me).</li>
+<li>Complete chapters 7 through 10 in the
+  <a href="https://www.railstutorial.org/book/beginning">Ruby on Rails Tutorial</a></li>
+<li>Hook TravisCI up to your repository.</li>
 </ul></section>
             
           </div>
@@ -350,7 +356,7 @@ loop forever
 <ul>
 <li>Simple</li>
 <li>Provides easy isolation between requests</li>
-<li>No threading issues</li>
+<li>No threading issues (to discuss)</li>
 </ul>
 <h2>Weaknesses</h2>
 <ul>
@@ -432,7 +438,7 @@ size as needed.</p></section>
 <li>Children can die after <em>M</em> requests to avoid memory leakage</li>
 <li>Process setup and tear down costs are minimized</li>
 <li>More predictable behavior under high load</li>
-<li>No threading issues</li>
+<li>No threading issues (to discuss)</li>
 </ul>
 <h2>Weaknesses</h2>
 <ul>
@@ -683,8 +689,8 @@ clients."</p>
 <li>Reading from the network socket</li>
 <li>Parsing its request</li>
 <li>Opening a file on disk</li>
-<li>Read the file into memory</li>
-<li>Write the memory to network</li>
+<li>Reading the file into memory</li>
+<li>Writing the memory to network</li>
 </ul></section>
             
           </div>
@@ -751,14 +757,14 @@ clients."</p>
             <header><h1>Waiting on I/O</h1></header>
             
             
-            <section><p>Every time a process is waiting on I/O it is not runnable, and it is not
+            <section><p>Every time a process/thread is waiting on I/O it is not runnable, and it is not
 cost-free:</p>
 <ul>
-<li>Process is considered every time the scheduler makes a decision</li>
-<li>Memory is occupied by the process, last load may have evicted other
+<li>Each process/thread is considered every time the scheduler makes a decision</li>
+<li>Memory is occupied by the process, and its last load may have evicted other
   processes' memory from the cache</li>
 </ul>
-<p>Massive concurrency slows down all processes.</p></section>
+<p>Massive concurrency slows down all processes/threads.</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -795,7 +801,7 @@ cost-free:</p>
 <h2>Yes! Asynchronous I/O</h2>
 <ul>
 <li><code>select()</code>: Provided a list of file descriptors, block only until at least
-  one is ready for I/O</li>
+  one is ready for I/O (only usable up to 1024 file descriptors on Linux).</li>
 <li><code>epoll_*()</code>: Register to listen for events on file descriptors. Again block
   only until at least one of the registered descriptors is ready for I/O</li>
 </ul></section>
@@ -836,7 +842,7 @@ cost-free:</p>
             handle_io(fd)
         else do nothing
 </code></pre>
-<h2>some_handler</h2>
+<h2>handle_io</h2>
 <ul>
 <li>can include socket acceptance</li>
 <li>shouldn't make any blocking calls<ul>
@@ -1185,7 +1191,8 @@ reverse-proxy configuration).</p>
             <section><blockquote>
 <p>What architecture should we use for our application server?</p>
 </blockquote>
-<p>We have the same trade-offs to consider as with HTTP servers.</p>
+<p>We have the same trade-offs to consider as with HTTP servers
+(e.g. threads/processes/workers).</p>
 <h2>Up Next</h2>
 <p>Let's take a quantitative look at various approaches with Ruby application
 servers.</p>
@@ -1759,18 +1766,10 @@ benefit from using different interpreters.</p>
             
             <section><p>In this class you will be able to compare the performance of a handful of
 application servers:</p>
-<h2>via provided templates</h2>
+<h2>via elastic beanstalk configuration (formerly cloud formation templates)</h2>
 <ul>
-<li>WEBrick (single process, single thread)</li>
 <li>Puma (worker pool)</li>
 <li>Phusion Passenger (worker pool)</li>
-</ul>
-<h2>by creating your own templates</h2>
-<ul>
-<li>Unicorn</li>
-<li>Thin</li>
-<li>Mongrel</li>
-<li>???</li>
 </ul></section>
             
           </div>
@@ -1802,7 +1801,7 @@ application servers:</p>
             
             
             <section><p>Originally designed for Rubinius (GIL-less ruby interpreter).</p>
-<p>Claims to require less memory than others (the server itself)</p>
+<p>Claims to require less memory than others (for the server itself)</p>
 <p>Specifically made to work with thread-based parallelism, but also supports
 multiple processes each with a tunable number of threads.</p></section>
             
