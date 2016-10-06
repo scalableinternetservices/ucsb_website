@@ -43,13 +43,13 @@ All sprints end and begin with each week's lab session.
 * Complete Chapters 2 through 6 in the Ruby on Rails Tutorial.
 * Determine your team's project, get approved by instructor.
 * Learn [git](http://rogerdudler.github.io/git-guide/).
+* Create and push the base rails application to your team's github repository.
 
 #### Sprint 1: October 5, 2016 -- October 12, 2016
 * Complete chapters 7 through 10 in the Ruby on Rails Tutorial.
-* Create and push the base rails application to your team's github repository.
 * Learn TDD: get [Travis CI](http://docs.travis-ci.com) working with your
   github repository.
-* Start writing stories for your project in pivotal tracker.
+* Start writing stories for your project in Github projects.
 * Decide on a sprint commitment.
 * Learn pair programming through pairing up on the first few stories.
 
