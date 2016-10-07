@@ -53,6 +53,9 @@ October 6, 2015
 * Process/thread worker pool
 * Event-driven
 
+For select examples see:
+[https://gist.github.com/bboe/6a7b03fcd110c4c6bbe5ec412f523428](https://gist.github.com/bboe/6a7b03fcd110c4c6bbe5ec412f523428)
+
 ---
 
 # Single Threaded HTTP Servers
