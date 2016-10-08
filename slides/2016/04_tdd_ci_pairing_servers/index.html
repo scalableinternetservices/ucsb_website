@@ -1,5 +1,9 @@
-# TDD, CI, Pairing, and Web Servers
-.fx: title
+---
+layout: presentation
+title: TDD, CI, Pairing, and Web Servers
+---
+
+# {{page.title}}
 
 __CS291A__
 
@@ -377,7 +381,7 @@ Integration can be very difficult and painful.
 
 Chief Scientist, ThoughtWorks
 
-![Martin Fowler](img/martin_fowler.jpg)
+![Martin Fowler](martin_fowler.jpg)
 
 _"The effort of integration is exponentially proportional to the amount of
 time between integrations."_
@@ -414,13 +418,13 @@ The CI server can also test code quality and security, among other things.
 
 # CI via TeamCity
 
-![APM Bundle Trunk Team City CI](img/apm_bundle_ci.png)
+![APM Bundle Trunk Team City CI](apm_bundle_ci.png)
 
 ---
 
 # CI via Travis CI
 
-![Rails Travis CI](img/rails_ci.png)
+![Rails Travis CI](rails_ci.png)
 
 ---
 
@@ -434,7 +438,7 @@ Travis CI is free for open-source projects.
 If you are doing TDD and creating automated tests, Travis CI will provide you
 with immediate feedback on your changes through GitHub:
 
-![Github Pull Request "All is well"](img/github_pr_all_is_well.png)
+![Github Pull Request "All is well"](github_pr_all_is_well.png)
 
 ---
 
@@ -527,7 +531,7 @@ rebase__ is very useful:
 
     git rebase master feature_branch
 
-![git rebase](img/git_rebase.png)
+![git rebase](git_rebase.png)
 
 ---
 
@@ -535,7 +539,7 @@ rebase__ is very useful:
 
 .fx: img-left
 
-![git interactive rebase](img/git_interactive_rebase.png)
+![git interactive rebase](git_interactive_rebase.png)
 
 If you have been committing frequently and want to squash some commits, consider an interactive rebase:
 
@@ -547,7 +551,7 @@ If you have been committing frequently and want to squash some commits, consider
 
 .fx: img-left
 
-![Pair programming](img/pair_programming.png)
+![Pair programming](pair_programming.png)
 
 ## Pair Programming
 
@@ -573,7 +577,7 @@ minutes).
 
 # Pairing: Problem Complexity
 
-![pairing usefulness as a function of problem complexity](img/pairing_and_problem_complexity.png)
+![pairing usefulness as a function of problem complexity](pairing_and_problem_complexity.png)
 
 Source: Dr. Andrew Mutz
 
@@ -581,7 +585,7 @@ Source: Dr. Andrew Mutz
 
 # Pairing: Expertise Disparity
 
-![pairing usefulness as a function of expertise_disparity](img/pairing_and_expertise_disparity.png)
+![pairing usefulness as a function of expertise_disparity](pairing_and_expertise_disparity.png)
 
 Source: Dr. Andrew Mutz
 
@@ -589,7 +593,7 @@ Source: Dr. Andrew Mutz
 
 # Pairing: Code Reading
 
-![pairing usefulness as a function of amount of time spent reading code](img/pairing_and_code_reading.png)
+![pairing usefulness as a function of amount of time spent reading code](pairing_and_code_reading.png)
 
 Source: Dr. Andrew Mutz
 
@@ -680,7 +684,7 @@ The two components have separate concerns and design goals.
 
 # HTTP Servers
 
-![Netcraft survey of HTTP servers](img/netcraft_web_servers.png)
+![Netcraft survey of HTTP servers](netcraft_web_servers.png)
 
 Latest:
 [https://news.netcraft.com/archives/2016/09/19/september-2016-web-server-survey.html](https://news.netcraft.com/archives/2016/09/19/september-2016-web-server-survey.html)

@@ -4,7 +4,6 @@ title: Vertical and Horizontal Scaling
 ---
 
 # Vertical and Horizontal Scaling
-.fx: title
 
 __CS291A__
 
@@ -73,7 +72,7 @@ next few weeks.
 
 # Scaling Goal
 
-![Load Balanced Topology](img/load_balanced_topology.png)
+![Load Balanced Topology](load_balanced_topology.png)
 
 After today you will understand what load balancing is, and why the depicted
 architecture provides smooth cost-effective scaling.
@@ -179,7 +178,7 @@ This time we have twelve phases of testing each lasting 60 seconds:
 
 .fx: img-left
 
-![M3 Large Instance Graph](img/vertical_scaling_m3_large.png)
+![M3 Large Instance Graph](vertical_scaling_m3_large.png)
 
 * 2 vCPUs
 * 7.5 GB Memory
@@ -196,7 +195,7 @@ Fails with 10 ups.
 
 .fx: img-left
 
-![M3 X-Large Instance Graph](img/vertical_scaling_m3_xlarge.png)
+![M3 X-Large Instance Graph](vertical_scaling_m3_xlarge.png)
 
 * 4 vCPUs
 * 15 GB Memory
@@ -213,7 +212,7 @@ Fails with 16 ups.
 
 .fx: img-left
 
-![M3 XX-Large Instance Graph](img/vertical_scaling_m3_xxlarge.png)
+![M3 XX-Large Instance Graph](vertical_scaling_m3_xxlarge.png)
 
 * 8 vCPUs
 * 30 GB Memory
@@ -231,7 +230,7 @@ Fails with 20 ups.
 
 .fx: img-left
 
-![C3 4XLarge Instance Graph](img/vertical_scaling_c3_4xlarge.png)
+![C3 4XLarge Instance Graph](vertical_scaling_c3_4xlarge.png)
 
 * 16 vCPUs
 * 30 GB Memory
@@ -280,7 +279,7 @@ Consider the following sequence of actions:
 
 .fx: img-left
 
-![Load Balanced Topology](img/load_balanced_topology.png)
+![Load Balanced Topology](load_balanced_topology.png)
 
 In order for load balancing to work, the servers must be stateless.
 
@@ -293,7 +292,7 @@ from the application layer.
 
 .fx: img-left
 
-![Load balancing via redirect](img/load_balancing_redirect.png)
+![Load balancing via redirect](load_balancing_redirect.png)
 
 Discussed in section 6.1 of the reading.
 
@@ -340,7 +339,7 @@ to a pool of possible hosts.
 
 .fx: img-left
 
-![Load balancing via round-robin DNS](img/load_balancing_round_robin.png)
+![Load balancing via round-robin DNS](load_balancing_round_robin.png)
 
 Discussed in section 4.1 of the reading.
 
@@ -389,7 +388,7 @@ or highest priority).
 
 .fx: img-left
 
-![Load balancing via TCP](img/load_balancing_tcp.png)
+![Load balancing via TCP](load_balancing_tcp.png)
 
 Discussed in section 5 of the reading.
 
@@ -477,7 +476,7 @@ HTTP HTTP/1.1 200 OK
 
 .fx: img-left
 
-![Load balancing via TCP](img/load_balancing_http_proxy.png)
+![Load balancing via TCP](load_balancing_http_proxy.png)
 
 Also known as "Layer 7 load balancing"
 
@@ -631,7 +630,7 @@ as the web server application.
 For these tests we are going to use a single machine for the database. This
 will make it easy to scale up the number of application servers.
 
-![Single Server Load Balanced Topology](img/load_balanced_topology_single.png)
+![Single Server Load Balanced Topology](load_balanced_topology_single.png)
 
 ---
 
@@ -639,7 +638,7 @@ will make it easy to scale up the number of application servers.
 
 .fx: img-left
 
-![Single M3 Large Instance Graph](img/horizontal_scaling_1.png)
+![Single M3 Large Instance Graph](horizontal_scaling_1.png)
 
 * 2 vCPUs
 * 7.5 GB Memory
@@ -659,7 +658,7 @@ Comparable to single M3 XLarge ($200/mo)
 
 Let's scale horizontally by adding a second application server instance.
 
-![Dual Server Load Balanced Topology](img/load_balanced_topology_double.png)
+![Dual Server Load Balanced Topology](load_balanced_topology_double.png)
 
 ---
 
@@ -667,7 +666,7 @@ Let's scale horizontally by adding a second application server instance.
 
 .fx: img-left
 
-![Dual M3 Large Instance Graph](img/horizontal_scaling_2.png)
+![Dual M3 Large Instance Graph](horizontal_scaling_2.png)
 
 * 2 vCPUs
 * 7.5 GB Memory
@@ -687,7 +686,7 @@ Comparable to single C3 4XLarge ($600/mo)
 
 .fx: img-left
 
-![5x Load Balanced Topology](img/load_balanced_topology_5x.png)
+![5x Load Balanced Topology](load_balanced_topology_5x.png)
 
 Let’s see how the system performs if we scale out to 5 app servers.
 
@@ -700,7 +699,7 @@ tested.
 
 .fx: img-left
 
-![Five M3 Large Instance Graph](img/horizontal_scaling_5.png)
+![Five M3 Large Instance Graph](horizontal_scaling_5.png)
 
 * 2 vCPUs
 * 7.5 GB Memory

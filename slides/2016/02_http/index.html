@@ -1,5 +1,9 @@
-# HTTP
-.fx: title
+---
+layout: presentation
+title: HTTP
+---
+
+# {{page.title}}
 
 __CS291A__
 
@@ -11,7 +15,7 @@ September 27, 2016
 
 # In the News
 
-![The need for mobile speed](img/2016_mobile_speed.png)
+![The need for mobile speed](2016_mobile_speed.png)
 
 [Source](https://www.doubleclickbygoogle.com/articles/mobile-speed-matters/)
 
@@ -91,7 +95,7 @@ A web server is a process (at least one) that runs on an operating system. It:
 
 By the end of today's lecture, you should understand this output:
 
-![Chrome Network Table](img/chrome_network_table.png)
+![Chrome Network Table](chrome_network_table.png)
 
 ---
 
@@ -111,7 +115,7 @@ __HyperText__: Links documents together via __HyperLinks__
 
 # The First Web Server
 
-![The First Web Server](img/first_web_server.png)
+![The First Web Server](first_web_server.png)
 
 ---
 
@@ -155,7 +159,7 @@ request, this contains the resource content)
 
 # HTTP Components Example
 
-![Components of HTTP request and response](img/http_components.png)
+![Components of HTTP request and response](http_components.png)
 
 ---
 
@@ -479,7 +483,7 @@ Prior to HTTP 1.1, one TCP connection was used for a single HTTP session. Thus
 
 Establishing a TCP connection requires 1 round-trip.
 
-![TCP round trip visualized](img/tcp_round_trip.png)
+![TCP round trip visualized](tcp_round_trip.png)
 
 _Image Source: “High Performance Browser Networking,” by Ilya Grigorik_
 
@@ -489,7 +493,7 @@ _Image Source: “High Performance Browser Networking,” by Ilya Grigorik_
 
 The early phases of a TCP connection are bandwidth constrained.
 
-![TCP congestion mechanisms](img/tcp_congestion.png)
+![TCP congestion mechanisms](tcp_congestion.png)
 
 _Image Source: “High Performance Browser Networking,” by Ilya Grigorik_
 
@@ -500,7 +504,7 @@ _Image Source: “High Performance Browser Networking,” by Ilya Grigorik_
 It takes a fair amount of time to get up-to-speed. Making new connections per
 HTTP request is not terribly efficient.
 
-![TCP connection window size](img/tcp_cwnd.png)
+![TCP connection window size](tcp_cwnd.png)
 
 _Image Source: “High Performance Browser Networking,” by Ilya Grigorik_
 
@@ -525,7 +529,7 @@ an additional request after processing the most recent request.
 
 # HTTP Keep-Alive Session
 
-![HTTP Session with Two Requests](img/http_session.png)
+![HTTP Session with Two Requests](http_session.png)
 
 _Image Source: “High Performance Browser Networking,” by Ilya Grigorik_
 
@@ -542,7 +546,7 @@ request. Why wait?
 
 # HTTP Pipelining Session
 
-![HTTP Session with Two Requests](img/http_pipelining.png)
+![HTTP Session with Two Requests](http_pipelining.png)
 
 _Image Source: “High Performance Browser Networking,” by Ilya Grigorik_
 
@@ -590,7 +594,7 @@ resource serially over the same TCP connection is too slow.
 Most browsers will open up to __six__ concurrent connections to the same
 server.
 
-![Concurrent HTTP Sessions](img/concurrent_http.png)
+![Concurrent HTTP Sessions](concurrent_http.png)
 
 _Image Source: “High Performance Browser Networking,” by Ilya Grigorik_
 
