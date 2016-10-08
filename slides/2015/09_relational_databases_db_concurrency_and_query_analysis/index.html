@@ -94,8 +94,6 @@ After today you should...
 
 # Stateful Requests
 
-.fx: img-left
-
 ![Database connectivity](app_server_to_database.png)
 
 We have many stateless application servers responding to requests.
@@ -107,8 +105,6 @@ Client requests regularly include data updates.
 ---
 
 # Application Server _Needs_
-
-.fx: img-left
 
 ![Database connectivity](app_server_to_database.png)
 
@@ -129,8 +125,6 @@ Client requests regularly include data updates.
 ---
 
 # Data Layer Options
-
-.fx: img-left
 
 ![Database connectivity](app_server_to_database.png)
 
@@ -153,8 +147,6 @@ There are quite a few existing solutions for a _stable_ data layer.
 
 # SQL v. NoSQL
 
-.fx: img-left
-
 ![Database connectivity](app_server_to_database.png)
 
 ## Relational Databases...
@@ -176,8 +168,6 @@ capabilities, go non-relational.
 ---
 
 # Database Outline
-
-.fx: img-left
 
 ![Database connectivity](app_server_to_database.png)
 
@@ -257,8 +247,6 @@ implemented via locking).
 
 # Definition: Schedule
 
-.fx: table-center
-
 A __schedule__ is an abstract model used to describe the execution of
 transactions that run in a database.
 
@@ -297,8 +285,6 @@ Two actions are said to be in conflict if:
 
 # Non-Conflicting Examples
 
-.fx: center
-
 ## All reads
 
 | T1     | T2     | T3     |
@@ -336,8 +322,6 @@ __No__
 
 # Dirty Read Problem
 
-.fx: table-center
-
 A transaction (T2) reads a value written by another transaction (T1) that is
 later _aborted_ (its actions are rolled back).
 
@@ -354,8 +338,6 @@ The result of the T2 transaction will put the database in an incorrect state.
 ---
 
 # Incorrect Summary Problem
-
-.fx: table-center
 
 A transaction (T1) computes a summary over the values of all the instances of a
 repeated data-item. While that occurs, another transaction (T2) updates some
@@ -399,8 +381,6 @@ order of the transactions (T1 then T2, or T2 then T1).
 
 # Not Conflict Serializable
 
-.fx: table-left
-
 | T1     | T2     |
 |:------:|:------:|
 | R(A)   |        |
@@ -439,8 +419,6 @@ When transactions are serialized, it is not conflict equivalent to either of:
 ---
 
 # Why Serializable?
-
-.fx: img-left
 
 ![Database connectivity](app_server_to_database.png)
 
@@ -516,8 +494,6 @@ The two phases are:
 
 # Two-Phase Locking: Potential Issue
 
-.fx: table-center
-
 During the second phase locks can be released as soon as they are no longer
 needed. This permits other transactions to obtain those locks.
 
@@ -555,8 +531,6 @@ This approach avoids the problem with cascading aborts.
 ---
 
 # Concurrency Control in Rails
-
-.fx: img-left
 
 ![Database connectivity](app_server_to_database.png)
 
@@ -774,8 +748,6 @@ You think the bottleneck may be the database.
 
 # Demo App Database Optimizations
 
-.fx: img-left
-
 ![Submissions Index View](demo_submissions_index.png)
 
 Let's use an example from the Demo app!
@@ -789,8 +761,6 @@ on github.
 ---
 
 # Demo App ActiveRecord Time
-
-.fx: img-left
 
 With the Demo app's _master_ branch deployed on a `m3_medium` instance
 with:

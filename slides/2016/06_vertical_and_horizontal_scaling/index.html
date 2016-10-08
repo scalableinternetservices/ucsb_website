@@ -176,8 +176,6 @@ This time we have twelve phases of testing each lasting 60 seconds:
 
 # Vertical Scaling: M3 Large Instance
 
-.fx: img-left
-
 ![M3 Large Instance Graph](vertical_scaling_m3_large.png)
 
 * 2 vCPUs
@@ -192,8 +190,6 @@ Fails with 10 ups.
 ---
 
 # Vertical Scaling: M3 X-Large Instance
-
-.fx: img-left
 
 ![M3 X-Large Instance Graph](vertical_scaling_m3_xlarge.png)
 
@@ -210,8 +206,6 @@ Fails with 16 ups.
 
 # Vertical Scaling: M3 XX-Large Instance
 
-.fx: img-left
-
 ![M3 XX-Large Instance Graph](vertical_scaling_m3_xxlarge.png)
 
 * 8 vCPUs
@@ -227,8 +221,6 @@ Fails with 20 ups.
 ---
 
 # Vertical Scaling: C3 4XLarge Instance
-
-.fx: img-left
 
 ![C3 4XLarge Instance Graph](vertical_scaling_c3_4xlarge.png)
 
@@ -277,8 +269,6 @@ Consider the following sequence of actions:
 
 # Stateless Servers
 
-.fx: img-left
-
 ![Load Balanced Topology](load_balanced_topology.png)
 
 In order for load balancing to work, the servers must be stateless.
@@ -289,8 +279,6 @@ from the application layer.
 ---
 
 # Load Balancing (1): HTTP Redirects
-
-.fx: img-left
 
 ![Load balancing via redirect](load_balancing_redirect.png)
 
@@ -336,8 +324,6 @@ to a pool of possible hosts.
 ---
 
 # Load Balancing (2): Round Robin DNS
-
-.fx: img-left
 
 ![Load balancing via round-robin DNS](load_balancing_round_robin.png)
 
@@ -385,8 +371,6 @@ or highest priority).
 ---
 
 # Load Balancing (3): TCP Load Balancing
-
-.fx: img-left
 
 ![Load balancing via TCP](load_balancing_tcp.png)
 
@@ -473,8 +457,6 @@ HTTP HTTP/1.1 200 OK
 ---
 
 # Load Balancing (4): HTTP Proxy
-
-.fx: img-left
 
 ![Load balancing via TCP](load_balancing_http_proxy.png)
 
@@ -636,8 +618,6 @@ will make it easy to scale up the number of application servers.
 
 # Horizontal Scaling: 1 M3 Large Instance
 
-.fx: img-left
-
 ![Single M3 Large Instance Graph](horizontal_scaling_1.png)
 
 * 2 vCPUs
@@ -664,8 +644,6 @@ Let's scale horizontally by adding a second application server instance.
 
 # Horizontal Scaling: 2 M3 Large Instances
 
-.fx: img-left
-
 ![Dual M3 Large Instance Graph](horizontal_scaling_2.png)
 
 * 2 vCPUs
@@ -684,8 +662,6 @@ Comparable to single C3 4XLarge ($600/mo)
 
 # More App Servers!
 
-.fx: img-left
-
 ![5x Load Balanced Topology](load_balanced_topology_5x.png)
 
 Let’s see how the system performs if we scale out to 5 app servers.
@@ -696,8 +672,6 @@ tested.
 ---
 
 # Horizontal Scaling: 5 M3 Large Instances
-
-.fx: img-left
 
 ![Five M3 Large Instance Graph](horizontal_scaling_5.png)
 

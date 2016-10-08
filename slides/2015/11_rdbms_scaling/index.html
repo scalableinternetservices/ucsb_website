@@ -201,8 +201,6 @@ transitively, database joins could connect everything together.
 
 # Sharding: Separating Data
 
-.fx: img-left
-
 ![Sharding](sharding_app_server.png)
 
 Sharding a database requires finding some partition of your data that ideally
@@ -260,8 +258,6 @@ mapping to determine where to find that data.
 
 # At the App Server
 
-.fx: img-left
-
 ![App Server Sharding](sharding_app_server.png)
 
 Each application server contains a configuration that informs it of where each
@@ -289,8 +285,6 @@ Such mappings are limited by knowledge that the database can inspect:
 ---
 
 # Across Load Balancers
-
-.fx: img-left
 
 ![Sharding Across Load Balancers](sharding_region.png)
 
@@ -391,8 +385,6 @@ that always talks to the `ucsb` containing database.
 
 # Community Sharding Success
 
-.fx: img-left
-
 ![Sharding Submission View](sharding_submission_view.png)
 ![Sharding New Submission View](sharding_new_submission_view.png)
 ![Sharding New Comment View](sharding_new_comment_view.png)
@@ -400,8 +392,6 @@ that always talks to the `ucsb` containing database.
 ---
 
 # Community Sharding Difficulty
-
-.fx: img-left
 
 ![Sharding Global Submission View](sharding_index_view.png)
 
@@ -475,8 +465,6 @@ Like sharding, no relations will cross these partitions.
 
 # SOA Stack
 
-.fx: img-left
-
 ![Service Oriented Architecture](soa_stack.png)
 
 The primary concept behind SOA is having many focused mini-applications.
@@ -490,8 +478,6 @@ speaking to a database, it will request data from the appropriate service.
 
 # SOA Functions
 
-.fx: img-left
-
 ![Service Oriented Architecture](soa_stack.png)
 
 Each service is broken out by logical function. E.g.:
@@ -504,8 +490,6 @@ Each service is broken out by logical function. E.g.:
 
 # SOA Communications
 
-.fx: img-left
-
 ![Service Oriented Architecture](soa_stack.png)
 
 With _sharding_ the application server typically only talks to a single shard.
@@ -516,8 +500,6 @@ services, and some of those services may talk to a handful of other services.
 ---
 
 # Benefits of SOA
-
-.fx: img-left
 
 ![Service Oriented Architecture](soa_stack.png)
 
@@ -671,8 +653,6 @@ for your application.
 
 # Database Horizontal Scaling
 
-.fx: img-left
-
 ![Database Master Follower](database_master_follower.png)
 
 In general a relational database is hard to horizontally scale.
@@ -690,8 +670,6 @@ database context. However, I will try to exclusively use _follower_.
 ---
 
 # Database Replication
-
-.fx: img-left
 
 ![Database Master Follower](database_master_follower.png)
 
@@ -715,8 +693,6 @@ its followers but does not wait to see if the transaction is applied.
 
 # Database Replication Trade-offs
 
-.fx: img-left
-
 ![Database Master Follower](database_master_follower.png)
 
 > What are the advantages of waiting until it is applied to all followers?
@@ -730,8 +706,6 @@ Performance. There may be many read followers to apply changes to.
 ---
 
 # Database Replication Levels
-
-.fx: img-left
 
 ![Database Master Follower](database_master_follower.png)
 
@@ -773,8 +747,6 @@ Such values must be communicated from the master to its followers.
 
 # Demo App and Read Followers
 
-.fx: img-left
-
 The following pages would be served from read followers:
 
 ![Global Submission View](small_demo_index_view.png)
@@ -783,8 +755,6 @@ The following pages would be served from read followers:
 ---
 
 # Demo App DB Master Pages
-
-.fx: img-left
 
 The controllers associated with the following pages would need to talk to the
 master database.
