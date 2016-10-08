@@ -1,5 +1,9 @@
-# RDBMS Scaling and Service Oriented Architectures
-.fx: title
+---
+layout: presentation
+title: RDBMS Scaling and Service Oriented Architectures
+---
+
+# {{page.title}}
 
 __CS290B__
 
@@ -41,7 +45,7 @@ But as your site's popularity continues to grow that is not sufficient.
 
 > What do you do?
 
-![Concurrent Requests](img/server_process_pool.png)
+![Concurrent Requests](server_process_pool.png)
 
 ---
 
@@ -54,7 +58,7 @@ scaling vertically.
 
 > What do you do?
 
-![Vertical Scaling](img/vertical_scaling.png)
+![Vertical Scaling](vertical_scaling.png)
 
 ---
 
@@ -68,7 +72,7 @@ scaling of the application servers does not solve the problem.
 
 > What do you do?
 
-![Horizontal Scaling](img/load_balanced_topology.png)
+![Horizontal Scaling](load_balanced_topology.png)
 
 ---
 
@@ -121,7 +125,7 @@ machines and introducing a load balancer to access them.
 
 > Can we do the same with the database?
 
-![Horizontal Database Idea](img/horizontal_database_idea.png)
+![Horizontal Database Idea](horizontal_database_idea.png)
 
 ---
 
@@ -140,7 +144,7 @@ scale.
 
 # Problem: R(X), W(X), R(X)
 
-![Database Horizontal Scaling Problem](img/database_horizontal_scaling_problem.png)
+![Database Horizontal Scaling Problem](database_horizontal_scaling_problem.png)
 
 ---
 
@@ -166,7 +170,7 @@ Each of the following techniques partitions RDBMS in a different way:
 
 # AKF Cube
 
-![AKF Cube](img/akf_cube.png)
+![AKF Cube](akf_cube.png)
 
 Reference: [http://akfpartners.com/techblog/2008/05/08/splitting-applications-or-services-for-scale/](http://akfpartners.com/techblog/2008/05/08/splitting-applications-or-services-for-scale/)
 
@@ -199,7 +203,7 @@ transitively, database joins could connect everything together.
 
 .fx: img-left
 
-![Sharding](img/sharding_app_server.png)
+![Sharding](sharding_app_server.png)
 
 Sharding a database requires finding some partition of your data that ideally
 produces unrelated (not joined across) _shards_.
@@ -258,7 +262,7 @@ mapping to determine where to find that data.
 
 .fx: img-left
 
-![App Server Sharding](img/sharding_app_server.png)
+![App Server Sharding](sharding_app_server.png)
 
 Each application server contains a configuration that informs it of where each
 database is (IP address, DNS name) and how to map data to the database.
@@ -280,7 +284,7 @@ Such mappings are limited by knowledge that the database can inspect:
 * Headers
 * Request Payload
 
-![Load Balancer Sharding](img/sharding_load_balancer.png)
+![Load Balancer Sharding](sharding_load_balancer.png)
 
 ---
 
@@ -288,7 +292,7 @@ Such mappings are limited by knowledge that the database can inspect:
 
 .fx: img-left
 
-![Sharding Across Load Balancers](img/sharding_region.png)
+![Sharding Across Load Balancers](sharding_region.png)
 
 Host names (DNS) can be configured to point to the correct load balancer for a
 given request.
@@ -389,9 +393,9 @@ that always talks to the `ucsb` containing database.
 
 .fx: img-left
 
-![Sharding Submission View](img/sharding_submission_view.png)
-![Sharding New Submission View](img/sharding_new_submission_view.png)
-![Sharding New Comment View](img/sharding_new_comment_view.png)
+![Sharding Submission View](sharding_submission_view.png)
+![Sharding New Submission View](sharding_new_submission_view.png)
+![Sharding New Comment View](sharding_new_comment_view.png)
 
 ---
 
@@ -399,7 +403,7 @@ that always talks to the `ucsb` containing database.
 
 .fx: img-left
 
-![Sharding Global Submission View](img/sharding_index_view.png)
+![Sharding Global Submission View](sharding_index_view.png)
 
 * The global list of submissions.
 * List of submissions by user.
@@ -473,7 +477,7 @@ Like sharding, no relations will cross these partitions.
 
 .fx: img-left
 
-![Service Oriented Architecture](img/soa_stack.png)
+![Service Oriented Architecture](soa_stack.png)
 
 The primary concept behind SOA is having many focused mini-applications.
 
@@ -488,7 +492,7 @@ speaking to a database, it will request data from the appropriate service.
 
 .fx: img-left
 
-![Service Oriented Architecture](img/soa_stack.png)
+![Service Oriented Architecture](soa_stack.png)
 
 Each service is broken out by logical function. E.g.:
 
@@ -502,7 +506,7 @@ Each service is broken out by logical function. E.g.:
 
 .fx: img-left
 
-![Service Oriented Architecture](img/soa_stack.png)
+![Service Oriented Architecture](soa_stack.png)
 
 With _sharding_ the application server typically only talks to a single shard.
 
@@ -515,7 +519,7 @@ services, and some of those services may talk to a handful of other services.
 
 .fx: img-left
 
-![Service Oriented Architecture](img/soa_stack.png)
+![Service Oriented Architecture](soa_stack.png)
 
 With SOA the deployment of services is decoupled. That means that each can be
 updated and scaled independently of the remainder of the system. This
@@ -531,7 +535,7 @@ single monolithic application.
 
 > How could we divide the Demo App into services?
 
-![Demo App](img/demo_submissions_index.png)
+![Demo App](demo_submissions_index.png)
 
 ---
 
@@ -658,7 +662,7 @@ Archived Source: [https://plus.google.com/+RipRowan/posts/eVeouesvaVX](https://p
 
 # Database Operations
 
-![Graph of Database Reads and Writes](img/database_reads_writes.png)
+![Graph of Database Reads and Writes](database_reads_writes.png)
 
 This graph shows significantly more _reads_ than _writes_. This may be the case
 for your application.
@@ -669,7 +673,7 @@ for your application.
 
 .fx: img-left
 
-![Database Master Follower](img/database_master_follower.png)
+![Database Master Follower](database_master_follower.png)
 
 In general a relational database is hard to horizontally scale.
 
@@ -689,7 +693,7 @@ database context. However, I will try to exclusively use _follower_.
 
 .fx: img-left
 
-![Database Master Follower](img/database_master_follower.png)
+![Database Master Follower](database_master_follower.png)
 
 The sending of data from the master to its followers (replication) can happen
 either synchronously or asynchronously.
@@ -713,7 +717,7 @@ its followers but does not wait to see if the transaction is applied.
 
 .fx: img-left
 
-![Database Master Follower](img/database_master_follower.png)
+![Database Master Follower](database_master_follower.png)
 
 > What are the advantages of waiting until it is applied to all followers?
 
@@ -729,7 +733,7 @@ Performance. There may be many read followers to apply changes to.
 
 .fx: img-left
 
-![Database Master Follower](img/database_master_follower.png)
+![Database Master Follower](database_master_follower.png)
 
 ## Statement-level
 
@@ -773,8 +777,8 @@ Such values must be communicated from the master to its followers.
 
 The following pages would be served from read followers:
 
-![Global Submission View](img/small_demo_index_view.png)
-![Submissions View](img/sharding_submission_view.png)
+![Global Submission View](small_demo_index_view.png)
+![Submissions View](sharding_submission_view.png)
 
 ---
 
@@ -785,8 +789,8 @@ The following pages would be served from read followers:
 The controllers associated with the following pages would need to talk to the
 master database.
 
-![Demo New Submission View](img/demo_half_new_submission_view.png)
-![Demo New Comment View](img/demo_half_new_comment_view.png)
+![Demo New Submission View](demo_half_new_submission_view.png)
+![Demo New Comment View](demo_half_new_comment_view.png)
 
 ---
 

@@ -1,5 +1,9 @@
-# Clients, JavaScript, and Client-side MVC
-.fx: title
+---
+layout: presentation
+title: Clients, JavaScript, and Client-side MVC
+---
+
+# {{page.title}}
 
 __CS290B__
 
@@ -54,7 +58,7 @@ Meanwhile, Netscape focuses on open-sourcing its browser.
 
 # Browser Market Share
 
-![Browser Market Share to 2009](img/browser_market_share.png)
+![Browser Market Share to 2009](browser_market_share.png)
 
 ---
 
@@ -100,7 +104,7 @@ Browser innovation reignites and today there are 4 popular browsers:
 
 # Current Global Browser Market Share
 
-![Browser Market Share between 2009 and 2015](img/browser_market_share2.png)
+![Browser Market Share between 2009 and 2015](browser_market_share2.png)
 
 ---
 
@@ -322,7 +326,7 @@ built on top of the V8 engine.
 * Green: Chrome
 * Orange: Firefox
 
-![Kraken Time](img/js_engine_kraken.png)
+![Kraken Time](js_engine_kraken.png)
 
 Source:
 [http://arewefastyet.com/#machine=28](http://arewefastyet.com/#machine=28)
@@ -336,7 +340,7 @@ Source:
 * Green: Chrome
 * Orange: Firefox
 
-![Octane Time](img/js_engine_octane.png)
+![Octane Time](js_engine_octane.png)
 
 Source:
 [http://arewefastyet.com/#machine=28](http://arewefastyet.com/#machine=28)
@@ -350,7 +354,7 @@ Source:
 * Green: Chrome
 * Orange: Firefox
 
-![Sunspider Time](img/js_engine_sunspider.png)
+![Sunspider Time](js_engine_sunspider.png)
 
 Source:
 [http://arewefastyet.com/#machine=28](http://arewefastyet.com/#machine=28)
@@ -513,7 +517,7 @@ concept. We will introduce four:
 
 .fx: img-left
 
-![Backbone](img/backbone.png)
+![Backbone](backbone.png)
 
 * Developed by Jeremy Ashkenas (creator of CoffeeScript and Underscore.js)
 * Most lightweight of the four libraries we will discuss
@@ -532,9 +536,9 @@ concept. We will introduce four:
 
 # Backbone Model-View
 
-![Backbone Model View](img/backbone_model_view.png)
+![Backbone Model View](backbone_model_view.png)
 
-![Backbone Views](img/backbone_views.png)
+![Backbone Views](backbone_views.png)
 
 ---
 
@@ -616,7 +620,7 @@ concept. We will introduce four:
 
 .fx: img-left
 
-![Angular Logo](img/angular.png)
+![Angular Logo](angular.png)
 
 * MVC framework supported and promoted by Google.
 * Much larger and more complex than Backbone.
@@ -634,7 +638,7 @@ concept. We will introduce four:
 
 # Angular Two-Way Data Binding
 
-![Angular Two Way Data Binding](img/angular_two_way.png)
+![Angular Two Way Data Binding](angular_two_way.png)
 
 ---
 
@@ -648,7 +652,7 @@ concept. We will introduce four:
       <div>
         Costs: <input type="number" min="0" ng-model="cost">
       </div>
-      <div><b>Total:</b> {{qty * cost | currency}}</div>
+      <div><b>Total:</b> {{"{{"}}qty * cost | currency}}</div>
     </div>
 
 ---
@@ -675,7 +679,7 @@ concept. We will introduce four:
 
 .fx: img-left
 
-![Angular Logo](img/angular.png)
+![Angular Logo](angular.png)
 
 * Ambitious and large framework that really turns the page into an application
 * Data binding provides a lot of magic
@@ -688,7 +692,7 @@ concept. We will introduce four:
 
 .fx: img-left
 
-![Ember Logo](img/ember.png)
+![Ember Logo](ember.png)
 
 * Created by prominent members of the Rails community
   (e.g., Yehuda Katz)
@@ -704,7 +708,7 @@ concept. We will introduce four:
 
 .fx: img-left
 
-![Ember Logo](img/ember.png)
+![Ember Logo](ember.png)
 
 * Focus on convention over configuration
 * Focus on standards compliance
@@ -717,7 +721,7 @@ concept. We will introduce four:
 
 .fx: img-left
 
-![React](img/react.png)
+![React](react.png)
 
 * Developed at Facebook
 * Observation: Event handling systems can be hard to reason about
@@ -732,7 +736,7 @@ concept. We will introduce four:
 
 .fx: img-left
 
-![React](img/react.png)
+![React](react.png)
 
 If we could completely re-render the entire UI whenever anything changes, we
 could develop systems that were very simple to reason about.
@@ -746,7 +750,7 @@ operations fast.
 
 # React VirtualDOM
 
-![React VirtualDOM](img/react_virtual_dom.png)
+![React VirtualDOM](react_virtual_dom.png)
 
 Instead of updating the DOM directly, keep track of modifications in a
 "VirtualDOM", and only actually re-render what is needed.
@@ -773,7 +777,7 @@ re-rendering everything each time, we get simple UI code:
 
 .fx: img-left
 
-![React](img/react.png)
+![React](react.png)
 
 Currently in production use at:
 

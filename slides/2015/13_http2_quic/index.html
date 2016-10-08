@@ -1,5 +1,9 @@
-# HTTP/2 and QUIC
-.fx: title
+---
+layout: presentation
+title: HTTP/2 and QUIC
+---
+
+# {{page.title}}
 
 __CS290B__
 
@@ -60,7 +64,7 @@ We will conduct the final peer evaluation during a 20 minute break after the
 
 # Connections per Page
 
-![Connections per page](img/connections_per_page.png)
+![Connections per page](connections_per_page.png)
 
 Many requests are required for today's web pages:
 
@@ -74,7 +78,7 @@ Source: [http://httparchive.org](http://httparchive.org)
 
 # TCP Phases
 
-![TCP Phases](img/tcp_congestion.png)
+![TCP Phases](tcp_congestion.png)
 
 Establishing many TCP connections to serve these resources is very slow.
 
@@ -84,7 +88,7 @@ Source: High Performance Browser Networking
 
 # TCP Round Trips
 
-![Number of TCP Segments v. Round Trips](img/tcp_segments_and_round_trips.png)
+![Number of TCP Segments v. Round Trips](tcp_segments_and_round_trips.png)
 
 TCP was designed for long-lived flows. HTTP is short and bursty.
 
@@ -94,7 +98,7 @@ TCP was designed for long-lived flows. HTTP is short and bursty.
 
 .fx: img-left
 
-![Head of Line Blocking](img/tcp_head_of_line_blocking.png)
+![Head of Line Blocking](tcp_head_of_line_blocking.png)
 
 HTTP Keep-alive was introduced to help reuse TCP connections for HTTP, but there
 are issues.
@@ -108,13 +112,13 @@ This is called __Head-of-line blocking__.
 
 # HTTP Request Header
 
-![HTTP Header 1](img/http_header_1.png)
+![HTTP Header 1](http_header_1.png)
 
 ---
 
 # HTTP Request Header Repetition
 
-![HTTP Header 2](img/http_header_2.png)
+![HTTP Header 2](http_header_2.png)
 
 The highlighted sections show the differences from this request to the previous
 request. All other bytes are duplicates.
@@ -123,7 +127,7 @@ request. All other bytes are duplicates.
 
 # HTTP Request Header Repetition
 
-![HTTP Header 3](img/http_header_3.png)
+![HTTP Header 3](http_header_3.png)
 
 In this case the only thing that changed from the previous request were 14 new
 bytes out of 683.
@@ -145,7 +149,7 @@ This technique can also be applied to images.
 
 # Image Spriting
 
-![Image Sprite](img/image_sprite.jpg)
+![Image Sprite](image_sprite.jpg)
 
 A sprite is an image that is comprised of many smaller images.
 
@@ -164,7 +168,7 @@ order to speed up the time to obtain a page's resources.
 
 For better performance domain sharding is utilized with HTTP/1.1.
 
-![Concurrent TCP Connections](img/concurrent_http.png)
+![Concurrent TCP Connections](concurrent_http.png)
 
 ---
 
@@ -211,7 +215,7 @@ HTTP/2 addresses all of these issues.
 
 # HTTP/2 Binary Frames
 
-![HTTP/2 Frame](img/http2_frame.png)
+![HTTP/2 Frame](http2_frame.png)
 
 Note that the headers and data are in separate frames.
 
@@ -219,7 +223,7 @@ Note that the headers and data are in separate frames.
 
 # HTTP/2 Binary Framed Connection
 
-![HTTP/2 Connection](img/http2_connection.png)
+![HTTP/2 Connection](http2_connection.png)
 
 Note that different streams are interleaved over a single TCP connection.
 
@@ -239,7 +243,7 @@ Now implemented using HPACK.
 
 # HPACK
 
-![HPACK](img/hpack.png)
+![HPACK](hpack.png)
 
 1. HPACK allows the transmitted header fields to be encoded via a static
    Huffman code, which reduces their individual transfer size.
@@ -257,7 +261,7 @@ Source:
 
 .fx: img-left
 
-![Binary Framing Flexibility](img/http2_flexibility.png)
+![Binary Framing Flexibility](http2_flexibility.png)
 
 With binary framing the ordering of resources is flexible.
 
@@ -299,7 +303,7 @@ HTTP/2 obviates the HTTP/1.1 hacks used over the last twenty years.
 
 # Server Push
 
-![HTTP/2 Server Push](img/http2_server_push.png)
+![HTTP/2 Server Push](http2_server_push.png)
 
 When a resource is requested (e.g., `/`) the server can proactively send
 additional resources using `PUSH_PROMISE` (e.g., favicon.ico, style.css).
@@ -311,19 +315,19 @@ feature is useful if the client already has a cached copy.
 
 # HTTP/2 Results
 
-![HTTP/2 Page Load Time](img/http2_results.png)
+![HTTP/2 Page Load Time](http2_results.png)
 
 ---
 
 # HTTP/2 Low Latency Results
 
-![HTTP/2 Low Latency Results](img/http2_low_latency_results.png)
+![HTTP/2 Low Latency Results](http2_low_latency_results.png)
 
 ---
 
 # HTTP/2 High Latency Results
 
-![HTTP/2 High Latency Results](img/http2_high_latency_results.png)
+![HTTP/2 High Latency Results](http2_high_latency_results.png)
 
 ---
 
@@ -334,13 +338,13 @@ HTTP/2 improves HTTP while still using TCP.
 __QUIC__ is an attempt to sidestep TCP in order to avoid TCP limitations,
 primarily the round trip necessary to establish connections.
 
-![QUIC](img/quic.png)
+![QUIC](quic.png)
 
 ---
 
 # Review: TCP Connection Establishment
 
-![TCP Round Trip](img/tcp_round_trip.png)
+![TCP Round Trip](tcp_round_trip.png)
 
 TCP connections require a full round trip before any application data can be
 sent.
@@ -349,7 +353,7 @@ sent.
 
 # Review: TCP+TLS Establishment
 
-![TLS Round Trip](img/tls_handshake.png)
+![TLS Round Trip](tls_handshake.png)
 
 HTTPS (TCP+TLS) requires three full round trips (two with optimizations) before
 any application data can be sent.
@@ -358,7 +362,7 @@ any application data can be sent.
 
 # HTTP/2 (SPDY) and Dropped Packets
 
-![HTTP/2 with dropped packet](img/http2_dropped_packet.png)
+![HTTP/2 with dropped packet](http2_dropped_packet.png)
 
 HTTP/2 provides excellent multiplexing support. However, any dropped packet
 blocks the entire connection.
@@ -369,7 +373,7 @@ TCP cannot differentiate between packets dropped by different steams.
 
 # TCP Retransmissions
 
-![TCP Retransmissions](img/tcp_retransmissions.png)
+![TCP Retransmissions](tcp_retransmissions.png)
 
 Losing packets results in retransmissions. In high latency networks this
 process is painfully slow.
@@ -380,7 +384,7 @@ process is painfully slow.
 
 .fx: img-left
 
-![Mobile Users](img/mobile_users.png)
+![Mobile Users](mobile_users.png)
 
 A TCP connection is defined by its source IP address/port combination.
 
@@ -425,7 +429,7 @@ Inspect via: chrome://net-internals/
 
 .fx: img-left
 
-![QUIC second connection](img/quic_second_connection.png)
+![QUIC second connection](quic_second_connection.png)
 
 * Client sends (assumes server certificate hasn't changed):
     * CID
@@ -447,7 +451,7 @@ QUIC is engineered to avoid such attacks through the use of the CID.
 
 # QUIC and Packet Loss
 
-![QUIC Multiplexing](img/quic_multiplexing.png)
+![QUIC Multiplexing](quic_multiplexing.png)
 
 Packet loss affects only the stream that lost the resource.
 
@@ -462,7 +466,7 @@ without retransmission.
 
 # Forward Error Correction
 
-![Forward Error Correction](img/forward_error_correction.png)
+![Forward Error Correction](forward_error_correction.png)
 
 With forward error correction we trade bandwidth (extra data) for latency
 (retransmissions).
@@ -473,7 +477,7 @@ With forward error correction we trade bandwidth (extra data) for latency
 
 .fx: img-left
 
-![Mobile Users](img/mobile_users.png)
+![Mobile Users](mobile_users.png)
 
 Connections in QUIC are based on the CID rather than the its IP address/PORT
 combination.

@@ -1,5 +1,9 @@
-# An Introduction to Web Security
-.fx: title
+---
+layout: presentation
+title: An Introduction to Web Security
+---
+
+# {{page.title}}
 
 __CS290B__
 
@@ -41,7 +45,7 @@ problems.
 
 > What sort of _bad actors_ can exist in this system?
 
-![Browser to Client](img/no_malicious_users.png)
+![Browser to Client](no_malicious_users.png)
 
 ---
 
@@ -50,7 +54,7 @@ problems.
 A malicious client may be a compromised host (browser, server, operating
 system), or a direct attacker.
 
-![Malicious Client](img/malicious_client.png)
+![Malicious Client](malicious_client.png)
 
 ---
 
@@ -60,7 +64,7 @@ A malicious server may be impersonating a real server (therealgoogle.com) in
 attempt to phish unsuspecting users, or it could be a compromised high-traffic
 web service serving up drive-by-downloads.
 
-![Malicious Server](img/malicious_server.png)
+![Malicious Server](malicious_server.png)
 
 ---
 
@@ -71,7 +75,7 @@ recording your actions for nefarious purposes such as obtaining sensitive
 information (credentials, bank account numbers, credit cards), blackmail
 (ransom ware).
 
-![Malicious Observer](img/malicious_observer.png)
+![Malicious Observer](malicious_observer.png)
 
 ---
 
@@ -82,7 +86,7 @@ than passive collection of web traffic. Intermediaries may perform a
 man-in-the-middle attack, DNS poisoning, or a handful of other types of
 attacks.
 
-![Malicious Intermediary](img/malicious_intermediary.png)
+![Malicious Intermediary](malicious_intermediary.png)
 
 ---
 
@@ -109,7 +113,7 @@ Neither my messages, nor the other party's messages have been tampered with.
 HTTP over TCP with a _trusted_ TLS session (HTTPS) is designed to protect us
 against malicious __servers__, __observers__, and __intermediaries__.
 
-![Malicious Users](img/malicious_intermediary.png)
+![Malicious Users](malicious_intermediary.png)
 
 ---
 
@@ -159,7 +163,7 @@ Common implementations: __RSA__, __DSA__
 
 # Symmetric Cryptography and Requests
 
-![HTTP with Symmetric Cryptography](img/http_with_crypto.png)
+![HTTP with Symmetric Cryptography](http_with_crypto.png)
 
 > How far can symmetric cryptography alone get us?
 
@@ -167,7 +171,7 @@ Common implementations: __RSA__, __DSA__
 
 # Symmetric Cryptography and Requests
 
-![HTTP with Symmetric Cryptography](img/http_with_crypto.png)
+![HTTP with Symmetric Cryptography](http_with_crypto.png)
 
 > How far can symmetric cryptography alone get us?
 
@@ -197,7 +201,7 @@ between our browser and whatever server we want to talk to.
 
 Use asymmetric cryptography to communicate a shared secret key.
 
-![HTTP Shared Secret](img/http_shared_secret.png)
+![HTTP Shared Secret](http_shared_secret.png)
 
 > Does this solve all of our malicious actor problems?
 
@@ -280,7 +284,7 @@ trusts and transitively the browser will trust that website.
 
 Certificates can be chained (Root CA -> Intermediate CA -> Site Certificate)
 
-![TLS Certificate Chain](img/certificate_chain.png)
+![TLS Certificate Chain](certificate_chain.png)
 
 ---
 
@@ -300,7 +304,7 @@ with different combinations of cipher suites.
 
 .fx: img-left
 
-![TLS Handshake](img/tls_handshake.png)
+![TLS Handshake](tls_handshake.png)
 
 ## After TCP setup
 
@@ -317,7 +321,7 @@ with different combinations of cipher suites.
 
 .fx: img-left
 
-![TLS Handshake](img/tls_handshake.png)
+![TLS Handshake](tls_handshake.png)
 
 The latency involved in the two extra round trips is expensive!
 
@@ -330,7 +334,7 @@ optimization.
 
 .fx: img-left
 
-![Abbreviated TLS Handshake](img/abbreviated_tls_handshake.png)
+![Abbreviated TLS Handshake](abbreviated_tls_handshake.png)
 
 ## After TCP setup
 
@@ -386,10 +390,10 @@ Certificates can be revoked by two primary ways:
 > Where should TLS connections terminate?
 
 At the Application Server
-![App Server TLS Termination](img/tls_termination_app_server.png)
+![App Server TLS Termination](tls_termination_app_server.png)
 
 At the Load Balancer
-![Load Balancer TLS Termination](img/tls_termination_load_balancer.png)
+![Load Balancer TLS Termination](tls_termination_load_balancer.png)
 
 ---
 
@@ -524,7 +528,7 @@ Rails does a lot of the work here for you:
 
 # XKCD: Exploits of a Mom
 
-![XKCD Little Bobby Tables](img/xkcd_327.png)
+![XKCD Little Bobby Tables](xkcd_327.png)
 
 "Her daughter is named Help I'm trapped in a driver's license factory."
 
@@ -568,7 +572,7 @@ executes all JavaScript that is embedded within the HTML document.
 
 # XSS Example
 
-![XSS Example](img/xss_example.png)
+![XSS Example](xss_example.png)
 
 > How can we prevent XSS from occurring?
 

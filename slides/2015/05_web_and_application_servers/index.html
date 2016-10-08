@@ -1,5 +1,9 @@
-# HTTP and Application Servers
-.fx: title
+---
+layout: presentation
+title: HTTP and Application Servers
+---
+
+# {{page.title}}
 
 __CS290B__
 
@@ -91,7 +95,7 @@ Handle each request as a subprocess:
 
 .fx: img-left
 
-![forking web server](img/server_forking.png)
+![forking web server](server_forking.png)
 
     bind() to port 80 and listen()
     loop forever
@@ -127,7 +131,7 @@ Handle each request as a subprocess:
 
 .fx: img-left
 
-![process pool web server](img/server_process_pool.png)
+![process pool web server](server_process_pool.png)
 
 Instead of spawning a process for each request create a pool of N processes at
 start-up and have them handle incoming requests when available.
@@ -166,7 +170,7 @@ spawn new threads for each request.
 
 .fx: img-left
 
-![http server thread per request](img/server_threaded.png)
+![http server thread per request](server_threaded.png)
 
     bind() to port 80 and listen()
     loop forever
@@ -203,7 +207,7 @@ spawn new threads for each request.
 
 .fx: img-left
 
-![http process/thread worker pool](img/server_worker_pool.png)
+![http process/thread worker pool](server_worker_pool.png)
 
 Combination of the two techniques.
 
@@ -383,7 +387,7 @@ Event driven code is dominated by callbacks:
 
 # Callback Hell
 
-![Yo dawg, I heard you like JavaScript](img/callback_hell.png)
+![Yo dawg, I heard you like JavaScript](callback_hell.png)
 
 It _can_ very easily become complicated.
 
@@ -468,7 +472,7 @@ because Rails will not run on such application servers.
 
 # Our Test Setup
 
-![Demo App](img/demo_app.png)
+![Demo App](demo_app.png)
 
 The Demo App is a link sharing website with:
 
@@ -530,7 +534,7 @@ The `database_optimizations` branch of the demo app was used to run the tests:
 
 # Single Thread/Process (Users)
 
-![Single Thread/Process Users](img/demo_single_users.png)
+![Single Thread/Process Users](demo_single_users.png)
 
 ---
 
@@ -538,13 +542,13 @@ The `database_optimizations` branch of the demo app was used to run the tests:
 
 Decrease in performance around 60s (1.5 new users per second)
 
-![Single Thread/Process Page Load](img/demo_single_page_load.png)
+![Single Thread/Process Page Load](demo_single_page_load.png)
 
 ---
 
 # Four Processes (Users)
 
-![Four Processes Users](img/demo_four_users.png)
+![Four Processes Users](demo_four_users.png)
 
 ---
 
@@ -552,13 +556,13 @@ Decrease in performance around 60s (1.5 new users per second)
 
 Decrease in performance around 240s (3 new users per second)
 
-![Four Processes Page Load](img/demo_four_load.png)
+![Four Processes Page Load](demo_four_load.png)
 
 ---
 
 # Sixteen Processes (Users)
 
-![Sixteen Processes Users](img/demo_sixteen_users.png)
+![Sixteen Processes Users](demo_sixteen_users.png)
 
 ---
 
@@ -566,7 +570,7 @@ Decrease in performance around 240s (3 new users per second)
 
 Little improvement over 4 processes
 
-![Sixteen Processes Page Load](img/demo_sixteen_load.png)
+![Sixteen Processes Page Load](demo_sixteen_load.png)
 
 ---
 
@@ -578,7 +582,7 @@ Little improvement over 4 processes
 
 # Four Threads (Users)
 
-![Four Threads Users](img/demo_four_threads_users.png)
+![Four Threads Users](demo_four_threads_users.png)
 
 ---
 
@@ -587,13 +591,13 @@ Little improvement over 4 processes
 Still decrease in performance around 240s, but more
 stable until then.
 
-![Four Threads Page Load](img/demo_four_threads_load.png)
+![Four Threads Page Load](demo_four_threads_load.png)
 
 ---
 
 # 32 Threads (Users)
 
-![32 Threads Users](img/demo_32_threads_users.png)
+![32 Threads Users](demo_32_threads_users.png)
 
 ---
 
@@ -601,7 +605,7 @@ stable until then.
 
 Decrease in performance beginning around 300s (3.5 new users per second)
 
-![32 Threads Page Load](img/demo_32_threads_load.png)
+![32 Threads Page Load](demo_32_threads_load.png)
 
 ---
 

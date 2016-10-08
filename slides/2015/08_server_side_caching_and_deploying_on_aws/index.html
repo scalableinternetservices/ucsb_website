@@ -1,5 +1,9 @@
-# Server-side Caching and Deploying on AWS
-.fx: title
+---
+layout: presentation
+title: Server-side Caching and Deploying on AWS
+---
+
+# {{page.title}}
 
 __CS290B__
 
@@ -20,13 +24,13 @@ October 20, 2015
 
 # High Availability Review
 
-![High Availability in Two Sites](img/dual_site_availability.png)
+![High Availability in Two Sites](dual_site_availability.png)
 
 ---
 
 # Client-side Caching Review
 
-![Defining optimal Cache-Control policy](img/http-cache-decision-tree.png)
+![Defining optimal Cache-Control policy](http-cache-decision-tree.png)
 
 Source: [https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching)
 
@@ -173,7 +177,7 @@ Now, let's look into each of these options. But first a look at latency.
 
 # Latency Numbers (ns and μs)
 
-![Latency Numbers Every Programmer Should Know](img/latency_1_2015.png)
+![Latency Numbers Every Programmer Should Know](latency_1_2015.png)
 
 Source: http://www.eecs.berkeley.edu/~rcs/research/interactive_latency.html
 
@@ -181,7 +185,7 @@ Source: http://www.eecs.berkeley.edu/~rcs/research/interactive_latency.html
 
 # Latency Numbers (μs and ms)
 
-![Latency Numbers Every Programmer Should Know](img/latency_2_2015.png)
+![Latency Numbers Every Programmer Should Know](latency_2_2015.png)
 
 Source: http://www.eecs.berkeley.edu/~rcs/research/interactive_latency.html
 
@@ -344,7 +348,7 @@ Let's look at fragment caching in the context of the demo app.
 
 .fx: img-left
 
-![Submissions Index View](img/demo_submissions_index.png)
+![Submissions Index View](demo_submissions_index.png)
 
 We can cache each submission listing.
 
@@ -454,7 +458,7 @@ Reference:
 
 .fx: img-left
 
-![Submissions Index View](img/demo_submissions_index.png)
+![Submissions Index View](demo_submissions_index.png)
 
 Now we are caching a fragment for each submission.
 
@@ -466,7 +470,7 @@ Now we are caching a fragment for each submission.
 
 .fx: img-left
 
-![Submissions Index View](img/demo_submissions_index.png)
+![Submissions Index View](demo_submissions_index.png)
 
 Now we are caching a fragment for each submission.
 
@@ -613,7 +617,7 @@ This time we have six phases of testing each lasting 60 seconds:
 
 The application struggles to handle a single user arriving each second.
 
-![Performance without caching](img/performance_no_caching.png)
+![Performance without caching](performance_no_caching.png)
 
 ---
 
@@ -622,7 +626,7 @@ The application struggles to handle a single user arriving each second.
 With server-side caching implemented, the server can easily handle up to two
 new users a second.
 
-![Performance with caching](img/performance_server_cache.png)
+![Performance with caching](performance_server_cache.png)
 
 ---
 
@@ -682,7 +686,7 @@ credentials to login to the AWS interface.
 To login visit:
 [https://bboe.signin.aws.amazon.com/console](https://bboe.signin.aws.amazon.com/console)
 
-![bboe AWS Sign-in](img/aws_signin.png)
+![bboe AWS Sign-in](aws_signin.png)
 
 ---
 
@@ -691,7 +695,7 @@ To login visit:
 Ensure that the __N. Virginia__ (us-east-1) region is selected in the upper
 right.
 
-![AWS N. Virginia](img/aws_region.png)
+![AWS N. Virginia](aws_region.png)
 
 ---
 
@@ -700,7 +704,7 @@ right.
 Click the _CloudFormation_ service link in the middle column under the
 _Management Tools_ section.
 
-![AWS CloudFormation](img/aws_cloud_formation.png)
+![AWS CloudFormation](aws_cloud_formation.png)
 
 ---
 
@@ -710,7 +714,7 @@ On subsequent visits __CloudFormation__ will appear in your
 _Services/History_. Also note that the link is the fourth one under the __All
 AWS Services__ section.
 
-![AWS CloudFormation History](img/aws_cloud_formation_history.png)
+![AWS CloudFormation History](aws_cloud_formation_history.png)
 
 ---
 
@@ -720,7 +724,7 @@ Observe the various stacks that are launched.
 
 Click the blue __Create Stack__ button to create a new stack.
 
-![AWS CloudFormation View](img/aws_cloud_formation_view.png)
+![AWS CloudFormation View](aws_cloud_formation_view.png)
 
 ---
 
@@ -733,7 +737,7 @@ For now, the only available template is the Single Instance UCSB WEBrick
 template at:
 [https://cs290b.s3.amazonaws.com/SingleWEBrick.json](https://cs290b.s3.amazonaws.com/SingleWEBrick.json)
 
-![Template URLs](img/template_urls.png)
+![Template URLs](template_urls.png)
 
 ## October 27 Update
 
@@ -747,7 +751,7 @@ Please use this template now:
 Paste the URL of the template into the _Specify an Amazon S3 template URL_
 field, and click the blue__Next__ button when ready.
 
-![CloudFormation Template](img/aws_cloud_formation_template.png)
+![CloudFormation Template](aws_cloud_formation_template.png)
 
 ---
 
@@ -761,7 +765,7 @@ field, and click the blue__Next__ button when ready.
 3. Specify the git branch of your application server to deploy.
 4. Select your team name.
 
-![CloudFormation parameters](img/aws_cloud_formation_parameters.png)
+![CloudFormation parameters](aws_cloud_formation_parameters.png)
 
 ---
 
@@ -775,11 +779,11 @@ We want to disable rollback on failure.
 
 1. Expand the _Advanced_ section
 
-    ![CloudFormation Advanced](img/aws_cloud_formation_advanced.png)
+    ![CloudFormation Advanced](aws_cloud_formation_advanced.png)
 
 2. Select __No__ for the "Rollback on failure" option.
 
-    ![CloudFormation Rollback](img/aws_cloud_formation_rollback.png)
+    ![CloudFormation Rollback](aws_cloud_formation_rollback.png)
 
 3. Deploy your stack!
 
@@ -790,7 +794,7 @@ We want to disable rollback on failure.
 
 On successful stack creation, select the __Outputs__ tab in the lower left.
 
-![CloudFormation Outputs](img/aws_cloud_formation_outputs.png)
+![CloudFormation Outputs](aws_cloud_formation_outputs.png)
 
 The SSH output provides the SSH connect string you can use in order to SSH into
 the machine.
@@ -808,7 +812,7 @@ production mode.
 
 When you are done with your instance delete your stack.
 
-![CloudFormation Delete Stack](img/aws_cloud_formation_delete_stack.png)
+![CloudFormation Delete Stack](aws_cloud_formation_delete_stack.png)
 
 __Be careful!__ While you will not be able to delete the stacks of other teams,
 you are able to delete your teammates' stacks. Double check that you are
@@ -871,7 +875,7 @@ command(s). You will need to manually find the EC2 instance to log into.
 4. Select the instance and hit the __Connect__ button to obtain the connect
 string.
 
-![EC2 Filter](img/aws_ec2_filter.png)
+![EC2 Filter](aws_ec2_filter.png)
 
 __Note__: If there are multiple results and you're not on a multi-machine stack
 you will need to manually inspect each instance's tags to find the right one.

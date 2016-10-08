@@ -1,5 +1,9 @@
-# Relational Databases: Concurrency Control and Query Analysis
-.fx: title
+---
+layout: presentation
+title: "Relational Databases: Concurrency Control and Query Analysis"
+---
+
+# {{page.title}}
 
 __CS290B__
 
@@ -92,7 +96,7 @@ After today you should...
 
 .fx: img-left
 
-![Database connectivity](img/app_server_to_database.png)
+![Database connectivity](app_server_to_database.png)
 
 We have many stateless application servers responding to requests.
 
@@ -106,7 +110,7 @@ Client requests regularly include data updates.
 
 .fx: img-left
 
-![Database connectivity](img/app_server_to_database.png)
+![Database connectivity](app_server_to_database.png)
 
 * Data needs to be shared between requests and servers
 
@@ -128,7 +132,7 @@ Client requests regularly include data updates.
 
 .fx: img-left
 
-![Database connectivity](img/app_server_to_database.png)
+![Database connectivity](app_server_to_database.png)
 
 There are quite a few existing solutions for a _stable_ data layer.
 
@@ -151,7 +155,7 @@ There are quite a few existing solutions for a _stable_ data layer.
 
 .fx: img-left
 
-![Database connectivity](img/app_server_to_database.png)
+![Database connectivity](app_server_to_database.png)
 
 ## Relational Databases...
 
@@ -175,7 +179,7 @@ capabilities, go non-relational.
 
 .fx: img-left
 
-![Database connectivity](img/app_server_to_database.png)
+![Database connectivity](app_server_to_database.png)
 
 ## Today we will discuss:
 
@@ -438,7 +442,7 @@ When transactions are serialized, it is not conflict equivalent to either of:
 
 .fx: img-left
 
-![Database connectivity](img/app_server_to_database.png)
+![Database connectivity](app_server_to_database.png)
 
 > Why is it important that we have a serializable schedule?
 
@@ -554,7 +558,7 @@ This approach avoids the problem with cascading aborts.
 
 .fx: img-left
 
-![Database connectivity](img/app_server_to_database.png)
+![Database connectivity](app_server_to_database.png)
 
 We have many application servers running our application.
 
@@ -772,7 +776,7 @@ You think the bottleneck may be the database.
 
 .fx: img-left
 
-![Submissions Index View](img/demo_submissions_index.png)
+![Submissions Index View](demo_submissions_index.png)
 
 Let's use an example from the Demo app!
 
@@ -791,7 +795,7 @@ on github.
 With the Demo app's _master_ branch deployed on a `m3_medium` instance
 with:
 
-![Submissions Index View](img/demo_submissions_index.png)
+![Submissions Index View](demo_submissions_index.png)
 
 
 * 20 Communities

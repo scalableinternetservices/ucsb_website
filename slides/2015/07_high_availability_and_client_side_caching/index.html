@@ -1,5 +1,9 @@
-# High Availability and Client-side Caching
-.fx: title
+---
+layout: presentation
+title: High Availability and Client-side Caching
+---
+
+# {{page.title}}
 
 __CS290B__
 
@@ -102,7 +106,7 @@ how frequent, are usually not incorporated in marketing material.
 
 > What are possible causes of failures?
 
-![Full network topology](img/full_stack.png)
+![Full network topology](full_stack.png)
 
 ---
 
@@ -126,7 +130,7 @@ how frequent, are usually not incorporated in marketing material.
 
 .fx: img-left
 
-![Single application server](img/application_server.png)
+![Single application server](application_server.png)
 
 We've already discussed the components of this sort of failure.
 
@@ -141,7 +145,7 @@ dead) by having a pool of other servers to direct traffic to.
 
 # How do we Handle Load Balancer Failure?
 
-![Single load balancer](img/single_load_balancer.png)
+![Single load balancer](single_load_balancer.png)
 
 ---
 
@@ -149,7 +153,7 @@ dead) by having a pool of other servers to direct traffic to.
 
 .fx: img-left
 
-![Redundant load balancers](img/redundant_load_balancers.png)
+![Redundant load balancers](redundant_load_balancers.png)
 
 Buy two load balancers. One is the primary, and the other is the failover.
 
@@ -179,7 +183,7 @@ occurs between the load balancers.
 
 # How do we Handle Switch Failure?
 
-![Redundant load balancers](img/redundant_load_balancers.png)
+![Redundant load balancers](redundant_load_balancers.png)
 
 
 ---
@@ -191,13 +195,13 @@ Buy two switches! Again with a primary and failover and a heartbeat.
 During failover similar issues occur but layer 2 should be stateless so no/less
 synchronization needed.
 
-![Redundant switches](img/redundant_switches.png)
+![Redundant switches](redundant_switches.png)
 
 ---
 
 # How do we Handle Router Failure?
 
-![Redundant switches](img/redundant_switches.png)
+![Redundant switches](redundant_switches.png)
 
 ---
 
@@ -207,7 +211,7 @@ Buy two!
 
 Similar heartbeat and failover system, with slightly different problems.
 
-![Redundant routers](img/redundant_routers.png)
+![Redundant routers](redundant_routers.png)
 
 ---
 
@@ -215,7 +219,7 @@ Similar heartbeat and failover system, with slightly different problems.
 
 Buy two! Use separate internet service providers (ISPs).
 
-![Redundant routers](img/redundant_routers.png)
+![Redundant routers](redundant_routers.png)
 
 ---
 
@@ -241,7 +245,7 @@ over another. (Path prepending, Community values)
 
 # High Availability
 
-![High Availability Topology](img/high_availability.png)
+![High Availability Topology](high_availability.png)
 
 We will discuss database failover in another lecture.
 
@@ -257,13 +261,13 @@ So we have redundant systems in place.
 
 # Disaster Strikes
 
-![Hurricane Sandy from Satellite](img/hurricane_sandy_satellite.png)
+![Hurricane Sandy from Satellite](hurricane_sandy_satellite.png)
 
 ---
 
 # Hurricane Sandy via Ars Technica
 
-![Hurricane Sandy Headline](img/hurricane_sandy_article.png)
+![Hurricane Sandy Headline](hurricane_sandy_article.png)
 
 ---
 
@@ -288,7 +292,7 @@ We end up having to make a choice between performance and availability.
 
 # Multi-site High Availability
 
-![High Availability in Two Sites](img/dual_site_availability.png)
+![High Availability in Two Sites](dual_site_availability.png)
 
 ---
 
@@ -340,7 +344,7 @@ Source: High Performance Browser Networking
 
 # Multiple HTTP Requests per Page
 
-![Total Requests Per Page](img/httparchive_requests_per_page.png)
+![Total Requests Per Page](httparchive_requests_per_page.png)
 
 Source: [http://httparchive.org/interesting.php#reqTotal](http://httparchive.org/interesting.php#reqTotal)
 
@@ -491,7 +495,7 @@ return 304 (not modified).
 
 # HTTP Caching Summary
 
-![Defining optimal Cache-Control policy](img/http-cache-decision-tree.png)
+![Defining optimal Cache-Control policy](http-cache-decision-tree.png)
 
 Source: [https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching)
 
@@ -559,7 +563,7 @@ not save a copy to a non-volatile location.
 Let's start with implementation client-side HTTP caching on the New Submission
 page in the demo app:
 
-![Demo App New Submission View](img/demo_new_submission.png)
+![Demo App New Submission View](demo_new_submission.png)
 
 ---
 
@@ -567,7 +571,7 @@ page in the demo app:
 
 Initial page load fetches every resource (indicated via 200 response).
 
-![Initial Demo App New Submission Resources](img/demo_new_submission_resources.png)
+![Initial Demo App New Submission Resources](demo_new_submission_resources.png)
 
 
 ---
@@ -578,7 +582,7 @@ Refreshing the page doesn't require sending the asset bodies (304 responses),
 but the server sends the complete /submissions/new response body (200
 response).
 
-![Subsequent Demo App New Submissions Resources](img/demo_new_submission_resources_subsequent.png)
+![Subsequent Demo App New Submissions Resources](demo_new_submission_resources_subsequent.png)
 
 ---
 
@@ -586,7 +590,7 @@ response).
 
 > When can this page be out-of-date?
 
-![Demo App New Submission View](img/demo_new_submission.png)
+![Demo App New Submission View](demo_new_submission.png)
 
 ---
 
@@ -640,7 +644,7 @@ in a 304 (not modified) response.
 If the list of communities change subsequent
 responses will return a 200 along with the body of the response.
 
-![Cached Demo App New Submissions Resources](img/demo_new_submission_resources_cached.png)
+![Cached Demo App New Submissions Resources](demo_new_submission_resources_cached.png)
 
 ---
 
@@ -648,7 +652,7 @@ responses will return a 200 along with the body of the response.
 
 .fx: img-left
 
-![Submission View](img/demo_submission_view.png)
+![Submission View](demo_submission_view.png)
 
 > What on the submission view can make the page stale?
 
@@ -703,7 +707,7 @@ The web console indicates our caching was successful.
 Adding a new comment, modifying the community or submission causes a 200
 response.
 
-![Cached Demo App Submission Show](img/demo_submission_view_cached.png)
+![Cached Demo App Submission Show](demo_submission_view_cached.png)
 
 ---
 
@@ -711,7 +715,7 @@ response.
 
 > What on the submissions index can make the page stale?
 
-![Submissions Index View](img/demo_submissions_index.png)
+![Submissions Index View](demo_submissions_index.png)
 
 ---
 
