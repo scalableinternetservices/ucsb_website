@@ -1,5 +1,6 @@
 ---
 layout: default
+navigation_weight: 3
 permalink: /project_ideas/
 title: Project Ideas
 ---

@@ -1,5 +1,6 @@
 ---
 layout: default
+navigation_weight: 1
 permalink: /lecture/
 title: Lecture Schedule
 ---

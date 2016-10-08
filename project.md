@@ -1,5 +1,6 @@
 ---
 layout: default
+navigation_weight: 2
 permalink: /project/
 title: Course Project
 ---
