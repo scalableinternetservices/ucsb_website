@@ -291,17 +291,18 @@ to a pool of possible hosts.
 
 # HTTP Redirect Example
 
-    !http
-    % nc www.domain.com 80
-    GET / HTTP/1.1
-    host: www.domain.com
+```http
+% nc www.domain.com 80
+GET / HTTP/1.1
+host: www.domain.com
 
-    HTTP/1.1 301 Moved Permanently
-    Date: Wed, 15 Oct 2014 21:08:22 GMT
-    Server: Apache/2.2.22 (Ubuntu)
-    Location: http://www2.domain.com/
-    Content-Type: text/html; charset=iso-8859-1
-    ...
+HTTP/1.1 301 Moved Permanently
+Date: Wed, 15 Oct 2014 21:08:22 GMT
+Server: Apache/2.2.22 (Ubuntu)
+Location: http://www2.domain.com/
+Content-Type: text/html; charset=iso-8859-1
+...
+```
 
 ---
 

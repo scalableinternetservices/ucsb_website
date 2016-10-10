@@ -535,16 +535,17 @@ single monolithic application.
 
 ## Before
 
-    !ruby
-    class CommunitiesController < ApplicationController
-      def create
-        if current_user.allowed_to_create_community?
-          Community.create!(params)
-          render :show and return
-        end
-        render :new
-      end
+```ruby
+class CommunitiesController < ApplicationController
+  def create
+    if current_user.allowed_to_create_community?
+      Community.create!(params)
+      render :show and return
     end
+    render :new
+  end
+end
+```
 
 ---
 
@@ -552,19 +553,20 @@ single monolithic application.
 
 ## After
 
-    !ruby
-    class CommunitiesController < ApplicationController
-      def create
-        user = UsersService.get_user_from_session(cookie)
-        if user.allowed_to_create_community?
-          CommunitiesService.create_submission!(params['title'],
-                                                params['community'],
-                                                user_id)
-          render :show and return
-        end
-        render :new
-      end
+```ruby
+class CommunitiesController < ApplicationController
+  def create
+    user = UsersService.get_user_from_session(cookie)
+    if user.allowed_to_create_community?
+      CommunitiesService.create_submission!(params['title'],
+                                            params['community'],
+                                            user_id)
+      render :show and return
     end
+    render :new
+  end
+end
+```
 
 ---
 
@@ -728,16 +730,18 @@ Statement-level is faster than block-level, with a catch.
 
 An SQL statement is generally more compact than its consequences.
 
-    !sql
-    UPDATE txns SET amount=5;
+```sql
+UPDATE txns SET amount=5;
+```
 
 The above query acts on all rows which may require a lot of data to transmit
 the consequences.
 
 However, SQL statements must now be deterministic:
 
-    !sql
-    UPDATE txns SET amount=5, updated_at=NOW();
+```sql
+UPDATE txns SET amount=5, updated_at=NOW();
+```
 
 > What is the value of `NOW()`?
 
@@ -770,14 +774,15 @@ Like with sharding, rails does not provide build-in support.
 
 However, the Octopus gem does support read followers:
 
-    !ruby
-    Octopus.using(:read_follower) do
-      num_users = User.count
-    end
+```ruby
+Octopus.using(:read_follower) do
+  num_users = User.count
+end
 
-    Octopus.using(:master) do
-      User.create(:name => "Mike")
-    end
+Octopus.using(:master) do
+  User.create(:name => "Mike")
+end
+```
 
 ---
 

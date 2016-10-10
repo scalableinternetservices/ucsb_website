@@ -400,15 +400,16 @@ Example:
 
 `curl http://httpbin.org/post --data 'username=bboe&comment=Hi There' -v`
 
-    !http
-    POST /post HTTP/1.1
-    Host: httpbin.org
-    User-Agent: curl/7.43.0
-    Accept: */*
-    Content-Length: 30
-    Content-Type: application/x-www-form-urlencoded
+```http
+POST /post HTTP/1.1
+Host: httpbin.org
+User-Agent: curl/7.43.0
+Accept: */*
+Content-Length: 30
+Content-Type: application/x-www-form-urlencoded
 
-    username=bboe&comment=Hi There
+username=bboe&comment=Hi There
+```
 
 ---
 
@@ -416,15 +417,16 @@ Example:
 
 The body of a response usually contains the requested resource content.
 
-    !http
-    HTTP/1.1 200 OK
-    Content-Type: text/html; charset=utf-8
-    Content-Length: 9973
+```http
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+Content-Length: 9973
 
-    <!DOCTYPE html>
-    <html lang="en">
-    ...
-    </html>
+<!DOCTYPE html>
+<html lang="en">
+...
+</html>
+```
 
 ---
 
@@ -439,16 +441,17 @@ The body of a response usually contains the requested resource content.
 ## Paste the following into your terminal:
 
 
-    !http
-    HTTP/1.1 200 OK
-    Content-Type: text/html; charset=utf-8
-    Content-Length: 106
+```http
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+Content-Length: 106
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <h1>HTML is easy!</h1>
-    <img src="http://i.imgur.com/oXxTj5g.gif">
-    </html>
+<!DOCTYPE html>
+<html lang="en">
+<h1>HTML is easy!</h1>
+<img src="http://i.imgur.com/oXxTj5g.gif">
+</html>
+```
 
 ---
 

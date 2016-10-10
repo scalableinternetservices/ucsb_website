@@ -127,17 +127,19 @@ necessarily 100%), how do we get there?__
 
 ## Test
 
-    !ruby
-    def test_divisible_by_3
-      assert_equal 'Fizz', fizzbuzz(3)
-    end
+```ruby
+def test_divisible_by_3
+  assert_equal 'Fizz', fizzbuzz(3)
+end
+```
 
 ## Program
 
-    !ruby
-    def fizzbuzz(n)
-      # test_divisible_by_3 fails
-    end
+```ruby
+def fizzbuzz(n)
+  # test_divisible_by_3 fails
+end
+```
 
 ---
 
@@ -145,18 +147,20 @@ necessarily 100%), how do we get there?__
 
 ## Test
 
-    !ruby
-    def test_divisible_by_3
-      assert_equal 'Fizz', fizzbuzz(3)
-    end
+```ruby
+def test_divisible_by_3
+  assert_equal 'Fizz', fizzbuzz(3)
+end
+```
 
 ## Program
 
-    !ruby
-    def fizzbuzz(n)
-      'Fizz'
-      # test_divisible_by_3 passes
-    end
+```ruby
+def fizzbuzz(n)
+  'Fizz'
+  # test_divisible_by_3 passes
+end
+```
 
 ---
 
@@ -164,19 +168,21 @@ necessarily 100%), how do we get there?__
 
 ## Test
 
-    !ruby
-    def test_divisible_by_5
-      assert_equal 'Buzz', fizzbuzz(5)
-    end
+```ruby
+def test_divisible_by_5
+  assert_equal 'Buzz', fizzbuzz(5)
+end
+```
 
 ## Program
 
-    !ruby
-    def fizzbuzz(n)
-      'Fizz'
-      # test_divisible_by_3 passes
-      # test_divisible_by_5 fails
-    end
+```ruby
+def fizzbuzz(n)
+  'Fizz'
+  # test_divisible_by_3 passes
+  # test_divisible_by_5 fails
+end
+```
 
 ---
 
@@ -184,23 +190,25 @@ necessarily 100%), how do we get there?__
 
 ## Test
 
-    !ruby
-    def test_divisible_by_5
-      assert_equal 'Buzz', fizzbuzz(5)
-    end
+```ruby
+def test_divisible_by_5
+  assert_equal 'Buzz', fizzbuzz(5)
+end
+```
 
 ## Program
 
-    !ruby
-    def fizzbuzz(n)
-      if n % 3 == 0
-        'Fizz'
-      else
-        'Buzz'
-      end
-      # test_divisible_by_3 passes
-      # test_divisible_by_5 passes
-    end
+```ruby
+def fizzbuzz(n)
+  if n % 3 == 0
+    'Fizz'
+  else
+    'Buzz'
+  end
+  # test_divisible_by_3 passes
+  # test_divisible_by_5 passes
+end
+```
 
 ---
 
@@ -208,24 +216,26 @@ necessarily 100%), how do we get there?__
 
 ## Test
 
-    !ruby
-    def test_divisible_by_both
-      assert_equal 'FizzBuzz', fizzbuzz(15)
-    end
+```ruby
+def test_divisible_by_both
+  assert_equal 'FizzBuzz', fizzbuzz(15)
+end
+```
 
 ## Program
 
-    !ruby
-    def fizzbuzz(n)
-      if n % 3 == 0
-        'Fizz'
-      else
-        'Buzz'
-      end
-      # test_divisible_by_3 passes
-      # test_divisible_by_5 passes
-      # test_divisible_by_both fails
-    end
+```ruby
+def fizzbuzz(n)
+  if n % 3 == 0
+    'Fizz'
+  else
+    'Buzz'
+  end
+  # test_divisible_by_3 passes
+  # test_divisible_by_5 passes
+  # test_divisible_by_both fails
+end
+```
 
 ---
 
@@ -233,28 +243,30 @@ necessarily 100%), how do we get there?__
 
 ## Test
 
-    !ruby
-    def test_divisible_by_both
-      assert_equal 'FizzBuzz', fizzbuzz(15)
-    end
+```ruby
+def test_divisible_by_both
+  assert_equal 'FizzBuzz', fizzbuzz(15)
+end
+```
 
 ## Program
 
-    !ruby
-    def fizzbuzz(n)
-      if n % 3 == 0
-        if n % 5 == 0
-          'FizzBuzz'
-        else
-          'Fizz'
-        end
-      else
-        'Buzz'
-      end
-      # test_divisible_by_3 passes
-      # test_divisible_by_5 passes
-      # test_divisible_by_both passes
+```ruby
+def fizzbuzz(n)
+  if n % 3 == 0
+    if n % 5 == 0
+      'FizzBuzz'
+    else
+      'Fizz'
     end
+  else
+    'Buzz'
+  end
+  # test_divisible_by_3 passes
+  # test_divisible_by_5 passes
+  # test_divisible_by_both passes
+end
+```
 
 ---
 
@@ -262,29 +274,31 @@ necessarily 100%), how do we get there?__
 
 ## Test
 
-    !ruby
-    def test_divisible_by_neither
-      assert_equal 17, fizzbuzz(17)
-    end
+```ruby
+def test_divisible_by_neither
+  assert_equal 17, fizzbuzz(17)
+end
+```
 
 ## Program
 
-    !ruby
-    def fizzbuzz(n)
-      if n % 3 == 0
-        if n % 5 == 0
-          'FizzBuzz'
-        else
-          'Fizz'
-        end
-      else
-        'Buzz'
-      end
-      # test_divisible_by_3 passes
-      # test_divisible_by_5 passes
-      # test_divisible_by_both passes
-      # test_divisible_by_neither fails
+```ruby
+def fizzbuzz(n)
+  if n % 3 == 0
+    if n % 5 == 0
+      'FizzBuzz'
+    else
+      'Fizz'
     end
+  else
+    'Buzz'
+  end
+  # test_divisible_by_3 passes
+  # test_divisible_by_5 passes
+  # test_divisible_by_both passes
+  # test_divisible_by_neither fails
+end
+```
 
 ---
 
@@ -292,45 +306,47 @@ necessarily 100%), how do we get there?__
 
 ## Program
 
-    !ruby
-    def fizzbuzz(n)
-      if n % 3 == 0
-        if n % 5 == 0
-          'FizzBuzz'
-        else
-          'Fizz'
-        end
-      elsif n % 5 == 0
-        'Buzz'
-      else
-        n
-      end
-      # test_divisible_by_3 passes
-      # test_divisible_by_5 passes
-      # test_divisible_by_both passes
-      # test_divisible_by_neither passes
+```ruby
+def fizzbuzz(n)
+  if n % 3 == 0
+    if n % 5 == 0
+      'FizzBuzz'
+    else
+      'Fizz'
     end
+  elsif n % 5 == 0
+    'Buzz'
+  else
+    n
+  end
+  # test_divisible_by_3 passes
+  # test_divisible_by_5 passes
+  # test_divisible_by_both passes
+  # test_divisible_by_neither passes
+end
+```
 
 ---
 
 # FizzBuzz Refactor
 
-    !ruby
-    def fizzbuzz(n)
-      if n % 15 == 0
-        'FizzBuzz'
-      elsif n % 3 == 0
-        'Fizz'
-      elsif n % 5 == 0
-        'Buzz'
-      else
-        n
-      end
-      # test_divisible_by_3 passes
-      # test_divisible_by_5 passes
-      # test_divisible_by_both passes
-      # test_divisible_by_neither passes
-    end
+```ruby
+def fizzbuzz(n)
+  if n % 15 == 0
+    'FizzBuzz'
+  elsif n % 3 == 0
+    'Fizz'
+  elsif n % 5 == 0
+    'Buzz'
+  else
+    n
+  end
+  # test_divisible_by_3 passes
+  # test_divisible_by_5 passes
+  # test_divisible_by_both passes
+  # test_divisible_by_neither passes
+end
+```
 
 ---
 

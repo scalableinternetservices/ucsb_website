@@ -590,25 +590,27 @@ response).
 
 ## Without Caching
 
-    !ruby
-    class SubmissionsController < ApplicationController
+```ruby
+class SubmissionsController < ApplicationController
 
-      def new
-        @submission = Submission.new
-      end
+  def new
+    @submission = Submission.new
+  end
 
-    end
+end
+```
 
 ## With Caching
 
-    !ruby
-    class SubmissionsController < ApplicationController
+```ruby
+class SubmissionsController < ApplicationController
 
-      def new
-        @submission = Submission.new if stale?(Community.all)
-      end
+  def new
+    @submission = Submission.new if stale?(Community.all)
+  end
 
-    end
+end
+```
 
 ---
 
@@ -652,19 +654,20 @@ responses will return a 200 along with the body of the response.
 
 ## Without Caching
 
-    !ruby
-    class SubmissionsController < ApplicationController
-      before_action :set_submission, only: [:show, ...]
+```ruby
+class SubmissionsController < ApplicationController
+  before_action :set_submission, only: [:show, ...]
 
-      def show
-      end
+  def show
+  end
 
-      private
+  private
 
-      def set_submission
-        @submission = Submission.find(params[:id])
-      end
-    end
+  def set_submission
+    @submission = Submission.find(params[:id])
+  end
+end
+```
 
 ---
 
@@ -672,21 +675,22 @@ responses will return a 200 along with the body of the response.
 
 ## With Caching
 
-    !ruby
-    class SubmissionsController < ApplicationController
-      before_action :set_submission, only: [:show, ...]
+```ruby
+class SubmissionsController < ApplicationController
+  before_action :set_submission, only: [:show, ...]
 
-      def show
-        fresh_when([@submission, @submission.community,
-                    @submission.comments])
-      end
+  def show
+    fresh_when([@submission, @submission.community,
+                @submission.comments])
+  end
 
-      private
+  private
 
-      def set_submission
-        @submission = Submission.find(params[:id])
-      end
-    end
+  def set_submission
+    @submission = Submission.find(params[:id])
+  end
+end
+```
 
 ---
 
@@ -713,27 +717,29 @@ response.
 
 ## Without Caching
 
-    !ruby
-    class SubmissionsController < ApplicationController
+```ruby
+class SubmissionsController < ApplicationController
 
-      def index
-        @submissions = Submission.all
-      end
+  def index
+    @submissions = Submission.all
+  end
 
-    end
+end
+```
 
 ## With Caching
 
-    !ruby
-    class SubmissionsController < ApplicationController
+```ruby
+class SubmissionsController < ApplicationController
 
-      def index
-        if stale?([Submission.all, Community.all, Comments.all])
-          @submissions = Submission.all
-        end
-      end
-
+  def index
+    if stale?([Submission.all, Community.all, Comments.all])
+      @submissions = Submission.all
     end
+  end
+
+end
+```
 
 ---
 

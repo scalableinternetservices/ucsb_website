@@ -187,16 +187,19 @@ Use the SSH string to SSH into the Tsung instance.
 
 The home directory of the Tsung instance contains one file:
 
-    !sh
-    [ec2-user@ip-10-140-200-96 ~]$ ls
-    simple.xml
+```bash
+[ec2-user@ip-10-140-200-96 ~]$ ls
+simple.xml
+```
 
 `simple.xml` is a sample Tsung load-test configuration file that establishes 1
 user each second to http://www.google.com.
 
 Run this Tsung test via:
 
-    tsung -f simple.xml -k start
+```bash
+tsung -f simple.xml -k start
+```
 
 One Tsung starts, visit the URL listed in the outputs.
 
@@ -233,7 +236,9 @@ Assuming your SSH connect string is: `ssh -i demo.pem ec2-user@54.166.5.220`
 then the following command will synchronize all the Tsung result files (from
 all runs) to your local machine:
 
-    rsync -auve 'ssh -i demo.pem' ec2-user@54.166.5.220:.tsung/log/ .
+```bash
+rsync -auve 'ssh -i demo.pem' ec2-user@54.166.5.220:.tsung/log/ .
+```
 
 Running that command a second time will only fetch any new files (assuming you
 run it from the same path). rsync is awesome!
@@ -248,19 +253,20 @@ discussion please see Tsung's documentation:
 
 # Tsung File Structure
 
-    !xml
-    <?xml version="1.0"?>
-    <!DOCTYPE tsung SYSTEM "/usr/share/tsung/tsung-1.0.dtd">
-    <tsung loglevel="notice" version="1.0">
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE tsung SYSTEM "/usr/share/tsung/tsung-1.0.dtd">
+<tsung loglevel="notice" version="1.0">
 
-      <clients>...</clients>
-      <servers>...</servers>
-      <load>...</load>
-      <options>...</options>
-      <sessions>...</sessions>
-      ...
+  <clients>...</clients>
+  <servers>...</servers>
+  <load>...</load>
+  <options>...</options>
+  <sessions>...</sessions>
+  ...
 
-    </tsung>
+</tsung>
+```
 
 ---
 
@@ -268,10 +274,11 @@ discussion please see Tsung's documentation:
 
 Reference: [http://tsung.erlang-projects.org/user_manual/conf-client-server.html](http://tsung.erlang-projects.org/user_manual/conf-client-server.html)
 
-    !xml
-    <clients>
-      <client host="localhost" use_controller_vm="true" maxusers='30000'/>
-    </clients>
+```xml
+<clients>
+  <client host="localhost" use_controller_vm="true" maxusers='30000'/>
+</clients>
+```
 
 The clients section specifies the clients to generate load from. While you can
 use multiple machines as part of a single test, you probably won't need to.
@@ -282,10 +289,11 @@ use multiple machines as part of a single test, you probably won't need to.
 
 Reference: [http://tsung.erlang-projects.org/user_manual/conf-client-server.html](http://tsung.erlang-projects.org/user_manual/conf-client-server.html)
 
-    !xml
-    <servers>
-      <server host="www.google.com" port="80" type="tcp"></server>
-    </servers>
+```xml
+<servers>
+  <server host="www.google.com" port="80" type="tcp"></server>
+</servers>
+```
 
 The servers section specifies where you intend to connect to. For your tests
 you will always want to modify the `host` value to match your stack's
@@ -297,15 +305,16 @@ IP/domain.
 
 Reference: [http://tsung.erlang-projects.org/user_manual/conf-load.html](http://tsung.erlang-projects.org/user_manual/conf-load.html)
 
-    !xml
-    <load>
-      <arrivalphase phase="1" duration="60" unit="second">
-        <users arrivalrate="2" unit="second"></users>
-      </arrivalphase>
-      <arrivalphase phase="2" duration="1" unit="minute">
-        <users interarrival="2" unit="second"></users>
-      </arrivalphase>
-    </load>
+```xml
+<load>
+  <arrivalphase phase="1" duration="60" unit="second">
+    <users arrivalrate="2" unit="second"></users>
+  </arrivalphase>
+  <arrivalphase phase="2" duration="1" unit="minute">
+    <users interarrival="2" unit="second"></users>
+  </arrivalphase>
+</load>
+```
 
 Here we describe two phases.
 
@@ -321,15 +330,16 @@ The second phase also lasts 60 seconds. Here 1 new user arrives
 
 Reference: [http://tsung.erlang-projects.org/user_manual/conf-options.html](http://tsung.erlang-projects.org/user_manual/conf-options.html)
 
-    !xml
-    <options>
-      <!-- Set connection timeout to 2 seconds -->
-      <option name="global_ack_timeout" value="2000"></option>
+```xml
+<options>
+  <!-- Set connection timeout to 2 seconds -->
+  <option name="global_ack_timeout" value="2000"></option>
 
-      <option type="ts_http" name="user_agent">
-        <user_agent probability="100">Mozilla/5.0 ...</user_agent>
-      </option>
-    </options>
+  <option type="ts_http" name="user_agent">
+    <user_agent probability="100">Mozilla/5.0 ...</user_agent>
+  </option>
+</options>
+```
 
 Unless you do something special with the user-agent in your web application,
 you probably will not need to modify these options.
@@ -340,19 +350,20 @@ you probably will not need to modify these options.
 
 Reference: [http://tsung.erlang-projects.org/user_manual/conf-sessions.html](http://tsung.erlang-projects.org/user_manual/conf-sessions.html)
 
-    !xml
-    <sessions>
-      <session name="http-example" probability="100" type="ts_http">
-        <request>
-          <http url='/' version='1.1' method='GET'></http>
-        </request>
-        <thinktime value="2" random="true"></thinktime>
-        <request>
-          <http url='/login' version='1.1' method='POST'
-                contents="user=foo"></http>
-        </request>
-      </session>
-    </sessions>
+```xml
+<sessions>
+  <session name="http-example" probability="100" type="ts_http">
+    <request>
+      <http url='/' version='1.1' method='GET'></http>
+    </request>
+    <thinktime value="2" random="true"></thinktime>
+    <request>
+      <http url='/login' version='1.1' method='POST'
+            contents="user=foo"></http>
+    </request>
+  </session>
+</sessions>
+```
 
 You can define multiple sessions and for each user one will be chosen according
 to the probabilities.
@@ -377,18 +388,20 @@ Reference: [http://tsung.erlang-projects.org/user_manual/conf-advanced-features.
 
 Assume this HTML form:
 
-    !html
-    <form action="/create" method="POST">
-      <input name="auth_token" type="hidden" value="gDTI=" />
-    </form>
+```html
+<form action="/create" method="POST">
+  <input name="auth_token" type="hidden" value="gDTI=" />
+</form>
+```
 
 The value `gDTI=` can be obtained from the response via:
 
-    !xml
-    <request>
-      <dyn_variable name="auth_token"></dyn_variable>
-      <http url="/new" method="GET" version="1.1"></http>
-    </request>
+```xml
+<request>
+  <dyn_variable name="auth_token"></dyn_variable>
+  <http url="/new" method="GET" version="1.1"></http>
+</request>
+```
 
 ---
 
@@ -396,13 +409,14 @@ The value `gDTI=` can be obtained from the response via:
 
 We previously set a variable named `auth_token`. Let's use it.
 
-    !xml
-    <request subst="true">
-      <http url="/create" version="1.1"
-            contents="user=bboe&amp;auth_token=%%_auth_token%%"
-            content_type="application/x-www-form-urlencoded" method="POST">
-      </http>
-    </request>
+```xml
+<request subst="true">
+  <http url="/create" version="1.1"
+        contents="user=bboe&amp;auth_token=%%_auth_token%%"
+        content_type="application/x-www-form-urlencoded" method="POST">
+  </http>
+</request>
+```
 
 Substitution is done via `%%_VARIABLE_NAME%%`.
 
@@ -430,18 +444,19 @@ Variables can be explicitly set via a few functions and occur anywhere in a
 
 ## Random Number as `rndint`
 
-    !xml
-    <setdynvars sourcetype="random_number" start="3" end="32">
-      <var name="rndint" />
-    </setdynvars>
+```xml
+<setdynvars sourcetype="random_number" start="3" end="32">
+  <var name="rndint" />
+</setdynvars>
+```
 
 ## Random String as `rndstring1`
 
-    !xml
-    <setdynvars sourcetype="random_string" length="13">
-      <var name="rndstring1" />
-    </setdynvars>
-
+```xml
+<setdynvars sourcetype="random_string" length="13">
+  <var name="rndstring1" />
+</setdynvars>
+```
 
 For a more complete example please see:
 [Demo App's load_tests/critical.xml](https://github.com/scalableinternetservices/demo/blob/master/load_tests/critical.xml)

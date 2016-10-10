@@ -364,16 +364,17 @@ Well used examples:
 
 Event driven code is dominated by callbacks:
 
-    !ruby
-    EM.run {
-      page = EM::HttpRequest.new('http://google.ca/').get
-      page.errback { p "Google is down! terminate?" }
-      page.callback {
-        a = EM::HttpRequest.new('http://google.ca/search?q=em').get
-        a.callback { # callback nesting, ad infinitum }
-        a.errback  { # error-handling code }
-      }
-    }
+```ruby
+EM.run do
+  page = EM::HttpRequest.new('http://google.ca/').get
+  page.errback { p "Google is down! terminate?" }
+  page.callback do
+    a = EM::HttpRequest.new('http://google.ca/search?q=em').get
+    a.callback { # callback nesting, ad infinitum }
+    a.errback  { # error-handling code }
+  end
+end
+```
 
 ---
 
@@ -680,11 +681,11 @@ isn't always obvious.
 
 ## Old example: pp/models/order.rb
 
-    !ruby
-    class Order
-      belongs_to :user, klass: User
-    end
-
+```ruby
+class Order
+  belongs_to :user, klass: User
+end
+```
 
 The above code may result in _autoloading_ the `user.rb` for the `User`
 model. In versions of ruby prior to 2.0 (February 2013) autoloading was not

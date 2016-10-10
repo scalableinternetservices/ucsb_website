@@ -101,25 +101,26 @@ footer, sidebar, or even an item listing that may appear in multiple locations
 
 Sidebar Fragment (shown on all cs290.com pages)
 
-    !html
-    <div class="col-md-3 hidden-xs">
-      <div class="sidebar well">
-        Scalable Internet Services, CS290B, Fall 2015
-      </div>
+```html
+<div class="col-md-3 hidden-xs">
+  <div class="sidebar well">
+    Scalable Internet Services, CS290B, Fall 2015
+  </div>
 
-      <div class="sidebar well">
-        <h1 id="course-information">Course Information</h1>
-        <h2 id="instructor">Instructor</h2>
-        <p><a href="http://cs.ucsb.edu/~bboe">Dr. Bryce Boe</a>
+  <div class="sidebar well">
+    <h1 id="course-information">Course Information</h1>
+    <h2 id="instructor">Instructor</h2>
+    <p><a href="http://cs.ucsb.edu/~bboe">Dr. Bryce Boe</a>
 
-        <h2 id="lecture">Lecture</h2>
-        <p>Tuesday and Thursday<br />
-           3:00pm – 4:50pm</p>
+    <h2 id="lecture">Lecture</h2>
+    <p>Tuesday and Thursday<br />
+       3:00pm – 4:50pm</p>
 
-        ...
+    ...
 
-      </div>
-    </div>
+  </div>
+</div>
+```
 
 ---
 
@@ -298,8 +299,9 @@ in production mode.
 If you want to enable caching in development mode you must make the following
 change to your Rails environment:
 
-    !ruby
-    config.action_controller.perform_caching = true
+```ruby
+config.action_controller.perform_caching = true
+```
 
 Rails can be configured to store cached data in a few different places:
 
@@ -322,16 +324,18 @@ Rails can be configured to store cached data in a few different places:
 * Cached data is stored on the _local_ file system.
 * Can configure the location of the storage in the Rails environment:
 
-        !ruby
-        config.cache_store = :file_store, '/path/to/cache/'
+```ruby
+config.cache_store = :file_store, '/path/to/cache/'
+```
 
 ## ActiveSupport::Cache::MemcacheStore
 
 * Cached data is stored in memory on another machine (could also be local).
 * Can configure the location of the server in the Rails environment:
 
-        !ruby
-        config.cache_store = :mem_cache_store, 'cache-1.example.com'
+```ruby
+config.cache_store = :mem_cache_store, 'cache-1.example.com'
+```
 
 ---
 
@@ -357,41 +361,43 @@ re-render the submission view for all submissions that haven't been updated.
 
 # Submission Listing (without cache)
 
-    !erb
-    <% @submissions.each do |submission| %>
-      <tr>
-        <td><%= link_to(submission.title, submission.url) %></td>
-        <td><%= submission.url %></td>
-        <td><%= submission.community.name %></td>
-        <td>
-          <%= link_to("#{submission.comments.size} comments",
-                      submission, class: 'btn btn-primary btn-xs') %>
-        </td>
-      </tr>
-    <% end %>
+```erb
+<% @submissions.each do |submission| %>
+  <tr>
+    <td><%= link_to(submission.title, submission.url) %></td>
+    <td><%= submission.url %></td>
+    <td><%= submission.community.name %></td>
+    <td>
+      <%= link_to("#{submission.comments.size} comments",
+                  submission, class: 'btn btn-primary btn-xs') %>
+    </td>
+  </tr>
+<% end %>
+```
 
 ---
 
 # Submission Listing (with cache)
 
-    !erb
-    <% @submissions.each do |submission| %>
+```erb
+<% @submissions.each do |submission| %>
 
-      <% cache(cache_key_for_submission(submission)) do %>
+  <% cache(cache_key_for_submission(submission)) do %>
 
-      <tr>
-        <td><%= link_to(submission.title, submission.url) %></td>
-        <td><%= submission.url %></td>
-        <td><%= submission.community.name %></td>
-        <td>
-          <%= link_to("#{submission.comments.size} comments",
-                      submission, class: 'btn btn-primary btn-xs') %>
-        </td>
-      </tr>
+  <tr>
+    <td><%= link_to(submission.title, submission.url) %></td>
+    <td><%= submission.url %></td>
+    <td><%= submission.community.name %></td>
+    <td>
+      <%= link_to("#{submission.comments.size} comments",
+                  submission, class: 'btn btn-primary btn-xs') %>
+    </td>
+  </tr>
 
-      <% end %>
+  <% end %>
 
-    <% end %>
+<% end %>
+```
 
 ---
 
@@ -399,12 +405,13 @@ re-render the submission view for all submissions that haven't been updated.
 
 > How should we choose a cache key?
 
-    !ruby
-    module SubmissionHelper
-      def cache_key_for_submission(submission)
-        "submission/#{submission.id}"
-      end
-    end
+```ruby
+module SubmissionHelper
+  def cache_key_for_submission(submission)
+    "submission/#{submission.id}"
+  end
+end
+```
 
 > What are the weaknesses with the above approach?
 
@@ -414,12 +421,13 @@ re-render the submission view for all submissions that haven't been updated.
 
 > How should we choose a cache key?
 
-    !ruby
-    module SubmissionHelper
-      def cache_key_for_submission(submission)
-        "submission/#{submission.id}"
-      end
-    end
+```ruby
+module SubmissionHelper
+  def cache_key_for_submission(submission)
+    "submission/#{submission.id}"
+  end
+end
+```
 
 > What are the weaknesses with the above approach?
 
@@ -431,12 +439,13 @@ re-render the submission view for all submissions that haven't been updated.
 
 # Choosing a Better Cache Key
 
-    !ruby
-    module SubmissionHelper
-      def cache_key_for_submission(sub)
-        "submission/#{sub.id}/#{sub.updated_at}/#{sub.comments.count}"
-      end
-    end
+```ruby
+module SubmissionHelper
+  def cache_key_for_submission(sub)
+    "submission/#{sub.id}/#{sub.updated_at}/#{sub.comments.count}"
+  end
+end
+```
 
 With the above, a submission's fragment cache is invalidated anytime the
 submission is updated (`updated_at` is always updated), or when the number of
@@ -460,15 +469,7 @@ Now we are caching a fragment for each submission.
 
 > What else can we cache?
 
----
-
-# More Fragment Caching
-
-![Submissions Index View](demo_submissions_index.png)
-
-Now we are caching a fragment for each submission.
-
-> What else can we cache?
+--
 
 We can cache the entire submission listing!
 
@@ -476,65 +477,69 @@ We can cache the entire submission listing!
 
 # Community Listing (without cache)
 
-    !erb
-    <h3>Submissions</h3>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Url</th>
-          <th>Community</th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
+```erb
+<h3>Submissions</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Url</th>
+      <th>Community</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
 
-      <tbody>
-        <% @submissions.each do |submission| %>
-          <% cache(...) do %> ... <% end %>
-        <% end %>
-      </tbody>
-    </table>
+  <tbody>
+    <% @submissions.each do |submission| %>
+      <% cache(...) do %> ... <% end %>
+    <% end %>
+  </tbody>
+</table>
 
-    ...
+...
+```
 
 ---
 
 # Community Listing (with cache)
 
-    !erb
-    <% cache(cache_key_for_submission_table) do %>
+```erb
+<% cache(cache_key_for_submission_table) do %>
 
-    <h3>Submissions</h3>
-    <table class="table">
-      <thead>
-        <tr>...</tr>
-      </thead>
+<h3>Submissions</h3>
+<table class="table">
+  <thead>
+    <tr>...</tr>
+  </thead>
 
-      <tbody>
-        <% @submissions.each do |submission| %>
-          <% cache(...) do %> ... <% end %>
-        <% end %>
-      </tbody>
-    </table>
-
-    ...
-
+  <tbody>
+    <% @submissions.each do |submission| %>
+      <% cache(...) do %> ... <% end %>
     <% end %>
+  </tbody>
+</table>
+
+...
+
+<% end %>
+```
+
 ---
 
 # cache_key_for_submission_table
 
-    !ruby
-    module SubmissionHelper
-      def cache_key_for_submission(sub)
-        "submission/#{sub.id}/#{sub.updated_at}/#{sub.comments.count}"
-      end
+```ruby
+module SubmissionHelper
+  def cache_key_for_submission(sub)
+    "submission/#{sub.id}/#{sub.updated_at}/#{sub.comments.count}"
+  end
 
-      def cache_key_for_submission_table
-        ("submission_table/#{Submission.maximum(:updated_at)}/"
-         + Comment.maximum(:updated_at).to_s)
-      end
-    end
+  def cache_key_for_submission_table
+    ("submission_table/#{Submission.maximum(:updated_at)}/"
+     + Comment.maximum(:updated_at).to_s)
+  end
+end
+```
 
 This technique of nesting cache fragments is known as __Russian Doll Caching__.
 
@@ -544,15 +549,16 @@ This technique of nesting cache fragments is known as __Russian Doll Caching__.
 
 You can use the same built-in mechanisms to manually cache anything:
 
-    !ruby
-    class Product < ActiveRecord::Base
-      def competing_price
-        Rails.cache.fetch("#{cache_key}/competing_price",
-                          expires_in: 12.hours) do
-          Competitor::API.find_price(id)
-        end
-      end
+```ruby
+class Product < ActiveRecord::Base
+  def competing_price
+    Rails.cache.fetch("#{cache_key}/competing_price",
+                      expires_in: 12.hours) do
+      Competitor::API.find_price(id)
     end
+  end
+end
+```
 
 ---
 
@@ -577,19 +583,20 @@ passenger as an NGINX module.
 Using Tsung (erlang-based test framework) we will simulate multiple users
 visiting the Demo App web service. Each user will:
 
-    !text
-    Visit the homepage (/)
-      Wait randomly between 0 and 2 seconds
-    Request community creation form
-      Wait randomly between 0 and 2 seconds
-    Submit new community form
-    Request new link submission form
-      Wait randomly between 0 and 2 seconds
-    Submit new link submission form
-      Wait randomly between 0 and 2 seconds
-    Delete the link
-      Wait randomly between 0 and 2 seconds
-    Delete the community
+```
+Visit the homepage (/)
+  Wait randomly between 0 and 2 seconds
+Request community creation form
+  Wait randomly between 0 and 2 seconds
+Submit new community form
+Request new link submission form
+  Wait randomly between 0 and 2 seconds
+Submit new link submission form
+  Wait randomly between 0 and 2 seconds
+Delete the link
+  Wait randomly between 0 and 2 seconds
+Delete the community
+```
 
 ---
 
@@ -597,13 +604,14 @@ visiting the Demo App web service. Each user will:
 
 This time we have six phases of testing each lasting 60 seconds:
 
-    !text
-       (0-59s) Every second a new simulated user arrives
-     (60-119s) Every second 1.5 new simulated users arrive
-    (120-179s) Every second 2 new simulated users arrive
-    (180-239s) Every second 4 new simulated users arrive
-    (240-299s) Every second 6 new simulated users arrive
-    (300-359s) Every second 10 new simulated users arrive
+```
+   (0-59s) Every second a new simulated user arrives
+ (60-119s) Every second 1.5 new simulated users arrive
+(120-179s) Every second 2 new simulated users arrive
+(180-239s) Every second 4 new simulated users arrive
+(240-299s) Every second 6 new simulated users arrive
+(300-359s) Every second 10 new simulated users arrive
+```
 
 ---
 
@@ -824,14 +832,18 @@ This script runs before `bundle install` is run on the application
 server(s). It is useful if you need to install any packages (only use `sudo` if
 necessary)
 
-    sudo yum install -y ImageMagick
+```bash
+sudo yum install -y ImageMagick
+```
 
 ## .rails_initialize
 
 This script runs after `rake db:create db:migrate` is run on the application
 server(s). One usefulness is to use it to pre-populate your database, i.e.:
 
-    rake db:seed
+```
+rake db:seed
+```
 
 
 Both files described in more detail at:

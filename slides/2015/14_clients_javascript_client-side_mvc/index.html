@@ -119,13 +119,14 @@ Browser innovation reignites and today there are 4 popular browsers:
 Allows JavaScript on the page to asynchronously request resources from the
 server.
 
-    !javascript
-    var request = new XMLHttpRequest();
-    request.onload = function() {
-      console.log("I'm a callback!");
-    };
-    request.open("GET", "/comments", true);
-    request.send();
+```javascript
+var request = new XMLHttpRequest();
+request.onload = function() {
+  console.log("I'm a callback!");
+};
+request.open("GET", "/comments", true);
+request.send();
+```
 
 `XMLHttpRequest` was originally added to IE to enable the Outlook Web Access
 team to asynchronously communicate between a browser viewing their web page,
@@ -153,8 +154,9 @@ phrase.
 These days, many developers avoid calling `XMLHttpRequest` directly and use
 __jQuery__ instead:
 
-    !javascript
-    $.get('/comments', function() { console.log("I'm a callback!"); });
+```javascript
+$.get('/comments', function() { console.log("I'm a callback!"); });
+```
 
 ---
 
@@ -198,7 +200,9 @@ of a `Origin: http://request.origin` header
 The browser will only return the response back to JavaScript if the HTTP
 response contains a header like:
 
-    Access-Control-Allow-Origin: http://request.origin
+```http
+Access-Control-Allow-Origin: http://request.origin
+```
 
 While the browser always issues the requests, it omits the cookies for the
 domain, and any HTTP authentication.
@@ -212,24 +216,28 @@ permission from the server.
 
 On the client side the code need only add `xhr.withCredentials = true;`.
 
-    !javascript
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://other.domain/data', true);
-    xhr.withCredentials = true;
-    xhr.send();
+```javascript
+var xhr = new XMLHttpRequest();
+xhr.open('POST', 'http://other.domain/data', true);
+xhr.withCredentials = true;
+xhr.send();
+```
 
 Behind the scenes the browser makes an `OPTIONS` request to other.domain:
 
-    !http
-    OPTIONS /data HTTP/1.1
-    Host: other.domain
-    Origin: http://my.domain
-    Access-Control-Request-Method: POST
+```http
+OPTIONS /data HTTP/1.1
+Host: other.domain
+Origin: http://my.domain
+Access-Control-Request-Method: POST
+```
 
 The browser expects the server to respond with headers like:
 
-    Access-Control-Allow-Origin: http://my.domain
-    Access-Control-Allow-Methods: POST
+```http
+Access-Control-Allow-Origin: http://my.domain
+Access-Control-Allow-Methods: POST
+```
 
 ---
 
@@ -245,11 +253,12 @@ manipulated.
 
 ## Example
 
-    !javascript
-    var newDiv = document.createElement("div");
-    var newContent = document.createTextNode("Hello World!");
-    newDiv.appendChild(newContent);
-    document.body.appendChild(newDiv);
+```javascript
+var newDiv = document.createElement("div");
+var newContent = document.createTextNode("Hello World!");
+newDiv.appendChild(newContent);
+document.body.appendChild(newDiv);
+```
 
 ---
 
@@ -540,62 +549,65 @@ concept. We will introduce four:
 
 # Backbone Model Sample
 
-    !javascript
-    var Sidebar = Backbone.Model.extend({
-      promptColor: function() {
-        var cssColor = prompt("Please enter a CSS color:");
-        this.set({color: cssColor});
-      }
-    });
-    window.sidebar = new Sidebar;
-    sidebar.on('change:color', function(model, color) {
-      $('#sidebar').css({background: color});
-    });
-    sidebar.set({color: 'white'});
-    sidebar.promptColor();
+```javascript
+var Sidebar = Backbone.Model.extend({
+  promptColor: function() {
+    var cssColor = prompt("Please enter a CSS color:");
+    this.set({color: cssColor});
+  }
+});
+window.sidebar = new Sidebar;
+sidebar.on('change:color', function(model, color) {
+  $('#sidebar').css({background: color});
+});
+sidebar.set({color: 'white'});
+sidebar.promptColor();
+```
 
 ---
 
 # Backbone View Sample
 
-    !javascript
-    var DocumentRow = Backbone.View.extend({
-      tagName: "li",
-      className: "document-row",
-      events: {
-        "click .button.edit": "openEditDialog"
-      },
-      initialize: function() {
-        this.listenTo(this.model, "change", this.render);
-      },
-      render: function() {
-        this.$el.html(this.template(this.model.attributes));
-        return this;
-      }
-    });
+```javascript
+var DocumentRow = Backbone.View.extend({
+  tagName: "li",
+  className: "document-row",
+  events: {
+    "click .button.edit": "openEditDialog"
+  },
+  initialize: function() {
+    this.listenTo(this.model, "change", this.render);
+  },
+  render: function() {
+    this.$el.html(this.template(this.model.attributes));
+    return this;
+  }
+});
+```
 
 ---
 
 # Backbone Router Sample
 
-    !javascript
-    var Workspace = Backbone.Router.extend({
+```javascript
+var Workspace = Backbone.Router.extend({
 
-      routes: {
-        "help":                 "help",    // #help
-        "search/:query":        "search",  // #search/kiwis
-        "search/:query/p:page": "search"   // #search/kiwis/p7
-      },
+  routes: {
+    "help":                 "help",    // #help
+    "search/:query":        "search",  // #search/kiwis
+    "search/:query/p:page": "search"   // #search/kiwis/p7
+  },
 
-      help: function() {
-        ...
-      },
+  help: function() {
+    ...
+  },
 
-      search: function(query, page) {
-        ...
-      }
+  search: function(query, page) {
+    ...
+  }
 
-    });
+});
+```
 
 ---
 
@@ -638,34 +650,35 @@ concept. We will introduce four:
 
 # Angular Data Binding Example
 
-    !html
-    <div ng-app ng-init="qty=1;cost=2">
-      <div>
-        Quantity: <input type="number" min="0" ng-model="qty">
-      </div>
-      <div>
-        Costs: <input type="number" min="0" ng-model="cost">
-      </div>
-      <div><b>Total:</b> {{"{{"}}qty * cost | currency}}</div>
-    </div>
+```html
+<div ng-app ng-init="qty=1;cost=2">
+  <div>
+    Quantity: <input type="number" min="0" ng-model="qty">
+  </div>
+  <div>
+    Costs: <input type="number" min="0" ng-model="cost">
+  </div>
+  <div><b>Total:</b> {{"{{"}}qty * cost | currency}}</div>
+</div>
+```
 
 ---
 
 # Angular Model Example
 
-    !html
-    <div ng-controller="Controller">
-      Hello <input ng-model='name'> <hr/>
-      <span ng-bind="name"></span> <br/>
-    </div>
+```html
+<div ng-controller="Controller">
+  Hello <input ng-model='name'> <hr/>
+  <span ng-bind="name"></span> <br/>
+</div>
+```
 
-.
-
-    !javascript
-    angular.module('docsBindExample', [])
-           .controller('Controller', ['$scope', function($scope) {
-             $scope.name = 'Bryce';
-           }]);
+```javascript
+angular.module('docsBindExample', [])
+       .controller('Controller', ['$scope', function($scope) {
+         $scope.name = 'Bryce';
+       }]);
+```
 
 ---
 
@@ -746,14 +759,15 @@ Instead of updating the DOM directly, keep track of modifications in a
 By giving the software engineer the ability to code as though he is
 re-rendering everything each time, we get simple UI code:
 
-    !javascript
-    var HelloMessage = React.createClass({displayName: "HelloMessage",
-      render: function() {
-        return React.createElement("div", null, "Hello ", this.props.name);
-      }
-    });
+```javascript
+var HelloMessage = React.createClass({displayName: "HelloMessage",
+  render: function() {
+    return React.createElement("div", null, "Hello ", this.props.name);
+  }
+});
 
-    React.render(React.createElement(HelloMessage, {name: "John"}), mountNode);
+React.render(React.createElement(HelloMessage, {name: "John"}), mountNode);
+```
 
 ---
 
