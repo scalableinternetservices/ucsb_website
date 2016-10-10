@@ -9,9 +9,9 @@ title: Lecture Schedule
 
 Below you can find the mostly set schedule for the course. Note that the guest
 lecture dates are subject to change, but the topic order should remain
-consistent.
+consistent.OB
 
-#### September 22, 2016 ([slides](/slides/01_course_introduction.html))
+#### September 22, 2016 ([slides](/slides/2016/01_course_introduction))
 * Introduction to Scalable Internet Services
 
 __TODO__:
@@ -23,7 +23,7 @@ __TODO__:
 * Begin chapter 1 in the
   [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
 
-#### September 27, 2016 ([slides](/slides/02_http.html))
+#### September 27, 2016 ([slides](/slides/2016/02_http))
 * Introduction to HTTP
 
 __TODO__:
@@ -35,15 +35,15 @@ __TODO__:
   [Ruby on Rails Tutorial](https://www.railstutorial.org/book/toy_app)
 
 
-#### September 29, 2016  ([slides](/slides/03_html_css_agile.html))
+#### September 29, 2016  ([slides](/slides/2016/03_html_css_agile))
 * Introduction to HTML and CSS
 * Agile/Scrum
 
-#### October 4, 2016 ([slides](/slides/04_tdd_ci_pairing_servers.html))
+#### October 4, 2016 ([slides](/slides/2016/04_tdd_ci_pairing_servers))
 * TDD, CI, and Pairing
 * Web Server Architectures (very brief)
 
-#### October 6, 2016 ([slides](/slides/05_web_and_application_servers.html))
+#### October 6, 2016 ([slides](/slides/2016/05_web_and_application_servers))
 * Web Server and Application Server Architectures
 
 __TODO__:
@@ -52,19 +52,19 @@ __TODO__:
 [Dynamic Load Balancing on Web-server Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf)
 by Cardellini, Colajanni, and Yu.
 
-#### October 11, 2016 ([slides](/slides/06_vertical_and_horizontal_scaling.html))
+#### October 11, 2016 ([slides](/slides/2016/06_vertical_and_horizontal_scaling))
 * Vertical Scaling
 * Horizontal Scaling with Load Balancing
 
-#### October 13, 2016 ([slides](/slides/07_high_availability_and_client_side_caching.html))
+#### October 13, 2016 ([slides](/slides/2016/07_high_availability_and_client_side_caching))
 * Architecting for High Availability
 * Client-side Caching
 
-#### October 18, 2016 ([slides](/slides/08_server_side_caching_and_deploying_on_aws.html))
+#### October 18, 2016 ([slides](/slides/2016/08_server_side_caching_and_deploying_on_aws))
 * Server-side Caching
 * Deploying on AWS
 
-#### October 20, 2016 ([slides](/slides/09_relational_databases_db_concurrency_and_query_analysis.html))
+#### October 20, 2016 ([slides](/slides/2016/09_relational_databases_db_concurrency_and_query_analysis))
 * Relational Databases
 * Database Concurrency Control
 * Query Analysis
@@ -72,10 +72,10 @@ by Cardellini, Colajanni, and Yu.
 #### October 25, 2016
 * Guest lecture placeholder
 
-#### October 27, 2016 ([slides](/slides/10_tsung.html))
+#### October 27, 2016 ([slides](/slides/2016/10_tsung))
 * Load testing with Tsung
 
-#### November 1, 2016 ([slides](/slides/11_rdbms_scaling.html))
+#### November 1, 2016 ([slides](/slides/2016/11_rdbms_scaling))
 * Database Scaling
     * Sharding
     * Service Oriented Architectures
@@ -87,7 +87,7 @@ __TODO__:
   [Transport Layer Security](https://hpbn.co/transport-layer-security-tls/) in
   High Performance Browser Networking
 
-#### November 3, 2016 ([slides](/slides/12_web_security.html))
+#### November 3, 2016 ([slides](/slides/2016/12_web_security))
 * An Introduction to Web Security
     * HTTPS
     * Firewalls
@@ -108,7 +108,7 @@ __TODO__:
 * Read Chapter 12: [HTTP/2](https://hpbn.co/http2/) in High Performance Browser
   Networking
 
-#### Novemver 15, 2016 ([slides](/slides/13_http2_quic.html))
+#### Novemver 15, 2016 ([slides](/slides/2016/13_http2_quic))
 * HTTP 2.0
 * QUIC
 
@@ -117,7 +117,7 @@ __TODO__:
 * Read chapter 15: [XMLHttpRequest](https://hpbn.co/xmlhttprequest/) in High
   Performance Browser Networking
 
-#### Novemver 17, 2016 ([slides](/slides/14_clients_javascript_client-side_mvc.html))
+#### Novemver 17, 2016 ([slides](/slides/2016/14_clients_javascript_client-side_mvc))
 * Clients
 * JavaScript
 * Client-side MVC
