@@ -595,7 +595,9 @@ this for you:
 Entering `<script>alert("oops");</script>` into a form as a submission title,
 and rendering via `<%= submission.title %>` will produce:
 
-    &lt;script&gt;alert(&quot;oops&quot;);&lt;/script&gt;
+```html
+&lt;script&gt;alert(&quot;oops&quot;);&lt;/script&gt;
+```
 
 __Note__: XSS can also be prevented by disabling inline JavaScript with a
 Content Security Policy by trading convenience for security.

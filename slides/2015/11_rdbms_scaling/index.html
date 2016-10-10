@@ -421,14 +421,15 @@ open-source community, there exists a great Rails sharding gem Octopus:
 
 [https://github.com/tchandy/octopus](https://github.com/tchandy/octopus)
 
-    !ruby
-    class BrazilController < ActionController::Base
-      around_filter :select_shard
+```ruby
+class BrazilController < ActionController::Base
+  around_filter :select_shard
 
-      def select_shard(&block)
-        Octopus.using(:brazil, &block)
-      end
-    end
+  def select_shard(&amp;block)
+    Octopus.using(:brazil, &amp;block)
+  end
+end
+```
 
 The above sends all actions to the Brazil controller to the `:brazil` shard.
 

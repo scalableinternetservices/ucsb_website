@@ -226,11 +226,11 @@ __BAD__: /index.jsp?page_id=4251
 * The portion of the resource after the _question mark_
 * Used to assist in locating the resource
 * Values are assigned using the equal token (e.g., `id=15`)
-* Multiple values can be concatenated via ampersand (`&`)
+* Multiple values can be concatenated via ampersand (`&amp;`)
 
 Example:
 
-http://www.reddit.com/r/ucsantabarbara/?__sort=new&t=all__
+http://www.reddit.com/r/ucsantabarbara/?sort=new&amp;t=all
 
 ---
 
@@ -398,7 +398,7 @@ type.
 
 Example:
 
-`curl http://httpbin.org/post --data 'username=bboe&comment=Hi There' -v`
+`curl http://httpbin.org/post --data 'username=bboe&amp;comment=Hi There' -v`
 
 ```http
 POST /post HTTP/1.1
@@ -408,7 +408,7 @@ Accept: */*
 Content-Length: 30
 Content-Type: application/x-www-form-urlencoded
 
-username=bboe&comment=Hi There
+username=bboe&amp;comment=Hi There
 ```
 
 ---
