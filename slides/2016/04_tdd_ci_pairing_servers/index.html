@@ -126,17 +126,19 @@ necessarily 100%), how do we get there?__
 
 ## Test
 
-    !ruby
-    def test_divisible_by_3
-      assert_equal 'Fizz', fizzbuzz(3)
-    end
+```ruby
+def test_divisible_by_3
+  assert_equal 'Fizz', fizzbuzz(3)
+end
+```
 
 ## Program
 
-    !ruby
-    def fizzbuzz(n)
-      # test_divisible_by_3 fails
-    end
+```ruby
+def fizzbuzz(n)
+  # test_divisible_by_3 fails
+end
+```
 
 ---
 
@@ -144,18 +146,20 @@ necessarily 100%), how do we get there?__
 
 ## Test
 
-    !ruby
-    def test_divisible_by_3
-      assert_equal 'Fizz', fizzbuzz(3)
-    end
+```ruby
+def test_divisible_by_3
+  assert_equal 'Fizz', fizzbuzz(3)
+end
+```
 
 ## Program
 
-    !ruby
-    def fizzbuzz(n)
-      'Fizz'
-      # test_divisible_by_3 passes
-    end
+```ruby
+def fizzbuzz(n)
+  'Fizz'
+  # test_divisible_by_3 passes
+end
+```
 
 ---
 
@@ -163,19 +167,21 @@ necessarily 100%), how do we get there?__
 
 ## Test
 
-    !ruby
-    def test_divisible_by_5
-      assert_equal 'Buzz', fizzbuzz(5)
-    end
+```ruby
+def test_divisible_by_5
+  assert_equal 'Buzz', fizzbuzz(5)
+end
+```
 
 ## Program
 
-    !ruby
-    def fizzbuzz(n)
-      'Fizz'
-      # test_divisible_by_3 passes
-      # test_divisible_by_5 fails
-    end
+```ruby
+def fizzbuzz(n)
+  'Fizz'
+  # test_divisible_by_3 passes
+  # test_divisible_by_5 fails
+end
+```
 
 ---
 
@@ -183,23 +189,25 @@ necessarily 100%), how do we get there?__
 
 ## Test
 
-    !ruby
-    def test_divisible_by_5
-      assert_equal 'Buzz', fizzbuzz(5)
-    end
+```ruby
+def test_divisible_by_5
+  assert_equal 'Buzz', fizzbuzz(5)
+end
+```
 
 ## Program
 
-    !ruby
-    def fizzbuzz(n)
-      if n % 3 == 0
-        'Fizz'
-      else
-        'Buzz'
-      end
-      # test_divisible_by_3 passes
-      # test_divisible_by_5 passes
-    end
+```ruby
+def fizzbuzz(n)
+  if n % 3 == 0
+    'Fizz'
+  else
+    'Buzz'
+  end
+  # test_divisible_by_3 passes
+  # test_divisible_by_5 passes
+end
+```
 
 ---
 
@@ -207,24 +215,26 @@ necessarily 100%), how do we get there?__
 
 ## Test
 
-    !ruby
-    def test_divisible_by_both
-      assert_equal 'FizzBuzz', fizzbuzz(15)
-    end
+```ruby
+def test_divisible_by_both
+  assert_equal 'FizzBuzz', fizzbuzz(15)
+end
+```
 
 ## Program
 
-    !ruby
-    def fizzbuzz(n)
-      if n % 3 == 0
-        'Fizz'
-      else
-        'Buzz'
-      end
-      # test_divisible_by_3 passes
-      # test_divisible_by_5 passes
-      # test_divisible_by_both fails
-    end
+```ruby
+def fizzbuzz(n)
+  if n % 3 == 0
+    'Fizz'
+  else
+    'Buzz'
+  end
+  # test_divisible_by_3 passes
+  # test_divisible_by_5 passes
+  # test_divisible_by_both fails
+end
+```
 
 ---
 
@@ -232,28 +242,30 @@ necessarily 100%), how do we get there?__
 
 ## Test
 
-    !ruby
-    def test_divisible_by_both
-      assert_equal 'FizzBuzz', fizzbuzz(15)
-    end
+```ruby
+def test_divisible_by_both
+  assert_equal 'FizzBuzz', fizzbuzz(15)
+end
+```
 
 ## Program
 
-    !ruby
-    def fizzbuzz(n)
-      if n % 3 == 0
-        if n % 5 == 0
-          'FizzBuzz'
-        else
-          'Fizz'
-        end
-      else
-        'Buzz'
-      end
-      # test_divisible_by_3 passes
-      # test_divisible_by_5 passes
-      # test_divisible_by_both passes
+```ruby
+def fizzbuzz(n)
+  if n % 3 == 0
+    if n % 5 == 0
+      'FizzBuzz'
+    else
+      'Fizz'
     end
+  else
+    'Buzz'
+  end
+  # test_divisible_by_3 passes
+  # test_divisible_by_5 passes
+  # test_divisible_by_both passes
+end
+```
 
 ---
 
@@ -261,29 +273,31 @@ necessarily 100%), how do we get there?__
 
 ## Test
 
-    !ruby
-    def test_divisible_by_neither
-      assert_equal 17, fizzbuzz(17)
-    end
+```ruby
+def test_divisible_by_neither
+  assert_equal 17, fizzbuzz(17)
+end
+```
 
 ## Program
 
-    !ruby
-    def fizzbuzz(n)
-      if n % 3 == 0
-        if n % 5 == 0
-          'FizzBuzz'
-        else
-          'Fizz'
-        end
-      else
-        'Buzz'
-      end
-      # test_divisible_by_3 passes
-      # test_divisible_by_5 passes
-      # test_divisible_by_both passes
-      # test_divisible_by_neither fails
+```ruby
+def fizzbuzz(n)
+  if n % 3 == 0
+    if n % 5 == 0
+      'FizzBuzz'
+    else
+      'Fizz'
     end
+  else
+    'Buzz'
+  end
+  # test_divisible_by_3 passes
+  # test_divisible_by_5 passes
+  # test_divisible_by_both passes
+  # test_divisible_by_neither fails
+end
+```
 
 ---
 
@@ -291,45 +305,47 @@ necessarily 100%), how do we get there?__
 
 ## Program
 
-    !ruby
-    def fizzbuzz(n)
-      if n % 3 == 0
-        if n % 5 == 0
-          'FizzBuzz'
-        else
-          'Fizz'
-        end
-      elsif n % 5 == 0
-        'Buzz'
-      else
-        n
-      end
-      # test_divisible_by_3 passes
-      # test_divisible_by_5 passes
-      # test_divisible_by_both passes
-      # test_divisible_by_neither passes
+```ruby
+def fizzbuzz(n)
+  if n % 3 == 0
+    if n % 5 == 0
+      'FizzBuzz'
+    else
+      'Fizz'
     end
+  elsif n % 5 == 0
+    'Buzz'
+  else
+    n
+  end
+  # test_divisible_by_3 passes
+  # test_divisible_by_5 passes
+  # test_divisible_by_both passes
+  # test_divisible_by_neither passes
+end
+```
 
 ---
 
 # FizzBuzz Refactor
 
-    !ruby
-    def fizzbuzz(n)
-      if n % 15 == 0
-        'FizzBuzz'
-      elsif n % 3 == 0
-        'Fizz'
-      elsif n % 5 == 0
-        'Buzz'
-      else
-        n
-      end
-      # test_divisible_by_3 passes
-      # test_divisible_by_5 passes
-      # test_divisible_by_both passes
-      # test_divisible_by_neither passes
-    end
+```ruby
+def fizzbuzz(n)
+  if n % 15 == 0
+    'FizzBuzz'
+  elsif n % 3 == 0
+    'Fizz'
+  elsif n % 5 == 0
+    'Buzz'
+  else
+    n
+  end
+  # test_divisible_by_3 passes
+  # test_divisible_by_5 passes
+  # test_divisible_by_both passes
+  # test_divisible_by_neither passes
+end
+```
 
 ---
 
@@ -502,20 +518,28 @@ __Note__: We neglected the _deploy_ phase just prior to merging.
 
 ## Ensure your master branch is up-to-date with the remote
 
-    git pull
+```bash
+git pull
+```
 
 ## Create a new branch for your feature
 
-    git checkout -b feature_name
+```bash
+git checkout -b feature_name
+```
 
 ## Commit to the feature branch regularly
 
-    git add [files...]
-    git commit -m "Short useful description of changes."
+```bash
+git add [files...]
+git commit -m "Short useful description of changes."
+```
 
 ## Push local changes to the remote
 
-    git push -u origin master
+``` bash
+git push -u origin master
+```
 
 ---
 
@@ -527,7 +551,9 @@ be no more than a day or two out-of-sync with their parent branch.
 If you want to reconcile your changes without merging to master, a __git
 rebase__ is very useful:
 
-    git rebase master feature_branch
+```bash
+git rebase master feature_branch
+```
 
 ![git rebase](git_rebase.png)
 
@@ -539,7 +565,9 @@ rebase__ is very useful:
 
 If you have been committing frequently and want to squash some commits, consider an interactive rebase:
 
-    git rebase -i master
+```bash
+git rebase -i master
+```
 
 ---
 
@@ -709,13 +737,15 @@ Latest:
 
 # Single Threaded HTTP Servers
 
-    bind() to port 80 and listen()
-    loop forever
-        accept() a socket connection
-        while we can read from the socket
-            read() a request
-            process that request
-            write() its response
-        close() the socket connection
+```python
+bind() to port 80 and listen()
+loop forever
+    accept() a socket connection
+    while we can read from the socket
+        read() a request
+        process that request
+        write() its response
+    close() the socket connection
+```
 
 > If another request comes in while we're within the loop what happens?

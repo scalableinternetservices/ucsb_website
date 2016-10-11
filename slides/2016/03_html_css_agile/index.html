@@ -86,10 +86,11 @@ Plain text language that uses SGML syntax with a defined set of _tags_.
 
 Example:
 
-    !html
-    <h1>Header 1</h1>
-    <h3>Header 3</h3>
-    <p class="intro">A paragraph with some <em>emphasized text</em>.</p>
+```html
+<h1>Header 1</h1>
+<h3>Header 3</h3>
+<p class="intro">A paragraph with some <em>emphasized text</em>.</p>
+```
 
 ---
 
@@ -113,25 +114,26 @@ being parsed.
 
 # HTML5 Bootstrap Example
 
-    !html
-    <!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Bootstrap 101 Template</title>
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
 
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-      </head>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+  </head>
 
-      <body>
-        <h1>Hello, world!</h1>
+  <body>
+    <h1>Hello, world!</h1>
 
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-      </body>
-    </html>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
+```
 
 ---
 
@@ -161,8 +163,9 @@ anchor tag: `<a>`
 Using an anchor tag one can link to another document (resource) anywhere on the
 web.
 
-    !html
-    <a href="http://cs291.com">CS291A</a>
+```html
+<a href="http://cs291.com">CS291A</a>
+```
 
 ---
 
@@ -170,13 +173,14 @@ web.
 
 An HTML form provides a convenient way to collect input from a web browser.
 
-    !html
-    <form action="/communities" method="post">
-      <label for="cn">Name</label>
-      <br>
-      <input type="text" name="community" id="cn">
-      <input type="submit" name="commit" value="Submit">
-    </form>
+```html
+<form action="/communities" method="post">
+  <label for="cn">Name</label>
+  <br>
+  <input type="text" name="community" id="cn">
+  <input type="submit" name="commit" value="Submit">
+</form>
+```
 
 ## Notes
 
@@ -195,8 +199,9 @@ HTML elements have two ubiquitous tags:
 `class`: Multiple classes can be assigned to DOM elements, and the same class
 can be applied to multiple DOM elements (many-to-many relationship).
 
-    !html
-    <span class="alert loud" id="flash_message">Error.</span>
+```html
+<span class="alert loud" id="flash_message">Error.</span>
+```
 
 DOM IDs and classes are very useful for applying CSS, and adding JavaScript
 callback hooks to elements on the page.
@@ -214,17 +219,18 @@ directly to the HTML.
 
 Here we are styling all `h1` tags.
 
-    !html
-    <html>
-      <head>
-        <style>
-          h1 {color: blue;}
-        </style>
-      </head>
-      <body>
-        <h1>Hello World</h1>
-      </body>
-    </html>
+```html
+<html>
+  <head>
+    <style>
+      h1 {color: blue;}
+    </style>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+  </body>
+</html>
+```
 
 ---
 
@@ -237,17 +243,18 @@ one per page).
 
 IDs are prefixed with the `#` symbol in CSS.
 
-    !html
-    <html>
-      <head>
-        <style>
-          #header {color: blue;}
-        </style>
-      </head>
-      <body>
-        <span id="header">Hello World</span>
-      </body>
-    </html>
+```html
+<html>
+  <head>
+    <style>
+      #header {color: blue;}
+    </style>
+  </head>
+  <body>
+    <span id="header">Hello World</span>
+  </body>
+</html>
+```
 
 ---
 
@@ -257,17 +264,18 @@ Here we are styling all DOM elements with class `alert`.
 
 Classes are prefixed with the `.` symbol in CSS.
 
-    !html
-    <html>
-      <head>
-        <style>
-          .alert {color: red;}
-        </style>
-      </head>
-      <body>
-        <span class="alert">Hello World</span>
-      </body>
-    </html>
+```html
+<html>
+  <head>
+    <style>
+      .alert {color: red;}
+    </style>
+  </head>
+  <body>
+    <span class="alert">Hello World</span>
+  </body>
+</html>
+```
 
 ---
 
@@ -276,35 +284,37 @@ Classes are prefixed with the `.` symbol in CSS.
 We can use the `style` attribute on HTML tags to directly style
 DOM elements.
 
-    !html
-    <html>
-      <head>
-        <style>
-         /* nothing added here */
-        </style>
-      </head>
-      <body>
-        <span style="color: blue;">Hello World</span>
-      </body>
-    </html>
+```html
+<html>
+  <head>
+    <style>
+     /* nothing added here */
+    </style>
+  </head>
+  <body>
+    <span style="color: blue;">Hello World</span>
+  </body>
+</html>
+```
 
 ---
 
 # Contradictory Styles
 
-    !html
-    <html>
-      <head>
-        <style>
-          span {color: blue;}
-          .a {color: yellow;}
-          #b {color: green;}
-        </style>
-      </head>
-      <body>
-        <span class="a" id="b" style="color: red;">Hello World</span>
-      </body>
-      </html>
+```html
+<html>
+  <head>
+    <style>
+      span {color: blue;}
+      .a {color: yellow;}
+      #b {color: green;}
+    </style>
+  </head>
+  <body>
+    <span class="a" id="b" style="color: red;">Hello World</span>
+  </body>
+</html>
+```
 
 > What color is Hello World?
 
@@ -331,16 +341,16 @@ It gets more complicated, but understanding these rules will go a long way.
 Style definitions are most often provided through separate CSS files, rather
 than `<style>` blocks.
 
-    !html
-    <html>
-      <head>
-        <link rel="stylesheet" href="style.css" type="text/css">
-      </head>
-      <body>
-        <span>Hello World</span>
-      </body>
-      </html>
-
+```html
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css" type="text/css">
+  </head>
+  <body>
+    <span>Hello World</span>
+  </body>
+</html>
+```
 
 > Why might external styles be better than using the `<style>` tag, or inline
 > styles?

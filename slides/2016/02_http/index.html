@@ -218,7 +218,9 @@ Correct HTTP verb usage is not enforced, and is often misused.
 
 > What do you think the following is supposed to do?
 
-`GET /post/5?action=hide`
+```http
+GET /post/5?action=hide
+```
 
 > What other problem do you think can occur with the misuse of HTTP verbs?
 
@@ -280,15 +282,21 @@ Provides metadata for the request and response.
 
 Indicates the format of the resource
 
-`Accept: text/html`
+```http
+Accept: text/html
+```
 
 I desire the resource in html format.
 
-`Accept: application/json`
+```http
+Accept: application/json
+```
 
 I desire the resource as a JSON document.
 
-`Accept application/json,application/xml`
+```http
+Accept: application/json,application/xml
+```
 
 I prefer a JSON document, but if you cannot do that then an XML document will
 do.
@@ -301,7 +309,9 @@ do.
 
 Indicates preferred encoding for the response body.
 
-`Accept-Encoding: bzip2,gzip`
+```http
+Accept-Encoding: bzip2,gzip
+```
 
 I prefer the data compressed via bzip2. If that cannot be done, please gzip the
 response.
@@ -310,7 +320,9 @@ response.
 
 Indicates the preferred language for the resource
 
-`Accept-Language: es,en-US`
+```http
+Accept-Language: es,en-US
+```
 
 I prefer Spanish, but will accept US-English.
 
@@ -329,7 +341,9 @@ Indicates the DNS hostname associated with the desired resource.
 Indicates information about the client (web browser, crawler, tool) to the web
 server.
 
-`User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.99 Safari/537.36`
+```http
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.99 Safari/537.36
+```
 
 Can be used to serve different content to different clients. However, try to
 avoid doing so.
@@ -416,17 +430,20 @@ type.
 
 Example:
 
-`curl http://httpbin.org/post --data 'username=bboe&amp;comment=Hi There' -v`
+```bash
+curl http://httpbin.org/post --data 'username=bboe&amp;comment=Hi There' -v
+```
 
-    !http
-    POST /post HTTP/1.1
-    Host: httpbin.org
-    User-Agent: curl/7.43.0
-    Accept: */*
-    Content-Length: 30
-    Content-Type: application/x-www-form-urlencoded
+```http
+POST /post HTTP/1.1
+Host: httpbin.org
+User-Agent: curl/7.43.0
+Accept: */*
+Content-Length: 30
+Content-Type: application/x-www-form-urlencoded
 
-    username=bboe&amp;comment=Hi There
+username=bboe&amp;comment=Hi There
+```
 
 ---
 
@@ -434,15 +451,16 @@ Example:
 
 The body of a response usually contains the requested resource content.
 
-    !http
-    HTTP/1.1 200 OK
-    Content-Type: text/html; charset=utf-8
-    Content-Length: 9973
+```http
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+Content-Length: 9973
 
-    <!DOCTYPE html>
-    <html lang="en">
-    ...
-    </html>
+<!DOCTYPE html>
+<html lang="en">
+...
+</html>
+```
 
 ---
 
@@ -450,23 +468,26 @@ The body of a response usually contains the requested resource content.
 
 ## Listen for a TCP connection
 
-`nc -l localhost 4000`
+```bash
+nc -l localhost 4000
+```
 
 ## Browse to: [http://localhost:4000](http://localhost:4000)
 
 ## Paste the following into your terminal:
 
 
-    !http
-    HTTP/1.1 200 OK
-    Content-Type: text/html; charset=utf-8
-    Content-Length: 106
+```http
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+Content-Length: 106
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <h1>HTML is easy!</h1>
-    <img src="http://i.imgur.com/oXxTj5g.gif">
-    </html>
+<!DOCTYPE html>
+<html lang="en">
+<h1>HTML is easy!</h1>
+<img src="http://i.imgur.com/oXxTj5g.gif">
+</html>
+```
 
 ---
 

@@ -64,14 +64,16 @@ For select examples see:
 
 # Single Threaded HTTP Servers
 
-    bind() to port 80 and listen()
-    loop forever
-        accept() a socket connection
-        while we can read from the socket
-            read() a request
-            process that request
-            write() its response
-        close() the socket connection
+```python
+bind() to port 80 and listen()
+loop forever
+    accept() a socket connection
+    while we can read from the socket
+        read() a request
+        process that request
+        write() its response
+    close() the socket connection
+```
 
 > What happens when another request comes in while we're within the loop?
 
@@ -103,16 +105,18 @@ Handle each request as a subprocess:
 
 ![forking web server](server_forking.png)
 
-    bind() to port 80 and listen()
-    loop forever
-        accept() a socket connection
-        if fork() == 0  # child process
-            while we can read from the socket
-                read() a request
-                process that request
-                write() its response
-            close() the socket connection
-            exit()
+```python
+bind() to port 80 and listen()
+loop forever
+    accept() a socket connection
+*   if fork() == 0  # child process
+        while we can read from the socket
+            read() a request
+            process that request
+            write() its response
+        close() the socket connection
+*       exit()
+```
 
 ---
 
@@ -174,17 +178,18 @@ spawn new threads for each request.
 
 ![http server thread per request](server_threaded.png)
 
-    bind() to port 80 and listen()
-    loop forever
-        accept() a socket connection
-        pthread_create()  # function that...
-            while we can read from the socket
-                read() a request
-                process that request
-                write() its response
-            close() the socket connection
-            # thread dies
-
+```python
+bind() to port 80 and listen()
+loop forever
+    accept() a socket connection
+*   pthread_create()
+        while we can read from the socket
+            read() a request
+            process that request
+            write() its response
+        close() the socket connection
+*       # thread dies
+```
 
 ---
 
@@ -314,12 +319,14 @@ Blocking system calls cause this problem.
 
 Assume we have a list of sockets called fd_list.
 
-    loop forever:
-        select(fd_list, ...) // block until something has I/O to handle
-        for fd in fd_list
-            if fd is ready for IO
-                handle_io(fd)
-            else do nothing
+```python
+loop forever:
+    select(fd_list, ...) // block until something has I/O to handle
+    for fd in fd_list
+        if fd is ready for IO
+            handle_io(fd)
+        else do nothing
+```
 
 ## handle_io
 
@@ -372,16 +379,17 @@ Well used examples:
 
 Event driven code is dominated by callbacks:
 
-    !ruby
-    EM.run {
-      page = EM::HttpRequest.new('http://google.ca/').get
-      page.errback { p "Google is down! terminate?" }
-      page.callback {
-        a = EM::HttpRequest.new('http://google.ca/search?q=em').get
-        a.callback { # callback nesting, ad infinitum }
-        a.errback  { # error-handling code }
-      }
-    }
+```ruby
+EM.run {
+  page = EM::HttpRequest.new('http://google.ca/').get
+  page.errback { p "Google is down! terminate?" }
+  page.callback {
+    a = EM::HttpRequest.new('http://google.ca/search?q=em').get
+    a.callback { # callback nesting, ad infinitum }
+    a.errback  { # error-handling code }
+  }
+}
+```
 
 ---
 
@@ -488,18 +496,20 @@ The Demo App is a link sharing website with:
 Using Tsung (erlang-based test framework) we will simulate multiple users
 visiting the Demo App web service. Each user will:
 
-    Visit the homepage (/)
-      Wait randomly between 0 and 2 seconds
-    Request community creation form
-      Wait randomly between 0 and 2 seconds
-    Submit new community form
-    Request new link submission form
-      Wait randomly between 0 and 2 seconds
-    Submit new link submission form
-      Wait randomly between 0 and 2 seconds
-    Delete the link
-      Wait randomly between 0 and 2 seconds
-    Delete the community
+```
+Visit the homepage (/)
+  Wait randomly between 0 and 2 seconds
+Request community creation form
+  Wait randomly between 0 and 2 seconds
+Submit new community form
+Request new link submission form
+  Wait randomly between 0 and 2 seconds
+Submit new link submission form
+  Wait randomly between 0 and 2 seconds
+Delete the link
+  Wait randomly between 0 and 2 seconds
+Delete the community
+```
 
 ---
 
@@ -679,11 +689,11 @@ isn't always obvious.
 
 ## Old example: pp/models/order.rb
 
-    !ruby
-    class Order
-      belongs_to :user, klass: User
-    end
-
+```ruby
+class Order
+  belongs_to :user, klass: User
+end
+```
 
 The above code may result in _autoloading_ the `user.rb` for the `User`
 model. In versions of ruby prior to 2.0 (February 2013) autoloading was not
