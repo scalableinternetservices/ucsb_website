@@ -1,0 +1,790 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>HTML, CSS and Agile</title>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 3em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      blockquote {
+        border-left: 0.3em solid rgba(0,0,0,0.5);
+        padding: 0 15px;
+        font-style: italic;
+      }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .pull-left {
+        float: left;
+        width: 47%;
+      }
+      .pull-right {
+        float: right;
+        width: 47%;
+      }
+      .pull-right ~ p { clear: both; }
+      #slideshow .slide .content code { font-size: 0.8em; }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        width: 49%;
+        float: left;
+      }
+      .right-column {
+        width: 49%;
+        float: right;
+      }
+      .left-column20 {
+        width: 20%;
+        float: left;
+      }
+      .right-column80 {
+        width: 79%;
+        float: right;
+      }
+      .left-column30 {
+        width: 30%;
+        float: left;
+      }
+      .right-column70 {
+        width: 69%;
+        float: right;
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle
+
+# HTML, CSS and Agile
+
+__CS290B__
+
+Dr. Bryce Boe
+
+October 1, 2015
+
+---
+
+# Today's Agenda
+
+* TODO
+* HTTP Review
+* Introduction to HTML
+* Introduction to CSS
+* Agile Software Development
+
+---
+
+# TO-DO
+
+## Before Tuesday's Class:
+
+* Complete [Ruby Code Academy](https://www.codecademy.com/tracks/ruby)
+* Complete chapters 1 and 2 from Agile Web Development with Rails
+* Complete chapters 1 and 2 in
+[High Performance Browser Networking](http://chimera.labs.oreilly.com/books/1230000000545/ch01.html)
+* Read chapters 9 through 11 in [High Performance Browser Networking](http://chimera.labs.oreilly.com/books/1230000000545/ch01.html)
+
+---
+
+# HTTP Components Review
+
+![Components of HTTP request and response](http_components.png)
+
+---
+
+# Chrome Network Table
+
+![Chrome Network Table](chrome_network_table.png)
+
+---
+
+
+# Review
+
+> Why is the HOST header required in HTTP 1.1?
+
+> What are the issues with using a TCP connection for each HTTP request?
+
+> What is domain sharding?
+
+
+---
+
+# Introduction to HTML
+
+---
+
+# HyperText Markup Language
+
+Plain text language that uses SGML syntax with a defined set of _tags_.
+
+* Mark-up is provided by nesting text and other mark-up between `<open_tag>`
+  and `</close_tag>`
+* Tags are nestable
+* Some tags have key-value attributes
+
+Example:
+
+```html
+<h1>Header 1</h1>
+<h3>Header 3</h3>
+<p class="intro">A paragraph with some <em>emphasized text</em>.</p>
+```
+
+---
+
+# HTML Document
+
+HTML documents single root-element _should_ be the `<html>` tag. It's forest of
+children are referred to as the _Document Object Model_ or __DOM__.
+
+Technically are should be only two children of an `<html>` tag:
+
+`<head>`: Encapsulates meta-data about the page including its title, and
+   references to external resources (CSS, JavaScript)
+
+`<body>`: Encapsulates everything to be displayed on the page
+
+__Note__: With HTML5 (and many browsers' parsers for other variations of HTML)
+these first-level tags can be omitted as they can be inferred based on the tag
+being parsed.
+
+---
+
+# HTML5 Bootstrap Example
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <h1>Hello, world!</h1>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
+```
+
+---
+
+# Common HTML Tags
+
+Different HTML tags should be used for different elements on the page. There
+exist a handful of formatting and style tags, however, those should be avoided
+in-favor of using CSS (cascading style sheets) -- we will discuss CSS later.
+
+* __h1__ through __h6__: various header-level tags (h1 should be page title)
+* __p__: paragraph text
+* __ul__, __ol__: unordered and ordered list wrapper
+* __li__: list item (nested within ul, or ol)
+* __table__: begin a table
+* __tr__: begin a table row within a table
+* __td__: one entry in a table row
+* __span__: An inline grouping mechanism
+* __div__: A block-level grouping mechanism
+
+---
+
+# Anchor Tag
+
+The most innovative part about HTML is the __HyperText__ part provided by the
+anchor tag: `<a>`
+
+Using an anchor tag one can link to another document (resource) anywhere on the
+web.
+
+```html
+<a href="http://cs290.com">CS290</a>
+```
+
+---
+
+# HTML Forms
+
+An HTML form provides a convenient way to collect input from a web browser.
+
+```html
+<form action="/communities" method="post">
+  <label for="cn">Name</label>
+  <br>
+  <input type="text" name="community" id="cn">
+  <input type="submit" name="commit" value="Submit">
+</form>
+```
+
+## Notes
+
+* `method` defaults to __GET__. Recall that __GET__ requests shouldn't
+  have side-effects so __POST__ is more-often more appropriate.
+* The default encoding is `application/x-www-form-urlencoded`
+
+---
+
+# Attributes `id` and `class`
+
+HTML elements have two ubiquitous tags:
+
+`id`: A unique identifier that makes it easy to find one element in the DOM
+
+`class`: Multiple classes can be assigned to DOM elements, and the same class
+can be applied to multiple DOM elements (many-to-many relationship).
+
+```html
+<span class="alert,loud" id="flash_message">Error.</span>
+```
+
+DOM IDs and classes are very useful for applying CSS, and adding JavaScript
+callback hooks to elements on the page.
+
+---
+
+# Introduction to Cascading Style Sheets (CSS)
+
+---
+
+# The `<style>` tag
+
+Inside the HTML `<head>` section we can use the `<style>` tag to add CSS
+directly to the HTML.
+
+Here we are styling all `h1` tags.
+
+```html
+<html>
+  <head>
+    <style>
+      h1 {color: blue;}
+    </style>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+  </body>
+</html>
+```
+
+---
+
+# Style via ID
+
+DOM elements can be styled multiple ways.
+
+Here we are styling all DOM elements with ID `header` (there should be at most
+one per page).
+
+IDs are prefixed with the `#` symbol in CSS.
+
+```html
+<html>
+  <head>
+    <style>
+      #header {color: blue;}
+    </style>
+  </head>
+  <body>
+    <span id="header">Hello World</span>
+  </body>
+</html>
+```
+
+---
+
+# Style via Class
+
+Here we are styling all DOM elements with class `alert`.
+
+Classes are prefixed with the `.` symbol in CSS.
+
+```html
+<html>
+  <head>
+    <style>
+      .alert {color: red;}
+    </style>
+  </head>
+  <body>
+    <span class="alert">Hello World</span>
+  </body>
+</html>
+```
+
+---
+
+# Inline Styles
+
+We can use the `style` attribute on HTML tags to directly style
+DOM elements.
+
+```html
+<html>
+  <head>
+    <style>
+     /* nothing added here */
+    </style>
+  </head>
+  <body>
+    <span style="color: blue;">Hello World</span>
+  </body>
+</html>
+```
+
+---
+
+# Contradictory Styles
+
+```html
+<html>
+  <head>
+    <style>
+      span {color: blue;}
+      .a {color: yellow;}
+      #b {color: green;}
+    </style>
+  </head>
+  <body>
+    <span class="a" id="b" style="color: red;">Hello World</span>
+  </body>
+</html>
+```
+
+> What color is Hello World?
+
+---
+
+# Simplified Rule Precedence
+
+In general more specific rules have higher precedence than less specific rules.
+
+Precedence order (highest first):
+
+* `!important` rules (e.g., `span {color: blue !important};`)
+* Inline style
+* ID
+* Class
+* HTML Tag
+
+It gets more complicated, but understanding these rules will go a long way.
+
+---
+
+# External Style Sheets
+
+Style definitions are most often provided through separate CSS files, rather
+than `<style>` blocks.
+
+```html
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css" type="text/css">
+  </head>
+  <body>
+    <span>Hello World</span>
+  </body>
+</html>
+```
+
+> Why might external styles be better than using the `<style>` tag, or inline
+> styles?
+
+---
+
+# Visually Powerful
+
+CSS is incredibly powerful. Changing a site's stylesheet can completely impact
+how the site's users interact with the site.
+
+This ends the brief overview of CSS.
+
+To get started, it's definitely recommended to use a CSS framework like
+Twitter's Bootstrap: [http://getbootstrap.com/](http://getbootstrap.com/)
+
+---
+
+# Bootstrap Alert Example
+
+![Bootstrap Alert Example](bootstrap_alerts.png)
+
+---
+
+# Bootstrap Form Example
+
+![Bootstrap Form Example](bootstrap_form.png)
+
+---
+
+# Agile Software Development
+
+---
+
+# Talent Shortage
+
+![TC Talent Shortage Snippet](tc_talent.png)
+
+Source:
+[http://techcrunch.com/2013/05/05/there-is-in-fact-a-tech-talent-shortage-and-there-always-will-be/](http://techcrunch.com/2013/05/05/there-is-in-fact-a-tech-talent-shortage-and-there-always-will-be/)
+
+---
+
+# Talent Shortage
+
+![TT Talent Shortage Snippet](tt_talent.png)
+
+Source: [http://searchmobilecomputing.techtarget.com/news/2240241877/IT-jobs-market-booms-but-talent-in-short-supply](http://searchmobilecomputing.techtarget.com/news/2240241877/IT-jobs-market-booms-but-talent-in-short-supply)
+
+
+---
+
+# Scarce Resources
+
+Software Engineering requires judicious use of scarce resources.
+
+YOU are one of those scarce resources.
+
+Modern techniques are designed to optimize for your time.
+
+## Modern Software Development Techniques
+
+* Agile and Scrum
+* Test Driven Development (TDD)
+* Continuous Integration (CI)
+* Github work flow
+* Pair programming (pairing)
+
+---
+
+# Understanding Agile
+
+> ## Sprint 2: Starts October 15
+
+> * Conduct a __retrospective__ on how the last sprint went and how your group
+>   can improve.
+> * Decide on a sprint commitment.
+> * Implement stories from the current sprint.
+
+Soon guidelines like the above should make complete sense to you.
+
+---
+
+# Agile and Scrum
+
+> What is Agile software development?
+
+__Agile__ is a collection of different approaches for developing software that
+has emerged as dominant in the last ~15 years.
+
+__Scrum__ is a popular form of Agile software development.
+
+---
+
+# The World Before Agile
+
+---
+
+# Waterfall
+
+The origin of the _Waterfall_ model is generally misattributed to Winston
+Royce, from his paper: "Managing the Development of Large Software Systems"
+
+In reality, he wasn't the first, and didn't advocate for what became Waterfall
+software engineering.
+
+Herbert Benington would be a more accurate attribution.
+
+Reference: *1970, Proceedings of IEEE WESCON 26 (August): 1–9.
+
+---
+
+# Waterfall Diagram
+
+![Waterfall](waterfall.png)
+
+This diagram from Royce's paper is frequently cited.
+
+
+---
+
+# Waterfall Process
+
+Each stage performs its role and then passes its deliverable to the next stage.
+
+E.g., Design must be completed before coding, which in-turn must be completed
+before testing.
+
+Strength: This approach allows for deep specialization.
+
+Waterfall works great for areas like manufacturing where it is _expensive_ to
+alter the design due to issues detected in latter stages.
+
+With software it's incredibly cheap to adapt the process along the way.
+
+---
+
+# Waterfall Continued
+
+The Waterfall technique works best when you have complete knowledge. With
+respect to software development:
+
+* Software testers and developers know everything about how the software will
+  be deployed
+* Software developers have few if any _surprises_ during testing
+* Designers have complete understanding of the difficulty of each design
+  decision
+* Requirements team understands the impact on design and development
+
+In practice most of these items are not met, thus the waterfall model inhibits
+the software development process.
+
+---
+
+# Agile Manifesto
+
+In 2001, the “Agile Software Manifesto” was written by Kent Beck, Ken Schwaber,
+Jeff Sutherland, and Dave Thomas.
+
+## Agile Values
+
+* __Responding to change__ over following a plan
+* __Working software__ over comprehensive docs
+* __Customer collaboration__ over contract negotiation
+* __Individuals and interactions__ over processes and tools
+
+---
+
+# Responding to Change
+
+Unexpected issues will occur during the product development.
+
+Responding to change involves deciding how to best proceed when such issues
+occur.
+
+For example:
+
+> What do you do when half your team is suddenly out for a week sick?
+
+> What do you do when the _simple_ feature addition turns out to be
+> significantly more complicated?
+
+---
+
+# Working Software
+
+> * Demonstration to customer
+> * Automated acceptance tests
+> * Descriptive unit tests
+> * Centralized styling &amp; view code
+
+vs.
+
+> * Description to customer
+> * Extensive documented requirements
+> * Code comments
+> * Style guide documentation
+
+---
+
+# Customer Collaboration
+
+![Three people looking at computer](stock_collaboration.png)
+
+"Here's what we've got so far."
+
+"Uh... Now that I see it in action, I've changed my mind."
+
+
+![Software Developer](cartoon_programmer.png)
+
+"I'm sure if I just build what they've asked for, they'll love it."
+
+
+---
+
+# Individuals and Interactions
+
+![Rugby Scrum](rugby_scrum.jpg)
+
+---
+
+# Scrum
+
+Scrum is a specific type of Agile software development.
+
+It was developed in the early 1990s by Ken Schwaber and Jeff Sutherland.
+
+We will use a stripped down version of Scrum for this class.
+
+## Other Agile Alternatives
+
+* __Kanban__: Focus on controlling WIP (work in progress), no __sprints__
+* Extreme Programming (XP): Emphasis on feedback systems through automated
+testing and pair programming
+
+
+---
+
+# Scrum Roles
+
+## Product Owner
+
+Understands the needs of the customer and prioritizes those needs.
+
+## The Team
+
+People building the software. Individual roles are intentionally vague.
+
+## Scrum Master
+
+Responsible for making sure the _Scrum_ process is followed and helps to resolve
+blocking issues (e.g., between members of the team, with the product owner, or
+with external dependencies)
+
+__Note__: We will have neither a product owner nor scrum master on our teams.
+
+
+---
+
+# Scrum Story Defined
+
+A __story__ is a unit of functionality that exposes something new to the user
+(customer). Stories are often written like:
+
+> As a \_\_\_\_\_\_\_\_\_\_, I can \_\_\_\_\_\_\_\_\_\_, in order to
+> \_\_\_\_\_\_\_\_\_\_.
+
+For example:
+
+> As a github gold organization, I am permitted up to 50 private repositories,
+> in order to privately maintain a large number of distinct projects.
+
+> As an authenticated student user, I am able to post a question such that my
+> instructor knows I am asking the question but my classmates do not, in order
+> increase my likeliness of submitting questions.
+
+---
+
+# Scrum Sprint Defined
+
+A __sprint__ is a specific length of time to accomplish some work.
+
+Sprints may operate on the same schedule as product releases (e.g., 2-week
+Sprints immediately followed by releasing whatever was accomplished) however,
+it's not necessary.
+
+---
+
+# Scrum Process
+
+![Scrum Process](scrum_process.png)
+
+---
+
+# Scrum Process
+
+At the start of each sprint is the __sprint planning meeting__ to decide the
+"sprint commitment".
+
+Stories are pulled from the prioritized product backlog into the sprint
+backlog. The team may decide to pull stories in a slightly different order
+depending on various constraints. So _agile_.
+
+The team decides how many stories to pull based on their prior estimate of
+those stories' effort (done in _grooming_) relative to their current
+_velocity_. Velocity is often the average amount of _work_ delivered over the
+last three weeks.
+
+After the sprint planning meeting the commitment is _frozen_ and the team works
+through the sprint backlog for the duration of the sprint.
+
+Each day the team has a __stand up__ meeting to discuss what is currently being
+worked on, and to discover any _blocking_ issues.
+
+---
+
+# End of Sprint
+
+A __sprint review__ is conducted at the end of the sprint to demo what was
+accomplished. Everything considered completed should be ready to be released to
+customers (also referred to as __shippable__).
+
+Finally a __sprint retrospective__ is conducted for the team to reflect on how
+well or poorly things went during the sprint. The team discusses how they can
+improve their process and (hopefully) comes out of the meeting with concrete
+idea to be acted upon in the next sprint.
+
+---
+
+# CS290 Scrum
+
+We will use an adapted version of scrum:
+
+* No product owner
+* No scrum master
+* At the start of each (future) lab the team will conduct a retrospective
+* Each team will demo their sprint's progress to me
+* After the retro and demo the next sprint will begin and teams will choose
+  their commitment
+* Throughout the week each team will work to complete their commitment, and
+  subsequently deploy their releasable code to AWS
+
+    </textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js"
+            type="text/javascript"></script>
+    <script type="text/javascript">
+      var hljs = remark.highlighter.engine;
+      var slideshow = remark.create({
+          highlightLanguage: 'ruby',
+          highlightLines: true,
+          hightlightSpans: true,
+          highlightStyle: 'monokai'
+        }) ;
+    </script>
+  </body>
+</html>
