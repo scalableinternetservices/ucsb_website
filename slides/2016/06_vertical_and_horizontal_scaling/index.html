@@ -7,8 +7,6 @@ class: center, middle
 
 # {{page.title}}
 
-
-
 __CS291A__
 
 Dr. Bryce Boe
@@ -62,13 +60,19 @@ next few weeks.
 
 ---
 
+class: center, middle
+
 # What are the trade-offs of process-based concurrency?
 
 ---
 
+class: center, middle
+
 # What are the trade-offs of thread-based concurrency?
 
 ---
+
+class: center, middle
 
 # What are the trade-offs of event-driven systems?
 
@@ -76,7 +80,7 @@ next few weeks.
 
 # Scaling Goal
 
-![Load Balanced Topology](load_balanced_topology.png)
+.center[![Load Balanced Topology](load_balanced_topology.png)]
 
 After today you will understand what load balancing is, and why the depicted
 architecture provides smooth cost-effective scaling.
@@ -144,18 +148,20 @@ We will use the same test setup explained in the last lecture.
 Using Tsung (erlang-based test framework) we will simulate multiple users
 visiting the Demo App web service. Each user will:
 
-    Visit the homepage (/)
-      Wait randomly between 0 and 2 seconds
-    Request community creation form
-      Wait randomly between 0 and 2 seconds
-    Submit new community form
-    Request new link submission form
-      Wait randomly between 0 and 2 seconds
-    Submit new link submission form
-      Wait randomly between 0 and 2 seconds
-    Delete the link
-      Wait randomly between 0 and 2 seconds
-    Delete the community
+```
+Visit the homepage (/)
+  Wait randomly between 0 and 2 seconds
+Request community creation form
+  Wait randomly between 0 and 2 seconds
+Submit new community form
+Request new link submission form
+  Wait randomly between 0 and 2 seconds
+Submit new link submission form
+  Wait randomly between 0 and 2 seconds
+Delete the link
+  Wait randomly between 0 and 2 seconds
+Delete the community
+```
 
 ---
 
@@ -163,25 +169,26 @@ visiting the Demo App web service. Each user will:
 
 This time we have twelve phases of testing each lasting 60 seconds:
 
-     1.    (0-59s) Every second a new simulated user arrives
-     2.  (60-119s) Every second 1.5 new simulated users arrive
-     3. (120-179s) Every second 2 new simulated users arrive
-     4. (180-239s) Every second 4 new simulated users arrive
-     5. (240-299s) Every second 6 new simulated users arrive
-     6. (300-359s) Every second 10 new simulated users arrive
-     7. (360-419s) Every second 16 new simulated users arrive
-     8. (420-479s) Every second 20 new simulated users arrive
-     9. (480-539s) Every second 25 new simulated users arrive
-    10. (540-599s) Every second 35 new simulated users arrive
-    11. (600-659s) Every second 45 new simulated users arrive
-    12. (660-719s) Every second 55 new simulated users arrive
+```
+ 1.    (0-59s) Every second a new simulated user arrives
+ 2.  (60-119s) Every second 1.5 new simulated users arrive
+ 3. (120-179s) Every second 2 new simulated users arrive
+ 4. (180-239s) Every second 4 new simulated users arrive
+ 5. (240-299s) Every second 6 new simulated users arrive
+ 6. (300-359s) Every second 10 new simulated users arrive
+ 7. (360-419s) Every second 16 new simulated users arrive
+ 8. (420-479s) Every second 20 new simulated users arrive
+ 9. (480-539s) Every second 25 new simulated users arrive
+10. (540-599s) Every second 35 new simulated users arrive
+11. (600-659s) Every second 45 new simulated users arrive
+12. (660-719s) Every second 55 new simulated users arrive
+```
 
 ---
 
 # Vertical Scaling: M3 Large Instance
 
-![M3 Large Instance Graph](vertical_scaling_m3_large.png)
-
+.left-column20[
 * 2 vCPUs
 * 7.5 GB Memory
 * SSD storage
@@ -190,13 +197,16 @@ This time we have twelve phases of testing each lasting 60 seconds:
 Handles 6 new users per second (ups).
 
 Fails with 10 ups.
+]
+.right-column80[
+![M3 Large Instance Graph](vertical_scaling_m3_large.png)
+]
 
 ---
 
 # Vertical Scaling: M3 X-Large Instance
 
-![M3 X-Large Instance Graph](vertical_scaling_m3_xlarge.png)
-
+.left-column20[
 * 4 vCPUs
 * 15 GB Memory
 * SSD storage
@@ -205,13 +215,17 @@ Fails with 10 ups.
 Handles 10 new users per second (ups).
 
 Fails with 16 ups.
+]
+.right-column80[
+![M3 X-Large Instance Graph](vertical_scaling_m3_xlarge.png)
+]
+
 
 ---
 
 # Vertical Scaling: M3 XX-Large Instance
 
-![M3 XX-Large Instance Graph](vertical_scaling_m3_xxlarge.png)
-
+.left-column20[
 * 8 vCPUs
 * 30 GB Memory
 * SSD storage
@@ -221,13 +235,16 @@ Fails with 16 ups.
 Handles 16 new users per second (ups).
 
 Fails with 20 ups.
+]
+.right-column80[
+![M3 XX-Large Instance Graph](vertical_scaling_m3_xxlarge.png)
+]
 
 ---
 
 # Vertical Scaling: C3 4XLarge Instance
 
-![C3 4XLarge Instance Graph](vertical_scaling_c3_4xlarge.png)
-
+.left-column20[
 * 16 vCPUs
 * 30 GB Memory
 * SSD storage
@@ -236,6 +253,10 @@ Fails with 20 ups.
 Handles 20 new users per second (ups).
 
 Fails with 25 ups.
+]
+.right-column80[
+![C3 4XLarge Instance Graph](vertical_scaling_c3_4xlarge.png)
+]
 
 ---
 
@@ -262,9 +283,9 @@ handles the request.
 
 Consider the following sequence of actions:
 
-1. GET /products
-2. POST /products
-3. GET /products
+1. `GET /products`
+2. `POST /products`
+3. `GET /products`
 
 > If these requests are handled by three different servers, will the third
 > request show the new product?
@@ -273,7 +294,7 @@ Consider the following sequence of actions:
 
 # Stateless Servers
 
-![Load Balanced Topology](load_balanced_topology.png)
+.center[![Load Balanced Topology](load_balanced_topology.png)]
 
 In order for load balancing to work, the servers must be stateless.
 
@@ -284,14 +305,17 @@ from the application layer.
 
 # Load Balancing (1): HTTP Redirects
 
-![Load balancing via redirect](load_balancing_redirect.png)
-
+.left-column30[
 Discussed in section 6.1 of the reading.
 
 Implemented using multiple web servers with different domain names.
 
-A request for www.domain.com will use HTTP 301 or 302 to redirect the request
+A request for `www.domain.com` will use HTTP 301 or 302 to redirect the request
 to a pool of possible hosts.
+]
+.right-column70.center[
+![Load balancing via redirect](load_balancing_redirect.png)
+]
 
 ---
 
@@ -330,34 +354,39 @@ Content-Type: text/html; charset=iso-8859-1
 
 # Load Balancing (2): Round Robin DNS
 
-![Load balancing via round-robin DNS](load_balancing_round_robin.png)
-
+.left-column30[
 Discussed in section 4.1 of the reading.
 
-When a user's browser queries DNS for www.example.com, a list of IPs is
+When a user's browser queries DNS for `www.example.com`, a list of IPs is
 returned. The DNS server rotates the list order for each query (or alters
 priorities).
 
 The user's browser chooses which IP to connect to (generally picks the first,
 or highest priority).
+]
+.right-column70.center[
+![Load balancing via round-robin DNS](load_balancing_round_robin.png)
+]
 
 ---
 
 # Round Robin DNS Example
 
-    % host www.google.com
-    www.google.com has address 74.125.224.48
-    www.google.com has address 74.125.224.51
-    www.google.com has address 74.125.224.52
-    www.google.com has address 74.125.224.49
-    www.google.com has address 74.125.224.50
+```
+% host www.google.com
+www.google.com has address 74.125.224.48
+www.google.com has address 74.125.224.51
+www.google.com has address 74.125.224.52
+www.google.com has address 74.125.224.49
+www.google.com has address 74.125.224.50
 
-    % host www.google.com
-    www.google.com has address 74.125.224.49
-    www.google.com has address 74.125.224.52
-    www.google.com has address 74.125.224.51
-    www.google.com has address 74.125.224.50
-    www.google.com has address 74.125.224.48
+% host www.google.com
+www.google.com has address 74.125.224.49
+www.google.com has address 74.125.224.52
+www.google.com has address 74.125.224.51
+www.google.com has address 74.125.224.50
+www.google.com has address 74.125.224.48
+```
 
 ---
 
@@ -377,15 +406,17 @@ or highest priority).
 
 # Load Balancing (3): TCP Load Balancing
 
-![Load balancing via TCP](load_balancing_tcp.png)
-
+.left-column30[
 Discussed in section 5 of the reading.
 
 ## General Idea
 
 Rewrite TCP packets to send them to the selected server. This includes
 addresses, sequence numbers, and checksums.
-
+]
+.right-column70.center[
+![Load balancing via TCP](load_balancing_tcp.png)
+]
 
 ## Commercial Products (use hardware ASICs to do this fast)
 
@@ -393,57 +424,54 @@ addresses, sequence numbers, and checksums.
 * Citrix Netscaler
 * F5 Big IP
 
+
 ---
 
 # TCP Load Balancing HTTP Request
 
+```
 (client -> lb)
-IP D=208.50.157.136 S=__216.64.159.149__ LEN=60, ID=48397  
+IP D=208.50.157.136 S=216.64.159.149 LEN=60, ID=48397
 TCP D=80 S=1421 Syn Seq=899863543 Len=0 Win=32120
 
 (lb -> server)
-IP D=_10.16.100.121_ S=208.50.157.136 LEN=60, ID=48397  
+IP D=10.16.100.121 S=208.50.157.136 LEN=60, ID=48397
 TCP D=80 S=1421 Syn Seq=899863543 Len=0 Win=32120
 
 (server -> lb)
-IP D=208.50.157.136 S=_10.16.100.121_ LEN=48, ID=26291  
+IP D=208.50.157.136 S=10.16.100.121 LEN=48, ID=26291
 TCP D=1421 S=80 Syn Ack=899863544 Seq=1908949446 Len=0
 
 (lb -> client)
-IP D=__216.64.159.149__ S=208.50.157.136 LEN=48, ID=26291  
+IP D=216.64.159.149 S=208.50.157.136 LEN=48, ID=26291
 TCP D=1421 S=80 Syn Ack=899863544 Seq=1908949446 Len=0
 
 (client -> lb)
-IP D=208.50.157.136 S=__216.64.159.149__ LEN=154, ID=48401  
-TCP D=80 S=1421 Ack=1908949447 Seq=899863544 Len=114   
+IP D=208.50.157.136 S=216.64.159.149 LEN=154, ID=48401
+TCP D=80 S=1421 Ack=1908949447 Seq=899863544 Len=114
 HTTP GET /eb/images/ec_home_logo_tag.gif HTTP/1.0
 
 (lb -> server)
-IP D=_10.16.100.121_ S=208.50.157.136 LEN=154, ID=48401  
-TCP D=80 S=1421 Ack=1908949447 Seq=899863544 Len=114  
+IP D=10.16.100.121 S=208.50.157.136 LEN=154, ID=48401
+TCP D=80 S=1421 Ack=1908949447 Seq=899863544 Len=114
 HTTP GET /eb/images/ec_home_logo_tag.gif HTTP/1.0
+```
 
 ---
 
-# TCP Load Balancing Example 3
+# TCP Load Balancing HTTP Response
 
-__ server -> switch : 10.16.100.121 -> 216.64.159.149
-IP D=216.64.159.149 S=10.16.100.121 LEN=40, ID=22236 0.00134 10.16.100.121 -> 216.64.159.149
-TCP D=1421 S=80 Ack=899863658 Seq=2156657895 Len=0 …
-
-__ switch -> client : 208.50.157.136 -> 216.64.159.149
-IP D=216.64.159.149 S=208.50.157.136 LEN=40, ID=22236 2.98619 208.50.157.136 -> 216.64.159.149
-TCP D=1421 S=80 Ack=899863658 Seq=1908949447 Len=0 ...
-
-__ server -> switch : 10.16.100.121 -> 216.64.159.149
-IP D=216.64.159.149 S=10.16.100.121 LEN=1500, ID=22237 0.00298 10.16.100.121 -> 216.64.159.149
-TCP D=1421 S=80 Ack=899863658 Seq=2156657895 Len=1460 ... 0.00298 10.16.100.121 -> 216.64.159.149
+```
+(server -> lb)
+IP D=208.50.157.136 S=10.16.100.121 LEN=1500, ID=22237
+TCP D=1421 S=80 Ack=899863658 Seq=1908949447 Len=1460
 HTTP HTTP/1.1 200 OK
 
-__ switch -> client : 208.50.157.136 -> 216.64.159.149
-IP D=216.64.159.149 S=208.50.157.136 LEN=1500, ID=22237 2.98828 208.50.157.136 -> 216.64.159.149
-TCP D=1421 S=80 Ack=899863658 Seq=1908949447 Len=1460 ... 2.98828 208.50.157.136 -> 216.64.159.149
+(lb -> client)
+IP D=216.64.159.149 S=208.50.157.136 LEN=1500, ID=22237
+TCP D=1421 S=80 Ack=899863658 Seq=1908949447 Len=1460
 HTTP HTTP/1.1 200 OK
+```
 
 ---
 
@@ -463,8 +491,7 @@ HTTP HTTP/1.1 200 OK
 
 # Load Balancing (4): HTTP Proxy
 
-![Load balancing via TCP](load_balancing_http_proxy.png)
-
+.left-column30[
 Also known as "Layer 7 load balancing"
 
 Terminate HTTP requests: act like a web server
@@ -477,6 +504,10 @@ Hardware products:
 * F5 Big-IP
 
 Many HTTP servers have modules to do this as well (Apache, NGINX)
+]
+.right-column70.center[
+![Load balancing via TCP](load_balancing_http_proxy.png)
+]
 
 ---
 
@@ -623,8 +654,7 @@ will make it easy to scale up the number of application servers.
 
 # Horizontal Scaling: 1 M3 Large Instance
 
-![Single M3 Large Instance Graph](horizontal_scaling_1.png)
-
+.left-column20[
 * 2 vCPUs
 * 7.5 GB Memory
 * SSD storage
@@ -636,6 +666,10 @@ Handles 10 new users per second (ups).
 Fails with 16 ups.
 
 Comparable to single M3 XLarge ($200/mo)
+]
+.right-column80.center[
+![Single M3 Large Instance Graph](horizontal_scaling_1.png)
+]
 
 ---
 
@@ -649,8 +683,7 @@ Let's scale horizontally by adding a second application server instance.
 
 # Horizontal Scaling: 2 M3 Large Instances
 
-![Dual M3 Large Instance Graph](horizontal_scaling_2.png)
-
+.left-column20[
 * 2 vCPUs
 * 7.5 GB Memory
 * SSD storage
@@ -662,24 +695,30 @@ Handles 20 new users per second (ups).
 Fails with 25 ups.
 
 Comparable to single C3 4XLarge ($600/mo)
+]
+.right-column80.center[
+![Dual M3 Large Instance Graph](horizontal_scaling_2.png)
+]
 
 ---
 
 # More App Servers!
 
-![5x Load Balanced Topology](load_balanced_topology_5x.png)
-
+.left-column30[
 Let’s see how the system performs if we scale out to 5 app servers.
 
 Total dollar cost will be comparable to the most expensive single instance we
 tested.
+]
+.right-column70.center[
+![5x Load Balanced Topology](load_balanced_topology_5x.png)
+]
 
 ---
 
 # Horizontal Scaling: 5 M3 Large Instances
 
-![Five M3 Large Instance Graph](horizontal_scaling_5.png)
-
+.left-column20[
 * 2 vCPUs
 * 7.5 GB Memory
 * SSD storage
@@ -687,12 +726,17 @@ tested.
 * $600 per month ($100 each)
 
 Handles 35 new users per second (ups).
+]
+.right-column80.center[
+![Five M3 Large Instance Graph](horizontal_scaling_5.png)
+Single C3 4XLarge ($600/mo) failed at 25 ups!
+]
 
 Handles 45 ups with an increase in response time.
 
 Fails with 55 ups.
 
-Single C3 4XLarge ($600/mo) failed at 25 ups!
+
 
 ---
 
