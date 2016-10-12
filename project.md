@@ -59,13 +59,13 @@ All sprints end and begin with each week's lab session.
 * Conduct a retrospective on how the last sprint went and how you can improve.
 * Decide on a sprint commitment.
 * Implement stories from the current sprint.
-* Learn EC2 and Amazon Web Console by deploying your initial application on
-  Amazon EC2.
 
 #### Sprint 3: October 19, 2016 -- October 26, 2016
 * Conduct a retrospective on how the last sprint went and how you can improve.
 * Decide on a sprint commitment.
 * Implement stories from the current sprint.
+* Learn EC2 and Amazon Web Console by deploying your initial application on
+  Amazon EC2.
 
 #### Sprint 4: October 26, 2016 -- November 2, 2016
 * Conduct a retrospective on how the last sprint went and how you can improve.
