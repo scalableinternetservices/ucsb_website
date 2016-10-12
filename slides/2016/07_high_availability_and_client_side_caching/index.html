@@ -36,6 +36,10 @@
         background: #e7e8e2;
         border-radius: 5px;
       }
+      img {
+        max-height: 100%;
+        max-width: 100%;
+      }
       .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
       .remark-code-line-highlighted     { background-color: #373832; }
       .pull-left {
@@ -160,12 +164,8 @@ Buying "bigger" hardware and scaling _up_
 Buying move servers and scaling _out_
 
 * __PRO__: Easy to add more servers (limited by data center space)
-* __PRO__: Linear increase in cost when scaling
+* __PRO__: Linear (maybe even sublinear) increase in cost when scaling
 * __CON__: More moving parts makes things more complicated
-
----
-
-
 
 ---
 
@@ -187,10 +187,10 @@ important.
 Companies offering services will often advertise some number of nines
 availability:
 
-* Three nines: 99.9% uptime, 525.6 minutes of downtime a year (43.8/mo)
-* Four nines: 99.99% uptime, 52.6 minutes of downtime a year (4.38/mo)
+* Three nines: 99.9% uptime, 525.6 minutes of downtime a year (43.8/month)
+* Four nines: 99.99% uptime, 52.6 minutes of downtime a year (4.38/month)
     * Desired by many business applications
-* Five nines: 99.999% uptime, 5.3 minutes of downtime a year (26.5s/mo)
+* Five nines: 99.999% uptime, 5.3 minutes of downtime a year (26.5s/month)
     * Desired by communication companies
 
 Downtime usually only includes unplanned outages. Scheduled outages, no matter
@@ -202,7 +202,7 @@ how frequent, are usually not incorporated in marketing material.
 
 > What are possible causes of failures?
 
-![Full network topology](full_stack.png)
+.center[![Full network topology](full_stack.png)]
 
 ---
 
