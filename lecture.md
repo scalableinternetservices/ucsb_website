@@ -132,7 +132,9 @@ __TODO__:
   by Werner Vogels
 
 #### November 22, 2016
-* Guest lecture placeholder
+* Guest Lecture: Neil Williams (/u/spladug), Lead Engineer, Infrastructure Team
+  @ [Reddit](https://www.reddit.com/)
+* "How Reddit works... and why it sometimes doesn't"
 
 #### November 24, 2016 (Thanksgiving, no class)
 
