@@ -42,15 +42,7 @@
       }
       .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
       .remark-code-line-highlighted     { background-color: #373832; }
-      .pull-left {
-        float: left;
-        width: 47%;
-      }
-      .pull-right {
-        float: right;
-        width: 47%;
-      }
-      .pull-right ~ p { clear: both; }
+      .clear { clear: both; }
       #slideshow .slide .content code { font-size: 0.8em; }
       #slideshow .slide .content pre code {
         font-size: 0.9em;
@@ -92,6 +84,26 @@
         float: right;
       }
 
+      /* Table layout */
+      table {
+        background: #f5f5f5;
+        margin: 30px auto;
+        text-align: left;
+        width: 100%;
+      }
+      th {
+        background: linear-gradient(#777, #444);
+        color: #fff;
+        font-weight: bold;
+        padding: 10px 15px;
+      }
+      td {
+        border-right: 1px solid #fff;
+        border-left: 1px solid #e8e8e8;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #e8e8e8;
+        padding: 10px 15px;
+      }
 
     </style>
   </head>
@@ -114,7 +126,6 @@ October 13, 2016
 * TODO
 * Complete Horizontal Scaling Slides
 * Scaling Review
-* Corrections
 * High Availability
 * Client-side Caching
 
@@ -198,44 +209,59 @@ how frequent, are usually not incorporated in marketing material.
 
 ---
 
-# Question
+class: center, middle
 
-> What are possible causes of failures?
+# What are possible causes of failures?
 
-.center[![Full network topology](full_stack.png)]
+![Full network topology](full_stack.png)
 
 ---
 
-# What if...
+# What are possible causes of failures?
 
-> What are possible causes of failures?
+## What if...
 
 * a server process hangs?
+
 * a server process dies?
+
 * an application server fails?
+
 * the load balancer fails?
+
 * the switch fails?
+
 * the router fails?
+
 * the Internet fails?
+
 * the database fails?
+
 * the entire data center fails?
 
 ---
 
 # Handling Application Server Failure
 
+.left-column.center[
 ![Single application server](application_server.png)
-
+]
+.right-column[
 We've already discussed the components of this sort of failure.
 
 * Process-level isolation reduces hanging, or dead processes by having other
   processes to pick up the slack.
+
 * A process in an infinite loop may add unnecessary load to the server, so it's
   important to have monitoring to detect such issues.
+
 * Having a load-balanced configuration permits failing servers (high load or
-dead) by having a pool of other servers to direct traffic to.
+  dead) by having a pool of other servers to direct traffic to.
+]
 
 ---
+
+class: center, middle
 
 # How do we Handle Load Balancer Failure?
 
@@ -245,33 +271,42 @@ dead) by having a pool of other servers to direct traffic to.
 
 # Redundant Load Balancers
 
-![Redundant load balancers](redundant_load_balancers.png)
-
+.left-column30[
 Buy two load balancers. One is the primary, and the other is the failover.
 
 Load balancers communicate via a heartbeat to determine the health of each
 other.
+]
+.right-column70.center[
+![Redundant load balancers](redundant_load_balancers.png)
+]
 
-* _During a failover, what happens to established flows?_
-* _During a failover, what happens to the IP address?_
+.clear[
+> During a failover, what happens to established flows?
+
+> During a failover, what happens to the IP address?
+]
+
 
 ---
 
 # Load Balancer Failover
 
-When the failure determines it needs to become the primary (detected via lack
+When the failover determines it needs to become the primary (detected via lack
 of heartbeat), it issues a gratuitous ARP for the load balanced IP.
 
 The gratuitous ARP (layer 2) will inform the switch that traffic should be
-delivered to the port that leads to the former failover (now primary).
+delivered to the port that leads to the new primary (formerly the failover).
 
-All new packets will transparently be delivered to the new primary load
+All new packets will be transparently delivered to the new primary load
 balancer.
 
 Established flows can be supported depending on how much information sharing
 occurs between the load balancers.
 
 ---
+
+class: center, middle
 
 # How do we Handle Switch Failure?
 
@@ -282,14 +317,17 @@ occurs between the load balancers.
 
 # Redundant Switches
 
-Buy two switches! Again with a primary and failover and a heartbeat.
+Buy two switches! Again with a both a primary and failover and using a
+heartbeat between them.
 
 During failover similar issues occur but layer 2 should be stateless so no/less
 synchronization needed.
 
-![Redundant switches](redundant_switches.png)
+.center[![Redundant switches](redundant_switches.png)]
 
 ---
+
+class: center, middle
 
 # How do we Handle Router Failure?
 
@@ -303,6 +341,15 @@ Buy two!
 
 Similar heartbeat and failover system, with slightly different problems.
 
+
+.center[![Redundant routers](redundant_routers.png)]
+
+---
+
+class: center, middle
+
+# How do we Handle Internet Failure?
+
 ![Redundant routers](redundant_routers.png)
 
 ---
@@ -311,7 +358,7 @@ Similar heartbeat and failover system, with slightly different problems.
 
 Buy two! Use separate internet service providers (ISPs).
 
-![Redundant routers](redundant_routers.png)
+.center[![High Availability Topology](high_availability.png)]
 
 ---
 
@@ -337,7 +384,7 @@ over another. (Path prepending, Community values)
 
 # High Availability
 
-![High Availability Topology](high_availability.png)
+.center[![High Availability Topology](high_availability.png)]
 
 We will discuss database failover in another lecture.
 
@@ -351,11 +398,15 @@ So we have redundant systems in place.
 
 ---
 
-# Disaster Strikes
+class: center, middle
+
+# Disaster Strikes!
 
 ![Hurricane Sandy from Satellite](hurricane_sandy_satellite.png)
 
 ---
+
+class: center, middle
 
 # Hurricane Sandy via Ars Technica
 
@@ -371,7 +422,13 @@ Source: [http://www.tenereillo.com/GSLBPageOfShame.htm](http://www.tenereillo.co
 > include the use of multiple A records.
 
 
-An A record is an IP address associated with a DNS host.
+An "A record" is an IPv4 address associated with a DNS host (AAAA for IPv6
+addresses).
+
+## Problem
+
+The order of DNS responses with multiple A records is often not preserved by a
+client's DNS server.
 
 ## Result
 
@@ -382,11 +439,15 @@ We end up having to make a choice between performance and availability.
 
 ---
 
+class: center, middle
+
 # Multi-site High Availability
 
 ![High Availability in Two Sites](dual_site_availability.png)
 
 ---
+
+class: center, inverse, middle
 
 # Client-side Caching
 
