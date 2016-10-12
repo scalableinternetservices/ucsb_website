@@ -1,0 +1,802 @@
+---
+layout: presentation
+title: High Availability and Client-side Caching
+---
+
+class: center, middle
+
+# {{page.title}}
+
+__CS291A__
+
+Dr. Bryce Boe
+
+October 13, 2016
+
+---
+
+# Today's Agenda
+
+* TODO
+* Complete Horizontal Scaling Slides
+* Scaling Review
+* High Availability
+* Client-side Caching
+
+---
+
+# TODO
+
+## Should be done
+
+* Chapters 1, 2, 9-11 in
+  [HPBN](https://hpbn.co/primer-on-latency-and-bandwidth/) / Chapters 1-10 in
+  the [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
+* [Dynamic Load Balancing on Web-server Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf)
+  by Cardellini, Colajanni, and Yu.
+* Web application with a few basic features.
+* TravisCI integration with your repository.
+
+## Before next lab
+
+* Chapters 13, 14 in the [Ruby on Rails
+  Tutorial](https://www.railstutorial.org/book/user_microposts) (read/skim
+  chapters 11 and 12 as you see fit)
+
+__Focus__: On delivering new usable features to your customers (me) for the
+next few weeks.
+
+---
+
+class: center, middle
+
+[Complete Horizontal Scaling Slides](/slides/2016/06_vertical_and_horizontal_scaling/#39)
+
+---
+
+# Scaling Review
+
+## Vertical Scaling
+
+Buying "bigger" hardware and scaling _up_
+
+* __PRO__: Easy
+* __CON__: Limited
+* __CON__: Non-linear increase in cost when scaling
+
+## Horizontal Scaling
+
+Buying move servers and scaling _out_
+
+* __PRO__: Easy to add more servers (limited by data center space)
+* __PRO__: Linear (maybe even sublinear) increase in cost when scaling
+* __CON__: More moving parts makes things more complicated
+
+---
+
+# High Availability Motivation
+
+Modern web applications power some very important parts of our lives.
+
+* Banking
+* Medical
+* Telephony
+
+Having anytime access to these services (high availability) is increasingly
+important.
+
+---
+
+# Expressing Availability
+
+Companies offering services will often advertise some number of nines
+availability:
+
+* Three nines: 99.9% uptime, 525.6 minutes of downtime a year (43.8/month)
+* Four nines: 99.99% uptime, 52.6 minutes of downtime a year (4.38/month)
+    * Desired by many business applications
+* Five nines: 99.999% uptime, 5.3 minutes of downtime a year (26.5s/month)
+    * Desired by communication companies
+
+Downtime usually only includes unplanned outages. Scheduled outages, no matter
+how frequent, are usually not incorporated in marketing material.
+
+---
+
+class: center, middle
+
+# What are possible causes of failures?
+
+![Full network topology](full_stack.png)
+
+---
+
+# What are possible causes of failures?
+
+## What if...
+
+* a server process hangs?
+
+* a server process dies?
+
+* an application server fails?
+
+* the load balancer fails?
+
+* the switch fails?
+
+* the router fails?
+
+* the Internet fails?
+
+* the database fails?
+
+* the entire data center fails?
+
+---
+
+# Handling Application Server Failure
+
+.left-column.center[
+![Single application server](application_server.png)
+]
+.right-column[
+We've already discussed the components of this sort of failure.
+
+* Process-level isolation reduces hanging, or dead processes by having other
+  processes to pick up the slack.
+
+* A process in an infinite loop may add unnecessary load to the server, so it's
+  important to have monitoring to detect such issues.
+
+* Having a load-balanced configuration permits failing servers (high load or
+  dead) by having a pool of other servers to direct traffic to.
+]
+
+---
+
+class: center, middle
+
+# How do we Handle Load Balancer Failure?
+
+![Single load balancer](single_load_balancer.png)
+
+---
+
+# Redundant Load Balancers
+
+.left-column30[
+Buy two load balancers. One is the primary, and the other is the failover.
+
+Load balancers communicate via a heartbeat to determine the health of each
+other.
+]
+.right-column70.center[
+![Redundant load balancers](redundant_load_balancers.png)
+]
+
+.clear[
+> During a failover, what happens to established flows?
+
+> During a failover, what happens to the IP address?
+]
+
+
+---
+
+# Load Balancer Failover
+
+When the failover determines it needs to become the primary (detected via lack
+of heartbeat), it issues a gratuitous ARP for the load balanced IP.
+
+The gratuitous ARP (layer 2) will inform the switch that traffic should be
+delivered to the port that leads to the new primary (formerly the failover).
+
+All new packets will be transparently delivered to the new primary load
+balancer.
+
+Established flows can be supported depending on how much information sharing
+occurs between the load balancers.
+
+---
+
+class: center, middle
+
+# How do we Handle Switch Failure?
+
+![Redundant load balancers](redundant_load_balancers.png)
+
+
+---
+
+# Redundant Switches
+
+Buy two switches! Again with a both a primary and failover and using a
+heartbeat between them.
+
+During failover similar issues occur but layer 2 should be stateless so no/less
+synchronization needed.
+
+.center[![Redundant switches](redundant_switches.png)]
+
+---
+
+class: center, middle
+
+# How do we Handle Router Failure?
+
+![Redundant switches](redundant_switches.png)
+
+---
+
+# Redundant Routers
+
+Buy two!
+
+Similar heartbeat and failover system, with slightly different problems.
+
+
+.center[![Redundant routers](redundant_routers.png)]
+
+---
+
+class: center, middle
+
+# How do we Handle Internet Failure?
+
+![Redundant routers](redundant_routers.png)
+
+---
+
+# How do we Handle Internet Failure?
+
+Buy two! Use separate internet service providers (ISPs).
+
+.center[![High Availability Topology](high_availability.png)]
+
+---
+
+# Routing with Two ISPs
+
+> How do we handle routing when we have two ISPs?
+
+## Outgoing Traffic (easy)
+
+We control how we send outbound traffic so we have some options:
+
+* Pick the cheapest or most reliable link
+* Pick the _closer_ link
+
+## Incoming Traffic (hard)
+
+We cannot inform clients by which path to reach our IP.
+
+However, we can give hints by using BGP to persuade networks to prefer one path
+over another. (Path prepending, Community values)
+
+---
+
+# High Availability
+
+.center[![High Availability Topology](high_availability.png)]
+
+We will discuss database failover in another lecture.
+
+---
+
+# Redundancy Everywhere!
+
+So we have redundant systems in place.
+
+> Can anything go wrong?
+
+---
+
+class: center, middle
+
+# Disaster Strikes!
+
+![Hurricane Sandy from Satellite](hurricane_sandy_satellite.png)
+
+---
+
+class: center, middle
+
+# Hurricane Sandy via Ars Technica
+
+![Hurricane Sandy Headline](hurricane_sandy_article.png)
+
+---
+
+# Availability Axiom (Pete Tenereillo)
+
+Source: [http://www.tenereillo.com/GSLBPageOfShame.htm](http://www.tenereillo.com/GSLBPageOfShame.htm)
+
+> The only way to achieve high-availability for browser based clients is to
+> include the use of multiple A records.
+
+
+An "A record" is an IPv4 address associated with a DNS host (AAAA for IPv6
+addresses).
+
+## Problem
+
+The order of DNS responses with multiple A records is often not preserved by a
+client's DNS server.
+
+## Result
+
+* For performance we want to send the browser to one data center.
+* For availability we want to send the browser multiple A records.
+
+We end up having to make a choice between performance and availability.
+
+---
+
+class: center, middle
+
+# Multi-site High Availability
+
+![High Availability in Two Sites](dual_site_availability.png)
+
+---
+
+class: center, inverse, middle
+
+# Client-side Caching
+
+---
+
+# Client-side Caching Motivation
+
+We want our important application data persisted safely in our data center.
+
+This data will be regularly read and updated by geographically distributed
+clients.
+
+Our access to the data needs to be fast.
+
+---
+
+# Response Time and Human Perception
+
+| Delay         | User Reaction                |
+| -------------:|:----------------------------:|
+|   0 -  100 ms | Instant                      |
+| 100 -  300 ms | Small perceptible delay      |
+| 300 - 1000 ms | Machine is working           |
+|      1000+ ms | Likely mental context switch |
+|    10,000+ ms | Task is abandoned            |
+
+Source: High Performance Browser Networking
+
+---
+
+# Minimum Latencies
+
+| Route                    | Distance  | Time, light in vacuum | Time, light in fiber |
+| ------------------------ | --------- | --------------------- | -------------------- |
+| NYC to SF                | 4,148 km  | 14 ms                 | 21 ms                |
+| NYC to London            | 5,585 km  | 19 ms                 | 28 ms                |
+| NYC to Sydney            | 15,993 km | 53 ms                 | 80 ms                |
+| Equatorial circumference | 40,075 km | 133.7 ms              | 200 ms               |
+
+Source: High Performance Browser Networking
+
+---
+
+# Multiple HTTP Requests per Page
+
+![Total Requests Per Page](httparchive_requests_per_page.png)
+
+Source: [http://httparchive.org/interesting.php#reqTotal](http://httparchive.org/interesting.php#reqTotal)
+
+---
+
+# Caching
+
+The fastest request is one that never happens.
+
+__Cache__: a component that transparently stores data so that future requests
+for the same data can be served faster
+
+> Where can we introduce caching?
+
+* Inside the browser
+* In "front" of the server (CDNs, ISP cache, etc.)
+* Inside the application server
+* Inside the database (query cache)
+
+---
+
+# Client-side Caching
+
+> How does the browser cache data?
+
+> How does the browser know when it can or cannot use cached data?
+
+The building blocks of caching are all provided via HTTP headers:
+
+* cache-control
+    * no-store
+    * no-cache
+    * max-age
+    * public | private
+* etag
+* last-modified
+* if-none-match
+
+* if-modified-since
+
+---
+
+# cache-control: no-store
+
+When `cache-control: no-store` is provided as a header to a HTTP response the
+browser and intermediate proxy-caches:
+
+* must not save the information in any non-volatile storage
+* must make a best effort attempt to remove the information from volatile
+  storage as promptly as possible
+
+__Note__: The browser may retain a copy in memory (volatile storage) for use
+with the browser's back/forward buttons.
+
+Generally used for sensitive information.
+
+---
+
+# cache-control: no-cache
+
+When `cache-control: no-cache` is provided as a header to a HTTP response the
+browser and intermediate proxy-caches:
+
+* must not use the response to satisfy a subsequent request without successful
+  revalidation with the origin server
+
+Useful to force the browser and intermediate caches to check for updated
+content.
+
+---
+
+# cache-control: private
+
+When `cache-control: private` is provided as a header to a HTTP response the
+browser is free to cache the response (for the current user) but, intermediate
+proxy-caches should discard the data.
+
+This is the opposite of `cache-control: public`.
+
+Rails built-in caching safely assumes `cache-control: private`.
+
+---
+
+# cache-control: max-age=120
+
+
+When `cache-control: max-age=120` is provided as a header to a HTTP response
+the browser and intermediate proxy-caches should consider the information to be
+fresh until the specified number of seconds has passed.
+
+This is the modern version of the `expires` and `date` headers.
+
+---
+
+# etag: "5bf444d26f9f1c74"
+
+When an etag (entity tag) header is provided as a header to a HTTP response the
+browser will keep an association between the request, the etag, and the
+response information.
+
+When requesting the same resource in the future, the browser may add an
+`if-none-match` header along with the etag in the HTTP request.
+
+---
+
+# last-modified: Wed, 14 Oct 2015 23:47:36 GMT
+
+-
+
+When a `last-modified` header is provided in an HTTP response the browser may
+save the information to use in future requests for the same resource.
+
+When requesting the same resource in the future, the browser may add an
+`if-modified-since` header along with the datetime in the HTTP request.
+
+---
+
+# if-none-match: "5bf444d26f9f1c74"
+
+When accompanying a HTTP request, the `if-none-match` HTTP header indicates
+that the client has a cached copy with the associated tag.  Multiple etags can
+be provided.
+
+If the server's current version of the resource maps to one of the provided
+etags, the server will return 304 (not modified) with the etag of the current
+resource included.
+
+Otherwise the server will return the full response body along with the
+appropriate etag for the updated resource.
+
+---
+
+# if-modified-since: Wed, 14 Oct 2015 23:47:36 GMT
+
+-
+
+When accompanying an HTTP request, the `if-modified-since` HTTP header
+indicates that the client already has a copy that was fresh as of the specified
+datetime.
+
+If the server's copy is newer than the specified datetime, it will be served to
+the client along with a new `last-modified` HTTP response header.
+
+If the server's copy has not changed since the specified date, the server will
+return 304 (not modified).
+
+---
+
+# HTTP Caching Summary
+
+![Defining optimal Cache-Control policy](http-cache-decision-tree.png)
+
+Source: [https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching)
+
+---
+
+# Applying Client-side Caching #1
+
+Assume we want to serve JavaScript that won't change over the next day, but it
+contains user-specific code.
+
+> What headers should the HTTP response include?
+
+---
+
+# Caching Reusable, Private Resources
+
+    Cache-control: private, max-age=86400
+
+Intermediate proxy-caches should not save a copy, and the browser can consider
+the resource fresh for up to a day since it was retrieved.
+
+---
+
+# Applying Client-side Caching #2
+
+Assume we are serving an image that may change in the future, and we never want
+a stale version shown. The image is not specific to the requester.
+
+> What headers should the HTTP response include?
+
+---
+
+# Caching Reusable, Public Resources
+
+    Cache-control: public, no-cache
+    ETag: "4d7a6ca05b5df656"
+
+Browser will store a copy to be used if a 304 (not modified) response is
+sent. In subsequent HTTP requests for the resource the browser will include:
+
+    if-none-match: "4d7a6ca05b5df656"
+
+---
+
+# Applying Client-side Caching #3
+
+Assume we are serving an image containing the user's social security and credit
+card numbers.
+
+> What headers should the HTTP response include?
+
+---
+
+# No Caching!
+
+    Cache-control: private, no-store
+
+The browser may keep a copy in memory for browser navigation, but __must__
+not save a copy to a non-volatile location.
+
+---
+
+# Implementing Caching In Rails
+
+Let's start with implementation client-side HTTP caching on the New Submission
+page in the demo app:
+
+![Demo App New Submission View](demo_new_submission.png)
+
+---
+
+# Initial Request: New Submission Page
+
+Initial page load fetches every resource (indicated via 200 response).
+
+![Initial Demo App New Submission Resources](demo_new_submission_resources.png)
+
+
+---
+
+# Subsequent Request: New Submission
+
+Refreshing the page doesn't require sending the asset bodies (304 responses),
+but the server sends the complete /submissions/new response body (200
+response).
+
+![Subsequent Demo App New Submissions Resources](demo_new_submission_resources_subsequent.png)
+
+---
+
+# Determining Staleness
+
+> When can this page be out-of-date?
+
+![Demo App New Submission View](demo_new_submission.png)
+
+---
+
+# SubmissionsController.new
+
+## Without Caching
+
+```ruby
+class SubmissionsController < ApplicationController
+
+  def new
+    @submission = Submission.new
+  end
+
+end
+```
+
+## With Caching
+
+```ruby
+class SubmissionsController < ApplicationController
+
+  def new
+    @submission = Submission.new if stale?(Community.all)
+  end
+
+end
+```
+
+---
+
+# ActionController::ConditionalGet.stale?
+
+[http://apidock.com/rails/ActionController/ConditionalGet/stale%3F](http://apidock.com/rails/ActionController/ConditionalGet/stale%3F)
+
+> What is `if stale?(Community.all)` actually doing?
+
+* Informs Rails to base the `etag` and/or `last_modified` response header on
+  all communities.
+* Compares the `last_modified` or `etag` value against `if-modified-since`
+  and/or `if-none-match` request headers.
+* `stale?` returns true when `Communities.all` is newer and/or differs
+* `stale?` implicitly affects the response such that a 304 HTTP status and no
+  body is returned when `stale?` returns false
+
+---
+
+# Cached: New Submission Page
+
+After making the above change, a second request to `/submissions/new` results
+in a 304 (not modified) response.
+
+If the list of communities change subsequent
+responses will return a 200 along with the body of the response.
+
+![Cached Demo App New Submissions Resources](demo_new_submission_resources_cached.png)
+
+---
+
+# Submission View
+
+![Submission View](demo_submission_view.png)
+
+> What on the submission view can make the page stale?
+
+---
+
+# SubmissionsController.show
+
+## Without Caching
+
+```ruby
+class SubmissionsController < ApplicationController
+  before_action :set_submission, only: [:show, ...]
+
+  def show
+  end
+
+  private
+
+  def set_submission
+    @submission = Submission.find(params[:id])
+  end
+end
+```
+
+---
+
+# SubmissionsController.show
+
+## With Caching
+
+```ruby
+class SubmissionsController < ApplicationController
+  before_action :set_submission, only: [:show, ...]
+
+  def show
+    fresh_when([@submission, @submission.community,
+                @submission.comments])
+  end
+
+  private
+
+  def set_submission
+    @submission = Submission.find(params[:id])
+  end
+end
+```
+
+---
+
+# Cached: SubmissionsController.show
+
+The web console indicates our caching was successful.
+
+Adding a new comment, modifying the community or submission causes a 200
+response.
+
+![Cached Demo App Submission Show](demo_submission_view_cached.png)
+
+---
+
+# Submissions Index
+
+> What on the submissions index can make the page stale?
+
+![Submissions Index View](demo_submissions_index.png)
+
+---
+
+# SubmissionsController.index
+
+## Without Caching
+
+```ruby
+class SubmissionsController < ApplicationController
+
+  def index
+    @submissions = Submission.all
+  end
+
+end
+```
+
+## With Caching
+
+```ruby
+class SubmissionsController < ApplicationController
+
+  def index
+    if stale?([Submission.all, Community.all, Comments.all])
+      @submissions = Submission.all
+    end
+  end
+
+end
+```
+
+---
+
+# Client Caching Example
+
+These changes can be viewed on the `client_side_caching` branch on the demo app
+repository:
+
+[https://github.com/scalableinternetservices/demo/compare/client_side_caching](https://github.com/scalableinternetservices/demo/compare/client_side_caching)
