@@ -474,7 +474,8 @@ Our access to the data needs to be fast.
 |      1000+ ms | Likely mental context switch |
 |    10,000+ ms | Task is abandoned            |
 
-Source: High Performance Browser Networking
+Source: [High Performance Browser
+Networking](https://hpbn.co/primer-on-web-performance/)
 
 ---
 
@@ -487,15 +488,18 @@ Source: High Performance Browser Networking
 | NYC to Sydney            | 15,993 km | 53 ms                 | 80 ms                |
 | Equatorial circumference | 40,075 km | 133.7 ms              | 200 ms               |
 
-Source: High Performance Browser Networking
+Source: [High Performance Browser
+Networking](https://hpbn.co/primer-on-web-performance/)
 
 ---
+
+class: center middle
 
 # Multiple HTTP Requests per Page
 
 ![Total Requests Per Page](httparchive_requests_per_page.png)
 
-Source: [http://httparchive.org/interesting.php#reqTotal](http://httparchive.org/interesting.php#reqTotal)
+Source: http://httparchive.org/interesting.php#reqTotal
 
 ---
 
@@ -508,6 +512,8 @@ for the same data can be served faster
 
 > Where can we introduce caching?
 
+--
+
 * Inside the browser
 * In "front" of the server (CDNs, ISP cache, etc.)
 * Inside the application server
@@ -519,7 +525,11 @@ for the same data can be served faster
 
 > How does the browser cache data?
 
+--
+
 > How does the browser know when it can or cannot use cached data?
+
+--
 
 The building blocks of caching are all provided via HTTP headers:
 
@@ -531,14 +541,13 @@ The building blocks of caching are all provided via HTTP headers:
 * etag
 * last-modified
 * if-none-match
-
 * if-modified-since
 
 ---
 
 # cache-control: no-store
 
-When `cache-control: no-store` is provided as a header to a HTTP response the
+When `cache-control: no-store` is provided as a header to an HTTP response the
 browser and intermediate proxy-caches:
 
 * must not save the information in any non-volatile storage
@@ -554,7 +563,7 @@ Generally used for sensitive information.
 
 # cache-control: no-cache
 
-When `cache-control: no-cache` is provided as a header to a HTTP response the
+When `cache-control: no-cache` is provided as a header to an HTTP response the
 browser and intermediate proxy-caches:
 
 * must not use the response to satisfy a subsequent request without successful
@@ -567,7 +576,7 @@ content.
 
 # cache-control: private
 
-When `cache-control: private` is provided as a header to a HTTP response the
+When `cache-control: private` is provided as a header to an HTTP response the
 browser is free to cache the response (for the current user) but, intermediate
 proxy-caches should discard the data.
 
@@ -580,7 +589,7 @@ Rails built-in caching safely assumes `cache-control: private`.
 # cache-control: max-age=120
 
 
-When `cache-control: max-age=120` is provided as a header to a HTTP response
+When `cache-control: max-age=120` is provided as a header to an HTTP response
 the browser and intermediate proxy-caches should consider the information to be
 fresh until the specified number of seconds has passed.
 
@@ -590,9 +599,9 @@ This is the modern version of the `expires` and `date` headers.
 
 # etag: "5bf444d26f9f1c74"
 
-When an etag (entity tag) header is provided as a header to a HTTP response the
-browser will keep an association between the request, the etag, and the
-response information.
+When an etag (entity tag) header is provided as a header to an HTTP response
+the browser will keep an association between the request, the etag, and the
+response.
 
 When requesting the same resource in the future, the browser may add an
 `if-none-match` header along with the etag in the HTTP request.
@@ -600,8 +609,6 @@ When requesting the same resource in the future, the browser may add an
 ---
 
 # last-modified: Wed, 14 Oct 2015 23:47:36 GMT
-
--
 
 When a `last-modified` header is provided in an HTTP response the browser may
 save the information to use in future requests for the same resource.
@@ -613,7 +620,7 @@ When requesting the same resource in the future, the browser may add an
 
 # if-none-match: "5bf444d26f9f1c74"
 
-When accompanying a HTTP request, the `if-none-match` HTTP header indicates
+When accompanying an HTTP request, the `if-none-match` HTTP header indicates
 that the client has a cached copy with the associated tag.  Multiple etags can
 be provided.
 
@@ -628,8 +635,6 @@ appropriate etag for the updated resource.
 
 # if-modified-since: Wed, 14 Oct 2015 23:47:36 GMT
 
--
-
 When accompanying an HTTP request, the `if-modified-since` HTTP header
 indicates that the client already has a copy that was fresh as of the specified
 datetime.
@@ -642,11 +647,13 @@ return 304 (not modified).
 
 ---
 
+class: center middle
+
 # HTTP Caching Summary
 
 ![Defining optimal Cache-Control policy](http-cache-decision-tree.png)
 
-Source: [https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching)
+[Source](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching)
 
 ---
 
@@ -657,11 +664,13 @@ contains user-specific code.
 
 > What headers should the HTTP response include?
 
----
+--
 
-# Caching Reusable, Private Resources
+## Caching Reusable, Private Resources
 
-    Cache-control: private, max-age=86400
+```http
+Cache-control: private, max-age=86400
+```
 
 Intermediate proxy-caches should not save a copy, and the browser can consider
 the resource fresh for up to a day since it was retrieved.
@@ -675,17 +684,21 @@ a stale version shown. The image is not specific to the requester.
 
 > What headers should the HTTP response include?
 
----
+--
 
-# Caching Reusable, Public Resources
+## Caching Reusable, Public Resources
 
-    Cache-control: public, no-cache
-    ETag: "4d7a6ca05b5df656"
+```http
+Cache-control: public, no-cache
+ETag: 4d7a6ca05b5df656
+```
 
 Browser will store a copy to be used if a 304 (not modified) response is
 sent. In subsequent HTTP requests for the resource the browser will include:
 
-    if-none-match: "4d7a6ca05b5df656"
+```http
+if-none-match: 4d7a6ca05b5df656
+```
 
 ---
 
@@ -696,11 +709,13 @@ card numbers.
 
 > What headers should the HTTP response include?
 
----
+--
 
-# No Caching!
+## No Caching!
 
-    Cache-control: private, no-store
+```http
+Cache-control: private, no-store
+```
 
 The browser may keep a copy in memory for browser navigation, but __must__
 not save a copy to a non-volatile location.
@@ -763,7 +778,7 @@ end
 class SubmissionsController < ApplicationController
 
   def new
-    @submission = Submission.new if stale?(Community.all)
+*   @submission = Submission.new if stale?(Community.all)
   end
 
 end
@@ -801,9 +816,12 @@ responses will return a 200 along with the body of the response.
 
 # Submission View
 
-![Submission View](demo_submission_view.png)
-
+.left-column30[
 > What on the submission view can make the page stale?
+]
+.right-column70.center[
+![Submission View](demo_submission_view.png)
+]
 
 ---
 
@@ -837,8 +855,8 @@ class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, ...]
 
   def show
-    fresh_when([@submission, @submission.community,
-                @submission.comments])
+*   fresh_when([@submission, @submission.community,
+*               @submission.comments])
   end
 
   private
@@ -890,9 +908,9 @@ end
 class SubmissionsController < ApplicationController
 
   def index
-    if stale?([Submission.all, Community.all, Comments.all])
+*   if stale?([Submission.all, Community.all, Comments.all])
       @submissions = Submission.all
-    end
+*   end
   end
 
 end
