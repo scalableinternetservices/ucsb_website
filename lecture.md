@@ -8,8 +8,7 @@ title: Lecture Schedule
 # 2016 Lecture Schedule
 
 Below you can find the mostly set schedule for the course. Note that the guest
-lecture dates are subject to change, but the topic order should remain
-consistent.OB
+lecture dates are subject to change.
 
 #### September 22, 2016 ([slides](/slides/2016/01_course_introduction))
 * Introduction to Scalable Internet Services
