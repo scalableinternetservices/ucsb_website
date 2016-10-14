@@ -60,67 +60,26 @@ by Cardellini, Colajanni, and Yu.
 * Architecting for High Availability
 * Client-side Caching
 
-#### October 18, 2016 ([slides](/slides/2016/08_server_side_caching_and_deploying_on_aws))
+#### October 18, 2016
+* Story Splitting Workshop: Elephant Carpaccio
+
+#### October 20, 2016 ([slides](/slides/2016/08_server_side_caching_and_deploying_on_aws))
 * Server-side Caching
 * Deploying on AWS
 
-#### October 20, 2016 ([slides](/slides/2016/09_relational_databases_db_concurrency_and_query_analysis))
+#### October 25, 2016 ([slides](/slides/2016/09_relational_databases_db_concurrency_and_query_analysis))
 * Relational Databases
 * Database Concurrency Control
 * Query Analysis
 
-#### October 25, 2016
-* Guest lecture placeholder
-
-#### October 27, 2016 ([slides](/slides/2016/10_tsung))
-* Load testing with Tsung
-
-#### November 1, 2016 ([slides](/slides/2016/11_rdbms_scaling))
+#### October 27, 2016 ([slides](/slides/2016/10_rdbms_scaling))
 * Database Scaling
     * Sharding
     * Service Oriented Architectures
     * Read-only Followers
 
-__TODO__:
-
-* Read Chapter 4:
-  [Transport Layer Security](https://hpbn.co/transport-layer-security-tls/) in
-  High Performance Browser Networking
-
-#### November 3, 2016 ([slides](/slides/2016/12_web_security))
-* An Introduction to Web Security
-    * HTTPS
-    * Firewalls
-    * SQL Injection
-    * XSS
-    * CSRF
-
-#### November 8, 2016
-* Guest lecture placeholder
-
-#### November 10, 2016
-* Guest Lecture: Sean Maloney, Big Data Engineer @
-  [Riot Games](http://www.riotgames.com/)
-* "Moving Mountains of Player Data"
-
-__TODO__:
-
-* Read Chapter 12: [HTTP/2](https://hpbn.co/http2/) in High Performance Browser
-  Networking
-
-#### Novemver 15, 2016 ([slides](/slides/2016/13_http2_quic))
-* HTTP 2.0
-* QUIC
-
-__TODO__:
-
-* Read chapter 15: [XMLHttpRequest](https://hpbn.co/xmlhttprequest/) in High
-  Performance Browser Networking
-
-#### Novemver 17, 2016 ([slides](/slides/2016/14_clients_javascript_client-side_mvc))
-* Clients
-* JavaScript
-* Client-side MVC
+#### November 1, 2016 ([slides](/slides/2016/11_tsung))
+* Load testing with Tsung
 
 __TODO__:
 
@@ -131,15 +90,56 @@ __TODO__:
   [Eventually Consistent](http://www.scalableinternetservices.com/slides/vogels.pdf)
   by Werner Vogels
 
+#### November 3, 2016
+* Guest lecture placeholder
+
+#### November 8, 2016 ([slides](/slides/2016/12_nosql))
+* Non-relational Data Stores
+
+#### November 10, 2016
+* Guest Lecture: Sean Maloney, Big Data Engineer @
+  [Riot Games](http://www.riotgames.com/)
+  * "Moving Mountains of Player Data"
+
+__TODO__:
+
+* Read Chapter 4:
+  [Transport Layer Security](https://hpbn.co/transport-layer-security-tls/) in
+  High Performance Browser Networking
+
+#### Novemver 15, 2016 ([slides](/slides/2016/13_web_security))
+* An Introduction to Web Security
+    * HTTPS
+    * Firewalls
+    * SQL Injection
+    * XSS
+    * CSRF
+
+__TODO__:
+
+* Read Chapter 12: [HTTP/2](https://hpbn.co/http2/) in High Performance Browser
+  Networking
+
+#### Novemver 17, 2016 ([slides](/slides/2016/14_http2_quic))
+* HTTP 2.0
+* QUIC
+
 #### November 22, 2016
 * Guest Lecture: Neil Williams (/u/spladug), Lead Engineer, Infrastructure Team
   @ [Reddit](https://www.reddit.com/)
 * "How Reddit works... and why it sometimes doesn't"
 
+__TODO__:
+
+* Read chapter 15: [XMLHttpRequest](https://hpbn.co/xmlhttprequest/) in High
+  Performance Browser Networking
+
 #### November 24, 2016 (Thanksgiving, no class)
 
-#### November 29, 2016
-* Guest lecture placeholder
+#### November 29, 2016 ([slides](/slides/2016/15_clients_javascript_client-side_mvc))
+* Clients
+* JavaScript
+* Client-side MVC
 
 #### December 1, 2016
 * Guest lecture placeholder
