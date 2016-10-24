@@ -75,7 +75,7 @@ by Cardellini, Colajanni, and Yu.
 * Database Scaling
     * Sharding
     * Service Oriented Architectures
-    * Read-only Followers
+    * Read-only Secondaries
 
 #### November 1, 2016 ([slides](/slides/2016/11_tsung))
 * Load testing with Tsung
@@ -98,7 +98,7 @@ __TODO__:
 #### November 10, 2016
 * Guest Lecture: Sean Maloney, Big Data Engineer @
   [Riot Games](http://www.riotgames.com/)
-  * "Moving Mountains of Player Data"
+* "Moving Mountains of Player Data"
 
 __TODO__:
 
