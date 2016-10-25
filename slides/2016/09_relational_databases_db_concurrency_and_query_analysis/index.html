@@ -7,11 +7,11 @@ class: center, middle
 
 # {{page.title}}
 
-__CS290B__
+__CS291A__
 
 Dr. Bryce Boe
 
-October 22, 2015
+October 25, 2016
 
 ---
 
@@ -19,7 +19,7 @@ October 22, 2015
 
 * TODO
 * Server-side Caching in Rails Review
-* Motivation
+* Relational Databases Motivation
 * A Stable Data Layer
 * Database Concurrency Control
 * Query Analysis
@@ -28,19 +28,29 @@ October 22, 2015
 
 # TODO
 
-## By end of lab
+## Should be done
 
-* As a team, launch your application on AWS
-* Individually, confirm that you are able to SSH into your instance
-* Shutdown your AWS stack(s)
+* Chapters 1-2, 9-11 in
+  [HPBN](https://hpbn.co/primer-on-latency-and-bandwidth/) / All Chapters in
+  the [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
+* TravisCI integration with your repository.
+* Web application with a handful of basic and more complex features.
+* Successfully deployed your application to AWS or made a Piazza question with
+  your issues.
+
+## Just before Lab
+
+* Launch your application to AWS and demo from it.
 
 ---
+
+class: center, inverse, middle
 
 # Server-side Caching in Rails Review
 
 ---
 
-# Rails Russian Doll Caching
+# Russian Doll Caching in Rails
 
 ```erb
 <% cache(cache_key_for_submission_table) do %>
@@ -82,36 +92,43 @@ end
 
 ---
 
-# Motivation
+# Relational Databases Motivation
 
 After today you should...
 
 * understand the importance of relational databases in architecting scalable
   Internet systems
+
 * understand how to design with concurrency in mind
+
 * have a basic idea regarding how to speed up your data layer
-    * where to start
-    * Rails-specific techniques
-    * be able to identity the source of slowness in a SQL query
+
+    * determining where to start
+
+    * using rails-specific techniques
+
+    * being able to identity the source of slowness in a SQL query
 
 ---
 
 # Stateful Requests
 
-![Database connectivity](app_server_to_database.png)
-
+.left-column[
 We have many stateless application servers responding to requests.
 
 Clients can be served by any application servers.
 
 Client requests regularly include data updates.
+]
+.right-column[
+![Database connectivity](app_server_to_database.png)
+]
 
 ---
 
 # Application Server _Needs_
 
-![Database connectivity](app_server_to_database.png)
-
+.left-column[
 * Data needs to be shared between requests and servers
 
 * Access to data shouldn't be slow
@@ -126,13 +143,16 @@ Client requests regularly include data updates.
       mary.deposit(100)
       end
 ```
+]
+.right-column[
+![Database connectivity](app_server_to_database.png)
+]
 
 ---
 
 # Data Layer Options
 
-![Database connectivity](app_server_to_database.png)
-
+.left-column[
 There are quite a few existing solutions for a _stable_ data layer.
 
 ## Relational (SQL)
@@ -147,13 +167,16 @@ There are quite a few existing solutions for a _stable_ data layer.
 * Cassandra
 * MongoDB
 * Redis
+]
+.right-column[
+![Database connectivity](app_server_to_database.png)
+]
 
 ---
 
 # SQL v. NoSQL
 
-![Database connectivity](app_server_to_database.png)
-
+.left-column[
 ## Relational Databases...
 
 * are a general-purpose persistence layer
@@ -169,13 +192,16 @@ There are quite a few existing solutions for a _stable_ data layer.
 If your needs fit within a RDBMS's (relational database management system)
 ability to scale, they tend to be best. If your scaling needs exceed RDBMS
 capabilities, go non-relational.
+]
+.right-column[
+![Database connectivity](app_server_to_database.png)
+]
 
 ---
 
 # Database Outline
 
-![Database connectivity](app_server_to_database.png)
-
+.left-column[
 ## Today we will discuss:
 
 * Relational databases
@@ -189,6 +215,10 @@ capabilities, go non-relational.
     * Service Oriented Architectures (SOA)
     * Distinguishing reads from writes
 * A survey of NoSQL options
+]
+.right-column[
+![Database connectivity](app_server_to_database.png)
+]
 
 ---
 
@@ -218,23 +248,29 @@ the introduction of transactions.
 
 # Database ACID Properties
 
-## Atomicity
+__Atomicity__
 
 * Complete everything, or do nothing
 * No partial application of a transaction
 
-## Consistency
+--
+
+__Consistency__
 
 * The database should be consistent both at the beginning and end of a
   transaction
 * Consistency is defined by the integrity constraints (e.g., foreign keys, `NOT
   NULL`, etc.)
 
-## Isolation
+--
+
+__Isolation__
 
 * A transaction should not see the effects of other uncommitted transactions
 
-## Durability
+--
+
+__Durability__
 
 * Once committed, the transaction's effects should not disappear
 
@@ -298,6 +334,8 @@ Two actions are said to be in conflict if:
 |        | R(X)   |        |
 |        |        | R(X)   |
 
+--
+
 ## Write to different object
 
 | T1     | T2     | T3     |
@@ -312,11 +350,9 @@ Two actions are said to be in conflict if:
 
 > Can we blindly execute transactions in parallel?
 
----
+--
 
 # Answer
-
-> Can we blindly execute transactions in parallel?
 
 __No__
 
@@ -370,7 +406,7 @@ order of the transactions (T1 then T2, or T2 then T1).
 
 ## Two schedules are _conflict equivalent_ if
 
-* they involve the same actions of the same transactions
+* they involve the same set of transactions
 * every pair of conflicting actions are ordered in the same way
 
 ## A schedule is _conflict serializable_ if
@@ -386,6 +422,7 @@ order of the transactions (T1 then T2, or T2 then T1).
 
 # Not Conflict Serializable
 
+.left-column20[
 | T1     | T2     |
 |:------:|:------:|
 | R(A)   |        |
@@ -396,9 +433,11 @@ order of the transactions (T1 then T2, or T2 then T1).
 |        | W(B)   |
 | R(B)   |        |
 | W(B)   |        |
-
+]
+.left-column20.center[
 When transactions are serialized, it is not conflict equivalent to either of:
-
+]
+.left-column20[
 | T1     | T2     |
 |:------:|:------:|
 | R(A)   |        |
@@ -409,6 +448,11 @@ When transactions are serialized, it is not conflict equivalent to either of:
 |        | W(A)   |
 |        | R(B)   |
 |        | W(B)   |
+]
+.left-column20.center[
+or
+]
+.left-column20[
 
 | T1     | T2     |
 |:------:|:------:|
@@ -420,16 +464,20 @@ When transactions are serialized, it is not conflict equivalent to either of:
 | W(A)   |        |
 | R(B)   |        |
 | W(B)   |        |
+]
 
 ---
 
 # Why Serializable?
 
-![Database connectivity](app_server_to_database.png)
-
+.left-column[
 > Why is it important that we have a serializable schedule?
 
 > Why not simply execute serially?
+]
+.right-column[
+![Database connectivity](app_server_to_database.png)
+]
 
 ---
 
@@ -470,6 +518,8 @@ resources by concurrent transactions.
 * Blocks writes and reads
 * Also called __exclusive lock__
 
+--
+
 ## Read-lock
 
 * Blocks writes
@@ -486,6 +536,8 @@ The two phases are:
 
 * Acquire Locks
 * Release Locks
+
+--
 
 ## Two-phase locking Protocol
 
@@ -511,6 +563,8 @@ needed. This permits other transactions to obtain those locks.
 | ...       | ...    |
 | abort     |        |
 
+--
+
 > What happens to T2 when T1 aborts the transaction?
 
 ---
@@ -521,15 +575,20 @@ needed. This permits other transactions to obtain those locks.
 
 SS2PL allows only conflict serializable schedules.
 
+--
+
 # Strong Strict Two-Phase Locking Protocol
 
 * Each transaction must obtain a _shared_ lock on an object before reading.
 * Each transaction must obtain an _exclusive_ lock on an object before writing.
 * If a transaction holds an exclusive lock on an object, no other transaction
   can obtain any lock on that object.
-* All locks held by a transaction are released when the transaction completes.
+* __All locks held by a transaction are released when the transaction
+  completes.__
 
 This approach avoids the problem with cascading aborts.
+
+--
 
 > What is the downside to SS2PL?
 
@@ -537,14 +596,18 @@ This approach avoids the problem with cascading aborts.
 
 # Concurrency Control in Rails
 
-![Database connectivity](app_server_to_database.png)
-
+.left-column[
 We have many application servers running our application.
 
-We are using a relational database to ensure that each requests observes a
+We are using a relational database to ensure that each request observes a
 consistent view of the database.
 
-> What it required in rails to obtain this consistency?
+> What is required in rails to obtain this consistency?
+]
+.right-column[
+![Database connectivity](app_server_to_database.png)
+]
+
 
 ---
 
@@ -556,6 +619,8 @@ Rails uses two types of concurrency control:
 
 Assume that database modifications are going to succeed. Throw an exception
 when they do not.
+
+--
 
 ## Pessimistic Locking
 
@@ -575,10 +640,14 @@ contains its associated `lock_version`.
 When an update for the object occurs, Rails compares the object's
 `lock_version` to the most recent one in the database.
 
+--
+
 If they differ a `StaleObjectException` is thrown.
 
 Otherwise, the data is written to the database, and the `lock_version` value is
 incremented.
+
+--
 
 This optimistic locking is an application-level construct. The database does
 nothing more than storing the `lock_version` values.
@@ -598,10 +667,14 @@ c1.save!  # Succeeds (It's a boy!)
 c2.save!  # throws StaleObjectException
 ```
 
+--
+
 ## Strengths
 
 * Predictable performance
 * Lightweight
+
+--
 
 ## Weaknesses
 
@@ -642,7 +715,7 @@ Request 2
 ```ruby
 transaction do
   c2 = Child.find(1).lock(true)
-  c2.name = 'Evelyn'
+  c2.name = 'Delaney'
   c2.save!  # works fine
 end
 ```
@@ -663,7 +736,7 @@ Request 1
 transaction do
   c1 = Child.find(1).lock(true)
   c1.name = 'Daniel'
-  my_long_procedure
+* my_long_procedure
   c1.save!
 end
 ```
@@ -673,7 +746,7 @@ Request 2
 ```ruby
 transaction do
   c2 = Child.find(1).lock(true)
-  c2.name = 'Evelyn'
+  c2.name = 'Delaney'
   c2.save!
 end
 ```
@@ -686,12 +759,12 @@ Request 1
 
 ```ruby
 transaction do
-  fam = Family.find(3).lock(true)
+* fam = Family.find(3).lock(true)
   c1 = Child.find(1).lock(true)
   c1.name = 'Daniel'
   c1.save!
-  fam.count += 1
-  fam.save!
+* fam.count += 1
+* fam.save!
 end
 ```
 
@@ -700,11 +773,11 @@ Request 2
 ```ruby
 transaction do
   c2 = Child.find(1).lock(true)
-  c2.name = 'Evelyn'
+  c2.name = 'Delaney'
   c2.save!
-  fam = Family.find(3).lock(true)
-  fam.count += 1
-  fam.save!
+* fam = Family.find(3).lock(true)
+* fam.count += 1
+* fam.save!
 end
 ```
 
@@ -715,6 +788,8 @@ end
 ## Strengths
 
 * Failed transactions are incredibly rare or nonexistent
+
+--
 
 ## Weaknesses
 
@@ -735,7 +810,7 @@ transaction do
 end
 ```
 
----
+--
 
 # Challenge 2
 
@@ -752,7 +827,8 @@ end
 
 # Next Step
 
-We now have a Rails app connected to MySQL and it is slower than you'd like.
+We now have a Rails app connected to MySQL and it is slower than you'd
+like.
 
 You think the bottleneck may be the database.
 
@@ -762,8 +838,7 @@ You think the bottleneck may be the database.
 
 # Demo App Database Optimizations
 
-![Submissions Index View](demo_submissions_index.png)
-
+.left-column30[
 Let's use an example from the Demo app!
 
 By changing the way you interact with the Rails ORM (ActiveRecord) you can
@@ -771,16 +846,18 @@ significantly improve performance.
 
 The following examples are all contained in the _database_optimizations_ branch
 on github.
+]
+.right-column70[
+![Submissions Index View](demo_submissions_index.png)
+]
 
 ---
 
 # Demo App ActiveRecord Time
 
+.left-column30[
 With the Demo app's _master_ branch deployed on a `m3_medium` instance
 with:
-
-![Submissions Index View](demo_submissions_index.png)
-
 
 * 20 Communities
 * 400 Submissions
@@ -792,6 +869,10 @@ Completed 200 OK
 ActiveRecord: 220.6ms.
 
 > Why so slow?
+]
+.right-column70[
+![Submissions Index View](demo_submissions_index.png)
+]
 
 ---
 
@@ -843,29 +924,24 @@ View
 
 # Generated SQL Statements
 
-    Processing by SubmissionsController#index as HTML
-    Submission Load (0.5ms)  SELECT `submissions`.* FROM `submissions`
-    Community Load (0.3ms)  SELECT  `communities`.* FROM `communities` WHERE `communities`.`id` = 1 LIMIT 1
-    SELECT COUNT(*) FROM `comments` WHERE `comments`.`submission_id` = 1
-    SELECT  `communities`.* FROM `communities` WHERE `communities`.`id` = 1 LIMIT 1  [["id", 1]]
-    SELECT COUNT(*) FROM `comments` WHERE `comments`.`submission_id` = 2
-    SELECT  `communities`.* FROM `communities` WHERE `communities`.`id` = 1 LIMIT 1  [["id", 1]]
-    SELECT COUNT(*) FROM `comments` WHERE `comments`.`submission_id` = 3
-    SELECT  `communities`.* FROM `communities` WHERE `communities`.`id` = 1 LIMIT 1  [["id", 1]]
-    ...
-    SELECT  `communities`.* FROM `communities` WHERE `communities`.`id` = 20 LIMIT 1  [["id", 20]]
-    SELECT COUNT(*) FROM `comments` WHERE `comments`.`submission_id` = 400
+```
+Processing by SubmissionsController#index as HTML
+Submission Load (0.5ms)  SELECT `submissions`.* FROM `submissions`
+Community Load (0.3ms)  SELECT  `communities`.* FROM `communities` WHERE `communities`.`id` = 1 LIMIT 1
+SELECT COUNT(*) FROM `comments` WHERE `comments`.`submission_id` = 1
+SELECT  `communities`.* FROM `communities` WHERE `communities`.`id` = 1 LIMIT 1  [["id", 1]]
+SELECT COUNT(*) FROM `comments` WHERE `comments`.`submission_id` = 2
+SELECT  `communities`.* FROM `communities` WHERE `communities`.`id` = 1 LIMIT 1  [["id", 1]]
+SELECT COUNT(*) FROM `comments` WHERE `comments`.`submission_id` = 3
+SELECT  `communities`.* FROM `communities` WHERE `communities`.`id` = 1 LIMIT 1  [["id", 1]]
+...
+SELECT  `communities`.* FROM `communities` WHERE `communities`.`id` = 20 LIMIT 1  [["id", 20]]
+SELECT COUNT(*) FROM `comments` WHERE `comments`.`submission_id` = 400
+```
 
-That is a lot of `SELECT` queries!
+--
 
----
-
-# Number of Queries Bottleneck
-
-We are issuing a ton of `SELECT` queries. The overhead associated with each is
-slowing us down.
-
-> How can we fix this problem?
+## That is a lot of `SELECT` queries!
 
 ---
 
@@ -875,6 +951,8 @@ We are issuing a ton of `SELECT` queries. The overhead associated with each is
 slowing us down.
 
 > How can we fix this problem?
+
+--
 
 ## Issue fewer queries.
 
@@ -885,7 +963,7 @@ slowing us down.
 
 # Reducing Queries in Rails
 
-Without `includes`
+(__Before__) Without `includes`
 
 ```ruby
 class SubmissionsController < ApplicationController
@@ -895,7 +973,9 @@ class SubmissionsController < ApplicationController
 end
 ```
 
-With `includes`
+--
+
+(__After__) With `includes`
 
 ```ruby
 class SubmissionsController < ApplicationController
@@ -906,15 +986,18 @@ class SubmissionsController < ApplicationController
 end
 ```
 
----
+--
 
-# With Includes Result
+Result
 
-    Result: ActiveRecord 39.6ms
+```
+Result: ActiveRecord 39.6ms
 
-    Submission Load (0.9ms)  SELECT `submissions`.* FROM `submissions`
-    Comment Load (38.3ms)  SELECT `comments`.* FROM `comments` WHERE `comments`.`submission_id` IN (1, 2,... 399, 400)
-    Community Load (0.4ms)  SELECT `communities`.* FROM `communities` WHERE `communities`.`id` IN (1, 2, ...19, 20)
+Submission Load (0.9ms)  SELECT `submissions`.* FROM `submissions`
+Comment Load (38.3ms)  SELECT `comments`.* FROM `comments` WHERE `comments`.`submission_id` IN (1, 2,... 399, 400)
+Community Load (0.4ms)  SELECT `communities`.* FROM `communities` WHERE `communities`.`id` IN (1, 2, ...19, 20)
+```
+
 
 ---
 
@@ -933,35 +1016,36 @@ When a query starts with `EXPLAIN`...
 
 ---
 
-# SQL Explain Example
+# MySQL Explain Example
 
-    EXPLAIN SELECT COUNT(DISTINCT `submissions`.`id`) FROM `submissions`
-    JOIN `comments` WHERE `comments`.`submission_id` = `submissions`.`id`
-    AND `comments`.`message` = 'This is not a test!'\G
-
-    *************************** 1. row ***************************
-    id: 1
-    select_type: SIMPLE
-    table: submissions
-    type: index
-    possible_keys: PRIMARY
-    key: index_submissions_on_community_id
-    key_len: 5
-    ref: NULL
-    rows: 50
-    Extra: Using index
-    *************************** 2. row ***************************
-    id: 1
-    select_type: SIMPLE
-    table: comments
-    type: ref
-    possible_keys: index_comments_on_submission_id
-    key: index_comments_on_submission_id
-    key_len: 5
-    ref: rails_app.submissions.id
-    rows: 1
-    Extra: Using where
-    2 rows in set (0.00 sec)
+```sql
+EXPLAIN SELECT COUNT(DISTINCT `submissions`.`id`) FROM `submissions`
+JOIN `comments` WHERE `comments`.`submission_id` = `submissions`.`id`
+AND `comments`.`message` = 'This is not a test!'\G
+ *************************** 1. row ***************************
+id: 1
+select_type: SIMPLE
+table: submissions
+type: index
+possible_keys: PRIMARY
+key: index_submissions_on_community_id
+key_len: 5
+ref: NULL
+rows: 50
+Extra: Using index
+*************************** 2. row ***************************
+id: 1
+select_type: SIMPLE
+table: comments
+type: ref
+possible_keys: index_comments_on_submission_id
+key: index_comments_on_submission_id
+key_len: 5
+ref: rails_app.submissions.id
+rows: 1
+Extra: Using where
+2 rows in set (0.00 sec)
+```
 
 ---
 
@@ -979,7 +1063,7 @@ The following are the most important fields for performance analysis:
 
 ---
 
-# Explain Field: select_type
+# MySQL Explain Field: select_type
 
 `select_type` indicates the type of select statement being performed.
 
@@ -991,7 +1075,7 @@ Most types are fine, but two indicate potential performance problems:
 
 ---
 
-# Explain Field: type
+# MySQL Explain Field: type
 
 `type` indicates the type of JOIN being used. From best to worst:
 
@@ -1009,7 +1093,7 @@ Most types are fine, but two indicate potential performance problems:
 
 ---
 
-# Explain Fields: possible_keys &amp; key
+# MySQL Explain Fields: possible_keys &amp; key
 
 `possible_keys` lists the indexes that could possibly be used to perform the
 query. `key` indicates which key was actually chosen to perform the query.
@@ -1022,7 +1106,7 @@ added to the appropriate columns.
 
 ---
 
-# Explain Field: rows
+# MySQL Explain Field: rows
 
 The `rows` field indicates the database's estimate of how many rows may need
 to be read to perform the query.
@@ -1036,7 +1120,9 @@ The larger the number, the more time the query will take.
 There are three primary ways to optimize SQL queries:
 
 * Add or modify indexes
+
 * Modify the table structure
+
 * Directly optimize the query
 
 ---
@@ -1108,7 +1194,9 @@ memory savings.
 If appropriate some options are:
 
 * Reduce the length of a VARCHAR index if appropriate
+
 * Use a smaller unsigned integer type
+
 * Use an integer or enum field for statuses rather than a text-based value
 
 ---
@@ -1127,6 +1215,8 @@ key: index_txns_on_reverse_txn_id
 rows: 439186
 Extra: Using where; Using index
 ```
+
+--
 
 After
 
