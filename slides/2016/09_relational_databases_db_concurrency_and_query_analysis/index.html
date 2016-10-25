@@ -138,10 +138,10 @@ Client requests regularly include data updates.
 * Utilizing the data layer should be intuitive:
 
 ```ruby
-    if david.balance > 100
-      david.withdrawal(100)
-      mary.deposit(100)
-      end
+if david.balance > 100
+  david.withdrawal(100)
+  mary.deposit(100)
+end
 ```
 ]
 .right-column[
@@ -901,8 +901,8 @@ class SubmissionsController < ApplicationController
   def index
     @submissions = Submission.all
   end
- end
- ```
+end
+```
 
 View
 
@@ -1090,6 +1090,8 @@ Most types are fine, but two indicate potential performance problems:
 * __range__: Only rows in a given range are retrieved, but can use index
 * __index__: Full table scan, but can scan index instead of actual table
 * __ALL__: Full table scan
+
+http://dev.mysql.com/doc/refman/5.7/en/explain-output.html#explain-join-types
 
 ---
 
