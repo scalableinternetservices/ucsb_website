@@ -80,6 +80,9 @@ by Cardellini, Colajanni, and Yu.
 #### November 1, 2016 ([slides](/slides/2016/11_tsung))
 * Load testing with Tsung
 
+#### November 3, 2016
+* Work Session
+
 __TODO__:
 
 * Read
@@ -88,9 +91,6 @@ __TODO__:
 * Read
   [Eventually Consistent](http://www.scalableinternetservices.com/slides/vogels.pdf)
   by Werner Vogels
-
-#### November 3, 2016
-* Guest lecture placeholder
 
 #### November 8, 2016 ([slides](/slides/2016/12_nosql))
 * Non-relational Data Stores
@@ -141,7 +141,8 @@ __TODO__:
 * Client-side MVC
 
 #### December 1, 2016
-* Guest lecture placeholder
+* Guest Lecture: Heidi Helfand, Agile Coach, Speaker & Consultant @ Heidi
+  Helfand Consulting
 
 #### December 5, 2016 (Monday)
 * Final presentations
