@@ -70,21 +70,22 @@ All sprints end and begin with each week's lab session.
 #### Sprint 4: October 26, 2016 -- November 2, 2016
 * Conduct a retrospective on how the last sprint went and how you can improve.
 * Decide on a sprint commitment.
-* Implement stories from the current sprint.
-* Deploy a tsung instance on EC2.
-* Write an initial tsung xml file to load test a simple action on your
-  application.
-* Define the "critical path" through your application (the set of pages that a
+* Implement stories from the current sprint. Your application should be mostly
+  feature complete at this time and subsequent work should focus on polish.
+* Define the "critical paths" through your application (the set of pages that a
   common user will go through).
-* Write a tsung xml file to exercise this critical path.
-* Load test your application with tsung running on a m3.medium instance.
-* Produce an initial set of graphs with your application's performance.
 
 #### Sprint 5: November 2, 2016 -- November 9, 2016
 * Conduct a retrospective on how the last sprint went and how you can improve.
 * Decide on a sprint commitment.
 * Implement stories from the current sprint. Your application should be mostly
   feature complete at this time and subsequent work should focus on polish.
+* Deploy a tsung instance on EC2.
+* Write an initial tsung xml file to load test a simple action on your
+  application.
+* Write a tsung xml file to exercise this critical path.
+* Load test your application with tsung running on a m3.medium instance.
+* Produce an initial set of graphs with your application's performance.
 * Test (and document) the effects of vertical scaling on your application with
   the critical path xml file.
 * Deploy and test your application on a variety of load-balanced
