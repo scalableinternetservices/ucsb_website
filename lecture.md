@@ -95,7 +95,7 @@ __TODO__:
 #### November 8, 2016 ([slides](/slides/2016/12_nosql))
 * Non-relational Data Stores
 
-#### November 10, 2016
+#### November 10, 2016 ([slides](/slides/2016/maloney_lecture.pdf))
 * Guest Lecture: Sean Maloney, Big Data Engineer @
   [Riot Games](http://www.riotgames.com/)
 * "Moving Mountains of Player Data"
