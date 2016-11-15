@@ -134,7 +134,7 @@ __CS291A__
 
 Dr. Bryce Boe
 
-November 10, 2015
+November 15, 2016
 
 ---
 
@@ -226,9 +226,13 @@ attacks.
 
 My data cannot be read by by third parties.
 
+--
+
 ## Authenticity
 
 I am communicating with whom I expect to be communicating with.
+
+--
 
 ## Integrity
 
@@ -254,8 +258,10 @@ Anyone on the path of the TCP stream (routers, switches, other clients on a
 wireless network) can:
 
 * Read the packets (violates privacy)
+
 * Inject _fake_ packets to disrupt the stream or impersonate the destination
   server (violates authenticity)
+
 * Inject modified packets to change their meaning (violates integrity)
 
 ---
@@ -348,13 +354,23 @@ Malicious intermediary can:
 
 * Create their own asymmetric key pair
 
+--
+
 * Present their public key to the server as the client's public key
+
+--
 
 * Establish a shared key with the server
 
+--
+
 * Present their public key to the client as the server's public key
 
+--
+
 * Establish a shared key with the client
+
+--
 
 * Relay messages between the client and server, modifying them as desired
 
@@ -419,16 +435,27 @@ We can use public key signatures to transitively authenticate someone.
 
 * Alice trusts Bob and as a result already has Bob's public key.
 
+--
+
 * Bob trusts Chelsea and has even _signed_ Chelsea's public key.
 
+--
+
 * Alice doesn't know Chelsea but wants to talk to her.
-    * Alice asks Chelsea for her public key.
 
-    * Chelsea presents her public key along with the signature from Bob.
+--
 
-    * Alice verifies that Chelsea's key has indeed been signed with Bob's key,
-      someone she trusts, and as a result accepts that she is really talking to
-      Chelsea.
+  * Alice asks Chelsea for her public key.
+
+--
+
+  * Chelsea presents her public key along with the signature from Bob.
+
+--
+
+  * Alice verifies that Chelsea's key has indeed been signed with Bob's key,
+    someone she trusts, and as a result accepts that she is really talking to
+    Chelsea.
 
 The public key along with it's parent signatures is known as a __certificate__.
 
@@ -555,14 +582,16 @@ Certificates can be revoked in two primary ways:
 
 * Certificate Revocation List
 
-    * Periodically fetch a list of all revoked certificates.
+  * Periodically fetch a list of all revoked certificates.
 
-    * At request time, reject revoked server certificates.
+  * At request time, reject revoked server certificates.
+
+--
 
 * Online Certificate Status Protocol (OCSP)
 
-    * At request time, use OCSP to see if the server's certificate has been
-      revoked. If so reject it.
+  * At request time, use OCSP to see if the server's certificate has been
+    revoked. If so reject it.
 
 
 --
@@ -800,7 +829,7 @@ Fuzzing is the process of automatically submitting semi-random input to an
 application and watching for subsequent problematic side-effects.
 
 __Tarantula__ is an automated tool to crawl and fuzz older rails applications
-(doesn't officially support rails 4).
+(doesn't officially support rails 4+).
 
 ---
 
@@ -847,6 +876,8 @@ The possibilities are endless.
 This step ensures any CSRF via image tag, or other resource auto-loading tag is
 benign.
 
+--
+
 ## Add a CRSF Protection Token to every request with side effects
 
 Generally every action with side effects originates with the preceding page
@@ -885,14 +916,18 @@ values of course):
 * Two designs: restrict _bad traffic_ or permit _good traffic_
 * Designed to operate at different layers of the network stack
 
+--
+
 ## Can influence traffic going out as well
 
 * e.g. [Great Firewall of China](http://www.greatfirewallofchina.org/)
 * We are primarily concerned with inbound traffic
 
+--
+
 ## Can be standalone hardware devices or software
 
-* Often included in multi-purpose device e.g. switch or load balancer
+* Often included in multi-purpose device, e.g. switch or load balancer
 
 ---
 
