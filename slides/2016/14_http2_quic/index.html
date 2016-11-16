@@ -29,6 +29,7 @@ November 17, 2016
 
 * Read chapter 15: [XMLHttpRequest](https://hpbn.co/xmlhttprequest/) in High
   Performance Browser Networking
+
 * Reports are due Thursday, December 1 by 12PM (noon) via Piazza
 
 ---
@@ -52,21 +53,27 @@ We will conduct the final peer evaluation during a 20 minute break after the
 
 # Connections per Page
 
+.center[
 ![Connections per page](connections_per_page.png)
+]
 
 Many requests are required for today's web pages:
 
 * CSS
+
 * JavaScript
+
 * Images
 
-Source: [http://httparchive.org](http://httparchive.org)
+Source: http://httparchive.org
 
 ---
 
 # TCP Phases
 
+.center[
 ![TCP Phases](tcp_congestion.png)
+]
 
 Establishing many TCP connections to serve these resources is very slow.
 
@@ -76,7 +83,9 @@ Source: High Performance Browser Networking
 
 # TCP Round Trips
 
+.center[
 ![Number of TCP Segments v. Round Trips](tcp_segments_and_round_trips.png)
+]
 
 TCP was designed for long-lived flows. HTTP is short and bursty.
 
@@ -84,27 +93,34 @@ TCP was designed for long-lived flows. HTTP is short and bursty.
 
 # HTTP Keep-alive
 
+.left-column[
 ![Head of Line Blocking](tcp_head_of_line_blocking.png)
-
-HTTP Keep-alive was introduced to help reuse TCP connections for HTTP, but there
-are issues.
+]
+.right-column[
+HTTP Keep-alive was introduced to help reuse TCP connections for HTTP, but
+there are issues.
 
 While we can reuse a TCP socket for multiple HTTP requests, one heavyweight
 request can starve all others.
 
 This is called __Head-of-line blocking__.
+]
 
 ---
 
 # HTTP Request Header
 
+.center[
 ![HTTP Header 1](http_header_1.png)
+]
 
 ---
 
 # HTTP Request Header Repetition
 
+.center[
 ![HTTP Header 2](http_header_2.png)
+]
 
 The highlighted sections show the differences from this request to the previous
 request. All other bytes are duplicates.
@@ -113,7 +129,9 @@ request. All other bytes are duplicates.
 
 # HTTP Request Header Repetition
 
+.center[
 ![HTTP Header 3](http_header_3.png)
+]
 
 In this case the only thing that changed from the previous request were 14 new
 bytes out of 683.
@@ -135,7 +153,9 @@ This technique can also be applied to images.
 
 # Image Spriting
 
+.center[
 ![Image Sprite](image_sprite.jpg)
+]
 
 A sprite is an image that is comprised of many smaller images.
 
@@ -154,7 +174,9 @@ order to speed up the time to obtain a page's resources.
 
 For better performance domain sharding is utilized with HTTP/1.1.
 
+.center[
 ![Concurrent TCP Connections](concurrent_http.png)
+]
 
 ---
 
@@ -163,28 +185,41 @@ For better performance domain sharding is utilized with HTTP/1.1.
 We want fewer TCP connections, but
 
 * we don't want head-of-line blocking
+
 * we don't want to have to concatenate our CSS and JavaScript
+
 * we don't want to have to use image sprites
+
 * we don't want to have to split our resources to trick the browser
 
 > What do we do?
 
 ---
 
-# HTTP/2
+class: center middle inverse
 
-HTTP/2 addresses all of these issues.
+# HTTP/2 addresses all of these issues
 
-## History
+---
+
+# HTTP/2 History
 
 * Google internally announced the SPDY protocol (Nov 2009).
+
 * Google released SPDY in Chrome for (Sept 2010).
+
 * Google deployed SPDY on all their servers (Jan 2011).
+
 * Twitter deployed SPDY on its servers (March 2012).
+
 * Apache support for SPDY (April 2012)
+
 * NGINX support for SPDY (June 2012)
+
 * Firefox support for SPDY (June 2012)
+
 * First draft of HTTP/2.0 based on SPDY (Nov 2012)
+
 * RFC 7540: HTTP/2.0 published (May 2015)
 
 ---
@@ -193,7 +228,9 @@ HTTP/2 addresses all of these issues.
 
 * Multiplexed TCP connection permits concurrent streams over a single TCP
   connection with the ability to prioritize streams.
+
 * Header compression minimizes request and response overhead.
+
 * Server push provides a way for the server to send responses prior to
   receiving a request for the associated resource.
 
@@ -201,7 +238,9 @@ HTTP/2 addresses all of these issues.
 
 # HTTP/2 Binary Frames
 
+.center[
 ![HTTP/2 Frame](http2_frame.png)
+]
 
 Note that the headers and data are in separate frames.
 
@@ -209,7 +248,9 @@ Note that the headers and data are in separate frames.
 
 # HTTP/2 Binary Framed Connection
 
+.center[
 ![HTTP/2 Connection](http2_connection.png)
+]
 
 Note that different streams are interleaved over a single TCP connection.
 
@@ -229,35 +270,43 @@ Now implemented using HPACK.
 
 # HPACK
 
+.center[
 ![HPACK](hpack.png)
+]
 
 1. HPACK allows the transmitted header fields to be encoded via a static
    Huffman code, which reduces their individual transfer size.
+
 2. HPACK requires that both the client and server maintain and update an
    indexed list of previously seen header fields (i.e. establishes a shared
    compression context), which is then used as a reference to efficiently
    encode previously transmitted values.
 
-Source:
-[High Performance Browser Networking](http://chimera.labs.oreilly.com/books/1230000000545/ch12.html#HTTP2_HEADER_COMPRESSION)
+Source: High Performance Browser Networking
 
 ---
 
 # Binary Framing Benefits
 
+.left-column[
 ![Binary Framing Flexibility](http2_flexibility.png)
+]
 
+.right-column[
 With binary framing the ordering of resources is flexible.
 
-* Handling of many small resources is efficient
-* Headers are compressed, so they are lightweight
-* Head of line blocking no longer exists
+* Handling of many small resources is efficient.
+
+* Headers are compressed, so they are lightweight.
+
+* Head of line blocking no longer exists.
+]
 
 ---
 
 # HTTP/2 Prioritization and Flow Control
 
-With resource ordering not being an issue, we can implement resource
+With resource ordering no longer an issue, we can implement resource
 prioritization.
 
 ## Request Priority Example
@@ -287,7 +336,9 @@ HTTP/2 obviates the HTTP/1.1 hacks used over the last twenty years.
 
 # Server Push
 
+.center[
 ![HTTP/2 Server Push](http2_server_push.png)
+]
 
 When a resource is requested (e.g., `/`) the server can proactively send
 additional resources using `PUSH_PROMISE` (e.g., favicon.ico, style.css).
@@ -299,19 +350,31 @@ feature is useful if the client already has a cached copy.
 
 # HTTP/2 Results
 
+.center[
 ![HTTP/2 Page Load Time](http2_results.png)
+]
 
 ---
 
 # HTTP/2 Low Latency Results
 
+.center[
 ![HTTP/2 Low Latency Results](http2_low_latency_results.png)
+]
 
 ---
 
 # HTTP/2 High Latency Results
 
+.center[
 ![HTTP/2 High Latency Results](http2_high_latency_results.png)
+]
+
+---
+
+class: center inverse middle
+
+# QUIC
 
 ---
 
@@ -328,7 +391,9 @@ primarily the round trip necessary to establish connections.
 
 # Review: TCP Connection Establishment
 
+.center[
 ![TCP Round Trip](tcp_round_trip.png)
+]
 
 TCP connections require a full round trip before any application data can be
 sent.
@@ -337,7 +402,9 @@ sent.
 
 # Review: TCP+TLS Establishment
 
+.center[
 ![TLS Round Trip](tls_handshake.png)
+]
 
 HTTPS (TCP+TLS) requires three full round trips (two with optimizations) before
 any application data can be sent.
@@ -346,7 +413,9 @@ any application data can be sent.
 
 # HTTP/2 (SPDY) and Dropped Packets
 
+.center[
 ![HTTP/2 with dropped packet](http2_dropped_packet.png)
+]
 
 HTTP/2 provides excellent multiplexing support. However, any dropped packet
 blocks the entire connection.
@@ -357,7 +426,9 @@ TCP cannot differentiate between packets dropped by different steams.
 
 # TCP Retransmissions
 
+.center[
 ![TCP Retransmissions](tcp_retransmissions.png)
+]
 
 Losing packets results in retransmissions. In high latency networks this
 process is painfully slow.
@@ -366,8 +437,10 @@ process is painfully slow.
 
 # Physically Mobile Users
 
+.left-column[
 ![Mobile Users](mobile_users.png)
-
+]
+.right-column[
 A TCP connection is defined by its source IP address/port combination.
 
 If a connected user's device moves from their house's wifi to their cellular
@@ -375,13 +448,19 @@ network or to another network's wifi, they will obtain a new IP address.
 
 This move requires the user to establish a new connection and once again incur
 any start-up costs.
+]
+
+---
+
+class: center inverse middle
+
+# Given the limitations of TCP, can we build a better HTTP/2 on top of UDP instead?
+
 
 ---
 
 # QUIC
 
-> Given the limitations of TCP, can we build a better HTTP/2 on top of UDP
-> instead?
 
 QUIC is an attempt to do use UDP for HTTP.
 
@@ -390,33 +469,48 @@ QUIC's primary goal is to reduce latency.
 In fact, you are already using QUIC if you use Google Chrome and access Google
 services.
 
-Inspect via: chrome://net-internals/
+Inspect via: `chrome://net-internals/`
 
 ---
 
 # QUIC Initial Connection
 
 * Client sends random 64-bit CID (connection ID)
+
 * Server replies with certificate and cookie
+
 * Client responds with:
-    * CID
-    * cookie
-    * proposed encrypted session key
-    * encryption algorithm
+
+  * CID
+
+  * cookie
+
+  * proposed encrypted session key
+
+  * encryption algorithm
+
 * Client can immediately send requests
 
 ---
 
 # QUIC Subsequent Connections
 
+.left-column[
 ![QUIC second connection](quic_second_connection.png)
-
+]
+.right-column[
 * Client sends (assumes server certificate hasn't changed):
-    * CID
-    * cookie
-    * proposed encrypted session key
-    * encryption algorithm
+
+  * CID
+
+  * cookie
+
+  * proposed encrypted session key
+
+  * encryption algorithm
+
 * Client can immediately send requests
+]
 
 ---
 
@@ -431,7 +525,9 @@ QUIC is engineered to avoid such attacks through the use of the CID.
 
 # QUIC and Packet Loss
 
+.center[
 ![QUIC Multiplexing](quic_multiplexing.png)
+]
 
 Packet loss affects only the stream that lost the resource.
 
@@ -446,7 +542,9 @@ without retransmission.
 
 # Forward Error Correction
 
+.center[
 ![Forward Error Correction](forward_error_correction.png)
+]
 
 With forward error correction we trade bandwidth (extra data) for latency
 (retransmissions).
@@ -455,21 +553,27 @@ With forward error correction we trade bandwidth (extra data) for latency
 
 # QUIC and Physically Mobile Users
 
+.left-column[
 ![Mobile Users](mobile_users.png)
-
+]
+.right-column[
 Connections in QUIC are based on the CID rather than the its IP address/PORT
 combination.
 
 Thus clients can freely move between networks without having to reestablish
 their connections.
+]
 
 ---
 
 # QUIC Results
 
 * 75% of requests avoid handshake
+
 * Google search observed a 3% reduction in mean page load time.
+
 * The slowest 1% of users experience a 1 second reduction in page load time.
+
 * YouTube users experience 30% fewer rebuffers.
 
 Overall the most significant results occur under poor network conditions.
