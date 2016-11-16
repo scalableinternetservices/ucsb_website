@@ -559,7 +559,7 @@ Attacker can trick user into performing an action on a targeted site
 
 An SQL injection attack is when a malicious user submits a carefully crafted
 HTTP request that directly or indirectly causes your application server to
-interact with the database in a manner you did not indent.
+interact with the database in a manner you did not intend.
 
 ---
 
@@ -687,7 +687,7 @@ Entering `<script>alert("oops");</script>` into a form as a submission title,
 and rendering via `<%= submission.title %>` will produce:
 
 ```html
-&lt;script&gt;alert(&quot;oops&quot;);&lt;/script&gt;
+&amp;lt;script&amp;gt;alert("oops");&amp;lt;/script&amp;gt;
 ```
 
 __Note__: XSS can also be prevented by disabling inline JavaScript with a
