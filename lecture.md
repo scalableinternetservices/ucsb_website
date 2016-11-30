@@ -123,7 +123,7 @@ __TODO__:
 * HTTP 2.0
 * QUIC
 
-#### November 22, 2016
+#### November 22, 2016 ([slides](https://docs.google.com/presentation/d/1YnwTXKgRlPWIvmiaHFgjwN1x3SJbCLYHWMWgmpN3CEw/edit?usp=sharing))
 * Guest Lecture: Neil Williams (/u/spladug), Lead Engineer, Infrastructure Team
   @ [Reddit](https://www.reddit.com/)
 * "How Reddit works... and why it sometimes doesn't"
