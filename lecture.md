@@ -145,4 +145,4 @@ __TODO__:
   Helfand Consulting
 
 #### December 5, 2016 (Monday)
-* Final presentations
+* Final presentations from 12 to 3PM in Phelps 3526
