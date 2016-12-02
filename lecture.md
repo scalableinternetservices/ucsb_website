@@ -140,7 +140,7 @@ __TODO__:
 * JavaScript
 * Client-side MVC
 
-#### December 1, 2016
+#### December 1, 2016 ([slides](/slides/2016/helfand_talk.pdf))
 * Guest Lecture: Heidi Helfand, Agile Coach, Speaker & Consultant @ Heidi
   Helfand Consulting
 
