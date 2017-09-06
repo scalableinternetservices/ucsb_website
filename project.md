@@ -30,7 +30,7 @@ fundamental web technologies and the Ruby on Rails framework.
 
 All sprints end and begin with each week's lab session.
 
-#### Sprint -1: September 22, 2016 -- September 28, 2016
+#### Sprint 0: September 28, 2017 -- October 5, 2017
 * Install [Rails](http://rubyonrails.org/).
 * Learn [Ruby](https://www.ruby-lang.org/en/).
 * Complete [Ruby Code Academy](https://www.codecademy.com/tracks/ruby).
@@ -40,13 +40,13 @@ All sprints end and begin with each week's lab session.
   [Ruby on Rails Tutorial](https://www.railstutorial.org/book/toy_app).
 * Form your team.
 
-#### Sprint 0: September 28, 2016 -- October 5, 2016
+#### Sprint 1: October 5, 2017 -- October 12, 2017
 * Complete Chapters 2 through 6 in the Ruby on Rails Tutorial.
 * Determine your team's project, get approved by instructor.
 * Learn [git](http://rogerdudler.github.io/git-guide/).
 * Create and push the base rails application to your team's github repository.
 
-#### Sprint 1: October 5, 2016 -- October 12, 2016
+#### Sprint 2: October 12, 2017 -- October 19, 2017
 * Complete chapters 7 through 10 in the Ruby on Rails Tutorial.
 * Learn TDD: get [Travis CI](http://docs.travis-ci.com) working with your
   github repository.
@@ -54,20 +54,20 @@ All sprints end and begin with each week's lab session.
 * Decide on a sprint commitment.
 * Learn pair programming through pairing up on the first few stories.
 
-#### Sprint 2: October 12, 2016 -- October 19, 2016
+#### Sprint 3: October 19, 2017 -- October 26, 2017
 * Complete chapters 13 and 14 in the Ruby on Rails Tutorial.
 * Conduct a retrospective on how the last sprint went and how you can improve.
 * Decide on a sprint commitment.
 * Implement stories from the current sprint.
 
-#### Sprint 3: October 19, 2016 -- October 26, 2016
+#### Sprint 4: October 26, 2017 -- November 2, 2017
 * Conduct a retrospective on how the last sprint went and how you can improve.
 * Decide on a sprint commitment.
 * Implement stories from the current sprint.
 * Learn EC2 and Amazon Web Console by deploying your initial application on
   Amazon EC2.
 
-#### Sprint 4: October 26, 2016 -- November 2, 2016
+#### Sprint 5: November 2, 2017 -- November 9, 2017
 * Conduct a retrospective on how the last sprint went and how you can improve.
 * Decide on a sprint commitment.
 * Implement stories from the current sprint. Your application should be mostly
@@ -75,11 +75,11 @@ All sprints end and begin with each week's lab session.
 * Define the "critical paths" through your application (the set of pages that a
   common user will go through).
 
-#### Sprint 5: November 2, 2016 -- November 9, 2016
+#### Sprint 6: November 9, 2017 -- November 16, 2017
 * Conduct a retrospective on how the last sprint went and how you can improve.
 * Decide on a sprint commitment.
-* Implement stories from the current sprint. Your application should be mostly
-  feature complete at this time and subsequent work should focus on polish.
+* Implement stories from the current sprint. Your application should be feature
+  complete at this time and subsequent work should focus on polish.
 * Deploy a tsung instance on EC2.
 * Write an initial tsung xml file to load test a simple action on your
   application.
@@ -92,37 +92,31 @@ All sprints end and begin with each week's lab session.
   configurations, with the medium--large dataset.
 * Test using Tsung, measure, and document.
 
-#### Sprint 6: November 9, 2016 -- November 16, 2016
-* Conduct a retrospective on how the last sprint went and how you can improve.
-* Decide on a sprint commitment.
-* Implement stories from the current sprint. Only polish is appropriate at this
-  point.
-* Create a medium--large dataset (~10,000+ records) using database seeds.
-* Test (and document) the effects of horizontal scaling on your application
-  with the critical path xml file.
-
-#### Sprint 7: November 16, 2016 -- November 23, 2016
+#### Sprint 7: November 16, 2017 -- November 23, 2017
 * Conduct a retrospective on how the last sprint went and how you can improve.
 * Decide on a sprint commitment.
 * Implement stories from the current sprint. Only polish is appropriate at this
   point.
 * By the end of this sprint your project should be feature complete.
+* Create a medium--large dataset (~10,000+ records) using database seeds.
+* Test (and document) the effects of horizontal scaling on your application
+  with the critical path xml file.
+
+#### Sprint 8: November 23, 2017 -- November 30, 2017 (No lab on the 23rd)
+* Conduct a retrospective on how the last sprint went and how you can improve.
 * Create a large dataset (more than 100,000 records).
 * Inspect and optimize the way your application is interacting with the
   database. If necessary, write custom sql to optimize.
-* Continue testing using Tsung, measure, and document.
-* How many users can you handle?
-
-#### Sprint 8: November 23, 2016 -- November 30, 2016 (No lab on the 23rd)
-* Conduct a retrospective on how the last sprint went and how you can improve.
-* If appropriate, create as large of a dataset as possible. How big can it be?
 * Implement server-side caching (if you haven't already)
 * Deploy your caching optimizations on a simple load-balanced configuration,
   with the large dataset, both with and without memcache.
-*  Continue testing using Tsung, measure, and document.
+* Continue testing using Tsung, measure, and document.
 * How many users can you handle?
 
-#### Sprint 9: November 30, 2016 -- December 5, 2016 (Monday)
+#### Sprint 9: November 30, 2017 -- December 7, 2017
 * Conduct a retrospective on how the last sprint went and how you can improve.
-* Complete the project write-up (due Thursday, December 1).
-* Prepare final presentation (present Monday, December 5).
+* If appropriate, create as large of a dataset as possible. How big can it be?
+* Continue testing using Tsung, measure, and document.
+* How many users can you handle?
+* Complete the project write-up (due Tuesday, December 5).
+* Prepare final presentation (present Thursday, December 7).
