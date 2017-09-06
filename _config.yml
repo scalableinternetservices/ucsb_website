@@ -16,5 +16,5 @@ instructor_url: "http://bryceboe.com"
 # Build settings
 markdown: kramdown
 
-gems:
+plugins:
   - jekyll-sitemap
