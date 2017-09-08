@@ -81,21 +81,22 @@ by Cardellini, Colajanni, and Yu.
 * Query Analysis
 
 
-#### November 7, 2017 ([slides](/slides/2017/10_rdbms_scaling))
+#### November 7, 2017
+* Guest Lecture: Sean Maloney, Engineering Lead @ [Riot Games](http://www.riotgames.com/)
+
+
+#### November 9, 2017 ([slides](/slides/2017/10_rdbms_scaling))
 * Database Scaling
     * Sharding
     * Service Oriented Architectures
     * Read-only Secondaries
 
 
-#### November 9, 2017 ([slides](/slides/2017/11_tsung))
-* Load testing with Tsung
-
-
-#### November 14, 2017
+#### November 14, 2017 ([slides](/slides/2017/11_tsung))
 
 * Guest Lecture: Dr. Andrew Mutz, CTO @
   [AppFolio](https://www.appfolioinc.com/)
+* Load testing with Tsung
 
 __TODO__:
 
