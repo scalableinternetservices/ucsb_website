@@ -113,7 +113,7 @@ __TODO__:
 
 
 #### November 21, 2017
-* PLACEHOLDER FOR GUEST LECTURE
+* Guest Lecture: Courtney Wang, Senior Software Engineer @ [Reddit](https://about.reddit.com/careers/)
 
 __TODO__:
 
