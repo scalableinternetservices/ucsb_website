@@ -155,5 +155,5 @@ __TODO__:
 * Client-side MVC
 
 
-#### December 7, 2017 (Monday)
+#### December 7, 2017
 * Final presentations
