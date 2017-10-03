@@ -11,15 +11,7 @@ __CS291A__
 
 Dr. Bryce Boe
 
-September 27, 2016
-
----
-
-# In the News
-
-![The need for mobile speed](2016_mobile_speed.png)
-
-[Source](https://www.doubleclickbygoogle.com/articles/mobile-speed-matters/)
+October 3, 2017
 
 ---
 
@@ -37,25 +29,34 @@ September 27, 2016
 ## Should be done
 
 * Join the class on [Piazza](https://piazza.com/class/idgkoaxbvg14lx)
+
 * Complete the form:
   [https://goo.gl/forms/CF1CIeTSymIuMbO73](https://goo.gl/forms/CF1CIeTSymIuMbO73)
   (people will be dropped who haven't completed it)
+
 * Read chapters 1 and 2 in
   [High Performance Browser Networking](https://hpbn.co/primer-on-latency-and-bandwidth/)
 
+* Read the list of project ideas: [http://cs291.com/project_ideas/](http://cs291.com/project_ideas/)
 
-## Before Tomorrow
-
-* Read the list of project ideas: [http://cs290.com/project_ideas/](http://cs290.com/project_ideas/)
 * Post or comment on at least one idea on Piazza under the `project_idea`
   "folder"
+
+
+
+## Before Thursday's Lab
+
 * Complete the [Ruby Code Academy](https://www.codecademy.com/tracks/ruby)
+
 * Complete chapter 1 in the
   [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
+
 * Begin chapter 2 in the
   [Ruby on Rails Tutorial](https://www.railstutorial.org/book/toy_app)
 
 ---
+
+class: center inverse middle
 
 # The Life Cycle of a Web Request
 
@@ -66,12 +67,17 @@ September 27, 2016
 A web browser is a process (at least one) that runs on an operating system. It:
 
 * responds to user input
+
 * renders the display
+
 * utilizes the network
+
+--
 
 A web server is a process (at least one) that runs on an operating system. It:
 
 * responds to network requests
+
 * loads resources that may come from file system, database, other servers
 
 ---
@@ -79,15 +85,24 @@ A web server is a process (at least one) that runs on an operating system. It:
 # Core Components of a Web request
 
 * Web server: Opens a TCP socket to listen for requests
+
 * Browser: Makes a DNS query to obtain an IP address for www.reddit.com
-* Browser: Establishes a TCP connection to the IP address
+
+* Browser: Initiates a TCP connection to the IP address
+
 * Web server: Accepts the TCP connection
-* Web server: Adds a TLS context to the TCP connection
-* Browser: Wraps a TLS session on-top of the TCP connection
+
+* Web server: Adds TLS context to the TCP connection
+
+* Browser: Wraps the TCP connection in a TLS session
+
 * Browser: Sends an HTTP request over the TLS session
+
 * Web server: Parses the request, fetches and sends the requested resources
 
 ---
+
+class: center inverse middle
 
 # HTTP
 
@@ -103,6 +118,10 @@ By the end of today's lecture, you should understand this output:
 
 # History
 
+> When was HTTP created?
+
+--
+
 The year is 1990. The Internet has existed for ~20 years, email for ~8.
 
 Tim Berners-Lee has the idea to combine __HyperText__ and the __Internet__. He
@@ -110,7 +129,12 @@ creates the first version of __HTTP__ and __HTML__.
 
 __HyperText__: Links documents together via __HyperLinks__
 
+> When was the first web browser created?
+
+--
+
 * 1993: Mosaic, the first web browser, is created at UIUC
+
 * 1994: Marc Andreessen leaves UIUC and founds Netscape with Jim Clark
 
 ---
@@ -126,36 +150,55 @@ __HyperText__: Links documents together via __HyperLinks__
 It its original, simplest version:
 
 * Open a TCP socket (standard port is 80)
+
 * Send an ASCII request for a resource (`GET mypage.html`)
+
 * Response comes back containing only the content of `mypage.html`
+
 * Close the TCP socket
+
+--
 
 HTTP was originally designed to:
 
 * Send HTML (was later extended to send anything)
+
 * To facilitate interaction between a web browser and a web server (now also
   used heavily for server-to-server communication)
 
 ---
 
+class: center inverse middle
+
 # HTTP Request/Response Components
 
-## HTTP Request
+---
+
+# HTTP Request
 
 * __Verb__: What do you want to do (e.g., __GET__, __POST__)
+
 * __Resource__: What is the logical path of the resource you want
+
 * __HTTP Version__: What version of HTTP are you using?
+
 * __Headers__: Standard way to specify or request optional behavior
+
 * __Body__: Content that is being sent to the server (e.g., a file upload)
 
-## HTTP Response
+---
+
+# HTTP Response
 
 * __HTTP Version__: Indicates the HTTP version the server is "speaking"
-* __Status Code__: Indicates success, failure, or other possible response
-  states
+
+* __Status Code__: Indicates success, failure, or other possible [response
+  codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
+
 * __Headers__: Provides meta data about the response.
+
 * __Body__: The primary payload of the response (for a successful _GET_
-request, this contains the resource content)
+  request, this contains the resource content)
 
 ---
 
@@ -165,48 +208,65 @@ request, this contains the resource content)
 
 ---
 
-# HTTP Verbs GET and POST
+class: center inverse middle
 
-## GET
+# HTTP Verbs
+
+---
+
+# GET
 
 * Request a copy of a _resource_
+
 * The request should have no side-effects (i.e., doesn't change server state)
+
 * __GOOD__: `GET /fluffy_kitty.jpg`
+
 * __BAD__: `GET /users/sign_out`
 
-## POST
+---
+
+# POST
 
 * Sends data to the server
+
 * Generally used to create a _resource_
+
 * Has side-effects (e.g., creates a resource)
+
 * Not idempotent (i.e., making the same request twice creates two
   separate, but similar resources)
+
     * "Do you want to submit your form again?"
 
 ---
 
-# HTTP Verbs PUT and DELETE
-
-## PUT
+# PUT
 
 * Sends data to the server
+
 * Often used to update an existing resource
+
 * Has side-effects
+
 * Should be idempotent (e.g., updating a resource twice should result in the
   same effect to the resource)
 
-## DELETE
+---
+
+# DELETE
 
 * Destroys a resource
-* Has side effects
+
+* Has side-effects
+
 * Should be idempotent
+
 * __GOOD__: `DELETE /session/<id>` (for log out)
 
 ---
 
-# HTTP Verb HEAD
-
-## HEAD
+# HEAD
 
 * Exactly like GET but excludes the body in the response
 
@@ -224,6 +284,8 @@ Correct HTTP verb usage is not enforced, and is often misused.
 GET /post/5?action=hide
 ```
 
+--
+
 > What other problem do you think can occur with the misuse of HTTP verbs?
 
 ---
@@ -231,7 +293,9 @@ GET /post/5?action=hide
 # Other HTTP Verbs
 
 * TRACE
+
 * OPTIONS
+
 * CONNECT
 
 ---
@@ -240,19 +304,25 @@ GET /post/5?action=hide
 
 Specifies a logical hierarchy to access a resource:
 
-* __GOOD__: /gp/product/1565925092/
-* __BAD__: /index.jsp?page_id=4251
+* __GOOD__: `/gp/product/1565925092/`
+
+* __BAD__: `/index.jsp?page_id=4251`
+
+--
 
 ## Query String
 
-* The portion of the resource after the _question mark_
+* The portion of the resource after a _question mark_ (`?`)
+
 * Used to assist in locating the resource
-* Values are assigned using the equal token (e.g., `id=15`)
-* Multiple values can be concatenated via ampersand (`&amp;`)
+
+* Values are assigned using the equal token (e.g., `sort=top`)
+
+* Multiple values can be concatenated via _ampersand_ (`&amp;`)
 
 Example:
 
-http://www.reddit.com/r/ucsantabarbara/?sort=top&amp;t=all
+http://www.reddit.com/user/spez/?sort=top&amp;t=all
 
 ---
 
@@ -264,10 +334,13 @@ protocol.
 With HTTP different versions have different behavior:
 
 * (1991) HTTP 0.9 (retroactively versioned): Single line protocol with no
-  headers. Only GET supported: `GET index.html`
+  headers. Only __GET__ supported: `GET index.html`
+
 * (1996) HTTP 1.0: Added headers, and a version string
+
 * (1999) HTTP 1.1: Connection keep-alive by default, additional caching
   mechanisms. __Primary HTTP version used today__
+
 * (2015) HTTP 2.0: Binary framing, header compression, many other
   optimizations. Discussed in more detail in a future lecture
 
@@ -279,6 +352,7 @@ Provides metadata for the request and response.
 
 > What HTTP headers do you know of?
 
+---
 
 # HTTP Headers: Accept
 
@@ -330,15 +404,17 @@ I prefer Spanish, but will accept US-English.
 
 ---
 
-# HTTP Headers: Host, User-Agent
-
-## Host (required in HTTP 1.1 request)
+# HTTP Headers: Host
 
 Indicates the DNS hostname associated with the desired resource.
 
+Required in an HTTP 1.1 request.
+
 > Why is the HOST header required?
 
-## User-Agent
+---
+
+# HTTP Headers: User-Agent
 
 Indicates information about the client (web browser, crawler, tool) to the web
 server.
@@ -364,7 +440,11 @@ subsequent requests to the server.
 A request header containing the data previously set by the server via a
 `Set-Cookie` header.
 
+--
+
 > What kind of information might one put in a cookie?
+
+--
 
 > What security concerns may exist with cookies?
 
@@ -412,15 +492,24 @@ Ref: [HTTP Status Code Definitions](http://www.w3.org/Protocols/rfc2616/rfc2616-
 # Common HTTP Statuses
 
 * __200 OK__: The requested resource is being returned.
+
 * __301 Moved Permanently__: The resource has been moved and the browser should
   always use the new URL provided via the `Location: http://...` header.
-* __302 Found__: The resource can be found at another location.
+
+* __302 Found__: The resource can be found at another location via the
+  `Location` header.
+
 * __304 Not Modified__: Useful with `HEAD` requests containing a cache header
   (e.g., `If-Modified-Since`) to see if a `GET` request is needed.
+
 * __403 Forbidden__: The request is not authorized to access the resource.
+
 * __404 Not Found__: The resource does not exist.
-* __500 Internal Server Error__: Something crashed on the server.
-* __503 Service Unavailable__: Temporary failure on the server-side.
+
+* __500 Internal Server Error__: Something unexpected happened on the server.
+
+* __503 Service Unavailable__: Temporary failure on the server-side possibly
+  with an upstream server.
 
 ---
 
@@ -471,10 +560,10 @@ Content-Length: 9973
 ## Listen for a TCP connection
 
 ```bash
-nc -l localhost 4000
+nc -l localhost 5000
 ```
 
-## Browse to: [http://localhost:4000](http://localhost:4000)
+## Browse to: [http://localhost:5000](http://localhost:5000)
 
 ## Paste the following into your terminal:
 
@@ -486,19 +575,20 @@ Content-Length: 106
 
 <!DOCTYPE html>
 <html lang="en">
-<h1>HTML is easy!</h1>
-<img src="http://i.imgur.com/oXxTj5g.gif">
+  <h1>HTML is easy!</h1>
+  <img src="http://i.imgur.com/oXxTj5g.gif">
 </html>
 ```
+
+Tip: Ensure the newline gets copied
 
 ---
 
 # HTTP Performance
 
-Prior to HTTP 1.1, one TCP connection was used for a single HTTP session. Thus
-1 request per connection.
+Prior to HTTP 1.1, one TCP connection was used for a single HTTP request.
 
-> What performance implications does having 1 request per session have?
+> What performance flaws exist in this design?
 
 ---
 
@@ -516,7 +606,7 @@ _Image Source: “High Performance Browser Networking,” by Ilya Grigorik_
 
 The early phases of a TCP connection are bandwidth constrained.
 
-![TCP congestion mechanisms](tcp_congestion.png)
+.center[![TCP congestion mechanisms](tcp_congestion.png)]
 
 _Image Source: “High Performance Browser Networking,” by Ilya Grigorik_
 
@@ -527,7 +617,7 @@ _Image Source: “High Performance Browser Networking,” by Ilya Grigorik_
 It takes a fair amount of time to get up-to-speed. Making new connections per
 HTTP request is not terribly efficient.
 
-![TCP connection window size](tcp_cwnd.png)
+.center[![TCP connection window size](tcp_cwnd.png)]
 
 _Image Source: “High Performance Browser Networking,” by Ilya Grigorik_
 
@@ -552,7 +642,7 @@ an additional request after processing the most recent request.
 
 # HTTP Keep-Alive Session
 
-![HTTP Session with Two Requests](http_session.png)
+.center[![HTTP Session with Two Requests](http_session.png)]
 
 _Image Source: “High Performance Browser Networking,” by Ilya Grigorik_
 
@@ -569,7 +659,7 @@ request. Why wait?
 
 # HTTP Pipelining Session
 
-![HTTP Session with Two Requests](http_pipelining.png)
+.center[![HTTP Session with Two Requests](http_pipelining.png)]
 
 _Image Source: “High Performance Browser Networking,” by Ilya Grigorik_
 
@@ -588,6 +678,8 @@ _Image Source: “High Performance Browser Networking,” by Ilya Grigorik_
 Head of line blocking means that a request that takes a long time is blocking
 another request from occurring.
 
+--
+
 ## Extra work for the server
 
 Pipeling may require the server to buffer future responses while blocked on the
@@ -595,6 +687,8 @@ head of the line. These extra resources can exhaust the server.
 
 Furthermore, if an error occurs the server may end up doing the same _work_
 twice.
+
+--
 
 ## Adoption
 
@@ -614,10 +708,10 @@ resource serially over the same TCP connection is too slow.
 
 # Concurrent HTTP Sessions
 
-Most browsers will open up to __six__ concurrent connections to the same
+Most browsers will open up to __six__ concurrent TCP connections to the same
 server.
 
-![Concurrent HTTP Sessions](concurrent_http.png)
+.center[![Concurrent HTTP Sessions](concurrent_http.png)]
 
 _Image Source: “High Performance Browser Networking,” by Ilya Grigorik_
 
@@ -625,7 +719,7 @@ _Image Source: “High Performance Browser Networking,” by Ilya Grigorik_
 
 # Even more speed
 
-According to HTTP Archive the average number of resources for websites they
+According to the HTTP Archive the average number of resources for websites they
 crawled is ~100. With up to six connections each HTTP session must fetch
 approximately 16 resources. With head-of-line blocking this may still be too
 slow.
@@ -647,8 +741,9 @@ Reduces page load time for some work-loads (test to see if it's right for you).
 
 # Hacks that work
 
-Concurrent sessions and domain sharding are hacks to get more performance out
-of an existing system. Using these hacks makes deployment more complicated.
+Concurrent TCP sessions and domain sharding are hacks to get more performance
+out of an existing system. Using these hacks makes application development and
+deployment more complicated.
 
 ## Other Performance Related Hacks
 
@@ -657,21 +752,21 @@ of an existing system. Using these hacks makes deployment more complicated.
 
 ## The Future is Here!
 
-In a future lecture we'll talk about how HTTP 2.0 obviates all of these hacks.
+In a future lecture we'll talk about how HTTP 2.0 obviates many of these hacks.
 
 ---
 
-# Wednesday's Lab
+# Thursday's Lab
 
-Bring your laptop, with the battery fully charged.
+Bring your laptop, with the battery fully charged (power outlets are not easily
+accessible).
 
-## Reminder: Before Tomorrow
+## Reminder: Before Thursday
 
-* Read the list of project ideas: [http://cs290.com/project_ideas/](http://cs290.com/project_ideas/)
-* Post or comment on at least one idea on Piazza under the `project_idea`
-  "folder"
 * Complete the [Ruby Code Academy](https://www.codecademy.com/tracks/ruby)
+
 * Complete chapter 1 in the
   [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
+
 * Begin chapter 2 in the
   [Ruby on Rails Tutorial](https://www.railstutorial.org/book/toy_app)
