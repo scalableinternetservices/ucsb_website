@@ -40,6 +40,13 @@ __TODO__:
 * Introduction to HTML and CSS
 * Agile/Scrum
 
+__TODO__:
+
+* Read chapters [9](https://hpbn.co/brief-history-of-http/),
+  [10](https://hpbn.co/primer-on-web-performance/), and
+  [11](https://hpbn.co/http1x/) in High Performance Browser
+  Networking
+
 
 #### October 10, 2017 ([slides](/slides/2017/04_tdd_ci_pairing_servers))
 * TDD, CI, and Pairing
