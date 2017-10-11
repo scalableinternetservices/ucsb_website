@@ -50,7 +50,6 @@ __TODO__:
 
 #### October 10, 2017 ([slides](/slides/2017/04_tdd_ci_pairing_servers))
 * TDD, CI, and Pairing
-* Web Server Architectures (very brief)
 
 __TODO__:
 
