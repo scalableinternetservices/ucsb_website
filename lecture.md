@@ -54,7 +54,7 @@ __TODO__:
 
 __TODO__:
 
-* Complete chapter [3](https://www.railstutorial.org/book/static_pages), [4](https://www.railstutorial.org/book/rails_flavored_ruby), [5](https://www.railstutorial.org/book/filling_in_the_layout) and [6](https://www.railstutorial.org/book/modeling_users) in the Ruby on Rails Tutorial
+* Complete chapter [2](https://www.railstutorial.org/book/toy_app), [3](https://www.railstutorial.org/book/static_pages), [4](https://www.railstutorial.org/book/rails_flavored_ruby), [5](https://www.railstutorial.org/book/filling_in_the_layout) and [6](https://www.railstutorial.org/book/modeling_users) in the Ruby on Rails Tutorial
 
 
 #### October 12, 2017 ([slides](/slides/2017/05_web_and_application_servers))
