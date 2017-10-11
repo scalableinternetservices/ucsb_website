@@ -46,6 +46,8 @@ __TODO__:
   [10](https://hpbn.co/primer-on-web-performance/), and
   [11](https://hpbn.co/http1x/) in High Performance Browser
   Networking
+* Learn [git](http://rogerdudler.github.io/git-guide/)
+* Add single-controller app to repo, README with project description and team member photos
 
 
 #### October 10, 2017 ([slides](/slides/2017/04_tdd_ci_pairing_servers))
