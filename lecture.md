@@ -46,8 +46,6 @@ __TODO__:
   [10](https://hpbn.co/primer-on-web-performance/), and
   [11](https://hpbn.co/http1x/) in High Performance Browser
   Networking
-* Learn [git](http://rogerdudler.github.io/git-guide/)
-* Add single-controller app to repo, README with project description and team member photos
 
 
 #### October 10, 2017 ([slides](/slides/2017/04_tdd_ci_pairing_servers))
@@ -57,6 +55,8 @@ __TODO__:
 __TODO__:
 
 * Complete chapter [2](https://www.railstutorial.org/book/toy_app), [3](https://www.railstutorial.org/book/static_pages), [4](https://www.railstutorial.org/book/rails_flavored_ruby), [5](https://www.railstutorial.org/book/filling_in_the_layout) and [6](https://www.railstutorial.org/book/modeling_users) in the Ruby on Rails Tutorial
+* Learn [git](http://rogerdudler.github.io/git-guide/)
+* Add single-controller app to repo, README with project description and team member photos
 
 
 #### October 12, 2017 ([slides](/slides/2017/05_web_and_application_servers))
