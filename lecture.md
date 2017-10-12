@@ -59,7 +59,7 @@ __TODO__:
 
 
 #### October 12, 2017 ([slides](/slides/2017/05_web_and_application_servers))
-* Web Server and Application Server Architectures
+* HTTP and Application Servers
 
 __TODO__:
 
