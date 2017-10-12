@@ -78,36 +78,29 @@ by Cardellini, Colajanni, and Yu.
 * Client-side Caching
 
 
-#### October 24, 2017
-* Story Splitting Workshop: Elephant Carpaccio
-
-
-#### October 26, 2017 ([slides](/slides/2017/08_server_side_caching_and_deploying_on_aws))
+#### October 24, 2017 ([slides](/slides/2017/08_server_side_caching_and_deploying_on_aws))
 * Server-side Caching
 * Deploying on AWS
 
 
-#### October 31, 2017 ([slides](/slides/2017/09_relational_databases_db_concurrency_and_query_analysis))
+#### October 26, 2017 ([slides](/slides/2017/09_relational_databases_db_concurrency_and_query_analysis))
 * Relational Databases
 * Database Concurrency Control
 * Query Analysis
 
 
-#### November 7, 2017
-* Guest Lecture: Sean Maloney, Engineering Lead @ [Riot Games](http://www.riotgames.com/)
-
-
-#### November 9, 2017 ([slides](/slides/2017/10_rdbms_scaling))
+#### October 31, 2017 ([slides](/slides/2017/10_rdbms_scaling))
 * Database Scaling
     * Sharding
     * Service Oriented Architectures
     * Read-only Secondaries
 
 
-#### November 14, 2017 ([slides](/slides/2017/11_tsung))
+#### November 7, 2017
+* Guest Lecture: Sean Maloney, Engineering Lead @ [Riot Games](http://www.riotgames.com/)
 
-* Guest Lecture: Dr. Andrew Mutz, CTO @
-  [AppFolio](https://www.appfolioinc.com/)
+
+#### November 9, 2017 ([slides](/slides/2017/11_tsung))
 * Load testing with Tsung
 
 __TODO__:
@@ -118,6 +111,11 @@ __TODO__:
 * Read
   [Eventually Consistent](http://www.scalableinternetservices.com/slides/vogels.pdf)
   by Werner Vogels
+
+
+#### November 14, 2017
+* Guest Lecture: Dr. Andrew Mutz, CTO @
+  [AppFolio](https://www.appfolioinc.com/)
 
 
 #### November 16, 2017 ([slides](/slides/2017/12_nosql))
