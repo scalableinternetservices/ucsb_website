@@ -13,7 +13,7 @@
         font-weight: 400;
         margin-bottom: 0;
       }
-      .remark-slide-content h1 { font-size: 3em; }
+      .remark-slide-content h1 { font-size: 2.5em; }
       .remark-slide-content h2 { font-size: 2em; }
       .remark-slide-content h3 { font-size: 1.6em; }
       .footnote {
@@ -140,9 +140,9 @@ October 10, 2017
 
 # Today's Agenda
 
-* [Finish Agile Lecture](/slides/2017/03_html_css_agile/#26)
-
 * TODO
+
+* [Finish Agile Lecture](/slides/2017/03_html_css_agile/#26)
 
 * Agile Review
 
@@ -153,8 +153,6 @@ October 10, 2017
 * Github Workflow
 
 * Pair Programming
-
-* Web Servers
 
 ---
 
@@ -819,120 +817,6 @@ should be able to sufficiently explain what was done.
 
 On the other hand, it is possible for there to be bad pairings among your
 group. If you don't feel it is working out, then simply don't do it.
-
----
-
-class: center inverse middle
-
-# Web HTTP and Application Servers
-
----
-
-# What does it mean?
-
-After this lecture (will likely continue into Thursday) you should understand
-the trade-offs in the following stack descriptions:
-
-## NGINX + Passenger (Recommended for regular testing)
-
-NGINX handles requests to port 80 and passes connections to instances of the
-app through Passenger. Multiple concurrent connections are supported.
-
-## Puma
-
-Puma allows both thread-based and process-based
-concurrency.
-
----
-
-# Motivation
-
-We all should have a reasonable understanding of the HTTP protocol.
-
-Many browsers and clients exist that are able to:
-
-* Open a TCP socket
-* Send an HTTP request
-* Have the request processed
-* Receive the data in a response
-* Reuse the socket for multiple requests
-
-The software systems that handle the request are generally divided into two
-parts:
-
-* HTTP Servers
-* Application Servers
-
----
-
-# Separation of Responsibilities
-
-> Why not use a single process to handle both the http request and the
-> application logic?
-
-The two components have separate concerns and design goals.
-
-## HTTP Server
-
-* Provides a high performance HTTP implementation (handles concurrency)
-* Extremely stable, and relatively static
-* Very configurable and language/framework agnostic
-
-## Application Server
-
-* Written to support a specific language (e.g., Ruby), which may
-  hinder performance
-* Contains _business logic_ and is extremely dynamic
-* Focus on optimizing human resources via abstractions (e.g.,
-  model-view-controller [MVC] framework)
-
----
-
-# HTTP Servers
-
-![Netcraft survey of HTTP servers](netcraft_web_servers.png)
-
-Latest:
-[https://news.netcraft.com/archives/2016/09/19/september-2016-web-server-survey.html](https://news.netcraft.com/archives/2016/09/19/september-2016-web-server-survey.html)
-
----
-
-# HTTP Server Responsibilities
-
-* Parse HTTP requests and craft HTTP responses _very_ fast
-* Dispatch to the appropriate handler and return response
-* Be stable and secure (lots of string parsing)
-* Provide clean abstraction for backing applications
-
->  How do web servers provide concurrency?
-
----
-
-# HTTP Server Architectures
-
-* Single Threaded (no concurrency)
-* Process per request
-* Process pool
-* Thread per request
-* Process/thread worker pool
-* Event-driven
-
----
-
-# Single Threaded HTTP Servers
-
-```python
-bind() to port 80 and listen()
-loop forever
-    accept() a socket connection
-    while we can read from the socket
-        read() a request
-        process that request
-        write() its response
-    close() the socket connection
-```
-
-> If another request comes in while we're within the loop what happens?
 
     </textarea>
     <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js"
