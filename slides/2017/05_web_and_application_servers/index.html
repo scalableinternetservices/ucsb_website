@@ -1044,24 +1044,6 @@ Both Puma and Phusion Passenger:
 If you can use thread-parallelism, do it! But, making your code thread safe
 isn't always obvious.
 
---
-
-## Old example: pp/models/order.rb
-
-```ruby
-class Order
-  belongs_to :user, klass: User
-end
-```
-
-The above code may result in _autoloading_ `user.rb` for the `User`
-model. In versions of ruby prior to 2.0 (February 2013) autoloading was not
-thread safe.
-
-> What else might not be thread safe?
-
---
-
 Things to consider:
 
 * Your code
