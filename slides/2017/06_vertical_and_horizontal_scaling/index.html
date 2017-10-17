@@ -11,16 +11,22 @@ __CS291A__
 
 Dr. Bryce Boe
 
-October 11, 2015
+October 17, 2017
 
 ---
 
 # Today's Agenda
 
 * TODO
+
+* [Complete Server Architecture Slides](/slides/2017/05_web_and_application_servers/#32)
+
 * Server Architecture Review
+
 * Motivation
+
 * Vertical Scaling
+
 * Horizontal Scaling
 
 ---
@@ -32,16 +38,20 @@ October 11, 2015
 * Chapters 1, 2, 9-11 in
   [HPBN](https://hpbn.co/primer-on-latency-and-bandwidth/) / Chapters 1-6 in
   the [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
+
 * Familiarity with Git (you'll get more practice)
+
 * [Dynamic Load Balancing on Web-server Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf)
   by Cardellini, Colajanni, and Yu.
 
-## Before Lab
+## Before Thursday's Lab
 
 * Complete at least #TEAM_MEMBERS stories that deliver value to your users
   (me).
+
 * Complete chapters 7 through 10 in the
   [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
+
 * Hook TravisCI up to your repository.
 
 __Focus__: On delivering new usable features to your customers (me) for the
@@ -52,10 +62,15 @@ next few weeks.
 # HTTP Server Architecture Review
 
 * Single Threaded (no concurrency)
+
 * Process per request
+
 * Process pool
+
 * Thread per request
+
 * Process/thread worker pool
+
 * Event-driven
 
 ---
@@ -102,15 +117,21 @@ You've built something the world (or significant subset) is excited about.
 Buying "bigger" hardware and scaling _up_
 
 * __PRO__: Easy
+
 * __CON__: Limited
+
 * __CON__: Non-linear increase in cost when scaling
+
+--
 
 ## Horizontal Scaling
 
 Buying move servers and scaling _out_
 
 * __PRO__: Easy to add more servers (limited by data center space)
+
 * __PRO__: Linear (maybe even sublinear) increase in cost when scaling
+
 * __CON__: More moving parts makes things more complicated
 
 ---
@@ -121,7 +142,9 @@ When needed, increase the resources of your current server, eventually buy a
 bigger server with:
 
 * More memory
+
 * More and/or faster CPUs and/or cores
+
 * Higher bandwidth
 
 ---
@@ -133,10 +156,15 @@ paths. Each type of instance (below) has a few options ranging from lower
 resources/performance to higher resources/performance:
 
 * __T__ and __M__ prefixed instances: balanced mix of memory and CPU
+
 * __C__ prefixed instances: CPU optimized
+
 * __R__ prefixed instances: Memory optimized
+
 * __G__ prefixed instances: GPU optimized
+
 * __I__ prefixed instances: I/O optimized
+
 * __D__ prefixed instances: Storage capacity optimized
 
 ---
@@ -270,6 +298,7 @@ balancing__.
 ## Basic Idea
 
 * Have many servers that can serve clients
+
 * Make these servers _appear_ as a single endpoint to the outside world
 
 The users' experiences are the same regardless of which server ultimately
@@ -341,13 +370,17 @@ Content-Type: text/html; charset=iso-8859-1
 ## Strengths
 
 * Simple
+
 * Complete control over load balancing algorithm
+
 * Location independent
 
 ## Weaknesses
 
 * Not transparent to user
+
 * High load on www
+
 * May reduce local-network cache applicability
 
 ---
@@ -391,11 +424,13 @@ cs291.com has address 192.30.252.153
 ## Strengths
 
 * Simple
+
 * Cheap
 
 ## Weaknesses
 
 * Less control over balancing
+
 * Modifying the list is inhibited by caching in the browser and proxies
 
 ---
@@ -476,11 +511,13 @@ HTTP HTTP/1.1 200 OK
 ## Strengths
 
 * More control over which requests go to which servers
+
 * Works fine with HTTPs
 
 ## Weaknesses
 
 * Constrains where the servers can be located (same network)
+
 * Complicated
 
 ---
@@ -518,30 +555,32 @@ This is the most popular technique in use (#3 is also used).
 ## Weaknesses
 
 * Load balancer needs to do more work
+
 * HTTPs is more complicated
 
 ---
 
-# Think About It
+# Load Balancing Considerations
 
 Assume you are to design a load balancing HTTP proxy. You have insight into
 every incoming request and response.
 
 > How would you determine which server to forward a request to?
 
----
-
-# Load Balancing Considerations
-
-> How would you determine which server to forward a request to?
+--
 
 ## Options
 
 * Random
+
 * Round robin
+
 * Least number of connections
+
 * Fastest response time
+
 * Bandwidth per server
+
 * URI-based mapping (e.g., `/images` to server1, `/admin` to server2)
 
 Amazon's ELB (elastic load balancer) uses round robin with cookie-based
@@ -552,17 +591,23 @@ stickiness (send the same client to the same server).
 # Load Balancing Challenges
 
 When working with and/or designing a load balancing proxy there are some
-challenges to consider.
+challenges to consider:
 
 * Detecting and reacting to server failures
+
 * Session affinity and persistence
+
 * Connection pooling
 
-__Affinity__: Map a client to a server without application-level information
+Definitions:
+
+* __Affinity__: Map a client to a server without application-level information
 (e.g., IP address, request time)
 
-__Persistence__: Use application-level
+* __Persistence__: Use application-level
 information to map a client to a server (e.g., cookies)
+
+[Reference](https://www.haproxy.com/blog/load-balancing-affinity-persistence-sticky-sessions-what-you-need-to-know/)
 
 ---
 
@@ -576,8 +621,11 @@ time?
 Probe the server through various means:
 
 * __ICMP ping__: tests the network and server kernel
+
 * __TCP connection__: the process is running and accepting connections
+
 * __HTTP HEAD__: the application is serving pages
+
 * __SNMP__: Provides insight into server load (and more if configured)
 
 ---
@@ -592,7 +640,9 @@ A few options:
 
 * Affinity based on client IP address (concerns: client IPs change, and IPs are
 shared)
+
 * HTTP Cookie (works but requires proxy configuration)
+
 * Session ID in URL (not a great solution)
 
 ---
@@ -613,22 +663,31 @@ Reduces idle waiting on server for reads and writes.
 # Software Load Balancers
 
 * Apache
+
 * NGINX
+
 * HAProxy
+
 * Varnish
+
 * Pound
+
 * Squid
 
 ---
 
 # Amazon Elastic Load Balancer
 
-Amazon provides load balancing as a service.
+Amazon provides load balancing as a service:
 
 * $0.025 per load balancer hour
+
 * $0.008 per GB of data processed
+
 * Works with EC2 autoscaling groups
+
 * Supports TLS termination
+
 * Supports load balancing between Availability Zones within a Region
 
 __Does not__: support load balancing between regions (e.g., between us-west-1
@@ -644,7 +703,7 @@ as the web server application.
 For these tests we are going to use a single machine for the database. This
 will make it easy to scale up the number of application servers.
 
-![Single Server Load Balanced Topology](load_balanced_topology_single.png)
+.center[![Single Server Load Balanced Topology](load_balanced_topology_single.png)]
 
 ---
 
@@ -673,7 +732,7 @@ Comparable to single M3 XLarge ($200/mo)
 
 Let's scale horizontally by adding a second application server instance.
 
-![Dual Server Load Balanced Topology](load_balanced_topology_double.png)
+.center[![Dual Server Load Balanced Topology](load_balanced_topology_double.png)]
 
 ---
 
