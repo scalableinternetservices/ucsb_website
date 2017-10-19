@@ -11,16 +11,20 @@ __CS291A__
 
 Dr. Bryce Boe
 
-October 13, 2016
+October 19, 2017
 
 ---
 
 # Today's Agenda
 
 * TODO
-* Complete Horizontal Scaling Slides
+
+* [Complete Horizontal Scaling Slides](/slides/2017/06_vertical_and_horizontal_scaling/#29)
+
 * Scaling Review
+
 * High Availability
+
 * Client-side Caching
 
 ---
@@ -32,12 +36,15 @@ October 13, 2016
 * Chapters 1, 2, 9-11 in
   [HPBN](https://hpbn.co/primer-on-latency-and-bandwidth/) / Chapters 1-10 in
   the [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
+
 * [Dynamic Load Balancing on Web-server Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf)
   by Cardellini, Colajanni, and Yu.
-* Web application with a few basic features.
+
+* Build out a web application with a few basic features.
+
 * TravisCI integration with your repository.
 
-## Before next lab
+## Before next week's lab
 
 * Chapters 13, 14 in the [Ruby on Rails
   Tutorial](https://www.railstutorial.org/book/user_microposts) (read/skim
@@ -48,12 +55,6 @@ next few weeks.
 
 ---
 
-class: center, middle
-
-[Complete Horizontal Scaling Slides](/slides/2016/06_vertical_and_horizontal_scaling/#39)
-
----
-
 # Scaling Review
 
 ## Vertical Scaling
@@ -61,7 +62,9 @@ class: center, middle
 Buying "bigger" hardware and scaling _up_
 
 * __PRO__: Easy
+
 * __CON__: Limited
+
 * __CON__: Non-linear increase in cost when scaling
 
 ## Horizontal Scaling
@@ -69,7 +72,9 @@ Buying "bigger" hardware and scaling _up_
 Buying move servers and scaling _out_
 
 * __PRO__: Easy to add more servers (limited by data center space)
+
 * __PRO__: Linear (maybe even sublinear) increase in cost when scaling
+
 * __CON__: More moving parts makes things more complicated
 
 ---
@@ -79,7 +84,9 @@ Buying move servers and scaling _out_
 Modern web applications power some very important parts of our lives.
 
 * Banking
+
 * Medical
+
 * Telephony
 
 Having anytime access to these services (high availability) is increasingly
@@ -93,8 +100,10 @@ Companies offering services will often advertise some number of nines
 availability:
 
 * Three nines: 99.9% uptime, 525.6 minutes of downtime a year (43.8/month)
+
 * Four nines: 99.99% uptime, 52.6 minutes of downtime a year (4.38/month)
     * Desired by many business applications
+
 * Five nines: 99.999% uptime, 5.3 minutes of downtime a year (26.5s/month)
     * Desired by communication companies
 
@@ -121,26 +130,28 @@ class: center, middle
 
 * an application server fails?
 
-* the load balancer fails?
+* a load balancer fails?
 
-* the switch fails?
+* a switch fails?
 
-* the router fails?
+* a router fails?
+
+* a connection to the Internet fails?
 
 * the Internet fails?
 
-* the database fails?
+* a database fails?
 
-* the entire data center fails?
+* an entire data center fails?
 
 ---
 
 # Handling Application Server Failure
 
-.left-column.center[
+.left-column40.center[
 ![Single application server](application_server.png)
 ]
-.right-column[
+.right-column60[
 We've already discussed the components of this sort of failure.
 
 * Process-level isolation reduces hanging, or dead processes by having other
@@ -165,29 +176,36 @@ class: center, middle
 
 # Redundant Load Balancers
 
-.left-column30[
-Buy two load balancers. One is the primary, and the other is the failover.
+.left-column40[
+Buy two load balancers.
+
+One is the primary, and the other is the failover.
 
 Load balancers communicate via a heartbeat to determine the health of each
 other.
 ]
-.right-column70.center[
+.right-column60.center[
 ![Redundant load balancers](redundant_load_balancers.png)
 ]
 
+--
+
 .clear[
 > During a failover, what happens to established flows?
+]
+
+--
 
 > During a failover, what happens to the IP address?
-]
 
 
 ---
 
 # Load Balancer Failover
 
-When the failover determines it needs to become the primary (detected via lack
-of heartbeat), it issues a gratuitous ARP for the load balanced IP.
+When the failover load balancer determines it needs to become the primary
+(detected via lack of heartbeat), it issues a gratuitous ARP for the load
+balancer's IP.
 
 The gratuitous ARP (layer 2) will inform the switch that traffic should be
 delivered to the port that leads to the new primary (formerly the failover).
@@ -211,8 +229,9 @@ class: center, middle
 
 # Redundant Switches
 
-Buy two switches! Again with a both a primary and failover and using a
-heartbeat between them.
+Buy two switches!
+
+Again with a both a primary and failover and using a heartbeat between them.
 
 During failover similar issues occur but layer 2 should be stateless so no/less
 synchronization needed.
@@ -242,15 +261,17 @@ Similar heartbeat and failover system, with slightly different problems.
 
 class: center, middle
 
-# How do we Handle Internet Failure?
+# How do we Handle Access to the Internet Failure?
 
 ![Redundant routers](redundant_routers.png)
 
 ---
 
-# How do we Handle Internet Failure?
+# How do we Handle Access to the Internet Failure?
 
-Buy two! Use separate internet service providers (ISPs).
+Buy two!
+
+Use separate internet service providers (ISPs).
 
 .center[![High Availability Topology](high_availability.png)]
 
@@ -260,12 +281,16 @@ Buy two! Use separate internet service providers (ISPs).
 
 > How do we handle routing when we have two ISPs?
 
+--
+
 ## Outgoing Traffic (easy)
 
 We control how we send outbound traffic so we have some options:
 
 * Pick the cheapest or most reliable link
 * Pick the _closer_ link
+
+--
 
 ## Incoming Traffic (hard)
 
@@ -308,6 +333,19 @@ class: center, middle
 
 ---
 
+class: center, middle
+
+# 2017 Hurricanes
+
+![2017 Hurricanes Headline](2017_hurricanes.png)
+
+> Yet another data center, west of Houston, was so well prepared for the storm
+  — with backup generators, bunks and showers — that employees’ displaced
+  family members took up residence and United States marshals used it as a
+  headquarters until the weather passed.
+
+---
+
 # Availability Axiom (Pete Tenereillo)
 
 Source: [http://www.tenereillo.com/GSLBPageOfShame.htm](http://www.tenereillo.com/GSLBPageOfShame.htm)
@@ -318,6 +356,8 @@ Source: [http://www.tenereillo.com/GSLBPageOfShame.htm](http://www.tenereillo.co
 
 An "A record" is an IPv4 address associated with a DNS host (AAAA for IPv6
 addresses).
+
+--
 
 ## Problem
 
@@ -338,6 +378,8 @@ class: center, middle
 # Multi-site High Availability
 
 ![High Availability in Two Sites](dual_site_availability.png)
+
+What about the database?
 
 ---
 
@@ -409,8 +451,11 @@ for the same data can be served faster
 --
 
 * Inside the browser
+
 * In "front" of the server (CDNs, ISP cache, etc.)
+
 * Inside the application server
+
 * Inside the database (query cache)
 
 ---
@@ -432,9 +477,13 @@ The building blocks of caching are all provided via HTTP headers:
     * no-cache
     * max-age
     * public | private
+
 * etag
+
 * last-modified
+
 * if-none-match
+
 * if-modified-since
 
 ---
@@ -445,6 +494,7 @@ When `cache-control: no-store` is provided as a header to an HTTP response the
 browser and intermediate proxy-caches:
 
 * must not save the information in any non-volatile storage
+
 * must make a best effort attempt to remove the information from volatile
   storage as promptly as possible
 
@@ -621,7 +671,7 @@ not save a copy to a non-volatile location.
 Let's start with implementation client-side HTTP caching on the New Submission
 page in the demo app:
 
-![Demo App New Submission View](demo_new_submission.png)
+.center[![Demo App New Submission View](demo_new_submission.png)]
 
 ---
 
