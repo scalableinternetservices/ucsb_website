@@ -77,7 +77,7 @@ by Cardellini, Colajanni, and Yu.
 * Architecting for High Availability
 
 
-#### October 24, 2017 ([slides](/slides/2017/08_server_side_caching_and_deploying_on_aws))
+#### October 24, 2017 ([slides](/slides/2017/08_caching))
 * Client-side Caching
 * Server-side Caching
 * Deploying on AWS
