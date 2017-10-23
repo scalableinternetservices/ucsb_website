@@ -73,7 +73,7 @@ by Cardellini, Colajanni, and Yu.
 * Horizontal Scaling with Load Balancing
 
 
-#### October 19, 2017 ([slides](/slides/2017/07_high_availability_and_client_side_caching))
+#### October 19, 2017 ([slides](/slides/2017/07_high_availability))
 * Architecting for High Availability
 
 
