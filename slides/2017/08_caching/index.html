@@ -18,9 +18,13 @@ October 24, 2017
 # Today's Agenda
 
 * TODO
+
 * [Complete High Availability Slides](/slides/2017/07_high_availability/#24)
+
 * High Availability Review
+
 * Client-Side Caching
+
 * Server-side Caching
 
 
@@ -33,13 +37,14 @@ October 24, 2017
 * Chapters 1-2, 9-11 in
   [HPBN](https://hpbn.co/primer-on-latency-and-bandwidth/) / All Chapters in
   the [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
-* Web application with a handful of basic and more complex features.
+
+* Web application with a handful of features.
+
 * TravisCI integration with your repository.
 
-## Before next lab
+## Before the end of Thursday's lab
 
-* Successfully deploy your application to AWS. Credentials should be available
-again tomorrow.
+* Successfully deploy your application to AWS.
 
 __Focus__: On delivering new usable features to your customers (me) for the
 next few weeks.
@@ -50,7 +55,7 @@ class: center middle
 
 # High Availability Review
 
-![High Availability in Two Sites](dual_site_availability.png)
+.center[![High Availability in Two Sites](dual_site_availability.png)]
 
 ---
 
@@ -350,7 +355,7 @@ page in the demo app:
 
 Initial page load fetches every resource (indicated via 200 response).
 
-![Initial Demo App New Submission Resources](demo_new_submission_resources.png)
+.center[![Initial Demo App New Submission Resources](demo_new_submission_resources.png)]
 
 
 ---
@@ -361,7 +366,7 @@ Refreshing the page doesn't require sending the asset bodies (304 responses),
 but the server sends the complete /submissions/new response body (200
 response).
 
-![Subsequent Demo App New Submissions Resources](demo_new_submission_resources_subsequent.png)
+.center[![Subsequent Demo App New Submissions Resources](demo_new_submission_resources_subsequent.png)]
 
 ---
 
@@ -369,7 +374,7 @@ response).
 
 > When can this page be out-of-date?
 
-![Demo App New Submission View](demo_new_submission.png)
+.center[![Demo App New Submission View](demo_new_submission.png)]
 
 ---
 
@@ -409,9 +414,12 @@ end
 
 * Informs Rails to base the `etag` and/or `last_modified` response header on
   all communities.
+
 * Compares the `last_modified` or `etag` value against `if-modified-since`
   and/or `if-none-match` request headers.
+
 * `stale?` returns true when `Communities.all` is newer and/or differs
+
 * `stale?` implicitly affects the response such that a 304 HTTP status and no
   body is returned when `stale?` returns false
 
@@ -425,7 +433,7 @@ in a 304 (not modified) response.
 If the list of communities change subsequent
 responses will return a 200 along with the body of the response.
 
-![Cached Demo App New Submissions Resources](demo_new_submission_resources_cached.png)
+.center[![Cached Demo App New Submissions Resources](demo_new_submission_resources_cached.png)]
 
 ---
 
@@ -435,7 +443,7 @@ responses will return a 200 along with the body of the response.
 > What on the submission view can make the page stale?
 ]
 .right-column70.center[
-![Submission View](demo_submission_view.png)
+.center[![Submission View](demo_submission_view.png)]
 ]
 
 ---
@@ -491,7 +499,7 @@ The web console indicates our caching was successful.
 Adding a new comment, modifying the community or submission causes a 200
 response.
 
-![Cached Demo App Submission Show](demo_submission_view_cached.png)
+.center[![Cached Demo App Submission Show](demo_submission_view_cached.png)]
 
 ---
 
@@ -499,7 +507,7 @@ response.
 
 > What on the submissions index can make the page stale?
 
-![Submissions Index View](demo_submissions_index.png)
+.center[![Submissions Index View](demo_submissions_index.png)]
 
 ---
 
@@ -548,17 +556,6 @@ class: center, inverse, middle
 
 ---
 
-# Goals for Server-side Caching
-
-## After today you should understand...
-
-* why server-side caching exists
-* what options you have when using server-side caching
-* how to use server-side caching in your projects
-* how to deploy on AWS using elastic beanstalk
-
----
-
 # Caching HTTP Responses: Motivation
 
 A single web server process repeatedly responds to HTTP requests from a variety
@@ -570,7 +567,7 @@ performed, both of which can be expensive.
 In practice, there is a significant amount of similarity between HTTP
 responses.
 
-In the client-side caching lecture we looked at optimizing scenarios where
+With client-side caching we looked at optimizing scenarios where
 requests for the same resource would result in an identical response.
 
 In this lecture we will look at optimizing scenarios where repeated responses
@@ -586,7 +583,9 @@ are not identical, but similar.
 --
 
 * View fragments
+
 * Rarely modified ORM objects
+
 * Expensive to compute data
 
 ---
@@ -602,7 +601,7 @@ Sidebar Fragment (shown on all cs291.com pages)
 ```html
 <div class="col-md-3 hidden-xs">
   <div class="sidebar well">
-    Scalable Internet Services, CS291A, Fall 2016
+    Scalable Internet Services, CS291A, Fall 2017
   </div>
 
   <div class="sidebar well">
@@ -612,7 +611,7 @@ Sidebar Fragment (shown on all cs291.com pages)
 
     <h2 id="lecture">Lecture</h2>
     <p>Tuesday and Thursday<br />
-       1:00pm – 2:50pm</p>
+       3:00pm – 4:50pm</p>
 
     ...
 
@@ -625,8 +624,11 @@ Sidebar Fragment (shown on all cs291.com pages)
 # Rarely Modified ORM Objects
 
 * User permissions
+
 * Configuration options
+
 * Product details (on a shopping site)
+
 * In general, any database-backed data that seldom changes
 
 ---
@@ -637,14 +639,20 @@ Expensive to compute data is exactly what the name suggests. Expensive could
 mean:
 
 * it takes a significant amount of time to compute
+
 * it is best suited for a background worker due to hardware constraints on the
   application servers.
+
+--
 
 ## Examples
 
 * Total account balance on Mint
+
 * Monthly account summary on Google
+
 * The complete diff between two commits on GitHub
+
 * The list of suggested contacts on LinkedIn
 
 ---
@@ -707,17 +715,27 @@ Source: http://www.eecs.berkeley.edu/~rcs/research/interactive_latency.html
 
 * Storing in memory and reading later is fast
     * Random reads from memory is < 0.1μs
+
     * Reading 1MB is 9μs
+
+--
 
 * Storing on disk is slow without SSD (solid state drive):
     * Disk seek is 4000μs
+
     * Subsequent sequential read of 1MB is 2000μs
+
+--
 
 * Storing on disk with SSD is much more reasonable
     * Random read is 16μs
+
     * Sequential read of 1MB is 156μs
 
+--
+
 * Storing on another machine is reasonable
+
     * Round trip within data center is 500μs
 
 ---
@@ -727,13 +745,17 @@ Source: http://www.eecs.berkeley.edu/~rcs/research/interactive_latency.html
 ## Summary
 
 * In memory: tens of μs
+
 * On SSD: hundreds of μs
+
 * On magnetic disk: thousands of μs
+
 * On remote machine: __add__ hundreds of μs
 
 ## Conclusions
 
 * Prefer SSD over magnetic storage for speed
+
 * Memory > SSD > Remote
 
 > Are these conclusions always true?
@@ -760,33 +782,17 @@ Source: http://www.eecs.berkeley.edu/~rcs/research/interactive_latency.html
 
 * In memory
     * highest performance
-    * lowest hit rate
+    * lowest hit rate (if applicable to only one process)
 
 * On SSD
     * lower performance
     * higher hit rate
 
-* On remove machine
+* On remote machine
     * lowest performance
     * highest hit rate
 
 There is no silver bullet.
-
----
-
-# Caching Trade-offs
-
-> How will each of the following affect system performance:
-
-* Number of processes per machine
-
---
-
-* Concurrency model of application server
-
---
-
-* Number of machines per cluster
 
 ---
 
@@ -800,7 +806,9 @@ __memcached__ is a commonly used remote cache server. It...
 
 * is a distributed key-value store
     * keys can be up to 250 bytes
+
     * values can be up to 1MB
+
     * scales horizontally
 
 * uses a simple LRU (least recently used) to make space for new items when full
@@ -816,7 +824,9 @@ Rails provides excellent support for server-side caching.
 The three primary interfaces to caching in rails are:
 
 * HTTP caching
+
 * Fragment caching
+
 * Low level caching
 
 We already covered HTTP caching. Today we'll discuss the latter two.
@@ -890,7 +900,7 @@ config.cache_store = :mem_cache_store, 'cache-1.example.com'
 
 # Fragment Caching in Rails
 
-Fragment caching caches a portion of a rendered view for reuse on future
+Fragment caching caches a portion of a rendered view for reuse with future
 requests.
 
 Let's look at fragment caching in the context of the demo app.
@@ -1098,7 +1108,13 @@ module SubmissionHelper
 end
 ```
 
+---
+
+# Russian Doll Caching
+
 This technique of nesting cache fragments is known as __Russian Doll Caching__.
+
+.center[![Imperial Russian Dolls](russian_dolls.jpg)]
 
 ---
 
