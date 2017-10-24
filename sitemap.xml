@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>http://cs291.com/slides/2017/08_server_side_caching_and_deploying_on_aws/</loc>
+<loc>http://cs291.com/slides/2017/08_caching/</loc>
 </url>
 <url>
 <loc>http://cs291.com/slides/2015/02_http/</loc>
@@ -106,7 +106,7 @@
 <loc>http://cs291.com/slides/2017/06_vertical_and_horizontal_scaling/</loc>
 </url>
 <url>
-<loc>http://cs291.com/slides/2017/07_high_availability_and_client_side_caching/</loc>
+<loc>http://cs291.com/slides/2017/07_high_availability/</loc>
 </url>
 <url>
 <loc>http://cs291.com/slides/2015/01_course_introduction/</loc>
