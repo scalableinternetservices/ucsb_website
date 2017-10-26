@@ -33,8 +33,8 @@ five students, and team will build their own scalable web site using
 fundamental web technologies and the [Ruby on Rails](http://rubyonrails.org/)
 framework.
 
-Project-centric lab will meet every Wednesday from 5:00pm to 6:00pm in
-Phelps 3523. These mandatory labs offer a chance to collaborate with your teammates,
+Project-centric lab will meet every Thursday from 5:00pm to 6:00pm in
+Phelps 3525. These mandatory labs offer a chance to collaborate with your teammates,
 demo your progress to the instructor, and get guidance.
 
 ## Learning Outcomes
