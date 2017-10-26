@@ -1,0 +1,266 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Elastic Beanstalk</title>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 2.5em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      blockquote {
+        border-left: 0.3em solid rgba(0,0,0,0.5);
+        padding: 0 15px;
+        font-style: italic;
+      }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      img {
+        max-height: 100%;
+        max-width: 100%;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .clear { clear: both; }
+      #slideshow .slide .content code { font-size: 0.8em; }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+      .background-blue {
+        background-color: deepskyblue;
+      }
+      .background-green {
+        background-color: springgreen;
+      }
+      .background-pink {
+        background-color: deeppink;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        width: 49%;
+        float: left;
+      }
+      .right-column {
+        width: 49%;
+        float: right;
+      }
+      .left-column20 {
+        width: 20%;
+        float: left;
+      }
+      .right-column80 {
+        width: 79%;
+        float: right;
+      }
+      .left-column30 {
+        width: 30%;
+        float: left;
+      }
+      .right-column70 {
+        width: 69%;
+        float: right;
+      }
+      .left-column40 {
+        width: 40%;
+        float: left;
+      }
+      .right-column60 {
+        width: 59%;
+        float: right;
+      }
+
+      /* Table layout */
+      table {
+        background: #f5f5f5;
+        margin: 30px auto;
+        text-align: left;
+        width: 100%;
+      }
+      th {
+        background: linear-gradient(#777, #444);
+        color: #fff;
+        font-weight: bold;
+        padding: 10px 15px;
+      }
+      td {
+        border-right: 1px solid #fff;
+        border-left: 1px solid #e8e8e8;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #e8e8e8;
+        padding: 10px 15px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle
+
+# Elastic Beanstalk
+
+__CS291A__
+
+Dr. Bryce Boe
+
+October 26, 2017
+
+---
+
+# Deploying to AWS
+
+Now that you all have a start to your rails application on Github, it is time
+to learn how to deploy to AWS (Amazon Web Service).
+
+Amazon provides a tool called Elastic Beanstalk that we will use to create
+various deployments.
+
+https://aws.amazon.com/elasticbeanstalk/
+
+--
+
+Amazon will provide AWS credits if you sign up for AWS Educate using this link:
+
+https://www.awseducate.com/Registration?apptype=student&courseview=true
+
+* Type in "University of California Santa Barbara" as the institution
+
+* Select "Scalabe Internet Services - CS291A" as the course
+
+
+---
+
+# Working with AWS Guideliens
+
+Additional AWS resources are being donated by AppFolio. Please:
+
+* __NEVER__ copy your AWS credentials into your code nor make them publicly
+  available.
+
+--
+
+* Only deploy when you are ready to test something or demo.
+
+--
+
+* Terminate your deployment immediately when testing or the demo is done.
+
+--
+
+* For demoing and deployment testing please only use a single `t2.micro`
+  instance for the application server, and a `db.t2.micro` instance for the
+  database, without a load balancer:
+
+    ```
+    eb create -db.i db.t2.micro -i t2.micro --single ...
+    ```
+
+---
+
+# Working with AWS Guidelines
+
+* For vertical scaling tests, always start with the smallest instance type and
+  work your way up within the same deployment in order to minimize the time
+  that larger instances are deployed for.
+  http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.managing.ec2.html
+
+--
+
+* For horizontal scaling tests, try to consistently use the smallest instance
+  type that works for your application.
+  http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.managing.as.html
+
+--
+
+* Reset your database, and flush all caches between tests for consistency.
+
+--
+
+* Do not use any of the `t2` instances (e.g., `t2.micro`) for neither the app
+  server nor the database when performing scalability tests they have a CPU
+  quota system that will affect results.
+
+--
+
+## When in doubt, please ask.
+
+---
+
+# AWS Instances and Data
+
+Because instances should only be up for a limited amount of time it's important
+to:
+
+* Fetch any important data on the instances as soon as available (e.g., test
+  results)
+
+* Quickly load large amounts of testing data (test this process on smaller
+  instances)
+
+---
+
+# Deploying to Elastic Beanstalk
+
+Instructions for configuring your app, preparing, and deploying are found at:
+https://github.com/scalableinternetservices/demo_rails514_beanstalk
+
+## Oregon Region
+
+Ensure that you are utilizing the __oregon__ (us-west-2) region.
+
+---
+
+# By The end of Lab
+
+Demonstrate that you can successfully deploy your application to AWS by demoing
+on AWS.
+
+__Note__: All teams will be expected to demo on AWS for all following labs.
+
+Launching a new deployment will take >10 minutes so kick it off prior to lab.
+
+    </textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js"
+            type="text/javascript"></script>
+    <script type="text/javascript">
+      var hljs = remark.highlighter.engine;
+      var slideshow = remark.create({
+          highlightLanguage: 'ruby',
+          highlightLines: true,
+          hightlightSpans: true,
+          highlightStyle: 'monokai'
+        }) ;
+    </script>
+  </body>
+</html>
