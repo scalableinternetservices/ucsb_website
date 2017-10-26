@@ -11,17 +11,22 @@ __CS291A__
 
 Dr. Bryce Boe
 
-October 25, 2016
+October 26, 2017
 
 ---
 
 # Today's Agenda
 
 * TODO
-* Server-side Caching in Rails Review
+
+* [Complete Server-side Caching](/slides/2017/08_caching/#65)
+
 * Relational Databases Motivation
+
 * A Stable Data Layer
+
 * Database Concurrency Control
+
 * Query Analysis
 
 ---
@@ -33,73 +38,29 @@ October 25, 2016
 * Chapters 1-2, 9-11 in
   [HPBN](https://hpbn.co/primer-on-latency-and-bandwidth/) / All Chapters in
   the [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
+
 * TravisCI integration with your repository.
+
 * Web application with a handful of basic and more complex features.
-* Successfully deployed your application to AWS or made a Piazza question with
-  your issues.
 
-## Just before Lab
+## Before End of Lab
 
-* Launch your application to AWS and demo from it.
+* Successfully deployed your application to AWS.
 
 ---
 
-class: center, inverse, middle
-
-# Server-side Caching in Rails Review
-
----
-
-# Russian Doll Caching in Rails
-
-```erb
-<% cache(cache_key_for_submission_table) do %>
-
-<h3>Submissions</h3>
-<table class="table">
-  <thead>
-    <tr>...</tr>
-  </thead>
-
-  <tbody>
-    <% @submissions.each do |submission| %>
-      <% cache(...) do %> ... <% end %>
-    <% end %>
-  </tbody>
-</table>
-
-...
-
-<% end %>
-```
-
----
-
-# Low-level Rails Caching
-
-You can use the same built-in mechanisms to manually cache anything:
-
-```ruby
-class Product < ActiveRecord::Base
-  def competing_price
-    Rails.cache.fetch("#{cache_key}/competing_price",
-                      expires_in: 12.hours) do
-      Competitor::API.find_price(id)
-    end
-  end
-end
-```
-
----
-
-# Relational Databases Motivation
+# Relational Databases
 
 After today you should...
 
 * understand the importance of relational databases in architecting scalable
   Internet systems
 
+--
+
 * understand how to design with concurrency in mind
+
+--
 
 * have a basic idea regarding how to speed up your data layer
 
@@ -311,7 +272,9 @@ transactions that run in a database.
 Two actions are said to be in conflict if:
 
 * the actions belong to different transactions
+
 * at least one of the actions is a write operation
+
 * the actions access the same object (read or write)
 
 ## Conflicting Actions
@@ -357,6 +320,7 @@ Two actions are said to be in conflict if:
 __No__
 
 * Dirty Read Problem
+
 * Incorrect Summary Problem
 
 ---
@@ -516,6 +480,7 @@ resources by concurrent transactions.
 ## Write-lock
 
 * Blocks writes and reads
+
 * Also called __exclusive lock__
 
 --
@@ -523,6 +488,7 @@ resources by concurrent transactions.
 ## Read-lock
 
 * Blocks writes
+
 * Also called __shared lock__ (other reads can happen concurrently)
 
 ---
@@ -535,16 +501,21 @@ serializability.
 The two phases are:
 
 * Acquire Locks
+
 * Release Locks
 
 --
 
 ## Two-phase locking Protocol
 
-* Each transaction must obtain a _shared_ lock on an object before reading.
-* Each transaction must obtain an _exclusive_ lock on an object before writing.
+* Each transaction must obtain a _shared_ lock on an object before __reading__.
+
+* Each transaction must obtain an _exclusive_ lock on an object before
+  __writing__.
+
 * If a transaction holds an exclusive lock on an object, no other transaction
   can obtain any lock on that object.
+
 * A transaction cannot request additional locks once it releases any locks.
 
 ---
@@ -579,8 +550,11 @@ SS2PL allows only conflict serializable schedules.
 
 # Strong Strict Two-Phase Locking Protocol
 
-* Each transaction must obtain a _shared_ lock on an object before reading.
-* Each transaction must obtain an _exclusive_ lock on an object before writing.
+* Each transaction must obtain a _shared_ lock on an object before __reading__.
+
+* Each transaction must obtain an _exclusive_ lock on an object before
+__writing__.
+
 * If a transaction holds an exclusive lock on an object, no other transaction
   can obtain any lock on that object.
 * __All locks held by a transaction are released when the transaction
@@ -794,6 +768,7 @@ end
 ## Weaknesses
 
 * Have to worry about deadlocks and avoiding them
+
 * Performance is less predictable
 
 ---
@@ -957,6 +932,7 @@ slowing us down.
 ## Issue fewer queries.
 
 * Do not ask for the community each time
+
 * Do not ask for the number of comments each time
 
 ---
@@ -1012,6 +988,7 @@ queries.
 When a query starts with `EXPLAIN`...
 
 * the query is not actually executed
+
 * the produced output will help us identify potential improvements
 
 ---
@@ -1171,10 +1148,8 @@ Assuming the relationship is defined properly, Rails will enforce that when
 creating an `Employee`, the associated `Company` exists.
 
 Many databases, have built-in support for enforcing such constraints. With
-rails, one can use the `Foreigner` gem to take advantage of the database's
-foreign key support.
-
-After installing the gem, create a migration:
+rails, one can also take advantage of the database's foreign key support via
+[add_foreign_key](http://guides.rubyonrails.org/active_record_migrations.html#foreign-keys).
 
 ```ruby
 class AddForeignKeyToOrders < ActiveRecord::Migration
