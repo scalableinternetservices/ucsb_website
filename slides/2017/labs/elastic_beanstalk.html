@@ -1,6 +1,17 @@
-# Today's Agenda
+---
+layout: presentation
+title: Elastic Beanstalk
+---
 
-* Deploying on Amazon Web Services (AWS)
+class: center, middle
+
+# {{page.title}}
+
+__CS291A__
+
+Dr. Bryce Boe
+
+October 26, 2017
 
 ---
 
@@ -14,14 +25,22 @@ various deployments.
 
 https://aws.amazon.com/elasticbeanstalk/
 
-Note: I have verified that my demo app deploys. I need to make a few
-cost-saving tweaks. Credentials should be usable again tomorrow.
+--
+
+Amazon will provide AWS credits if you sign up for AWS Educate using this link:
+
+https://www.awseducate.com/Registration?apptype=student&courseview=true
+
+* Type in "University of California Santa Barbara" as the institution
+
+* Select "Scalabe Internet Services - CS291A" as the course
+
 
 ---
 
 # Working with AWS Guideliens
 
-The AWS resources we will use are being donated by AppFolio. Please:
+Additional AWS resources are being donated by AppFolio. Please:
 
 * __NEVER__ copy your AWS credentials into your code nor make them publicly
   available.
@@ -30,8 +49,9 @@ The AWS resources we will use are being donated by AppFolio. Please:
 
 * Only deploy when you are ready to test something or demo.
 
-* Terminate your deployment immediately when testing or the demo is done
-  (billing is on 1-hour intervals from launch time).
+--
+
+* Terminate your deployment immediately when testing or the demo is done.
 
 --
 
@@ -64,9 +84,9 @@ The AWS resources we will use are being donated by AppFolio. Please:
 
 --
 
-* Do not use any of the `micro` instances (app server or database) when
-  performing scalability tests they have a CPU quota system that will affect
-  results.
+* Do not use any of the `t2` instances (e.g., `t2.micro`) for neither the app
+  server nor the database when performing scalability tests they have a CPU
+  quota system that will affect results.
 
 --
 
@@ -87,33 +107,18 @@ to:
 
 ---
 
-# Signing into AWS
+# Deploying to Elastic Beanstalk
 
-Yesterday I sent a Piazza message to each team containing your team's private
-ssh key (teamname.pem).
-
-Use that to ssh into ec2.cs291.com
-
-```bash
-ssh -i teamname.pem teamname@ec2.cs291.com
-```
-
-Your AWS web console username and password be found in `~/teamname.txt`.
-
-To login visit:
-https://bboe-ucsb.signin.aws.amazon.com/console
+Instructions for configuring your app, preparing, and deploying are found at:
+https://github.com/scalableinternetservices/demo_rails514_beanstalk
 
 ## Oregon Region
 
-Ensure that the __Oregon__ (us-west-2) region is selected in the upper right.
-
-## Configuring your Application and Deploying
-
-https://github.com/scalableinternetservices/demo_rails5_beanstalk
+Ensure that you are utilizing the __oregon__ (us-west-2) region.
 
 ---
 
-# By Next Wednesday
+# By The end of Lab
 
 Demonstrate that you can successfully deploy your application to AWS by demoing
 on AWS.
