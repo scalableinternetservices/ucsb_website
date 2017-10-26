@@ -83,7 +83,6 @@ by Cardellini, Colajanni, and Yu.
 
 
 #### October 26, 2017 ([slides](/slides/2017/09_relational_databases_db_concurrency_and_query_analysis))
-* Deploying on AWS
 * Relational Databases
 * Database Concurrency Control
 * Query Analysis
