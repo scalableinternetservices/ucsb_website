@@ -11,7 +11,24 @@ __CS291A__
 
 Dr. Bryce Boe
 
-October 27, 2016
+October 31, 2017
+
+---
+
+# Outline
+
+* TODO
+
+* Complete [Database Concurrency Control and Query Analysis
+  Slides](/slides/2017/09_relational_databases_db_concurrency_and_query_analysis/#50)
+
+* Database Scaling Motivation
+
+* Sharding
+
+* Service Oriented Architectures
+
+* Separating Reads from Writes
 
 ---
 
@@ -22,13 +39,17 @@ October 27, 2016
 * Chapters 1-2, 9-11 in
   [HPBN](https://hpbn.co/primer-on-latency-and-bandwidth/) / All Chapters in
   the [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
+
 * Successfully deploying your application to AWS, and pushing updates `eb
   deploy`.
 
-## Before Tuesday's class
+## Before Thursday's Lab
+* Everyone is able to reliable create, update, and terminate elastic beanstalk
+  instances.
 
 * Practice scaling horizontally and vertically without creating a new
   deployment.
+
 * Verify scaling with some naïve measurements using a tool like `ab` or
   `httperf`.
 
@@ -180,10 +201,13 @@ database.
 
 # Three Techniques
 
-Each of the following techniques partitions RDBMS in a different way:
+Each of the following techniques partitions RDBMS (Relational Database
+Management System) in a different way:
 
 * Sharding
+
 * Service Oriented Architectures (SOA)
+
 * Separating Reads from Writes
 
 ---
@@ -222,7 +246,9 @@ transitively, database joins could connect everything together.
 
 * Any comment is only related to its parent (if not top-level), its children
   (replies), and its submission.
+
 * Submissions relate to each other through communities.
+
 * Transitively, all of these relationships could be joined across.
 
 ---
@@ -330,7 +356,9 @@ given request.
 Examples:
 
 * en.wikipedia.org vs. es.wikipedia.org (language based sharding)
+
 * google.com vs. google.co.uk (location based sharding)
+
 * na6.salesforce.com vs. naX.salesforce.com (customer based sharding)
 
 __Note__: The above examples could involve only a single load balancer.
@@ -385,7 +413,9 @@ disruption.
 # Demo App Example
 
 * Users can create and view communities.
+
 * Users can create submissions in these communities.
+
 * Each submission has a tree of comments.
 
 > How can we shard this application?
@@ -399,9 +429,13 @@ disruption.
 This would have difficulty as logged in users will want to see communities,
 submissions, and comments made by other logged in users.
 
+--
+
 ## By Submission?
 
 This would make generating submission lists for a single community difficult.
+
+--
 
 ## By Community?
 
@@ -418,6 +452,7 @@ We can use information in the url with any of the three load balancing
 approaches.
 
 * http://ucsb.demo.com (community sub-domain)
+
 * http://demo.com/ucsb (community path)
 
 Either the application server connects to the right database for the `ucsb`
@@ -554,7 +589,9 @@ speaking to a database, it will request data from the appropriate service.
 Each service is broken out by logical function. E.g.:
 
 * Users service that handles authentication and authorization
+
 * Billing service that handles credit cards and subscriptions
+
 * Account subsystem that tracks invoices
 
 .center[![Service Oriented Architecture](soa_stack.png)]
@@ -675,6 +712,7 @@ The primary issue with JSON/HTTP/REST is performance.
 For high-performance internal APIs there are a few excellent options:
 
 * Google Protocol Buffers
+
 * Apache Thrift (developed by Facebook)
 
 High performance APIs often trade flexibility for performance. For instance
@@ -689,28 +727,34 @@ Jeff Bezos (Amazon CEO) circa 2002 (according to Steve Yegge)
 
 1. All teams will henceforth expose their data and functionality through
    service interfaces.
+
 --
 
 2. Teams must communicate with each other through these interfaces.
+
 --
 
-3. There will be no other form of inter-process communication allowed: no direct
-   linking, no direct reads of another team's data store, no shared-memory
-   model, no back-doors whatsoever. The only communication allowed is via
-   service interface calls over the network.
+3. There will be no other form of inter-process communication allowed: no
+   direct linking, no direct reads of another team's data store, no
+   shared-memory model, no back-doors whatsoever. The only communication
+   allowed is via service interface calls over the network.
+
 --
 
 4. It doesn't matter what technology they use. HTTP, Corba, Pubsub, custom
    protocols -- doesn't matter. Bezos doesn't care.
+
 --
 
 5. All service interfaces, without exception, must be designed from the ground
    up to be externalizable. That is to say, the team must plan and design to be
    able to expose the interface to developers in the outside world. No
    exceptions.
+
 --
 
 6. Anyone who doesn't do this will be fired.
+
 --
 
 7. Thank you; have a nice day!
@@ -724,7 +768,9 @@ Archived Source: [https://plus.google.com/+RipRowan/posts/eVeouesvaVX](https://p
 ## Strengths
 
 * Small encapsulated code-bases
+
 * Scales well as application size scales
+
 * Scales well as the number of teams scale
 
 --
@@ -733,7 +779,9 @@ Archived Source: [https://plus.google.com/+RipRowan/posts/eVeouesvaVX](https://p
 
 * May not scale with the number of users (e.g., increased load to
   authentication service)
+
 * Transactions across services do not exist
+
 * Consistent DB snapshots across services do not exist
 
 ---
