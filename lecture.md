@@ -95,6 +95,10 @@ by Cardellini, Colajanni, and Yu.
     * Read-only Secondaries
 
 
+#### November 2, 2017
+* Slide catch-up
+
+
 #### November 7, 2017
 * Guest Lecture: Sean Maloney, Engineering Lead @ [Riot Games](http://www.riotgames.com/)
 
