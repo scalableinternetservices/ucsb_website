@@ -91,9 +91,9 @@ Then Alice would end with a 106.4% (A+), Bob with 97.85% (A+) and Chuck with
 80.75% (B-).
 
 So that everyone knows where they stand within their group, we will
-confidentially conduct the peer grading process at each quarter interval in the
-course. Only the outcome of the final peer-grade will be used to compute the
-final grade.
+confidentially conduct the peer grading process three times during the course
+(November 2, November 21, and December 7). Only the outcome of the final
+peer-grade (December 7) will be used to compute the final grade.
 
 ### Letter Grades
 
