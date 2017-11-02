@@ -91,12 +91,12 @@ by Cardellini, Colajanni, and Yu.
 #### October 31, 2017 ([slides](/slides/2017/10_rdbms_scaling))
 * Database Scaling
     * Sharding
+
+
+#### November 2, 2017 ([slides](/slides/2017/10_rdbms_scaling/#46))
+* Complete Database Scaling
     * Service Oriented Architectures
     * Read-only Secondaries
-
-
-#### November 2, 2017
-* Slide catch-up
 
 
 #### November 7, 2017
