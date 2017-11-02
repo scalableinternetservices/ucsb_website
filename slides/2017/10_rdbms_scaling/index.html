@@ -134,7 +134,7 @@ __CS291A__
 
 Dr. Bryce Boe
 
-October 31, 2017
+October 31 & November 2, 2017
 
 ---
 
@@ -907,6 +907,8 @@ Archived Source: [https://plus.google.com/+RipRowan/posts/eVeouesvaVX](https://p
 
 * Consistent DB snapshots across services do not exist
 
+* Application logic required to join data
+
 ---
 
 class: center inverse middle
@@ -932,33 +934,31 @@ In general, a relational database is hard to horizontally scale.
 However, when limited to a read-only copies, databases are very easy to
 horizontally scale.
 
-* Set up separate machines to act as __read followers__
-* Whenever any transaction commits to the _master_ database, send a copy to
-  each _follower_ and apply it
+* Set up separate machines to act as __read replicas__
 
-__Note__: The term _follower_ more often appears as the term _slave_ in the
-database context. However, I will try to exclusively use _follower_.
+* Whenever any transaction commits to the _master_ database, send a copy to
+  each _replica_ and apply it
 ]
-.right-column[![Database Master Follower](database_master_follower.png)]
+.right-column[![Database Master Replica](database_master_replica.png)]
 
 ---
 
 # Database Replication
 
-.left-column40[![Database Master Follower](database_master_follower.png)]
+.left-column40[![Database Master Replica](database_master_replica.png)]
 .right-column60[
-The sending of data from the master to its followers (replication) can happen
+The sending of data from the master to its replicas (replication) can happen
 either synchronously or asynchronously.
 
 ## Synchronous
 
 When a transaction is committed to mater, the master sends the transaction to
-its followers and waits until applied by all before completing.
+its replicas and waits until applied by all before completing.
 
 ## Asynchronous
 
 When a transaction is committed to master, the master sends the transaction to
-its followers but does not wait to see if the transaction is applied.
+its replicas but does not wait to see if the transaction is applied.
 ]
 
 
@@ -967,22 +967,22 @@ its followers but does not wait to see if the transaction is applied.
 # Database Replication Trade-offs
 
 .left-column[
-> What are the advantages of waiting until it is applied to all followers?
+> What are the advantages of waiting until it is applied to all replicas?
 ]
-.right-column[![Database Master Follower](database_master_follower.png)]
+.right-column[![Database Master Replica](database_master_replica.png)]
 
 ---
 
 # Database Replication Trade-offs
 
 .left-column[
-> What are the advantages of waiting until it is applied to all followers?
+> What are the advantages of waiting until it is applied to all replicas?
 
 Consistency. Subsequent read requests will see changes.
 
-> What are the disadvantages of waiting until it is applied to all followers?
+> What are the disadvantages of waiting until it is applied to all replicas?
 ]
-.right-column[![Database Master Follower](database_master_follower.png)]
+.right-column[![Database Master Replica](database_master_replica.png)]
 
 
 ---
@@ -990,29 +990,29 @@ Consistency. Subsequent read requests will see changes.
 # Database Replication Trade-offs
 
 .left-column[
-> What are the advantages of waiting until it is applied to all followers?
+> What are the advantages of waiting until it is applied to all replicas?
 
 Consistency. Subsequent read requests will see changes.
 
-> What are the disadvantages of waiting until it is applied to all followers?
+> What are the disadvantages of waiting until it is applied to all replicas?
 
-Performance. There may be many read followers to apply changes to.
+Performance. There may be many read replicass to apply changes to.
 ]
-.right-column[![Database Master Follower](database_master_follower.png)]
+.right-column[![Database Master Replica](database_master_replica.png)]
 
 ---
 
 # Database Replication Levels
 
-.left-column[![Database Master Follower](database_master_follower.png)]
+.left-column[![Database Master Replica](database_master_replica.png)]
 .right-column[
 ## Statement-level
 
-Similar to streaming the journal from the master to its followers.
+Similar to streaming the journal from the master to its replicas.
 
 ## Block-level
 
-Instead of sending the SQL statements to the followers, send the consequences
+Instead of sending the SQL statements to the replicas, send the consequences
 of those statements.
 
 > What are the advantages of each?
@@ -1041,13 +1041,13 @@ UPDATE txns SET amount=5, updated_at=NOW();
 
 > What is the value of `NOW()`?
 
-Such values must be communicated from the master to its followers.
+Such values must be communicated from the master to its replicas.
 
 ---
 
-# Demo App and Read Followers
+# Demo App and Read Replicas
 
-The following pages would be served from read followers:
+The following pages would be served from read replicas:
 
 .center[
 ![Global Submission View](small_demo_index_view.png)
@@ -1068,14 +1068,14 @@ need to talk to the master database.
 
 ---
 
-# Rails Read Follower Support
+# Rails Read Replica Support
 
 Like with sharding, rails does not provide build-in support.
 
-However, the Octopus gem does support read followers:
+However, the Octopus gem does support read replicas:
 
 ```ruby
-Octopus.using(:read_follower) do
+Octopus.using(:read_replica) do
   num_users = User.count
 end
 
@@ -1086,14 +1086,15 @@ end
 
 ---
 
-# Trade-offs of Read Followers
+# Trade-offs of Read Replicas
 
 ## Strengths
 
 For applications with a high read-to-write ratio:
 
 * the load on the master database can be dramatically reduced.
-* read followers can be horizontally scaled (even with a load balancer)
+
+* read replicas can be horizontally scaled (even with a load balancer)
 
 --
 
@@ -1110,6 +1111,7 @@ transaction as the write.
 ## High usage of sharding
 
 * Each customer's data is stored in separate logical database.
+
 * Those logical databases can be moved between distinct physical database
   servers as needed.
 
@@ -1121,7 +1123,7 @@ transaction as the write.
 
 ## Low use of Read vs. Write distinction
 
-* We utilize read followers for backup and offline analysis.
+* We utilize read replicas for backup and offline analysis.
 
 ---
 
@@ -1129,7 +1131,7 @@ transaction as the write.
 
 Horizontal scaling of relational databases is hard.
 
-There is no silver bullet, but by combining sharding, SOA, and read followers
+There is no silver bullet, but by combining sharding, SOA, and read replicas
 you can get very far.
 
 For applications that need to scale writes beyond what RDBMS can offer, you
