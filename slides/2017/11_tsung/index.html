@@ -11,13 +11,14 @@ __CS291A__
 
 Dr. Bryce Boe
 
-November 1, 2016
+November 9, 2017
 
 ---
 
 # Today's Agenda
 
 * TODO
+
 * Load Testing with Tsung
 
 ---
@@ -30,9 +31,7 @@ November 1, 2016
 
 * Start thinking about what you want to load test and how you will go about it.
 
-## Before Lab
-
-* Deploy a Tsung instance on EC2
+## Before the End of Lab
 
 * Write an initial Tsung xml file to load test a simple action on your
   application
@@ -219,10 +218,8 @@ provides a simple web interface.
 
 # Tsung Interface
 
-Out of the box, Tsung generates a report `/report.html`, and a handful of
-graphs `/graphs.html`.
-
-Additional graphs can be viewed directly at `/images/`.
+Out of the box, Tsung generates a report `/es/ts_web:report`, and a handful of
+graphs `/es/ts_web:graph`.
 
 The server, and web-based access to these files ceases to be accessible once
 the Tsung process is stopped. Restarting Tsung only makes the graphs from the
@@ -240,7 +237,7 @@ then the following command will synchronize all the Tsung result files (from
 all runs) to your local machine:
 
 ```bash
-rsync -auve 'ssh -i demo.pem' ec2-user@54.166.5.220:.tsung/log/ .
+rsync -auvLe 'ssh -i demo.pem' ec2-user@54.166.5.220:tsung_logs .
 ```
 
 Running that command a second time will only fetch any new files (assuming you
@@ -258,8 +255,8 @@ discussion please see Tsung's documentation:
 
 ```xml
 <?xml version="1.0"?>
-<!DOCTYPE tsung SYSTEM "/usr/share/tsung/tsung-1.0.dtd">
-<tsung loglevel="notice" version="1.0">
+<!DOCTYPE tsung SYSTEM "/usr/local/share/tsung/tsung-1.0.dtd" [] >
+<tsung loglevel="notice">
 
   <clients>...</clients>
   <servers>...</servers>
@@ -417,7 +414,7 @@ We previously set a variable named `auth_token`. Let's use it.
 ```xml
 <request subst="true">
   <http url="/create" version="1.1"
-        contents="user=bboe&amp;auth_token=%%_auth_token%%"
+        contents="user=bboe&amp;amp;auth_token=%%_auth_token%%"
         content_type="application/x-www-form-urlencoded" method="POST">
   </http>
 </request>
@@ -428,7 +425,7 @@ Substitution is done via `%%_VARIABLE_NAME%%`.
 In rails CSRF protection values are usually stored in a hidden field named
 `authenticity_token`.
 
-__Note__: The `&` character must be encoded like `&amp;`. This causes a problem
+__Note__: The `&` character must be encoded like `&amp;amp;`. This causes a problem
 with the CSRF token.
 
 ---
@@ -472,6 +469,8 @@ For a more complete example please see:
 [Demo App's load_tests/critical.xml](https://github.com/scalableinternetservices/demo/blob/master/load_tests/critical.xml)
 
 ---
+
+class: center, middle, inverse
 
 # Understanding Tsung's Output
 
@@ -525,8 +524,16 @@ are certain they are due to exceeding the load on your web server's stack.
 
 ---
 
-# Reminder: Fetch your Tsung data as soon as it is available
+# Hints
+
+## Reminder: Fetch your Tsung data as soon as it is available
 
 ```bash
-rsync -auve 'ssh -i demo.pem' ec2-user@54.166.5.220:.tsung/log/ .
+rsync -auvLe 'ssh -i demo.pem' ec2-user@54.166.5.220:tsung_logs .
+```
+
+## Use tsplot to compare separate runs:
+
+```bash
+tsplot -d graphs m3_medium tsung_logs/20171108-2133/tsung.log m3_large tsung_logs/20171108-2146/tsung.log
 ```
