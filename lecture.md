@@ -99,7 +99,7 @@ by Cardellini, Colajanni, and Yu.
     * Read-only Secondaries
 
 
-#### November 7, 2017
+#### November 7, 2017 ([slides](/slides/2017/maloney_lecture.pdf))
 * Guest Lecture: Sean Maloney, Engineering Lead @ [Riot Games](http://www.riotgames.com/)
 
 
