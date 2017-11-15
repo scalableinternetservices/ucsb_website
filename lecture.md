@@ -116,7 +116,7 @@ __TODO__:
   by Werner Vogels
 
 
-#### November 14, 2017
+#### November 14, 2017 ([slides](/slides/2017/mutz_lecture.pdf))
 * Guest Lecture: Dr. Andrew Mutz, CTO @
   [AppFolio](https://www.appfolioinc.com/)
 
