@@ -11,7 +11,7 @@ __CS291A__
 
 Dr. Bryce Boe
 
-November 8, 2016
+November 16, 2017
 
 ---
 
@@ -19,12 +19,17 @@ November 8, 2016
 
 .left-column[
 * TODO
+
 * NoSQL Motivation
+
 * CAP Theorem
+
 * NoSQL Options
-    * MongoDB
-    * Redis
-    * Cassandra
+  * MongoDB
+
+  * Redis
+
+  * Cassandra
 ]
 .right-column[
 ![Database Symbol](database_symbol.svg)
@@ -34,12 +39,12 @@ November 8, 2016
 
 # TODO
 
-## Before Lab
+## Before next week's Lab
 
 * Implement a complete set of tsung sessions for all the user-flows in your
   application.
 
-* Using tsung results identify and resolve at least one bottleneck.
+* Use tsung results identify and resolve at least one bottleneck.
 
 * Start you report to show the results of your performance improvements.
 
@@ -156,7 +161,7 @@ application fewer guarantees.
 .right-column[
 Let's say we want a database to span multiple machines.
 
-We can send writes to both nodes, and the nodes with keep each other in sync.
+We can send writes to both nodes, and the nodes will keep each other in sync.
 ]
 
 ---
@@ -170,6 +175,7 @@ We can send writes to both nodes, and the nodes with keep each other in sync.
 Let's say:
 
 * We have two clients sending writes.
+
 * There's a uniqueness constraint on the email field.
 
 If both try to write the same email address to different rows, and the
@@ -221,8 +227,8 @@ If we allow the write, our database is not __consistent__.
 
 If we do not allow the write, our database is not __available__.
 
-If we only operate where network __partitions__ cannot occur, we are not an
-Internet service.
+If we only operate where network __partitions__ cannot occur, we are not a
+distributed service.
 ]
 
 ---
@@ -250,7 +256,9 @@ system.
 ]
 .right-column[
 * Always consistent
+
 * Can handle network partitions
+
 * Not always available to clients
 
 In the earlier example, a CP solution would not allow any writes.
@@ -265,7 +273,9 @@ In the earlier example, a CP solution would not allow any writes.
 ]
 .right-column[
 * Always accessible
+
 * Can handle network partitions
+
 * Not always consistent
 
 In the earlier example, an AP solution would accept the conflicting writes.
@@ -280,11 +290,13 @@ In the earlier example, an AP solution would accept the conflicting writes.
 ]
 .right-column[
 * Always accessible
+
 * Always consistent
+
 * Assumes no network partitions
 
 A CA system would never get into the earlier scenario because it would not be
-deployed where partitions could occur.
+deployed where partitions occur.
 ]
 
 ---
@@ -299,7 +311,8 @@ Assuming no partitions is very limiting:
 
 * For high availability and latency reasons, supporting multiple data
   centers are desirable
-* Even within a datacenter, partitions could occur
+
+* Even within a single datacenter, partitions occur
 
 As a result, scalable Internet services require partition tolerance, and have a
 choice between consistency, or availability.
@@ -332,12 +345,18 @@ Consistency comes in many forms:
 ## Eventual Consistency
 
 * Eventually the system will converge on the updated value
+
 * Read-your-writes consistency
-    * Writer immediately sees written values
+
+  * Writer immediately sees written values
+
 * Causal consistency
-    * Writer, and those they communicate with, sees written values
+
+  * Writer, and those they communicate with, sees written values
+
 * Session consistency
-    * Within a session writer sees written values
+
+  * Within a session writer sees written values
 
 ---
 
@@ -645,18 +664,25 @@ the read-replicas.
 
 ---
 
-# ![Redis](Redis_Logo.svg)
+# ![Redis](Redis_Logo.svg) Overview
 
 Redis is a key-value data store.
 
 * Also called a data structure store
+
 * Supports many data structures
-    * Lists
-    * Sorted Sets
-    * Hashes
-    * Bitmaps
+
+  * Lists
+
+  * Sorted Sets
+
+  * Hashes
+
+  * Bitmaps
+
 * Primarily keeps data structures in memory
-    * Persistence to disk is optional
+
+  * Persistence to disk is optional
 
 ---
 
@@ -680,8 +706,13 @@ A series of commands can be executed within a transaction.
 
 These transactions are atomic -- no other operations can occur during a
 transaction -- however, failures do not rollback previous operations in the
-transaction. In other words consistency is not maintained in the event of a
-failure.
+transaction.
+
+> Errors happening after EXEC instead are not handled in a special way: all the
+  other commands will be executed even if some command fails during the
+  transaction [[reference](https://redis.io/topics/transactions)].
+
+In other words consistency is not maintained in the event of a failure.
 
 ---
 
@@ -842,38 +873,4 @@ Cassandra distributes its keyspace across a virtual ring of nodes.
 ]
 .right-column[
 ![Cassandra Ring](cassandra-ring.png)
-]
-
----
-
-class: center inverse middle
-
-# Questions?
-
----
-
-# Known Image Attributions
-
-.left-column30[
-![Database Symbol](database_symbol.svg)
-]
-.right-column70[
-http://anysnapshot.com/database-symbol-vector/
-]
-.clear.left-column30[
-![CAP](CAP.png)
-]
-.right-column70[
-http://darrellburgan.us/?p=3
-]
-
----
-
-# Known Image Attributions
-
-.left-column30[
-![Cassandra Ring](cassandra-ring.png)
-]
-.right-column70[
-http://www.hjort.co/2010/09/assembling-local-cassandra-cluster-in.html
 ]
