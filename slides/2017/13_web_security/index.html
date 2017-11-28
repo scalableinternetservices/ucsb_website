@@ -349,7 +349,7 @@ We can use public key signatures to transitively authenticate someone.
     someone she trusts, and as a result accepts that she is really talking to
     Chelsea.
 
-The public key along with it's parent signatures is known as a __certificate__.
+The public key along with its parent signatures is known as a __certificate__.
 
 ---
 
@@ -678,8 +678,8 @@ application (e.g., add a comment to a submission).
 When another user visits the page, the server includes this data as part of the
 body of the webpage.
 
-When the victim's browser encounters the data, it executes it in the same way it
-executes all JavaScript that is embedded within the HTML document.
+When the victim's browser encounters the data, it executes it in the same way
+it executes all JavaScript that is embedded within the HTML document.
 
 ---
 
@@ -695,7 +695,7 @@ executes all JavaScript that is embedded within the HTML document.
 
 Never trust data from your users.
 
-As with SQL Injection, lets sanitize data being displayed. Rails already does
+As with SQL Injection, let's sanitize data being displayed. Rails already does
 this for you:
 
 Entering `<script>alert("oops");</script>` into a form as a submission title,
@@ -805,7 +805,9 @@ values of course):
 ## Used to secure devices from outside access
 
 * Enforces access control policy between two networks
+
 * Two designs: restrict _bad traffic_ or permit _good traffic_
+
 * Designed to operate at different layers of the network stack
 
 --
@@ -813,6 +815,7 @@ values of course):
 ## Can influence traffic going out as well
 
 * e.g. [Great Firewall of China](http://www.greatfirewallofchina.org/)
+
 * We are primarily concerned with inbound traffic
 
 --
