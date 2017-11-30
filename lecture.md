@@ -156,16 +156,9 @@ __TODO__:
 * HTTP 2.0
 * QUIC
 
-__TODO__:
 
-* Read chapter 15: [XMLHttpRequest](https://hpbn.co/xmlhttprequest/) in High
-  Performance Browser Networking
-
-
-#### December 5, 2017 ([slides](/slides/2017/15_clients_javascript_client-side_mvc))
-* Clients
-* JavaScript
-* Client-side MVC
+#### December 5, 2017 ([slides](/slides/2017/15_serverless))
+* "Serverless" via AWS Lambda
 
 
 #### December 7, 2017
