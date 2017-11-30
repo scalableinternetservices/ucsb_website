@@ -11,47 +11,57 @@ __CS291A__
 
 Dr. Bryce Boe
 
-November 17, 2016
+November 30, 2017
 
 ---
 
 # Today's Agenda
 
-* TODO
+* Report Reminder
+
 * Final Presentation Information
+
 * HTTP Optimization Hacks
+
 * HTTP/2
+
 * QUIC
 
 ---
 
-# TODO
+class: center, middle, inverse
 
-* Read chapter 15: [XMLHttpRequest](https://hpbn.co/xmlhttprequest/) in High
-  Performance Browser Networking
+# Report Reminder
 
-* Reports are due Thursday, December 1 by 12PM (noon) via Piazza
+### Reports are due Tuesday, December 5 by 3PM via Piazza
+
+
 
 ---
 
 # Final Presentation Information
 
-The final presentation will be in this room Monday December 5 between 12 and
-3PM.
+The final presentation will be in this room Thursday December 7 between 3 and
+4:50PM.
 
-Each team will have fifteen minutes to present and take questions. Presentation
-order will be randomized on the day of.
+Each team will have a total of fourteen minutes to present and take
+questions. Presentation order will be randomized.
 
 I expect everyone to be there to observe and ask questions during __all__ of
 the presentations.
 
-We will conduct the final peer evaluation during a 20 minute break after the
-4th presentation.
+We will conduct the final peer evaluation during a 10 minute break after the
+3rd presentation.
 
 ---
 
+class: center, middle, inverse
 
-# Connections per Page
+# HTTP Optimization Hacks
+
+---
+
+# Review: Connections per Page
 
 .center[
 ![Connections per page](connections_per_page.png)
@@ -69,7 +79,7 @@ Source: http://httparchive.org
 
 ---
 
-# TCP Phases
+# Review: TCP Phases
 
 .center[
 ![TCP Phases](tcp_congestion.png)
@@ -81,7 +91,7 @@ Source: High Performance Browser Networking
 
 ---
 
-# TCP Round Trips
+# Review: TCP Round Trips
 
 .center[
 ![Number of TCP Segments v. Round Trips](tcp_segments_and_round_trips.png)
@@ -91,7 +101,7 @@ TCP was designed for long-lived flows. HTTP is short and bursty.
 
 ---
 
-# HTTP Keep-alive
+# Review: HTTP Keep-alive & Head-of-Line Blocking
 
 .left-column[
 ![Head of Line Blocking](tcp_head_of_line_blocking.png)
@@ -108,7 +118,7 @@ This is called __Head-of-line blocking__.
 
 ---
 
-# HTTP Request Header
+# Review: HTTP Request Header
 
 .center[
 ![HTTP Header 1](http_header_1.png)
@@ -122,8 +132,8 @@ This is called __Head-of-line blocking__.
 ![HTTP Header 2](http_header_2.png)
 ]
 
-The highlighted sections show the differences from this request to the previous
-request. All other bytes are duplicates.
+The highlighted sections show the differences from this request with the
+previous request. All other bytes are duplicates.
 
 ---
 
@@ -140,7 +150,7 @@ bytes out of 683.
 
 ---
 
-# Asset Concatenation
+# Review: Asset Concatenation
 
 To minimize header overhead in HTTP/1.1 we concatenate files together (e.g.,
 JavaScript, and CSS).
@@ -151,7 +161,7 @@ This technique can also be applied to images.
 
 ---
 
-# Image Spriting
+# Review: Image Spriting
 
 .center[
 ![Image Sprite](image_sprite.jpg)
@@ -167,7 +177,7 @@ performance.
 
 ---
 
-# Concurrent TCP Connections
+# Review: Concurrent TCP Connections
 
 The browser will utilize up to 6 concurrent TCP connections to a single host in
 order to speed up the time to obtain a page's resources.
@@ -212,11 +222,11 @@ class: center middle inverse
 
 * Twitter deployed SPDY on its servers (March 2012).
 
-* Apache support for SPDY (April 2012)
+* Apache added support for SPDY (April 2012)
 
-* NGINX support for SPDY (June 2012)
+* NGINX added support for SPDY (June 2012)
 
-* Firefox support for SPDY (June 2012)
+* Firefox added support for SPDY (June 2012)
 
 * First draft of HTTP/2.0 based on SPDY (Nov 2012)
 
@@ -226,7 +236,7 @@ class: center middle inverse
 
 # HTTP/2 Features
 
-* Multiplexed TCP connection permits concurrent streams over a single TCP
+* A multiplexed TCP connection permits concurrent streams over a single TCP
   connection with the ability to prioritize streams.
 
 * Header compression minimizes request and response overhead.
@@ -260,7 +270,8 @@ Note that different streams are interleaved over a single TCP connection.
 
 With binary framing, header compression becomes easy.
 
-Initially implemented using GZIP, but CRIME attack revealed weaknesses.
+Initially implemented using GZIP, but [CRIME
+attack](https://en.wikipedia.org/wiki/CRIME) revealed weaknesses.
 
 * If an attacker can inject data, compressed size can leak information.
 
@@ -329,12 +340,12 @@ HTTP/2 obviates the HTTP/1.1 hacks used over the last twenty years.
 * Spriting and asset compilation are no longer needed since we can effectively
   handle many small resources without worrying about head-of-line blocking.
 
-* Domain sharing is irrelevant since all content is delivered over a single
+* Domain sharding is irrelevant since all content is delivered over a single
   connection.
 
 ---
 
-# Server Push
+# New Feature: Server Push
 
 .center[
 ![HTTP/2 Server Push](http2_server_push.png)
@@ -462,7 +473,7 @@ class: center inverse middle
 # QUIC
 
 
-QUIC is an attempt to do use UDP for HTTP.
+QUIC is an attempt to use UDP for HTTP.
 
 QUIC's primary goal is to reduce latency.
 
@@ -577,3 +588,5 @@ their connections.
 * YouTube users experience 30% fewer rebuffers.
 
 Overall the most significant results occur under poor network conditions.
+
+As of 2017, QUIC accounts for approximately 5% of Internet traffic.
