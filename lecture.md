@@ -66,6 +66,7 @@ __TODO__:
 * Read
 [Dynamic Load Balancing on Web-server Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf)
 by Cardellini, Colajanni, and Yu.
+* https://www.nginx.com/blog/10-tips-for-10x-application-performance/
 
 
 #### October 17, 2017 ([slides](/slides/2017/06_vertical_and_horizontal_scaling))
