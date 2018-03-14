@@ -5,13 +5,13 @@ permalink: /lecture/
 title: Lecture Schedule
 ---
 
-# 2017 Lecture Schedule
+# 2018 Lecture Schedule
 
-Below you can find the mostly set schedule for the course. Note that the guest
+Below is the tentative schedule for the course. Note that the guest
 lecture dates are subject to change.
 
 
-#### September 28, 2017 ([slides](/slides/2017/01_course_introduction))
+#### September 27, 2018
 * Introduction to Scalable Internet Services
 
 __TODO__:
@@ -24,7 +24,7 @@ __TODO__:
   [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
 
 
-#### October 3, 2017 ([slides](/slides/2017/02_http))
+#### October 2, 2018
 * Introduction to HTTP
 
 __TODO__:
@@ -36,7 +36,7 @@ __TODO__:
   [Ruby on Rails Tutorial](https://www.railstutorial.org/book/toy_app)
 
 
-#### October 5, 2017  ([slides](/slides/2017/03_html_css_agile))
+#### October 4, 2018
 * Introduction to HTML and CSS
 * Agile/Scrum
 
@@ -48,7 +48,7 @@ __TODO__:
   Networking
 
 
-#### October 10, 2017 ([slides](/slides/2017/04_tdd_ci_pairing_servers))
+#### October 9, 2018
 * TDD, CI, and Pairing
 
 __TODO__:
@@ -58,7 +58,7 @@ __TODO__:
 * Add single-controller app to repo, README with project description and team member photos
 
 
-#### October 12, 2017 ([slides](/slides/2017/05_web_and_application_servers))
+#### October 11, 2018
 * HTTP and Application Servers
 
 __TODO__:
@@ -69,42 +69,42 @@ by Cardellini, Colajanni, and Yu.
 * https://www.nginx.com/blog/10-tips-for-10x-application-performance/
 
 
-#### October 17, 2017 ([slides](/slides/2017/06_vertical_and_horizontal_scaling))
+#### October 16, 2018
 * Vertical Scaling
 * Horizontal Scaling with Load Balancing
 
 
-#### October 19, 2017 ([slides](/slides/2017/07_high_availability))
+#### October 18, 2018
 * Architecting for High Availability
 
 
-#### October 24, 2017 ([slides](/slides/2017/08_caching))
+#### October 23, 2018
 * Client-side Caching
 * Server-side Caching
 
 
-#### October 26, 2017 ([slides](/slides/2017/09_relational_databases_db_concurrency_and_query_analysis))
+#### October 25, 2018
 * Relational Databases
 * Database Concurrency Control
 * Query Analysis
 
 
-#### October 31, 2017 ([slides](/slides/2017/10_rdbms_scaling))
+#### October 30, 2018
 * Database Scaling
     * Sharding
 
 
-#### November 2, 2017 ([slides](/slides/2017/10_rdbms_scaling/#46))
-* Complete Database Scaling
+#### November 1, 2018
+* Finish "Database Scaling"
     * Service Oriented Architectures
     * Read-only Secondaries
 
 
-#### November 7, 2017 ([slides](/slides/2017/maloney_lecture.pdf))
-* Guest Lecture: Sean Maloney, Engineering Lead @ [Riot Games](http://www.riotgames.com/)
+#### November 6, 2018
+* PLACEHOLDER for Guest Lecture
 
 
-#### November 9, 2017 ([slides](/slides/2017/11_tsung))
+#### November 8, 2018
 * Load testing with Tsung
 
 __TODO__:
@@ -117,17 +117,16 @@ __TODO__:
   by Werner Vogels
 
 
-#### November 14, 2017 ([slides](/slides/2017/mutz_lecture.pdf))
-* Guest Lecture: Dr. Andrew Mutz, CTO @
-  [AppFolio](https://www.appfolioinc.com/)
+#### November 13, 2018
+* PLACEHOLDER for Guest Lecture
 
 
-#### November 16, 2017 ([slides](/slides/2017/12_nosql))
+#### November 15, 2018
 * Non-relational Data Stores
 
 
-#### November 21, 2017
-* Guest Lecture: Courtney Wang, Senior Software Engineer @ [Reddit](https://about.reddit.com/careers/)
+#### November 20, 2018
+* PLACEHOLDER for Guest Lecture
 
 __TODO__:
 
@@ -136,10 +135,13 @@ __TODO__:
   High Performance Browser Networking
 
 
-#### November 23, 2017 (Thanksgiving, no class)
+#### November 22, 2018 (Thanksgiving, no class)
+
+#### November 27, 2018
+* Work Session?
 
 
-#### Novemver 28, 2017 ([slides](/slides/2017/13_web_security))
+#### Novemver 29, 2018
 * An Introduction to Web Security
     * HTTPS
     * Firewalls
@@ -153,14 +155,16 @@ __TODO__:
   Networking
 
 
-#### Novemver 30, 2017 ([slides](/slides/2017/14_http2_quic))
+#### December 4, 2018
 * HTTP 2.0
 * QUIC
 
 
-#### December 5, 2017 ([slides](/slides/2017/15_serverless))
+#### December 6, 2018
 * "Serverless" via AWS Lambda
 
 
-#### December 7, 2017
+#### December 10, 2018
 * Final presentations
+* 12PM to 3PM
+* Phelps 2510

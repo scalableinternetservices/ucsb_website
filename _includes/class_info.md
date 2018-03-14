@@ -7,17 +7,17 @@
 
 ## Lecture
 Tuesday and Thursday  
-3:00pm -- 4:50pm  
-Phelps 3526
+1:00pm -- 2:50pm  
+Phelps 2510
 
 ## Lab
-Thursday  
-5:00pm -- 6:00pm  
+day of week TBD  
+time TBD  
 Phelps 3525
 
 ## Resources
 
-[Piazza](https://piazza.com/ucsb/fall2017/cs291a) (class discussion)
+[Piazza](https://piazza.com/ucsb/fall2018/cs291a) (class discussion)
 
 [<i class="fa fa-github"></i> Github](https://github.com/{{ site.github_username }})
 
