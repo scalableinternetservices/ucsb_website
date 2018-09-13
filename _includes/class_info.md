@@ -11,8 +11,8 @@ Tuesday and Thursday
 Phelps 2510
 
 ## Lab
-day of week TBD  
-time TBD  
+Tuesday  
+4:00pm -- 5:00pm  
 Phelps 3525
 
 ## Resources

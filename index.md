@@ -32,7 +32,7 @@ and fault-tolerance concerns. Projects will be conducted in agile teams of five
 students, and team will build their own scalable web site using fundamental web
 technologies and the [Ruby on Rails](http://rubyonrails.org/) framework.
 
-Project-centric lab will meet every DAYOFWEEK from START:00pm to END:00pm in
+Project-centric lab will meet every Tuesday from 4:00pm to 5:00pm in
 Phelps 3525. These mandatory labs offer a chance to collaborate with your
 teammates, demo your progress to the instructor, and get guidance.
 
