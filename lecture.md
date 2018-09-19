@@ -101,11 +101,14 @@ by Cardellini, Colajanni, and Yu.
 
 
 #### November 6, 2018
-* PLACEHOLDER for Guest Lecture
+* Load testing with Tsung
 
 
 #### November 8, 2018
-* Load testing with Tsung
+* Guest Lecture: Ricky Ramirez (/r/rram), TITLE @ [Reddit](https://about.reddit.com/careers/)
+
+#### November 13, 2018
+* PLACEHOLDER for Guest Lecture
 
 __TODO__:
 
@@ -115,10 +118,6 @@ __TODO__:
 * Read
   [Eventually Consistent](http://www.scalableinternetservices.com/slides/vogels.pdf)
   by Werner Vogels
-
-
-#### November 13, 2018
-* PLACEHOLDER for Guest Lecture
 
 
 #### November 15, 2018
