@@ -105,7 +105,9 @@ by Cardellini, Colajanni, and Yu.
 
 
 #### November 8, 2018
-* Guest Lecture: Ricky Ramirez (/r/rram), TITLE @ [Reddit](https://about.reddit.com/careers/)
+* Guest Lecture: Ricky Ramirez ([/u/rram](https://www.reddit.com/user/rram)),
+  Senior Systems Engineer @ [Reddit](https://about.reddit.com/careers/)
+* Tentative Talk Title: Infrastructure as Code
 
 #### November 13, 2018
 * PLACEHOLDER for Guest Lecture
