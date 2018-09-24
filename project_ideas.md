@@ -50,51 +50,6 @@ title: Project Ideas
 
 ## Past Projects
 
-For more inspiration see some of the past projects of the Scalable Web Services
-Classes:
-
-### Fall 2015 (UCSB) Projects
-
-* [A class note sharing application](https://github.com/scalableinternetservicesarchive/noteit)
-* [A file sharing platform](https://github.com/scalableinternetservicesarchive/groupshare)
-* [A nearby discounted food finding application](https://github.com/scalableinternetservicesarchive/foodfinder)
-* [A service for smart trading indicators](https://github.com/scalableinternetservicesarchive/teamtrader)
-* [Aggregator for product pricing across multiple sites](https://github.com/scalableinternetservicesarchive/productgrabber)
-* [E-commerce site focusing on time-limited sales](https://github.com/scalableinternetservicesarchive/fastbuy)
-* [Location based book sharing and revewing platform](https://github.com/scalableinternetservicesarchive/crowdlib)
-* [Quiz building and taking service](https://github.com/scalableinternetservicesarchive/quizler)
-* [Ride Sharing Application](https://github.com/scalableinternetservicesarchive/goda)
-
-### Spring 2015 (UCLA) Projects
-* [A location-based note taking application](https://github.com/scalableinternetservicesarchive/MapKeep)
-* [An Uber for Anything](https://github.com/scalableinternetservicesarchive/victorious-Secret)
-* [Delegate tasks as quests](https://github.com/scalableinternetservicesarchive/Questing-Adventurer)
-* [Find events around you](https://github.com/scalableinternetservicesarchive/whatsup)
-* [Food review, discount and discussion application](https://github.com/scalableinternetservicesarchive/Newbie)
-* [Gathering activities](https://github.com/scalableinternetservicesarchive/ScalableMaster)
-* [Gift exchange coordination system](https://github.com/scalableinternetservicesarchive/GiftHub)
-* [Multiplayer gaming platform](https://github.com/scalableinternetservicesarchive/yam)
-* [Music sharing website](https://github.com/scalableinternetservicesarchive/Michelangelo)
-* [Musical instrument marketplace](https://github.com/scalableinternetservicesarchive/Arpeggio)
-* [Online clothing and merchandise hub](https://github.com/scalableinternetservicesarchive/Atticus)
-* [Reddit-style quote sharing website](https://github.com/scalableinternetservicesarchive/Quotopia)
-* [Renting and borrowing books](https://github.com/scalableinternetservicesarchive/AirBooks)
-* [Test bank for UCLA](https://github.com/scalableinternetservicesarchive/Gattlestar-Balactica)
-* [Univeristy admission application service](https://github.com/scalableinternetservicesarchive/RubyCoders)
-* [Virtual waiting in line](https://github.com/scalableinternetservicesarchive/Team1024)
-* [Visual voting for events](https://github.com/scalableinternetservicesarchive/Fantastic4)
-* [Yelp for places](https://github.com/scalableinternetservicesarchive/Yeap)
-* [Yikyak meets Snapchat](https://github.com/scalableinternetservicesarchive/U1F44D)
-
-### Fall 2014 (UCSB) Projects
-
-* [A competition tracking application](https://github.com/scalableinternetservices/Compete)
-* [A scalable automatic grading system](https://github.com/scalableinternetservices/Gradr)
-* [An electronic cabin guest book](https://github.com/scalableinternetservices/Team-Hytta)
-* [Find and compare nearby surf spots](https://github.com/scalableinternetservices/BaconWindshield)
-* [Find parties near you and share yours](https://github.com/scalableinternetservices/Xup)
-* [Questmaster: gamification of everyday tasks](https://github.com/scalableinternetservices/Motley-Crew)
-* [Send photos to strangers, and upvote/downvote them](https://github.com/scalableinternetservices/Picshare)
-* [Share programming projects like MIT's Scratch](https://github.com/scalableinternetservices/LaPlaya)
-* [Suppr: share meals with friends](https://github.com/scalableinternetservices/Suppr)
-* [Upload and share viral videos](https://github.com/scalableinternetservices/Upvid)
+For more inspiration browse through the 100+ past projects of the
+Scalable Web Services classes:
+[https://github.com/scalableinternetservicesarchive](https://github.com/scalableinternetservicesarchive)
