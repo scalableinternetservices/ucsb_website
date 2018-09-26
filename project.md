@@ -65,7 +65,7 @@ All sprints end and begin with each week's lab session.
 * Decide on a sprint commitment.
 * Implement stories from the current sprint.
 * Learn EC2 and Amazon Web Console by deploying your initial application on
-  Amazon EC2 [[ref](/slides/2017/labs/elastic_beanstalk.html)]
+  Amazon EC2
 
 #### Sprint 5: October 30, 2018 -- November 6, 2018
 * Conduct a retrospective on how the last sprint went and how you can improve.
