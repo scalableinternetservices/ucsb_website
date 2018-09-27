@@ -6,12 +6,12 @@ description: > # this means to ignore newlines until "baseurl:"
 
 baseurl: "" # the subpath of your site, e.g. /blog/
 
-url: "http://cs291.com" # the base hostname & protocol for your site
+url: "https://cs291.com" # the base hostname & protocol for your site
 
 github_username:  scalableinternetservices
 
 instructor: "Bryce Boe"
-instructor_url: "http://bryceboe.com"
+instructor_url: "https://bryceboe.com"
 
 # Build settings
 markdown: kramdown

@@ -11,7 +11,7 @@ Below is the tentative schedule for the course. Note that the guest
 lecture dates are subject to change.
 
 
-#### September 27, 2018
+#### September 27, 2018 ([slides](/slides/2018/01_course_introduction))
 * Introduction to Scalable Internet Services
 
 __TODO__:
