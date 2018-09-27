@@ -19,7 +19,7 @@ __TODO__:
 * Read chapters [1](https://hpbn.co/primer-on-latency-and-bandwidth/) and
   [2](https://hpbn.co/building-blocks-of-tcp/) in High Performance Browser
   Networking
-* Begin [Ruby Code Academy](https://www.codecademy.com/tracks/ruby)
+* Begin [Learn Ruby Codecademy](https://www.codecademy.com/learn/learn-ruby)
 * Begin chapter 1 in the
   [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
 
@@ -29,7 +29,7 @@ __TODO__:
 
 __TODO__:
 
-* Complete [Ruby Code Academy](https://www.codecademy.com/tracks/ruby)
+* Complete [Learn Ruby Codecademy](https://www.codecademy.com/learn/learn-ruby)
 * Complete chapter 1 in the
   [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
 * Begin chapter 2 in the
