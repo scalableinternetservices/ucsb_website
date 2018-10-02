@@ -24,7 +24,7 @@ __TODO__:
   [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
 
 
-#### October 2, 2018
+#### October 2, 2018 ([slides](/slides/2018/02_http))
 * Introduction to HTTP
 
 __TODO__:
