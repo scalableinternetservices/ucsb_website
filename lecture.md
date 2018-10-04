@@ -19,7 +19,7 @@ __TODO__:
 * Read chapters [1](https://hpbn.co/primer-on-latency-and-bandwidth/) and
   [2](https://hpbn.co/building-blocks-of-tcp/) in High Performance Browser
   Networking
-* Begin [Learn Ruby Codecademy](https://www.codecademy.com/learn/learn-ruby)
+* Begin {{ site.codecademy_md_link }}
 * Begin chapter 1 in the
   [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
 
@@ -29,14 +29,14 @@ __TODO__:
 
 __TODO__:
 
-* Complete [Learn Ruby Codecademy](https://www.codecademy.com/learn/learn-ruby)
+* Complete {{ site.codecademy_md_link }}
 * Complete chapter 1 in the
   [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
 * Begin chapter 2 in the
   [Ruby on Rails Tutorial](https://www.railstutorial.org/book/toy_app)
 
 
-#### October 4, 2018
+#### October 4, 2018 ([slides](/slides/2018/03_html_css_agile))
 * Introduction to HTML and CSS
 * Agile/Scrum
 

@@ -17,7 +17,7 @@ Phelps 3525
 
 ## Resources
 
-[Piazza](https://piazza.com/ucsb/fall2018/cs291a) (class discussion)
+[Piazza]({{ site.piazza_url_2018 }}) (class discussion)
 
 [<i class="fa fa-github"></i> Github](https://github.com/{{ site.github_username }})
 

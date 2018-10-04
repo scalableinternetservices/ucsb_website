@@ -33,7 +33,7 @@ All sprints end and begin with each week's lab session.
 #### Sprint 0: September 27, 2018 -- October 2, 2018
 * Install [Rails](http://rubyonrails.org/).
 * Learn [Ruby](https://www.ruby-lang.org/en/).
-* Complete [Learn Ruby Codecademy](https://www.codecademy.com/learn/learn-ruby).
+* Complete {{ site.codecademy_md_link }}.
 * Complete chapter 1 in the
   [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning).
 * Begin chapter 2 in the

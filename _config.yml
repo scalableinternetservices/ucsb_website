@@ -13,6 +13,9 @@ github_username:  scalableinternetservices
 instructor: "Bryce Boe"
 instructor_url: "https://bryceboe.com"
 
+codecademy_md_link: "[Learn Ruby Codecademy](https://www.codecademy.com/learn/learn-ruby)"
+piazza_url_2018: "https://piazza.com/ucsb/fall2018/cs291a"
+
 # Build settings
 markdown: kramdown
 
