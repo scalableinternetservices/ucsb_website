@@ -48,14 +48,20 @@ __TODO__:
   Networking
 
 
-#### October 9, 2018
+#### October 9, 2018 ([slides](/slides/2018/04_tdd_ci_pairing_servers))
 * TDD, CI, and Pairing
 
 __TODO__:
 
-* Complete chapter [2](https://www.railstutorial.org/book/toy_app), [3](https://www.railstutorial.org/book/static_pages), [4](https://www.railstutorial.org/book/rails_flavored_ruby), [5](https://www.railstutorial.org/book/filling_in_the_layout) and [6](https://www.railstutorial.org/book/modeling_users) in the Ruby on Rails Tutorial
+* Complete chapter [2](https://www.railstutorial.org/book/toy_app),
+  [3](https://www.railstutorial.org/book/static_pages),
+  [4](https://www.railstutorial.org/book/rails_flavored_ruby),
+  [5](https://www.railstutorial.org/book/filling_in_the_layout) and
+  [6](https://www.railstutorial.org/book/modeling_users) in the Ruby on Rails
+  Tutorial
 * Learn [git](http://rogerdudler.github.io/git-guide/)
-* Add single-controller app to repo, README with project description and team member photos
+* Add at least a single-controller app to repo, README with project description
+  and team member photos
 
 
 #### October 11, 2018
@@ -66,7 +72,7 @@ __TODO__:
 * Read
 [Dynamic Load Balancing on Web-server Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf)
 by Cardellini, Colajanni, and Yu.
-* https://www.nginx.com/blog/10-tips-for-10x-application-performance/
+* [https://www.nginx.com/blog/10-tips-for-10x-application-performance/](https://www.nginx.com/blog/10-tips-for-10x-application-performance]/)
 
 
 #### October 16, 2018
