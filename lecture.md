@@ -64,7 +64,7 @@ __TODO__:
   and team member photos
 
 
-#### October 11, 2018
+#### October 11, 2018 ([slides](/slides/2018/05_web_and_application_servers))
 * HTTP and Application Servers
 
 __TODO__:
