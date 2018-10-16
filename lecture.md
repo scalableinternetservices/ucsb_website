@@ -75,7 +75,7 @@ by Cardellini, Colajanni, and Yu.
 * [https://www.nginx.com/blog/10-tips-for-10x-application-performance/](https://www.nginx.com/blog/10-tips-for-10x-application-performance]/)
 
 
-#### October 16, 2018
+#### October 16, 2018 ([slides](/slides/2018/06_vertical_and_horizontal_scaling))
 * Vertical Scaling
 * Horizontal Scaling with Load Balancing
 
