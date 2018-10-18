@@ -80,7 +80,7 @@ by Cardellini, Colajanni, and Yu.
 * Horizontal Scaling with Load Balancing
 
 
-#### October 18, 2018
+#### October 18, 2018 ([slides](/slides/2018/07_high_availability))
 * Architecting for High Availability
 
 
