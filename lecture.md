@@ -84,7 +84,7 @@ by Cardellini, Colajanni, and Yu.
 * Architecting for High Availability
 
 
-#### October 23, 2018
+#### October 23, 2018 ([slides](/slides/2018/08_caching))
 * Client-side Caching
 * Server-side Caching
 
