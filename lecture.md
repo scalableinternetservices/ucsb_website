@@ -116,7 +116,8 @@ by Cardellini, Colajanni, and Yu.
 * Tentative Talk Title: Infrastructure as Code
 
 #### November 13, 2018
-* PLACEHOLDER for Guest Lecture
+* Guest Lecture: Sean Maloney, Engineering Manager @ [Riot Games](https://www.riotgames.com/en)
+* Tentative Talk Title: Event Architecture From Game to Tools
 
 __TODO__:
 
