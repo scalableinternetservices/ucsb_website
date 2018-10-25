@@ -89,7 +89,7 @@ by Cardellini, Colajanni, and Yu.
 * Server-side Caching
 
 
-#### October 25, 2018
+#### October 25, 2018 ([slides](/slides/2018/09_relational_databases_db_concurrency_and_query_analysis))
 * Relational Databases
 * Database Concurrency Control
 * Query Analysis
