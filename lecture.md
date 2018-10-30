@@ -95,7 +95,7 @@ by Cardellini, Colajanni, and Yu.
 * Query Analysis
 
 
-#### October 30, 2018
+#### October 30, 2018 ([slides](/slides/2018/10_rdbms_scaling))
 * Database Scaling
     * Sharding
 
