@@ -109,7 +109,7 @@ __TODO__:
   by Werner Vogels
 
 
-#### November 1, 2018
+#### November 1, 2018 ([slides](/slides/2018/11_nosql))
 * Non-relational Data Stores
 
 
