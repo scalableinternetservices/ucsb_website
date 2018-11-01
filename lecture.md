@@ -99,11 +99,18 @@ by Cardellini, Colajanni, and Yu.
 * Database Scaling
     * Sharding
 
+__TODO__:
+
+* Read
+  [CAP 12 years later](http://www.realtechsupport.org/UB/NP/Numeracy_CAP%2B12Years_2012.pdf)
+  by Eric Brewer
+* Read
+  [Eventually Consistent](http://www.scalableinternetservices.com/slides/vogels.pdf)
+  by Werner Vogels
+
 
 #### November 1, 2018
-* Finish "Database Scaling"
-    * Service Oriented Architectures
-    * Read-only Secondaries
+* Non-relational Data Stores
 
 
 #### November 6, 2018
@@ -115,26 +122,10 @@ by Cardellini, Colajanni, and Yu.
   Senior Systems Engineer @ [Reddit](https://about.reddit.com/careers/)
 * Tentative Talk Title: Infrastructure as Code
 
+
 #### November 13, 2018
 * Guest Lecture: Sean Maloney, Engineering Manager @ [Riot Games](https://www.riotgames.com/en)
 * Tentative Talk Title: Event Architecture From Game to Tools
-
-__TODO__:
-
-* Read
-  [CAP 12 years later](http://www.realtechsupport.org/UB/NP/Numeracy_CAP%2B12Years_2012.pdf)
-  by Eric Brewer
-* Read
-  [Eventually Consistent](http://www.scalableinternetservices.com/slides/vogels.pdf)
-  by Werner Vogels
-
-
-#### November 15, 2018
-* Non-relational Data Stores
-
-
-#### November 20, 2018
-* PLACEHOLDER for Guest Lecture
 
 __TODO__:
 
@@ -143,13 +134,7 @@ __TODO__:
   High Performance Browser Networking
 
 
-#### November 22, 2018 (Thanksgiving, no class)
-
-#### November 27, 2018
-* Work Session?
-
-
-#### Novemver 29, 2018
+#### November 15, 2018
 * An Introduction to Web Security
     * HTTPS
     * Firewalls
@@ -163,13 +148,29 @@ __TODO__:
   Networking
 
 
-#### December 4, 2018
+#### November 20, 2018
 * HTTP 2.0
 * QUIC
 
 
-#### December 6, 2018
+#### November 22, 2018 (Thanksgiving, no class)
+
+
+#### November 27, 2018
 * "Serverless" via AWS Lambda
+
+
+#### Novemver 29, 2018
+* Work Session
+
+
+#### December 4, 2018
+* Work Session
+
+
+#### December 6, 2018
+* Guest Lecture: Andrew Mutz, CTO @
+  [AppFolio](https://www.appfolioinc.com/jobs)
 
 
 #### December 10, 2018
