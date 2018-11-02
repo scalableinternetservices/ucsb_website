@@ -113,7 +113,7 @@ __TODO__:
 * Non-relational Data Stores
 
 
-#### November 6, 2018
+#### November 6, 2018 ([slides](/slides/2018/12_tsung))
 * Load testing with Tsung
 
 
