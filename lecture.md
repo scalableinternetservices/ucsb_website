@@ -132,7 +132,7 @@ __TODO__:
   High Performance Browser Networking
 
 
-#### November 15, 2018
+#### November 15, 2018 ([slides](/slides/2018/13_web_security))
 * An Introduction to Web Security
     * HTTPS
     * Firewalls
