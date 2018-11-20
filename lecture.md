@@ -146,7 +146,7 @@ __TODO__:
   Networking
 
 
-#### November 20, 2018
+#### November 20, 2018 ([slides](/slides/2018/14_http2_quic))
 * HTTP 2.0
 * QUIC
 
@@ -155,7 +155,7 @@ __TODO__:
 
 
 #### November 27, 2018
-* "Serverless" via AWS Lambda
+* Work Session
 
 
 #### Novemver 29, 2018
@@ -165,7 +165,7 @@ __TODO__:
 
 
 #### December 4, 2018
-* Work Session
+* "Serverless" via AWS Lambda
 
 
 #### December 6, 2018
