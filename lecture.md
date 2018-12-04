@@ -164,7 +164,7 @@ __TODO__:
 * Tentative Talk Title: Infrastructure as Code
 
 
-#### December 4, 2018
+#### December 4, 2018 ([slides](/slides/2018/15_serverless))
 * "Serverless" via AWS Lambda
 
 
