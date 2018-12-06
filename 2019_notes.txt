@@ -1,0 +1,110 @@
+For 2019, my goal is to significantly stress the importance of using data to
+determine what needs to be scaled. The students goal is to enable their
+application to handle increased load. The only way to do that is to increase
+the number of users to their system (and data) and correspondingly scale up and
+out as is beneficial, and to continuously remove bottlenecks along the way. The
+following approach should be used by students:
+
+1) Start with whatever current state your application is in.
+
+2) Write a cohesive set of flow tests that represent 4 or 5 different types of
+users in your system. With a low amount of load ensure the following is true
+for all flows:
+
+    A) Ensure your PUT/POST/DELETE requests fail with a 400-level status code
+    when something goes wrong (e.g., user could not be created). If you don't
+    do this then you might not be able to properly verify "B".
+
+    B) There are no 400-level exceptions. Such exceptions indicate a bug in
+    your flows.
+
+    C) There are no 500-level exceptions. Such exceptions typically indicate a
+    bug in your application.
+
+    D) You should have a single tsung xml file that combines all these
+    flows. The only cases one might want to test a single flow at a time are:
+
+        I) Testing the creation of the flow.
+
+        II) When load tests identifies a single flow as a bottleneck, it's okay
+        to show the performance improvement of just the flow, however, your
+        report must also include the overall performance improvement when
+        included with all flows.
+
+3) Prepare a number of phases that start of with the current level of users
+your application handles, and grow by doubling the number of users introduced
+in each subsequent phase. Feel free to alter this growth as you see fit, but
+your report should explain why you chose the growth pattern you did. For
+example, when initially starting out, the following phases might be reasonable:
+
+    * Phase 1: 1 new user per second
+    * Phase 2: 2 new users per second
+    * Phase 3: 4 new uesrs per second
+    * Phase 4: 8 new users per second
+    * Phase 5: 16 new users per second
+    * Phase 6: 32 new users per second
+    * Phase 8: 64 new users per second
+    * Phase 9: 128 new users per second
+
+Use this to establish a baseline of what your application can currently handle
+with a single application sever of the smallest instance type (m5.large), and
+the smallest database type (db.m5.large). Adjust the min and maximum values, or
+increase the number of phases as it makes sense to do so. When you start
+observing 500-level errors, you know you've encountered a load issue.
+
+4) The following two steps should both be done at least two to see which is
+more beneficial as a function of cost. Note that vertical scaling, and
+horizontal scaling is not an optimization. They are both means to handle
+additional load.
+
+    A) Vertically scale your single-instance application server through each of
+    the permitted instance types until you see no benefit from doing so. Keep
+    track of that point of no improvement. If you scale through all the
+    instance types and continue to see benefit, move on to part B, before
+    asking me for an "okay" to vertically scale to larger instance types".
+
+    B) Scale horizontally by increasing the number of m5.xlarge instance types
+    you have. Grow exponentially (2, 4, 8, 16, etc) until you see no
+    benefit from horizontal scaling. Keep track of that point of no
+    improvement.
+
+5) Compare the costs of those points of no improvement with vertical scaling
+and horizontal scaling. If it's cheaper to horizontally scale, then there's
+little reason to make further attempts to vertically scale your application
+servers at this time (that may change later). If vertical scaling is more cost
+effective at this point, reach out to me with your results.
+
+6) At this point you should have observed through both vertical and horizontal
+scaling a lack of benefit from said scaling. The next step is to vertically
+scale your database through each instance type, and then repeat the process in
+step 5 with the larger database instance. Continue this process until you've
+reached a point where you see no meaningful increases in performance by
+scaling.
+
+7) Congratulations, you have some bottleneck to resolve. Determine which part
+of your application is causing the biggest slowdown, and resolve just that
+part. For example, if you need to add server-side caching, add it to just the
+relevant part. Do not apply it everywhere at this time. It's imperative that
+your report includes data to justify the optimization you made.
+
+At this point repeat steps beginning at step 4 to see how this optimization has
+improved your application. Revise the number of users per second through each
+phase as it makes sense to do so. For example, there's little reason to have a
+bunch of phases that fail for a given test, and similarly there's little reason
+to run a ton of failing phases for a given test. You may want to run through a
+handful of passing phases so that your graphs are easily "stackable" across
+optimizations, but that's up to you.
+
+In the end you should have run close to a hundred load tests, and have made a
+dozen or so small, but beneficial, optimizations. The next result should be a
+significant increase in the number of users your application is able to handle
+from your original unoptimized application. Push this as far as you can. Can
+your application handle 1024 new users per second?
+
+If an optimization you've made had little impact, it's likely you selected the
+wrong optimization. That's okay, but include in your report what might have
+lead you to pick the wrong bottleneck. Hopefully by the end of the quarter your
+team is better at determining the highest priority bottleneck to resolve.
+
+If you have questions about any of this proceedure, please do not hesitate to
+ask.
