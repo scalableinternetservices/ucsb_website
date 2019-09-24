@@ -23,7 +23,7 @@ Phelps 3525
 
 [AWS Educate](https://www.awseducate.com/Registration?apptype=student&courseview=true)
 
-[<i class="fa fa-github"></i> Github](https://github.com/{{ site.github_username }})
+[Github](https://github.com/{{ site.github_username }})
 
 ## Textbooks
 
