@@ -21,6 +21,8 @@ Phelps 3525
 
 [Piazza]({{ site.piazza_url_2019 }}) (class discussion)
 
+[AWS Educate](https://www.awseducate.com/Registration?apptype=student&courseview=true)
+
 [<i class="fa fa-github"></i> Github](https://github.com/{{ site.github_username }})
 
 ## Textbooks
