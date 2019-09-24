@@ -24,7 +24,6 @@ fundamental web technologies and the Ruby on Rails framework.
 
 - Complete chapter 1 in the
   [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
-- Read the list of [project ideas](/project_ideas/).
 - Add your own project suggestions.
 
 ## Project Sprint Schedule
