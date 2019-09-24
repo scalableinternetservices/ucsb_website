@@ -5,6 +5,8 @@ permalink: /lecture/
 title: Lecture Schedule
 ---
 
+## Note: The content of this page is not yet completely updated to reflect the 2019 course.
+
 # 2019 Lecture Schedule
 
 Below is the tentative schedule for the course. Note that the guest

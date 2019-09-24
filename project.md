@@ -2,10 +2,12 @@
 layout: default
 navigation_weight: 2
 permalink: /project/
-title: Course Project
+title: Primary Project
 ---
 
-# Course Project
+## Note: The content of this page is not yet updated to reflect the 2019 course.
+
+# Primary Project
 
 ## Objective
 

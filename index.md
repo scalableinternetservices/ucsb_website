@@ -5,60 +5,93 @@ layout: default
 ## Course Description
 
 This course explores advanced topics in highly scalable Internet services and
-their underlying systems architecture. Software today is increasingly being
-delivered as a service: accessible globally via web browsers and mobile
-applications and backed by millions of servers. Modern frameworks and platforms
-are making it easier to build and deploy these systems, such as [Ruby on
-Rails](http://rubyonrails.org/) and [Amazon's
-EC2](https://aws.amazon.com/ec2/).
+their underlying systems architecture. Software today is primarily delivered as
+a service: accessible globally via web browsers and mobile applications and
+backed by millions of servers. Modern web frameworks (e.g., [Ruby on
+Rails](http://rubyonrails.org/), [Django](https://www.djangoproject.com), and
+[Express](https://expressjs.com)), and continuous improvements to cloud
+providers (e.g., [Amazon Web Services](https://aws.amazon.com), [Google Cloud
+Platform](https://cloud.google.com), and [Microsoft
+Azure](https://azure.microsoft.com/en-us/)) make it increasingly easier to
+build and deploy these systems.
 
-Yet despite these advances, some concerns just don't go away. Building scalable
-Internet services today still requires an understanding of topics like caching,
-load balancing, security, and monitoring. In this course we will examine these
-topics and more: the state of the art in building scalable Internet services.
+Despite these advances, building scalable Internet services today still requires
+an understanding of topics like caching, load balancing, security, and
+monitoring. In this course we will examine these topics and more: the state of
+the art in building scalable Internet services.
 
-## Lectures
-
-Course lectures will be Tuesdays and Thursdays, from 1:00pm to 2:50pm in Phelps
-2510. Lecture material will cover the essentials of building large scale
-Internet services. The lecture schedule and slides are available online.
-
-## Project
-
-The goal of the course project is to gain hands-on experience in building and
-deploying a scalable web service on the Internet. Students will do this using
-some of the latest web technologies in order to learn how to tackle scalability
-and fault-tolerance concerns. Projects will be conducted in agile teams of five
-students, and team will build their own scalable web site using fundamental web
-technologies and the [Ruby on Rails](http://rubyonrails.org/) framework.
-
-Project-centric lab will meet every Tuesday from 4:00pm to 5:00pm in Phelps
-3525. These mandatory labs offer a chance to collaborate with your teammates,
-demo your progress to the instructor, and get guidance.
 
 ## Learning Outcomes
 
-By the end of this course CS291A students will be able to:
+By the end of this course students will be able to:
+
+* write and deploy highly scalable web functions using [AWS
+  Lambda](https://aws.amazon.com/lambda/)
+
+* create and deploy [Docker](https://www.docker.com/get-started) containers
+  using [Google's Cloud Run](https://cloud.google.com/run/)
+
+* write a modern front end client application using [React](https://reactjs.org)
 
 * create a [Ruby on Rails](http://rubyonrails.org/) web service and deploy it
-  to [Amazon's EC2](https://aws.amazon.com/ec2/)
+  via [AWS Elastic Beanstalk](https://aws.amazon.com/elasticbeanstalk/)
 
-* detail a significant majority of the general _services_ and protocols that
-  are, or may be, involved when browsing to a high-traffic volume web service
-  such as [reddit.com](https://www.reddit.com)
+* measure the performance of various components of a web service
 
-* determine via measurement where bottlenecks exist in a web service under
-  their control
+* discover and resolve bottlenecks in a web service
 
-* employ memcached to reduce the load on an uncached web service in order to
-  handle a larger volume of traffic
 
-* utilize git to contribute to open source projects on
-  [github](https://github.com/) via pull requests
+## Lectures
+
+Lecture material will cover the essentials of building large scale Internet
+services. The lecture schedule and slides are available online at
+[https://cs291.com](https://cs291.com). Lecture attendance is optional, but
+strongly recommended as interactive examples will be provided during lecture
+that often won't be well reflected in the online material.
+
+## Labs
+
+Mandatory labs will meet once a week in Phelps 3525. These labs offer students
+a chance to collaborate on their projects and demo progress on the primary
+project.
+
+## Initial Projects
+
+There will be four projects in the first five weeks of the course, one per week
+with the fourth project spanning two weeks. These projects will ensure students
+have the basic knowledge to build and deploy modern, simple, and scalable web
+services without needing a deep understanding of how the underlying systems
+enable scalability. The first three projects are to be completed individually,
+and the fourth completed in a pair.
+
+## Primary Project
+
+The goal of the course's primary project is for students to experience and
+resolve pain points encountered when building and deploying a moderate-sized
+scalable web service. Students will do this using some of the latest web
+technologies in order to learn how to tackle scalability and fault-tolerance
+concerns. Projects will be conducted in agile teams of four students, and team
+will build their own scalable web site using fundamental web technologies and
+the [Ruby on Rails](http://rubyonrails.org/) framework.
+
 
 ## Grading
 
-At the end of the quarter each group's project will be assigned a grade based
+* 5% Participation
+* 5% Project 0 (Static Web Page)
+* 5% Project 1 (AWS Lambda)
+* 5% Project 2 (Google's Cloud Run)
+* 10% Project 3 (React and GraphQL)
+* 70% Primary Project Individual Grade
+
+Participation can be earned by asking or answering questions during lectures,
+and asking or answering public questions on Piazza.
+
+Projects 0 through 3 are scored as complete (100%) or incomplete (0%).
+
+### Primary Project Scoring
+
+At the end of the quarter each group's project will be assigned a score based
 on their web service being of sufficient complexity, and the group's
 description of their methodological approach to load testing and subsequent
 scaling via various techniques as described in their project write-up and/or in
@@ -70,16 +103,15 @@ their project presentation. Objectively these components break down into:
 * 10%: quality of project presentation
 * 10%: quality project write-up
 
-On an individual basis, 5% of one's grade is based on their participation
-in-class and on piazza.
+### Primary Project Individual Grading
 
-The remaining 95% of an individual's grade will be computed by multiplying
-their group's project grade by an individual score. Individual scores are
-computed by suming the relative percent of _work_ each individual
+The project individual grade is computed by multiplying a student's group's
+project score by their individual project score. Individual project scores are
+computed by summing the relative percent of _work_ each individual
 confidentially assigns other individuals in their group.
 
-For example, given a three person group with a group grade of 95%, everyone
-individually with 100% participation, and the following peer-graded scores:
+For example, given a three person group with a group grade of 95% and the
+following peer-graded scores:
 
 |           | Alice     | Bob      | Chuck     |
 |:---------:|:---------:|:--------:|:---------:|
@@ -90,13 +122,13 @@ individually with 100% participation, and the following peer-graded scores:
 | __Total__ | __112%__  | __103%__ | __85%__   |
 {: class="table table-striped"}
 
-Then Alice would end with a 106.4% (A+), Bob with 97.85% (A+) and Chuck with
-80.75% (B-).
+Then Alice's Primary Project Individual Grade would be 106.4%, Bob with 97.85% and Chuck with
+80.75%.
 
-So that everyone knows where they stand within their group, we will
-confidentially conduct the peer grading process three times during the course
-(November 2, November 21, and December 7). Only the outcome of the final
-peer-grade (December 7) will be used to compute the final grade.
+So that everyone knows where they stand within their primary project group, we
+will confidentially conduct the peer grading process twice during the
+course. Only the outcome of the second peer-grade (on the day of presentations)
+will be used to compute the final grade.
 
 ### Letter Grades
 
