@@ -8,9 +8,9 @@ This course explores advanced topics in highly scalable Internet services and
 their underlying systems architecture. Software today is increasingly being
 delivered as a service: accessible globally via web browsers and mobile
 applications and backed by millions of servers. Modern frameworks and platforms
-are making it easier to build and deploy these systems, such as
-[Ruby on Rails](http://rubyonrails.org/) and
-[Amazon's EC2](https://aws.amazon.com/ec2/).
+are making it easier to build and deploy these systems, such as [Ruby on
+Rails](http://rubyonrails.org/) and [Amazon's
+EC2](https://aws.amazon.com/ec2/).
 
 Yet despite these advances, some concerns just don't go away. Building scalable
 Internet services today still requires an understanding of topics like caching,
@@ -19,8 +19,8 @@ topics and more: the state of the art in building scalable Internet services.
 
 ## Lectures
 
-Course lectures will be Tuesdays and Thursdays, from 1:00pm to 2:50pm in
-Phelps 2510. Lecture material will cover the essentials of building large scale
+Course lectures will be Tuesdays and Thursdays, from 1:00pm to 2:50pm in Phelps
+2510. Lecture material will cover the essentials of building large scale
 Internet services. The lecture schedule and slides are available online.
 
 ## Project
@@ -32,9 +32,9 @@ and fault-tolerance concerns. Projects will be conducted in agile teams of five
 students, and team will build their own scalable web site using fundamental web
 technologies and the [Ruby on Rails](http://rubyonrails.org/) framework.
 
-Project-centric lab will meet every Tuesday from 4:00pm to 5:00pm in
-Phelps 3525. These mandatory labs offer a chance to collaborate with your
-teammates, demo your progress to the instructor, and get guidance.
+Project-centric lab will meet every Tuesday from 4:00pm to 5:00pm in Phelps
+3525. These mandatory labs offer a chance to collaborate with your teammates,
+demo your progress to the instructor, and get guidance.
 
 ## Learning Outcomes
 
@@ -42,13 +42,17 @@ By the end of this course CS291A students will be able to:
 
 * create a [Ruby on Rails](http://rubyonrails.org/) web service and deploy it
   to [Amazon's EC2](https://aws.amazon.com/ec2/)
+
 * detail a significant majority of the general _services_ and protocols that
   are, or may be, involved when browsing to a high-traffic volume web service
   such as [reddit.com](https://www.reddit.com)
+
 * determine via measurement where bottlenecks exist in a web service under
   their control
+
 * employ memcached to reduce the load on an uncached web service in order to
   handle a larger volume of traffic
+
 * utilize git to contribute to open source projects on
   [github](https://github.com/) via pull requests
 
@@ -66,8 +70,8 @@ their project presentation. Objectively these components break down into:
 * 10%: quality of project presentation
 * 10%: quality project write-up
 
-On an individual basis, 5% of one's grade is based on their
-participation in-class and on piazza.
+On an individual basis, 5% of one's grade is based on their participation
+in-class and on piazza.
 
 The remaining 95% of an individual's grade will be computed by multiplying
 their group's project grade by an individual score. Individual scores are
