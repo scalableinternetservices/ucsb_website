@@ -70,24 +70,33 @@ The goal of the course's primary project is for students to experience and
 resolve pain points encountered when building and deploying a moderate-sized
 scalable web service. Students will do this using some of the latest web
 technologies in order to learn how to tackle scalability and fault-tolerance
-concerns. Projects will be conducted in agile teams of four students, and team
-will build their own scalable web site using fundamental web technologies and
-the [Ruby on Rails](http://rubyonrails.org/) framework.
+concerns. Projects will be conducted in agile teams of four students, and each
+team will build their own scalable web site using fundamental web technologies
+and the [Ruby on Rails](http://rubyonrails.org/) framework.
 
 
 ## Grading
 
-* 5% Participation
-* 5% Project 0 (Static Web Page)
-* 5% Project 1 (AWS Lambda)
-* 5% Project 2 (Google's Cloud Run)
-* 10% Project 3 (React and GraphQL)
-* 70% Primary Project Individual Grade
+| Percent | Item |
+|--:|:--|
+| 3 | Project 0 (Static Web Page) |
+| 6 | Project 1 (AWS Lambda) |
+| 6 | Project 2 (Google's Cloud Run) |
+| 10 | Project 3 (React and GraphQL) |
+| 70 | Primary Project Individual Grade |
+| 5 | Participation |
+{: class="table table-striped"}
 
 Participation can be earned by asking or answering questions during lectures,
 and asking or answering public questions on Piazza.
 
-Projects 0 through 3 are scored as complete (100%) or incomplete (0%).
+Projects 0 through 3 are scored as either complete (`100%`) or incomplete (`0%`);
+there is no fractional score.
+
+Late submissions incur a `1%` penalty for every minute late rounded up to the
+nearest minute. For example, if the deadline is `13:59:59`, an assignment
+submitted at `14:00:00` will receive `99%` of its score, and an assignment
+submitted at `15:00:00` will receive only `39%` of its score.
 
 ### Primary Project Scoring
 
@@ -97,18 +106,20 @@ description of their methodological approach to load testing and subsequent
 scaling via various techniques as described in their project write-up and/or in
 their project presentation. Objectively these components break down into:
 
-* 30%: web service complexity
-* 50%: load testing and scaling (communicated through presentation and/or
-  write-up)
-* 10%: quality of project presentation
-* 10%: quality project write-up
+| Percent | Item |
+|--:|:--|
+| 50 | load testing and scaling (communicated through presentation and/or write-up) |
+| 30 | web service complexity |
+| 10 | quality of project presentation |
+| 10 | quality of project write-up |
+{: class="table table-striped"}
 
 ### Primary Project Individual Grading
 
 The project individual grade is computed by multiplying a student's group's
 project score by their individual project score. Individual project scores are
-computed by summing the relative percent of _work_ each individual
-confidentially assigns other individuals in their group.
+computed by summing the relative percent of _work_ each individual's teammates
+confidentially assigns them.
 
 For example, given a three person group with a group grade of 95% and the
 following peer-graded scores:
@@ -122,11 +133,10 @@ following peer-graded scores:
 | __Total__ | __112%__  | __103%__ | __85%__   |
 {: class="table table-striped"}
 
-Then Alice's Primary Project Individual Grade would be 106.4%, Bob with 97.85% and Chuck with
-80.75%.
+Then Alice's Primary Project Individual Grade would be `106.4%`, Bob with
+`97.85%` and Chuck with `80.75%`.
 
-So that everyone knows where they stand within their primary project group, we
-will confidentially conduct the peer grading process twice during the
+We will confidentially conduct the peer grading process twice during the
 course. Only the outcome of the second peer-grade (on the day of presentations)
 will be used to compute the final grade.
 
