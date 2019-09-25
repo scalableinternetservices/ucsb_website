@@ -81,9 +81,9 @@ and the [Ruby on Rails](http://rubyonrails.org/) framework.
 |--:|:--|
 | 3 | Project 0 (Static Web Page) |
 | 6 | Project 1 (AWS Lambda) |
-| 6 | Project 2 (Google's Cloud Run) |
-| 10 | Project 3 (React and GraphQL) |
-| 70 | Primary Project Individual Grade |
+| 9 | Project 2 (Google's Cloud Run) |
+| 12 | Project 3 (React and GraphQL) |
+| 65 | Primary Project Individual Grade |
 | 5 | Participation |
 {: class="table table-striped"}
 
