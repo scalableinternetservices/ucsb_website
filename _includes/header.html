@@ -25,12 +25,12 @@
           </div>
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-              {% assign navigation_pages = site.html_pages | sort: 'navigation_weight' %}
-              {% for page in navigation_pages %}
-              {% if page.navigation_weight and page.title %}
+              {%- assign navigation_pages = site.html_pages | sort: 'navigation_weight' -%}
+              {%- for page in navigation_pages -%}
+              {%- if page.navigation_weight and page.title -%}
               <li class="active"><a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a></li>
-              {% endif %}
-              {% endfor %}
+              {%- endif -%}
+              {%- endfor -%}
             </ul>
           </div>
         </div>
