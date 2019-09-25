@@ -17,7 +17,7 @@ Build, deploy, and load test a static web page hosted on GitHub Pages.
 
 ## Due Date
 
-Tuesday October 1, 10:59:59 PDT
+Tuesday October 1, 10:59:59 AM PDT
 
 ## Project Submission
 
