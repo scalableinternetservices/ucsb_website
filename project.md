@@ -1,6 +1,6 @@
 ---
 layout: default
-navigation_weight: 2
+navigation_weight: 10
 permalink: /project/
 title: Primary Project
 ---
