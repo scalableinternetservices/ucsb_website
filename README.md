@@ -1,38 +1,25 @@
-# Dependency Installation
+# CS291A Website
 
-In order to build and update the website you will need two tools:
+## Developing
 
-### jekyll
+In order to develop the website you will need one tool: jekyll
 
-Jekyll is a ruby gem that generates websites from markdown. To install it run:
+Jekyll is a ruby gem that generates websites from markdown. To install it and
+its dependencies run:
 
-    gem install jekyll jekyll-sitemap kramdown
+    bundle
 
-### ghp-import
+To develop locally run:
 
-ghp-import is a tool that will in a single step copy the contents of a
-directory on the current branch into the gh-pages branch of a repository. To
-install it run:
+    bundle exec jekyll serve
 
-    pip install ghp-import
+## Publishing
 
-# Publishing the website
+Push updates or merge a PR to the master branch and CircleCI will take care of
+the rest.
 
-After making the desired changes you must build the website:
 
-    jekyll build
-
-If you would like to inspect the site prior to publishing you can run:
-
-    jekyll serve
-
-Once satisfied, ensure all outstanding changes are committed to your current
-branch where the markdown sources live. Then use the ghp-import tool to publish
-the site.
-
-    ghp-import _site -pm "COMMIT MESSAGE"
-
----
+## Theme
 
 Site theme originally based on
 [jekyll-clean](https://github.com/scotte/jekyll-clean) by Scott
