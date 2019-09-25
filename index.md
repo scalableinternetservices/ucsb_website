@@ -79,11 +79,11 @@ and the [Ruby on Rails](http://rubyonrails.org/) framework.
 
 | Percent | Item |
 |--:|:--|
-| 3 | Project 0 (Static Web Page) |
-| 6 | Project 1 (AWS Lambda) |
-| 9 | Project 2 (Google's Cloud Run) |
-| 12 | Project 3 (React and GraphQL) |
-| 65 | Primary Project Individual Grade |
+| 3 | [Project 0](project0) (Static Web Page) |
+| 6 | [Project 1](project1) (AWS Lambda) |
+| 9 | [Project 2](project2) (Google's Cloud Run) |
+| 12 | [Project 3](project3) (React and GraphQL) |
+| 65 | [Primary Project](project) Individual Grade |
 | 5 | Participation |
 {: class="table table-striped"}
 
