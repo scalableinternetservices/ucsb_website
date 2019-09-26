@@ -5,9 +5,10 @@ permalink: /project/
 title: Primary Project
 ---
 
-## Note: The content of this page is not yet updated to reflect the 2019 course.
-
 # Primary Project
+
+Below is an approximate schedule for the primary project. As the quarter
+progresses it'll become more complete.
 
 ## Objective
 
