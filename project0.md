@@ -11,6 +11,7 @@ Build, deploy, and load test a static web page hosted on GitHub Pages.
 
 ## Learning Outcomes:
 
+- Student can setup a git repository and use it for version control.
 - Student can build and deploy a simple static web page.
 - Student can measure average page load time.
 - Student can measure server's rate limit.
@@ -35,7 +36,7 @@ Your static webpage must:
 - contain 100% valid CSS
 - utilize the external style sheet to provide style changes
 
-Page must include:
+You webpage must include:
 
 - a page title
 - a page heading
@@ -45,13 +46,6 @@ Page must include:
 - a table with at least 2 columns and at least 3 rows
 - a hyperlink to the github repository containing the source code
 
-
-## Required Tools:
-
-- [HTML5](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5)
-- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
-- [ab](https://httpd.apache.org/docs/2.4/programs/ab.html)
-
 ## Questions To Answer:
 
 - On average, how many requests can `ab` complete in 10 seconds with various
@@ -60,6 +54,13 @@ Page must include:
 - What's the difference when requesting HTTP and HTTPS?
 - How can github respond so quickly?
 - What is your site's "Time to Interactive" according to PageSpeed Insights?
+
+## Required Tools:
+
+- [ab](https://httpd.apache.org/docs/2.4/programs/ab.html)
+- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
+- git via [GitHub](https://help.github.com/en#dotcom)
+- [HTML5](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5)
 
 ## Other Resources
 
