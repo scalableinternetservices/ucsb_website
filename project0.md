@@ -55,8 +55,9 @@ Page must include:
 ## Questions To Answer:
 
 - How long does it take to respond to 50,000 requests?
-- What did you find to be the optimal setting for responding to 50,000 requests?
+- What did you find to be the ab parameters for responding to 50,000 requests?
 - What's the difference when requesting HTTP and HTTPS?
+- How can github respond so quickly?
 
 ## Other Resources
 
