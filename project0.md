@@ -54,8 +54,9 @@ Page must include:
 
 ## Questions To Answer:
 
-- How long does it take to respond to 50,000 requests?
-- What did you find to be the ab parameters for responding to 50,000 requests?
+- On average, how many requests can `ab` complete in 10 seconds with various
+  power of two concurrency levels between 1 and 256?
+- Why are there diminishing returns at higher concurrency levels?
 - What's the difference when requesting HTTP and HTTPS?
 - How can github respond so quickly?
 
