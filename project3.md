@@ -13,7 +13,7 @@ Content TBD
 
 ## Due Date
 
-Tuesday October 29, 10:59:59 AM PDT
+Thursday October 24, 13:59:59 PDT
 
 ## Project Submission
 

@@ -58,11 +58,11 @@ project.
 ## Initial Projects
 
 There will be four projects in the first five weeks of the course, one per week
-with the fourth project spanning two weeks. These projects will ensure students
-have the basic knowledge to build and deploy modern, simple, and scalable web
-services without needing a deep understanding of how the underlying systems
-enable scalability. The first three projects are to be completed individually,
-and the fourth completed in a pair.
+with the fourth project spanning nearly two weeks. These projects will ensure
+students have the basic knowledge to build and deploy modern, simple, and
+scalable web services without needing a deep understanding of how the
+underlying systems enable scalability. The first three projects are to be
+completed individually, and the fourth completed in a pair.
 
 ## Primary Project
 

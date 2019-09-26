@@ -9,6 +9,14 @@ title: Project 0
 
 Build, deploy, and load test a static web page hosted on GitHub Pages.
 
+This project will ensure that students can deploy and load test a simple web
+page prior to working with more complicated web applications.
+
+Static web pages are fast to serve, and are relatively trivial to scale. Anyone
+with access to a free github account can deploy a static web site that can
+scale to thousands of users without requring any knowledge of how such scaling
+is accomplished.
+
 ## Learning Outcomes:
 
 - Student can setup a git repository and use it for version control.
