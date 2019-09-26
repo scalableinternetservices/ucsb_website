@@ -59,6 +59,7 @@ Page must include:
 - Why are there diminishing returns at higher concurrency levels?
 - What's the difference when requesting HTTP and HTTPS?
 - How can github respond so quickly?
+- What is your site's "Time to Interactive" according to PageSpeed Insights?
 
 ## Other Resources
 
