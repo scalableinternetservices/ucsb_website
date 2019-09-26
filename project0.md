@@ -21,7 +21,7 @@ Tuesday October 1, 10:59:59 AM PDT
 
 ## Project Submission
 
-GOOGLE FORM LINK
+[https://forms.gle/AiuHXw3C6NmPiouG6](https://forms.gle/AiuHXw3C6NmPiouG6)
 
 ## Page Requirements
 
