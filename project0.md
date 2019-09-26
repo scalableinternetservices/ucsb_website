@@ -37,8 +37,8 @@ Your static webpage must:
 
 Page must include:
 
-- page title
-- page heading
+- a page title
+- a page heading
 - an image hosted on the same domain
 - an external CSS file written by you and hosted on the same domain
 - an unordered list with at least three items
