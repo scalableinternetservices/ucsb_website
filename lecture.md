@@ -5,88 +5,77 @@ permalink: /lecture/
 title: Lecture Schedule
 ---
 
-## Note: The content of this page is not yet completely updated to reflect the 2019 course.
-
 # 2019 Lecture Schedule
 
-Below is the tentative schedule for the course. Note that the guest
-lecture dates are subject to change.
+Below is the tentative schedule for the course. As the quarter progresses it'll become more complete.
 
 #### September 26, 2019
 
-- Introduction to Scalable Internet Services
+Introduction to Scalable Internet Services
 
 **TODO**:
 
-- Read chapters [1](https://hpbn.co/primer-on-latency-and-bandwidth/) and
-  [2](https://hpbn.co/building-blocks-of-tcp/) in High Performance Browser
+- Join the class on Piazza (all discussion and announcements will be made there)
+- Enroll in [AWS Educate](https://www.awseducate.com/Registration?apptype=student&courseview=true#INFO-Student) for this class
+- Complete [Project 0](project0)
+- Read chapters [1](https://hpbn.co/primer-on-latency-and-bandwidth/),
+  [2](https://hpbn.co/building-blocks-of-tcp/), and
+  [9](https://hpbn.co/brief-history-of-http/) in High Performance Browser
   Networking
-- Begin {{ site.codecademy_md_link }}
-- Begin chapter 1 in the
-  [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
 
 #### October 1, 2019
 
-- Introduction to Scalable Internet Services
+The HTTP Protocol
 
 **TODO**:
 
-- Complete {{ site.codecademy_md_link }}
-- Complete chapter 1 in the
-  [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
-- Begin chapter 2 in the
-  [Ruby on Rails Tutorial](https://www.railstutorial.org/book/toy_app)
+- Begin [Project 1](project1)
+- Read chapters [10](https://hpbn.co/primer-on-web-performance/), and
+  [11](https://hpbn.co/http1x/) in High Performance Browser Networking
 
 #### October 3, 2019
 
 **TODO**:
 
-- Read chapters [9](https://hpbn.co/brief-history-of-http/),
-  [10](https://hpbn.co/primer-on-web-performance/), and
-  [11](https://hpbn.co/http1x/) in High Performance Browser
-  Networking
+- Complete [Project 1](project1)
 
 #### October 8, 2019
 
 **TODO**:
 
-- Complete chapter [2](https://www.railstutorial.org/book/toy_app),
-  [3](https://www.railstutorial.org/book/static_pages),
-  [4](https://www.railstutorial.org/book/rails_flavored_ruby),
-  [5](https://www.railstutorial.org/book/filling_in_the_layout) and
-  [6](https://www.railstutorial.org/book/modeling_users) in the Ruby on Rails
-  Tutorial
-- Learn [git](http://rogerdudler.github.io/git-guide/)
-- Add at least a single-controller app to repo, README with project description
-  and team member photos
+- Begin [Project 2](project2)
 
 #### October 10, 2019
 
 **TODO**:
 
-- Read
-  [Dynamic Load Balancing on Web-server Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf)
-  by Cardellini, Colajanni, and Yu.
-- [https://www.nginx.com/blog/10-tips-for-10x-application-performance/](https://www.nginx.com/blog/10-tips-for-10x-application-performance]/)
+- Complete [Project 2](project2)
 
 #### October 15, 2019
 
+**TODO**:
+
+- Begin [Project 3](project3) with a partner
+
 #### October 17, 2019
-
-#### October 22, 2019
-
-#### October 24, 2019
-
-#### October 29, 2019
 
 **TODO**:
 
-- Read
-  [CAP 12 years later](http://www.realtechsupport.org/UB/NP/Numeracy_CAP%2B12Years_2012.pdf)
-  by Eric Brewer
-- Read
-  [Eventually Consistent](http://www.scalableinternetservices.com/slides/vogels.pdf)
-  by Werner Vogels
+- Make progress on [Project 3](project3)
+
+#### October 22, 2019
+
+**TODO**:
+
+- Make progress on [Project 3](project3)
+
+#### October 24, 2019
+
+**TODO**:
+
+- Complete [Project 3](project3)
+
+#### October 29, 2019
 
 #### October 31, 2019
 
@@ -96,18 +85,7 @@ lecture dates are subject to change.
 
 #### November 12, 2019
 
-**TODO**:
-
-- Read Chapter 4:
-  [Transport Layer Security](https://hpbn.co/transport-layer-security-tls/) in
-  High Performance Browser Networking
-
 #### November 14, 2019
-
-**TODO**:
-
-- Read Chapter 12: [HTTP/2](https://hpbn.co/http2/) in High Performance Browser
-  Networking
 
 #### November 19, 2019
 
