@@ -140,6 +140,8 @@ We will confidentially conduct the peer grading process twice during the
 course. Only the outcome of the second peer-grade (on the day of presentations)
 will be used to compute the final grade.
 
+Any moderate deviations from near-equal grades will require discussion.
+
 ### Letter Grades
 
 Letter grades will be assigned as follows:

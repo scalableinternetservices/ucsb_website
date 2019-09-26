@@ -11,7 +11,7 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
 
 #### September 26, 2019
 
-Introduction to Scalable Internet Services
+Introduction to Scalable Internet Services [[slides](/slides/2019/01_course_introduction/)]
 
 **TODO**:
 

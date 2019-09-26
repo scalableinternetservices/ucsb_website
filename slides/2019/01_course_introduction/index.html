@@ -10,9 +10,8 @@ class: center, middle
 __CS291A__
 
 Dr. Bryce Boe
-(Bryce, or bboe, is preferred)
 
-September 27, 2018
+September 26, 2019
 
 
 ---
@@ -21,10 +20,10 @@ September 27, 2018
 # Welcome to CS291A
 
 This slide can be found at:
-https://cs291.com/slides/2018/01_course_introduction/#2
+https://cs291.com/slides/2019/01_course_introduction/#2
 
 Please complete this form via your phone or computer:
-https://goo.gl/forms/qIeWIvdbPYujNj8j2
+https://forms.gle/eFxNuZ2y3VXnKoWb8
 
 If that does not work, please write on a piece of paper:
 
@@ -50,11 +49,11 @@ If that does not work, please write on a piece of paper:
 
 * Took this course in Winter 2009 (CS290N at the time)
 
-* 4th time teaching this course (was CS290B in Fall 2015)
+* 5th time teaching this course (was CS290B in Fall 2015)
 
 * Staff Software Engineer, Tech Lead at AppFolio
 
-* 16+ years of web development and operations experience
+* Many years of web development and operations experience
     * First web page using HTML in 1996
     * Learned PHP and MySQL around 2002
 
@@ -105,7 +104,7 @@ Website source:
 https://github.com/scalableinternetservices/ucsb_website/
 
 Slide source:
-https://github.com/scalableinternetservices/ucsb_website/tree/master/slides/2018/
+https://github.com/scalableinternetservices/ucsb_website/tree/master/slides/2019/
 
 
 ---
@@ -173,8 +172,9 @@ class: center middle
 * [mapquest](http://www.mapquest.com/maps?city=Goleta&amp;state=CA)
 * [tripadvisor](http://www.tripadvisor.com/LocalMaps-g32438-Goleta-Area.html)
 * [Yelp](http://www.yelp.com/c/goleta-ca-us/restaurants)
-* [Uber](https://www.uber.com)
 * [Lyft](https://www.lyft.com)
+* [Uber](https://www.uber.com)
+* [UCSB Interactive Map](http://mapdev.geog.ucsb.edu/)
 
 
 ---
@@ -201,7 +201,7 @@ class: center middle
 * [Grindr](https://www.grindr.com/)
 * [Jdate](https://www.jdate.com/en-us)
 * [Christian Mingle](http://www.christianmingle.com/)
-* [Facebook](https://www.wired.com/story/facebook-dating-how-it-works/)
+* [Facebook](https://newsroom.fb.com/news/2019/09/facebook-dating/)
 * and many more!
 
 
@@ -233,6 +233,29 @@ class: center middle
 ![Stephen Fry takes down websites with single tweet](stephen_fry_tweet.png)
 
 ---
+
+class: center inverse middle
+
+# Complex Services Can Also Fail
+
+---
+
+class: center middle
+
+![Facebook Outage March 14, 2019](facebook_0319.png)
+
+Reference: https://twitter.com/facebook/status/1106229690069442560
+
+---
+
+class: center middle
+
+![Cloudflare Outage July 2, 2019](cloudflare_0719.png)
+
+Reference: https://twitter.com/cloudflare/status/1146086417971499010
+
+---
+
 
 # Internet Services, what's that?
 
@@ -304,10 +327,10 @@ Demands could be:
 
 ## Think about it
 
-Assume you have a web service designed to run on a single server with a plan to
-use a bigger server when it can no longer effectively meet demand.
+You have a web service designed to run on a single server. What do you do when
+you can no longer effectively meet demand.
 
-__Is this scalable?__
+__Is your solution scalable?__
 
 
 ---
@@ -349,8 +372,6 @@ In addition to scaling, we will learn about:
 
 * Agile software development
 
-* Test driven development
-
 * Web clients (e.g., web browsers)
 
 
@@ -364,57 +385,11 @@ class: center inverse middle
 ---
 
 
-# Lectures
+# Syllabus
 
-* Tuesday and Thursday from 1 -- 2:50PM in Phelps 2510 (here)
+https://cs291.com
 
-* The lectures and associated reading will cover the concepts you are expected
-  to learn in this class
-
----
-
-# Labs
-
-* Meets Tuesday from 4 -- 5:00PM in Phelps 3523 (upstairs)
-
-* Labs are mandatory
-
-* Labs will focus on the course project
-
-* During the labs you will:
-
-     * Plan out a week's worth of work
-
-     * Discuss how to improve team processes
-
-     * Work with your team
-
-     * Demo your progress
-
-
----
-
-
-# Course Project
-
-You will apply your learnings from this course to your course project. The
-project entails:
-
-* Working in teams of four or five people
-
-* Developing a sufficiently complex Internet service
-
-* Deploying your service to Amazon EC2 via elastic beanstalk
-
-* Iteratively measuring your service's performance and scalability
-
-    * Applying techniques presented in class to improve your service's
-      performance and scalability
-
-    * Documenting these improvements via a detailed write-up
-
-* Presenting the results at the end of the quarter (Monday, December 10 between
-   12PM and 3PM)
+[Go over lectures, labs, projects, reading materials, and grading]
 
 
 ---
@@ -429,12 +404,10 @@ courses you can take.__ You will develop the following skills:
 
 * Building web services using the __Rails__ framework
 
-* Experience with Amazon Web Services (__AWS__): __EC2__, __S3__,
-  __Elastic Beanstalk__
-
-* Load testing Internet services via __Tsung__
-
-* Test-Driven Development (__TDD__)
+* Experience with Amazon Web Services (__AWS__): __EC2__, __Elastic
+  Beanstalk__, __Lambda__, __S3__
+  
+* Load testing Internet services via __Tsung__, and __ab__
 
 * __Agile__/__Scrum__ software development
 
@@ -480,7 +453,7 @@ Industry related tools you will use:
 
 * Ruby on Rails (development stack)
 
-* Travis CI (automated testing)
+* Circle CI (automated testing)
 
 * NewRelic (performance metrics)
 
@@ -500,78 +473,9 @@ service.
 Building Rails Internet services quickly with zero prior experience makes this
 class possible.
 
+Consistency in frameworks across teams allows us to better support each other.
 
 ---
-
-
-# Texts
-
-## "High Performance Browser Networking"
-
-* by Ilya Grigorik
-* Available free online
-
-
-## "The Ruby On Rails Tutorial"
-
-* by Michael Hartl
-* Available free online
-
-
----
-
-class: center inverse middle
-
-# Course Grading
-
-
----
-
-# Project Grade (assigned to your group)
-
-* 30% web service complexity
-
-* 50% load testing and subsequent scaling (explained in presentation and
-  write-up)
-
-* 10% quality of presentation
-
-* 10% quality of write-up
-
----
-
-
-# Individual Grade
-
-* 5% participation (in-class, on piazza, slide/material corrections)
-
-* 95% project grade (your relative group project involvement percent)
-
-## How is relative involvement computed?
-
-* Privately, everyone has 100% to assign across the other members of their
-  group
-
-* The relative percent for each individual is the sum of what their group-mates
-  assign them (can go above 100%)
-
-We will compute these scores __three__ times during the quarter. Only the last
-score will be used for your grade.
-
-Any moderate deviations from near-equal grades will require discussion.
-
----
-
-
-# Letter Grades
-
-Final letter grades will be assigned as indicated at:
-
-* https://cs291.com/#letter-grades
-
-
----
-
 
 # Course Info
 
@@ -579,11 +483,11 @@ Final letter grades will be assigned as indicated at:
 
 * https://github.com/scalableinternetservices/
 
-* {{ site.piazza_url_2018 }}
+* {{ site.piazza_url_2019 }}
 
     * All out-of-class announcements will be made here
 
-    * Set up email notifications
+    * Set up and verify email notifications
 
     * It is strongly encouraged for you to respond to questions, and improve
       upon the "student answer" by making edits.
@@ -601,14 +505,14 @@ Final letter grades will be assigned as indicated at:
 
 * The basics (HTTP and HTML)
 
-* _Industrial_ software engineering: _Agile_, _TDD_, _Continuous Integration_
-  (CI), Pair Programming
-
 * HTTP Application Server architectures
 
 * High availability via load balancing: a share-nothing web stack
 
 * Client-side and server-side caching
+
+* _Industrial_ software engineering: _Agile_, _TDD_, _Continuous Integration_
+  (CI), Pair Programming
 
 * Relational databases with web applications: concurrency control and query
   analysis
@@ -635,8 +539,6 @@ Final letter grades will be assigned as indicated at:
 
 * Non-relational data stores (NoSQL)
 
-* _Serverless_ via AWS Lambda
-
 
 ---
 
@@ -644,9 +546,7 @@ Final letter grades will be assigned as indicated at:
 # Guest Lectures
 
 
-* Ricky Ramirez, Senior Systems Engineer @ Reddit
-
-* At least two others TBD
+* To be arranged
 
 
 ---
@@ -654,25 +554,27 @@ Final letter grades will be assigned as indicated at:
 
 # TO-DO
 
-## By next class
+## Before 11AM Tuesday
 
-* Join the class on [Piazza]({{ site.piazza_url_2018 }})
+* Join the class on [Piazza]({{ site.piazza_url_2019 }})
 
-* Read the list of project ideas:
-  https://cs291.com/project_ideas/
+* Enroll in [AWS
+Educate](https://www.awseducate.com/Registration?apptype=student&courseview=true#INFO-Student)
+for this class
 
-* Post or comment on at least one idea on Piazza under the `project_idea`
-  "folder"
+* Complete [Project 0](/project0/)
 
-* Read chapters 1 and 2 in
-[High Performance Browser Networking](https://hpbn.co/primer-on-latency-and-bandwidth/)
+* Read chapters [1](https://hpbn.co/primer-on-latency-and-bandwidth/),
+[2](https://hpbn.co/building-blocks-of-tcp/), and [9](https://hpbn.co/brief-history-of-http/) in High Performance Browser
+Networking
 
-## Before Tuesday's Lab (shortly after Tuesday's class)
+---
 
-* Complete the [Learn Ruby Codecademy](https://www.codecademy.com/learn/learn-ruby)
+# Project 0
 
-* Complete chapter 1 in the
-  [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
+Create, publish, and load test a static web page.
+
+[Project Description](/project0/)
 
 ---
 
@@ -719,21 +621,15 @@ Prompt: What _things_ (e.g., events, protocols, actions) (might) occur when
 someone types [https://www.reddit.com](https://www.reddit.com) in their web
 browser and presses return.
 
-## Part 1 (~10 minutes)
+## Part 1: ~10 minutes
 
-Discuss in pairs, and write down in-order the components you come up
+Discuss in groups of four, and write down in-order the components you come up
 with. Start generic, and leave space to provide additional detail for
 sub-sequences.
 
-## Part 2 (~10 minutes)
-
-Merge your pair with a near-by pair. Start by comparing the lists you've come
-up with, and then write-down your combined lists. (~10 minutes)
-
-## Part 3
+## Part 2 (remaining time)
 
 Collectively, we build a more definitive list using the whiteboard.
-
 
 ---
 
@@ -755,20 +651,6 @@ Collectively, we build a more definitive list using the whiteboard.
 * Browser: Sends an HTTP request over the TLS session
 
 * Web server: Parses the request, fetches and sends the requested resources
-
-
----
-
-
-# What about scalability?
-
-
-Let's add a load balancer and additional servers.
-
-.center[![Load balancer and three web servers](load_balancer_simple.jpg)]
-
-Source:
-[http://www.laymance.com/blog/apache-load-balancers-and-log-files/](http://www.laymance.com/blog/apache-load-balancers-and-log-files/)
 
 
 ---
