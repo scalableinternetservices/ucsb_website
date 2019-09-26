@@ -14,6 +14,12 @@ def count_format(word, number):
 
 
 def main():
+    if len(sys.argv) == 1:
+        local_file = 'example.html'
+        print(f'No args given, scoring local file {local_file}')
+        content = open(local_file,'r').read()
+        return page_issues(content, 'file:///'+local_file)
+
     if len(sys.argv) != 2:
         print(f"Usage: {sys.argv[0]} URL")
         return 1
