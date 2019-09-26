@@ -4,7 +4,7 @@ from urllib.parse import urljoin, urlparse
 
 import requests
 from html5_parser import parse
-
+from bs4 import BeautifulSoup
 
 def count_format(word, number):
     base = f"{number} {word}"
@@ -31,6 +31,8 @@ def page_issues(content, url):
     issues = 0
     root = parse(content, sanitize_names=False)
     tags = list(root.iterdescendants())
+
+    soup = BeautifulSoup(content, features='lxml')
 
     base_tags = [x for x in tags if x.tag == "base"]
     if len(base_tags) > 1:
@@ -108,11 +110,26 @@ def page_issues(content, url):
         print("No link tag found")
         issues += 1
 
-    table_tags = [x for x in tags if x.tag == "table"]
+    # a table with at least 2 columns and at least 3 rows
+    def is_good_table(table):
+        tr_tags = table.find_all('tr')
+        enough_rows = len(tr_tags) >= 2
+        if not enough_rows: return False 
+        num_cols_per_row = [len(tr.find_all('td')) for tr in tr_tags]
+        each_row_has_same_num_cols = len(set(num_cols_per_row))==1
+        if not each_row_has_same_num_cols: return False
+        enough_cols = num_cols_per_row[0] >= 3
+        if not enough_cols: return False
+        return True
+
+    table_tags = soup.find_all('table')
     if table_tags:
-        pass
+        good_tables = list(filter(is_good_table, table_tags))
+        if not good_tables:
+            print("No tables found with >= 2 cols & >= 3 rows")
+            issues += 1
     else:
-        print("No table tag found")
+        print("No table tags found")
         issues += 1
 
     title_tags = [x for x in tags if x.tag == "title"]
@@ -123,11 +140,15 @@ def page_issues(content, url):
         print("Title text cannot be blank")
         issues += 1
 
-    ul_tags = [x for x in tags if x.tag == "ul"]
+    # an unordered list with at least three items
+    ul_tags = soup.find_all('ul')
     if ul_tags:
-        pass
+        # Find at least one ul with >=3 items:
+        if max([len(ul.find_all('li')), ul_tags]) < 3:
+            print('No ul tag with >= 3 li tags')
+            issues += 1
     else:
-        print("No ul tag found")
+        print("No unordered-list tags found")
         issues += 1
 
     return issues
