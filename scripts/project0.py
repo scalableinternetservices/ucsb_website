@@ -6,6 +6,7 @@ import requests
 from html5_parser import parse
 from bs4 import BeautifulSoup
 
+
 def count_format(word, number):
     base = f"{number} {word}"
     if number != 1:
@@ -15,10 +16,10 @@ def count_format(word, number):
 
 def main():
     if len(sys.argv) == 1:
-        local_file = 'example.html'
-        print(f'No args given, scoring local file {local_file}')
-        content = open(local_file,'r').read()
-        return page_issues(content, 'file:///'+local_file)
+        local_file = "example.html"
+        print(f"No args given, scoring local file {local_file}")
+        content = open(local_file, "r").read()
+        return page_issues(content, "file:///" + local_file)
 
     if len(sys.argv) != 2:
         print(f"Usage: {sys.argv[0]} URL")
@@ -32,7 +33,7 @@ def page_issues(content, url):
     root = parse(content, sanitize_names=False)
     tags = list(root.iterdescendants())
 
-    soup = BeautifulSoup(content, features='lxml')
+    soup = BeautifulSoup(content, features="lxml")
 
     base_tags = [x for x in tags if x.tag == "base"]
     if len(base_tags) > 1:
@@ -112,17 +113,20 @@ def page_issues(content, url):
 
     # a table with at least 2 columns and at least 3 rows
     def is_good_table(table):
-        tr_tags = table.find_all('tr')
+        tr_tags = table.find_all("tr")
         enough_rows = len(tr_tags) >= 2
-        if not enough_rows: return False 
-        num_cols_per_row = [len(tr.find_all('td')) for tr in tr_tags]
-        each_row_has_same_num_cols = len(set(num_cols_per_row))==1
-        if not each_row_has_same_num_cols: return False
+        if not enough_rows:
+            return False
+        num_cols_per_row = [len(tr.find_all("td")) for tr in tr_tags]
+        each_row_has_same_num_cols = len(set(num_cols_per_row)) == 1
+        if not each_row_has_same_num_cols:
+            return False
         enough_cols = num_cols_per_row[0] >= 3
-        if not enough_cols: return False
+        if not enough_cols:
+            return False
         return True
 
-    table_tags = soup.find_all('table')
+    table_tags = soup.find_all("table")
     if table_tags:
         good_tables = list(filter(is_good_table, table_tags))
         if not good_tables:
@@ -141,11 +145,11 @@ def page_issues(content, url):
         issues += 1
 
     # an unordered list with at least three items
-    ul_tags = soup.find_all('ul')
+    ul_tags = soup.find_all("ul")
     if ul_tags:
         # Find at least one ul with >=3 items:
-        if max([len(ul.find_all('li')), ul_tags]) < 3:
-            print('No ul tag with >= 3 li tags')
+        if max([len(ul.find_all("li")), ul_tags]) < 3:
+            print("No ul tag with >= 3 li tags")
             issues += 1
     else:
         print("No unordered-list tags found")
