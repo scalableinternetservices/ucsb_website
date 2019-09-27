@@ -3,8 +3,8 @@ import sys
 from urllib.parse import urljoin, urlparse
 
 import requests
-from html5_parser import parse
 from bs4 import BeautifulSoup
+from html5_parser import parse
 
 
 def count_format(word, number):
@@ -18,7 +18,8 @@ def main():
     if len(sys.argv) == 1:
         local_file = "example.html"
         print(f"No args given, scoring local file {local_file}")
-        content = open(local_file, "r").read()
+        with open(local_file, "r") as fp:
+            content = fp.read()
         return page_issues(content, "file:///" + local_file)
 
     if len(sys.argv) != 2:
@@ -148,7 +149,7 @@ def page_issues(content, url):
     ul_tags = soup.find_all("ul")
     if ul_tags:
         # Find at least one ul with >=3 items:
-        if max([len(ul.find_all("li")), ul_tags]) < 3:
+        if max([len(ul.find_all("li")) for ul in ul_tags]) < 3:
             print("No ul tag with >= 3 li tags")
             issues += 1
     else:
@@ -181,17 +182,17 @@ def score(url):
             print(f"\t{history.url} -> {history.headers['location']}")
         failures += 1
 
-    # html_validation_url = f"https://validator.w3.org/nu/"
-    # response = requests.get(html_validation_url, params={"doc": url, "out": "json"})
-    # if response.status_code != 200:
-    #     print(f"HTML validation unexpectedly failed: {response.status_code}")
-    #     return 1
-    # messages = response.json()['messages']
-    # if messages:
-    #     print("HTML5 validation had some issues:")
-    #     for message in messages:
-    #         print(f"\t{message['type']}: {message['message']}")
-    #     return failures + len(messages)
+    html_validation_url = f"https://validator.w3.org/nu/"
+    response = requests.get(html_validation_url, params={"doc": url, "out": "json"})
+    if response.status_code != 200:
+        print(f"HTML validation unexpectedly failed: {response.status_code}")
+        return 1
+    messages = response.json()["messages"]
+    if messages:
+        print("HTML5 validation had some issues:")
+        for message in messages:
+            print(f"\t{message['type']}: {message['message']}")
+        return failures + len(messages)
 
     failures += page_issues(content, url)
 
