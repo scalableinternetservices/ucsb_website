@@ -118,7 +118,7 @@ def page_issues(content, url):
         enough_rows = len(tr_tags) >= 2
         if not enough_rows:
             return False
-        num_cols_per_row = [len(tr.find_all("td")) for tr in tr_tags]
+        num_cols_per_row = [len(tr.find_all("td")+tr.find_all("th")) for tr in tr_tags]
         each_row_has_same_num_cols = len(set(num_cols_per_row)) == 1
         if not each_row_has_same_num_cols:
             return False
