@@ -115,19 +115,20 @@ def page_issues(content, url):
     # a table with at least 2 columns and at least 3 rows
     def is_good_table(table):
         tr_tags = table.find_all("tr")
-        enough_rows = len(tr_tags) >= 2
+        enough_rows = len(tr_tags) >= 3
         if not enough_rows:
             return False
         num_cols_per_row = [len(tr.find_all("td")) for tr in tr_tags]
         each_row_has_same_num_cols = len(set(num_cols_per_row)) == 1
         if not each_row_has_same_num_cols:
             return False
-        enough_cols = num_cols_per_row[0] >= 3
+        enough_cols = num_cols_per_row[0] >= 2
         if not enough_cols:
             return False
         return True
 
     table_tags = soup.find_all("table")
+    table_tags += soup.find_all("tbody")
     if table_tags:
         good_tables = list(filter(is_good_table, table_tags))
         if not good_tables:
