@@ -59,7 +59,7 @@ You webpage must include:
 - On average, how many requests can `ab` complete in 10 seconds with various
   power of two concurrency levels between 1 and 256?
 - Why are there diminishing returns at higher concurrency levels?
-- What's the difference when requesting HTTP and HTTPS?
+- What's the performance difference when requesting HTTP and HTTPS?
 - How can github respond so quickly?
 - What is your site's "Time to Interactive" according to PageSpeed Insights?
 
