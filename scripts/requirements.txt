@@ -1,3 +1,5 @@
+PyJWT==1.6.1
+beautifulsoup4
 html5-parser
 requests
-beautifulsoup4
+
