@@ -61,14 +61,14 @@ def score(url):
         print(count_format("Failure", failures))
         return failures
 
-    # failures += test_invalid_urls(url)
-    # failures += test_invalid_verbs(url, set(HTTP_VERBS) - {"GET"})
-    # failures += test_invalid_verbs(urljoin(url, "token"), set(HTTP_VERBS) - {"POST"})
-    # failures += test_token__invalid_content_type(urljoin(url, "token"))
-    # failures += test_token__invalid_json_body(urljoin(url, "token"))
-    # failures += test_token__success(urljoin(url, "token"))
-    # failures += test_root__invalid_header_specification(url)
-    # failures += test_root__invalid_tokens(url)
+    failures += test_invalid_urls(url)
+    failures += test_invalid_verbs(url, set(HTTP_VERBS) - {"GET"})
+    failures += test_invalid_verbs(urljoin(url, "token"), set(HTTP_VERBS) - {"POST"})
+    failures += test_token__invalid_content_type(urljoin(url, "token"))
+    failures += test_token__invalid_json_body(urljoin(url, "token"))
+    failures += test_token__success(urljoin(url, "token"))
+    failures += test_root__invalid_header_specification(url)
+    failures += test_root__invalid_tokens(url)
 
     if failures:  # Only run the last tests if everything else passes
         print(count_format("Failure", failures))
@@ -285,7 +285,7 @@ def test_token__success(url):
             failures += 1
             continue
 
-        token = JWT().decode(body["token"], do_verify=False)
+        token = jwt.decode(body["token"], verify=False)
         if sorted(token.keys()) != ["data", "exp", "nbf"]:
             print(
                 f"Expected token keys to be only data, exp, and nbf. Got {sorted(token.keys())}"
