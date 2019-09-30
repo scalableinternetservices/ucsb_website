@@ -92,7 +92,7 @@ the authentication step and will always return a token for a valid request.
 ## Verification Script
 
 Please use the following script to verify your web application:
-https://github.com/scalableinternetservices/ucsb_website/tree/master/scripts#project-1-verification-script
+[https://github.com/scalableinternetservices/ucsb_website/tree/master/scripts#project-1-verification-script](https://github.com/scalableinternetservices/ucsb_website/tree/master/scripts#project-1-verification-script)
 
 ## Questions To Answer
 
@@ -100,19 +100,22 @@ TBD
 
 ## Required Tools:
 
-- [AWS API Gateway](https://aws.amazon.com/api-gateway/) (the `deploy.py`
-  script should take care of everything)
-
-- [AWS Lambda](https://aws.amazon.com/lambda/)
-
 - [JSON Web Tokens](https://jwt.io/introduction/)
 
 - [Ruby](https://www.ruby-lang.org/en/)
 
 ## Other Resources:
 
-- [ruby-jwt](https://github.com/jwt/ruby-jwt) (provided in the template
-  project)
+- [AWS API
+  Gateway](https://us-west-2.console.aws.amazon.com/apigateway/home?region=us-west-2#/apis)
+
+- [AWS
+  Lambda](https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions)
+
+- [AWS CloudWatch
+  Logs](https://us-west-2.console.aws.amazon.com/cloudwatch/home?region=us-west-2#logs:)
+
+- [ruby-jwt](https://github.com/jwt/ruby-jwt)
 
 - [JSON Web Token RFC 7519](https://tools.ietf.org/html/rfc7519) (no need to
   really read through this all)
