@@ -97,15 +97,120 @@ Note: The online version is slightly more up-to-date.</p>
 
     </div>
     <div class="col-md-9">
-      <h1 id="project-1-aws-lambda">Project 1: AWS Lambda</h1>
+      <h1 id="project-1-aws-lambda-and-json-web-tokens-jwt">Project 1: AWS Lambda and JSON Web Tokens (JWT)</h1>
 
-<p>Content TBD</p>
+<p>In this project you will write ruby code to provide a semi-trivial
+HTTP API. Your code will be deployed using a single AWS Lambda function.</p>
 
 <h2 id="learning-outcomes">Learning Outcomes:</h2>
+
+<ul>
+  <li>
+    <p>Student has leveraged JWTs to provide authorization protection to HTTP
+endpoints.</p>
+  </li>
+  <li>
+    <p>Student has utilized HTTP request methods, resources, headers, and bodies to
+differentiate between distinct HTTP requests.</p>
+  </li>
+  <li>
+    <p>Student has implemented two endpoints to an HTTP API.</p>
+  </li>
+  <li>
+    <p>Student can deploy code to AWS Lambda.</p>
+  </li>
+  <li>
+    <p>Student has compared the performance of a static website to that of a dynamic website.</p>
+  </li>
+</ul>
 
 <h2 id="due-date">Due Date</h2>
 
 <p>Tuesday October 8, 10:59:59 AM PDT</p>
+
+<h2 id="api-specification">API Specification</h2>
+
+<h3 id="get-">GET /</h3>
+
+<p>This protected endpoint is used to simply reflect the content contained within
+the <code class="highlighter-rouge">data</code> field of a valid JWT. It is a demonstration of how authorization can
+be enforced on an endpoint.</p>
+
+<ul>
+  <li>
+    <p>Requires a valid token from <code class="highlighter-rouge">GET /token</code> passed via the HTTP Header
+<code class="highlighter-rouge">Authorization</code> whose value is <code class="highlighter-rouge">Bearer &lt;TOKEN&gt;</code>.</p>
+  </li>
+  <li>
+    <p>On success, returns a json document containing the contents of the <code class="highlighter-rouge">data</code>
+field from the provided token and responds with the status code <code class="highlighter-rouge">200</code>.</p>
+  </li>
+  <li>
+    <p>Responds <code class="highlighter-rouge">401</code> if either the token is not yet valid, or if it is expired.</p>
+  </li>
+  <li>
+    <p>Responds <code class="highlighter-rouge">403</code> if a proper <code class="highlighter-rouge">Authorization: Bearer &lt;TOKEN&gt;</code> header is not
+provided.</p>
+  </li>
+</ul>
+
+<h3 id="post-token">POST /token</h3>
+
+<p>This endpoint is used to obtain the JWT necessary to request <code class="highlighter-rouge">/</code>. Normally such
+an endpoint would be used to authenticate a user (e.g., verify a username and
+password) before returning an authorization token. For simplicity we’re skiping
+the authentication step and will always return a token for a valid request.</p>
+
+<ul>
+  <li>
+    <p>On success, returns a json document of the format <code class="highlighter-rouge">{"token": &lt;GENERATED_JWT&gt;}</code>
+with status code <code class="highlighter-rouge">201</code> where <code class="highlighter-rouge">&lt;GENERATED_JWT&gt;</code>:</p>
+
+    <ul>
+      <li>
+        <p>uses a HS256 signature (the symmetric key to use is in the environment
+variable <code class="highlighter-rouge">JWT_SECRET</code>)</p>
+      </li>
+      <li>
+        <p>contains exactly three fields</p>
+
+        <ul>
+          <li>
+            <p><code class="highlighter-rouge">data</code> which includes the request body from the HTTP requst</p>
+          </li>
+          <li>
+            <p><code class="highlighter-rouge">exp</code> which is set to 5 seconds after the generation time</p>
+          </li>
+          <li>
+            <p><code class="highlighter-rouge">nbf</code> which is set to 2 seconds after the generation time</p>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Responds <code class="highlighter-rouge">415</code> if the request content type is not <code class="highlighter-rouge">application/json</code>.</p>
+  </li>
+  <li>
+    <p>Responds <code class="highlighter-rouge">422</code> if the body of the request is not actually json.</p>
+  </li>
+</ul>
+
+<h3 id="other-specifications">Other Specifications</h3>
+
+<ul>
+  <li>
+    <p>All HTTP responses should have the content type <code class="highlighter-rouge">applicaiton/json</code>. You
+<em>shouldn’t</em> need to do anything to satisfy this requirement.</p>
+  </li>
+  <li>
+    <p>Requests to any other resources must respond with status code <code class="highlighter-rouge">404</code>.</p>
+  </li>
+  <li>
+    <p>Requests to <code class="highlighter-rouge">/</code> or <code class="highlighter-rouge">/token</code> which do not use the appropriate HTTP method must
+respond with status code <code class="highlighter-rouge">405</code>.</p>
+  </li>
+</ul>
 
 <h2 id="project-submission">Project Submission</h2>
 
