@@ -28,6 +28,10 @@ HTTP API. Your code will be deployed using a single AWS Lambda function.
 
 Tuesday October 8, 10:59:59 AM PDT
 
+## Project Submission
+
+GOOGLE FORM LINK
+
 ## API Specification
 
 ### GET /
@@ -90,6 +94,25 @@ the authentication step and will always return a token for a valid request.
 Please use the following script to verify your web application:
 https://github.com/scalableinternetservices/ucsb_website/tree/master/scripts#project-1-verification-script
 
-## Project Submission
+## Questions To Answer
 
-GOOGLE FORM LINK
+TBD
+
+## Required Tools:
+
+- [AWS API Gateway](https://aws.amazon.com/api-gateway/) (the `deploy.py`
+  script should take care of everything)
+
+- [AWS Lambda](https://aws.amazon.com/lambda/)
+
+- [JSON Web Tokens](https://jwt.io/introduction/)
+
+- [Ruby](https://www.ruby-lang.org/en/)
+
+## Other Resources:
+
+- [ruby-jwt](https://github.com/jwt/ruby-jwt) (provided in the template
+  project)
+
+- [JSON Web Token RFC 7519](https://tools.ietf.org/html/rfc7519) (no need to
+  really read through this all)
