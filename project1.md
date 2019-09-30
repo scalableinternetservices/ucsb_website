@@ -89,7 +89,17 @@ the authentication step and will always return a token for a valid request.
   respond with status code `405`.
 
 
-## Verification Script
+## Resources
+
+### CS291 SSH Jump Box
+
+TBD
+
+### Project Template
+
+https://github.com/scalableinternetservices/cs291a_project1_template
+
+### Verification Script
 
 Please use the following script to verify your web application:
 [https://github.com/scalableinternetservices/ucsb_website/tree/master/scripts#project-1-verification-script](https://github.com/scalableinternetservices/ucsb_website/tree/master/scripts#project-1-verification-script)
