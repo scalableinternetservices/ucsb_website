@@ -62,7 +62,7 @@ the authentication step and will always return a token for a valid request.
 - On success, returns a json document of the format `{"token": <GENERATED_JWT>}`
   with status code `201` where `<GENERATED_JWT>`:
 
-  - uses a HS256 signature (the symmetric key to use is in the environment
+  - uses a `HS256` signature (the symmetric key to use is in the environment
     variable `JWT_SECRET`)
 
   - contains exactly three fields
@@ -80,7 +80,7 @@ the authentication step and will always return a token for a valid request.
 
 ### Other Specifications
 
-- All HTTP responses should have the content type `applicaiton/json`. You
+- All HTTP responses should have the content type `application/json`. You
   _shouldn't_ need to do anything to satisfy this requirement.
 
 - Requests to any other resources must respond with status code `404`.
