@@ -97,7 +97,7 @@ TBD
 
 ### Project Template
 
-https://github.com/scalableinternetservices/cs291a_project1_template
+[https://github.com/scalableinternetservices/cs291a_project1_template](https://github.com/scalableinternetservices/cs291a_project1_template)
 
 ### Verification Script
 
