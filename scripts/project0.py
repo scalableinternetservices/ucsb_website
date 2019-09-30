@@ -173,8 +173,10 @@ def score(url):
         print(f"Domain does not appear to be github: {result.netloc}")
         return failures + 1  # Cannot continue
 
-    if '.html' in result.path:
-        print(f"Please remove .html from the URL (e.g., `/` insted of `/index.html`): {result.path}")
+    if ".html" in result.path:
+        print(
+            f"Please remove .html from the URL (e.g., `/` insted of `/index.html`): {result.path}"
+        )
         return failures + 1  # Cannot continue
 
     response = requests.get(url)
