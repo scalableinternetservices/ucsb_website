@@ -25,7 +25,7 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
   [9](https://hpbn.co/brief-history-of-http/) in High Performance Browser
   Networking
 
-#### October 1, 2019: The HTTP Protocol
+#### October 1, 2019: HTTP [[slides](/slides/2019/02_http/)]
 
 **TODO**:
 
