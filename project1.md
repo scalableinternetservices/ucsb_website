@@ -10,8 +10,6 @@ title: Project 1
 In this project you will write ruby code to provide a semi-trivial
 HTTP API. Your code will be deployed using a single AWS Lambda function.
 
-__Overview Video__: https://www.youtube.com/watch?v=Z1qmUASw58E
-
 ## Learning Outcomes:
 
 - Student has leveraged JWTs to provide authorization protection to HTTP
@@ -29,6 +27,10 @@ __Overview Video__: https://www.youtube.com/watch?v=Z1qmUASw58E
 ## Due Date
 
 Tuesday October 8, 10:59:59 AM PDT
+
+## Overview Video
+
+[https://www.youtube.com/watch?v=Z1qmUASw58E](https://www.youtube.com/watch?v=Z1qmUASw58E)
 
 ## Project Submission
 
