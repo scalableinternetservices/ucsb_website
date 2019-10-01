@@ -93,7 +93,31 @@ the authentication step and will always return a token for a valid request.
 
 ### CS291 SSH Jump Box
 
-TBD
+The CS291 SSH jump box provides all the necessary configuration to deploy this
+project to AWS. Using the `*.pem` file you were shared on Google Drive, ssh
+into the jump box via:
+
+    ssh -i <ACCOUNT_NAME>.pem <ACCOUNT_NAME>@ec2.cs291.com
+
+For example, if your account name is `some-student`, you should have the file
+`some-student.pem`, and you will run the command:
+
+    ssh -i some-student.pem some-student@ec2.cs291.com
+
+Once on the box you can clone the template repository:
+
+    git clone https://github.com/scalableinternetservices/cs291a_project1_template.git
+
+Then, run the file directly to ensure the example code works:
+
+    cd cs291a_project1_template
+    ruby function.rb
+
+Deploy the function:
+
+    ./deploy.py <ACCOUNT_NAME>
+
+__Note__: Please do not do any load testing from this machine.
 
 ### Project Template
 
