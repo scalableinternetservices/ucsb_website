@@ -220,7 +220,36 @@ respond with status code <code class="highlighter-rouge">405</code>.</p>
 
 <h3 id="cs291-ssh-jump-box">CS291 SSH Jump Box</h3>
 
-<p>TBD</p>
+<p>The CS291 SSH jump box provides all the necessary configuration to deploy this
+project to AWS. Using the <code class="highlighter-rouge">*.pem</code> file you were shared on Google Drive, ssh
+into the jump box via:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh -i &lt;ACCOUNT_NAME&gt;.pem &lt;ACCOUNT_NAME&gt;@ec2.cs291.com
+</code></pre></div></div>
+
+<p>For example, if your account name is <code class="highlighter-rouge">some-student</code>, you should have the file
+<code class="highlighter-rouge">some-student.pem</code>, and you will run the command:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh -i some-student.pem some-student@ec2.cs291.com
+</code></pre></div></div>
+
+<p>Once on the box you can clone the template repository:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/scalableinternetservices/cs291a_project1_template.git
+</code></pre></div></div>
+
+<p>Then, run the file directly to ensure the example code works:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd cs291a_project1_template
+ruby function.rb
+</code></pre></div></div>
+
+<p>Deploy the function:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./deploy.py &lt;ACCOUNT_NAME&gt;
+</code></pre></div></div>
+
+<p><strong>Note</strong>: Please do not do any load testing from this machine.</p>
 
 <h3 id="project-template">Project Template</h3>
 
