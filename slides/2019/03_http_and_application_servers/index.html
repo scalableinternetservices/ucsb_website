@@ -11,17 +11,17 @@ __CS291A__
 
 Dr. Bryce Boe
 
-October 11, 2018
+October 3, 2019
 
 ---
 
 # Today's Agenda
 
-* TODO
+* TO-DO
 
-* Web Servers Introduction
+* HTTP Servers vs. Application Servers
 
-* HTTP Server Architectures
+* Server Architectures
 
 * C10K Problem
 
@@ -30,20 +30,9 @@ October 11, 2018
 ---
 
 # TO-DO
+## Before 11AM Tuesday:
 
-## Should be done:
-
-* Chapters 1, 2, 9-11 in
-  [HPBN](https://hpbn.co/) / Chapters 1-6 in
-  the [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
-
-* Familiarity with [git](http://rogerdudler.github.io/git-guide/)
-
-* Have at least 40 user stories for your project
-
----
-
-# TO-DO
+* Complete [Project 1](/project1)
 
 ## Before Tuesday's Class:
 
@@ -51,39 +40,18 @@ October 11, 2018
   [Dynamic Load Balancing on Web-server Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf)
   by Cardellini, Colajanni, and Yu.
 
-## Before Tuesday's Lab
-
-* Complete at least `2 * #TEAM_MEMBERS` stories that deliver value to your
-  users (me).
-
-* Complete chapters 7 through 10 in the
-  [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
-
-* Hook [TravisCI](https://travis-ci.org/) up to your repository.
-
 ---
 
-# Web Servers Introduction
-
-After this lecture you should understand the trade-offs in the following stack
-descriptions:
-
-## NGINX + Passenger
-
-NGINX is an event-driven HTTP server that handles HTTP requests to port 80 and
-passes connections to instances of the application through Passenger. Multiple
-concurrent connections are supported.
-
-## Puma
-
-Puma is an application server that speaks the HTTP protocol and allows both
-thread-based and process-based concurrency.
+class: center inverse middle
+# HTTP Servers vs. Application Servers
 
 ---
 
 # End to End HTTP
 
 By now, we all should have a reasonable understanding of the HTTP protocol.
+
+--
 
 Recall that many browsers and clients exist that are able to:
 
@@ -97,7 +65,9 @@ Recall that many browsers and clients exist that are able to:
 
 * Reuse the socket for multiple requests
 
-The software systems that handle the request are generally divided into two
+--
+
+The software systems that handle the requests are generally divided into two
 parts:
 
 * HTTP Servers
@@ -118,27 +88,24 @@ application servers.
 
 ---
 
-# Server Responsibilities
+# Server Design Goals
 
 ## HTTP Server
 
-* Provides a high performance HTTP implementation (handles concurrency)
+* Provide a high performance HTTP implementation (handles concurrency)
 
-* Extremely stable, and relatively static
+* Be extremely stable, and relatively static
 
-* Very configurable and language/framework agnostic
+* Be very configurable and language/framework agnostic
 
 --
 
 ## Application Server
 
-* Written to support a specific language (e.g., Ruby), which may
-  hinder performance
+* Support a specific language (e.g., Ruby), many of which are not optimized for
+  performance
 
-* Contains _business logic_ and is extremely dynamic
-
-* Focus on optimizing human resources via abstractions, e.g.,
-  model-view-controller (MVC) framework)
+* Run _business logic_ which is extremely dynamic
 
 ---
 
@@ -147,7 +114,7 @@ application servers.
 ![Netcraft survey of HTTP servers](netcraft_web_servers.png)
 
 Latest:
-https://news.netcraft.com/archives/2017/09/11/september-2017-web-server-survey.html
+https://news.netcraft.com/archives/2019/08/15/august-2019-web-server-survey.html
 
 ---
 
@@ -161,13 +128,18 @@ https://news.netcraft.com/archives/2017/09/11/september-2017-web-server-survey.h
 
 * Provide clean abstraction for application servers
 
->  How do web servers provide concurrency?
+>  How do HTTP servers provide concurrency?
+
+---
+
+class: center inverse middle
+# Server Architectures
 
 ---
 
 # TCP Server Concurrency Approaches
 
-* Single Threaded (no concurrency)
+* Sequential (no concurrency)
 
 * Process per request
 
@@ -184,7 +156,7 @@ For select examples see:
 
 ---
 
-# Single Threaded HTTP Servers
+# Sequential Servers
 
 ```python
 bind() to port 80 and listen()
@@ -203,20 +175,28 @@ loop forever
 
 ---
 
-# Single Threaded Server Issues
+# Sequential Server Issues
 
-If a single threaded web service does not process the request quickly, other
-clients end up waiting or dropping their connections (head of line blocking).
+If a sequential HTTP server does not process the request quickly, other clients
+end up waiting or dropping their connections (**head of line blocking**).
 
-We are building complex web applications not simple  web sites. As a result:
+We are building complex web applications not simple web sites. As a result:
+
+--
 
 * The requests are usually more complicated than serving a file from disk.
+
+--
 
 * It is common to have a web request doing a significant amount of computation
   and business logic.
 
+--
+
 * It is common to have a web request result in connections to multiple external
   services, e.g., databases, and caching stores.
+
+--
 
 * These requests can be anything: lightweight or heavyweight, IO intensive or
   CPU intensive.
@@ -226,11 +206,11 @@ is separate from the thread that `listen()`s and `accept()`s new connections.
 
 ---
 
-# Process per Request HTTP Servers
+# Process per Request Servers
 
 Handle each request as a subprocess:
 
-.left-column40[![forking web server](server_forking.png)]
+.left-column40[![forking server](server_forking.png)]
 .right-column60[
 ```python
 bind() to port 80 and listen()
@@ -248,7 +228,7 @@ loop forever
 
 ---
 
-# Process per Request HTTP Servers
+# Process per Request Servers
 
 ## Strengths
 
@@ -262,15 +242,15 @@ loop forever
 
 * What happens as the CPU load increases?
 
-* How efficient is it to fire up a process on each request?
+* How efficient is it to start a process on each request?
 
-  * How much setup and tear down work is necessary?
+  * How much setup and teardown work is necessary?
 
 ---
 
-# Process Pool HTTP Servers
+# Process Pool Servers
 
-.left-column[![process pool web server](server_process_pool.png)]
+.left-column[![process pool server](server_process_pool.png)]
 .right-column[
 Instead of spawning a process for each request, create a pool of N processes at
 start-up and have them handle incoming requests when available.
@@ -284,7 +264,7 @@ size as needed.
 
 ---
 
-# Process Pool HTTP Servers
+# Process Pool Servers
 
 ## Strengths
 
@@ -292,7 +272,7 @@ size as needed.
 
 * Children can die after _M_ requests to minimize memory leakage issues
 
-* Process setup and tear down costs are minimized
+* Process setup and teardown costs are minimized
 
 * More predictable behavior under high load
 
@@ -302,11 +282,11 @@ size as needed.
 
 * Many processes can still mean a large amount of memory consumption
 
-This web server architecture is provided by the Apache 2.x MPM "Prefork" module.
+This HTTP server architecture is provided by the Apache 2.x MPM "Prefork" module.
 
 ---
 
-# Thread per Request HTTP Servers
+# Thread per Request Servers
 
 Why use multiple processes at all? Instead we can use a single process and
 spawn new threads for each request.
@@ -329,7 +309,7 @@ loop forever
 
 ---
 
-# Thread per Request HTTP Servers
+# Thread per Request Servers
 
 ## Strengths
 
@@ -341,7 +321,7 @@ loop forever
 
 * Worker (request handling code)  must be thread-safe
 
-* Setup and tear down needs to occur for each thread (or shared data
+* Setup and teardown needs to occur for each thread (or shared data
   needs to be thread-safe)
 
 * What about memory leaks?
@@ -383,24 +363,24 @@ Fixed threads per request, scaling is done at the process level.
 
 * Uses more memory than an all-thread based approach
 
-This web server architecture is provided by the Apache 2.x MPM "Worker" module.
+This HTTP server architecture is provided by the Apache 2.x MPM "Worker" module.
 
 ---
 
 class: center inverse middle
 
-# C10K Problem
+# Digression: C10K Problem
 
 ---
 
 # C10K Problem
 
-Originally posed in 1999 by Dan Kegel.
-
 > Given a 1 GHz machine with 2GB of RAM, and a gigabit Ethernet card, can we
 > support 10,000 simultaneous connections?
 
-## 20,000 clients means each gets:
+--
+
+## 20,000 clients means each client gets:
 
 * 50 KHz of CPU
 
@@ -408,13 +388,21 @@ Originally posed in 1999 by Dan Kegel.
 
 * 50 Kb/second of network
 
-"It shouldn't take any more horsepower than that to take four kilobytes from
-the disk and send them to the network once a second for each of twenty thousand
-clients."
+--
 
-> What makes managing concurrent connections difficult?
+> It shouldn't take any more horsepower than that to take four kilobytes from
+> the disk and send them to the network once a second for each of twenty thousand
+> clients.
+
+Originally posed in 1999 by Dan Kegel.
 
 Source: [http://www.kegel.com/c10k.html](http://www.kegel.com/c10k.html)
+
+---
+
+class: center middle
+
+# What makes managing concurrent connections difficult?
 
 ---
 
@@ -468,13 +456,15 @@ Blocking system calls cause this problem.
 
 --
 
-## Yes! Asynchronous I/O
+## Yes! Using Asynchronous I/O
+
+Use a non-blocking version of I/O system calls in combination with:
 
 * `select()`: Provided a list of file descriptors, block only until at least
-  one is ready for I/O (only usable up to 1024 file descriptors on Linux).
+  one is ready for I/O (only usable up to file descriptor number 1023 on Linux).
 
-* `epoll_*()`: Register to listen for events on file descriptors. Again block
-  only until at least one of the registered descriptors is ready for I/O
+* `epoll_*()`: (Linux) Register to listen for events on file descriptors. Again
+  block only until at least one of the registered descriptors is ready for I/O
 
 ---
 
@@ -506,7 +496,7 @@ loop forever:
 
 # Event Driven Systems
 
-Systems that operate in such a manner are called event driven system.
+Systems that operate in such a manner are called event driven systems.
 
 Often such systems can accomplish everything using only a single process and
 thread, of course more may be needed for CPU-bound segments.
@@ -527,7 +517,7 @@ Well used examples:
 
 ---
 
-# Event Driven HTTP Servers
+# Event Driven Servers
 
 ## Strengths
 
@@ -557,12 +547,12 @@ Event driven code is dominated by callbacks:
 
 ```ruby
 EM.run {
-  page = EM::HttpRequest.new('http://google.ca/').get
-  page.errback { p "Google is down! terminate?" }
-  page.callback {
-    a = EM::HttpRequest.new('http://google.ca/search?q=em').get
-    a.callback { # callback nesting, ad infinitum }
-    a.errback  { # error-handling code }
+  test = EM::HttpRequest.new('http://google.com/').get
+  test.errback { puts "Google is down! terminate?" }
+  test.callback {
+    search = EM::HttpRequest.new('http://google.com/search?q=em').get
+    search.callback { # callback nesting, ad infinitum }
+    search.errback  { # error-handling code }
   }
 }
 ```
@@ -578,8 +568,9 @@ complicated.
 
 ---
 
-# HTTP Server Architectures Review
+# Server Architectures Review
 
+.left-column[
 * Sequential (single process and thread)
     * Easy
     * No concurrency
@@ -591,7 +582,8 @@ complicated.
 * Thread per request
     * Less isolation
     * Smaller memory footprint
-
+]
+.right-column[
 * Process/thread worker pool
     * Tunable compromise between processes and threads
 
@@ -599,6 +591,12 @@ complicated.
     * Great performance under high load
     * Difficult to extend
     * Reduced isolation
+]
+
+---
+
+class: center inverse middle
+# Application Servers
 
 ---
 
@@ -607,7 +605,10 @@ complicated.
 We are building web applications, so we will require complex server-side logic.
 
 We _can_ extend our HTTP servers to provide this logic through modules, but
-there are benefits to separating application servers to distinct process(es).
+there are benefits to separating application servers into one ore more distinct
+processes. Because:
+
+--
 
 * Application logic will be dynamic
 
@@ -618,14 +619,10 @@ there are benefits to separating application servers to distinct process(es).
 
 * Setup costs can be amortized if the app server is running continuously
 
-When separating the two, our HTTP server should forward requests to the
-application server(s).
-
 ---
 
-# Inter-server Communication
-
-> How does an HTTP Server communicate with the application server(s)?
+class: center middle
+# How does an HTTP Server communicate with the application server(s)?
 
 ---
 
@@ -651,7 +648,7 @@ Modifications to CGI to allow for persistent application server processes
 Communicate via the HTTP protocol to a long-running process. (Essentially a
 reverse-proxy configuration).
 
-> Does it make sense to do this?
+> Does it make sense to have the application server speak HTTP?
 
 ---
 
@@ -661,12 +658,12 @@ reverse-proxy configuration).
 
 --
 
-We have the same trade-offs to consider as with HTTP servers
-(e.g. threads/processes/workers).
+We have the same trade-offs to consider as with HTTP servers (e.g. threads,
+processes, and/or workers), so we needn't revisit them again.
 
---
+---
 
-## Up Next
+# Up Next
 
 Let's take a quantitative look at various approaches used in actual Ruby
 application servers.
@@ -743,7 +740,7 @@ All tests were conducted on a single Amazon EC2 m3-medium instance.
 
 * 3.75 GB RAM
 
-The tests used the `Puma` web application server (unless otherwise specified).
+The tests used the `Puma` application server (unless otherwise specified).
 
 The `database_optimizations` branch of the demo app was used to run the tests:
 [https://github.com/scalableinternetservices/demo/tree/database_optimizations](https://github.com/scalableinternetservices/demo/tree/database_optimizations)
@@ -854,7 +851,7 @@ Mean duration's spike is under 2 seconds.
 
 ---
 
-# Side note: Ruby interpreters
+# Digression: Ruby interpreters
 
 There are different versions of the Ruby interpreter. Different workloads may
 benefit from using different interpreters.
@@ -877,8 +874,8 @@ benefit from using different interpreters.
 
 # Application Server Options
 
-In this class you will be able to compare the performance of a handful of
-application servers:
+You will be able to compare the performance of two application servers when
+working on the primary project:
 
 ## via elastic beanstalk configuration
 
@@ -901,7 +898,7 @@ multiple processes each with a tunable number of threads.
 
 # Phusion Passenger
 
-Passenger is a ruby web application server that can be added as a module to
+Passenger is a ruby application server that can be added as a module to
 either Apache or NGINX.
 
 Passenger works as a worker pool adjusting the number of processes that
@@ -930,4 +927,4 @@ Things to consider:
 
 * Your code
 
-* Your many dependencies
+* Your code's many dependencies

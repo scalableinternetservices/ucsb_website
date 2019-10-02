@@ -33,19 +33,22 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
 - Read chapters [10](https://hpbn.co/primer-on-web-performance/), and
   [11](https://hpbn.co/http1x/) in High Performance Browser Networking
 
-#### October 3, 2019
+#### October 3, 2019: HTTP and Application Servers [[slides](/slides/2019/03_http_and_application_servers/)]
 
 **TODO**:
 
 - Complete [Project 1](/project1/)
+- Read [Dynamic Load Balancing on Web-server
+  Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf) by Cardellini,
+  Colajanni, and Yu.
 
-#### October 8, 2019
+#### October 8, 2019: Scaling Stateless Web Applications
 
 **TODO**:
 
 - Begin [Project 2](/project2/)
 
-#### October 10, 2019
+#### October 10, 2019: Architecting for High Availability
 
 **TODO**:
 
