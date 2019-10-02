@@ -134,7 +134,16 @@ Please use the following script to verify your web application:
 
 ## Questions To Answer
 
-TBD
+- On average, how many successful requests can `ab` complete to `/token` in 8
+  seconds with various power-of-two concurrency levels between 1 and 256?
+
+- Using data you've collected, describe how this service's performance compares
+  to that of your static webpage from Project 0 (remeasure those results if
+  necessary).
+
+- What do you suspect accounts for the difference in performance between GitHub
+  pages and your AWS Lambda web service?
+
 
 ## Required Tools:
 
