@@ -128,7 +128,7 @@ def test_root__invalid_header_specification(url):
 
 def test_root__invalid_timeliness(url):
     failures = 0
-    token = response = requests.post(
+    token = requests.post(
         urljoin(url, "token"),
         allow_redirects=False,
         headers={mix_case("content-type"): "application/json"},
@@ -180,7 +180,7 @@ def test_root__invalid_tokens(url):
 def test_root__success(url):
     failures = 0
     for payload in [{}, 1, ["a", 1, "b"], {"user_id": "12345"}]:
-        token = response = requests.post(
+        token = requests.post(
             urljoin(url, "token"),
             allow_redirects=False,
             headers={mix_case("content-type"): "application/json"},
