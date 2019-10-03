@@ -165,7 +165,7 @@ def test_root__invalid_timeliness(url):
 def test_root__invalid_tokens(url):
     failures = 0
     for security in [(None, "none"), ("NOTASECRET", "HS256")]:
-        token = jwt.encode({"data": 1}, *security)
+        token = jwt.encode({"data": 1}, *security).decode("utf-8")
         response = requests.get(
             url,
             allow_redirects=False,
