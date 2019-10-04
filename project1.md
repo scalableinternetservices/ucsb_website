@@ -44,7 +44,7 @@ This protected endpoint is used to simply reflect the content contained within
 the `data` field of a valid JWT. It is a demonstration of how authorization can
 be enforced on an endpoint.
 
-- Requires a valid token from `GET /token` passed via the HTTP Header
+- Requires a valid token from `POST /token` passed via the HTTP Header
   `Authorization` whose value is `Bearer <TOKEN>`.
 
 - On success, returns a json document containing the contents of the `data`
