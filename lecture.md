@@ -42,7 +42,7 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
   Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf) by Cardellini,
   Colajanni, and Yu.
 
-#### October 8, 2019: Scaling Stateless Web Applications
+#### October 8, 2019: Scaling Web Applications [[slides](/slides/2019/04_scaling_web_applications/)]
 
 **TODO**:
 
