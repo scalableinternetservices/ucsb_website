@@ -34,7 +34,7 @@ Tuesday October 15, 10:59:59 AM PDT
 
 ## Overview Video
 
-Coming soon!
+[https://youtu.be/UOTows96LDA](https://youtu.be/UOTows96LDA)
 
 ## Project Submission
 
