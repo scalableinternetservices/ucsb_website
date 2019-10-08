@@ -97,19 +97,275 @@ Note: The online version is slightly more up-to-date.</p>
 
     </div>
     <div class="col-md-9">
-      <h1 id="project-2-googles-cloud-run">Project 2: Google’s Cloud Run</h1>
+      <h1 id="project-2-docker-sinatra-and-googles-cloud-run">Project 2: Docker, Sinatra and Google’s Cloud Run</h1>
 
-<p>Content TBD</p>
+<p>In this project you will write a <a href="http://sinatrarb.com/">Sinatra</a> application,
+built it into a <a href="https://www.docker.com/products/docker-desktop">Docker</a>
+container, and deploy it <a href="https://cloud.google.com/run/">Google Cloud
+Run</a>. This service will provide a simple rest
+interface over a distributed storage system, Google Cloud Storage (GCS), where
+your application can create, list, read, and delete files.</p>
 
 <h2 id="learning-outcomes">Learning Outcomes:</h2>
+
+<ul>
+  <li>
+    <p>Student can perform create, read, and delete actions using Google Cloud
+Storage.</p>
+  </li>
+  <li>
+    <p>Student has written a Sinatra web application with four API endpoints.</p>
+  </li>
+  <li>
+    <p>Student has built a docker container.</p>
+  </li>
+  <li>
+    <p>Student has deployed code to Google Cloud Run.</p>
+  </li>
+  <li>
+    <p>Student has compared the performance of Google Cloud Run to that of AWS
+Lambda.</p>
+  </li>
+</ul>
 
 <h2 id="due-date">Due Date</h2>
 
 <p>Tuesday October 15, 10:59:59 AM PDT</p>
 
+<h2 id="overview-video">Overview Video</h2>
+
+<p>Coming soon!</p>
+
 <h2 id="project-submission">Project Submission</h2>
 
-<p>GOOGLE FORM LINK</p>
+<p>Coming soon!</p>
+
+<h2 id="http-api-specification">HTTP API Specification</h2>
+
+<p>The following describes the HTTP API endpoints that you are to implement. The
+template project provides only <code class="highlighter-rouge">GET /</code> that returns <code class="highlighter-rouge">Hello World</code>.</p>
+
+<h3 id="get-">GET /</h3>
+
+<p>This endpoint is simply used to redirect the client.</p>
+
+<ul>
+  <li>Reponds with <code class="highlighter-rouge">302</code> redirect to <code class="highlighter-rouge">/files/</code>.</li>
+</ul>
+
+<p>Example curl command:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-D-</span> URL_BASE
+</code></pre></div></div>
+
+<p>Example HTTP response:</p>
+
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Found</span>
+<span class="na">location</span><span class="p">:</span> <span class="s">URL_BASE/files/</span>
+</code></pre></div></div>
+
+<h3 id="get-files">GET /files/</h3>
+
+<p>This endpoint is used to get a list of files available in the GCS bucket.</p>
+
+<ul>
+  <li>Responds <code class="highlighter-rouge">200</code> with a JSON body containing a sorted list of valid SHA256
+digests in sorted order (lexicographically ascending).</li>
+</ul>
+
+<p>Example curl command:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-D-</span> URL_BASE/files/
+</code></pre></div></div>
+
+<p>Example HTTP response:</p>
+
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">content-type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">202</span>
+
+<span class="p">[</span><span class="s2">"02818fde32cc125a69bf5bdd2d1c1f615dee26984801ad3558cb7c71a54bc6ac"</span><span class="p">,</span><span class="s2">"c36e18b713bf317e08e2afce764bf7e17457be9e22538efb39a9f0d036f7c6cc"</span><span class="p">,</span><span class="s2">"fbcfc39ad67a080b85f914d3c37b10f6b814133fc1fcc321ac8c7e85cf42bc60"</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="post-files">POST /files/</h3>
+
+<p>This endpoint is used to upload a file to GCS.</p>
+
+<ul>
+  <li>
+    <p>On success, respond <code class="highlighter-rouge">201</code> with a JSON body that encompasses the uploaded
+file’s hex digest (see example below)</p>
+  </li>
+  <li>
+    <p>Respond <code class="highlighter-rouge">409</code> if a file with the same SHA256 hex digest has already been
+uploaded.</p>
+  </li>
+  <li>
+    <p>Respond <code class="highlighter-rouge">422</code> if:</p>
+
+    <ul>
+      <li>
+        <p>there isn’t a file provided as the <code class="highlighter-rouge">file</code> parameter</p>
+      </li>
+      <li>
+        <p>the provided file is more than <code class="highlighter-rouge">1MB</code> in size</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>Example curl command:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-D-</span> URL_BASE/files/ <span class="nt">-F</span> <span class="s1">'file=@test.txt'</span>
+</code></pre></div></div>
+
+<p>Example HTTP response:</p>
+
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
+<span class="na">content-type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">79</span>
+
+<span class="p">{</span><span class="nl">"uploaded"</span><span class="p">:</span><span class="s2">"3fd48de5c648bce27acaa6ddda51f35a0c69f07075ac472a4347c66502bb0d48"</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="get-filesdigest">GET /files/{DIGEST}</h3>
+
+<ul>
+  <li>
+    <p>On success, respond <code class="highlighter-rouge">200</code> and:</p>
+
+    <ul>
+      <li>
+        <p>the <code class="highlighter-rouge">Content-Type</code> header should be set to that provided when the file
+was uploaded</p>
+      </li>
+      <li>
+        <p>the body should contain the contents of the file</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Respond <code class="highlighter-rouge">404</code> if there is no file corresponding to <code class="highlighter-rouge">DIGEST</code>.</p>
+  </li>
+  <li>
+    <p>Respond <code class="highlighter-rouge">422</code> if <code class="highlighter-rouge">DIGEST</code> is not a valid SHA256 hex digest.</p>
+  </li>
+</ul>
+
+<p>Example curl command:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-D-</span> URL_BASE/files/3fd48de5c648bce27acaa6ddda51f35a0c69f07075ac472a4347c66502bb0d48
+</code></pre></div></div>
+
+<p>Example HTTP response:</p>
+
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">content-type</span><span class="p">:</span> <span class="s">text/plain;charset=utf-8</span>
+<span class="na">content-disposition</span><span class="p">:</span> <span class="s">attachment; filename="3fd48de5c648bce27acaa6ddda51f35a0c69f07075ac472a4347c66502bb0d48"</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">10</span>
+
+Test File
+</code></pre></div></div>
+
+<h3 id="delete-filesdigest">DELETE /files/{DIGEST}</h3>
+
+<p>Delete the file represented by <code class="highlighter-rouge">DIGEST</code>.</p>
+
+<ul>
+  <li>
+    <p>Respond <code class="highlighter-rouge">422</code> if <code class="highlighter-rouge">DIGEST</code> is not a valid SHA256 hex digest.</p>
+  </li>
+  <li>
+    <p>Respond 200 in all other cases (recall that HTTP <code class="highlighter-rouge">DELETE</code> should be
+idempotent).</p>
+  </li>
+</ul>
+
+<p>Example curl command:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-D-</span> <span class="nt">-X</span> DELETE URL_BASE/files/3fd48de5c648bce27acaa6ddda51f35a0c69f07075ac472a4347c66502bb0d48
+</code></pre></div></div>
+
+<p>Example HTTP response:</p>
+
+<pre><code class="language-HTTP">HTTP/1.1 200 OK
+</code></pre>
+
+<h2 id="storage-requirements">Storage Requirements</h2>
+
+<p>Files are to be saved to the GCS bucket <code class="highlighter-rouge">cs291_project2</code> associated with the
+project ID <code class="highlighter-rouge">cs291-f19</code>. The following ruby code provides an example for
+obtaining a Bucket object:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'google/cloud/storage'</span>
+<span class="n">storage</span> <span class="o">=</span> <span class="no">Google</span><span class="o">::</span><span class="no">Cloud</span><span class="o">::</span><span class="no">Storage</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">project_id: </span><span class="s1">'cs291-f19'</span><span class="p">)</span>
+<span class="n">bucket</span> <span class="o">=</span> <span class="n">storage</span><span class="p">.</span><span class="nf">bucket</span> <span class="s1">'cs291_project2'</span><span class="p">,</span> <span class="ss">skip_lookup: </span><span class="kp">true</span>
+</code></pre></div></div>
+
+<p>Uploaded files are to be saved into GCS using object names derived from the
+SHA256 hex digest of the file’s contents.</p>
+
+<p>For example, the follow shows a file, <code class="highlighter-rouge">test.txt</code>, that has a SHA256 hex digest of
+<code class="highlighter-rouge">3fd48de5c648bce27acaa6ddda51f35a0c69f07075ac472a4347c66502bb0d48</code>:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"Test File"</span> <span class="o">&gt;</span> test.txt
+<span class="nv">$ </span><span class="nb">sha256sum </span>test.txt
+3fd48de5c648bce27acaa6ddda51f35a0c69f07075ac472a4347c66502bb0d48  test.txt
+</code></pre></div></div>
+
+<p>The object name for the above file to store in GCS should be
+<code class="highlighter-rouge">3f/d4/8de5c648bce27acaa6ddda51f35a0c69f07075ac472a4347c66502bb0d48</code>. In
+particular we twice separate out two consecutive digits of the hex
+digest. While this is an implementation specific detail that has no impact on
+the external view of your API, it is important that this pattern is utilized.</p>
+
+<h2 id="resources">Resources</h2>
+
+<h3 id="project-template">Project Template</h3>
+
+<p><a href="https://github.com/scalableinternetservices/cs291a_project2_template">https://github.com/scalableinternetservices/cs291a_project2_template</a></p>
+
+<p>Please review the template project README for development and deployment instructions.</p>
+
+<h3 id="verification-script">Verification Script</h3>
+
+<p>Please use the following script to verify your web application:
+<a href="https://github.com/scalableinternetservices/ucsb_website/tree/master/scripts#project-2-verification-script">https://github.com/scalableinternetservices/ucsb_website/tree/master/scripts#project-2-verification-script</a></p>
+
+<h2 id="required-tools">Required Tools:</h2>
+
+<ul>
+  <li>
+    <p><a href="https://www.docker.com/products/docker-desktop">Docker</a></p>
+  </li>
+  <li>
+    <p><a href="https://cloud.google.com/run/">Google Cloud Run</a></p>
+  </li>
+  <li>
+    <p><a href="https://googleapis.dev/ruby/google-cloud-storage/latest/index.html">Google Cloud
+Storage</a></p>
+  </li>
+  <li>
+    <p><a href="https://www.ruby-lang.org/en/">Ruby</a></p>
+  </li>
+  <li>
+    <p><a href="http://sinatrarb.com/">Sinatra</a></p>
+  </li>
+</ul>
+
+<h2 id="other-resources">Other Resources:</h2>
+
+<ul>
+  <li>
+    <p><a href="https://cloud.google.com/sdk/docs/#install_the_latest_cloud_tools_version_cloudsdk_current_version">Google Cloud
+Tools</a></p>
+  </li>
+  <li>
+    <p><a href="https://cloud.google.com/run/docs/quickstarts/build-and-deploy">Google Cloud Run Quick
+Start</a> (in
+case you want to look at doing this from scratch)</p>
+  </li>
+</ul>
 
     </div>
   </div>

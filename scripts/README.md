@@ -30,3 +30,11 @@ Usage:
 ```
 ./project1.py LAMBDA_APP_URL
 ```
+
+## Project 2 Verification Script
+
+Usage:
+
+```
+./project2.py GOOGLE_CLOUD_RUN_URL
+```
