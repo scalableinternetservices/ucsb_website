@@ -1,6 +1,6 @@
 ---
 layout: presentation
-title: Vertical and Horizontal Scaling
+title: Scaling Web Applications
 ---
 
 class: center, middle
@@ -11,19 +11,17 @@ __CS291A__
 
 Dr. Bryce Boe
 
-October 16, 2018
+October 8, 2019
 
 ---
 
 # Today's Agenda
 
-* TODO
-
-* [Complete Server Architecture Slides](/slides/2018/05_web_and_application_servers/#59)
+* TO-DO
 
 * Server Architecture Review
 
-* Motivation
+* Scaling Motivation
 
 * Vertical Scaling
 
@@ -31,31 +29,24 @@ October 16, 2018
 
 ---
 
-# TODO
+# Completed
 
-## Should be done
+.left-column40[
+* Project 1
 
-* Chapters 1, 2, 9-11 in
-  [HPBN](https://hpbn.co/primer-on-latency-and-bandwidth/) / Chapters 1-6 in
-  the [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
+* Read HPBN Chapters 1, 2, 9, 10, and 11
+* Read Dynamic Load Balancing on Web-server Systems
 
-* Familiarity with Git (you'll get more practice)
+]
+.right-column60[
+![Success Meme](success-kid-original-828x550.jpg)
+]
 
-* [Dynamic Load Balancing on Web-server Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf)
-  by Cardellini, Colajanni, and Yu.
+---
 
-## Before Today's Lab
+# TO-DO
 
-* Complete at least `2 * #TEAM_MEMBERS` stories that deliver value to your
-  users (me).
-
-* Complete chapters 7 through 10 in the
-  [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
-
-* Hook TravisCI up to your repository.
-
-__Focus__: On delivering new usable features to your customers (me) for the
-next two weeks.
+-  Work on Project 2 (Due next Tuesay morning)
 
 ---
 
@@ -90,6 +81,11 @@ class: center, middle
 class: center, middle
 
 # What are the trade-offs of event-driven systems?
+
+---
+
+class: center, middle, inverse
+# Web Server Scaling
 
 ---
 
@@ -136,10 +132,15 @@ Buying more servers and scaling _out_
 
 ---
 
+class: center, middle, inverse
 # Vertical Scaling
 
-When needed, increase the resources of your current server, eventually buy a
-bigger server with:
+---
+
+# Vertical Scaling
+
+When needed, increase the resources of your current server, eventually buy (or
+rent) a bigger server with:
 
 * More memory
 
@@ -166,6 +167,8 @@ resources/performance to higher resources/performance:
 * __I__ prefixed instances: I/O optimized
 
 * __D__ prefixed instances: Storage capacity optimized
+
+https://aws.amazon.com/ec2/instance-types/
 
 ---
 
@@ -288,9 +291,17 @@ Fails with 25 ups.
 
 ---
 
+class: center, middle, inverse
+# Horizontal Scaling
+
+---
+
+
 # Load Balancing
 
-Vertical scaling has its place, but horizontal scaling is generally preferable.
+Vertical scaling requires fewer moving parts but has limited scaling
+capability. Eventually horizontal scaling becomes necessary to handle increased
+load.
 
 When horizontally scaling HTTP, this technique is referred to as __load
 balancing__.
@@ -371,8 +382,6 @@ Content-Type: text/html; charset=iso-8859-1
 
 * Simple
 
-* Complete control over load balancing algorithm
-
 * Location independent
 
 ## Weaknesses
@@ -382,6 +391,8 @@ Content-Type: text/html; charset=iso-8859-1
 * High load on www
 
 * May reduce local-network cache applicability
+
+* Users can bypass load balancer
 
 ---
 
@@ -480,12 +491,12 @@ TCP D=1421 S=80 Syn Ack=899863544 Seq=1908949446 Len=0
 (client -> lb)
 IP D=208.50.157.136 S=216.64.159.149 LEN=154, ID=48401
 TCP D=80 S=1421 Ack=1908949447 Seq=899863544 Len=114
-HTTP GET /eb/images/ec_home_logo_tag.gif HTTP/1.0
+HTTP GET /eb/images/ec_home_logo_tag.gif HTTP/1.1
 
 (lb -> server)
 IP D=10.16.100.121 S=208.50.157.136 LEN=154, ID=48401
 TCP D=80 S=1421 Ack=1908949447 Seq=899863544 Len=114
-HTTP GET /eb/images/ec_home_logo_tag.gif HTTP/1.0
+HTTP GET /eb/images/ec_home_logo_tag.gif HTTP/1.1
 ```
 
 ---
@@ -795,7 +806,7 @@ Fails with 55 ups.
 
 ---
 
-# Horizontal Scaling FTW!
+# Horizontal Scaling For The Win!
 
 Vertical scaling handled only 20 new users per second at a cost of about $600
 per month. There was no clear scaling path after that point.
@@ -803,8 +814,6 @@ per month. There was no clear scaling path after that point.
 Horizontal scaling handled 45 new users per second at a cost of about $600 per
 month. The scaling path is clear. Add more servers for a linear increase in
 cost.
-
-_FTW_: For the Win
 
 ---
 
