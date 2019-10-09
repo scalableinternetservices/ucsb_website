@@ -258,6 +258,7 @@ def test_files__invalid_create(url):
 
 
 def test_files__invalid_get_and_delete(url):
+    files_url = urljoin(url, "/files/")
     issues = 0
 
     for method in ["GET", "DELETE"]:
