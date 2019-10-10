@@ -72,10 +72,6 @@ def score(url):
         print(f"Resource path must be `/`. Yours: {result.path}")
         issues += 1
 
-    if issues:
-        print(count_format("Issue", issues))
-        return issues
-
     issues += test_root_url(url)
     issues += test_files__invalid_create(url)
     issues += test_files__invalid_get_and_delete(url)
