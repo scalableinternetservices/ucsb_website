@@ -258,7 +258,6 @@ def test_files__invalid_create(url):
 
 
 def test_files__invalid_get_and_delete(url):
-    files_url = urljoin(url, "/files/")
     issues = 0
 
     for method in ["GET", "DELETE"]:
@@ -266,6 +265,7 @@ def test_files__invalid_get_and_delete(url):
         while "0" not in digest:
             digest = hashlib.sha256(str(random.random()).encode("utf-8")).hexdigest()
         for invalid in [digest[:-1], digest + "a", digest.replace("0", "g")]:
+            files_url = urljoin(url, f"/files/{invalid}")
             response = requests.request(method, urljoin(url, f"/files/{invalid}"))
             if response.status_code != 422:
                 print(
