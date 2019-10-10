@@ -48,7 +48,7 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
 
 - Begin [Project 2](/project2/)
 
-#### October 10, 2019: Architecting for High Availability
+#### October 10, 2019: Architecting for High Availability [[slides](/slides/2019/05_high_availability/)]
 
 **TODO**:
 
