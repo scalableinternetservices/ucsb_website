@@ -58,7 +58,7 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
 
 **TODO**:
 
-- Begin [Project 3](project3) with a partner
+- Begin [Project 3](project3) (optional: with a partner)
 
 #### October 17, 2019
 
@@ -77,8 +77,8 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
 **TODO**:
 
 - Begin [Primary Project](/project/)
-  - form a team (merge with another project 3 team)
-  - develop initial feature
+  - form a team -- merge with another project 3 team (max 4 people)
+  - develop initial features
   - deploy to elastic beanstalk
 
 #### October 29, 2019
