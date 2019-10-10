@@ -1,6 +1,6 @@
 ---
 layout: presentation
-title: High Availability
+title: Architecting for High Availability
 ---
 
 class: center, middle
@@ -11,43 +11,26 @@ __CS291A__
 
 Dr. Bryce Boe
 
-October 18, 2018
+October 10, 2019
 
 ---
 
 # Today's Agenda
 
-* TODO
+* TO-DO
 
 * Scaling Review
 
-* High Availability
+* Architecting for High Availability
 
 ---
 
-# TODO
+# TO-DO
 
-## Should be done
+* Complete Project 2 (Due next Tuesday morning)
 
-* Chapters 1, 2, 9-11 in
-  [HPBN](https://hpbn.co/primer-on-latency-and-bandwidth/) / Chapters 1-10 in
-  the [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
-
-* [Dynamic Load Balancing on Web-server Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf)
-  by Cardellini, Colajanni, and Yu.
-
-* Build out a web application with a handful of features.
-
-* TravisCI integration with your repository.
-
-## Before next week's lab
-
-* Chapters 13, 14 in the [Ruby on Rails
-  Tutorial](https://www.railstutorial.org/book/user_microposts) (read/skim
-  chapters 11 and 12 as you see fit)
-
-__Focus__: On delivering new usable features to your customers (me) for the
-next two weeks.
+  * (Strongly encouraged) Ensure you can deploy to Google Cloud Run before
+    Friday at 5PM
 
 ---
 
@@ -72,6 +55,11 @@ Buying move servers and scaling _out_
 * __PRO__: Linear (maybe even sublinear) increase in cost when scaling
 
 * __CON__: More moving parts makes things more complicated
+
+---
+
+class: center, middle, inverse
+# Architecting for High Availability
 
 ---
 
@@ -227,10 +215,10 @@ class: center, middle
 
 Buy two switches!
 
-Again with a both a primary and failover and using a heartbeat between them.
+Again, both a primary and failover are necessary using a heartbeat between them.
 
-During failover similar issues occur but layer 2 should be stateless so no/less
-synchronization needed.
+During failover similar issues occur but layer 2 should be stateless so less or
+even no synchronization is needed.
 
 .center[![Redundant switches](redundant_switches.png)]
 
@@ -248,7 +236,7 @@ class: center, middle
 
 Buy two!
 
-Similar heartbeat and failover system, with slightly different problems.
+This includes a similar heartbeat and failover system, but is not as trivial to switch between.
 
 
 .center[![Redundant routers](redundant_routers.png)]
@@ -297,11 +285,11 @@ over another. (Path prepending, Community values)
 
 ---
 
+class: center, middle
+
 # High Availability
 
-.center[![High Availability Topology](high_availability.png)]
-
-We will discuss database failover in another lecture.
+![High Availability Topology](high_availability.png)
 
 ---
 
