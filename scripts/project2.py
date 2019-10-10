@@ -261,7 +261,8 @@ def test_files__invalid_get_and_delete(url):
         while "0" not in digest:
             digest = hashlib.sha256(str(random.random()).encode("utf-8")).hexdigest()
         for invalid in [digest[:-1], digest + "a", digest.replace("0", "g")]:
-            response = requests.request(method, urljoin(url, f"/files/{invalid}"))
+            files_url = urljoin(url, f"/files/{invalid}")
+            response = requests.request(method, files_url)
             if response.status_code != 422:
                 print(
                     f"Expected 422 response for `{method} {files_url}`. Got {response.status_code}."
