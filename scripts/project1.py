@@ -114,7 +114,18 @@ def test_invalid_verbs(url, verbs):
 
 def test_root__invalid_header_specification(url):
     failures = 0
-    for header_value in [None, "", "Bearer: foobar"]:
+
+    try:
+        token = requests.post(
+            urljoin(url, "token"),
+            allow_redirects=False,
+            headers={mix_case("content-type"): "application/json"},
+            json={},
+        ).json()["token"]
+    except Exception:
+        token = "notatoken"
+
+    for header_value in [None, "", "Bearer: foobar", f"NotBearer {token}"]:
         response = requests.get(
             url,
             allow_redirects=False,
