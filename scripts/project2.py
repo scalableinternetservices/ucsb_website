@@ -36,11 +36,17 @@ def count_format(word, number):
 
 
 def main():
-    if len(sys.argv) != 2:
+    checkfs = False
+    if len(sys.argv) < 2 or len(sys.argv) > 3:
         print(f"Usage: {sys.argv[0]} URL")
         return 1
+    if len(sys.argv) == 3:
+        if sys.argv[2] != "--checkfs":
+            print(f"Usage: {sys.argv[0]} URL")
+            return 1
+        checkfs = True
 
-    return score(url=sys.argv[1])
+    return score(checkfs=checkfs, url=sys.argv[1])
 
 
 def mix_case(word):
@@ -56,7 +62,7 @@ def mix_case(word):
     return result
 
 
-def score(url):
+def score(checkfs, url):
     issues = 0
 
     result = urlparse(url)
@@ -77,11 +83,107 @@ def score(url):
     issues += test_files__invalid_get_and_delete(url)
     issues += test_files__duplicate_create(url)
     issues += test_files__create_get_list_delete(url)
+    if checkfs:
+        issues += test_direct_file_add_valid(url)
+        issues += test_direct_file_add_invalid(url)
 
     if issues == 0:
         print("Passed")
     else:
         print(count_format("Issue", issues))
+    return issues
+
+
+def test_direct_file_add_valid(url):
+    import hashlib
+    from google.cloud import storage
+
+    issues = 0
+    files_url = urljoin(url, "/files/")
+
+    client = storage.Client(project="cs291_f19")
+    bucket = client.bucket("cs291_project2")
+
+    # Directly add files
+    expected_digests = set()
+    blobs = []
+    for _ in range(3):
+        body = str(random.random()).encode("utf-8")
+        digest = hashlib.sha256(body).hexdigest()
+        expected_digests.add(digest)
+        tmp = list(digest)
+        tmp[4:4] = "/"
+        tmp[2:2] = "/"
+        digest = "".join(tmp)
+        blob = bucket.blob(digest)
+        blobs.append(blob)
+        blob.upload_from_string(body)
+
+    # List files
+    response = requests.get(files_url)
+    if response.status_code != 200:
+        print(
+            f"Expected 200 response for `GET {files_url}`. Got {response.status_code}."
+        )
+        return 1
+    digests = set(response.json())
+
+    missing = expected_digests - digests
+    if missing:
+        print(f"Expected to find digests: {missing}")
+        issues += 1
+
+    # Clean up added files
+    for blob in blobs:
+        blob.delete()
+
+    return issues
+
+
+def test_direct_file_add_invalid(url):
+    import hashlib
+    from google.cloud import storage
+
+    issues = 0
+    files_url = urljoin(url, "/files/")
+
+    client = storage.Client(project="cs291_f19")
+    bucket = client.bucket("cs291_project2")
+
+    # Directly add files
+    unexpected_digests = set()
+    blobs = []
+    for i in range(0, 9, 3):
+        body = str(random.random()).encode("utf-8")
+        digest = hashlib.sha256(body).hexdigest()
+        unexpected_digests.add(digest)
+        if i > 0:
+            tmp = list(digest)
+            tmp[i + 2 : i + 2] = "/"
+            tmp[i:i] = "/"
+            digest = "".join(tmp)
+        blob = bucket.blob(digest)
+        blobs.append(blob)
+        blob.upload_from_string(body)
+
+    # List files
+    response = requests.get(files_url)
+    if response.status_code != 200:
+        print(
+            f"Expected 200 response for `GET {files_url}`. Got {response.status_code}."
+        )
+        return 1
+    digests = set(response.json())
+
+    unexpected = unexpected_digests & digests
+    if unexpected:
+        print(f"Did not expect to find invalid digests: {unexpected}")
+        issues += 1
+
+    # Clean up added files
+    for blob in blobs:
+        blob.delete()
+
     return issues
 
 
