@@ -1,5 +1,6 @@
 PyJWT==1.6.1
 beautifulsoup4
+google-cloud-storage
 html5-parser
 requests
 
