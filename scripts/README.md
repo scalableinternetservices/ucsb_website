@@ -4,15 +4,15 @@
 
 1. Clone this repository:
 ```
-    git clone https://github.com/scalableinternetservices/ucsb_website.git
+git clone https://github.com/scalableinternetservices/ucsb_website.git
 ```
 2. Change into the scripts directory:
 ```
-    cd ucsb_website/scripts
+cd ucsb_website/scripts
 ```
 3. Install python dependencies (re-run this to get latest updates):
 ```
-    pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ## Project 0 Verification Script
