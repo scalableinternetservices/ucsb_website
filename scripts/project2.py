@@ -376,10 +376,14 @@ def test_files__invalid_get_and_delete(url):
 def test_root_url(url):
     response = requests.get(url, allow_redirects=False)
     if response.status_code != 302:
+        print(f"Expected 302 response for `GET /`. Got {response.status_code}.")
         return 1
-    return (
-        0 if response.headers["Location"] in ["/files/", urljoin(url, "/files/")] else 1
-    )
+
+    if response.headers["Location"] not in ["/files/", urljoin(url, "/files/")]:
+        print(f"Expected redirect to `/files/`. Got {response.headers['Location']}")
+        return 1
+
+    return 0
 
 
 if __name__ == "__main__":
