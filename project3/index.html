@@ -104,8 +104,9 @@ docker container, as well as a standalone React-based front-end for your chat
 sever.</p>
 
 <p>Your front-end should have the capability to seamlessly work with both your
-server, and my deployed version of the server. Similarly my deployed front-end
-should be able to seamlessly interact with your server.</p>
+server, and my deployed version of the server (reference server). Similarly my
+deployed front-end (reference client) should be able to seamlessly interact
+with your server.</p>
 
 <h2 id="working-in-pairs-optional">Working in Pairs (optional)</h2>
 
@@ -147,6 +148,115 @@ provide a real-time communication platform.</p>
 </ul>
 
 <h2 id="project-submission">Project Submission</h2>
+
+<p>Coming soon.</p>
+
+<h2 id="http-api-specification">HTTP API Specification</h2>
+
+<p>The following endpoints are the only required endpoints. Feel free to add more
+endpoints or more functionality so long as the reference client continues to
+work with your server. Sections indicated via <code class="highlighter-rouge">(reference)</code> are not required,
+but are listed so you understand why the reference server behaves a certain
+way.</p>
+
+<p><strong>Note</strong>: I’ve intentionally excluded any CORS related headers and endpoints
+from the following list.</p>
+
+<h3 id="post-login">POST /login</h3>
+
+<p>This endpoint is used to grant a user an access token. In the reference
+implementation, the endpoint is also used to immediately register a new
+user. Once a user has been created, they must login with the same password.</p>
+
+<p>Returns:</p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">201</code> with the JSON body <code class="highlighter-rouge">{"token": &lt;SIGNED TOKEN&gt;}</code> on success</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">403</code> if the provided <code class="highlighter-rouge">username</code> and <code class="highlighter-rouge">password</code> combination doesn’t match
+that of an existing user</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">422</code> if either <code class="highlighter-rouge">password</code> or <code class="highlighter-rouge">username</code> is blank</p>
+  </li>
+  <li>
+    <p>(reference) <code class="highlighter-rouge">422</code> if the set of provided fields do not exactly match the
+expected fields</p>
+  </li>
+</ul>
+
+<p>Expected Form Fields:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">password</code></li>
+  <li><code class="highlighter-rouge">username</code></li>
+</ul>
+
+<p><strong>WARNING</strong>: Do not send real passwords to this system. The reference server is
+not protected by TLS and thus all data sent to or from the server is
+unencrypted.</p>
+
+<p>Example curl command:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-D-</span> &lt;BASE_URL&gt;/login <span class="nt">-F</span> <span class="nv">username</span><span class="o">=</span>&lt;USERNAME&gt; <span class="nt">-F</span> <span class="nv">password</span><span class="o">=</span>&lt;PASSWORD&gt;
+</code></pre></div></div>
+
+<p>Example HTTP response:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 201 CREATED
+Content-Type: application/json
+
+{"token": "&lt;SIGNED TOKEN&gt;"}
+</code></pre></div></div>
+
+<h3 id="post-message">POST /message</h3>
+
+<p>Send a message to all users of the chat system.</p>
+
+<p>Returns:</p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">201</code> on success</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">403</code> if <code class="highlighter-rouge">&lt;SIGNED TOKEN&gt;</code> is not valid</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">422</code> if <code class="highlighter-rouge">message</code> is blank</p>
+  </li>
+  <li>
+    <p>(reference) <code class="highlighter-rouge">422</code> if the set of provided fields do not exactly match the
+expected fields</p>
+  </li>
+</ul>
+
+<p>Expected Headers:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">Authorization</code> with value <code class="highlighter-rouge">Bearer &lt;SIGNED TOKEN&gt;</code></li>
+</ul>
+
+<p>Expected Form Fields:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">message</code>: a string of the message to send</li>
+</ul>
+
+<p>Example curl command:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-D-</span> &lt;BASE_URL&gt;/message <span class="nt">-F</span> <span class="nv">message</span><span class="o">=</span><span class="nb">test</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;SIGNED TOKEN&gt;"</span>
+</code></pre></div></div>
+
+<p>Example HTTP response:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 201 CREATED
+</code></pre></div></div>
+
+<h2 id="react-front-end-specification">React Front-end Specification</h2>
 
 <p>Coming soon.</p>
 
