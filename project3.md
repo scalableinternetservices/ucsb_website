@@ -12,8 +12,9 @@ docker container, as well as a standalone React-based front-end for your chat
 sever.
 
 Your front-end should have the capability to seamlessly work with both your
-server, and my deployed version of the server. Similarly my deployed front-end
-should be able to seamlessly interact with your server.
+server, and my deployed version of the server (reference server). Similarly my
+deployed front-end (reference client) should be able to seamlessly interact
+with your server.
 
 
 ## Working in Pairs (optional)
@@ -53,6 +54,101 @@ Tuesday October 29, 10:59:59 AM PDT
 
 
 ## Project Submission
+
+Coming soon.
+
+
+## HTTP API Specification
+
+The following endpoints are the only required endpoints. Feel free to add more
+endpoints or more functionality so long as the reference client continues to
+work with your server. Sections indicated via `(reference)` are not required,
+but are listed so you understand why the reference server behaves a certain
+way.
+
+__Note__: I've intentionally excluded any CORS related headers and endpoints
+from the following list.
+
+### POST /login
+
+This endpoint is used to grant a user an access token. In the reference
+implementation, the endpoint is also used to immediately register a new
+user. Once a user has been created, they must login with the same password.
+
+Returns:
+
+* `201` with the JSON body `{"token": <SIGNED TOKEN>}` on success
+
+* `403` if the provided `username` and `password` combination doesn't match
+  that of an existing user
+
+* `422` if either `password` or `username` is blank
+
+* (reference) `422` if the set of provided fields do not exactly match the
+  expected fields
+
+Expected Form Fields:
+
+* `password`
+* `username`
+
+__WARNING__: Do not send real passwords to this system. The reference server is
+not protected by TLS and thus all data sent to or from the server is
+unencrypted.
+
+Example curl command:
+
+```sh
+curl -D- <BASE_URL>/login -F username=<USERNAME> -F password=<PASSWORD>
+```
+
+Example HTTP response:
+
+```
+HTTP/1.1 201 CREATED
+Content-Type: application/json
+
+{"token": "<SIGNED TOKEN>"}
+```
+
+### POST /message
+
+Send a message to all users of the chat system.
+
+Returns:
+
+* `201` on success
+
+* `403` if `<SIGNED TOKEN>` is not valid
+
+* `422` if `message` is blank
+
+* (reference) `422` if the set of provided fields do not exactly match the
+  expected fields
+
+Expected Headers:
+
+* `Authorization` with value `Bearer <SIGNED TOKEN>`
+
+Expected Form Fields:
+
+* `message`: a string of the message to send
+
+Example curl command:
+
+```sh
+curl -D- <BASE_URL>/message -F message=test \
+-H "Authorization: Bearer <SIGNED TOKEN>"
+```
+
+Example HTTP response:
+
+```
+HTTP/1.1 201 CREATED
+```
+
+
+## React Front-end Specification
 
 Coming soon.
 
