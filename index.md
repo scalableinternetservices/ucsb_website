@@ -58,11 +58,11 @@ project.
 ## Initial Projects
 
 There will be four projects in the first five weeks of the course, one per week
-with the fourth project spanning nearly two weeks. These projects will ensure
-students have the basic knowledge to build and deploy modern, simple, and
-scalable web services without needing a deep understanding of how the
-underlying systems enable scalability. The first three projects are to be
-completed individually, and the fourth completed in a pair.
+with the fourth project spanning two weeks. These projects will ensure students
+have the basic knowledge to build and deploy modern, simple, and scalable web
+services without needing a deep understanding of how the underlying systems
+enable scalability. The first three projects are to be completed individually,
+and the fourth completed in a pair.
 
 ## Primary Project
 
@@ -82,7 +82,7 @@ and the [Ruby on Rails](http://rubyonrails.org/) framework.
 | 3 | [Project 0](project0) (Static Web Page) |
 | 6 | [Project 1](project1) (AWS Lambda) |
 | 9 | [Project 2](project2) (Google's Cloud Run) |
-| 12 | [Project 3](project3) (React and GraphQL) |
+| 12 | [Project 3](project3) (Chat Server and Client) |
 | 65 | [Primary Project](project) Individual Grade |
 | 5 | Participation |
 {: class="table table-striped"}

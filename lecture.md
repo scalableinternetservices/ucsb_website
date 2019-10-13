@@ -70,9 +70,15 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
 
 **TODO**:
 
-- Complete [Project 3](/project3/)
+- Continue working on [Project 3](/project3/)
 
 #### October 24, 2019
+
+**TODO**:
+
+- Complete [Project 3](/project3/)
+
+#### October 29, 2019
 
 **TODO**:
 
@@ -80,8 +86,6 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
   - form a team -- merge with another project 3 team (max 4 people)
   - develop initial features
   - deploy to elastic beanstalk
-
-#### October 29, 2019
 
 #### October 31, 2019
 
