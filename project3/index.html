@@ -366,9 +366,105 @@ always sent out on connection of new streams.</p>
   <li><code class="highlighter-rouge">users</code> (array[string]): the list of connected users</li>
 </ul>
 
+<h2 id="server-requirements">Server Requirements</h2>
+
+<ul>
+  <li>
+    <p>Your server must maintain state about the users who are connected.</p>
+  </li>
+  <li>
+    <p>A broadcast <code class="highlighter-rouge">JOIN</code> should be made any time a new user is connected.</p>
+  </li>
+  <li>
+    <p>A broadcast <code class="highlighter-rouge">PART</code> should be made any time a user has disconnected.</p>
+  </li>
+  <li>
+    <p>A <code class="highlighter-rouge">Users</code> event should be sent to each newly established connection.</p>
+  </li>
+  <li>
+    <p>Incoming messages should be broadcast to everyone.</p>
+  </li>
+  <li>
+    <p>A <code class="highlighter-rouge">Disconnect</code> should be sent to the existing connection when a user attempts
+to connect with a second client (the second client should remain connected).</p>
+
+    <ul>
+      <li>No <code class="highlighter-rouge">JOIN</code> or <code class="highlighter-rouge">PART</code> message should occur in such a case because the user is
+still connected.</li>
+    </ul>
+  </li>
+  <li>
+    <p>The first event in the server should be <code class="highlighter-rouge">ServerStatus</code> indicating the server
+has started.</p>
+  </li>
+  <li>
+    <p>A history of at least the last 100 events should be kept.</p>
+  </li>
+  <li>
+    <p>All of the <code class="highlighter-rouge">Message</code> or <code class="highlighter-rouge">ServerStatus</code> in the history should be sent to a
+newly connecting user.</p>
+  </li>
+  <li>
+    <p>A user who is reestablishing its connection (retry after failure) should
+receive all of the messages in the history that have occurred since the
+provided <code class="highlighter-rouge">last_event_id</code>.</p>
+  </li>
+</ul>
+
 <h2 id="react-front-end-specification">React Front-end Specification</h2>
 
-<p>Coming soon.</p>
+<p>Your application need not be anything like the reference application. It
+however, must meet the following requirements:</p>
+
+<ul>
+  <li>
+    <p>Connection status should be visually discernable between being connected and disconnected.</p>
+  </li>
+  <li>
+    <p>There should be an easy way to see who is connected.</p>
+  </li>
+  <li>
+    <p>There should be a way to discover when someone connected (<code class="highlighter-rouge">JOIN</code>).</p>
+  </li>
+  <li>
+    <p>It should be easy to discover when someone disconencted (<code class="highlighter-rouge">PART</code>).</p>
+  </li>
+  <li>
+    <p>New <code class="highlighter-rouge">Message</code> events should be immediately apparent.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">ServerStatus</code> events should be locatable.</p>
+  </li>
+  <li>
+    <p>For retryable connection failures, your application should automatically
+reconnect (<code class="highlighter-rouge">EventStream</code> should handle this for you).</p>
+  </li>
+  <li>
+    <p>On <code class="highlighter-rouge">Disconnect</code> your application should not automatically attempt to
+reconnect to the server.</p>
+  </li>
+  <li>
+    <p>A user should always be able to take an action (e.g., connect, send
+message). In other words there should be no terminal state that requires a
+page refresh.</p>
+  </li>
+  <li>
+    <p>Separate browser windows and/or tabs should each be able to have their own
+connection to the server.</p>
+  </li>
+</ul>
+
+<h3 id="components">Components</h3>
+
+<p>While the names do not need to be the same, you need to at least implement the
+following React components:</p>
+
+<ul>
+  <li>Compose (a way to input / send a message)</li>
+  <li>LoginForm</li>
+  <li>MessageList</li>
+  <li>UserList</li>
+</ul>
 
 <h2 id="resources">Resources</h2>
 
