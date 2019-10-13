@@ -20,7 +20,7 @@ should be able to seamlessly interact with your server.
 
 This project is significantly more complex than the previous projects. You will
 need to maintain state in your Sinatra application, and many of you will learn
-entirely new framework, React. I estimate this project to be more than four
+an entirely new framework, React. I estimate this project to be more than four
 times the work of [Project 2](/project2/). As a result, this project spans two
 weeks, and you have the option of working with another student of the course.
 
@@ -41,9 +41,15 @@ The pairing deadline is: Tuesday October 22, 10:59:59 AM PDT.
 Tuesday October 29, 10:59:59 AM PDT
 
 
-## Learning Outcomes:
+## Learning Outcomes
 
-Coming soon.
+* Student has written and deployed a React application coded using JSX.
+
+* Student has added CORS headers to their web application to support
+  third-party front-ends.
+
+* Student has leveraged Server-Sent Events and Javascript's EventSource to
+  provide a real-time communication platform.
 
 
 ## Project Submission
@@ -94,7 +100,7 @@ accompanied with component unit tests.
 
 * [React](https://reactjs.org)
 
-* [Server-Sent Events](https://www.w3.org/TR/eventsource/)
+* [Server-Sent Events](https://www.w3.org/TR/eventsource/) (SSE)
 
 * [Sinatra](http://sinatrarb.com/)
 
