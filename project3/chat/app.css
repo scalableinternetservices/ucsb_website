@@ -1,0 +1,79 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+h2 {
+    border-bottom: 1px solid black;
+    font-size: large;
+    text-align: center;
+}
+#container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+#chat {
+    flex: 1;
+    font-size: large;
+    overflow-y: scroll;
+}
+#login-modal {
+    background-color: rgba(0, 0, 0, 0.4);
+    display: none;
+    height: 100%;
+    left: 0;
+    padding-top: 100px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+#login-modal .content {
+    font-size: large;
+    background-color: white;
+    border: 2px solid black;
+    margin: auto;
+    max-width: 100%;
+    padding: 1em;
+    width: 20em;
+}
+#login-modal .content input {
+    width: 100%;
+}
+#message {
+    border: 2px solid grey;
+    border-radius: 0.5em;
+    font-size: larger;
+    min-height: 2em;
+    margin: 0 0.5em 0.5em 0.5em;
+    padding-left: 0.5em;
+}
+#message:focus {
+    outline: none;
+}
+#title {
+    border-bottom: 3px solid black;
+    color: green;
+    font-size: xx-large;
+    text-align: center;
+}
+#title.disconnected {
+    color: red;
+}
+#user_window {
+    border: 1px solid black;
+    margin-bottom: 0.5em;
+    height: 100%;
+    width: 10em;
+}
+#users li {
+    list-style-type: none;
+    text-align: center;
+}
+#window {
+    display: flex;
+    flex: 1;
+    margin: 0.5em 0.5em 0 0.5em;
+    min-height: 0;
+}
