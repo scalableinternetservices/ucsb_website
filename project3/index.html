@@ -256,6 +256,117 @@ expected fields</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 201 CREATED
 </code></pre></div></div>
 
+<h3 id="get-stream">GET /stream/<SIGNED TOKEN=""></SIGNED></h3>
+
+<p>Returns:</p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">200</code> and begins the Server-Sent Event stream with events as described the
+following section</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">403</code> if <code class="highlighter-rouge">&lt;SIGNED TOKEN&gt;</code> is not valid</p>
+  </li>
+</ul>
+
+<p>Example curl command:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-D-</span> &lt;BASE_URL&gt;/stream/&lt;SIGNED TOKEN&gt;
+</code></pre></div></div>
+
+<p>Example (partial) HTTP response:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+Content-Type: text/event-stream; charset=utf-8
+
+data: {"users": ["curl"], "created": 1570999219.797813}
+event: Users
+id: 0718299d-43ef-4b1c-b1cf-ba828d195959
+
+data: {"status": "Server start", "created": 1570947584.0895946}
+event: ServerStatus
+id: ed4e3e63-9680-436d-9ab2-e0546b5cc03f
+
+data: {"message": "We're online!", "user": "bboe", "created": 1570947655.5598643}
+event: Message
+id: 1a72e044-92e4-4ee5-94fe-5cabacb75b83
+</code></pre></div></div>
+
+<h2 id="sse-events">SSE Events</h2>
+
+<p>Below are a list of events that you must support and implement. The <code class="highlighter-rouge">data</code>
+field of all events must be JSON. All events have a unique ID which is included
+as part of the SSE protocal, and not part of the <code class="highlighter-rouge">data</code> attribute.</p>
+
+<h3 id="disconnect">Disconnect</h3>
+
+<p>Indicates that the server is closing the connection. The browser must not
+auto-retry on disconnect.</p>
+
+<p>Fields:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">created</code> (float): the unix timestamp when the event was created</li>
+</ul>
+
+<h3 id="join">Join</h3>
+
+<p>Indicates that a user has joined the chat.</p>
+
+<p>Fields:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">created</code> (float): the unix timestamp when the event was created</li>
+  <li><code class="highlighter-rouge">user</code> (string): the username of the user who joined the chat</li>
+</ul>
+
+<h3 id="message">Message</h3>
+
+<p>Represents a message from a user connected to the chat.</p>
+
+<p>Fields:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">created</code> (float): the unix timestamp when the event was created</li>
+  <li><code class="highlighter-rouge">message</code> (string): the message from the user</li>
+  <li><code class="highlighter-rouge">user</code> (string): the username of the sender</li>
+</ul>
+
+<h3 id="part">Part</h3>
+
+<p>Indicates that a user has left the chat.</p>
+
+<p>Fields:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">created</code> (float): the unix timestamp when the event was created</li>
+  <li><code class="highlighter-rouge">user</code> (string): the username of the user who left the chat</li>
+</ul>
+
+<h3 id="serverstatus">ServerStatus</h3>
+
+<p>Used for the server to provide status updates.</p>
+
+<p>Fields:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">created</code> (float): the unix timestamp when the event was created</li>
+  <li><code class="highlighter-rouge">status</code> (string): the message from the server</li>
+</ul>
+
+<h3 id="users">Users</h3>
+
+<p>Provides a complete list of users connected to the chat server. This message is
+always sent out on connection of new streams.</p>
+
+<p>Fields:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">created</code> (float): the unix timestamp when the event was created</li>
+  <li><code class="highlighter-rouge">users</code> (array[string]): the list of connected users</li>
+</ul>
+
 <h2 id="react-front-end-specification">React Front-end Specification</h2>
 
 <p>Coming soon.</p>
