@@ -246,10 +246,77 @@ Fields:
 * `users` (array[string]): the list of connected users
 
 
+## Server Requirements
+
+* Your server must maintain state about the users who are connected.
+
+* A broadcast `JOIN` should be made any time a new user is connected.
+
+* A broadcast `PART` should be made any time a user has disconnected.
+
+* A `Users` event should be sent to each newly established connection.
+
+* Incoming messages should be broadcast to everyone.
+
+* A `Disconnect` should be sent to the existing connection when a user attempts
+  to connect with a second client (the second client should remain connected).
+
+  * No `JOIN` or `PART` message should occur in such a case because the user is
+    still connected.
+
+* The first event in the server should be `ServerStatus` indicating the server
+  has started.
+
+* A history of at least the last 100 events should be kept.
+
+* All of the `Message` or `ServerStatus` in the history should be sent to a
+  newly connecting user.
+
+* A user who is reestablishing its connection (retry after failure) should
+  receive all of the messages in the history that have occurred since the
+  provided `last_event_id`.
+
+
 ## React Front-end Specification
 
-Coming soon.
+Your application need not be anything like the reference application. It
+however, must meet the following requirements:
 
+* Connection status should be visually discernable between being connected and disconnected.
+
+* There should be an easy way to see who is connected.
+
+* There should be a way to discover when someone connected (`JOIN`).
+
+* It should be easy to discover when someone disconencted (`PART`).
+
+* New `Message` events should be immediately apparent.
+
+* `ServerStatus` events should be locatable.
+
+* For retryable connection failures, your application should automatically
+  reconnect (`EventStream` should handle this for you).
+
+* On `Disconnect` your application should not automatically attempt to
+  reconnect to the server.
+
+* A user should always be able to take an action (e.g., connect, send
+  message). In other words there should be no terminal state that requires a
+  page refresh.
+
+* Separate browser windows and/or tabs should each be able to have their own
+  connection to the server.
+
+
+### Components
+
+While the names do not need to be the same, you need to at least implement the
+following React components:
+
+* Compose (a way to input / send a message)
+* LoginForm
+* MessageList
+* UserList
 
 ## Resources
 
