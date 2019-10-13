@@ -137,8 +137,7 @@ Expected Form Fields:
 Example curl command:
 
 ```sh
-curl -D- <BASE_URL>/message -F message=test \
--H "Authorization: Bearer <SIGNED TOKEN>"
+curl -D- <BASE_URL>/message -F message=test -H "Authorization: Bearer <SIGNED TOKEN>"
 ```
 
 Example HTTP response:
@@ -148,7 +147,7 @@ HTTP/1.1 201 CREATED
 ```
 
 
-### GET /stream/<SIGNED TOKEN>
+### GET /stream/&lt;SIGNED TOKEN&gt;
 
 Returns:
 
@@ -285,7 +284,7 @@ accompanied with component unit tests.
 
 ## Required Tools
 
-* [Cross-Origin Resource Sharing](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) (Cors)
+* [Cross-Origin Resource Sharing](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) (CORS)
 
 * [Docker](https://www.docker.com/products/docker-desktop)
 
