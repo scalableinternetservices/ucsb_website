@@ -55,7 +55,18 @@ Tuesday October 29, 10:59:59 AM PDT
 
 ## Project Submission
 
-Coming soon.
+Form link coming soon.
+
+### Deliverables
+
+In order to submit the form you will need three additional things:
+
+* The name of a pushed docker container that when invoked runs your chat server.
+
+* A url to your deployed front-end application with minimized javascript (tip: `yarn build`).
+
+* A url to a repository containing your front-end source code. Assuming this repository is
+  `private`, please invite me, `bboe` on github so that I can see your code.
 
 
 ## HTTP API Specification
