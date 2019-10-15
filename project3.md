@@ -23,7 +23,8 @@ This project is significantly more complex than the previous projects. You will
 need to maintain state in your Sinatra application, and many of you will learn
 an entirely new framework, React. I estimate this project to be more than four
 times the work of [Project 2](/project2/). As a result, this project spans two
-weeks, and you have the option of working with another student of the course.
+weeks, and you have the option of working with another student of the course
+who is in your same lab section.
 
 If you are to work in a pair, please have one member of your pair send a
 private message on Piazza to `instructors` and include your pair in the `to`
