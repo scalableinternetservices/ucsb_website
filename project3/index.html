@@ -483,6 +483,57 @@ following React components:</p>
   <li>UserList</li>
 </ul>
 
+<h2 id="developing-react-using-docker">Developing React Using Docker</h2>
+
+<p>The following instructions are not necessary, but might make it easier if you
+don’t want to set up the dependencies on your machine.</p>
+
+<h3 id="create-or-change-into-a-directory-where-you-want-your-project-to-live-under">Create or change into a directory where you want your project to live under.</h3>
+
+<pre><code class="language-ssh">mkdir project3
+cd project3
+</code></pre>
+
+<h3 id="create-react-app">Create React App</h3>
+
+<p>Run the following to start up a node-based container and drop into a shell.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">-p</span> 3000:3000 <span class="nt">-v</span> <span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>:/app <span class="nt">-w</span> /app node /bin/bash
+</code></pre></div></div>
+
+<p>The above maps local port <code class="highlighter-rouge">3000</code> to container port <code class="highlighter-rouge">3000</code>. Synchronizes the
+contents of the current local directory with <code class="highlighter-rouge">/app</code> in the container, and
+starts up <code class="highlighter-rouge">bash</code>.</p>
+
+<p>Once running, create your React application inside the container via:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx create-react-app chat_client
+</code></pre></div></div>
+
+<p>When that’s done, note that in your local directory (not in the container), a
+subdirectory named <code class="highlighter-rouge">chat_client</code> has appeared. This is your React application.</p>
+
+<h3 id="start-the-development-server">Start the development server</h3>
+
+<p>Connect to the container (re-run the above <code class="highlighter-rouge">docker run</code> command, if necessary,
+and then run:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>chat_client
+yarn start
+</code></pre></div></div>
+
+<p>Once started, you should be able to access your application via: http://localhost:3000</p>
+
+<h3 id="make-changes">Make Changes</h3>
+
+<p>Locally, edit the contents of files under <code class="highlighter-rouge">chat_client</code> and when you save, you
+should see said changes automatically take effect in the browser without
+needing to refresh.</p>
+
+<h3 id="react-tutorial">React Tutorial</h3>
+
+<p>Follow this guide to add more components: https://reactjs.org/docs/hello-world.html</p>
+
 <h2 id="resources">Resources</h2>
 
 <h3 id="hosted-server-example">Hosted Server Example</h3>
