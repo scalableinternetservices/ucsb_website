@@ -37,11 +37,6 @@ pairing deadline.
 The pairing deadline is: Tuesday October 22, 10:59:59 AM PDT.
 
 
-## Due Date
-
-Tuesday October 29, 10:59:59 AM PDT
-
-
 ## Learning Outcomes
 
 * Student has written and deployed a React application coded using JSX.
@@ -51,6 +46,16 @@ Tuesday October 29, 10:59:59 AM PDT
 
 * Student has leveraged Server-Sent Events and Javascript's EventSource to
   provide a real-time communication platform.
+
+
+## Due Date
+
+Tuesday October 29, 10:59:59 AM PDT
+
+
+## Overview Video
+
+[https://youtu.be/FutR00lpAfE](https://youtu.be/FutR00lpAfE)
 
 
 ## Project Submission
@@ -306,7 +311,7 @@ however, must meet the following requirements:
 * `ServerStatus` events should be locatable.
 
 * For retryable connection failures, your application should automatically
-  reconnect (`EventStream` should handle this for you).
+  reconnect (`EventSource` should handle this for you).
 
 * On `Disconnect` your application should not automatically attempt to
   reconnect to the server.
@@ -372,7 +377,8 @@ cd chat_client
 yarn start
 ```
 
-Once started, you should be able to access your application via: http://localhost:3000
+Once started, you should be able to access your application via:
+[http://localhost:3000](http://localhost:3000)
 
 ### Make Changes
 
@@ -383,7 +389,8 @@ needing to refresh.
 
 ### React Tutorial
 
-Follow this guide to add more components: https://reactjs.org/docs/hello-world.html
+Follow this guide to add more components:
+[https://reactjs.org/docs/hello-world.html](https://reactjs.org/docs/hello-world.html)
 
 
 ## Resources
