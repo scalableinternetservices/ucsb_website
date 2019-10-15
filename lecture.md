@@ -54,7 +54,7 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
 
 - Complete [Project 2](/project2/)
 
-#### October 15, 2019
+#### October 15, 2019: Creating a React Application (no slides)
 
 **TODO**:
 
