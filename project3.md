@@ -329,6 +329,63 @@ following React components:
 * MessageList
 * UserList
 
+## Developing React Using Docker
+
+The following instructions are not necessary, but might make it easier if you
+don't want to set up the dependencies on your machine.
+
+### Create or change into a directory where you want your project to live under.
+
+```ssh
+mkdir project3
+cd project3
+```
+
+### Create React App
+
+Run the following to start up a node-based container and drop into a shell.
+
+```sh
+docker run -it --rm -p 3000:3000 -v $(pwd):/app -w /app node /bin/bash
+```
+
+The above maps local port `3000` to container port `3000`. Synchronizes the
+contents of the current local directory with `/app` in the container, and
+starts up `bash`.
+
+Once running, create your React application inside the container via:
+
+```
+npx create-react-app chat_client
+```
+
+When that's done, note that in your local directory (not in the container), a
+subdirectory named `chat_client` has appeared. This is your React application.
+
+### Start the development server
+
+Connect to the container (re-run the above `docker run` command, if necessary,
+and then run:
+
+```sh
+cd chat_client
+yarn start
+```
+
+Once started, you should be able to access your application via: http://localhost:3000
+
+### Make Changes
+
+Locally, edit the contents of files under `chat_client` and when you save, you
+should see said changes automatically take effect in the browser without
+needing to refresh.
+
+
+### React Tutorial
+
+Follow this guide to add more components: https://reactjs.org/docs/hello-world.html
+
+
 ## Resources
 
 ### Hosted Server Example
