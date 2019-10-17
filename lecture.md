@@ -60,7 +60,7 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
 
 - Begin [Project 3](project3) (optional: with a partner)
 
-#### October 17, 2019
+#### October 17, 2019 Agile, TDD, CI, and Pairing [[slides](/slides/2019/06_agile_tdd_pairing/)]
 
 **TODO**:
 
