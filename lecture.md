@@ -54,7 +54,7 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
 
 - Complete [Project 2](/project2/)
 
-#### October 15, 2019: Creating a React Application (no slides)
+#### October 15, 2019: Creating a React Application [[source](https://github.com/scalableinternetservices/cs291a_react_demo/tree/master/class_app)]
 
 **TODO**:
 
