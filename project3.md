@@ -61,7 +61,8 @@ Tuesday October 29, 10:59:59 AM PDT
 
 ## Project Submission
 
-Form link coming soon.
+Please have each team member submit the following form:
+[https://forms.gle/3jDCN4MsaES169DG7](https://forms.gle/3jDCN4MsaES169DG7)
 
 ### Deliverables
 
