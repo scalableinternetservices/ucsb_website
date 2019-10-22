@@ -60,25 +60,25 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
 
 - Begin [Project 3](project3) (optional: with a partner)
 
-#### October 17, 2019 Agile, TDD, CI, and Pairing [[slides](/slides/2019/06_agile_tdd_pairing/)]
+#### October 17, 2019: Agile, TDD, CI, and Pairing [[slides](/slides/2019/06_agile_tdd_pairing/)]
 
 **TODO**:
 
 - Make progress on [Project 3](/project3/)
 
-#### October 22, 2019
+#### October 22, 2019: Caching [[slides](/slides/2019/07_caching/)]
 
 **TODO**:
 
 - Continue working on [Project 3](/project3/)
 
-#### October 24, 2019
+#### October 24, 2019: (Tentative) Relational Databases
 
 **TODO**:
 
 - Complete [Project 3](/project3/)
 
-#### October 29, 2019
+#### October 29, 2019: (Tentative) Load Testing with Tsung
 
 **TODO**:
 
