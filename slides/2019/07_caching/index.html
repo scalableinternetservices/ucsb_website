@@ -169,7 +169,7 @@ proxy-caches should discard the data.
 
 This is the opposite of `cache-control: public`.
 
-Rails built-in caching safely assumes `cache-control: private`.
+Rails built-in caching securely defaults to `cache-control: private`.
 
 ---
 
@@ -178,7 +178,7 @@ Rails built-in caching safely assumes `cache-control: private`.
 
 When `cache-control: max-age=120` is provided as a header to an HTTP response
 the browser and intermediate proxy-caches should consider the information to be
-fresh until the specified number of seconds has passed.
+fresh until the specified number of seconds (`120` in this case) has passed.
 
 This is the modern version of the `expires` and `date` headers.
 
@@ -205,6 +205,20 @@ When requesting the same resource in the future, the browser may add an
 
 ---
 
+# First GET Example
+
+```
+$ curl -I https://cs291.com
+
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+Last-Modified: Mon, 21 Oct 2019 21:41:43 GMT
+ETag: "5dae2617-48a8"
+Cache-Control: max-age=600
+```
+
+---
+
 # if-none-match: "5bf444d26f9f1c74"
 
 When accompanying an HTTP request, the `if-none-match` HTTP header indicates
@@ -217,6 +231,13 @@ resource included.
 
 Otherwise the server will return the full response body along with the
 appropriate etag for the updated resource.
+
+
+```sh
+$ curl -I https://cs291.com --header 'if-none-match: "5dae2617-48a8"'
+
+HTTP/1.1 304 Not Modified
+```
 
 ---
 
@@ -231,6 +252,13 @@ the client along with a new `last-modified` HTTP response header.
 
 If the server's copy has not changed since the specified date, the server will
 return 304 (not modified).
+
+
+```sh
+$ curl -I https://cs291.com --header 'if-modified-since: Mon, 21 Oct 2019 21:41:43 GMT'
+
+HTTP/1.1 304 Not Modified
+```
 
 ---
 
@@ -514,6 +542,42 @@ These changes can be viewed on the `client_side_caching` branch on the demo app
 repository:
 
 [https://github.com/scalableinternetservices/demo/compare/client_side_caching](https://github.com/scalableinternetservices/demo/compare/client_side_caching)
+
+
+---
+
+class: center, inverse, middle
+
+# Content (Delivery|Distribution) Networks
+
+---
+
+# CDN Overview
+
+![CDN Overview](cdn.png)
+
+---
+
+# CDN Benefits
+
+1. Reduce latency from client to server
+
+2. Provide "protection" to the origin server (e.g., DDoS protection)
+
+3. Reduce requests handled by origin server.
+
+And more!
+
+---
+
+# CDN Providers
+
+* Akamai
+* Fastly
+* CloudFlare
+* AWS CloudFront
+
+AND MORE!
 
 ---
 
