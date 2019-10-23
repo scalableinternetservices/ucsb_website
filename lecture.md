@@ -66,7 +66,7 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
 
 - Make progress on [Project 3](/project3/)
 
-#### October 22, 2019: Caching [[slides](/slides/2019/07_caching/)]
+#### October 22, 2019: Client-side Caching and CDNs [[slides](/slides/2019/07_client_caching_cdn/)]
 
 **TODO**:
 
