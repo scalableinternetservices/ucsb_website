@@ -1,0 +1,684 @@
+---
+layout: presentation
+title: Server-side Caching
+---
+
+class: center, middle
+
+# {{page.title}}
+
+__CS291A__
+
+Dr. Bryce Boe
+
+October 24, 2019
+
+---
+
+# Today's Agenda
+
+* Server-side Caching
+
+---
+
+class: center, inverse, middle
+
+# Server-side Caching
+
+---
+
+# Caching HTTP Responses: Motivation
+
+A single web server process repeatedly responds to HTTP requests from a variety
+of clients.
+
+Responding to each request requires computation and I/O to be performed, both
+of which can be expensive.
+
+In practice, there is a significant amount of similarity between HTTP
+responses.
+
+With client-side caching we looked at optimizing scenarios where
+requests for the same resource would result in an identical response.
+
+In this lecture we will look at optimizing scenarios where repeated responses
+are not identical, but similar.
+
+---
+
+# Caching HTTP Responses
+
+> With respect to HTTP responses for a single web service, which parts of a
+> response are similar to responses for other resources?
+
+--
+
+* View fragments
+
+* Rarely modified ORM objects
+
+* Expensive to compute data
+
+---
+
+# View Fragments
+
+View fragments are items that are similar across pages such as the header,
+footer, sidebar, or even an item listing that may appear in multiple locations
+(product listings, search results, product suggestions).
+
+Sidebar Fragment (shown on all cs291.com pages)
+
+```html
+<div class="col-md-3 hidden-xs">
+  <div class="sidebar well">
+    Scalable Internet Services, CS291A, Fall 2017
+  </div>
+
+  <div class="sidebar well">
+    <h1 id="course-information">Course Information</h1>
+    <h2 id="instructor">Instructor</h2>
+    <p><a href="http://cs.ucsb.edu/~bboe">Dr. Bryce Boe</a>
+
+    <h2 id="lecture">Lecture</h2>
+    <p>Tuesday and Thursday<br />
+       3:00pm – 4:50pm</p>
+
+    ...
+
+  </div>
+</div>
+```
+
+---
+
+# Rarely Modified ORM Objects
+
+* User permissions
+
+* Configuration options
+
+* Product details (on a shopping site)
+
+* In general, any persisted data (via a database, file store, external server, etc) that seldom changes
+
+---
+
+# Expensive to Compute Data
+
+Expensive to compute data is exactly what the name suggests. Expensive could
+mean:
+
+* it takes a significant amount of time to compute
+
+* it is best suited for a background worker due to hardware constraints on the
+  application servers.
+
+--
+
+## Examples
+
+* Total account balance on Mint
+
+* Monthly account summary on Google
+
+* The complete diff between two commits on GitHub
+
+* The list of suggested contacts on LinkedIn
+
+---
+
+# Semi-Expensive Operations
+
+View fragments are produced by extensive string manipulation. In ruby, many
+string manipulations with portions loaded from disk can result in a significant
+amount of time.
+
+Every query to the database utilizes the database's resources. Optimizing for
+similar queries can minimize the chance of a database bottleneck.
+
+--
+
+> Assuming we want to keep previously computed results around between requests,
+> how can we do it?
+
+--
+
+> Where can we store the cached results?
+
+---
+
+# Storing Cached Results
+
+Option 1: In memory on the application server
+
+--
+
+Option 2: On the file system
+
+--
+
+Option 3: In memory on another machine
+
+--
+
+Now, let's look into each of these options. But first a look at latency.
+
+---
+
+# Latency Numbers (ns and μs)
+
+![Latency Numbers Every Programmer Should Know](latency_1_2019.png)
+
+Source: http://www.eecs.berkeley.edu/~rcs/research/interactive_latency.html
+
+---
+
+# Latency Numbers (μs and ms)
+
+![Latency Numbers Every Programmer Should Know](latency_2_2019.png)
+
+Source: http://www.eecs.berkeley.edu/~rcs/research/interactive_latency.html
+
+---
+
+# Latency Numbers for Caching
+
+* Storing in memory and reading later is fast
+    * Random read: `0.1μs`
+
+    * Reading 1MB: `4μs`
+
+--
+
+* Storing on disk is slow without SSD (solid state drive):
+    * Disk seek: `3000μs`
+
+    * Reading 1MB: `947μs`
+
+--
+
+* Storing on disk with SSD is much more reasonable
+    * Random read: `16μs`
+
+    * Reading 1MB: `62μs`
+
+--
+
+* Storing on another machine is reasonable
+
+    * Round trip within data center is `500μs`
+
+---
+
+# Latency Numbers Summary
+
+## Summary
+
+* In memory: single digit `μs`
+
+* On SSD: tens of `μs`
+
+* On magnetic disk: thousands of `μs`
+
+* On remote machine: __add__ hundreds of `μs`
+
+## Conclusions
+
+* Prefer SSD over magnetic storage for speed
+
+* Memory > SSD > Remote
+
+> Are these conclusions always true?
+
+---
+
+# Caching Locations
+
+> What effect on the cache hit rate does each of these designs have?
+
+* In memory: cache per process
+
+--
+
+* On SSD: cache per machine
+
+--
+
+* On remote machine: cache per application server pool (cluster)
+
+---
+
+# Caching Location Trade-offs
+
+* In memory
+    * highest performance
+    * lowest hit rate (if applicable to only one process)
+
+* On SSD
+    * lower performance
+    * higher hit rate
+
+* On remote machine
+    * lowest performance
+    * highest hit rate
+
+There is no silver bullet.
+
+---
+
+# Memcached
+
+__memcached__ is a commonly used remote cache server. It...
+
+* keeps a cache in memory
+
+* provides a simple TCP protocol to return responses to look up requests
+
+* is a distributed key-value store
+    * keys can be up to 250 bytes
+
+    * values can be up to 1MB
+
+    * scales horizontally
+
+* uses a simple LRU (least recently used) to make space for new items when full
+
+* performs all operations in constant time
+
+---
+
+# Server-side Caching in Rails
+
+Rails provides excellent support for server-side caching.
+
+The three primary interfaces to caching in rails are:
+
+* HTTP caching
+
+* Fragment caching
+
+* Low level caching
+
+We already covered HTTP caching. Today we'll discuss the latter two.
+
+---
+
+# Enabling Caching in Rails
+
+By default, caching is disabled in development and test modes, and enabled only
+in production mode.
+
+If you want to enable caching in development mode you must make the following
+change to your Rails environment:
+
+```ruby
+config.action_controller.perform_caching = true
+```
+
+Rails can be configured to store cached data in a few different places:
+
+* In memory
+* On a _local_ file system
+* In a remote in-memory store
+
+http://edgeguides.rubyonrails.org/caching_with_rails.html
+
+---
+
+# Configuring Rails Cache Stores
+
+* ActiveSupport::Cache::MemoryStore
+
+* ActiveSupport::Cache::FileStore
+
+* ActiveSupport::Cache::MemcacheStore
+
+---
+
+# ActiveSupport::Cache::MemoryStore
+
+* Cached data is stored in memory, in the same address space as the ruby
+  process.
+
+* Defaults to `32MB`, configurable
+
+---
+
+# ActiveSupport::Cache::FileStore
+
+* Cached data is stored on the _local_ file system.
+
+* Can configure the location of the storage in the Rails environment:
+
+```ruby
+config.cache_store = :file_store, '/path/to/cache/'
+```
+
+---
+
+# ActiveSupport::Cache::MemcacheStore
+
+* Cached data is stored in memory on another machine (could also be local).
+
+* Can configure the location of the server in the Rails environment:
+
+```ruby
+config.cache_store = :mem_cache_store, 'cache-1.example.com'
+```
+
+---
+
+# Fragment Caching in Rails
+
+Fragment caching caches a portion of a rendered view for reuse with future
+requests.
+
+Let's look at fragment caching in the context of the demo app.
+
+---
+
+# Fragment Caching Submission Partials
+
+.left-column30[
+We can cache each submission listing.
+
+With that done, then regardless of any other changes on the page, we can
+re-render the submission view for all submissions that haven't been updated.
+]
+.right-column70[
+![Submissions Index View](demo_submissions_index.png)
+]
+
+---
+
+# Submission Listing (without cache)
+
+```erb
+<% @submissions.each do |submission| %>
+
+
+
+  <tr>
+    <td><%= link_to(submission.title, submission.url) %></td>
+    <td><%= submission.url %></td>
+    <td><%= submission.community.name %></td>
+    <td>
+      <%= link_to("#{submission.comments.size} comments",
+                  submission, class: 'btn btn-primary btn-xs') %>
+    </td>
+  </tr>
+
+
+
+<% end %>
+```
+
+---
+
+# Submission Listing (with cache)
+
+```erb
+<% @submissions.each do |submission| %>
+
+* <% cache(cache_key_for_submission(submission)) do %>
+
+  <tr>
+    <td><%= link_to(submission.title, submission.url) %></td>
+    <td><%= submission.url %></td>
+    <td><%= submission.community.name %></td>
+    <td>
+      <%= link_to("#{submission.comments.size} comments",
+                  submission, class: 'btn btn-primary btn-xs') %>
+    </td>
+  </tr>
+
+* <% end %>
+
+<% end %>
+```
+
+---
+
+# Choosing a Cache Key
+
+> How should we choose a cache key for a submission?
+
+--
+
+```ruby
+module SubmissionHelper
+  def cache_key_for_submission(submission)
+    "submission/#{submission.id}"
+  end
+end
+```
+
+> What are the weaknesses with the above approach?
+
+--
+
+* Invalidation will need to be explicit as the submission ID typically will
+  never be updated for an object.
+
+* Explicitly invalidating cache items can easily make a mess of the code.
+
+---
+
+# Choosing a Better Cache Key
+
+```ruby
+module SubmissionHelper
+  def cache_key_for_submission(sub)
+    "submission/#{sub.id}/#{sub.updated_at}/#{sub.comments.count}"
+  end
+end
+```
+
+With the above, a submission's fragment cache is invalidated anytime the
+submission is updated (`updated_at` is automatically updated on change), or
+when the number of comments associated with the submission changes.
+
+_Note_: An Active Record model can be used directly as the key. It calls an
+over-writable method `cache_key` on the model. By default that method returns a
+key that "includes the model name, the id and finally the updated_at
+timestamp".
+
+Reference:
+[http://guides.rubyonrails.org/caching_with_rails.html#fragment-caching](http://guides.rubyonrails.org/caching_with_rails.html#fragment-caching)
+
+---
+
+# More Fragment Caching
+
+.left-column30[
+Now we are caching a fragment for each submission.
+
+> What else can we cache?
+]
+.right-column70[
+![Submissions Index View](demo_submissions_index.png)
+]
+
+--
+
+We can cache the entire submission listing!
+
+---
+
+# Community Listing (without cache)
+
+```erb
+
+
+<h3>Submissions</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Url</th>
+      <th>Community</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @submissions.each do |submission| %>
+      <% cache(...) do %> ... <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+...
+```
+
+---
+
+# Community Listing (with cache)
+
+```erb
+*<% cache(cache_key_for_submission_table) do %>
+
+<h3>Submissions</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Url</th>
+      <th>Community</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @submissions.each do |submission| %>
+      <% cache(...) do %> ... <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+...
+
+*<% end %>
+```
+
+---
+
+# cache_key_for_submission_table
+
+```ruby
+module SubmissionHelper
+  def cache_key_for_submission(sub)
+    "submission/#{sub.id}/#{sub.updated_at}/#{sub.comments.count}"
+  end
+
+* def cache_key_for_submission_table
+*   ("submission_table/#{Submission.maximum(:updated_at)}/"
+*    + Comment.maximum(:updated_at).to_s)
+* end
+end
+```
+
+---
+
+# Russian Doll Caching
+
+This technique of nesting cache fragments is known as __Russian Doll Caching__.
+
+.center[![Imperial Russian Dolls](russian_dolls.jpg)]
+
+---
+
+# Low-level Rails Caching
+
+You can use the same built-in mechanisms to manually cache anything:
+
+```ruby
+class Product < ActiveRecord::Base
+  def competing_price
+    Rails.cache.fetch("#{cache_key}/competing_price",
+                      expires_in: 12.hours) do
+      Competitor::API.find_price(id)
+    end
+  end
+end
+```
+
+---
+
+# Performance Comparison
+
+Let's compare the performance of the demo app with and without caching.
+
+The subsequent graphs were generated using Tsung against a deployment of the
+`master` branch (without caching) and against a deployment of the
+`server_side_caching` branch (with server-side caching) using the default rails
+caching mechanism (memory).
+
+The `master` branch intentionally includes no optimizations.
+
+---
+
+# Caching Test: Simulated Users
+
+We will use an m3-medium instance with the usual workload deployed using
+passenger as an NGINX module.
+
+Using Tsung (erlang-based test framework) we will simulate multiple users
+visiting the Demo App web service. Each user will:
+
+```
+Visit the homepage (/)
+  Wait randomly between 0 and 2 seconds
+Request community creation form
+  Wait randomly between 0 and 2 seconds
+Submit new community form
+Request new link submission form
+  Wait randomly between 0 and 2 seconds
+Submit new link submission form
+  Wait randomly between 0 and 2 seconds
+Delete the link
+  Wait randomly between 0 and 2 seconds
+Delete the community
+```
+
+---
+
+# Caching Test: Phases
+
+This time we have six phases of testing each lasting 60 seconds:
+
+```
+   (0-59s) Every second a new simulated user arrives
+ (60-119s) Every second 1.5 new simulated users arrive
+(120-179s) Every second 2 new simulated users arrive
+(180-239s) Every second 4 new simulated users arrive
+(240-299s) Every second 6 new simulated users arrive
+(300-359s) Every second 10 new simulated users arrive
+```
+
+---
+
+class: center middle
+
+# Performance without Caching
+
+![Performance without caching](performance_no_caching.png)
+
+---
+
+class: center middle
+
+# Performance with Caching
+
+![Performance with caching](performance_server_cache.png)
+
+---
+
+# Performance Comparision
+
+Without caching the server struggled to handle a single new arrival each
+second.
+
+With server-side caching the server can easily handle up to two
+new arrivals a second.

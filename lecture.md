@@ -72,7 +72,7 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
 
 - Continue working on [Project 3](/project3/)
 
-#### October 24, 2019: (Tentative) Relational Databases
+#### October 24, 2019: Server-side Caching [[slides](/slides/2019/08_server_caching/)]
 
 **TODO**:
 
@@ -87,7 +87,7 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
   - develop initial features
   - deploy to elastic beanstalk
 
-#### October 31, 2019
+#### October 31, 2019: (Tentative) Relational Databases
 
 #### November 5, 2019
 
