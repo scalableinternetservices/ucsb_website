@@ -45,17 +45,17 @@ Usage:
 Run the error-case tests, and connect to the stream:
 
 ```
-./project3 URL
+./project3.py URL
 ```
 
 Skip the error-case tests, and just connect to the stream:
 
 ```
-./project3 --no-failures URL
+./project3.py --no-failures URL
 ```
 
 Test re-connect by copying an event ID, and then run:
 
 ```
-./project3 --no-failures --last-event-id LASTID URL
+./project3.py --no-failures --last-event-id LASTID URL
 ```
