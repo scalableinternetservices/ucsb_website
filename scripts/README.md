@@ -38,3 +38,24 @@ Usage:
 ```
 ./project2.py GOOGLE_CLOUD_RUN_URL
 ```
+
+
+## Project 3 Server-Side Partial Verification Script
+
+Run the error-case tests, and connect to the stream:
+
+```
+./project3 URL
+```
+
+Skip the error-case tests, and just connect to the stream:
+
+```
+./project3 --no-failures URL
+```
+
+Test re-connect by copying an event ID, and then run:
+
+```
+./project3 --no-failures --last-event-id LASTID URL
+```
