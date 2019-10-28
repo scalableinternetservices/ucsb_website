@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+import inspect
 import random
 import sys
 
@@ -8,7 +9,9 @@ import requests
 
 def assert_equal(lhs, rhs):
     if lhs != rhs:
+        frame = inspect.stack()[1]
         print(f"Failed: {lhs} != {rhs}")
+        print(f"\t{frame[3]} at line {frame[2]}")
 
 
 def connect(url, username, last_event_id):
