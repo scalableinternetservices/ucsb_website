@@ -31,14 +31,30 @@ fundamental web technologies and the Ruby on Rails framework.
 All sprints end and begin with each week's lab session, save for the last
 sprint which does not have an ending lab session.
 
+At the end of each sprint during lab section, you will need to do the
+following:
+
+- Ensure all your completed stories are integrated on your master branch.
+- Deploy your project using Elastic Beanstalk.
+- Demo your deployed version and share the newly created features.
+- Share any new load testing results.
+
+
 #### Sprint 1: October 29 -- November 5
 
 - Complete {{ site.codecademy_md_link }}.
 - Form your team.
+  - Decide on a team name
+  - One person on the team, message me on piazza with:
+    - Your team name
+    - The name, and github username of all the team members
+- Get access to your github respository (I'll create that after the above)
+- Get a new set of AWS credentials specific to your team.
+- Deploy your initial rails code to Elastic Beanstalk.
 - Complete `N` user stories, where `N` is the number of people on your team.
-- Deploy your initial project using Elastic Beanstalk.
-  - Ensure all your stories are integrated on your `master` branch.
-  - Demo this deployed version on November 5.
+- Write a tsung load test encompassing your existing features.
+  - Ensure that when it is run, there are no 4XX or 5XX level HTTP status
+    codes.
 
 #### Sprint 2: November 5 -- November 12
 
