@@ -37,8 +37,8 @@ Thursday December 12
 
 #### Textbooks
 
-[The Ruby On Rails Tutorial](https://www.railstutorial.org/)  
-_[Available online](https://www.railstutorial.org/book)._
+[The Ruby On Rails Tutorial](https://www.learnenough.com/ruby-on-rails-4th-edition-tutorial)  
+_[Available online](https://www.learnenough.com/ruby-on-rails-4th-edition-tutorial)._
 
 [High Performance Browser Networking](https://www.amazon.com/High-Performance-Browser-Networking-performance/dp/1449344763)  
 ISBN: 9781449344764  

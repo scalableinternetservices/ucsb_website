@@ -24,7 +24,7 @@ fundamental web technologies and the Ruby on Rails framework.
 ## Getting Started
 
 - Complete chapter 1 in the
-  [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
+  [Ruby on Rails Tutorial](https://www.learnenough.com/ruby-on-rails-4th-edition-tutorial/beginning)
 
 ## Project Sprint Schedule
 
