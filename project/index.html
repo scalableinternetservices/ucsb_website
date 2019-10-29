@@ -85,8 +85,8 @@
 
 <h4 id="textbooks">Textbooks</h4>
 
-<p><a href="https://www.railstutorial.org/">The Ruby On Rails Tutorial</a><br />
-<em><a href="https://www.railstutorial.org/book">Available online</a>.</em></p>
+<p><a href="https://www.learnenough.com/ruby-on-rails-4th-edition-tutorial">The Ruby On Rails Tutorial</a><br />
+<em><a href="https://www.learnenough.com/ruby-on-rails-4th-edition-tutorial">Available online</a>.</em></p>
 
 <p><a href="https://www.amazon.com/High-Performance-Browser-Networking-performance/dp/1449344763">High Performance Browser Networking</a><br />
 ISBN: 9781449344764<br />
@@ -117,7 +117,7 @@ fundamental web technologies and the Ruby on Rails framework.</p>
 
 <ul>
   <li>Complete chapter 1 in the
-<a href="https://www.railstutorial.org/book/beginning">Ruby on Rails Tutorial</a></li>
+<a href="https://www.learnenough.com/ruby-on-rails-4th-edition-tutorial/beginning">Ruby on Rails Tutorial</a></li>
 </ul>
 
 <h2 id="project-sprint-schedule">Project Sprint Schedule</h2>
@@ -125,12 +125,41 @@ fundamental web technologies and the Ruby on Rails framework.</p>
 <p>All sprints end and begin with each week’s lab session, save for the last
 sprint which does not have an ending lab session.</p>
 
+<p>At the end of each sprint during lab section, you will need to do the
+following:</p>
+
+<ul>
+  <li>Ensure all your completed stories are integrated on your master branch.</li>
+  <li>Deploy your project using Elastic Beanstalk.</li>
+  <li>Demo your deployed version and share the newly created features.</li>
+  <li>Share any new load testing results.</li>
+</ul>
+
 <h4 id="sprint-1-october-29--november-5">Sprint 1: October 29 – November 5</h4>
 
 <ul>
   <li>Complete <a href="https://www.codecademy.com/learn/learn-ruby">Learn Ruby Codecademy</a>.</li>
-  <li>Form your team.</li>
-  <li>Deploy your initial project using Elastic Beanstalk.</li>
+  <li>Form your team.
+    <ul>
+      <li>Decide on a team name</li>
+      <li>One person on the team, message me on piazza with:
+        <ul>
+          <li>Your team name</li>
+          <li>The name, and github username of all the team members</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Get access to your github respository (I’ll create that after the above)</li>
+  <li>Get a new set of AWS credentials specific to your team.</li>
+  <li>Deploy your initial rails code to Elastic Beanstalk.</li>
+  <li>Complete <code class="highlighter-rouge">N</code> user stories, where <code class="highlighter-rouge">N</code> is the number of people on your team.</li>
+  <li>Write a tsung load test encompassing your existing features.
+    <ul>
+      <li>Ensure that when it is run, there are no 4XX or 5XX level HTTP status
+codes.</li>
+    </ul>
+  </li>
 </ul>
 
 <h4 id="sprint-2-november-5--november-12">Sprint 2: November 5 – November 12</h4>
@@ -148,6 +177,126 @@ sprint which does not have an ending lab session.</p>
   <li>Prepare final presentation (present Thursday, December 12 between 4PM and
 7PM).</li>
 </ul>
+
+<h2 id="project-ideas">Project Ideas</h2>
+
+<p>Please select from one of the following project ideas. You are free to modify
+them as you wish, and can even come up with another project idea, but the
+complexity must remain the same.</p>
+
+<p>Please note all the user stories start off with unauthenticated users. That’s
+because you want to deliver functionality first. Implementing authentication
+first does not provide any value, if that authentication has no features behind
+it. Complete a set of unauthenticated stories first, prior to introducing
+authentication.</p>
+
+<h3 id="social-network">Social Network</h3>
+
+<p>Minimum necessary models:</p>
+
+<ul>
+  <li>Post</li>
+  <li>Comment (on Post)</li>
+  <li>Profile</li>
+  <li>Message (profile to profile)</li>
+</ul>
+
+<p>Initial user stories:</p>
+
+<ol>
+  <li>
+    <p>As an unauthenticated user I can make a post so that I can share whatever
+cool things I want.</p>
+  </li>
+  <li>
+    <p>As an unauthenticated user I can view all the posts on the front page in
+descending order so that I can see what new things people are sharing.</p>
+  </li>
+  <li>
+    <p>As an unauthenticated user, I can comment on a post so that I can add
+updates to existing content.</p>
+  </li>
+  <li>
+    <p>As an authenticated user, my front page shows only posts made on my profile
+so that I can see content specific to me.</p>
+  </li>
+  <li>
+    <p>As as authenicated user, my posts and comments are attributable to me so
+that others know what I’ve shared.</p>
+  </li>
+</ol>
+
+<h3 id="online-store">Online Store</h3>
+
+<p>Minimum necessary models:</p>
+
+<ul>
+  <li>Item</li>
+  <li>Order</li>
+  <li>Rating (user to item)</li>
+  <li>User</li>
+</ul>
+
+<p>Initial user stories:</p>
+
+<ol>
+  <li>
+    <p>As an unauthenticated user I can list my item on the store so that I can
+sell my products.</p>
+  </li>
+  <li>
+    <p>As an unauthenticated user I can purchase an item from the store so that I
+can obtain the things I desire.</p>
+  </li>
+  <li>
+    <p>As an unauthenticated user I can view all the purchase histories so that I
+can see what others have bought.</p>
+  </li>
+  <li>
+    <p>As an unauthenticated user, I can rate an item that has been purchased so
+that I can share my opinions of the item with others.</p>
+  </li>
+  <li>
+    <p>As an authenticated user, only I can see my own orders in my order history
+because I don’t want others to see what I’ve purchased.</p>
+  </li>
+</ol>
+
+<h3 id="event-sharing-service">Event Sharing Service</h3>
+
+<p>Minimum necessary models:</p>
+
+<ul>
+  <li>Event</li>
+  <li>RSVP</li>
+  <li>Comment</li>
+  <li>User</li>
+  <li>Invite</li>
+</ul>
+
+<p>Initial user stories:</p>
+
+<ol>
+  <li>
+    <p>As an unauthenticated user, I can create an event so that I can share with
+others the details of the event I am hosting.</p>
+  </li>
+  <li>
+    <p>As an unauthenticated user, I can comment on an event to share my enthusiasm
+for said event.</p>
+  </li>
+  <li>
+    <p>As an authenticated user, I can RSVP yes/no to events that I do [not] indend
+to attend so that the host can better estimate how many people will show up.</p>
+  </li>
+  <li>
+    <p>As an authenticated user, I can see the list of events that I have
+previously attended so that I can recall my fond memories.</p>
+  </li>
+  <li>
+    <p>As an event host, I can proactively invite users to my event, so that I can help spread the word.</p>
+  </li>
+</ol>
 
     </div>
   </div>

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+import inspect
 import random
 import sys
 
@@ -8,7 +9,9 @@ import requests
 
 def assert_equal(lhs, rhs):
     if lhs != rhs:
+        frame = inspect.stack()[1]
         print(f"Failed: {lhs} != {rhs}")
+        print(f"\t{frame[3]} at line {frame[2]}")
 
 
 def connect(url, username, last_event_id):
@@ -39,6 +42,7 @@ def main():
     parser.add_argument(
         "-F", "--no-failures", action="store_true", help="Skip failure testing"
     )
+    parser.add_argument("-u", "--user")
     parser.add_argument("url")
     arguments = parser.parse_args()
 
@@ -47,7 +51,10 @@ def main():
         test_message__failed(arguments.url)
         test_stream__failed(arguments.url)
 
-    username = random.randint(0, 9999999)
+    if arguments.user:
+        username = arguments.user
+    else:
+        username = random.randint(0, 9999999)
     connect(arguments.url, username, arguments.last_event_id)
 
 
