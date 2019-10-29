@@ -35,7 +35,10 @@ sprint which does not have an ending lab session.
 
 - Complete {{ site.codecademy_md_link }}.
 - Form your team.
+- Complete `N` user stories, where `N` is the number of people on your team.
 - Deploy your initial project using Elastic Beanstalk.
+  - Ensure all your stories are integrated on your `master` branch.
+  - Demo this deployed version on November 5.
 
 #### Sprint 2: November 5 -- November 12
 
@@ -50,3 +53,97 @@ sprint which does not have an ending lab session.
 - Complete the project write-up (due Friday, December 6 by 19:59:59 PST).
 - Prepare final presentation (present Thursday, December 12 between 4PM and
   7PM).
+
+
+## Project Ideas
+
+Please select from one of the following project ideas. You are free to modify
+them as you wish, and can even come up with another project idea, but the
+complexity must remain the same.
+
+Please note all the user stories start off with unauthenticated users. That's
+because you want to deliver functionality first. Implementing authentication
+first does not provide any value, if that authentication has no features behind
+it. Complete a set of unauthenticated stories first, prior to introducing
+authentication.
+
+### Social Network
+
+Minimum necessary models:
+
+- Post
+- Comment (on Post)
+- Profile
+- Message (profile to profile)
+
+Initial user stories:
+
+0. As an unauthenticated user I can make a post so that I can share whatever
+   cool things I want.
+
+0. As an unauthenticated user I can view all the posts on the front page in
+   descending order so that I can see what new things people are sharing.
+
+0. As an unauthenticated user, I can comment on a post so that I can add
+   updates to existing content.
+
+0. As an authenticated user, my front page shows only posts made on my profile
+   so that I can see content specific to me.
+
+0. As as authenicated user, my posts and comments are attributable to me so
+   that others know what I've shared.
+
+
+### Online Store
+
+Minimum necessary models:
+
+- Item
+- Order
+- Rating (user to item)
+- User
+
+Initial user stories:
+
+0. As an unauthenticated user I can list my item on the store so that I can
+   sell my products.
+
+0. As an unauthenticated user I can purchase an item from the store so that I
+   can obtain the things I desire.
+
+0. As an unauthenticated user I can view all the purchase histories so that I
+   can see what others have bought.
+
+0. As an unauthenticated user, I can rate an item that has been purchased so
+   that I can share my opinions of the item with others.
+
+0. As an authenticated user, only I can see my own orders in my order history
+   because I don't want others to see what I've purchased.
+
+
+### Event Sharing Service
+
+Minimum necessary models:
+
+- Event
+- RSVP
+- Comment
+- User
+- Invite
+
+Initial user stories:
+
+
+0. As an unauthenticated user, I can create an event so that I can share with
+   others the details of the event I am hosting.
+
+0. As an unauthenticated user, I can comment on an event to share my enthusiasm
+   for said event.
+
+0. As an authenticated user, I can RSVP yes/no to events that I do [not] indend
+   to attend so that the host can better estimate how many people will show up.
+
+0. As an authenticated user, I can see the list of events that I have
+   previously attended so that I can recall my fond memories.
+
+0. As an event host, I can proactively invite users to my event, so that I can help spread the word.
