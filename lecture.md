@@ -78,7 +78,7 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
 
 - Complete [Project 3](/project3/)
 
-#### October 29, 2019: (Tentative) Load Testing with Tsung
+#### October 29, 2019: Ruby on Rails
 
 **TODO**:
 
@@ -87,9 +87,9 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
   - develop initial features
   - deploy to elastic beanstalk
 
-#### October 31, 2019: (Tentative) Relational Databases
+#### October 31, 2019: Load Testing with Tsung
 
-#### November 5, 2019
+#### November 5, 2019: (Tentative) Relational Databases
 
 #### November 7, 2019
 

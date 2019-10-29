@@ -21,10 +21,18 @@ providing background material. Each project will be conducted in an agile team
 where students will build their own scalable, redundant web site using
 fundamental web technologies and the Ruby on Rails framework.
 
-## Getting Started
+## Resources
 
-- Complete chapter 1 in the
-  [Ruby on Rails Tutorial](https://www.learnenough.com/ruby-on-rails-4th-edition-tutorial/beginning)
+Throughout the project, you might find it helpful to go through a ruby on rails tutorial.
+
+The following is fantastic:
+
+* [Ruby on Rails
+  Tutorial](https://www.learnenough.com/ruby-on-rails-4th-edition-tutorial/beginning)
+
+And Rail's own tutorial is quite good as well:
+
+* [Getting Started with Rails](https://guides.rubyonrails.org/getting_started.html)
 
 ## Project Sprint Schedule
 
@@ -42,7 +50,6 @@ following:
 
 #### Sprint 1: October 29 -- November 5
 
-- Complete {{ site.codecademy_md_link }}.
 - Form your team.
   - Decide on a team name
   - One person on the team, message me on piazza with:
