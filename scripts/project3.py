@@ -42,6 +42,7 @@ def main():
     parser.add_argument(
         "-F", "--no-failures", action="store_true", help="Skip failure testing"
     )
+    parser.add_argument("-u", "--user")
     parser.add_argument("url")
     arguments = parser.parse_args()
 
@@ -50,7 +51,10 @@ def main():
         test_message__failed(arguments.url)
         test_stream__failed(arguments.url)
 
-    username = random.randint(0, 9999999)
+    if arguments.user:
+        username = arguments.user
+    else:
+        username = random.randint(0, 9999999)
     connect(arguments.url, username, arguments.last_event_id)
 
 
