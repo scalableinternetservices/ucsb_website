@@ -90,7 +90,7 @@ first does not provide any value, if that authentication has no features behind
 it. Complete a set of unauthenticated stories first, prior to introducing
 authentication.
 
-### Social Network
+### A Social Network
 
 Minimum necessary models:
 
@@ -117,7 +117,7 @@ Initial user stories:
    that others know what I've shared.
 
 
-### Online Store
+### An Online Store
 
 Minimum necessary models:
 
@@ -144,7 +144,7 @@ Initial user stories:
    because I don't want others to see what I've purchased.
 
 
-### Event Sharing Service
+### An Event Sharing Service
 
 Minimum necessary models:
 
