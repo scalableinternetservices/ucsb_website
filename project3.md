@@ -68,12 +68,15 @@ Please have each team member submit the following form:
 
 In order to submit the form you will need three additional things:
 
-* The name of a pushed docker container that when invoked runs your chat server.
+* The name of a pushed docker container that when invoked runs your chat
+  server, e.g., `us.gcr.io/cs291-f19/project3_bboe` (note: you do _not_ need to
+  deploy to Google Cloud Run).
 
 * A url to your deployed front-end application with minimized javascript (tip: `yarn build`).
 
-* A url to a repository containing your front-end source code. Assuming this repository is
-  `private`, please invite me, `bboe` on github so that I can see your code.
+* A url to a repository containing your front-end source code (not the code
+  from `yarn build`). Assuming this repository is `private`, please invite me,
+  `bboe` on github so that I can see your code.
 
 
 ## HTTP API Specification
