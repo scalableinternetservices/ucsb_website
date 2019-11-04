@@ -187,6 +187,257 @@ codes.</li>
 7PM).</li>
 </ul>
 
+<hr />
+
+<h2 id="creating-a-new-rails-application-using-docker">Creating a New Rails Application Using Docker</h2>
+
+<p>Assuming you have docker installed locally, follow the steps below to create a
+new rails project using docker.</p>
+
+<h3 id="prepare-the-project-directory">Prepare the project directory</h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>PROJECTNAME
+<span class="nb">cd </span>PROJECTNAME
+<span class="nb">touch </span>Dockerfile Gemfile Gemfile.lock docker-compose.yml
+</code></pre></div></div>
+
+<p>Copy the following contents into <code class="highlighter-rouge">Dockerfile</code>:</p>
+
+<div class="language-docker highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ruby</span>
+
+<span class="k">RUN </span>curl <span class="nt">-sS</span> https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add <span class="se">\
+</span>  <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">"deb https://dl.yarnpkg.com/debian/ stable main"</span> <span class="o">&gt;</span> /etc/apt/sources.list.d/yarn.list <span class="se">\
+</span>  <span class="o">&amp;&amp;</span> apt-get update <span class="o">&amp;&amp;</span> apt-get <span class="nb">install</span> <span class="nt">-y</span> nodejs yarn <span class="nt">--no-install-recommends</span> <span class="se">\
+</span>  <span class="o">&amp;&amp;</span> gem <span class="nb">install </span>rails
+
+<span class="k">WORKDIR</span><span class="s"> /app</span>
+
+<span class="k">COPY</span><span class="s"> Gemfile Gemfile.lock /app/</span>
+<span class="k">RUN </span>bundle <span class="nb">install</span>
+
+<span class="k">CMD</span><span class="s"> ["/bin/bash"]</span>
+</code></pre></div></div>
+
+<p>Copy the following contents into <code class="highlighter-rouge">docker-compose.yml</code>:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">db</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">postgres</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./tmp/db:/var/lib/postgresql/data</span>
+  <span class="na">web</span><span class="pi">:</span>
+    <span class="na">build</span><span class="pi">:</span> <span class="s">.</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s">bash -c "rm -f tmp/pids/server.pid &amp;&amp; bundle exec rails s -p 3000 -b '0.0.0.0'"</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">db</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">3000:3000"</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">.:/app:delegated</span>
+<span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3'</span>
+</code></pre></div></div>
+
+<p>Initialize your git repository and make an initial commit:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git init
+git add <span class="nb">.</span>
+git commit <span class="nt">-m</span> <span class="s2">"Prepare the project directory"</span>
+</code></pre></div></div>
+
+<h3 id="create-the-rails-project">Create the rails project</h3>
+
+<p>First build the <code class="highlighter-rouge">web</code> container image using <code class="highlighter-rouge">docker-compose</code>:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose build web
+</code></pre></div></div>
+
+<p>Then run <code class="highlighter-rouge">rails new</code> to create the initial rails project:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run web rails new <span class="nb">.</span> <span class="nt">--force</span> <span class="nt">--no-deps</span> <span class="nt">--database</span><span class="o">=</span>postgresql
+</code></pre></div></div>
+
+<p>Add everything to git and make a new commit:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add <span class="nb">.</span>
+git commit <span class="nt">-m</span> <span class="s2">"Run 'docker-compose run web rails new . --force --no-deps --database=postgresql'"</span>
+</code></pre></div></div>
+
+<p>Finally, re-build the <code class="highlighter-rouge">web</code> container so that it now includes the project dependencies:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose build web
+</code></pre></div></div>
+
+<h3 id="configure-the-project-to-talk-to-the-database-container">Configure the project to talk to the database container</h3>
+
+<p>Add the following to lines to the <code class="highlighter-rouge">default</code> section of <code class="highlighter-rouge">config.database.yml</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">host</span><span class="pi">:</span> <span class="s">db</span>
+  <span class="na">username</span><span class="pi">:</span> <span class="s">postgres</span>
+</code></pre></div></div>
+
+<p>Make a commit:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add <span class="nb">.</span>
+git commit <span class="nt">-m</span> <span class="s2">"Configure the project to talk to the database container"</span>
+</code></pre></div></div>
+
+<h3 id="create-the-development-and-test-databases">Create the development and test databases</h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run web rails db:create
+</code></pre></div></div>
+
+<h3 id="ensure-dependencies-are-up-to-date">Ensure dependencies are up-to-date</h3>
+
+<p>Periodically run the following two commands to ensure your ruby and node
+dependencies are up to date:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run web bundle <span class="nb">install
+</span>docker-compose run web yarn <span class="nb">install</span>
+</code></pre></div></div>
+
+<p>If your project has outstanding changes as shown via <code class="highlighter-rouge">git status</code>, consider making a
+commit at this time.</p>
+
+<h3 id="start-the-development-server">Start the development server</h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose up
+</code></pre></div></div>
+
+<p>At this point you <em>should</em> be able to access the “Yay! You’re on Rails!” page
+via <a href="http://localhost:3000">http://localhost:3000</a>.</p>
+
+<hr />
+
+<h2 id="deploying-to-elastic-beanstalk">Deploying to Elastic Beanstalk</h2>
+
+<p>At this point you should have a Rails project that you can successfully run in
+development locally using Docker. In the following steps we’ll make the
+necessary adjustments to configure the application for Amazon’s Elastic
+Beanstalk, and then deploy it.</p>
+
+<h3 id="configure-the-production-database">Configure the production database</h3>
+
+<p>Update the lines in the <code class="highlighter-rouge">production</code> section of <code class="highlighter-rouge">config.database.yml</code> to include:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">database</span><span class="pi">:</span> <span class="s">&lt;%= ENV['RDS_DB_NAME'] %&gt;</span>
+  <span class="na">host</span><span class="pi">:</span> <span class="s">&lt;%= ENV['RDS_HOSTNAME'] %&gt;</span>
+  <span class="na">password</span><span class="pi">:</span> <span class="s">&lt;%= ENV['RDS_PASSWORD'] %&gt;</span>
+  <span class="na">port</span><span class="pi">:</span> <span class="s">&lt;%= ENV['RDS_PORT'] %&gt;</span>
+  <span class="na">username</span><span class="pi">:</span> <span class="s">&lt;%= ENV['RDS_USERNAME'] %&gt;</span>
+</code></pre></div></div>
+
+<h3 id="add-ebextensions-to-install-nodejs-and-yarn-on-each-application-server-instance">Add ebextensions to install nodejs and yarn on each application server instance:</h3>
+
+<p>Create the directory and file</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> .ebextensions
+<span class="nb">touch</span> .ebextensions/01_install_dependencies.config
+</code></pre></div></div>
+
+<p>Copy the following contents into <code class="highlighter-rouge">.ebextensions/01_install_dependencies.config</code>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commands:
+  install_nodejs:
+    command: |
+      curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -
+      yum -y install nodejs
+  install_yarn:
+    command: |
+      sudo wget https://dl.yarnpkg.com/rpm/yarn.repo -O /etc/yum.repos.d/yarn.repo
+      yum -y install yarn
+</code></pre></div></div>
+
+<h3 id="commit-the-changes">Commit the changes</h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add <span class="nb">.</span>
+git commit <span class="nt">-m</span> <span class="s2">"Prepare the application to deploy to Amazon's Elastic Beanstalk"</span>
+</code></pre></div></div>
+
+<h3 id="push-changes-to-github">Push changes to github</h3>
+
+<p>If you haven’t already, add github as a remote:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote add origin git@github.com:scalableinternetservices/PROJECTNAME.git
+</code></pre></div></div>
+
+<p>If this is your first time pushing to github, then run:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push <span class="nt">-u</span> origin HEAD
+</code></pre></div></div>
+
+<p>Otherwise, you can simply run:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push
+</code></pre></div></div>
+
+<h3 id="ssh-to-ec2cs291com-and-clone-your-repository">SSH to ec2.cs291.com and clone your repository</h3>
+
+<p>In order to most easily create an elastic beanstalk deployment, we need to SSH
+into <code class="highlighter-rouge">ec2.cs291.com</code>. You should have received the file <code class="highlighter-rouge">TEAMNAME.pem</code> via your
+UCSB Google Drive. Assuming that file is in your downloads folder run the
+following:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh <span class="nt">-i</span> ~/Downloads/TEAMNAME.pem TEAMNAME@ec2.cs291.com
+</code></pre></div></div>
+
+<p>Once logged in, clone your repository using HTTPS (this will be a read-only
+version of the project):</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/scalableinternetservices/PROJECTNAME.git
+</code></pre></div></div>
+
+<h3 id="configure-elastic-beanstalk">Configure Elastic Beanstalk</h3>
+
+<p>For each copy of your repository, you’ll need to do the following only once:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>PROJECTNAME
+eb init <span class="nt">--keyname</span> <span class="si">$(</span><span class="nb">whoami</span><span class="si">)</span> <span class="se">\</span>
+  <span class="nt">--platform</span> <span class="s2">"64bit Amazon Linux 2018.03 v2.11.0 running Ruby 2.6 (Puma)"</span> <span class="se">\</span>
+  <span class="nt">--region</span> us-west-2 PROJECTNAME
+</code></pre></div></div>
+
+<h3 id="create-a-deployment-using-the-minimum-necessary-resources">Create a deployment using the minimum necessary resources</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eb create --envvars SECRET_KEY_BASE=BADSECRET \
+  -db.engine postgres -db.i db.t3.micro -db.user u \
+  -i t3.micro --single YOURNAME
+</code></pre></div></div>
+
+<p>Enter a database password at the prompt (twice) and then take a break as
+creating a deployment will take about ten minutes (the database is slow to
+create).</p>
+
+<h3 id="verify-the-deployment">Verify the deployment</h3>
+
+<p>Run <code class="highlighter-rouge">eb status</code> to see the state of your deployment. The output should look
+something like the following:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Environment details for: YOURNAME
+  Application name: PROJECTNAME
+  Region: us-west-2
+  Deployed Version: app-6360-191104_223036
+  Environment ID: e-yetvigtxpz
+  Platform: arn:aws:elasticbeanstalk:us-west-2::platform/Puma with Ruby 2.6 running on 64bit Amazon Linux/2.11.0
+  Tier: WebServer-Standard-1.0
+  CNAME: YOURNAME.yxhf954iam.us-west-2.elasticbeanstalk.com
+  Updated: 2019-11-04 22:40:16.929000+00:00
+  Status: Ready
+  Health: Green
+</code></pre></div></div>
+
+<p>The two most important parts are that <code class="highlighter-rouge">Status</code> is <code class="highlighter-rouge">Ready</code>, and <code class="highlighter-rouge">Health</code> is
+<code class="highlighter-rouge">Green</code>. If not consult the logs <code class="highlighter-rouge">eb logs</code>.</p>
+
+<p>To test if the deployment is successful copy the CNAME, and paste it into your
+browser:
+<a href="http://YOURNAME.yxhf954iam.us-west-2.elasticbeanstalk.com">http://YOURNAME.yxhf954iam.us-west-2.elasticbeanstalk.com</a></p>
+
+<p>If you get a page stating <code class="highlighter-rouge">The page you were looking for doesn't exist.</code>, that
+likely means things are working, and you have yet to set up a <code class="highlighter-rouge">root_route</code> on
+your site (the “Yay! You’re on Rails!” doesn’t show up in <code class="highlighter-rouge">production</code> mode).</p>
+
+<hr />
+
 <h2 id="project-ideas">Project Ideas</h2>
 
 <p>Please select from one of the following project ideas. You are free to modify
@@ -306,6 +557,7 @@ previously attended so that I can recall my fond memories.</p>
     <p>As an event host, I can proactively invite users to my event, so that I can help spread the word.</p>
   </li>
 </ol>
+
 
     </div>
   </div>
