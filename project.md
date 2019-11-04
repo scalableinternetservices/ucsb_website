@@ -77,6 +77,282 @@ following:
 - Prepare final presentation (present Thursday, December 12 between 4PM and
   7PM).
 
+---
+
+## Creating a New Rails Application Using Docker
+
+Assuming you have docker installed locally, follow the steps below to create a
+new rails project using docker.
+
+### Prepare the project directory
+
+
+```sh
+mkdir PROJECTNAME
+cd PROJECTNAME
+touch Dockerfile Gemfile Gemfile.lock docker-compose.yml
+```
+
+Copy the following contents into `Dockerfile`:
+
+```docker
+FROM ruby
+
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add \
+  && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
+  && apt-get update && apt-get install -y nodejs yarn --no-install-recommends \
+  && gem install rails
+
+WORKDIR /app
+
+COPY Gemfile Gemfile.lock /app/
+RUN bundle install
+
+CMD ["/bin/bash"]
+```
+
+Copy the following contents into `docker-compose.yml`:
+
+```yml
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app:delegated
+version: '3'
+```
+
+Initialize your git repository and make an initial commit:
+
+```sh
+git init
+git add .
+git commit -m "Prepare the project directory"
+```
+
+### Create the rails project
+
+First build the `web` container image using `docker-compose`:
+
+```sh
+docker-compose build web
+```
+
+Then run `rails new` to create the initial rails project:
+
+```sh
+docker-compose run web rails new . --force --no-deps --database=postgresql
+```
+
+Add everything to git and make a new commit:
+
+```sh
+git add .
+git commit -m "Run 'docker-compose run web rails new . --force --no-deps --database=postgresql'"
+```
+
+Finally, re-build the `web` container so that it now includes the project dependencies:
+
+```sh
+docker-compose build web
+```
+
+### Configure the project to talk to the database container
+
+Add the following to lines to the `default` section of `config.database.yml`:
+
+```yaml
+  host: db
+  username: postgres
+```
+
+Make a commit:
+
+```sh
+git add .
+git commit -m "Configure the project to talk to the database container"
+```
+
+### Create the development and test databases
+
+```sh
+docker-compose run web rails db:create
+```
+
+### Ensure dependencies are up-to-date
+
+Periodically run the following two commands to ensure your ruby and node
+dependencies are up to date:
+
+```sh
+docker-compose run web bundle install
+docker-compose run web yarn install
+```
+
+If your project has outstanding changes as shown via `git status`, consider making a
+commit at this time.
+
+### Start the development server
+
+```sh
+docker-compose up
+```
+
+At this point you _should_ be able to access the "Yay! You’re on Rails!" page
+via [http://localhost:3000](http://localhost:3000).
+
+---
+
+## Deploying to Elastic Beanstalk
+
+At this point you should have a Rails project that you can successfully run in
+development locally using Docker. In the following steps we'll make the
+necessary adjustments to configure the application for Amazon's Elastic
+Beanstalk, and then deploy it.
+
+### Configure the production database
+
+Update the lines in the `production` section of `config.database.yml` to include:
+
+```yaml
+  database: <%= ENV['RDS_DB_NAME'] %>
+  host: <%= ENV['RDS_HOSTNAME'] %>
+  password: <%= ENV['RDS_PASSWORD'] %>
+  port: <%= ENV['RDS_PORT'] %>
+  username: <%= ENV['RDS_USERNAME'] %>
+```
+
+### Add ebextensions to install nodejs and yarn on each application server instance:
+
+Create the directory and file
+
+```sh
+mkdir .ebextensions
+touch .ebextensions/01_install_dependencies.config
+```
+
+Copy the following contents into `.ebextensions/01_install_dependencies.config`:
+
+```
+commands:
+  install_nodejs:
+    command: |
+      curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -
+      yum -y install nodejs
+  install_yarn:
+    command: |
+      sudo wget https://dl.yarnpkg.com/rpm/yarn.repo -O /etc/yum.repos.d/yarn.repo
+      yum -y install yarn
+```
+
+### Commit the changes
+
+```sh
+git add .
+git commit -m "Prepare the application to deploy to Amazon's Elastic Beanstalk"
+```
+
+### Push changes to github
+
+If you haven't already, add github as a remote:
+
+```sh
+git remote add origin git@github.com:scalableinternetservices/PROJECTNAME.git
+```
+
+If this is your first time pushing to github, then run:
+
+```sh
+git push -u origin HEAD
+```
+
+Otherwise, you can simply run:
+
+```sh
+git push
+```
+
+### SSH to ec2.cs291.com and clone your repository
+
+In order to most easily create an elastic beanstalk deployment, we need to SSH
+into `ec2.cs291.com`. You should have received the file `TEAMNAME.pem` via your
+UCSB Google Drive. Assuming that file is in your downloads folder run the
+following:
+
+```sh
+ssh -i ~/Downloads/TEAMNAME.pem TEAMNAME@ec2.cs291.com
+```
+
+Once logged in, clone your repository using HTTPS (this will be a read-only
+version of the project):
+
+```sh
+git clone https://github.com/scalableinternetservices/PROJECTNAME.git
+```
+
+### Configure Elastic Beanstalk
+
+For each copy of your repository, you'll need to do the following only once:
+
+```sh
+cd PROJECTNAME
+eb init --keyname $(whoami) \
+  --platform "64bit Amazon Linux 2018.03 v2.11.0 running Ruby 2.6 (Puma)" \
+  --region us-west-2 PROJECTNAME
+```
+
+### Create a deployment using the minimum necessary resources
+
+```
+eb create --envvars SECRET_KEY_BASE=BADSECRET \
+  -db.engine postgres -db.i db.t3.micro -db.user u \
+  -i t3.micro --single YOURNAME
+```
+
+Enter a database password at the prompt (twice) and then take a break as
+creating a deployment will take about ten minutes (the database is slow to
+create).
+
+### Verify the deployment
+
+Run `eb status` to see the state of your deployment. The output should look
+something like the following:
+
+```
+Environment details for: YOURNAME
+  Application name: PROJECTNAME
+  Region: us-west-2
+  Deployed Version: app-6360-191104_223036
+  Environment ID: e-yetvigtxpz
+  Platform: arn:aws:elasticbeanstalk:us-west-2::platform/Puma with Ruby 2.6 running on 64bit Amazon Linux/2.11.0
+  Tier: WebServer-Standard-1.0
+  CNAME: YOURNAME.yxhf954iam.us-west-2.elasticbeanstalk.com
+  Updated: 2019-11-04 22:40:16.929000+00:00
+  Status: Ready
+  Health: Green
+```
+
+The two most important parts are that `Status` is `Ready`, and `Health` is
+`Green`. If not consult the logs `eb logs`.
+
+To test if the deployment is successful copy the CNAME, and paste it into your
+browser:
+[http://YOURNAME.yxhf954iam.us-west-2.elasticbeanstalk.com](http://YOURNAME.yxhf954iam.us-west-2.elasticbeanstalk.com)
+
+If you get a page stating `The page you were looking for doesn't exist.`, that
+likely means things are working, and you have yet to set up a `root_route` on
+your site (the "Yay! You’re on Rails!" doesn't show up in `production` mode).
+
+---
 
 ## Project Ideas
 
@@ -170,3 +446,5 @@ Initial user stories:
    previously attended so that I can recall my fond memories.
 
 0. As an event host, I can proactively invite users to my event, so that I can help spread the word.
+
+
