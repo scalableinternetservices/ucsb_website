@@ -354,6 +354,51 @@ your site (the "Yay! You’re on Rails!" doesn't show up in `production` mode).
 
 ---
 
+## Updating the application
+
+After making changes and verifying they work with locally, push your changes to
+github, pull them on `ec2.cs291.com` and then update your deployment via:
+
+```sh
+eb deploy
+```
+
+__Note__: Only commited changes are pushed on deployment, so ensure `git
+status` is clean. (You can run `eb deploy --staged` to include staged files,
+but it's preferrable to deploy code that has been pushed to github.
+
+---
+
+## Working with deployments
+
+## Viewing Logs
+
+To view the logs run:
+
+```sh
+eb logs | less -R
+```
+
+## SSH into an application server
+
+```sh
+eb ssh -i "ssh -i ~/$(whoami).pem"
+```
+
+### Cleaning Up
+
+When you know you're done, clean up your deployment:
+
+
+```
+eb terminate
+```
+
+__Note__: Deployments will automatically be cleaned up ~110 minutes after their
+last update.
+
+---
+
 ## Project Ideas
 
 Please select from one of the following project ideas. You are free to modify
