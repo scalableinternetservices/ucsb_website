@@ -438,6 +438,46 @@ your site (the “Yay! You’re on Rails!” doesn’t show up in <code class="h
 
 <hr />
 
+<h2 id="updating-the-application">Updating the application</h2>
+
+<p>After making changes and verifying they work with locally, push your changes to
+github, pull them on <code class="highlighter-rouge">ec2.cs291.com</code> and then update your deployment via:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eb deploy
+</code></pre></div></div>
+
+<p><strong>Note</strong>: Only commited changes are pushed on deployment, so ensure <code class="highlighter-rouge">git
+status</code> is clean. (You can run <code class="highlighter-rouge">eb deploy --staged</code> to include staged files,
+but it’s preferrable to deploy code that has been pushed to github.</p>
+
+<hr />
+
+<h2 id="working-with-deployments">Working with deployments</h2>
+
+<h2 id="viewing-logs">Viewing Logs</h2>
+
+<p>To view the logs run:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eb logs | less <span class="nt">-R</span>
+</code></pre></div></div>
+
+<h2 id="ssh-into-an-application-server">SSH into an application server</h2>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eb ssh <span class="nt">-i</span> <span class="s2">"ssh -i ~/</span><span class="si">$(</span><span class="nb">whoami</span><span class="si">)</span><span class="s2">.pem"</span>
+</code></pre></div></div>
+
+<h3 id="cleaning-up">Cleaning Up</h3>
+
+<p>When you know you’re done, clean up your deployment:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eb terminate
+</code></pre></div></div>
+
+<p><strong>Note</strong>: Deployments will automatically be cleaned up ~110 minutes after their
+last update.</p>
+
+<hr />
+
 <h2 id="project-ideas">Project Ideas</h2>
 
 <p>Please select from one of the following project ideas. You are free to modify
