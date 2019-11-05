@@ -11,13 +11,11 @@ __CS291A__
 
 Dr. Bryce Boe
 
-October 25, 2018
+November 5, 2019
 
 ---
 
 # Today's Agenda
-
-* TODO
 
 * Relational Databases Motivation
 
@@ -26,22 +24,6 @@ October 25, 2018
 * Database Concurrency Control
 
 * Query Analysis
-
----
-
-# TODO
-
-## Should be done
-
-* Chapters 1-2, 9-11 in
-  [HPBN](https://hpbn.co/primer-on-latency-and-bandwidth/) / All Chapters in
-  the [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
-
-* TravisCI integration with your repository.
-
-* Web application with a handful of basic and more complex features.
-
-* Successfully deployed your application to AWS.
 
 ---
 
@@ -64,7 +46,7 @@ After today you should...
 
     * using rails-specific techniques
 
-    * being able to identity the source of slowness in a SQL query
+    * being able to identity the source of slowness in an SQL query
 
 ---
 
@@ -350,8 +332,8 @@ order of the transactions (T1 then T2, or T2 then T1).
 | T1     | T2     |
 |:------:|:------:|
 | R(X*)  |        |
-| R(X*)  | W(X^n) |
-| R(X*)  | Commit |
+|        | W(X^n) |
+|        | Commit |
 | R(X*)  |        |
 | W(Y)   |        |
 | Commit |        |
