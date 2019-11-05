@@ -89,7 +89,7 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
 
 #### October 31, 2019: Load Testing with Tsung
 
-#### November 5, 2019: (Tentative) Relational Databases
+#### November 5, 2019: Relational Databases [[slides](/slides/2019/10_relational_databases_db_concurrency_and_query_analysis/)]
 
 #### November 7, 2019
 
