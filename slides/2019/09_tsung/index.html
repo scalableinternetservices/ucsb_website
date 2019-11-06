@@ -9,32 +9,15 @@ class: center, middle
 
 __CS291A__
 
-Dr. Justin Pearson
+Dr. Bryce Boe
 
-November 6, 2018
+October 31, 2019
 
 ---
 
 # Today's Agenda
 
-* TODO
-
 * Load Testing with Tsung
-
----
-
-# TODO
-
-* Keep making excellent progress on your project.
-
-* Periodically ensure you can successfully deploy your project to AWS.
-
-* Start thinking about what you want to load test and how you will go about it.
-
-## Before the End of Lab
-
-* Write an initial Tsung xml file to load test a simple action on your
-  application
 
 ---
 
@@ -42,9 +25,6 @@ November 6, 2018
 
 After today you will know how to evaluate the scalability of a deployed web
 application using Tsung.
-
-Today will be interactive, so if you've brought your laptop feel free to
-follow-along.
 
 ---
 
@@ -118,33 +98,12 @@ performance. Today I will show you how to use it.
 
 ---
 
-# Set Up
-
-We ideally want one application deployment, and one load testing instance per
-team.
-
-* If you can, sit near your team.
-
-* Deploy a version of your application
-
-* Deploy Tsung on a `c5.large` instance using CloudFormation:
-
-    * Visit: https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/new
-
-    * Use for the "S3 template URL": https://cs291.s3.amazonaws.com/Tsung.json
-
-
-__Note__: Now that we're directly using CloudFormation, you have one more place
-to shutdown instances when you're done working.
-
----
-
 # Testing EC2 instances from EC2
 
-We are going to launch the test instances in the same data center as our
-stack. This decision provides us with:
+We should the test instances in the same region as our elastic beanstalk
+deployment. This decision provides us with:
 
-* Lower cost: AWS charges for bandwidth outside of the data center
+* Lower cost: AWS charges for bandwidth outside of the region
 
 * Predictability: fewer moving parts between the test instance and the stack
 
@@ -156,32 +115,6 @@ The first two points are positive.
 The third point could be a concern, but since we are essentially using these
 sort of tests for comparison between code changes, we're less concerned with
 being completely representative.
-
----
-
-# Launching a Tsung Stack
-
-* Prefix the stack name with your teamname
-
-* Use the `c5.large` instance type unless you have a specific reason to use
-  one of the larger types
-
-* Select your team name so that your SSH private key works to SSH into the
-  instance
-
----
-
-# Accessing the Tsung Instance
-
-When the stack launch completes, the _Outputs_ tab will contain the SSH string
-and a URL.
-
-![Tsung Outputs tab](tsung_outputs.png)
-
-At first accessing the URL will result in an error. It will be useful once
-Tsung is running.
-
-Use the SSH string to SSH into the Tsung instance.
 
 ---
 
@@ -334,15 +267,8 @@ Reference: [http://tsung.erlang-projects.org/user_manual/conf-options.html](http
 <options>
   <!-- Set connection timeout to 2 seconds -->
   <option name="global_ack_timeout" value="2000"></option>
-
-  <option type="ts_http" name="user_agent">
-    <user_agent probability="100">Mozilla/5.0 ...</user_agent>
-  </option>
 </options>
 ```
-
-Unless you do something special with the user-agent in your web application,
-you probably will not need to modify these options.
 
 ---
 
