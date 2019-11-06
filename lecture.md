@@ -91,26 +91,25 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
 
 #### November 5, 2019: Relational Databases [[slides](/slides/2019/10_relational_databases_db_concurrency_and_query_analysis/)]
 
-#### November 7, 2019
+#### November 7, 2019 RDBMS Scaling and Service Oriented Architectures
 
-#### November 12, 2019
+#### November 12, 2019 Guest Lecture: Dr. Justin Pearson
 
-#### November 14, 2019
+#### November 14, 2019 (Tentative) Non-Relational Data Stores
 
-#### November 19, 2019
+#### November 19, 2019 (Tentative) Web Security
 
-#### November 21, 2019
+#### November 21, 2019 (Tentative) HTTP2 / Quic (HTTP 3)
 
-#### November 26, 2019
+#### November 26, 2019 (Placeholder for Guest Lecture)
 
 #### Novemver 28, 2019 (Thanksgiving, no class)
 
-#### December 3, 2019
+#### December 3, 2019 (Placeholder for Guest Lecture)
 
-#### December 5, 2019
+#### December 5, 2019 (Placeholder for Guest Lecture)
 
-#### December 12, 2019
+#### December 12, 2019 Final Presentations
 
-- Final presentations
 - 4PM to 7PM
 - Phelps 3526
