@@ -87,7 +87,7 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
   - develop initial features
   - deploy to elastic beanstalk
 
-#### October 31, 2019: Load Testing with Tsung
+#### October 31, 2019: Load Testing with Tsung [[slides](/slides/2019/09_tsung/)]
 
 #### November 5, 2019: Relational Databases [[slides](/slides/2019/10_relational_databases_db_concurrency_and_query_analysis/)]
 
