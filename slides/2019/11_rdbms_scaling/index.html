@@ -11,16 +11,11 @@ __CS291A__
 
 Dr. Bryce Boe
 
-October 30, 2018
+November 7, 2019
 
 ---
 
 # Outline
-
-* TODO
-
-* Complete [Database Concurrency Control and Query Analysis
-  Slides](/slides/2017/09_relational_databases_db_concurrency_and_query_analysis/#50)
 
 * Database Scaling Motivation
 
@@ -29,29 +24,6 @@ October 30, 2018
 * Service Oriented Architectures
 
 * Separating Reads from Writes
-
----
-
-# TODO
-
-## Should be done
-
-* Chapters 1-2, 9-11 in
-  [HPBN](https://hpbn.co/primer-on-latency-and-bandwidth/) / All Chapters in
-  the [Ruby on Rails Tutorial](https://www.railstutorial.org/book/beginning)
-
-* Successfully deploying your application to AWS, and pushing updates `eb
-  deploy`.
-
-## This week
-* Everyone is able to reliably create, update, and terminate elastic beanstalk
-  instances.
-
-* Practice scaling horizontally and vertically without creating a new
-  deployment.
-
-* Verify scaling with some naïve measurements using a tool like `ab` or
-  `httperf`.
 
 ---
 
@@ -438,7 +410,7 @@ This would make generating submission lists for a single community difficult.
 ## By Community?
 
 Obtaining a community list will be more difficult, but cleanly partitioning
-comments and submissions by their community is rather clean.
+comments and submissions by their community is doable.
 
 ---
 
@@ -507,22 +479,20 @@ that always talks to the `ucsb` containing database.
 
 # Sharding in Rails
 
-Rails does not have built-in support for sharding. However, thanks to the
-open-source community, there exists a great Rails sharding gem Octopus:
-
-https://github.com/thiagopradi/octopus
+Rails 6 has built-in support for sharding:
+https://guides.rubyonrails.org/active_record_multiple_databases.html
 
 ```ruby
-class BrazilController < ActionController::Base
-  around_filter :select_shard
-
-  def select_shard(&amp;block)
-    Octopus.using(:brazil, &amp;block)
-  end
+def index
+    ...
+    ActiveRecord::Base.connected_to(database: :customer1)
+        ...
+    end
 end
 ```
 
-The above sends all actions to the Brazil controller to the `:brazil` shard.
+Sharding could previously be accomplished via:
+https://github.com/thiagopradi/octopus
 
 ---
 
@@ -530,7 +500,7 @@ The above sends all actions to the Brazil controller to the `:brazil` shard.
 
 ## Strengths
 
-* If you genuinely have zero relations across shard, this scaling path is very
+* If you genuinely have zero relations across shards, this scaling path is very
   powerful.
 
 * Sharding works best when partitions grow with usage.
@@ -596,7 +566,8 @@ Each service is broken out by logical function. E.g.:
 
 # SOA Communications
 
-With _sharding_ the application server typically only talks to a single shard.
+With _sharding_ the application server often only talks to a single shard per
+request.
 
 With _SOA_ the front-end application server may communicate with many distinct
 services, and some of those services may talk to a handful of other services.
@@ -753,9 +724,7 @@ Jeff Bezos (Amazon CEO) circa 2002 (according to Steve Yegge)
 
 --
 
-7. Thank you; have a nice day!
-
-Archived Source: [https://plus.google.com/+RipRowan/posts/eVeouesvaVX](https://plus.google.com/+RipRowan/posts/eVeouesvaVX)
+Archived Source: https://gist.github.com/breadtk/bf3591a1ec181b62b659b68411694a06
 
 ---
 
@@ -945,19 +914,29 @@ need to talk to the primary database.
 
 # Rails Read Replica Support
 
-Like with sharding, rails does not provide build-in support.
+Rails 6 has first-class support for read replicas now. "Automatic switching"
+must be explictly configured and enabled:
 
-However, the Octopus gem does support read replicas:
+> Automatic switching allows the application to switch from the primary to
+> replica or replica to primary based on the HTTP verb and whether there was a
+> recent write.
 
-```ruby
-Octopus.using(:read_replica) do
-  num_users = User.count
-end
+--
 
-Octopus.using(:primary) do
-  User.create!(name: "Mike")
-end
-```
+> If the application is receiving a POST, PUT, DELETE, or PATCH request the
+> application will automatically write to the primary. For the specified time
+> after the write the application will read from the primary. For a GET or HEAD
+> request the application will read from the replica unless there was a recent
+> write.
+
+--
+
+> Rails guarantees "read your own write" and will send your GET or HEAD request
+> to the primary if it's within the delay window. By default the delay is set
+> to 2 seconds. You should change this based on your database
+> infrastructure. Rails doesn't guarantee "read a recent write" for other users
+> within the delay window and will send GET and HEAD requests to the replicas
+> unless they wrote recently.
 
 ---
 
