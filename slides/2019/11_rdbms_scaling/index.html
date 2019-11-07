@@ -924,8 +924,7 @@ its replicas and waits until applied by all before completing.
 
 When a transaction is committed to the primary, the primary sends the
 transaction to its replicas but does not wait to see if the transaction is
-applied.  ]
-
+applied.]
 
 ---
 
@@ -1009,6 +1008,29 @@ UPDATE txns SET amount=5, updated_at=NOW();
 > What is the value of `NOW()`?
 
 Such values must be communicated from the primary to its replicas.
+
+---
+
+# PostgreSQL Replication
+
+> PostgreSQL streaming replication is asynchronous by default. If the primary
+> server crashes then some transactions that were committed may not have been
+> replicated to the standby server, causing data loss. The amount of data loss
+> is proportional to the replication delay at the time of failover.
+
+> When requesting synchronous replication, each commit of a write transaction
+> will wait until confirmation is received that the commit has been written to
+> the transaction log on disk of both the primary and standby server. The only
+> possibility that data can be lost is if both the primary and the standby
+> suffer crashes at the same time. This can provide a much higher level of
+> durability, though only if the sysadmin is cautious about the placement and
+> management of the two servers. Waiting for confirmation increases the user's
+> confidence that the changes will not be lost in the event of server crashes
+> but it also necessarily increases the response time for the requesting
+> transaction. The minimum wait time is the roundtrip time between primary to
+> standby.
+
+https://www.postgresql.org/docs/9.1/warm-standby.html#SYNCHRONOUS-REPLICATION
 
 ---
 
