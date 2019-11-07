@@ -15,8 +15,8 @@ To develop locally run:
 
 ## Publishing
 
-Push updates or merge a PR to the master branch and CircleCI will take care of
-the rest.
+Push updates or merge a pull request to the master branch and CircleCI will
+take care of the rest.
 
 
 ## Theme
