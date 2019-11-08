@@ -93,7 +93,7 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
 
 #### November 7, 2019 RDBMS Scaling and Service Oriented Architectures [[slides](/slides/2019/11_rdbms_scaling/)]
 
-#### November 12, 2019 Guest Lecture: Dr. Justin Pearson
+#### November 12, 2019 Guest Lecture: Dr. Justin Pearson, Senior Software Engineer @AppFolio
 
 #### November 14, 2019 (Tentative) Non-Relational Data Stores
 
@@ -105,7 +105,7 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
 
 #### Novemver 28, 2019 (Thanksgiving, no class)
 
-#### December 3, 2019 (Placeholder for Guest Lecture)
+#### December 3, 2019 Guest Lecture: Courtney Wang, Senior Software Engineer @Reddit
 
 #### December 5, 2019 (Placeholder for Guest Lecture)
 
