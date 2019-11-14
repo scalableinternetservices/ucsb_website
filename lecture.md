@@ -95,7 +95,7 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
 
 #### November 12, 2019 Guest Lecture: Dr. Justin Pearson, Senior Software Engineer @AppFolio
 
-#### November 14, 2019 (Tentative) Non-Relational Data Stores
+#### November 14, 2019 Non-Relational Data Stores [[slides](/slides/2019/12_nosql/)]
 
 #### November 19, 2019 (Tentative) Web Security
 
