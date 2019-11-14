@@ -101,7 +101,7 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
 
 #### November 21, 2019 (Tentative) HTTP2 / Quic (HTTP 3)
 
-#### November 26, 2019 (Placeholder for Guest Lecture)
+#### November 26, 2019 Guest Lecture: Danny Cho, Software Engineer @Facebook
 
 #### Novemver 28, 2019 (Thanksgiving, no class)
 
