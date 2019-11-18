@@ -97,7 +97,7 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
 
 #### November 14, 2019 Non-Relational Data Stores [[slides](/slides/2019/12_nosql/)]
 
-#### November 19, 2019 (Tentative) Web Security
+#### November 19, 2019 Web Security [[slides](/slides/2019/13_web_security/)]
 
 #### November 21, 2019 (Tentative) HTTP2 / Quic (HTTP 3)
 
