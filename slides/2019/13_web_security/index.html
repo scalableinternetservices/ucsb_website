@@ -11,15 +11,7 @@ __CS291A__
 
 Dr. Bryce Boe
 
-November 15, 2018
-
----
-
-class: center, middle, inverse
-
-# Project Write Up Deadline
-
-### Thursday, December 6, before class (1pm)
+November 19, 2019
 
 ---
 
@@ -187,7 +179,7 @@ key can be used to encrypt data, and the other used to decrypt.
 # Only those with the private key can decrypt
 encrypt(data, pub_key) = encrypted      decrypt(encrypted, priv_key) = data
 
-# Only those with the private key can create
+# Only those with the private key can encryprt
 encrypt(data, priv_key) = encrypted      decrypt(encrypted, pub_key) = data
 ```
 
@@ -358,10 +350,10 @@ The public key along with its parent signatures is known as a __certificate__.
 Every browser (and operating system) maintains a small list of trusted
 Certificate Authorities.
 
-Any website can present a certificate issued (signed) by a CA the browser
-trusts and transitively the browser will trust that website.
+Any website presenting a certificate issued (signed) by a CA the browser
+trusts will transitively receive trust from the browser.
 
-Certificates can be chained (Root CA -> Intermediate CA -> Site Certificate)
+Certificates can be chained (Root CA -> Intermediate CA* -> Site Certificate)
 
 ![TLS Certificate Chain](certificate_chain.png)
 
@@ -377,8 +369,8 @@ Certificates can be chained (Root CA -> Intermediate CA -> Site Certificate)
 
 --
 
-* __Symmetric cryptography__ is used to _privately_ communicate with
-  _integrity_.
+* __Symmetric cryptography__ is used to quickly and _privately_ communicate
+  with _integrity_.
 
 --
 
@@ -392,11 +384,11 @@ with different combinations of cipher suites.
 .left-column40[
 After TCP setup:
 
-1. Client initiates TLS handshake with a list of cipher suites and a random
-   number
-2. Server responds with its cert, selected cipher suite, and a random number
-3. Client responds with more randomness, encrypted with the server's public key
-4. Each side computes session key based on the three random numbers
+1. (unencrypted) Client initiates TLS handshake with a list of supported cipher suites and a
+   random number
+2. (unencrypted) Server responds with its cert, selected cipher suite, and a random number
+3. (encrypted) Client responds with more randomness
+4. Each side independently computes the session key based on the three random numbers
 5. Both sides use the symmetric session key to communicate
 ]
 .right-column60[
@@ -443,8 +435,8 @@ After TCP setup:
 
 ## Privacy
 
-No other party can know the three random numbers with which we generated the
-session key, thus intermediaries cannot read our data.
+No other party can know __all__ three random numbers with which we generated
+the session key, thus intermediaries cannot read our data.
 
 --
 
@@ -457,8 +449,8 @@ messages were not tampered with.
 
 ## Authentication
 
-The server's public key is signed (certificate) by a trusted CA that my browser
-already knows about, thus I am certainly communicating with the intended party.
+The server's public key is signed (certificate) by a trusted CA that the
+browser already knows about, thus communication occurs with the intended party.
 
 ---
 
@@ -880,15 +872,3 @@ Scalability Rules, by Martin Abbott
 
 
 A typical large scale web service will use both hardware and software firewalls
-
----
-
-# References
-
-Slide images from "High Performance Browser Networking":
-
-* "Certificate Authorities (CAs)"
-
-* "TLS Handshake"
-
-* "Abbreviated TLS Handshake"
