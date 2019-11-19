@@ -78,7 +78,7 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
 
 - Complete [Project 3](/project3/)
 
-#### October 29, 2019: Ruby on Rails
+#### October 29, 2019: Ruby on Rails [video link on Piazza]
 
 **TODO**:
 
@@ -87,7 +87,7 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
   - develop initial features
   - deploy to elastic beanstalk
 
-#### October 31, 2019: Load Testing with Tsung [[slides](/slides/2019/09_tsung/)]
+#### October 31, 2019: Load Testing with Tsung [[slides](/slides/2019/09_tsung/), video link on Piazza]
 
 #### November 5, 2019: Relational Databases [[slides](/slides/2019/10_relational_databases_db_concurrency_and_query_analysis/)]
 
@@ -95,11 +95,30 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
 
 #### November 12, 2019 Guest Lecture: Dr. Justin Pearson, Senior Software Engineer @AppFolio
 
+**TODO**:
+
+- Read
+  [CAP 12 years later](http://www.realtechsupport.org/UB/NP/Numeracy_CAP%2B12Years_2012.pdf)
+  by Eric Brewer
+- Read
+  [Eventually Consistent](http://www.scalableinternetservices.com/slides/vogels.pdf)
+  by Werner Vogels
+
 #### November 14, 2019 Non-Relational Data Stores [[slides](/slides/2019/12_nosql/)]
+
+**TODO**:
+
+- Read chapter [4](https://hpbn.co/transport-layer-security-tls/) in High
+  Performance Browser Networking
 
 #### November 19, 2019 Web Security [[slides](/slides/2019/13_web_security/)]
 
-#### November 21, 2019 (Tentative) HTTP2 / Quic (HTTP 3)
+**TODO**:
+
+- Read chapter [12](https://hpbn.co/http2/) in High Performance Browser
+  Networking
+
+#### November 21, 2019 HTTP/2 / QUIC (HTTP/3)
 
 #### November 26, 2019 Guest Lecture: Danny Cho, Software Engineer @Facebook
 
@@ -108,6 +127,10 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
 #### December 3, 2019 Guest Lecture: Courtney Wang, Senior Software Engineer @Reddit
 
 #### December 5, 2019 (Placeholder for Guest Lecture)
+
+**TODO**:
+
+- Complete the project write-up. Due Friday, December 6 by 19:59:59 PST
 
 #### December 12, 2019 Final Presentations
 
