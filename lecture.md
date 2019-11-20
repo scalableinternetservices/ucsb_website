@@ -120,13 +120,13 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
 
 #### November 21, 2019 HTTP/2 / QUIC (HTTP/3)
 
-#### November 26, 2019 Guest Lecture: Danny Cho, Software Engineer @Facebook
+#### November 26, 2019 Guest Lecture: Overview of Analytical Databases, Danny Cho, Software Engineer @Facebook
 
 #### Novemver 28, 2019 (Thanksgiving, no class)
 
-#### December 3, 2019 Guest Lecture: Courtney Wang, Senior Software Engineer @Reddit
+#### December 3, 2019 Guest Lecture: How reddit Deploys Production Systems, Courtney Wang, Senior Software Engineer @Reddit
 
-#### December 5, 2019 (Placeholder for Guest Lecture)
+#### December 5, 2019 Guest Lecture: GraphQL, Ivan Chub, Software Engineer @AppFolio
 
 **TODO**:
 
