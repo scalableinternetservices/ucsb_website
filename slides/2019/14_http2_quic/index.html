@@ -1,6 +1,6 @@
 ---
 layout: presentation
-title: HTTP/2 and QUIC
+title: HTTP/2 and QUIC (HTTP/3)
 ---
 
 class: center, middle
@@ -11,15 +11,11 @@ __CS291A__
 
 Dr. Bryce Boe
 
-November 20, 2018
+November 21, 2019
 
 ---
 
 # Today's Agenda
-
-* Report Reminder
-
-* Final Presentation Information
 
 * HTTP Optimization Hacks
 
@@ -27,15 +23,9 @@ November 20, 2018
 
 * QUIC
 
----
+* HTTP/3
 
-class: center, middle, inverse
-
-# Report Reminder
-
-### Reports are due Thursday, December 6 by 1PM (before class) via Piazza
-
----
+r---
 
 class: center, middle, inverse
 
@@ -154,15 +144,15 @@ A sprite is an image that is comprised of many smaller images.
 CSS is used to extract the individual image based on its position and size in
 the sprite.
 
-Spriting is cumbersome to work with, and is a hack used to obtain better
-performance.
+Spriting is cumbersome to work with, and is a hack used to reduce page load
+times.
 
 ---
 
 # Review: Concurrent TCP Connections
 
 The browser will utilize up to 6 concurrent TCP connections to a single host in
-order to speed up the time to obtain a page's resources.
+order to reduce the time to obtain a page's resources.
 
 For better performance domain sharding is utilized with HTTP/1.1.
 
@@ -182,7 +172,7 @@ We want fewer TCP connections, but
 
 * we don't want to have to use image sprites
 
-* we don't want to have to split our resources to trick the browser
+* we don't want to have to split our resources across domains to trick the browser
 
 > What do we do?
 
@@ -218,7 +208,7 @@ class: center middle inverse
 
 # HTTP/2 Features
 
-* A multiplexed TCP connection permits concurrent streams over a single TCP
+* Multiplexing application streams permits concurrent streams over a single TCP
   connection with the ability to prioritize streams.
 
 * Header compression minimizes request and response overhead.
@@ -244,7 +234,7 @@ Note that the headers and data are in separate frames.
 ![HTTP/2 Connection](http2_connection.png)
 ]
 
-Note that different streams are interleaved over a single TCP connection.
+Note that different streams are interleaved over a single TCP connection (multiplexing).
 
 ---
 
@@ -292,7 +282,7 @@ With binary framing the ordering of resources is flexible.
 
 * Headers are compressed, so they are lightweight.
 
-* Head of line blocking no longer exists.
+* _Resource-based_ head of line blocking no longer exists.
 ]
 
 ---
@@ -317,17 +307,18 @@ A `WINDOW_UPDATE` flag exists to control the number of frames _in flight_.
 
 # HTTP/2 Saves the Day
 
-HTTP/2 obviates the HTTP/1.1 hacks used over the last twenty years.
+HTTP/2 obviates the HTTP/1.1 hacks used over the last twenty+ years.
 
 * Spriting and asset compilation are no longer needed since we can effectively
-  handle many small resources without worrying about head-of-line blocking.
+  handle many small resources without worrying about _resource-based_ head of
+  line blocking.
 
 * Domain sharding is irrelevant since all content is delivered over a single
   connection.
 
 ---
 
-# New Feature: Server Push
+# HTTP/2 New Feature: Server Push
 
 .center[
 ![HTTP/2 Server Push](http2_server_push.png)
@@ -373,10 +364,10 @@ class: center inverse middle
 
 # QUIC
 
-HTTP/2 improves HTTP while still using TCP.
+HTTP/2 improves HTTP while still using TCP as the underlying protocol.
 
-__QUIC__ is an attempt to sidestep TCP in order to avoid TCP limitations,
-primarily the round trip necessary to establish connections.
+__QUIC__ is is built on top of UDP in order to avoid TCP limitations, primarily
+the round trip necessary to establish connections.
 
 ![QUIC](quic.png)
 
@@ -573,3 +564,25 @@ Overall the most significant results occur under poor network conditions.
 
 As of September 2017, QUIC accounts for approximately 7% of Internet traffic
 [[ref](https://blog.apnic.net/2018/05/15/how-much-of-the-internet-is-using-quic/)].
+
+
+---
+
+# HTTP/3
+
+HTTP/3 is proposed as HTTP over QUIC.
+
+https://mailarchive.ietf.org/arch/msg/quic/RLRs4nB1lwFCZ_7k0iuz0ZBa35s
+
+Latest Draft (November 4, 2019)
+
+- https://tools.ietf.org/html/draft-ietf-quic-http-24
+
+Abstract:
+
+> The QUIC transport protocol has several features that are desirable in a
+  transport for HTTP, such as stream multiplexing, per-stream flow control, and
+  low-latency connection establishment.  This document describes a mapping of
+  HTTP semantics over QUIC.  This document also identifies HTTP/2 features that
+  are subsumed by QUIC, and describes how HTTP/2 extensions can be ported to
+  HTTP/3.
