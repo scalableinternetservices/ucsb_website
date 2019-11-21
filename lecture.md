@@ -118,7 +118,7 @@ Below is the tentative schedule for the course. As the quarter progresses it'll 
 - Read chapter [12](https://hpbn.co/http2/) in High Performance Browser
   Networking
 
-#### November 21, 2019 HTTP/2 / QUIC (HTTP/3)
+#### November 21, 2019 HTTP/2 and QUIC (HTTP/3) [[slides](/slides/2019/14_http2_quic/)]
 
 #### November 26, 2019 Guest Lecture: Overview of Analytical Databases, Danny Cho, Software Engineer @Facebook
 
