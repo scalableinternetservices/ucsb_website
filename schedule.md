@@ -152,7 +152,7 @@ Below is the tentative schedule for the course. As the quarter progresses this p
 
 ### Tasks
 
-- Complete the project write-up
+- Complete the project report
 
 </div>
 <div class="week">
