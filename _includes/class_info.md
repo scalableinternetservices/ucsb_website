@@ -11,16 +11,18 @@ Please use Piazza for correspondance when possible
 
 ## Dates
 
-_all times PST (UTC-8)_
-
 ### Synchronous Classes
 
 Tuesday and Thursday  
-3:00pm -- 4:50pm  
+3:00pm -- 4:50pm PST
 
-### Final Presentation Video Due
+### Project Report Due
 
-Tuesday March 18 before 4:00pm
+Friday, March 12 before 9:00am PST
+
+### Project Presentation Video Due
+
+Thursday March 18 before 4:00pm PDT
 
 ## Class Resources
 

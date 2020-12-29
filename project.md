@@ -23,16 +23,7 @@ fundamental web technologies and the Ruby on Rails framework.
 
 ## Resources
 
-Throughout the project, you might find it helpful to go through a ruby on rails tutorial.
-
-The following is fantastic:
-
-* [Ruby on Rails
-  Tutorial](https://www.learnenough.com/ruby-on-rails-4th-edition-tutorial/beginning)
-
-And Rail's own tutorial is quite good as well:
-
-* [Getting Started with Rails](https://guides.rubyonrails.org/getting_started.html)
+Throughout the project, you might find it helpful to go through a ruby on rails tutorial. The Ruby on Rails Tutorial (see sidebar) is an amazing resource. Rail's own tutorial is quite good as well: [Getting Started with Rails](https://guides.rubyonrails.org/getting_started.html)
 
 ## Project Sprint Schedule
 
