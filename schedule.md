@@ -9,6 +9,7 @@ title: Class Schedule
 
 Below is the tentative schedule for the course. As the quarter progresses this page will become more complete.
 
+<div class="week">
 ## Week 1 (January 4-)
 
 ### Topics
@@ -25,7 +26,8 @@ Below is the tentative schedule for the course. As the quarter progresses this p
 - Begin [Project 1](/project1/)
 - Read chapters [1](https://hpbn.co/primer-on-latency-and-bandwidth/), [2](https://hpbn.co/building-blocks-of-tcp/), [9](https://hpbn.co/brief-history-of-http/), [10](https://hpbn.co/primer-on-web-performance/), and [11](https://hpbn.co/http1x/) of High Performance Browser Networking
 
----
+</div>
+<div class="week">
 
 ## Week 2 (January 11-)
 
@@ -41,7 +43,8 @@ Below is the tentative schedule for the course. As the quarter progresses this p
 - Begin [Project 2](/project2/)
 - Read [Dynamic Load Balancing on Web-server Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf) by Cardellini, Colajanni, and Yu.
 
----
+</div>
+<div class="week">
 
 ## Week 3 (January 18-)
 
@@ -55,7 +58,8 @@ Below is the tentative schedule for the course. As the quarter progresses this p
 - Complete [Project 2](/project2/)
 - Begin [Project 3](project3)
 
----
+</div>
+<div class="week">
 
 ## Week 4 (January 25-)
 
@@ -72,7 +76,8 @@ Below is the tentative schedule for the course. As the quarter progresses this p
 
 - Make progress on [Project 3](/project3/)
 
----
+</div>
+<div class="week">
 
 ## Week 5 (February 1-)
 
@@ -90,7 +95,8 @@ Below is the tentative schedule for the course. As the quarter progresses this p
   - deploy to elastic beanstalk
   - schedule team meeting time with instructor
 
----
+</div>
+<div class="week">
 
 ## Week 6 (February 8-)
 
@@ -99,7 +105,8 @@ Below is the tentative schedule for the course. As the quarter progresses this p
 - Deep Dive: Load Testing with Tsung
 - Relational Database
 
----
+</div>
+<div class="week">
 
 ## Week 7 (February 15-)
 
@@ -108,7 +115,8 @@ Below is the tentative schedule for the course. As the quarter progresses this p
 - RDBMS Scaling
 - Service Oriented Architectures
 
----
+</div>
+<div class="week">
 
 ## Week 8 (February 22-)
 
@@ -123,7 +131,8 @@ Below is the tentative schedule for the course. As the quarter progresses this p
 - Read [Eventually Consistent](http://www.scalableinternetservices.com/slides/vogels.pdf) by Werner Vogels
 - Read chapter [4](https://hpbn.co/transport-layer-security-tls/) of High Performance Browser Networking
 
----
+</div>
+<div class="week">
 
 ## Week 9 (March 1-)
 
@@ -136,7 +145,8 @@ Below is the tentative schedule for the course. As the quarter progresses this p
 
 - Read chapter [12](https://hpbn.co/http2/) of High Performance Browser Networking
 
----
+</div>
+<div class="week">
 
 ## Week 10 (March 8-)
 
@@ -144,10 +154,13 @@ Below is the tentative schedule for the course. As the quarter progresses this p
 
 - Complete the project write-up
 
----
+</div>
+<div class="week">
 
 ## Finals Week (March 15-)
 
 ### Tasks
 
 - Complete the project presentation video
+
+</div>

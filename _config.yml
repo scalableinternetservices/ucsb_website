@@ -16,6 +16,9 @@ drive_url: "https://drive.google.com/drive/folders/1gR2i40_QGN0TfK4CjLZMGaQGNcTy
 nectir_url: "https://ucsb.nectir.io/channel/cs291a_w2021"
 piazza_url: "https://piazza.com/ucsb/winter2021/CS291A"
 
+kramdown:
+  parse_block_html: true
+
 # Build settings
 markdown: kramdown
 
