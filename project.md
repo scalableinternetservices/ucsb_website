@@ -10,9 +10,6 @@ Note: This page has not yet been updated for Winter 2021.
 
 # Primary Project
 
-Below is an approximate schedule for the primary project. As the quarter
-progresses it'll become more complete.
-
 ## Objective
 
 The goal of the project is to gain hands-on experience in building and
@@ -27,6 +24,22 @@ fundamental web technologies and the Ruby on Rails framework.
 ## Resources
 
 Throughout the project, you might find it helpful to go through a ruby on rails tutorial. The Ruby on Rails Tutorial (see sidebar) is an amazing resource. Rail's own tutorial is quite good as well: [Getting Started with Rails](https://guides.rubyonrails.org/getting_started.html)
+
+## Deliverables
+
+### Report
+
+...
+
+#### Stellar Report Examples
+
+...
+
+### Video
+
+Record a video presentation of your final project to share with the class. The video must be under 10 minutes in duration.
+
+The video should emphasize your key results from your report.
 
 ## Project Sprint Schedule
 
@@ -67,8 +80,8 @@ following:
 
 #### Sprint 6: Week 10+
 
-- Complete the project report
-- Create project presentation video
+- Complete the [project report](#report)
+- Create [project presentation video](#video)
 
 ---
 
