@@ -5,6 +5,9 @@ permalink: /project2/
 title: Project 2
 ---
 
+Note: This page has not yet been updated for Winter 2021.
+{: .alert .alert-danger }
+
 # Project 2: Docker, Sinatra and Google's Cloud Run
 
 In this project you will write a [Sinatra](http://sinatrarb.com/) application,

@@ -5,6 +5,9 @@ permalink: /project3/
 title: Project 3
 ---
 
+Note: This page has not yet been updated for Winter 2021.
+{: .alert .alert-danger }
+
 # Project 3: Chat Server and Corresponding React Front-End
 
 In this project you will write a chat server using sinatra and packaged in a

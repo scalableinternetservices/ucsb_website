@@ -5,6 +5,9 @@ permalink: /project/
 title: Primary Project
 ---
 
+Note: This page has not yet been updated for Winter 2021.
+{: .alert .alert-danger }
+
 # Primary Project
 
 Below is an approximate schedule for the primary project. As the quarter

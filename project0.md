@@ -5,6 +5,9 @@ permalink: /project0/
 title: Project 0
 ---
 
+Note: This page has not yet been updated for Winter 2021.
+{: .alert .alert-danger }
+
 # Project 0: Static Web Page
 
 Build, deploy, and load test a static web page hosted on GitHub Pages.
