@@ -1,0 +1,39 @@
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          ruby-version: 2.7
+      - run: bundle exec jekyll build
+      - run: tar -cvzf _site.tar.gz _site
+      - uses: actions/upload-artifact@v2
+        with:
+          name: site
+          path: _site.tar.gz
+          retention-days: 2
+
+  deploy:
+    if: ${{ github.ref == 'refs/heads/master' }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v2
+      - run: pip install ghp-import
+      - uses: actions/download-artifact@v2
+        with:
+          name: site
+      - run: tar -xzf _site.tar.gz
+      - name: ghp-import
+        run: ghp-import _site -pm "$(git log --format=oneline -n 1 HEAD)"
+
+name: jekyll
+on:
+  push:
+    branches-ignore:
+      - gh-pages
