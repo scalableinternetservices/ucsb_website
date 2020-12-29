@@ -42,7 +42,7 @@ following:
 - Share any new load testing results.
 
 
-#### Sprint 1: October 29 -- November 5
+#### Sprint 1: Week 5
 
 - Form your team.
   - Decide on a team name
@@ -57,19 +57,18 @@ following:
   - Ensure that when it is run, there are no 4XX or 5XX level HTTP status
     codes.
 
-#### Sprint 2: November 5 -- November 12
+#### Sprint 2: Week 6
 
-#### Sprint 3: November 12 -- November 19
+#### Sprint 3: Week 7
 
-#### Sprint 4: November 19 -- November 26
+#### Sprint 4: Week 8
 
-#### Sprint 5: November 26 -- December 3
+#### Sprint 5: Week 9
 
-#### Sprint 6: December 3 -- December 6 (short sprint)
+#### Sprint 6: Week 10+
 
-- Complete the project write-up (due Friday, December 6 by 19:59:59 PST).
-- Prepare final presentation (present Thursday, December 12 between 4PM and
-  7PM).
+- Complete the project report
+- Create project presentation video
 
 ---
 
