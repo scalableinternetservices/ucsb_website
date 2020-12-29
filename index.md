@@ -2,6 +2,10 @@
 layout: default
 ---
 
+Note: This page is still being updated for Winter 2021. Its content is subject to change.
+{: .alert .alert-info }
+
+
 ## Course Description
 
 This course explores advanced topics in highly scalable Internet services and
