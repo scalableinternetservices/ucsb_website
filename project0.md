@@ -5,6 +5,9 @@ permalink: /project0/
 title: Project 0
 ---
 
+Note: This page has not yet been updated for Winter 2021.
+{: .alert .alert-danger }
+
 # Project 0: Static Web Page
 
 Build, deploy, and load test a static web page hosted on GitHub Pages.
@@ -23,10 +26,6 @@ is accomplished.
 - Student can build and deploy a simple static web page.
 - Student can measure average page load time.
 - Student can measure server's rate limit.
-
-## Due Date
-
-Tuesday October 1, 10:59:59 AM PDT
 
 ## Project Submission
 

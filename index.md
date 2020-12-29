@@ -2,6 +2,10 @@
 layout: default
 ---
 
+Note: This page is still being updated for Winter 2021. Its content is subject to change.
+{: .alert .alert-info }
+
+
 ## Course Description
 
 This course explores advanced topics in highly scalable Internet services and
@@ -41,19 +45,15 @@ By the end of this course students will be able to:
 * discover and resolve bottlenecks in a web service
 
 
-## Lectures
+## Synchronous Classes
 
-Lecture material will cover the essentials of building large scale Internet
-services. The lecture schedule and slides are available online at
-[https://cs291.com](https://cs291.com). Lecture attendance is optional, but
-strongly recommended as interactive examples will be provided during lecture
-that often won't be well reflected in the online material.
+Class material will cover the essentials of building large scale Internet
+services. The class schedule and slides are available online at
+[https://cs291.com](https://cs291.com).
 
-## Labs
+## Team Check-ins
 
-Mandatory labs will meet once a week in Phelps 3525. These labs offer students
-a chance to collaborate on their projects and demo progress on the primary
-project.
+Once the primary project has started in week 5, teams will meet with the instructor once each week, via Zoom, for approximately 15 minutes.
 
 ## Initial Projects
 
@@ -70,9 +70,9 @@ The goal of the course's primary project is for students to experience and
 resolve pain points encountered when building and deploying a moderate-sized
 scalable web service. Students will do this using some of the latest web
 technologies in order to learn how to tackle scalability and fault-tolerance
-concerns. Projects will be conducted in agile teams of four students, and each
+concerns. Projects will be conducted in agile teams of four to six students, and each
 team will build their own scalable web site using fundamental web technologies
-and the [Ruby on Rails](http://rubyonrails.org/) framework.
+and the [Ruby on Rails](http://rubyonrails.org/) framework. A team may not be comprised of more than two undergraduate students.
 
 
 ## Grading
@@ -87,41 +87,40 @@ and the [Ruby on Rails](http://rubyonrails.org/) framework.
 | 5 | Participation |
 {: class="table table-striped"}
 
-Participation can be earned by asking or answering questions during lectures,
-and asking or answering public questions on Piazza.
+Participation is an important part of keeping a class engaging. Participation can be earned by asking or answering questions during synchronous classes, and asking or answering public questions on Piazza. Note that neither private conversations with the instructor, nor participation during team check-ins count toward the participation score.
 
 Projects 0 through 3 are scored as either complete (`100%`) or incomplete (`0%`);
-there is no fractional score.
+there is no fractional score other as described below for late submissions.
 
-Late submissions incur a `1%` penalty for every minute late rounded up to the
-nearest minute. For example, if the deadline is `13:59:59`, an assignment
-submitted at `14:00:00` will receive `99%` of its score, and an assignment
-submitted at `15:00:00` will receive only `39%` of its score.
+Late submissions incur a `1%` penalty for every five-minutes late rounded up.
+For example, if the deadline is `13:59:59`, an assignment
+submitted at `14:00:00` (5 minutes late) will receive `99%` of its score, and an assignment
+submitted at `15:00:00` (65 minutes late) will receive only `87%` of its score.
 
 ### Primary Project Scoring
 
-At the end of the quarter each group's project will be assigned a score based
-on their web service being of sufficient complexity, and the group's
+At the end of the quarter each team's project will be assigned a score based
+on their web service being of sufficient complexity, and the team's
 description of their methodological approach to load testing and subsequent
-scaling via various techniques as described in their project write-up and/or in
+scaling via various techniques as described in their project report and in
 their project presentation. Objectively these components break down into:
 
 | Percent | Item |
 |--:|:--|
-| 50 | load testing and scaling (communicated through presentation and/or write-up) |
-| 30 | web service complexity |
-| 10 | quality of project presentation |
-| 10 | quality of project write-up |
+| 60 | load testing and scaling (communicated through presentation video and report) |
+| 20 | web service complexity |
+| 10 | quality of project presentation video |
+| 10 | quality of project report |
 {: class="table table-striped"}
 
 ### Primary Project Individual Grading
 
-The project individual grade is computed by multiplying a student's group's
+The project individual grade is computed by multiplying a student's team's
 project score by their individual project score. Individual project scores are
 computed by summing the relative percent of _work_ each individual's teammates
 confidentially assigns them.
 
-For example, given a three person group with a group grade of 95% and the
+For example, given a three person team with a team grade of 95% and the
 following peer-graded scores:
 
 |           | Alice     | Bob      | Chuck     |
@@ -160,6 +159,6 @@ Letter grades will be assigned as follows:
 {: class="table table-striped"}
 
 The number listed is the lower bound of the percent grade for the given
-range. It is expected that you are a relatively equal contributor in your
-group, with adjustments for significant positive outliers. Thus, please take
+range. It is expected that each person is a relatively equal contributor on their
+team, with adjustments for significant positive outliers. Thus, please take
 note of the drop directly from C to F.

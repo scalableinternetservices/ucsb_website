@@ -5,6 +5,9 @@ permalink: /project2/
 title: Project 2
 ---
 
+Note: This page has not yet been updated for Winter 2021.
+{: .alert .alert-danger }
+
 # Project 2: Docker, Sinatra and Google's Cloud Run
 
 In this project you will write a [Sinatra](http://sinatrarb.com/) application,
@@ -27,10 +30,6 @@ your application can create, list, read, and delete files.
 
 - Student has compared the performance of Google Cloud Run to that of AWS
   Lambda.
-
-## Due Date
-
-Tuesday October 15, 10:59:59 AM PDT
 
 ## Overview Video
 

@@ -5,6 +5,9 @@ permalink: /project3/
 title: Project 3
 ---
 
+Note: This page has not yet been updated for Winter 2021.
+{: .alert .alert-danger }
+
 # Project 3: Chat Server and Corresponding React Front-End
 
 In this project you will write a chat server using sinatra and packaged in a
@@ -47,11 +50,6 @@ The pairing deadline is: Tuesday October 22, 10:59:59 AM PDT.
 
 * Student has leveraged Server-Sent Events and Javascript's EventSource to
   provide a real-time communication platform.
-
-
-## Due Date
-
-Tuesday October 29, 10:59:59 AM PDT
 
 
 ## Overview Video

@@ -1,44 +1,61 @@
-# Course Information
+## Course Info
 
-#### Instructor
+Course Number: {{ site.course_number }}  
+Quarter: {{ site.quarter }}
+
+## Instructor
 
 [Dr. Bryce Boe](https://sites.cs.ucsb.edu/~bboe/)  
-[bboe@cs.ucsb.edu](mailto:bboe@cs.ucsb.edu)
+[bboe@cs.ucsb.edu](mailto:bboe@cs.ucsb.edu)  
+Please use Piazza for correspondance when possible
 
-#### Class Assistant
+## Dates
 
-[Dr. Justin Pearson](https://justinppearson.com)
-
-#### Lecture
+### Synchronous Classes
 
 Tuesday and Thursday  
-3:00pm -- 4:50pm  
-[Phelps 3526](http://mapdev.geog.ucsb.edu/?searchResult=%7B%22tags%22:%22PHELPS%20HALL%203526%20Phelps%20Hall%20PHELP%22,%22fid%22:%2252689%22,%22category%22:%22rooms%22,%22location%22:%22PHELPS%20HALL%203526%22,%22label%22:%22PHELPS%20HALL%203526%22,%22geometry%22:%7B%22type%22:%22polygon%22,%22rings%22:%5B%5B%5B-13341034.4778,4084817.0509%5D,%5B-13341034.4773,4084816.5569%5D,%5B-13341034.4697,4084809.2695%5D,%5B-13341034.4696,4084809.1151%5D,%5B-13341045.2894,4084809.1038%5D,%5B-13341045.2895,4084809.2582%5D,%5B-13341045.4124,4084809.258%5D,%5B-13341045.4131,4084809.9991%5D,%5B-13341045.4145,4084811.2343%5D,%5B-13341045.42,4084816.5454%5D,%5B-13341045.2969,4084816.5456%5D,%5B-13341045.2975,4084817.0396%5D,%5B-13341045.4204,4084817.0395%5D,%5B-13341045.4251,4084821.517%5D,%5B-13341045.4263,4084822.7521%5D,%5B-13341045.428,4084824.327%5D,%5B-13341045.305,4084824.3271%5D,%5B-13341045.3052,4084824.4815%5D,%5B-13341034.4854,4084824.4927%5D,%5B-13341034.4852,4084824.3383%5D,%5B-13341034.4778,4084817.0509%5D%5D%5D,%22_ring%22:0,%22spatialReference%22:%7B%22wkid%22:102100%7D,%22_centroid%22:null,%22_extent%22:%7B%22xmin%22:-13341045.428,%22ymin%22:4084809.1038,%22xmax%22:-13341034.4696,%22ymax%22:4084824.4927,%22spatialReference%22:%7B%22wkid%22:102100%7D%7D,%22_partwise%22:null%7D%7D&xmin=-13341136&ymin=4084737&xmax=-13340944&ymax=4084897)
+3:00pm -- 4:50pm PST
 
-#### Lab
+### Project 0 Due
 
-Tuesday  
-12pm -- 1pm or 1pm -- 2pm  
-[Phelps 3525](http://mapdev.geog.ucsb.edu/?searchResult=%7B%22tags%22:%22PHELPS%20HALL%203525%20Phelps%20Hall%20PHELP%22,%22fid%22:%2252693%22,%22category%22:%22rooms%22,%22location%22:%22PHELPS%20HALL%203525%22,%22label%22:%22PHELPS%20HALL%203525%22,%22geometry%22:%7B%22type%22:%22polygon%22,%22rings%22:%5B%5B%5B-13341048.8674,4084821.2355%5D,%5B-13341048.8631,4084817.0359%5D,%5B-13341048.986,4084817.0359%5D,%5B-13341048.9855,4084816.5418%5D,%5B-13341048.8625,4084816.5418%5D,%5B-13341048.858,4084812.0953%5D,%5B-13341048.8567,4084810.8602%5D,%5B-13341048.855,4084809.2545%5D,%5B-13341048.9781,4084809.2543%5D,%5B-13341048.9779,4084809.0999%5D,%5B-13341055.9861,4084809.0926%5D,%5B-13341056.6008,4084809.092%5D,%5B-13341059.7975,4084809.0887%5D,%5B-13341059.7977,4084809.2431%5D,%5B-13341059.8053,4084816.5305%5D,%5B-13341059.8058,4084817.0246%5D,%5B-13341059.8134,4084824.3119%5D,%5B-13341059.8135,4084824.4663%5D,%5B-13341048.9937,4084824.4776%5D,%5B-13341048.9936,4084824.3232%5D,%5B-13341048.8706,4084824.3234%5D,%5B-13341048.8686,4084822.4706%5D,%5B-13341048.8674,4084821.2355%5D%5D%5D,%22_ring%22:0,%22spatialReference%22:%7B%22wkid%22:102100%7D,%22_centroid%22:null,%22_extent%22:%7B%22xmin%22:-13341059.8135,%22ymin%22:4084809.0887,%22xmax%22:-13341048.855,%22ymax%22:4084824.4776,%22spatialReference%22:%7B%22wkid%22:102100%7D%7D,%22_partwise%22:null%7D%7D&xmin=-13341150&ymin=4084737&xmax=-13340959&ymax=4084897)
+Friday, January 8 before 1pm PST
 
-#### Final Presentations
+### Project 1 Due
 
-Thursday December 12  
-4pm -- 7pm  
-[Phelps 3526](http://mapdev.geog.ucsb.edu/?searchResult=%7B%22tags%22:%22PHELPS%20HALL%203526%20Phelps%20Hall%20PHELP%22,%22fid%22:%2252689%22,%22category%22:%22rooms%22,%22location%22:%22PHELPS%20HALL%203526%22,%22label%22:%22PHELPS%20HALL%203526%22,%22geometry%22:%7B%22type%22:%22polygon%22,%22rings%22:%5B%5B%5B-13341034.4778,4084817.0509%5D,%5B-13341034.4773,4084816.5569%5D,%5B-13341034.4697,4084809.2695%5D,%5B-13341034.4696,4084809.1151%5D,%5B-13341045.2894,4084809.1038%5D,%5B-13341045.2895,4084809.2582%5D,%5B-13341045.4124,4084809.258%5D,%5B-13341045.4131,4084809.9991%5D,%5B-13341045.4145,4084811.2343%5D,%5B-13341045.42,4084816.5454%5D,%5B-13341045.2969,4084816.5456%5D,%5B-13341045.2975,4084817.0396%5D,%5B-13341045.4204,4084817.0395%5D,%5B-13341045.4251,4084821.517%5D,%5B-13341045.4263,4084822.7521%5D,%5B-13341045.428,4084824.327%5D,%5B-13341045.305,4084824.3271%5D,%5B-13341045.3052,4084824.4815%5D,%5B-13341034.4854,4084824.4927%5D,%5B-13341034.4852,4084824.3383%5D,%5B-13341034.4778,4084817.0509%5D%5D%5D,%22_ring%22:0,%22spatialReference%22:%7B%22wkid%22:102100%7D,%22_centroid%22:null,%22_extent%22:%7B%22xmin%22:-13341045.428,%22ymin%22:4084809.1038,%22xmax%22:-13341034.4696,%22ymax%22:4084824.4927,%22spatialReference%22:%7B%22wkid%22:102100%7D%7D,%22_partwise%22:null%7D%7D&xmin=-13341136&ymin=4084737&xmax=-13340944&ymax=4084897)
+Friday, January 15 before 1pm PST
 
-#### Class Resources
+### Project 2 Due
 
-[Piazza]({{ site.piazza_url_2019 }}) (class discussion)
+Friday, January 22 before 1pm PST
+
+### Project 3 Due
+
+Friday, February 5 before 9am PST
+
+### Project Report Due
+
+Friday, March 12 before 9am PST
+
+### Project Presentation Video Due
+
+Thursday, March 18 before 4pm PDT
+
+## Class Resources
+
+[Google Drive]({{ site.drive_url }}): Download lecture videos, and obtain other class content. You must be logged in to your UCSB account in order to access.
+
+[Piazza]({{ site.piazza_url }}): Use to receive class announcements, ask and answer questions, and to communicate with instructor. Access code is available in Google Drive.
+
+[Nectir]({{ site.nectir_url }}): Use for real-time chat with classmates.
+
+[Github](https://github.com/{{ site.github_username }}): Contains content for this website. Additionally all student projects will live here.
 
 [AWS Educate](https://www.awseducate.com/Registration?apptype=student&courseview=true)
 
-[Github](https://github.com/{{ site.github_username }})
+## Textbooks
 
-#### Textbooks
-
-[The Ruby On Rails Tutorial](https://www.learnenough.com/ruby-on-rails-4th-edition-tutorial)  
-_[Available online](https://www.learnenough.com/ruby-on-rails-4th-edition-tutorial)._
+[The Ruby On Rails Tutorial](https://www.railstutorial.org/book)  
+_[Complete 3rd edition available online](https://3rd-edition.railstutorial.org/book)_
 
 [High Performance Browser Networking](https://www.amazon.com/High-Performance-Browser-Networking-performance/dp/1449344763)  
 ISBN: 9781449344764  

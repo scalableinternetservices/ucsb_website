@@ -5,6 +5,9 @@ permalink: /project/
 title: Primary Project
 ---
 
+Note: This page has not yet been updated for Winter 2021.
+{: .alert .alert-danger }
+
 # Primary Project
 
 Below is an approximate schedule for the primary project. As the quarter
@@ -23,16 +26,7 @@ fundamental web technologies and the Ruby on Rails framework.
 
 ## Resources
 
-Throughout the project, you might find it helpful to go through a ruby on rails tutorial.
-
-The following is fantastic:
-
-* [Ruby on Rails
-  Tutorial](https://www.learnenough.com/ruby-on-rails-4th-edition-tutorial/beginning)
-
-And Rail's own tutorial is quite good as well:
-
-* [Getting Started with Rails](https://guides.rubyonrails.org/getting_started.html)
+Throughout the project, you might find it helpful to go through a ruby on rails tutorial. The Ruby on Rails Tutorial (see sidebar) is an amazing resource. Rail's own tutorial is quite good as well: [Getting Started with Rails](https://guides.rubyonrails.org/getting_started.html)
 
 ## Project Sprint Schedule
 
@@ -48,7 +42,7 @@ following:
 - Share any new load testing results.
 
 
-#### Sprint 1: October 29 -- November 5
+#### Sprint 1: Week 5
 
 - Form your team.
   - Decide on a team name
@@ -63,19 +57,18 @@ following:
   - Ensure that when it is run, there are no 4XX or 5XX level HTTP status
     codes.
 
-#### Sprint 2: November 5 -- November 12
+#### Sprint 2: Week 6
 
-#### Sprint 3: November 12 -- November 19
+#### Sprint 3: Week 7
 
-#### Sprint 4: November 19 -- November 26
+#### Sprint 4: Week 8
 
-#### Sprint 5: November 26 -- December 3
+#### Sprint 5: Week 9
 
-#### Sprint 6: December 3 -- December 6 (short sprint)
+#### Sprint 6: Week 10+
 
-- Complete the project write-up (due Friday, December 6 by 19:59:59 PST).
-- Prepare final presentation (present Thursday, December 12 between 4PM and
-  7PM).
+- Complete the project report
+- Create project presentation video
 
 ---
 
