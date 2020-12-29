@@ -16,29 +16,37 @@ Please use Piazza for correspondance when possible
 Tuesday and Thursday  
 3:00pm -- 4:50pm PST
 
-### Project 0 Due
+### Initial tasks due before
 
-Friday, January 8 before 1pm PST
+Wednesday, January 6 9am PST
 
-### Project 1 Due
+- Complete the [introduction survey](https://forms.gle/r9ksf1X9k7162mhdA)
+- Join the class on [Piazza]({{ site.piazza_url }})
+- Enroll in [AWS Educate](https://www.awseducate.com/Registration?apptype=student&courseview=true)
 
-Friday, January 15 before 1pm PST
+### [Project 0](/project0) due before
 
-### Project 2 Due
+Friday, January 8 1pm PST
 
-Friday, January 22 before 1pm PST
+### [Project 1](/project1) due before
 
-### Project 3 Due
+Friday, January 15 1pm PST
 
-Friday, February 5 before 9am PST
+### [Project 2](/project2) due before
 
-### Project Report Due
+Friday, January 22 1pm PST
 
-Friday, March 12 before 9am PST
+### [Project 3](/project3) due before
 
-### Project Presentation Video Due
+Friday, February 5 9am PST
 
-Thursday, March 18 before 4pm PDT
+### [Project](/project#report) report due before
+
+Friday, March 12 9am PST
+
+### [Project](/project#video) video due before
+
+Thursday, March 18 4pm PDT
 
 ## Class Resources
 
@@ -49,8 +57,6 @@ Thursday, March 18 before 4pm PDT
 [Nectir]({{ site.nectir_url }}): Use for real-time chat with classmates.
 
 [Github](https://github.com/{{ site.github_username }}): Contains content for this website. Additionally all student projects will live here.
-
-[AWS Educate](https://www.awseducate.com/Registration?apptype=student&courseview=true)
 
 ## Textbooks
 

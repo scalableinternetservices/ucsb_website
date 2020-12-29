@@ -20,7 +20,7 @@ Below is the tentative schedule for the course. The weekly topics may change as 
 
 ### Tasks
 
-- Complete the [introduction survey](https://forms.gle/r4PGM8uCcVuZ8Zju9)
+- Complete the introduction survey
 - Join the class on Piazza
 - Enroll in AWS Educate
 - Complete [Project 0](/project0/)
