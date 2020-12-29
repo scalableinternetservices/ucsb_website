@@ -1,138 +1,153 @@
 ---
 layout: default
 navigation_weight: 1
-permalink: /lecture/
-title: Lecture Schedule
+permalink: /schedule/
+title: Class Schedule
 ---
 
-# 2019 Lecture Schedule
+# Winter 2021 Class Schedule
 
-Below is the tentative schedule for the course. As the quarter progresses it'll become more complete.
+Below is the tentative schedule for the course. As the quarter progresses this page will become more complete.
 
-#### September 26, 2019: Introduction to Scalable Internet Services [[slides](/slides/2019/01_course_introduction/)]
+## Week 1 (January 4-)
 
-**TODO**:
+### Topics
 
-- Complete the [first day survey](https://forms.gle/eFxNuZ2y3VXnKoWb8)
-- Join the class on Piazza (important and timely announcements will be made
-  there, as well as other class communication)
-- Enroll in [AWS
-  Educate](https://www.awseducate.com/Registration?apptype=student&courseview=true#INFO-Student)
-  for this class
+- Class Introduction
+- Hypertext Transfer Protocol (HTTP)
+
+### Tasks
+
+- Complete the [introduction survey](https://forms.gle/r4PGM8uCcVuZ8Zju9)
+- Join the class on Piazza
+- Enroll in AWS Educate
 - Complete [Project 0](/project0/)
-- Read chapters [1](https://hpbn.co/primer-on-latency-and-bandwidth/),
-  [2](https://hpbn.co/building-blocks-of-tcp/), and
-  [9](https://hpbn.co/brief-history-of-http/) in High Performance Browser
-  Networking
-
-#### October 1, 2019: HTTP [[slides](/slides/2019/02_http/)]
-
-**TODO**:
-
 - Begin [Project 1](/project1/)
-- Read chapters [10](https://hpbn.co/primer-on-web-performance/), and
-  [11](https://hpbn.co/http1x/) in High Performance Browser Networking
+- Read chapters [1](https://hpbn.co/primer-on-latency-and-bandwidth/), [2](https://hpbn.co/building-blocks-of-tcp/), [9](https://hpbn.co/brief-history-of-http/), [10](https://hpbn.co/primer-on-web-performance/), and [11](https://hpbn.co/http1x/) of High Performance Browser Networking
 
-#### October 3, 2019: HTTP and Application Servers [[slides](/slides/2019/03_http_and_application_servers/)]
+---
 
-**TODO**:
+## Week 2 (January 11-)
+
+### Topics
+
+- HTTP Servers
+- Application Servers
+- Scaling Web Applications
+
+### Tasks
 
 - Complete [Project 1](/project1/)
-- Read [Dynamic Load Balancing on Web-server
-  Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf) by Cardellini,
-  Colajanni, and Yu.
-
-#### October 8, 2019: Scaling Web Applications [[slides](/slides/2019/04_scaling_web_applications/)]
-
-**TODO**:
-
 - Begin [Project 2](/project2/)
+- Read [Dynamic Load Balancing on Web-server Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf) by Cardellini, Colajanni, and Yu.
 
-#### October 10, 2019: Architecting for High Availability [[slides](/slides/2019/05_high_availability/)]
+---
 
-**TODO**:
+## Week 3 (January 18-)
+
+### Topics
+
+- Architecting for High Availability
+- Frontend Deep Dive: React
+
+### Tasks
 
 - Complete [Project 2](/project2/)
+- Begin [Project 3](project3)
 
-#### October 15, 2019: Creating a React Application [[source](https://github.com/scalableinternetservices/cs291a_react_demo/tree/master/class_app)]
+---
 
-**TODO**:
+## Week 4 (January 25-)
 
-- Begin [Project 3](project3) (optional: with a partner)
+### Topics
 
-#### October 17, 2019: Agile, TDD, CI, and Pairing [[slides](/slides/2019/06_agile_tdd_pairing/)]
+- Agile Software Development
+- Test Driven Development (TDD)
+- Continuous Integration (CI)
+- Pair Programming / Mobbing
+- Client-side Caching
+- Content Delivery Networks (CDNs)
 
-**TODO**:
+### Tasks
 
 - Make progress on [Project 3](/project3/)
 
-#### October 22, 2019: Client-side Caching and CDNs [[slides](/slides/2019/07_client_caching_cdn/)]
+---
 
-**TODO**:
+## Week 5 (February 1-)
 
-- Continue working on [Project 3](/project3/)
+### Topics
 
-#### October 24, 2019: Server-side Caching [[slides](/slides/2019/08_server_caching/)]
+- Server Side Caching
+- Deep Dive: Ruby on Rails
 
-**TODO**:
+### Tasks
 
 - Complete [Project 3](/project3/)
-
-#### October 29, 2019: Ruby on Rails [video link on Piazza]
-
-**TODO**:
-
 - Begin [Primary Project](/project/)
-  - form a team -- merge with another project 3 team (max 4 people)
+  - form a team -- merge with two project 3 teams (max 6 people)
   - develop initial features
   - deploy to elastic beanstalk
+  - schedule team meeting time with instructor
 
-#### October 31, 2019: Load Testing with Tsung [[slides](/slides/2019/09_tsung/), video link on Piazza]
+---
 
-#### November 5, 2019: Relational Databases [[slides](/slides/2019/10_relational_databases_db_concurrency_and_query_analysis/)]
+## Week 6 (February 8-)
 
-#### November 7, 2019 RDBMS Scaling and Service Oriented Architectures [[slides](/slides/2019/11_rdbms_scaling/)]
+### Topics
 
-#### November 12, 2019 Guest Lecture: Dr. Justin Pearson, Senior Software Engineer @AppFolio
+- Deep Dive: Load Testing with Tsung
+- Relational Database
 
-**TODO**:
+---
 
-- Read
-  [CAP 12 years later](http://www.realtechsupport.org/UB/NP/Numeracy_CAP%2B12Years_2012.pdf)
-  by Eric Brewer
-- Read
-  [Eventually Consistent](http://www.scalableinternetservices.com/slides/vogels.pdf)
-  by Werner Vogels
+## Week 7 (February 15-)
 
-#### November 14, 2019 Non-Relational Data Stores [[slides](/slides/2019/12_nosql/)]
+### Topics
 
-**TODO**:
+- RDBMS Scaling
+- Service Oriented Architectures
 
-- Read chapter [4](https://hpbn.co/transport-layer-security-tls/) in High
-  Performance Browser Networking
+---
 
-#### November 19, 2019 Web Security [[slides](/slides/2019/13_web_security/)]
+## Week 8 (February 22-)
 
-**TODO**:
+### Topics
 
-- Read chapter [12](https://hpbn.co/http2/) in High Performance Browser
-  Networking
+- Non-Relational Data Stores
+- Web Security
 
-#### November 21, 2019 HTTP/2 and QUIC (HTTP/3) [[slides](/slides/2019/14_http2_quic/)]
+### Tasks
 
-#### November 26, 2019 Guest Lecture: Overview of Analytical Databases, Danny Cho, Software Engineer @Facebook
+- Read [CAP 12 years later](http://www.realtechsupport.org/UB/NP/Numeracy_CAP%2B12Years_2012.pdf) by Eric Brewer
+- Read [Eventually Consistent](http://www.scalableinternetservices.com/slides/vogels.pdf) by Werner Vogels
+- Read chapter [4](https://hpbn.co/transport-layer-security-tls/) of High Performance Browser Networking
 
-#### Novemver 28, 2019 (Thanksgiving, no class)
+---
 
-#### December 3, 2019 Guest Lecture: How reddit Deploys Production Systems, Courtney Wang, Senior Software Engineer @Reddit
+## Week 9 (March 1-)
 
-#### December 5, 2019 Guest Lecture: GraphQL, Ivan Chub, Software Engineer @AppFolio
+### Topics
 
-**TODO**:
+- HTTP/2
+- QUIC (HTTP/3)
 
-- Complete the project write-up. Due Friday, December 6 by 19:59:59 PST
+### Tasks
 
-#### December 12, 2019 Final Presentations
+- Read chapter [12](https://hpbn.co/http2/) of High Performance Browser Networking
 
-- 4PM to 7PM
-- Phelps 3526
+---
+
+## Week 10 (March 8-)
+
+### Tasks
+
+- Complete the project write-up
+
+---
+
+## Finals Week (March 15-)
+
+### Tasks
+
+- Complete the project presentation video
