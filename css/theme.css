@@ -47,6 +47,17 @@ body {
     margin: 0;
 }
 
+.week {
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    padding-left: 1em;
+}
+
+.week:nth-child(even) {
+    background: #d5f5f5;
+    border-color: #bee5e5;
+}
+
 .well h1 {
     color: #ee4444;
     font-size: 1.3em;
