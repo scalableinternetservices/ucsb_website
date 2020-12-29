@@ -1,3 +1,10 @@
+:target::before {
+  content: "";
+  display: block;
+  height: 60px;
+  margin: -60px 0 0;
+}
+
 body {
     padding-top: 60px;
     padding-bottom: 60px;
