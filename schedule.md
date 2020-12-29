@@ -7,7 +7,8 @@ title: Class Schedule
 
 # Winter 2021 Class Schedule
 
-Below is the tentative schedule for the course. As the quarter progresses this page will become more complete.
+Below is the tentative schedule for the course. The weekly topics may change as the quarter progresses.
+{: .alert .alert-warning }
 
 <div class="week">
 ## Week 1 (January 4-)
