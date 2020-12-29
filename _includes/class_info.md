@@ -16,13 +16,29 @@ Please use Piazza for correspondance when possible
 Tuesday and Thursday  
 3:00pm -- 4:50pm PST
 
+### Project 0 Due
+
+Friday, January 8 before 1pm PST
+
+### Project 1 Due
+
+Friday, January 15 before 1pm PST
+
+### Project 2 Due
+
+Friday, January 22 before 1pm PST
+
+### Project 3 Due
+
+Friday, February 5 before 9am PST
+
 ### Project Report Due
 
-Friday, March 12 before 9:00am PST
+Friday, March 12 before 9am PST
 
 ### Project Presentation Video Due
 
-Thursday March 18 before 4:00pm PDT
+Thursday, March 18 before 4pm PDT
 
 ## Class Resources
 
