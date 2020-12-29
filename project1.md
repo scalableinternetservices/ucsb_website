@@ -27,10 +27,6 @@ HTTP API. Your code will be deployed using a single AWS Lambda function.
 
 - Student has compared the performance of a static website to that of a dynamic website.
 
-## Due Date
-
-Tuesday October 8, 10:59:59 AM PDT
-
 ## Overview Video
 
 [https://www.youtube.com/watch?v=Z1qmUASw58E](https://www.youtube.com/watch?v=Z1qmUASw58E)

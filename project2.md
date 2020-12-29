@@ -31,10 +31,6 @@ your application can create, list, read, and delete files.
 - Student has compared the performance of Google Cloud Run to that of AWS
   Lambda.
 
-## Due Date
-
-Tuesday October 15, 10:59:59 AM PDT
-
 ## Overview Video
 
 [https://youtu.be/UOTows96LDA](https://youtu.be/UOTows96LDA)

@@ -27,10 +27,6 @@ is accomplished.
 - Student can measure average page load time.
 - Student can measure server's rate limit.
 
-## Due Date
-
-Tuesday October 1, 10:59:59 AM PDT
-
 ## Project Submission
 
 [https://forms.gle/AiuHXw3C6NmPiouG6](https://forms.gle/AiuHXw3C6NmPiouG6)

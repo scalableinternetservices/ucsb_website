@@ -52,11 +52,6 @@ The pairing deadline is: Tuesday October 22, 10:59:59 AM PDT.
   provide a real-time communication platform.
 
 
-## Due Date
-
-Tuesday October 29, 10:59:59 AM PDT
-
-
 ## Overview Video
 
 [https://youtu.be/FutR00lpAfE](https://youtu.be/FutR00lpAfE)
