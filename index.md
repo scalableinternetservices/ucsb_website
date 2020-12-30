@@ -2,6 +2,8 @@
 layout: default
 ---
 
+# Scalable Internet Services Syllabus
+
 ## Course Description
 
 This course explores advanced topics in highly scalable Internet services and
