@@ -69,3 +69,7 @@ body {
     color: #ee4444;
     font-size: 1.3em;
 }
+
+.well blockquote {
+    font-size: inherit;
+}
