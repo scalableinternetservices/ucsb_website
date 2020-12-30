@@ -5,12 +5,11 @@ layout: default
 Note: This page is still being updated for Winter 2021. Its content is subject to change.
 {: .alert .alert-info }
 
-
 ## Course Description
 
 This course explores advanced topics in highly scalable Internet services and
-their underlying systems architecture. Software today is primarily delivered as
-a service: accessible globally via web browsers and mobile applications and
+their underlying systems' architecture. Software today is primarily delivered as
+a service: accessible globally via web browsers and mobile applications, and
 backed by millions of servers. Modern web frameworks (e.g., [Ruby on
 Rails](http://rubyonrails.org/), [Django](https://www.djangoproject.com), and
 [Express](https://expressjs.com)), and continuous improvements to cloud
@@ -45,17 +44,66 @@ By the end of this course students will be able to:
 * discover and resolve bottlenecks in a web service
 
 
-## Synchronous Classes
+## Class Content and Interactions
 
-Class material will cover the essentials of building large scale Internet
-services. The class schedule and slides are available online at
-[https://cs291.com](https://cs291.com).
 
-## Team Check-ins
+### Pre-recorded Videos
 
-Once the primary project has started in week 5, teams will meet with the instructor once each week, via Zoom, for approximately 15 minutes.
+All core course topics, covering the essentials of building large scale
+Internet services, will be presented in the form of pre-recorded videos. Links
+to the videos and associated material for each topic should be made available
+at the beginning of the week the topic is covered.
 
-## Initial Projects
+
+### Synchronous Classes
+
+Class will meet twice a week during the scheduled class time unless otherwise
+mentioned. Students are expected to watch the week's videos prior to the
+scheduled class times in order to leverage the class time to ask and answer
+questions, and explore the material in more depth.
+
+These classes will be held via Zoom. The Zoom classes will be recorded and
+shared only with enrolled students. Students are strongly encouraged, but not
+required, to turn on their web cameras when speaking and interacting in
+break-out rooms with their peers.
+
+Should the instructor experience any technical difficulties during synchronous
+classes, students may check Piazza for updates.
+
+Should a student experience any technical difficulties during synchronous
+classes, they can visit the [LSIT Help Center](https://help.lsit.ucsb.edu/hc/en-us),
+or they can send an email to <help@collaborate.ucsb.edu>.
+
+<div class="well">
+Please read the following UCSB notice regarding class Zoom recordings:
+
+> This live Zoom session will be recorded for students who may not be able to
+> attend at this time. By default, your microphone and camera will be muted
+> when you join the session. If you do not want to be included in the
+> recording, simply keep your camera and microphone off. You may ask questions
+> in the chat window. NOTE: Student participants are prohibited from recording
+> of any kind. Only the instructor is permitted to record.
+
+Source: <https://keepteaching.id.ucsb.edu/?page_id=113>
+</div>
+
+## Piazza
+
+...
+
+## Nectir
+
+...
+
+### Team Check-ins
+
+Once the primary project has started in week 5, teams will meet with the
+instructor once each week, via Zoom. These meetings will be scheduled for
+approximately 15 minutes.
+
+## Projects
+
+### Initial Projects
 
 There will be four projects in the first five weeks of the course, one per week
 with the fourth project spanning two weeks. These projects will ensure students
@@ -64,15 +112,16 @@ services without needing a deep understanding of how the underlying systems
 enable scalability. The first three projects are to be completed individually,
 and the fourth completed in a pair.
 
-## Primary Project
+### Primary Project
 
 The goal of the course's primary project is for students to experience and
 resolve pain points encountered when building and deploying a moderate-sized
 scalable web service. Students will do this using some of the latest web
 technologies in order to learn how to tackle scalability and fault-tolerance
-concerns. Projects will be conducted in agile teams of four to six students, and each
-team will build their own scalable web site using fundamental web technologies
-and the [Ruby on Rails](http://rubyonrails.org/) framework. A team may not be comprised of more than two undergraduate students.
+concerns. Projects will be conducted in agile teams of four to six students,
+and each team will build their own scalable web site using fundamental web
+technologies and the [Ruby on Rails](http://rubyonrails.org/) framework. A team
+may not be comprised of more than two undergraduate or BS/MS students.
 
 
 ## Grading
@@ -87,14 +136,18 @@ and the [Ruby on Rails](http://rubyonrails.org/) framework. A team may not be co
 | 5 | Participation |
 {: class="table table-striped"}
 
-Participation is an important part of keeping a class engaging. Participation can be earned by asking or answering questions during synchronous classes, and asking or answering public questions on Piazza. Note that neither private conversations with the instructor, nor participation during team check-ins count toward the participation score.
+Participation is an important part of keeping a class engaging. Participation
+can be earned by asking or answering questions during synchronous classes, and
+asking or answering public questions on Piazza. Note that neither private
+conversations with the instructor, nor participation during team check-ins
+count toward the participation score.
 
 Projects 0 through 3 are scored as either complete (`100%`) or incomplete (`0%`);
 there is no fractional score other as described below for late submissions.
 
 Late submissions incur a `1%` penalty for every five-minutes late rounded up.
-For example, if the deadline is `13:59:59`, an assignment
-submitted at `14:00:00` (5 minutes late) will receive `99%` of its score, and an assignment
+For example, if the deadline is `13:59:59`, an assignment submitted at
+`14:00:00` (5 minutes late) will receive `99%` of its score, and an assignment
 submitted at `15:00:00` (65 minutes late) will receive only `87%` of its score.
 
 ### Primary Project Scoring
@@ -159,6 +212,6 @@ Letter grades will be assigned as follows:
 {: class="table table-striped"}
 
 The number listed is the lower bound of the percent grade for the given
-range. It is expected that each person is a relatively equal contributor on their
-team, with adjustments for significant positive outliers. Thus, please take
-note of the drop directly from C to F.
+range. It is expected that each person is a relatively equal contributor on
+their team, with adjustments for significant positive outliers. Thus, please
+take note of the drop directly from C to F.
