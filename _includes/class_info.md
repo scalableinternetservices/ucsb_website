@@ -1,4 +1,4 @@
-## Course Info
+# Course Info
 
 Course Number: {{ site.course_number }}  
 Quarter: {{ site.quarter }}
