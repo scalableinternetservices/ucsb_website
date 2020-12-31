@@ -10,6 +10,10 @@ body {
     padding-bottom: 60px;
 }
 
+.container h1, .container h2, .container h3 {
+    margin-top: 0;
+}
+
 .copyright {
     color: #fff;
 }

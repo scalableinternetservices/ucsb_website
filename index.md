@@ -2,6 +2,15 @@
 layout: default
 ---
 
+<div class="alert alert-info">
+### Watch the [CS291A Welcome Video](https://drive.google.com/file/d/1ehJVHaf1yTtPvLYFJCXCLp2HvrZwwoo4/view)!
+
+Note: you must be logged in to your UCSB Google account to view or download this video.
+
+Details for the class Zoom sessions can be found in [zoom.txt](https://drive.google.com/file/d/1-lz1pRt9OH2Dm9vOHLtlPV5a7cdAiQEl/view) in the class [Google Drive](https://drive.google.com/drive/folders/1gR2i40_QGN0TfK4CjLZMGaQGNcTyj2P_).
+</div>
+
+
 # Scalable Internet Services Syllabus
 
 ## Course Description

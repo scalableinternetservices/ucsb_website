@@ -50,7 +50,7 @@ Thursday, March 18 4pm PDT
 
 ## Class Resources
 
-[Google Drive]({{ site.drive_url }}): Download lecture videos, and obtain other class content. You must be logged in to your UCSB account in order to access.
+[Google Drive]({{ site.drive_url }}): Download lecture videos, and obtain other class content. You must be logged in to your UCSB Google account in order to access.
 
 [Piazza]({{ site.piazza_url }}): Use to receive class announcements, ask and answer questions, and to communicate with instructor. Access code is available in Google Drive.
 
