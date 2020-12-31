@@ -1,61 +1,92 @@
 # CS291A Scripts
 
-## Installation
+## Obtaining python package requirements
 
-1. Clone this repository:
-```
+For simplicity, it is prefered that you use Docker to run these scripts. That
+way you need not worry about setting up a local python environment. However,
+you're free to also try a direct installation.
+
+__Step 1__ Clone this repository:
+
+```sh
 git clone https://github.com/scalableinternetservices/ucsb_website.git
 ```
-2. Change into the scripts directory:
-```
+
+Note: If you'd like to fetch updates to these scripts then run `git pull` from
+the `ucsb_website` directory at a later time.
+
+__Step 2__ Change into the scripts directory:
+
+```sh
 cd ucsb_website/scripts
 ```
-3. Install python dependencies (re-run this to get latest updates):
+
+### Installation via Docker
+
+__Step 3__ Build the docker container which will take care of installing the dependencies:
+
+```sh
+docker build -t cs291_scripts .
 ```
+
+Note: Re-run this command to rebuild the container image when any of the files change.
+
+### Direct Installation
+
+__Step 3__ Install python dependencies:
+
+```sh
 pip install -r requirements.txt
 ```
 
-## Project 0 Verification Script
+ Note: Run-run this command when the `requirements.txt` file changes.
+
+## Running the scripts
+
+The below instructions are for running the scripts from inside docker. If you'd
+like to run them directly simply exclude the `docker run -it cs291_scripts`
+part of the command.
+
+### Run Project 0 Verification Script
 
 Usage:
 
-```
-./project0.py GITHUB_WEBSITE_URL
+```sh
+docker run -it cs291_scripts ./project0.py GITHUB_WEBSITE_URL
 ```
 
-## Project 1 Verification Script
+### Project 1 Verification Script
 
 Usage:
 
-```
-./project1.py LAMBDA_APP_URL
+```sh
+docker run -it cs291_scripts ./project1.py LAMBDA_APP_URL
 ```
 
-## Project 2 Verification Script
+### Project 2 Verification Script
 
 Usage:
 
-```
-./project2.py GOOGLE_CLOUD_RUN_URL
+```sh
+docker run -it cs291_scripts ./project2.py GOOGLE_CLOUD_RUN_URL
 ```
 
-
-## Project 3 Server-Side Partial Verification Script
+### Project 3 Server-Side Partial Verification Script
 
 Run the error-case tests, and connect to the stream:
 
-```
-./project3.py URL
+```sh
+docker run -it cs291_scripts ./project3.py URL
 ```
 
 Skip the error-case tests, and just connect to the stream:
 
-```
-./project3.py --no-failures URL
+```sh
+docker run -it cs291_scripts ./project3.py --no-failures URL
 ```
 
 Test re-connect by copying an event ID, and then run:
 
-```
-./project3.py --no-failures --last-event-id LASTID URL
+```sh
+docker run -it cs291_scripts ./project3.py --no-failures --last-event-id LASTID URL
 ```
