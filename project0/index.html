@@ -117,9 +117,7 @@ Note: The online version is slightly more up-to-date.</p>
 
     </div>
     <div class="col-md-9">
-      <p class="alert alert-danger">Note: This page has not yet been updated for Winter 2021.</p>
-
-<h1 id="project-0-static-web-page">Project 0: Static Web Page</h1>
+      <h1 id="project-0-static-web-page">Project 0: Static Web Page</h1>
 
 <p>Build, deploy, and load test a static web page hosted on GitHub Pages.</p>
 
@@ -131,7 +129,7 @@ with access to a free github account can deploy a static web site that can
 scale to thousands of users without requring any knowledge of how such scaling
 is accomplished.</p>
 
-<h2 id="learning-outcomes">Learning Outcomes:</h2>
+<h2 id="learning-outcomes">Learning Outcomes</h2>
 
 <ul>
   <li>Student can setup a git repository and use it for version control.</li>
@@ -142,7 +140,7 @@ is accomplished.</p>
 
 <h2 id="project-submission">Project Submission</h2>
 
-<p><a href="https://forms.gle/AiuHXw3C6NmPiouG6">https://forms.gle/AiuHXw3C6NmPiouG6</a></p>
+<p><a href="https://forms.gle/sQ9GfZnvy97zHeD4A">https://forms.gle/AiuHXw3C6NmPiouG6</a></p>
 
 <h2 id="page-requirements">Page Requirements</h2>
 
@@ -151,11 +149,12 @@ is accomplished.</p>
 <ul>
   <li>be hosted on <a href="https://pages.github.com">GitHub Pages</a></li>
   <li>be served via HTTPS</li>
-  <li>be created by hand – go nuts, but don’t use a page generator, nor more markup
-than necessary</li>
+  <li>be created by hand – go nuts, but don’t use a page generator, i.e., no more
+markup than necessary</li>
   <li>contain 100% valid HTML5</li>
   <li>contain 100% valid CSS</li>
-  <li>utilize the external style sheet to provide style changes</li>
+  <li>utilize an external style sheet to provide style changes (no inline styles,
+i.e., provided via <code class="language-plaintext highlighter-rouge">style</code> attributes)</li>
 </ul>
 
 <p>You webpage must include:</p>
@@ -170,18 +169,29 @@ than necessary</li>
   <li>a hyperlink to the github repository containing the source code</li>
 </ul>
 
-<h2 id="questions-to-answer">Questions To Answer:</h2>
+<h3 id="verification-script">Verification Script</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">project0.py</code> script in
+<a href="https://github.com/scalableinternetservices/ucsb_website/tree/master/scripts">https://github.com/scalableinternetservices/ucsb_website/tree/master/scripts</a>
+can be used to automatically verify that your webpage meets the necessary
+requirements.</p>
+
+<p>Follow the directions in the README to clone the repository, install the python
+dependencies, and run the verification script.</p>
+
+<h2 id="questions-to-answer">Questions To Answer</h2>
 
 <ul>
-  <li>On average, how many requests can <code class="language-plaintext highlighter-rouge">ab</code> complete in 10 seconds with various
-power of two concurrency levels between 1 and 256?</li>
+  <li>On average, how many requests can <code class="language-plaintext highlighter-rouge">ab</code> complete in 10 seconds with all the
+power of two concurrency levels between 1 and 256 (i.e., 1, 2, 4, 8, 16, 32,
+64, 128, 256)?</li>
   <li>Why are there diminishing returns at higher concurrency levels?</li>
   <li>What’s the performance difference when requesting HTTP and HTTPS?</li>
   <li>How can github respond so quickly?</li>
   <li>What is your site’s “Time to Interactive” according to PageSpeed Insights?</li>
 </ul>
 
-<h2 id="required-tools">Required Tools:</h2>
+<h2 id="required-tools">Required Tools</h2>
 
 <ul>
   <li><a href="https://httpd.apache.org/docs/2.4/programs/ab.html">ab</a></li>

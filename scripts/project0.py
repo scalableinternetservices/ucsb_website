@@ -118,9 +118,7 @@ def page_issues(content, url):
         enough_rows = len(tr_tags) >= 3
         if not enough_rows:
             return False
-        num_cols_per_row = [
-            len(tr.find_all("td") + tr.find_all("th")) for tr in tr_tags
-        ]
+        num_cols_per_row = [len(tr.find_all(["td", "th"])) for tr in tr_tags]
         each_row_has_same_num_cols = len(set(num_cols_per_row)) == 1
         if not each_row_has_same_num_cols:
             return False
@@ -191,7 +189,7 @@ def score(url):
             print(f"\t{history.url} -> {history.headers['location']}")
         failures += 1
 
-    html_validation_url = f"https://validator.w3.org/nu/"
+    html_validation_url = "https://validator.w3.org/nu/"
     response = requests.get(html_validation_url, params={"doc": url, "out": "json"})
     if response.status_code != 200:
         print(f"HTML validation unexpectedly failed: {response.status_code}")
