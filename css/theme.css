@@ -6,70 +6,78 @@
 }
 
 body {
-    padding-top: 60px;
-    padding-bottom: 60px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.container h1,
+.container h2,
+.container h3 {
+  margin-top: 0;
 }
 
 .copyright {
-    color: #fff;
+  color: #fff;
 }
 
 .footer {
-    text-align: center;
+  text-align: center;
 }
 
-.footer a, .footer a:hover {
-    color: #fff;
+.footer a,
+.footer a:hover {
+  color: #fff;
 }
 
 .sidebar {
-    background: #f5f5f5;
-    border: 1px solid #e3e3e3;
-    border-radius: 4px;
-    padding: 19px;
+  background: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  padding: 19px;
 }
 
 .sidebar h1 {
-    font-size: 2em;
+  font-size: 2em;
 }
 
 .sidebar h2 {
-    font-size: 1.8em;
+  font-size: 1.8em;
 }
 
 .sidebar h3 {
-    font-size: 1.3em;
+  font-size: 1.3em;
 }
 
-.sidebar a, .sidebar a:hover {
-    color: #428bca;
+.sidebar a,
+.sidebar a:hover {
+  color: #428bca;
 }
 
 .sidebar li {
-    margin-top: .7em;
-    line-height: 1em;
+  margin-top: 0.7em;
+  line-height: 1em;
 }
 
 .container-left {
-    margin: 0;
+  margin: 0;
 }
 
 .week {
-    border: 1px solid #e3e3e3;
-    border-radius: 4px;
-    padding-left: 1em;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  padding-left: 1em;
 }
 
 .week:nth-child(even) {
-    background: #d5f5f5;
-    border-color: #bee5e5;
+  background: #d5f5f5;
+  border-color: #bee5e5;
 }
 
 .well h1 {
-    color: #ee4444;
-    font-size: 1.3em;
+  color: #e44;
+  font-size: 1.3em;
 }
 
 .well blockquote {
-    font-size: inherit;
+  font-size: inherit;
 }
