@@ -4,6 +4,7 @@ layout: default
 
 # Slides By Course
 
+* [Winter 2021](2021w/)
 * [Fall 2019](2019/)
 * [Fall 2018](2018/)
 * [Fall 2017](2017/)
