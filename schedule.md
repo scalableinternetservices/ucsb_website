@@ -15,6 +15,7 @@ Below is the tentative schedule for the course. The weekly topics may change as 
 
 ### Topics
 
+- [Syllabus Overview Video](https://drive.google.com/file/d/1wZsdxVyTPWF2huZG1aizb2jrbf5KekgN/view)
 - Class Introduction
 - Hypertext Transfer Protocol (HTTP)
 
