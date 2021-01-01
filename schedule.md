@@ -7,10 +7,12 @@ title: Class Schedule
 
 # Winter 2021 Class Schedule
 
-Below is the tentative schedule for the course. The weekly topics may change as the quarter progresses.
+Below is the tentative schedule for the course. The weekly topics may change as
+the quarter progresses.
 {: .alert .alert-warning }
 
 <div class="week">
+
 ## Week 1 (January 4-)
 
 ### Topics
@@ -26,7 +28,11 @@ Below is the tentative schedule for the course. The weekly topics may change as 
 - Enroll in AWS Educate
 - Complete [Project 0](/project0/)
 - Begin [Project 1](/project1/)
-- Read chapters [1](https://hpbn.co/primer-on-latency-and-bandwidth/), [2](https://hpbn.co/building-blocks-of-tcp/), [9](https://hpbn.co/brief-history-of-http/), [10](https://hpbn.co/primer-on-web-performance/), and [11](https://hpbn.co/http1x/) of High Performance Browser Networking
+- Read chapters [1](https://hpbn.co/primer-on-latency-and-bandwidth/),
+  [2](https://hpbn.co/building-blocks-of-tcp/),
+  [9](https://hpbn.co/brief-history-of-http/),
+  [10](https://hpbn.co/primer-on-web-performance/), and
+  [11](https://hpbn.co/http1x/) of High Performance Browser Networking
 
 </div>
 <div class="week">
@@ -43,7 +49,9 @@ Below is the tentative schedule for the course. The weekly topics may change as 
 
 - Complete [Project 1](/project1/)
 - Begin [Project 2](/project2/)
-- Read [Dynamic Load Balancing on Web-server Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf) by Cardellini, Colajanni, and Yu.
+- Read [Dynamic Load Balancing on Web-server
+  Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf) by Cardellini,
+  Colajanni, and Yu.
 
 </div>
 <div class="week">
@@ -129,9 +137,14 @@ Below is the tentative schedule for the course. The weekly topics may change as 
 
 ### Tasks
 
-- Read [CAP 12 years later](http://www.realtechsupport.org/UB/NP/Numeracy_CAP%2B12Years_2012.pdf) by Eric Brewer
-- Read [Eventually Consistent](http://www.scalableinternetservices.com/slides/vogels.pdf) by Werner Vogels
-- Read chapter [4](https://hpbn.co/transport-layer-security-tls/) of High Performance Browser Networking
+- Read [CAP 12 years
+  later](http://www.realtechsupport.org/UB/NP/Numeracy_CAP%2B12Years_2012.pdf)
+  by Eric Brewer
+- Read [Eventually
+  Consistent](http://www.scalableinternetservices.com/slides/vogels.pdf) by
+  Werner Vogels
+- Read chapter [4](https://hpbn.co/transport-layer-security-tls/) of High
+  Performance Browser Networking
 
 </div>
 <div class="week">
