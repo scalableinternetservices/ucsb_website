@@ -4,13 +4,27 @@ layout: default
 # Scalable Internet Services Syllabus
 
 <div class="alert alert-info">
-### Watch the [CS291A Welcome Video](https://drive.google.com/file/d/1ehJVHaf1yTtPvLYFJCXCLp2HvrZwwoo4/view)!
+## Welcome to CS291A!
 
-Note: you must be logged in to your UCSB Google account to view or download this video.
+Please complete the following before our first synchronous class on Tuesday:
 
-Details for the class Zoom sessions can be found in [zoom.txt](https://drive.google.com/file/d/1-lz1pRt9OH2Dm9vOHLtlPV5a7cdAiQEl/view) in the class [Google Drive](https://drive.google.com/drive/folders/1gR2i40_QGN0TfK4CjLZMGaQGNcTyj2P_).
+- Watch the [CS291A Welcome Video](https://drive.google.com/file/d/1ehJVHaf1yTtPvLYFJCXCLp2HvrZwwoo4/view)
+
+- Complete the [introduction survey](https://forms.gle/r9ksf1X9k7162mhdA)
+
+- Join the class on [Piazza]({{ site.piazza_url }})
+
+- Find details for the class Zoom sessions in the file
+  [zoom.txt](https://drive.google.com/file/d/1-lz1pRt9OH2Dm9vOHLtlPV5a7cdAiQEl/view)
+  in the class [Google
+  Drive](https://drive.google.com/drive/folders/1gR2i40_QGN0TfK4CjLZMGaQGNcTyj2P_)
+
+- Review the other Week 1 tasks on the [class schedule](/schedule/#week-1-january-4-)
+
+__Note__: you must be logged in to your UCSB Google account in order to view
+class videos, or access the class Google Drive.
+
 </div>
-
 
 ## Course Description
 
@@ -30,27 +44,25 @@ requires an understanding of topics like caching, load balancing, security, and
 monitoring. In this course we will examine these topics and more: the state of
 the art in building scalable Internet services.
 
-
 ## Learning Outcomes
 
 By the end of this course students will be able to:
 
-* write and deploy highly scalable web functions using [AWS
+- write and deploy highly scalable web functions using [AWS
   Lambda](https://aws.amazon.com/lambda/)
 
-* create and deploy [Docker](https://www.docker.com/get-started) containers
+- create and deploy [Docker](https://www.docker.com/get-started) containers
   using [Google's Cloud Run](https://cloud.google.com/run/)
 
-* write a modern front end client application using
+- write a modern front end client application using
   [React](https://reactjs.org)
 
-* create a [Ruby on Rails](http://rubyonrails.org/) web service and deploy it
+- create a [Ruby on Rails](http://rubyonrails.org/) web service and deploy it
   via [AWS Elastic Beanstalk](https://aws.amazon.com/elasticbeanstalk/)
 
-* measure the performance of various components of a web service
+- measure the performance of various components of a web service
 
-* discover and resolve bottlenecks in a web service
-
+- discover and resolve bottlenecks in a web service
 
 ## Class Content and Interactions
 
@@ -133,7 +145,6 @@ Once the primary project has started in week 5, teams will meet with the
 instructor once each week, via Zoom. These meetings will be scheduled for
 approximately 15 minutes.
 
-
 ## Projects
 
 ### Initial Projects
@@ -155,7 +166,6 @@ concerns. Projects will be conducted in agile teams of four to six students,
 and each team will build their own scalable web site using fundamental web
 technologies and the [Ruby on Rails](http://rubyonrails.org/) framework. A team
 may not be comprised of more than two undergraduate or BS/MS students.
-
 
 ## Grading
 

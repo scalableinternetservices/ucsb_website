@@ -10,6 +10,10 @@ body {
   padding-bottom: 60px;
 }
 
+.alert-info a {
+  font-weight: bold;
+}
+
 .container h1,
 .container h2,
 .container h3 {
