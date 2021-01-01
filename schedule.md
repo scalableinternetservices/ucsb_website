@@ -57,7 +57,7 @@ Below is the tentative schedule for the course. The weekly topics may change as 
 ### Tasks
 
 - Complete [Project 2](/project2/)
-- Begin [Project 3](project3)
+- Begin [Project 3](/project3/)
 
 </div>
 <div class="week">
@@ -153,7 +153,7 @@ Below is the tentative schedule for the course. The weekly topics may change as 
 
 ### Tasks
 
-- Complete the [project report](/project#report)
+- Complete the [project report](/project/#report)
 
 </div>
 <div class="week">
@@ -162,6 +162,6 @@ Below is the tentative schedule for the course. The weekly topics may change as 
 
 ### Tasks
 
-- Complete the [project presentation video](/project#video)
+- Complete the [project presentation video](/project/#video)
 
 </div>

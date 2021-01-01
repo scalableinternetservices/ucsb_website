@@ -161,11 +161,11 @@ may not be comprised of more than two undergraduate or BS/MS students.
 
 | Percent | Item |
 |--:|:--|
-| 3 | [Project 0](project0) (Static Web Page) |
-| 6 | [Project 1](project1) (AWS Lambda) |
-| 9 | [Project 2](project2) (Google's Cloud Run) |
-| 12 | [Project 3](project3) (Chat Server and Client) |
-| 65 | [Primary Project](project) Individual Score |
+| 3 | [Project 0](/project0/) (Static Web Page) |
+| 6 | [Project 1](/project1/) (AWS Lambda) |
+| 9 | [Project 2](/project2/) (Google's Cloud Run) |
+| 12 | [Project 3](/project3/) (Chat Server and Client) |
+| 65 | [Primary Project](/project/) Individual Score |
 | 5 | Participation |
 {: class="table table-striped"}
 

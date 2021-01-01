@@ -6,7 +6,7 @@ Quarter: {{ site.quarter }}
 ## Instructor
 
 [Dr. Bryce Boe](https://sites.cs.ucsb.edu/~bboe/)  
-[bboe@cs.ucsb.edu](mailto:bboe@cs.ucsb.edu)  
+<bboe@cs.ucsb.edu>
 Please use Piazza for correspondance when possible
 
 ## Dates
@@ -24,27 +24,27 @@ Wednesday, January 6 9am PST
 - Join the class on [Piazza]({{ site.piazza_url }})
 - Enroll in [AWS Educate](https://www.awseducate.com/Registration?apptype=student&courseview=true)
 
-### [Project 0](/project0) due before
+### [Project 0](/project0/) due before
 
 Friday, January 8 1pm PST
 
-### [Project 1](/project1) due before
+### [Project 1](/project1/) due before
 
 Friday, January 15 1pm PST
 
-### [Project 2](/project2) due before
+### [Project 2](/project2/) due before
 
 Friday, January 22 1pm PST
 
-### [Project 3](/project3) due before
+### [Project 3](/project3/) due before
 
 Friday, February 5 9am PST
 
-### [Project](/project#report) report due before
+### [Project](/project/#report) report due before
 
 Friday, March 12 9am PST
 
-### [Project](/project#video) video due before
+### [Project](/project/#video) video due before
 
 Thursday, March 18 4pm PDT
 
