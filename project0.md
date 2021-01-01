@@ -24,6 +24,10 @@ is accomplished.
 - Student can measure average page load time.
 - Student can measure server's rate limit.
 
+## Overview Video
+
+<https://drive.google.com/file/d/1lp-hixCQucLdXq-Ug37SyASnce9csF7i/view>
+
 ## Project Submission
 
 [https://forms.gle/AiuHXw3C6NmPiouG6](https://forms.gle/sQ9GfZnvy97zHeD4A)
