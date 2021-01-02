@@ -1,4 +1,7 @@
 {
+  "MD013": {
+    "headings": false,
+  },
   "MD024": {
     "siblings_only": true
   },
