@@ -19,7 +19,9 @@ the quarter progresses.
 
 - [Syllabus Overview Video](https://drive.google.com/file/d/1wZsdxVyTPWF2huZG1aizb2jrbf5KekgN/view)
 - [CS291A Welcome Video](https://drive.google.com/file/d/1ehJVHaf1yTtPvLYFJCXCLp2HvrZwwoo4/view)
-- Course Introduction ([slides](/slides/2021w/01_course_introduction/))
+- Course Introduction
+  ([video](https://drive.google.com/file/d/1lgO3ikzQ_DUihd8qHb08iljUegC28sBz/view),
+  [slides](/slides/2021w/01_course_introduction/))
 - Hypertext Transfer Protocol (HTTP) ([slides](/slides/2021w/02_http))
 
 ### Tasks
