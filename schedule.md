@@ -22,7 +22,9 @@ the quarter progresses.
 - Course Introduction
   ([video](https://drive.google.com/file/d/1lgO3ikzQ_DUihd8qHb08iljUegC28sBz/view),
   [slides](/slides/2021w/01_course_introduction/))
-- Hypertext Transfer Protocol (HTTP) ([slides](/slides/2021w/02_http))
+- Hypertext Transfer Protocol (HTTP)
+  ([video](https://drive.google.com/file/d/1gM3hEc9gyBpY0A9aPupNoSUGMJ_aunoe/view),
+  [slides](/slides/2021w/02_http))
 
 ### Tasks
 
