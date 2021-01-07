@@ -54,13 +54,13 @@ The pairing deadline is: Tuesday October 22, 10:59:59 AM PDT.
 
 ## Overview Video
 
-[https://youtu.be/FutR00lpAfE](https://youtu.be/FutR00lpAfE)
+<https://youtu.be/FutR00lpAfE>
 
 
 ## Project Submission
 
 Please have each team member submit the following form:
-[https://forms.gle/3jDCN4MsaES169DG7](https://forms.gle/3jDCN4MsaES169DG7)
+<https://docs.google.com/forms/d/e/1FAIpQLSccX7Wl0p7NP9C6-Cpwsv_1Zt42cPABnc11VLJWbCrmfuz6Mw/viewform>
 
 ### Deliverables
 
