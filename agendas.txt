@@ -1,0 +1,23 @@
+# Class Agendas
+
+The following are the list of synchronous class agendas for posterity purposes.
+
+## Class 1
+
+- Meet and greet
+- Review what needs to be done for the first week
+- Life Cycle of a Web Request break out room activity
+- Demo of AB tool
+
+## Class 2
+
+- Questions from Video
+  - What kind of information might one put in a cookie?
+  - What security concerns may exist with cookies?
+- Examples
+  - TLS server and client code
+  - HTTP/1.0 request example using netcat (`nc`)
+  - Making requests with curl (slide 46)
+  - Direct input server via netcat
+  - Concurrent TCP connections visualized (slide 62)
+    `/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-http2`
