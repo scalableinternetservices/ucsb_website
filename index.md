@@ -3,29 +3,6 @@ layout: default
 ---
 # Scalable Internet Services Syllabus
 
-<div class="alert alert-info">
-## Welcome to CS291A!
-
-Please complete the following before our first synchronous class on Tuesday:
-
-- Watch the [CS291A Welcome Video](https://drive.google.com/file/d/1ehJVHaf1yTtPvLYFJCXCLp2HvrZwwoo4/view)
-
-- Complete the [introduction survey](https://forms.gle/r9ksf1X9k7162mhdA)
-
-- Join the class on [Piazza]({{ site.piazza_url }})
-
-- Find details for the class Zoom sessions in the file
-  [zoom.txt](https://drive.google.com/file/d/1-lz1pRt9OH2Dm9vOHLtlPV5a7cdAiQEl/view)
-  in the class [Google
-  Drive](https://drive.google.com/drive/folders/1gR2i40_QGN0TfK4CjLZMGaQGNcTyj2P_)
-
-- Review the other Week 1 tasks on the [class schedule](/schedule/#week-1-january-4-)
-
-__Note__: you must be logged in to your UCSB Google account in order to view
-class videos, or access the class Google Drive.
-
-</div>
-
 ## Course Description
 
 This course explores advanced topics in highly scalable Internet services and
