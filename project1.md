@@ -5,9 +5,6 @@ permalink: /project1/
 title: Project 1
 ---
 
-Note: This page has not yet been updated for Winter 2021.
-{: .alert .alert-danger }
-
 # Project 1: AWS Lambda and JSON Web Tokens (JWT)
 
 In this project you will write ruby code to provide a semi-trivial
@@ -29,11 +26,11 @@ HTTP API. Your code will be deployed using a single AWS Lambda function.
 
 ## Overview Video
 
-[https://www.youtube.com/watch?v=Z1qmUASw58E](https://www.youtube.com/watch?v=Z1qmUASw58E)
+<https://www.youtube.com/watch?v=Z1qmUASw58E>
 
 ## Project Submission
 
-[https://forms.gle/ry2RpwPDHFgnSLYW6](https://forms.gle/ry2RpwPDHFgnSLYW6)
+<https://docs.google.com/forms/d/e/1FAIpQLSdk1OZ4XvpEp4_-pufCpyjgCFro9OfVheOQ4cZIt3mtO884nw/viewform>
 
 ## API Specification
 
