@@ -46,8 +46,8 @@ the quarter progresses.
 
 ### Topics
 
-- HTTP Servers
-- Application Servers
+- HTTP Servers ([slides](/slides/2021w/03_http_servers/))
+- Application Servers ([slides](/slides/2021w/04_application_servers/))
 - Scaling Web Applications
 
 ### Tasks
