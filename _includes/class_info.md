@@ -6,7 +6,7 @@ Quarter: {{ site.quarter }}
 ## Instructor
 
 [Dr. Bryce Boe](https://sites.cs.ucsb.edu/~bboe/)  
-<bboe@cs.ucsb.edu>
+<bboe@cs.ucsb.edu>  
 Please use Piazza for correspondance when possible
 
 ## Dates
