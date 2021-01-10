@@ -1,0 +1,665 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>HTTP Servers</title>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 2.5em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      blockquote {
+        border-left: 0.3em solid rgba(0,0,0,0.5);
+        padding: 0 15px;
+        font-style: italic;
+      }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      img {
+        max-height: 100%;
+        max-width: 100%;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .clear { clear: both; }
+      #slideshow .slide .content code { font-size: 0.8em; }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 1em;
+      }
+      .background-blue {
+        background-color: deepskyblue;
+      }
+      .background-green {
+        background-color: springgreen;
+      }
+      .background-pink {
+        background-color: deeppink;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        width: 49%;
+        float: left;
+      }
+      .right-column {
+        width: 49%;
+        float: right;
+      }
+      .left-column20 {
+        width: 20%;
+        float: left;
+      }
+      .right-column80 {
+        width: 79%;
+        float: right;
+      }
+      .left-column30 {
+        width: 30%;
+        float: left;
+      }
+      .right-column70 {
+        width: 69%;
+        float: right;
+      }
+      .left-column40 {
+        width: 40%;
+        float: left;
+      }
+      .right-column60 {
+        width: 59%;
+        float: right;
+      }
+
+      /* Table layout */
+      table {
+        background: #f5f5f5;
+        margin: 30px auto;
+        text-align: left;
+        width: 100%;
+      }
+      th {
+        background: linear-gradient(#777, #444);
+        color: #fff;
+        font-weight: bold;
+        padding: 10px 15px;
+      }
+      td {
+        border-right: 1px solid #fff;
+        border-left: 1px solid #e8e8e8;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #e8e8e8;
+        padding: 10px 15px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle
+
+# HTTP Servers
+
+## CS291A: Scalable Internet Services
+
+### Dr. Bryce Boe
+
+---
+
+# End to End HTTP
+
+By now, we all should have a reasonable understanding of the HTTP protocol.
+
+--
+
+Recall that many browsers and clients exist that are able to:
+
+* Open a TCP socket
+
+* Send an HTTP request
+
+* Have the request processed
+
+* Receive the data in a response
+
+* Reuse the socket for multiple requests
+
+--
+
+The software systems that handle the requests are generally divided into two
+parts:
+
+* HTTP Servers (this video)
+
+* Application Servers (the next video)
+
+---
+
+# HTTP Servers
+
+![Netcraft survey of HTTP servers](netcraft_web_servers.png)
+
+Latest:
+https://news.netcraft.com/archives/2019/08/15/august-2019-web-server-survey.html
+
+---
+
+# HTTP Server Responsibilities
+
+* Parse HTTP requests and craft HTTP responses _very_ fast
+
+* Dispatch to the appropriate handler and return response
+
+* Be stable and secure (lots of string parsing)
+
+* Provide clean abstraction for application servers
+
+>  How do HTTP servers provide concurrency?
+
+---
+
+class: center inverse middle
+# Server Architectures
+
+---
+
+# TCP Server Concurrency Approaches
+
+* Sequential (no concurrency)
+
+* Process per request
+
+* Process pool
+
+* Thread per request
+
+* Process/thread worker pool
+
+* Event-driven
+
+For select examples see:
+[https://gist.github.com/bboe/6a7b03fcd110c4c6bbe5ec412f523428](https://gist.github.com/bboe/6a7b03fcd110c4c6bbe5ec412f523428)
+
+---
+
+# Sequential Servers
+
+```python
+bind() to port 80 and listen()
+loop forever
+    accept() a socket connection
+    while we can read from the socket
+        read() a request
+        process that request
+        write() its response
+    close() the socket connection
+```
+
+--
+
+> What happens if another request comes in while we're within the loop?
+
+---
+
+# Sequential Server Issues
+
+If a sequential HTTP server does not process the request quickly, other clients
+end up waiting or dropping their connections (**head of line blocking**).
+
+We are building complex web applications not simple web sites. As a result:
+
+--
+
+* The requests are usually more complicated than serving a file from disk.
+
+--
+
+* It is common to have a web request doing a significant amount of computation
+  and business logic.
+
+--
+
+* It is common to have a web request result in connections to multiple external
+  services, e.g., databases, and caching stores.
+
+--
+
+* These requests can be anything: lightweight or heavyweight, IO intensive or
+  CPU intensive.
+
+We can solve these problems if the thread of control that processes the request
+is separate from the thread that `listen()`s and `accept()`s new connections.
+
+---
+
+# Process per Request Servers
+
+Handle each request as a subprocess:
+
+.left-column40[![forking server](server_forking.png)]
+.right-column60[
+```python
+bind() to port 80 and listen()
+loop forever
+    accept() a socket connection
+*   if fork() == 0  # child process
+        while we can read from the socket
+            read() a request
+            process that request
+            write() its response
+        close() the socket connection
+*       exit()
+```
+]
+
+---
+
+# Process per Request Servers
+
+## Strengths
+
+* Simple
+
+* Provides significant isolation between requests
+
+## Weaknesses
+
+* How much memory is required?
+
+* What happens as more parallel requests come in?
+
+* How efficient is it to start a process on each request?
+
+  * How much setup and teardown work is necessary?
+
+---
+
+# Process Pool Servers
+
+.left-column[![process pool server](server_process_pool.png)]
+.right-column[
+Instead of spawning a process for each request, create a pool of N processes at
+start-up and have them handle incoming requests when available.
+
+The children processes `accept()` the incoming connections and use shared
+memory to coordinate.
+
+The parent process watches the load on its children and can adjust the pool
+size as needed.
+]
+
+---
+
+# Process Pool Servers
+
+## Strengths
+
+* Provides isolation between concurrent requests
+
+* Children can die after _M_ requests to minimize memory leakage issues
+
+* Process setup and teardown costs are minimized
+
+* More predictable behavior under high load
+
+## Weaknesses
+
+* More complex than process per request
+
+* Many processes can still mean a large amount of memory consumption
+
+This HTTP server architecture is provided by the Apache 2.x MPM "Prefork" module.
+
+---
+
+# Thread per Request Servers
+
+Why use multiple processes at all? Instead we can use a single process and
+spawn new threads for each request.
+
+.left-column40[![http server thread per request](server_threaded.png)]
+.right-column60[
+```python
+bind() to port 80 and listen()
+loop forever
+    accept() a socket connection
+*   pthread_create()
+        while we can read from the socket
+            read() a request
+            process that request
+            write() its response
+        close() the socket connection
+        pthread_exit()
+```
+]
+
+---
+
+# Thread per Request Servers
+
+## Strengths
+
+* Relatively simple
+
+* Reduced memory footprint compared to multi-processed
+
+## Weaknesses
+
+* Worker (request handling code)  must be thread-safe
+
+* Setup and teardown needs to occur for each thread (or shared data
+  needs to be thread-safe)
+
+* What about memory leaks?
+
+---
+
+# Process/Thread Worker Pool Servers
+
+.left-column[![http process/thread worker pool](server_worker_pool.png)]
+.right-column[
+Combination of the two techniques.
+
+Master process spawns processes, each with many threads. Master maintains
+process pool.
+
+Processes coordinate through shared memory to `accept()` requests.
+
+Fixed threads per request, scaling is done at the process level.
+]
+
+---
+
+# Process/Thread Worker Pool Servers
+
+## Strengths
+
+* Faults isolated between processes, but not threads
+
+* Threads reduce memory footprint
+
+* Tunable level of isolation
+
+* Controlling the number of processes and threads allows for predictable
+  behavior under load
+
+## Weaknesses
+
+* Requires thread-safe code
+
+* Uses more memory than an all-thread based approach
+
+This HTTP server architecture is provided by the Apache 2.x MPM "Worker" module.
+
+---
+
+class: center inverse middle
+
+# Digression: C10K Problem
+
+---
+
+# C10K Problem
+
+> Given a 1 GHz machine with 2GB of RAM, and a gigabit Ethernet card, can we
+> support 10,000 simultaneous connections?
+
+--
+
+## 20,000 clients means each client gets:
+
+* 50 KHz of CPU
+
+* 100 KB of RAM
+
+* 50 Kb/second of network
+
+--
+
+> It shouldn't take any more horsepower than that to take four kilobytes from
+> the disk and send them to the network once a second for each of twenty thousand
+> clients.
+
+Originally posed in 1999 by Dan Kegel.
+
+Source: [http://www.kegel.com/c10k.html](http://www.kegel.com/c10k.html)
+
+---
+
+class: center middle
+
+# What makes managing concurrent connections difficult?
+
+---
+
+# For each client the server is...
+
+* Reading from the network socket
+
+* Parsing its request
+
+* Opening a file on disk
+
+* Reading the file into memory
+
+* Writing the memory to network
+
+---
+
+# For each client the server is... __blocking on I/O__
+
+* Reading from the network socket (__blocking__)
+
+* Parsing its request
+
+* Opening a file on disk  (__blocking__)
+
+* Reading the file into memory  (__blocking__)
+
+* Writing the memory to network  (__blocking__)
+
+---
+
+# Waiting on I/O
+
+Every time a process/thread is waiting on I/O it is not runnable, and it is not
+cost-free:
+
+* Each process/thread is considered every time the scheduler makes a decision
+
+* Memory is occupied by the process, and its last load may have evicted other
+  processes' memory from the cache
+
+Massive concurrency slows down all processes/threads.
+
+---
+
+# How can we not wait on I/O?
+
+Blocking system calls cause this problem.
+
+> Can we accomplish our desired tasks without blocking?
+
+--
+
+## Yes! Using Asynchronous I/O
+
+Use a non-blocking version of I/O system calls in combination with:
+
+* `select()`: Provided a list of file descriptors, block only until at least
+  one is ready for I/O (only usable up to file descriptor number 1023 on Linux).
+
+* `epoll_*()`: (Linux) Register to listen for events on file descriptors. Again
+  block only until at least one of the registered descriptors is ready for I/O
+
+---
+
+# Select example
+
+Assume we have a list of sockets called fd_list.
+
+```python
+loop forever:
+    select(fd_list, ...) // block until something has I/O to handle
+    for fd in fd_list
+        if fd is ready for IO
+            handle_io(fd)
+        else do nothing
+```
+
+--
+
+## handle_io
+
+* can include socket acceptance
+
+* shouldn't make any blocking calls (use non-blocking variants)
+
+* should avoid excessive computation
+    * Use a separate thread, process, or worker pool for such purposes
+
+---
+
+# Event Driven Systems
+
+Systems that operate in such a manner are called event driven systems.
+
+Often such systems can accomplish everything using only a single process and
+thread, of course more may be needed for CPU-bound segments.
+
+Well used examples:
+
+* NGINX
+
+* lighttpd
+
+* netty (java)
+
+* node.js (JavaScript)
+
+* eventmachine (ruby)
+
+* twisted (python)
+
+---
+
+# Event Driven Servers
+
+## Strengths
+
+* High performance under high load
+
+* Predictable performance under high load
+
+* No need to be thread-proof (unless specifically adding thread-concurrency)
+
+--
+
+## Weaknesses
+
+* Poor isolation
+
+    * What happens if a bug causes an infinite loop?
+
+* Extensions are hard to implement since they cannot use blocking syscalls
+
+* Very complex
+
+---
+
+# Event Machine (Ruby) Example
+
+Event driven code is dominated by callbacks:
+
+```ruby
+EM.run {
+  test = EM::HttpRequest.new('http://google.com/').get
+  test.errback { puts "Google is down! terminate?" }
+  test.callback {
+    search = EM::HttpRequest.new('http://google.com/search?q=em').get
+    search.callback { # callback nesting, ad infinitum }
+    search.errback  { # error-handling code }
+  }
+}
+```
+
+---
+
+# Callback Hell
+
+.center[![Yo dawg, I heard you like JavaScript](callback_hell.png)]
+
+With all these callbacks, event-drived programming _can_ very easily become
+complicated.
+
+---
+
+# Server Architectures Review
+
+.left-column[
+* Sequential (single process and thread)
+    * Easy
+    * No concurrency
+
+* Process per request
+    * Greatest isolation
+    * Largest memory footprint
+
+* Thread per request
+    * Less isolation
+    * Smaller memory footprint
+]
+.right-column[
+* Process/thread worker pool
+    * Tunable compromise between processes and threads
+
+* Event-driven
+    * Great performance under high load
+    * Difficult to extend
+    * Reduced isolation
+]
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"
+            type="text/javascript"></script>
+    <script type="text/javascript">
+      var hljs = remark.highlighter.engine;
+      var slideshow = remark.create({
+          highlightLanguage: 'ruby',
+          highlightLines: true,
+          hightlightSpans: true,
+          highlightStyle: 'monokai'
+        }) ;
+    </script>
+  </body>
+</html>
