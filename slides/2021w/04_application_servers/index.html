@@ -318,47 +318,21 @@ benefit from using different interpreters.
 
 ---
 
-# Application Server Options
+# Ruby Application Server: Puma
 
-You will be able to compare the performance of two application servers when
-working on the primary project:
+- "Puma is a simple, fast, multi-threaded, and highly concurrent HTTP 1.1 server for Ruby/Rack applications."
 
-## via elastic beanstalk configuration
+- "Puma ... serves the request using a thread pool. Each request is served in a separate thread, so truly concurrent Ruby implementations (JRuby, Rubinius) will use all available CPU cores."
 
-* Puma (worker pool)
+- "On MRI, there is a Global VM Lock (GVL) that ensures only one thread can run Ruby code at a time. But if you're doing a lot of blocking IO (such as HTTP calls to external APIs like Twitter), Puma still improves MRI's throughput by allowing IO waiting to be done in parallel."
 
-* Phusion Passenger (worker pool)
+- "Puma also offers 'clustered mode'. Clustered mode forks workers from a master process."
 
----
-
-# Puma
-
-Claims to require less memory than others (for the server itself)
-
-Specifically made to work with thread-based parallelism, but also supports
-multiple processes each with a tunable number of threads.
-
----
-
-# Phusion Passenger
-
-Passenger is a ruby application server that can be added as a module to
-either Apache or NGINX.
-
-Passenger works as a worker pool adjusting the number of processes that
-handle requests. Originally did not support threads within the processes.
-
----
-
-# Puma and Passenger
-
-Both Puma and Phusion Passenger:
-
-* are relatively easy to configure
-
-* enable processes to be forked after ruby/rails is loaded
+- "In clustered mode, Puma can 'preload' your application. This loads all the application code prior to forking."
 
 > Why might you want to wait to load the application prior to forking?
+
+<https://github.com/puma/puma>
 
 ---
 
