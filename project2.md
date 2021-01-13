@@ -5,19 +5,17 @@ permalink: /project2/
 title: Project 2
 ---
 
-Note: This page has not yet been updated for Winter 2021.
-{: .alert .alert-danger }
-
 # Project 2: Docker, Sinatra and Google's Cloud Run
 
 In this project you will write a [Sinatra](http://sinatrarb.com/) application,
-built it into a [Docker](https://www.docker.com/products/docker-desktop)
-container, and deploy it [Google Cloud
-Run](https://cloud.google.com/run/). This service will provide a simple rest
-interface over a distributed storage system, Google Cloud Storage (GCS), where
-your application can create, list, read, and delete files.
+build it into a [Docker](https://www.docker.com/products/docker-desktop)
+container, and deploy it via [Google Cloud
+Run](https://cloud.google.com/run/). This service will provide a simple
+[REST](https://www.codecademy.com/articles/what-is-rest) interface over a
+distributed storage system, Google Cloud Storage (GCS), where your application
+can `create`, `list`, `read`, and `delete` files.
 
-## Learning Outcomes:
+## Learning Outcomes
 
 - Student can perform create, read, and delete actions using Google Cloud
   Storage.
@@ -122,10 +120,10 @@ Content-Length: 79
 
 - On success, respond `200` and:
 
-    - the `Content-Type` header should be set to that provided when the file
-      was uploaded
+  - the `Content-Type` header should be set to that provided when the file was
+    uploaded
 
-    - the body should contain the contents of the file
+  - the body should contain the contents of the file
 
 - Respond `404` if there is no file corresponding to `DIGEST`.
 
@@ -171,18 +169,18 @@ HTTP/1.1 200 OK
 
 ## Storage Requirements
 
-Files are to be saved to the GCS bucket `cs291_project2` associated with the
-project ID `cs291-f19`. The following ruby code provides an example for
+Files are to be saved to the GCS bucket `cs291project2` associated with the
+project ID `cs291a`. The following ruby code provides an example for
 obtaining a Bucket object:
 
 ```ruby
 require 'google/cloud/storage'
-storage = Google::Cloud::Storage.new(project_id: 'cs291-f19')
-bucket = storage.bucket 'cs291_project2', skip_lookup: true
+storage = Google::Cloud::Storage.new(project_id: 'cs291a')
+bucket = storage.bucket 'cs291project2', skip_lookup: true
 ```
 
 Uploaded files are to be saved into GCS using object names derived from the
-SHA256 hex digest of the file's contents.
+lower-case SHA256 hex digest of the file's contents.
 
 For example, the follow shows a file, `test.txt`, that has a SHA256 hex digest of
 `3fd48de5c648bce27acaa6ddda51f35a0c69f07075ac472a4347c66502bb0d48`:
@@ -197,7 +195,11 @@ The object name for the above file to store in GCS should be
 `3f/d4/8de5c648bce27acaa6ddda51f35a0c69f07075ac472a4347c66502bb0d48`. In
 particular we twice separate out two consecutive digits of the hex
 digest. While this is an implementation specific detail that has no impact on
-the external view of your API, it is important that this pattern is utilized.
+the external view of your API, it is important that this pattern is
+utilized.
+
+Note: Any files in the GCS bucket not matching this format should be ignored.
+{: .alert .alert-warning }
 
 ## Resources
 
@@ -212,7 +214,7 @@ Please review the template project README for development and deployment instruc
 Please use the following script to verify your web application:
 [https://github.com/scalableinternetservices/ucsb_website/tree/master/scripts#project-2-verification-script](https://github.com/scalableinternetservices/ucsb_website/tree/master/scripts#project-2-verification-script)
 
-## Required Tools:
+## Required Tools
 
 - [Docker](https://www.docker.com/products/docker-desktop)
 
@@ -225,7 +227,7 @@ Please use the following script to verify your web application:
 
 - [Sinatra](http://sinatrarb.com/)
 
-## Other Resources:
+## Other Resources
 
 - [Google Cloud
   Tools](https://cloud.google.com/sdk/docs/#install_the_latest_cloud_tools_version_cloudsdk_current_version)
