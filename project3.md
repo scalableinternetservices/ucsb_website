@@ -19,7 +19,6 @@ server, and my deployed version of the server (reference server). Similarly my
 deployed front-end (reference client) should be able to seamlessly interact
 with your server.
 
-
 ## Working in Pairs (optional)
 
 This project is significantly more complex than the previous projects. You will
@@ -40,7 +39,6 @@ pairing deadline.
 
 The pairing deadline is: Tuesday October 22, 10:59:59 AM PDT.
 
-
 ## Learning Outcomes
 
 * Student has written and deployed a React application coded using JSX.
@@ -51,11 +49,9 @@ The pairing deadline is: Tuesday October 22, 10:59:59 AM PDT.
 * Student has leveraged Server-Sent Events and Javascript's EventSource to
   provide a real-time communication platform.
 
-
 ## Overview Video
 
 <https://youtu.be/FutR00lpAfE>
-
 
 ## Project Submission
 
@@ -75,7 +71,6 @@ In order to submit the form you will need three additional things:
 * A url to a repository containing your front-end source code (not the code
   from `yarn build`). Assuming this repository is `private`, please invite me,
   `bboe` on github so that I can see your code.
-
 
 ## HTTP API Specification
 
@@ -123,7 +118,7 @@ curl -D- <BASE_URL>/login -F username=<USERNAME> -F password=<PASSWORD>
 
 Example HTTP response:
 
-```
+```http
 HTTP/1.1 201 CREATED
 Content-Type: application/json
 
@@ -161,10 +156,9 @@ curl -D- <BASE_URL>/message -F message=test -H "Authorization: Bearer <SIGNED TO
 
 Example HTTP response:
 
-```
+```http
 HTTP/1.1 201 CREATED
 ```
-
 
 ### GET /stream/&lt;SIGNED TOKEN&gt;
 
@@ -177,14 +171,13 @@ Returns:
 
 Example curl command:
 
-
 ```sh
 curl -D- <BASE_URL>/stream/<SIGNED TOKEN>
 ```
 
 Example (partial) HTTP response:
 
-```
+```http
 HTTP/1.1 200 OK
 Content-Type: text/event-stream; charset=utf-8
 
@@ -200,7 +193,6 @@ data: {"message": "We're online!", "user": "bboe", "created": 1570947655.5598643
 event: Message
 id: 1a72e044-92e4-4ee5-94fe-5cabacb75b83
 ```
-
 
 ## SSE Events
 
@@ -264,7 +256,6 @@ Fields:
 * `created` (float): the unix timestamp when the event was created
 * `users` (array[string]): the list of connected users
 
-
 ## Server Requirements
 
 * Your server must maintain state about the users who are connected.
@@ -294,7 +285,6 @@ Fields:
 * A user who is reestablishing its connection (retry after failure) should
   receive all of the messages in the history that have occurred since the
   provided `last_event_id`.
-
 
 ## React Front-end Specification
 
@@ -326,7 +316,6 @@ however, must meet the following requirements:
 * Separate browser windows and/or tabs should each be able to have their own
   connection to the server.
 
-
 ### Components
 
 While the names do not need to be the same, you need to at least implement the
@@ -342,7 +331,7 @@ following React components:
 The following instructions are not necessary, but might make it easier if you
 don't want to set up the dependencies on your machine.
 
-### Create or change into a directory where you want your project to live under.
+### Create or change into a directory where you want your project to live under
 
 ```ssh
 mkdir project3
@@ -363,7 +352,7 @@ starts up `bash`.
 
 Once running, create your React application inside the container via:
 
-```
+```sh
 npx create-react-app chat_client
 ```
 
@@ -389,12 +378,10 @@ Locally, edit the contents of files under `chat_client` and when you save, you
 should see said changes automatically take effect in the browser without
 needing to refresh.
 
-
 ### React Tutorial
 
 Follow this guide to add more components:
 [https://reactjs.org/docs/hello-world.html](https://reactjs.org/docs/hello-world.html)
-
 
 ## Resources
 
@@ -418,7 +405,7 @@ CORS. A copy of the client, with CSS and JavaScript separated can be found at:
 And, while you can view the source in the browser, it might be more convenient
 to see it on GitHub:
 
-[https://github.com/scalableinternetservices/ucsb_website/tree/master/project3/chat](https://github.com/scalableinternetservices/ucsb_website/tree/master/project3/chat)
+<https://github.com/scalableinternetservices/ucsb_website/tree/master/project3/chat>
 
 __Note__: The logic of this client is written 100% in JavaScript and as such it
 serves as a poor example of code to copy since you can better accomplish the
@@ -426,10 +413,10 @@ same with React. While you may end up writing more code when using React, the
 maintainability of the React code is significantly greater, especially when
 accompanied with component unit tests.
 
-
 ## Required Tools
 
-* [Cross-Origin Resource Sharing](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) (CORS)
+* [Cross-Origin Resource
+  Sharing](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) (CORS)
 
 * [Docker](https://www.docker.com/products/docker-desktop)
 
@@ -443,9 +430,9 @@ accompanied with component unit tests.
 
 * [Sinatra](http://sinatrarb.com/)
 
-
 ## Suggested Reading
 
-* [Server-Sent Events (SSE)](https://hpbn.co/server-sent-events-sse/) in High Performance Browser Networking
+* [Server-Sent Events (SSE)](https://hpbn.co/server-sent-events-sse/) in High
+  Performance Browser Networking
 
 * [XMLHttpRequest](https://hpbn.co/xmlhttprequest/) in High Performance Browser Networking
