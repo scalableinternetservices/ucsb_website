@@ -46,8 +46,7 @@ The video should emphasize your key results from your report.
 All sprints end and begin with each week's lab session, save for the last
 sprint which does not have an ending lab session.
 
-At the end of each sprint during lab section, you will need to do the
-following:
+At the end of each sprint you will:
 
 - Ensure all your completed stories are integrated on your master branch.
 - Deploy your project using Elastic Beanstalk.
