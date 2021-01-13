@@ -36,6 +36,10 @@ Friday, January 15 1pm PST
 
 Friday, January 22 1pm PST
 
+### Project 3 Pairing Message due before
+
+Friday, January 29 9am PST
+
 ### [Project 3](/project3/) due before
 
 Friday, February 5 9am PST

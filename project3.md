@@ -5,9 +5,6 @@ permalink: /project3/
 title: Project 3
 ---
 
-Note: This page has not yet been updated for Winter 2021.
-{: .alert .alert-danger }
-
 # Project 3: Chat Server and Corresponding React Front-End
 
 In this project you will write a chat server using sinatra and packaged in a
@@ -25,19 +22,18 @@ This project is significantly more complex than the previous projects. You will
 need to maintain state in your Sinatra application, and many of you will learn
 an entirely new framework, React. I estimate this project to be more than four
 times the work of [Project 2](/project2/). As a result, this project spans two
-weeks, and you have the option of working with another student of the course
-who is in your same lab section.
+weeks, and you have the option of working with another student of the course.
 
-If you are to work in a pair, please have one member of your pair send a
-private message on Piazza to `instructors` and include your pair in the `to`
-indicating that the two of you will work together. Once you've formed a pair,
-you and your partner are committing to stick with the pairing.
+If you will work in a pair, please have one member of your pair send a private
+message to me on Piazza with both members' names to indicate that the two of you
+will work together. Once you've formed a pair, you and your partner are
+committing to stick with the pairing.
 
-If you intend to work solo, please also message `instructors` on Piazza to
-indicate your choice to work solo. You may later pair up with someone by the
-pairing deadline.
+If you intend to work solo, please also message me on Piazza to indicate your
+choice to work solo. Should you change your mind, you may later pair up with
+someone by the pairing deadline.
 
-The pairing deadline is: Tuesday October 22, 10:59:59 AM PDT.
+The pairing deadline is listed in the sidebar.
 
 ## Learning Outcomes
 
@@ -63,7 +59,7 @@ Please have each team member submit the following form:
 In order to submit the form you will need three additional things:
 
 * The name of a pushed docker container that when invoked runs your chat
-  server, e.g., `us.gcr.io/cs291-f19/project3_bboe` (note: you do _not_ need to
+  server, e.g., `us.gcr.io/cs291a/project3_bboe` (note: you do _not_ need to
   deploy to Google Cloud Run).
 
 * A url to your deployed front-end application with minimized javascript (tip: `yarn build`).
@@ -81,7 +77,8 @@ but are listed so you understand why the reference server behaves a certain
 way.
 
 __Note__: I've intentionally excluded any CORS related headers and endpoints
-from the following list.
+from the following list. It's up to you to determine the necessary CORs headers
+{: .alert .alert-warning }
 
 ### POST /login
 
@@ -109,6 +106,7 @@ Expected Form Fields:
 __WARNING__: Do not send real passwords to this system. The reference server is
 not protected by TLS and thus all data sent to or from the server is
 unencrypted.
+{: .alert .alert-danger }
 
 Example curl command:
 
@@ -370,7 +368,7 @@ yarn start
 ```
 
 Once started, you should be able to access your application via:
-[http://localhost:3000](http://localhost:3000)
+<http://localhost:3000>
 
 ### Make Changes
 
@@ -381,13 +379,13 @@ needing to refresh.
 ### React Tutorial
 
 Follow this guide to add more components:
-[https://reactjs.org/docs/hello-world.html](https://reactjs.org/docs/hello-world.html)
+<https://reactjs.org/docs/hello-world.html>
 
 ## Resources
 
 ### Hosted Server Example
 
-[http://chat.cs291.com/](http://chat.cs291.com/)
+<https://chat.cs291.com/>
 
 The application at the above URL contains a complete server implementation
 which your client should be able to communicate with. Of course, the server
@@ -400,7 +398,7 @@ While the above link also serves a complete client, it's more interesting to
 have a client hosted on a different domain as the interaction then requires
 CORS. A copy of the client, with CSS and JavaScript separated can be found at:
 
-[https://cs291.com/project3/chat/](https://cs291.com/project3/chat/)
+<https://cs291.com/project3/chat/>
 
 And, while you can view the source in the browser, it might be more convenient
 to see it on GitHub:
@@ -412,6 +410,7 @@ serves as a poor example of code to copy since you can better accomplish the
 same with React. While you may end up writing more code when using React, the
 maintainability of the React code is significantly greater, especially when
 accompanied with component unit tests.
+{: .alert .alert-warning }
 
 ## Required Tools
 
