@@ -118,18 +118,17 @@ Note: The online version is slightly more up-to-date.</p>
 
     </div>
     <div class="col-md-9">
-      <p class="alert alert-danger">Note: This page has not yet been updated for Winter 2021.</p>
-
-<h1 id="project-2-docker-sinatra-and-googles-cloud-run">Project 2: Docker, Sinatra and Google’s Cloud Run</h1>
+      <h1 id="project-2-docker-sinatra-and-googles-cloud-run">Project 2: Docker, Sinatra and Google’s Cloud Run</h1>
 
 <p>In this project you will write a <a href="http://sinatrarb.com/">Sinatra</a> application,
-built it into a <a href="https://www.docker.com/products/docker-desktop">Docker</a>
-container, and deploy it <a href="https://cloud.google.com/run/">Google Cloud
-Run</a>. This service will provide a simple rest
-interface over a distributed storage system, Google Cloud Storage (GCS), where
-your application can create, list, read, and delete files.</p>
+build it into a <a href="https://www.docker.com/products/docker-desktop">Docker</a>
+container, and deploy it via <a href="https://cloud.google.com/run/">Google Cloud
+Run</a>. This service will provide a simple
+<a href="https://www.codecademy.com/articles/what-is-rest">REST</a> interface over a
+distributed storage system, Google Cloud Storage (GCS), where your application
+can <code class="language-plaintext highlighter-rouge">create</code>, <code class="language-plaintext highlighter-rouge">list</code>, <code class="language-plaintext highlighter-rouge">read</code>, and <code class="language-plaintext highlighter-rouge">delete</code> files.</p>
 
-<h2 id="learning-outcomes">Learning Outcomes:</h2>
+<h2 id="learning-outcomes">Learning Outcomes</h2>
 
 <ul>
   <li>
@@ -255,8 +254,8 @@ uploaded.</p>
 
     <ul>
       <li>
-        <p>the <code class="language-plaintext highlighter-rouge">Content-Type</code> header should be set to that provided when the file
-was uploaded</p>
+        <p>the <code class="language-plaintext highlighter-rouge">Content-Type</code> header should be set to that provided when the file was
+uploaded</p>
       </li>
       <li>
         <p>the body should contain the contents of the file</p>
@@ -312,17 +311,17 @@ idempotent).</p>
 
 <h2 id="storage-requirements">Storage Requirements</h2>
 
-<p>Files are to be saved to the GCS bucket <code class="language-plaintext highlighter-rouge">cs291_project2</code> associated with the
-project ID <code class="language-plaintext highlighter-rouge">cs291-f19</code>. The following ruby code provides an example for
+<p>Files are to be saved to the GCS bucket <code class="language-plaintext highlighter-rouge">cs291project2</code> associated with the
+project ID <code class="language-plaintext highlighter-rouge">cs291a</code>. The following ruby code provides an example for
 obtaining a Bucket object:</p>
 
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'google/cloud/storage'</span>
-<span class="n">storage</span> <span class="o">=</span> <span class="no">Google</span><span class="o">::</span><span class="no">Cloud</span><span class="o">::</span><span class="no">Storage</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">project_id: </span><span class="s1">'cs291-f19'</span><span class="p">)</span>
-<span class="n">bucket</span> <span class="o">=</span> <span class="n">storage</span><span class="p">.</span><span class="nf">bucket</span> <span class="s1">'cs291_project2'</span><span class="p">,</span> <span class="ss">skip_lookup: </span><span class="kp">true</span>
+<span class="n">storage</span> <span class="o">=</span> <span class="no">Google</span><span class="o">::</span><span class="no">Cloud</span><span class="o">::</span><span class="no">Storage</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">project_id: </span><span class="s1">'cs291a'</span><span class="p">)</span>
+<span class="n">bucket</span> <span class="o">=</span> <span class="n">storage</span><span class="p">.</span><span class="nf">bucket</span> <span class="s1">'cs291project2'</span><span class="p">,</span> <span class="ss">skip_lookup: </span><span class="kp">true</span>
 </code></pre></div></div>
 
 <p>Uploaded files are to be saved into GCS using object names derived from the
-SHA256 hex digest of the file’s contents.</p>
+lower-case SHA256 hex digest of the file’s contents.</p>
 
 <p>For example, the follow shows a file, <code class="language-plaintext highlighter-rouge">test.txt</code>, that has a SHA256 hex digest of
 <code class="language-plaintext highlighter-rouge">3fd48de5c648bce27acaa6ddda51f35a0c69f07075ac472a4347c66502bb0d48</code>:</p>
@@ -336,7 +335,10 @@ SHA256 hex digest of the file’s contents.</p>
 <code class="language-plaintext highlighter-rouge">3f/d4/8de5c648bce27acaa6ddda51f35a0c69f07075ac472a4347c66502bb0d48</code>. In
 particular we twice separate out two consecutive digits of the hex
 digest. While this is an implementation specific detail that has no impact on
-the external view of your API, it is important that this pattern is utilized.</p>
+the external view of your API, it is important that this pattern is
+utilized.</p>
+
+<p class="alert alert-warning">Note: Any files in the GCS bucket not matching this format should be ignored.</p>
 
 <h2 id="resources">Resources</h2>
 
@@ -351,7 +353,7 @@ the external view of your API, it is important that this pattern is utilized.</p
 <p>Please use the following script to verify your web application:
 <a href="https://github.com/scalableinternetservices/ucsb_website/tree/master/scripts#project-2-verification-script">https://github.com/scalableinternetservices/ucsb_website/tree/master/scripts#project-2-verification-script</a></p>
 
-<h2 id="required-tools">Required Tools:</h2>
+<h2 id="required-tools">Required Tools</h2>
 
 <ul>
   <li>
@@ -372,7 +374,7 @@ Storage</a></p>
   </li>
 </ul>
 
-<h2 id="other-resources">Other Resources:</h2>
+<h2 id="other-resources">Other Resources</h2>
 
 <ul>
   <li>
