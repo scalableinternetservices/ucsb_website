@@ -1,41 +1,39 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
 require 'openssl'
 require 'socket'
 
-include Socket::Constants
-
 def accept(socket)
-  puts "Waiting for client..."
+  puts 'Waiting for client...'
   client = socket.accept
   socket.close
-  puts "Client connected"
+  puts 'Client connected'
   yield client
 end
-
 
 def tls_accept(socket)
   context = OpenSSL::SSL::SSLContext.new
   context.max_version = OpenSSL::SSL::TLS1_2_VERSION
   context.min_version = OpenSSL::SSL::TLS1_2_VERSION
   context.add_certificate(
-    OpenSSL::X509::Certificate.new(File.open("certificate.crt")),
-    OpenSSL::PKey::RSA.new(File.open("key.key"))
-  ) 
+    OpenSSL::X509::Certificate.new(File.open('certificate.crt')),
+    OpenSSL::PKey::RSA.new(File.open('key.key'))
+  )
   tls_socket = OpenSSL::SSL::SSLServer.new(socket, context)
 
   accept(tls_socket, &proc)
 end
 
-
 def main
-  accept_socket = TCPServer.new('localhost', 1024)
+  accept_socket = TCPServer.new('::', 1024)
 
   tls_accept(accept_socket) do |client|
-    client.puts("CONNECTED")
+    client.puts('CONNECTED')
 
-    while line = client.gets
+    while (line = client.gets)
       if line == "QUIT\n"
-        client.puts("GOODBYE!")
+        client.puts('GOODBYE!')
         break
       else
         client.write("ECHO: #{line}")
@@ -43,7 +41,7 @@ def main
     end
 
     client.puts("SERVER CLOSING\n")
-    client.close    
+    client.close
   end
 
   0 # Return code
