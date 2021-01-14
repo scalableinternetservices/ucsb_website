@@ -82,6 +82,10 @@ Please use Piazza for correspondance when possible</p>
 
 <p>Friday, January 22 1pm PST</p>
 
+<h3 id="project-3-pairing-message-due-before">Project 3 Pairing Message due before</h3>
+
+<p>Friday, January 29 9am PST</p>
+
 <h3 id="project-3project3-due-before"><a href="/project3/">Project 3</a> due before</h3>
 
 <p>Friday, February 5 9am PST</p>
@@ -96,13 +100,18 @@ Please use Piazza for correspondance when possible</p>
 
 <h2 id="class-resources">Class Resources</h2>
 
-<p><a href="https://drive.google.com/drive/folders/1gR2i40_QGN0TfK4CjLZMGaQGNcTyj2P_">Google Drive</a>: Download lecture videos, and obtain other class content. You must be logged in to your UCSB Google account in order to access.</p>
+<p><a href="https://drive.google.com/drive/folders/1gR2i40_QGN0TfK4CjLZMGaQGNcTyj2P_">Google Drive</a>: Download lecture videos, and obtain other
+class content. You must be logged in to your UCSB Google account in order to
+access.</p>
 
-<p><a href="https://piazza.com/ucsb/winter2021/CS291A">Piazza</a>: Use to receive class announcements, ask and answer questions, and to communicate with instructor. Access code is available in Google Drive.</p>
+<p><a href="https://piazza.com/ucsb/winter2021/CS291A">Piazza</a>: Use to receive class announcements, ask and
+answer questions, and to communicate with instructor. Access code is available
+in Google Drive.</p>
 
 <p><a href="https://ucsb.nectir.io/channel/cs291a_w2021">Nectir</a>: Use for real-time chat with classmates.</p>
 
-<p><a href="https://github.com/scalableinternetservices">Github</a>: Contains content for this website. Additionally all student projects will live here.</p>
+<p><a href="https://github.com/scalableinternetservices">Github</a>: Contains content for
+this website. Additionally all student projects will live here.</p>
 
 <h2 id="textbooks">Textbooks</h2>
 
@@ -111,16 +120,14 @@ Please use Piazza for correspondance when possible</p>
 
 <p><a href="https://www.amazon.com/High-Performance-Browser-Networking-performance/dp/1449344763">High Performance Browser Networking</a><br />
 ISBN: 9781449344764<br />
-<em><a href="https://hpbn.co/">Available online</a>.</em>
+<em><a href="https://hpbn.co/">Available online</a>.</em><br />
 Note: The online version is slightly more up-to-date.</p>
 
 </div>
 
     </div>
     <div class="col-md-9">
-      <p class="alert alert-danger">Note: This page has not yet been updated for Winter 2021.</p>
-
-<h1 id="project-3-chat-server-and-corresponding-react-front-end">Project 3: Chat Server and Corresponding React Front-End</h1>
+      <h1 id="project-3-chat-server-and-corresponding-react-front-end">Project 3: Chat Server and Corresponding React Front-End</h1>
 
 <p>In this project you will write a chat server using sinatra and packaged in a
 docker container, as well as a standalone React-based front-end for your chat
@@ -137,19 +144,18 @@ with your server.</p>
 need to maintain state in your Sinatra application, and many of you will learn
 an entirely new framework, React. I estimate this project to be more than four
 times the work of <a href="/project2/">Project 2</a>. As a result, this project spans two
-weeks, and you have the option of working with another student of the course
-who is in your same lab section.</p>
+weeks, and you have the option of working with another student of the course.</p>
 
-<p>If you are to work in a pair, please have one member of your pair send a
-private message on Piazza to <code class="language-plaintext highlighter-rouge">instructors</code> and include your pair in the <code class="language-plaintext highlighter-rouge">to</code>
-indicating that the two of you will work together. Once you’ve formed a pair,
-you and your partner are committing to stick with the pairing.</p>
+<p>If you will work in a pair, please have one member of your pair send a private
+message to me on Piazza with both members’ names to indicate that the two of you
+will work together. Once you’ve formed a pair, you and your partner are
+committing to stick with the pairing.</p>
 
-<p>If you intend to work solo, please also message <code class="language-plaintext highlighter-rouge">instructors</code> on Piazza to
-indicate your choice to work solo. You may later pair up with someone by the
-pairing deadline.</p>
+<p>If you intend to work solo, please also message me on Piazza to indicate your
+choice to work solo. Should you change your mind, you may later pair up with
+someone by the pairing deadline.</p>
 
-<p>The pairing deadline is: Tuesday October 22, 10:59:59 AM PDT.</p>
+<p>The pairing deadline is listed in the sidebar.</p>
 
 <h2 id="learning-outcomes">Learning Outcomes</h2>
 
@@ -183,7 +189,7 @@ provide a real-time communication platform.</p>
 <ul>
   <li>
     <p>The name of a pushed docker container that when invoked runs your chat
-server, e.g., <code class="language-plaintext highlighter-rouge">us.gcr.io/cs291-f19/project3_bboe</code> (note: you do <em>not</em> need to
+server, e.g., <code class="language-plaintext highlighter-rouge">us.gcr.io/cs291a/project3_bboe</code> (note: you do <em>not</em> need to
 deploy to Google Cloud Run).</p>
   </li>
   <li>
@@ -204,8 +210,8 @@ work with your server. Sections indicated via <code class="language-plaintext hi
 but are listed so you understand why the reference server behaves a certain
 way.</p>
 
-<p><strong>Note</strong>: I’ve intentionally excluded any CORS related headers and endpoints
-from the following list.</p>
+<p class="alert alert-warning"><strong>Note</strong>: I’ve intentionally excluded any CORS related headers and endpoints
+from the following list. It’s up to you to determine the necessary CORs headers</p>
 
 <h3 id="post-login">POST /login</h3>
 
@@ -239,7 +245,7 @@ expected fields</p>
   <li><code class="language-plaintext highlighter-rouge">username</code></li>
 </ul>
 
-<p><strong>WARNING</strong>: Do not send real passwords to this system. The reference server is
+<p class="alert alert-danger"><strong>WARNING</strong>: Do not send real passwords to this system. The reference server is
 not protected by TLS and thus all data sent to or from the server is
 unencrypted.</p>
 
@@ -250,11 +256,11 @@ unencrypted.</p>
 
 <p>Example HTTP response:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 201 CREATED
-Content-Type: application/json
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">CREATED</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 
-{"token": "&lt;SIGNED TOKEN&gt;"}
-</code></pre></div></div>
+<span class="p">{</span><span class="nl">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;SIGNED TOKEN&gt;"</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
 
 <h3 id="post-message">POST /message</h3>
 
@@ -297,7 +303,7 @@ expected fields</p>
 
 <p>Example HTTP response:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 201 CREATED
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">CREATED</span>
 </code></pre></div></div>
 
 <h3 id="get-streamsigned-token">GET /stream/&lt;SIGNED TOKEN&gt;</h3>
@@ -321,8 +327,8 @@ following section</p>
 
 <p>Example (partial) HTTP response:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
-Content-Type: text/event-stream; charset=utf-8
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/event-stream; charset=utf-8</span>
 
 data: {"users": ["curl"], "created": 1570999219.797813}
 event: Users
@@ -516,7 +522,7 @@ following React components:</p>
 <p>The following instructions are not necessary, but might make it easier if you
 don’t want to set up the dependencies on your machine.</p>
 
-<h3 id="create-or-change-into-a-directory-where-you-want-your-project-to-live-under">Create or change into a directory where you want your project to live under.</h3>
+<h3 id="create-or-change-into-a-directory-where-you-want-your-project-to-live-under">Create or change into a directory where you want your project to live under</h3>
 
 <div class="language-ssh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">mkdir</span> project3
 <span class="k">cd</span> project3
@@ -535,7 +541,7 @@ starts up <code class="language-plaintext highlighter-rouge">bash</code>.</p>
 
 <p>Once running, create your React application inside the container via:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx create-react-app chat_client
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx create-react-app chat_client
 </code></pre></div></div>
 
 <p>When that’s done, note that in your local directory (not in the container), a
@@ -568,7 +574,7 @@ needing to refresh.</p>
 
 <h3 id="hosted-server-example">Hosted Server Example</h3>
 
-<p><a href="http://chat.cs291.com/">http://chat.cs291.com/</a></p>
+<p><a href="https://chat.cs291.com/">https://chat.cs291.com/</a></p>
 
 <p>The application at the above URL contains a complete server implementation
 which your client should be able to communicate with. Of course, the server
@@ -588,7 +594,7 @@ to see it on GitHub:</p>
 
 <p><a href="https://github.com/scalableinternetservices/ucsb_website/tree/master/project3/chat">https://github.com/scalableinternetservices/ucsb_website/tree/master/project3/chat</a></p>
 
-<p><strong>Note</strong>: The logic of this client is written 100% in JavaScript and as such it
+<p class="alert alert-warning"><strong>Note</strong>: The logic of this client is written 100% in JavaScript and as such it
 serves as a poor example of code to copy since you can better accomplish the
 same with React. While you may end up writing more code when using React, the
 maintainability of the React code is significantly greater, especially when
@@ -598,7 +604,8 @@ accompanied with component unit tests.</p>
 
 <ul>
   <li>
-    <p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">Cross-Origin Resource Sharing</a> (CORS)</p>
+    <p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">Cross-Origin Resource
+Sharing</a> (CORS)</p>
   </li>
   <li>
     <p><a href="https://www.docker.com/products/docker-desktop">Docker</a></p>
@@ -624,7 +631,8 @@ accompanied with component unit tests.</p>
 
 <ul>
   <li>
-    <p><a href="https://hpbn.co/server-sent-events-sse/">Server-Sent Events (SSE)</a> in High Performance Browser Networking</p>
+    <p><a href="https://hpbn.co/server-sent-events-sse/">Server-Sent Events (SSE)</a> in High
+Performance Browser Networking</p>
   </li>
   <li>
     <p><a href="https://hpbn.co/xmlhttprequest/">XMLHttpRequest</a> in High Performance Browser Networking</p>
