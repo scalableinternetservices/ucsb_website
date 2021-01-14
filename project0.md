@@ -13,7 +13,7 @@ This project will ensure that students can deploy and load test a simple web
 page prior to working with more complicated web applications.
 
 Static web pages are fast to serve, and are relatively trivial to scale. Anyone
-with access to a free github account can deploy a static web site that can
+with access to a free GitHub account can deploy a static web site that can
 scale to thousands of users without requring any knowledge of how such scaling
 is accomplished.
 
@@ -53,7 +53,7 @@ You webpage must include:
 - an external CSS file written by you and hosted on the same domain
 - an unordered list with at least three items
 - a table with at least 2 columns and at least 3 rows
-- a hyperlink to the github repository containing the source code
+- a hyperlink to the GitHub repository containing the source code
 
 ### Verification Script
 

@@ -8,7 +8,7 @@ title: Project 3
 # Project 3: Chat Server and Corresponding React Front-End
 
 In this project you will write a chat server using sinatra and packaged in a
-docker container, as well as a standalone React-based front-end for your chat
+docker container, as well as a stand-alone React-based front-end for your chat
 sever.
 
 Your front-end should have the capability to seamlessly work with both your
@@ -33,7 +33,7 @@ If you intend to work solo, please also message me on Piazza to indicate your
 choice to work solo. Should you change your mind, you may later pair up with
 someone by the pairing deadline.
 
-The pairing deadline is listed in the sidebar.
+The pairing deadline is listed in the side bar.
 
 ## Learning Outcomes
 
@@ -42,7 +42,7 @@ The pairing deadline is listed in the sidebar.
 * Student has added CORS headers to their web application to support
   third-party front-ends.
 
-* Student has leveraged Server-Sent Events and Javascript's EventSource to
+* Student has leveraged Server-Sent Events and JavaScript's EventSource to
   provide a real-time communication platform.
 
 ## Overview Video
@@ -62,11 +62,11 @@ In order to submit the form you will need three additional things:
   server, e.g., `us.gcr.io/cs291a/project3_bboe` (note: you do _not_ need to
   deploy to Google Cloud Run).
 
-* A url to your deployed front-end application with minimized javascript (tip: `yarn build`).
+* A URL to your deployed front-end application with minimized JavaScript (tip: `yarn build`).
 
-* A url to a repository containing your front-end source code (not the code
+* A URL to a repository containing your front-end source code (not the code
   from `yarn build`). Assuming this repository is `private`, please invite me,
-  `bboe` on github so that I can see your code.
+  `bboe` on GitHub so that I can see your code.
 
 ## HTTP API Specification
 
@@ -191,7 +191,7 @@ id: 1a72e044-92e4-4ee5-94fe-5cabacb75b83
 
 Below are a list of events that you must support and implement. The `data`
 field of all events must be JSON. All events have a unique ID which is included
-as part of the SSE protocal, and not part of the `data` attribute.
+as part of the SSE protocol, and not part of the `data` attribute.
 
 ### Disconnect
 
@@ -200,7 +200,7 @@ auto-retry on disconnect.
 
 Fields:
 
-* `created` (float): the unix timestamp when the event was created
+* `created` (float): the Unix timestamp when the event was created
 
 ### Join
 
@@ -208,7 +208,7 @@ Indicates that a user has joined the chat.
 
 Fields:
 
-* `created` (float): the unix timestamp when the event was created
+* `created` (float): the Unix timestamp when the event was created
 * `user` (string): the username of the user who joined the chat
 
 ### Message
@@ -217,7 +217,7 @@ Represents a message from a user connected to the chat.
 
 Fields:
 
-* `created` (float): the unix timestamp when the event was created
+* `created` (float): the Unix timestamp when the event was created
 * `message` (string): the message from the user
 * `user` (string): the username of the sender
 
@@ -227,7 +227,7 @@ Indicates that a user has left the chat.
 
 Fields:
 
-* `created` (float): the unix timestamp when the event was created
+* `created` (float): the Unix timestamp when the event was created
 * `user` (string): the username of the user who left the chat
 
 ### ServerStatus
@@ -236,7 +236,7 @@ Used for the server to provide status updates.
 
 Fields:
 
-* `created` (float): the unix timestamp when the event was created
+* `created` (float): the Unix timestamp when the event was created
 * `status` (string): the message from the server
 
 ### Users
@@ -246,7 +246,7 @@ always sent out on connection of new streams.
 
 Fields:
 
-* `created` (float): the unix timestamp when the event was created
+* `created` (float): the Unix timestamp when the event was created
 * `users` (array[string]): the list of connected users
 
 ## Server Requirements
@@ -284,19 +284,19 @@ Fields:
 Your application need not be anything like the reference application. It
 however, must meet the following requirements:
 
-* Connection status should be visually discernable between being connected and disconnected.
+* Connection status should be visually discernible between being connected and disconnected.
 
 * There should be an easy way to see who is connected.
 
 * There should be a way to discover when someone connected (`JOIN`).
 
-* It should be easy to discover when someone disconencted (`PART`).
+* It should be easy to discover when someone disconnected (`PART`).
 
 * New `Message` events should be immediately apparent.
 
 * `ServerStatus` events should be locatable.
 
-* For retryable connection failures, your application should automatically
+* For retry-able connection failures, your application should automatically
   reconnect (`EventSource` should handle this for you).
 
 * On `Disconnect` your application should not automatically attempt to
