@@ -54,13 +54,18 @@ Thursday, March 18 4pm PDT
 
 ## Class Resources
 
-[Google Drive]({{ site.drive_url }}): Download lecture videos, and obtain other class content. You must be logged in to your UCSB Google account in order to access.
+[Google Drive]({{ site.drive_url }}): Download lecture videos, and obtain other
+class content. You must be logged in to your UCSB Google account in order to
+access.
 
-[Piazza]({{ site.piazza_url }}): Use to receive class announcements, ask and answer questions, and to communicate with instructor. Access code is available in Google Drive.
+[Piazza]({{ site.piazza_url }}): Use to receive class announcements, ask and
+answer questions, and to communicate with instructor. Access code is available
+in Google Drive.
 
 [Nectir]({{ site.nectir_url }}): Use for real-time chat with classmates.
 
-[Github](https://github.com/{{ site.github_username }}): Contains content for this website. Additionally all student projects will live here.
+[Github](https://github.com/{{ site.github_username }}): Contains content for
+this website. Additionally all student projects will live here.
 
 ## Textbooks
 
@@ -69,5 +74,5 @@ _[Complete 3rd edition available online](https://3rd-edition.railstutorial.org/b
 
 [High Performance Browser Networking](https://www.amazon.com/High-Performance-Browser-Networking-performance/dp/1449344763)  
 ISBN: 9781449344764  
-_[Available online](https://hpbn.co/)._
+_[Available online](https://hpbn.co/)._  
 Note: The online version is slightly more up-to-date.
