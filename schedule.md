@@ -50,7 +50,7 @@ the quarter progresses.
   ([video](https://drive.google.com/file/d/1m_NgJ9dhhAWUpgsylp1ciezgxKVCc5mC/view),
   [slides](/slides/2021w/03_http_servers/))
 - Application Servers ([slides](/slides/2021w/04_application_servers/))
-- Scaling Web Applications
+- Scaling Web Applications ([slides](/slides/2021w/05_scaling_web_applications/))
 
 ### Tasks
 

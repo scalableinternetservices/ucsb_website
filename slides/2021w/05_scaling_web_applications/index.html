@@ -1,0 +1,748 @@
+---
+layout: presentation
+title: Scaling Web Applications
+---
+
+class: center, middle
+
+# {{page.title}}
+
+## CS291A: Scalable Internet Services
+
+### Dr. Bryce Boe
+
+---
+
+# Scaling Goal
+
+.center[![Load Balanced Topology](load_balanced_topology.png)]
+
+After today you will understand what load balancing is, and why the depicted
+architecture provides smooth cost-effective scaling.
+
+---
+
+# The Problem
+
+You've built something the world (or significant subset) is excited about.
+
+> What do you do when your popularity doubles (again, and again)?
+
+---
+
+# The Solutions
+
+## Vertical Scaling
+
+Buying "bigger" hardware and scaling _up_
+
+* __PRO__: Easy
+
+* __CON__: Limited
+
+* __CON__: Non-linear increase in cost when scaling
+
+--
+
+## Horizontal Scaling
+
+Buying more servers and scaling _out_
+
+* __PRO__: Easy to add more servers (limited by data center space)
+
+* __PRO__: Linear (maybe even sublinear) increase in cost when scaling
+
+* __CON__: More moving parts makes things more complicated
+
+---
+
+class: center, middle, inverse
+# Vertical Scaling
+
+---
+
+# Vertical Scaling
+
+When needed, increase the resources of your current server, eventually buy (or
+rent) a bigger server with:
+
+* More memory
+
+* More and/or faster CPUs and/or cores
+
+* Higher bandwidth
+
+---
+
+# EC2 and Vertical Scaling
+
+With Amazon EC2 you rent virtual instances. There are clear vertical scaling
+paths. Each type of instance (below) has a few options ranging from lower
+resources/performance to higher resources/performance:
+
+* __T__ and __M__ prefixed instances: balanced mix of memory and CPU
+
+* __C__ prefixed instances: CPU optimized
+
+* __R__ prefixed instances: Memory optimized
+
+* __G__ prefixed instances: GPU optimized
+
+* __I__ prefixed instances: I/O optimized
+
+* __D__ prefixed instances: Storage capacity optimized
+
+https://aws.amazon.com/ec2/instance-types/
+
+---
+
+# Scaling Test: Simulated Users
+
+We will use the same test setup explained in the last lecture.
+
+Using Tsung (erlang-based test framework) we will simulate multiple users
+visiting the Demo App web service. Each user will:
+
+```
+Visit the homepage (/)
+  Wait randomly between 0 and 2 seconds
+Request community creation form
+  Wait randomly between 0 and 2 seconds
+Submit new community form
+Request new link submission form
+  Wait randomly between 0 and 2 seconds
+Submit new link submission form
+  Wait randomly between 0 and 2 seconds
+Delete the link
+  Wait randomly between 0 and 2 seconds
+Delete the community
+```
+
+---
+
+# Scaling Test: Phases
+
+This time we have twelve phases of testing each lasting 60 seconds:
+
+```
+ 1.    (0-59s) Every second a new simulated user arrives
+ 2.  (60-119s) Every second 1.5 new simulated users arrive
+ 3. (120-179s) Every second 2 new simulated users arrive
+ 4. (180-239s) Every second 4 new simulated users arrive
+ 5. (240-299s) Every second 6 new simulated users arrive
+ 6. (300-359s) Every second 10 new simulated users arrive
+ 7. (360-419s) Every second 16 new simulated users arrive
+ 8. (420-479s) Every second 20 new simulated users arrive
+ 9. (480-539s) Every second 25 new simulated users arrive
+10. (540-599s) Every second 35 new simulated users arrive
+11. (600-659s) Every second 45 new simulated users arrive
+12. (660-719s) Every second 55 new simulated users arrive
+```
+
+---
+
+# Vertical Scaling: M3 Large Instance
+
+.left-column20[
+* 2 vCPUs
+* 7.5 GB Memory
+* SSD storage
+* $100 per month
+
+Handles 6 new users per second (ups).
+
+Fails with 10 ups.
+]
+.right-column80[
+![M3 Large Instance Graph](vertical_scaling_m3_large.png)
+]
+
+---
+
+# Vertical Scaling: M3 X-Large Instance
+
+.left-column20[
+* 4 vCPUs
+* 15 GB Memory
+* SSD storage
+* $200 per month
+
+Handles 10 new users per second (ups).
+
+Fails with 16 ups.
+]
+.right-column80[
+![M3 X-Large Instance Graph](vertical_scaling_m3_xlarge.png)
+]
+
+
+---
+
+# Vertical Scaling: M3 XX-Large Instance
+
+.left-column20[
+* 8 vCPUs
+* 30 GB Memory
+* SSD storage
+* $400 per month
+* Largest available M-prefixed instance.
+
+Handles 16 new users per second (ups).
+
+Fails with 20 ups.
+]
+.right-column80[
+![M3 XX-Large Instance Graph](vertical_scaling_m3_xxlarge.png)
+]
+
+---
+
+# Vertical Scaling: C3 4XLarge Instance
+
+.left-column20[
+* 16 vCPUs
+* 30 GB Memory
+* SSD storage
+* $600 per month
+
+Handles 20 new users per second (ups).
+
+Fails with 25 ups.
+]
+.right-column80[
+![C3 4XLarge Instance Graph](vertical_scaling_c3_4xlarge.png)
+]
+
+---
+
+class: center, middle, inverse
+# Horizontal Scaling
+
+---
+
+
+# Load Balancing
+
+Vertical scaling requires fewer moving parts but has limited scaling
+capability. Eventually horizontal scaling becomes necessary to handle increased
+load.
+
+When horizontally scaling HTTP, this technique is referred to as __load
+balancing__.
+
+## Basic Idea
+
+* Have many servers that can serve clients
+
+* Make these servers _appear_ as a single endpoint to the outside world
+
+The users' experiences are the same regardless of which server ultimately
+handles the request.
+
+---
+
+# Think About It
+
+> How can we enable many servers to serve clients?
+
+Consider the following sequence of actions:
+
+1. `GET /products`
+2. `POST /products`
+3. `GET /products`
+
+> If these requests are handled by three different servers, will the third
+> request show the new product?
+
+---
+
+# Stateless Servers
+
+.center[![Load Balanced Topology](load_balanced_topology.png)]
+
+In order for load balancing to work, the servers must be stateless.
+
+Statelessness can be accomplished by keeping the persistence layer separate
+from the application layer.
+
+---
+
+# Load Balancing (1): HTTP Redirects
+
+.left-column30[
+Discussed in section 6.1 of the reading.
+
+Implemented using multiple web servers with different domain names.
+
+A request for `www.domain.com` will use HTTP 301 or 302 to redirect the request
+to a pool of possible hosts.
+]
+.right-column70.center[
+![Load balancing via redirect](load_balancing_redirect.png)
+]
+
+---
+
+# HTTP Redirect Example
+
+```http
+% nc www.domain.com 80
+GET / HTTP/1.1
+host: www.domain.com
+
+HTTP/1.1 301 Moved Permanently
+Date: Wed, 15 Oct 2014 21:08:22 GMT
+Server: Apache/2.2.22 (Ubuntu)
+Location: http://www2.domain.com/
+Content-Type: text/html; charset=iso-8859-1
+...
+```
+
+---
+
+# HTTP Redirects Trade-offs
+
+## Strengths
+
+* Simple
+
+* Location independent
+
+## Weaknesses
+
+* Not transparent to user
+
+* High load on www
+
+* May reduce local-network cache applicability
+
+* Users can bypass load balancer
+
+---
+
+# Load Balancing (2): Round Robin DNS
+
+.left-column30[
+Discussed in section 4.1 of the reading.
+
+When a user's browser queries DNS for `www.example.com`, a list of IPs is
+returned. The DNS server rotates the list order for each query (or alters
+priorities).
+
+The user's browser chooses which IP to connect to (generally picks the first,
+or highest priority).
+]
+.right-column70.center[
+![Load balancing via round-robin DNS](load_balancing_round_robin.png)
+]
+
+---
+
+# Round Robin DNS Example
+
+```
+% host cs291.com
+cs291.com has address 192.30.252.153
+cs291.com has address 192.30.252.154
+```
+
+```
+% host cs291.com
+cs291.com has address 192.30.252.154
+cs291.com has address 192.30.252.153
+```
+
+---
+
+# Round Robin DNS Trade-offs
+
+## Strengths
+
+* Simple
+
+* Cheap
+
+## Weaknesses
+
+* Less control over balancing
+
+* Modifying the list is inhibited by caching in the browser and proxies
+
+---
+
+# Load Balancing (3): TCP Load Balancing
+
+.left-column30[
+Discussed in section 5 of the reading.
+
+## General Idea
+
+Rewrite TCP packets to send them to the selected server. This includes
+addresses, sequence numbers, and checksums.
+]
+.right-column70.center[
+![Load balancing via TCP](load_balancing_tcp.png)
+]
+
+## Commercial Products (use hardware ASICs to do this fast)
+
+* Cisco Content Services Switch
+* Citrix Netscaler
+* F5 Big IP
+
+
+---
+
+# TCP Load Balancing HTTP Request
+
+```
+(client -> lb)
+IP D=208.50.157.136 S=216.64.159.149 LEN=60, ID=48397
+TCP D=80 S=1421 Syn Seq=899863543 Len=0 Win=32120
+
+(lb -> server)
+IP D=10.16.100.121 S=208.50.157.136 LEN=60, ID=48397
+TCP D=80 S=1421 Syn Seq=899863543 Len=0 Win=32120
+
+(server -> lb)
+IP D=208.50.157.136 S=10.16.100.121 LEN=48, ID=26291
+TCP D=1421 S=80 Syn Ack=899863544 Seq=1908949446 Len=0
+
+(lb -> client)
+IP D=216.64.159.149 S=208.50.157.136 LEN=48, ID=26291
+TCP D=1421 S=80 Syn Ack=899863544 Seq=1908949446 Len=0
+
+(client -> lb)
+IP D=208.50.157.136 S=216.64.159.149 LEN=154, ID=48401
+TCP D=80 S=1421 Ack=1908949447 Seq=899863544 Len=114
+HTTP GET /eb/images/ec_home_logo_tag.gif HTTP/1.1
+
+(lb -> server)
+IP D=10.16.100.121 S=208.50.157.136 LEN=154, ID=48401
+TCP D=80 S=1421 Ack=1908949447 Seq=899863544 Len=114
+HTTP GET /eb/images/ec_home_logo_tag.gif HTTP/1.1
+```
+
+---
+
+# TCP Load Balancing HTTP Response
+
+```
+(server -> lb)
+IP D=208.50.157.136 S=10.16.100.121 LEN=1500, ID=22237
+TCP D=1421 S=80 Ack=899863658 Seq=1908949447 Len=1460
+HTTP HTTP/1.1 200 OK
+
+(lb -> client)
+IP D=216.64.159.149 S=208.50.157.136 LEN=1500, ID=22237
+TCP D=1421 S=80 Ack=899863658 Seq=1908949447 Len=1460
+HTTP HTTP/1.1 200 OK
+```
+
+---
+
+# TCP Load Balancing Trade-offs
+
+## Strengths
+
+* More control over which requests go to which servers
+
+* Works fine with HTTPs
+
+## Weaknesses
+
+* Limits where the servers can be located (same network)
+
+* Complicated
+
+---
+
+# Load Balancing (4): HTTP Proxy
+
+.left-column30[
+Also known as "Layer 7 load balancing"
+
+Terminate HTTP requests: act like a web server
+
+Issue _back-end_ HTTP request to the desired application server.
+
+Hardware products:
+
+* Citrix Netscaler
+* F5 Big-IP
+
+Many HTTP servers have modules to do this as well (Apache, NGINX)
+]
+.right-column70.center[
+![Load balancing via TCP](load_balancing_http_proxy.png)
+]
+
+---
+
+# HTTP Proxy Trade-offs
+
+This is the most popular technique in use (#3 is also used).
+
+## Strengths
+
+* Cleaner implementation than packet rewriting
+
+## Weaknesses
+
+* Load balancer needs to do more work
+
+* HTTPs is more complicated
+
+---
+
+# Load Balancing Considerations
+
+Assume you are to design a load balancing HTTP proxy. You have insight into
+every incoming request and response.
+
+> How would you determine which server to forward a request to?
+
+--
+
+## Options
+
+* Random
+
+* Round robin
+
+* Least number of connections
+
+* Fastest response time
+
+* Bandwidth per server
+
+* URI-based mapping (e.g., `/images` to server1, `/admin` to server2)
+
+Amazon's ELB (elastic load balancer) uses round robin with cookie-based
+stickiness (send the same client to the same server).
+
+---
+
+# Load Balancing Challenges
+
+When working with and/or designing a load balancing proxy there are some
+challenges to consider:
+
+* Detecting and reacting to server failures
+
+* Session affinity and persistence
+
+* Connection pooling
+
+Definitions:
+
+* __Affinity__: Map a client to a server without application-level information
+(e.g., IP address, request time)
+
+* __Persistence__: Use application-level
+information to map a client to a server (e.g., cookies)
+
+[Reference](https://www.haproxy.com/blog/load-balancing-affinity-persistence-sticky-sessions-what-you-need-to-know/)
+
+---
+
+# Detecting Server Failures
+
+> How do we know when a member of our application pool has died?
+
+Observe traffic. Are requests being processed? Are they just taking a long
+time?
+
+Probe the server through various means:
+
+* __ICMP ping__: tests the network and server kernel
+
+* __TCP connection__: the process is running and accepting connections
+
+* __HTTP HEAD__: the application is serving pages
+
+* __SNMP__: Provides insight into server load (and more if configured)
+
+---
+
+# Session Affinity and Persistence
+
+> Can we redirect users back to the same web server they used before?
+
+Doing so can provide some caching improvements.
+
+A few options:
+
+* Affinity based on client IP address (concerns: client IPs change, and IPs are
+shared)
+
+* HTTP Cookie (works but requires proxy configuration) [_HTTPS?_]
+
+* Session ID in URL (not a great solution) [_HTTPS?_]
+
+---
+
+# Connection Pooling
+
+We're used to the idea that one client reuses a TCP connection for many HTTP
+requests.
+
+We can reuse this mechanism for distinct clients.
+
+Saves on repeated TCP setup between the load balancer and application servers.
+
+Reduces idle waiting on server for reads and writes.
+
+---
+
+# Software Load Balancers
+
+* Apache
+
+* NGINX
+
+* HAProxy
+
+* Varnish
+
+* Pound
+
+* Squid
+
+---
+
+# Amazon Elastic Load Balancer
+
+Amazon provides load balancing as a service:
+
+* $0.025 per load balancer hour
+
+* $0.008 per GB of data processed
+
+* Works with EC2 autoscaling groups
+
+* Supports TLS termination
+
+* Supports load balancing between Availability Zones within a Region
+
+__Does not__: support load balancing between regions (e.g., between us-west-1
+and us-west-2). Consider using Route 53 DNS for region failover.
+
+---
+
+# Horizontal Scaling Test
+
+In the vertical scaling tests, the database application ran on the same machine
+as the web server application.
+
+For these tests we are going to use a single machine for the database. This
+will make it easy to scale up the number of application servers.
+
+.center[![Single Server Load Balanced Topology](load_balanced_topology_single.png)]
+
+---
+
+# Horizontal Scaling: 1 M3 Large Instance
+
+.left-column20[
+* 2 vCPUs
+* 7.5 GB Memory
+* SSD storage
+* DB is also M3 large
+* $200 per month ($100 each)
+
+Handles 10 new users per second (ups).
+
+Fails with 16 ups.
+
+Comparable to single M3 XLarge ($200/mo)
+]
+.right-column80.center[
+![Single M3 Large Instance Graph](horizontal_scaling_1.png)
+]
+
+---
+
+# Adding an App Server
+
+Let's scale horizontally by adding a second application server instance.
+
+.center[![Dual Server Load Balanced Topology](load_balanced_topology_double.png)]
+
+---
+
+# Horizontal Scaling: 2 M3 Large Instances
+
+.left-column20[
+* 2 vCPUs
+* 7.5 GB Memory
+* SSD storage
+* DB is also M3 large
+* $300 per month ($100 each)
+
+Handles 20 new users per second (ups).
+
+Fails with 25 ups.
+
+Comparable to single C3 4XLarge ($600/mo)
+]
+.right-column80.center[
+![Dual M3 Large Instance Graph](horizontal_scaling_2.png)
+]
+
+---
+
+# More App Servers!
+
+.left-column30[
+Let’s see how the system performs if we scale out to 5 app servers.
+
+Total dollar cost will be comparable to the most expensive single instance we
+tested.
+]
+.right-column70.center[
+![5x Load Balanced Topology](load_balanced_topology_5x.png)
+]
+
+---
+
+# Horizontal Scaling: 5 M3 Large Instances
+
+.left-column20[
+* 2 vCPUs
+* 7.5 GB Memory
+* SSD storage
+* DB is also M3 large
+* $600 per month ($100 each)
+
+Handles 35 new users per second (ups).
+]
+.right-column80.center[
+![Five M3 Large Instance Graph](horizontal_scaling_5.png)
+Single C3 4XLarge ($600/mo) failed at 25 ups!
+]
+
+Handles 45 ups with an increase in response time.
+
+Fails with 55 ups.
+
+
+
+---
+
+# Horizontal Scaling For The Win!
+
+Vertical scaling handled only 20 new users per second at a cost of about $600
+per month. There was no clear scaling path after that point.
+
+Horizontal scaling handled 45 new users per second at a cost of about $600 per
+month. The scaling path is clear. Add more servers for a linear increase in
+cost.
+
+---
+
+# Load Balancing the Load Balancer
+
+From Github: http://githubengineering.com/introducing-glb/
+
+From Facebook: https://www.youtube.com/watch?v=dKsOvc73gQk
