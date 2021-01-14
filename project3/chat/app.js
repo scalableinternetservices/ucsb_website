@@ -53,7 +53,7 @@ function output(node) {
 }
 
 function show_login() {
-    url.value = sessionStorage.url || "http://chat.cs291.com";
+    url.value = sessionStorage.url || "https://chat.cs291.com";
     login_modal.style.display = "block";
 }
 

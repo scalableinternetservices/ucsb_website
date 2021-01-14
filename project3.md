@@ -103,11 +103,6 @@ Expected Form Fields:
 * `password`
 * `username`
 
-__WARNING__: Do not send real passwords to this system. The reference server is
-not protected by TLS and thus all data sent to or from the server is
-unencrypted.
-{: .alert .alert-danger }
-
 Example curl command:
 
 ```sh
