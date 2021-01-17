@@ -69,10 +69,12 @@ this website. Additionally all student projects will live here.
 
 ## Textbooks
 
-[The Ruby On Rails Tutorial](https://www.railstutorial.org/book)  
-_[Complete 3rd edition available online](https://3rd-edition.railstutorial.org/book)_
-
 [High Performance Browser Networking](https://www.amazon.com/High-Performance-Browser-Networking-performance/dp/1449344763)  
 ISBN: 9781449344764  
 _[Available online](https://hpbn.co/)._  
 Note: The online version is slightly more up-to-date.
+
+[The Ruby On Rails Tutorial](https://www.railstutorial.org/book)  
+_[Complete 3rd edition available online](https://3rd-edition.railstutorial.org/book)_  
+Note: This book is only useful once we get to the primary project.
+
