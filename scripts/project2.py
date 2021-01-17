@@ -2,6 +2,7 @@
 import hashlib
 import random
 import re
+import subprocess
 import sys
 from urllib.parse import urljoin, urlparse
 
@@ -26,6 +27,18 @@ MAX_FILESIZE = 1024 * 1024
 
 with open("/usr/share/dict/words") as fp:
     WORDS = fp.read().split()
+
+
+try:
+    result = subprocess.run(
+        ["gcloud", "auth", "print-identity-token"],
+        capture_output=True,
+        check=True,
+        text=True,
+    )
+    HEADERS = {"Authorization": f"Bearer {result.stdout.strip()}"}
+except (FileNotFoundError, subprocess.CalledProcessError):
+    HEADERS = {}
 
 
 def count_format(word, number):
@@ -101,8 +114,8 @@ def test_direct_file_add_valid(url):
     issues = 0
     files_url = urljoin(url, "/files/")
 
-    client = storage.Client(project="cs291_f19")
-    bucket = client.bucket("cs291_project2")
+    client = storage.Client(project="cs291a")
+    bucket = client.bucket("cs291project2")
 
     # Directly add files
     expected_digests = set()
@@ -120,7 +133,7 @@ def test_direct_file_add_valid(url):
         blob.upload_from_string(body)
 
     # List files
-    response = requests.get(files_url)
+    response = requests.get(files_url, headers=HEADERS)
     if response.status_code != 200:
         print(
             f"Expected 200 response for `GET {files_url}`. Got {response.status_code}."
@@ -147,8 +160,8 @@ def test_direct_file_add_invalid(url):
     issues = 0
     files_url = urljoin(url, "/files/")
 
-    client = storage.Client(project="cs291_f19")
-    bucket = client.bucket("cs291_project2")
+    client = storage.Client(project="cs291a")
+    bucket = client.bucket("cs291project2")
 
     # Directly add files
     unexpected_digests = set()
@@ -167,7 +180,7 @@ def test_direct_file_add_invalid(url):
         blob.upload_from_string(body)
 
     # List files
-    response = requests.get(files_url)
+    response = requests.get(files_url, headers=HEADERS)
     if response.status_code != 200:
         print(
             f"Expected 200 response for `GET {files_url}`. Got {response.status_code}."
@@ -196,7 +209,9 @@ def test_files__create_get_list_delete(url):
 
     # Create the file
     response = requests.post(
-        files_url, files={"file": (random.choice(WORDS), body, content_type)}
+        files_url,
+        files={"file": (random.choice(WORDS), body, content_type)},
+        headers=HEADERS,
     )
     if response.status_code != 201:
         print(
@@ -211,7 +226,7 @@ def test_files__create_get_list_delete(url):
 
     # Fetch the file
     file_url = urljoin(files_url, mix_case(digest))
-    response = requests.get(file_url)
+    response = requests.get(file_url, headers=HEADERS)
     if response.status_code != 200:
         print(
             f"Expected 200 response for `GET {file_url}`. Got {response.status_code}."
@@ -227,7 +242,7 @@ def test_files__create_get_list_delete(url):
         issues += 1
 
     # List files
-    response = requests.get(files_url)
+    response = requests.get(files_url, headers=HEADERS)
     if response.status_code != 200:
         print(
             f"Expected 200 response for `GET {files_url}`. Got {response.status_code}."
@@ -249,7 +264,7 @@ def test_files__create_get_list_delete(url):
 
     # Delete file
     file_url = urljoin(files_url, mix_case(digest))
-    response = requests.delete(file_url)
+    response = requests.delete(file_url, headers=HEADERS)
     if response.status_code != 200:
         print(
             f"Expected 200 response for `DELETE {file_url}`. Got {response.status_code}."
@@ -257,7 +272,7 @@ def test_files__create_get_list_delete(url):
         issues += 1
 
     # List files
-    response = requests.get(files_url)
+    response = requests.get(files_url, headers=HEADERS)
     if response.status_code != 200:
         print(
             f"Expected 200 response for `GET {files_url}`. Got {response.status_code}."
@@ -271,7 +286,7 @@ def test_files__create_get_list_delete(url):
         issues += 1
 
     # Duplicate delete file to verify idempotency
-    response = requests.delete(file_url)
+    response = requests.delete(file_url, headers=HEADERS)
     if response.status_code != 200:
         print(
             f"Expected 200 response for `DELETE {file_url}`. Got {response.status_code}."
@@ -280,7 +295,7 @@ def test_files__create_get_list_delete(url):
 
     # Fetch the no longer existing file
     file_url = urljoin(files_url, mix_case(digest))
-    response = requests.get(file_url)
+    response = requests.get(file_url, headers=HEADERS)
     if response.status_code != 404:
         print(
             f"Expected 404 response for `GET {file_url}`. Got {response.status_code}."
@@ -297,7 +312,9 @@ def test_files__duplicate_create(url):
 
     # Create the file
     response = requests.post(
-        files_url, files={"file": (random.choice(WORDS), body, content_type)}
+        files_url,
+        files={"file": (random.choice(WORDS), body, content_type)},
+        headers=HEADERS,
     )
     if response.status_code != 201:
         print(
@@ -312,7 +329,9 @@ def test_files__duplicate_create(url):
 
     # Recreate the file
     response = requests.post(
-        files_url, files={"file": (random.choice(WORDS), body, content_type)}
+        files_url,
+        files={"file": (random.choice(WORDS), body, content_type)},
+        headers=HEADERS,
     )
     if response.status_code != 409:
         print(
@@ -327,14 +346,16 @@ def test_files__invalid_create(url):
     issues = 0
 
     for data in [None, {"file": ""}, {"file": "file"}, {"file": "tempfile"}]:
-        response = requests.post(files_url, data=data)
+        response = requests.post(files_url, data=data, headers=HEADERS)
         if response.status_code != 422:
             print(
                 f"Expected 422 response for `POST {files_url}`. Got {response.status_code}."
             )
             issues += 1
 
-    response = requests.post(files_url, files={"data": (random.choice(WORDS), "body")})
+    response = requests.post(
+        files_url, files={"data": (random.choice(WORDS), "body")}, headers=HEADERS
+    )
     if response.status_code != 422:
         print(
             f"Expected 422 response for `POST {files_url}`. Got {response.status_code}."
@@ -345,6 +366,7 @@ def test_files__invalid_create(url):
     response = requests.post(
         files_url,
         files={"file": (random.choice(WORDS), body, random.choice(CONTENT_TYPES))},
+        headers=HEADERS,
     )
     if response.status_code != 422:
         print(
@@ -364,7 +386,7 @@ def test_files__invalid_get_and_delete(url):
             digest = hashlib.sha256(str(random.random()).encode("utf-8")).hexdigest()
         for invalid in [digest[:-1], digest + "a", digest.replace("0", "g")]:
             files_url = urljoin(url, f"/files/{invalid}")
-            response = requests.request(method, files_url)
+            response = requests.request(method, files_url, headers=HEADERS)
             if response.status_code != 422:
                 print(
                     f"Expected 422 response for `{method} {files_url}`. Got {response.status_code}."
@@ -374,7 +396,7 @@ def test_files__invalid_get_and_delete(url):
 
 
 def test_root_url(url):
-    response = requests.get(url, allow_redirects=False)
+    response = requests.get(url, allow_redirects=False, headers=HEADERS)
     if response.status_code != 302:
         print(f"Expected 302 response for `GET /`. Got {response.status_code}.")
         return 1
