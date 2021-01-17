@@ -115,13 +115,15 @@ this website. Additionally all student projects will live here.</p>
 
 <h2 id="textbooks">Textbooks</h2>
 
-<p><a href="https://www.railstutorial.org/book">The Ruby On Rails Tutorial</a><br />
-<em><a href="https://3rd-edition.railstutorial.org/book">Complete 3rd edition available online</a></em></p>
-
 <p><a href="https://www.amazon.com/High-Performance-Browser-Networking-performance/dp/1449344763">High Performance Browser Networking</a><br />
 ISBN: 9781449344764<br />
 <em><a href="https://hpbn.co/">Available online</a>.</em><br />
 Note: The online version is slightly more up-to-date.</p>
+
+<p><a href="https://www.railstutorial.org/book">The Ruby On Rails Tutorial</a><br />
+<em><a href="https://3rd-edition.railstutorial.org/book">Complete 3rd edition available online</a></em><br />
+Note: This book is only useful once we get to the primary project.</p>
+
 
 </div>
 
@@ -130,7 +132,7 @@ Note: The online version is slightly more up-to-date.</p>
       <h1 id="project-3-chat-server-and-corresponding-react-front-end">Project 3: Chat Server and Corresponding React Front-End</h1>
 
 <p>In this project you will write a chat server using sinatra and packaged in a
-docker container, as well as a standalone React-based front-end for your chat
+docker container, as well as a stand-alone React-based front-end for your chat
 sever.</p>
 
 <p>Your front-end should have the capability to seamlessly work with both your
@@ -155,7 +157,7 @@ committing to stick with the pairing.</p>
 choice to work solo. Should you change your mind, you may later pair up with
 someone by the pairing deadline.</p>
 
-<p>The pairing deadline is listed in the sidebar.</p>
+<p>The pairing deadline is listed in the side bar.</p>
 
 <h2 id="learning-outcomes">Learning Outcomes</h2>
 
@@ -168,7 +170,7 @@ someone by the pairing deadline.</p>
 third-party front-ends.</p>
   </li>
   <li>
-    <p>Student has leveraged Server-Sent Events and Javascript’s EventSource to
+    <p>Student has leveraged Server-Sent Events and JavaScript’s EventSource to
 provide a real-time communication platform.</p>
   </li>
 </ul>
@@ -193,12 +195,12 @@ server, e.g., <code class="language-plaintext highlighter-rouge">us.gcr.io/cs291
 deploy to Google Cloud Run).</p>
   </li>
   <li>
-    <p>A url to your deployed front-end application with minimized javascript (tip: <code class="language-plaintext highlighter-rouge">yarn build</code>).</p>
+    <p>A URL to your deployed front-end application with minimized JavaScript (tip: <code class="language-plaintext highlighter-rouge">yarn build</code>).</p>
   </li>
   <li>
-    <p>A url to a repository containing your front-end source code (not the code
+    <p>A URL to a repository containing your front-end source code (not the code
 from <code class="language-plaintext highlighter-rouge">yarn build</code>). Assuming this repository is <code class="language-plaintext highlighter-rouge">private</code>, please invite me,
-<code class="language-plaintext highlighter-rouge">bboe</code> on github so that I can see your code.</p>
+<code class="language-plaintext highlighter-rouge">bboe</code> on GitHub so that I can see your code.</p>
   </li>
 </ul>
 
@@ -343,7 +345,7 @@ id: 1a72e044-92e4-4ee5-94fe-5cabacb75b83
 
 <p>Below are a list of events that you must support and implement. The <code class="language-plaintext highlighter-rouge">data</code>
 field of all events must be JSON. All events have a unique ID which is included
-as part of the SSE protocal, and not part of the <code class="language-plaintext highlighter-rouge">data</code> attribute.</p>
+as part of the SSE protocol, and not part of the <code class="language-plaintext highlighter-rouge">data</code> attribute.</p>
 
 <h3 id="disconnect">Disconnect</h3>
 
@@ -353,7 +355,7 @@ auto-retry on disconnect.</p>
 <p>Fields:</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">created</code> (float): the unix timestamp when the event was created</li>
+  <li><code class="language-plaintext highlighter-rouge">created</code> (float): the Unix timestamp when the event was created</li>
 </ul>
 
 <h3 id="join">Join</h3>
@@ -363,7 +365,7 @@ auto-retry on disconnect.</p>
 <p>Fields:</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">created</code> (float): the unix timestamp when the event was created</li>
+  <li><code class="language-plaintext highlighter-rouge">created</code> (float): the Unix timestamp when the event was created</li>
   <li><code class="language-plaintext highlighter-rouge">user</code> (string): the username of the user who joined the chat</li>
 </ul>
 
@@ -374,7 +376,7 @@ auto-retry on disconnect.</p>
 <p>Fields:</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">created</code> (float): the unix timestamp when the event was created</li>
+  <li><code class="language-plaintext highlighter-rouge">created</code> (float): the Unix timestamp when the event was created</li>
   <li><code class="language-plaintext highlighter-rouge">message</code> (string): the message from the user</li>
   <li><code class="language-plaintext highlighter-rouge">user</code> (string): the username of the sender</li>
 </ul>
@@ -386,7 +388,7 @@ auto-retry on disconnect.</p>
 <p>Fields:</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">created</code> (float): the unix timestamp when the event was created</li>
+  <li><code class="language-plaintext highlighter-rouge">created</code> (float): the Unix timestamp when the event was created</li>
   <li><code class="language-plaintext highlighter-rouge">user</code> (string): the username of the user who left the chat</li>
 </ul>
 
@@ -397,7 +399,7 @@ auto-retry on disconnect.</p>
 <p>Fields:</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">created</code> (float): the unix timestamp when the event was created</li>
+  <li><code class="language-plaintext highlighter-rouge">created</code> (float): the Unix timestamp when the event was created</li>
   <li><code class="language-plaintext highlighter-rouge">status</code> (string): the message from the server</li>
 </ul>
 
@@ -409,7 +411,7 @@ always sent out on connection of new streams.</p>
 <p>Fields:</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">created</code> (float): the unix timestamp when the event was created</li>
+  <li><code class="language-plaintext highlighter-rouge">created</code> (float): the Unix timestamp when the event was created</li>
   <li><code class="language-plaintext highlighter-rouge">users</code> (array[string]): the list of connected users</li>
 </ul>
 
@@ -465,7 +467,7 @@ however, must meet the following requirements:</p>
 
 <ul>
   <li>
-    <p>Connection status should be visually discernable between being connected and disconnected.</p>
+    <p>Connection status should be visually discernible between being connected and disconnected.</p>
   </li>
   <li>
     <p>There should be an easy way to see who is connected.</p>
@@ -474,7 +476,7 @@ however, must meet the following requirements:</p>
     <p>There should be a way to discover when someone connected (<code class="language-plaintext highlighter-rouge">JOIN</code>).</p>
   </li>
   <li>
-    <p>It should be easy to discover when someone disconencted (<code class="language-plaintext highlighter-rouge">PART</code>).</p>
+    <p>It should be easy to discover when someone disconnected (<code class="language-plaintext highlighter-rouge">PART</code>).</p>
   </li>
   <li>
     <p>New <code class="language-plaintext highlighter-rouge">Message</code> events should be immediately apparent.</p>
@@ -483,7 +485,7 @@ however, must meet the following requirements:</p>
     <p><code class="language-plaintext highlighter-rouge">ServerStatus</code> events should be locatable.</p>
   </li>
   <li>
-    <p>For retryable connection failures, your application should automatically
+    <p>For retry-able connection failures, your application should automatically
 reconnect (<code class="language-plaintext highlighter-rouge">EventSource</code> should handle this for you).</p>
   </li>
   <li>
