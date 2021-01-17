@@ -70,7 +70,7 @@ def score(checkfs, url):
         print(f"Scheme is not https: {result.scheme}")
         issues += 1
 
-    if not result.netloc.endswith("-fi6eeq56la-uc.a.run.app"):
+    if not result.netloc.endswith("-66egyap56q-uc.a.run.app"):
         print(f"Domain does not appear to be google cloud run: {result.netloc}")
         issues += 1
 
