@@ -67,7 +67,7 @@ the quarter progresses.
 
 ### Topics
 
-- Architecting for High Availability
+- Architecting for High Availability ([slides](/slides/2021w/06_high_availability))
 - Frontend Deep Dive: React
 
 ### Tasks
