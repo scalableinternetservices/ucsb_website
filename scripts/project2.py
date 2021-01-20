@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import argparse
 import hashlib
 import random
 import re
@@ -49,17 +50,17 @@ def count_format(word, number):
 
 
 def main():
-    checkfs = False
-    if len(sys.argv) < 2 or len(sys.argv) > 3:
-        print(f"Usage: {sys.argv[0]} URL")
-        return 1
-    if len(sys.argv) == 3:
-        if sys.argv[2] != "--checkfs":
-            print(f"Usage: {sys.argv[0]} URL")
-            return 1
-        checkfs = True
+    arguments = argparse.ArgumentParser("")
+    arguments.add_argument("--checkfs", action="store_true")
+    arguments.add_argument("--token")
+    arguments.add_argument("URL")
 
-    return score(checkfs=checkfs, url=sys.argv[1])
+    options = arguments.parse_args()
+
+    if options.token is not None:
+        HEADERS["Authorization"] = f"Bearer {options.token.strip()}"
+
+    return score(checkfs=options.checkfs, url=options.URL)
 
 
 def mix_case(word):
