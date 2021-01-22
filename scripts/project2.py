@@ -22,7 +22,7 @@ CONTENT_TYPES = [
     "text/javascript;charset=utf-8",
     "text/plain;charset=utf-8",
 ]
-RE_HEXDIGEST = re.compile(r"\A[a-z0-9]{64}\Z")
+RE_HEXDIGEST = re.compile(r"\A[a-f0-9]{64}\Z")
 MAX_FILESIZE = 1024 * 1024
 
 
