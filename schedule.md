@@ -82,10 +82,11 @@ the quarter progresses.
 
 ### Topics
 
-- Agile Software Development
-- Test Driven Development (TDD)
-- Continuous Integration (CI)
-- Pair Programming / Mobbing
+- Working in teams ([slides](/slides/2021w/07_agile_tdd_pairing))
+  - Agile Software Development
+  - Test Driven Development (TDD)
+  - Continuous Integration (CI)
+  - Pair Programming / Mobbing
 - Client-side Caching
 - Content Delivery Networks (CDNs)
 
