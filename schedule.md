@@ -87,8 +87,7 @@ the quarter progresses.
   - Test Driven Development (TDD)
   - Continuous Integration (CI)
   - Pair Programming / Mobbing
-- Client-side Caching
-- Content Delivery Networks (CDNs)
+- Client-side Caching & Content Delivery Networks ([slides](/slides/2021w/08_client_caching_cdn))
 
 ### Tasks
 
