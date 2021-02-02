@@ -100,7 +100,7 @@ the quarter progresses.
 
 ### Topics
 
-- Server Side Caching
+- Server Side Caching ([slides](/slides/2021w/09_server_caching))
 - Deep Dive: Ruby on Rails
 
 ### Tasks
