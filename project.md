@@ -5,9 +5,6 @@ permalink: /project/
 title: Primary Project
 ---
 
-Note: This page has not yet been updated for Winter 2021.
-{: .alert .alert-danger }
-
 # Primary Project
 
 ## Objective
@@ -29,11 +26,16 @@ Throughout the project, you might find it helpful to go through a ruby on rails 
 
 ### Report
 
-...
+Submit a report describing your project, and your data-driven approach to load testing. Consider answering the following questions:
+
+- What bottlenecks did you encounter along the way, and how did you address them?
+- What's the optimal $ cost per number of users your web service supports?
+- What design or functionality tradeoffs did you have to make in order to support additional load?
 
 #### Stellar Report Examples
 
-...
+- [Gaucho Book](/report_samples/gaucho_book.pdf)
+- [Whatever Chat](/report_samples/whatever_chat.pdf)
 
 ### Video
 
@@ -48,20 +50,20 @@ sprint which does not have an ending lab session.
 
 At the end of each sprint you will:
 
-- Ensure all your completed stories are integrated on your master branch.
+- Ensure all your completed stories are integrated on your main branch.
 - Deploy your project using Elastic Beanstalk.
 - Demo your deployed version and share the newly created features.
 - Share any new load testing results.
 
 
-#### Sprint 1: Week 5
+#### Sprint 1: Week 6
 
 - Form your team.
   - Decide on a team name
   - One person on the team, message me on piazza with:
     - Your team name
-    - The name, and github username of all the team members
-- Get access to your github respository (I'll create that after the above)
+    - The name, and GitHub username of all the team members
+- Get access to your GitHub respository (I'll create that after the above)
 - Get a new set of AWS credentials specific to your team.
 - Deploy your initial rails code to Elastic Beanstalk.
 - Complete `N` user stories, where `N` is the number of people on your team.
@@ -69,15 +71,13 @@ At the end of each sprint you will:
   - Ensure that when it is run, there are no 4XX or 5XX level HTTP status
     codes.
 
-#### Sprint 2: Week 6
+#### Sprint 2: Week 7
 
-#### Sprint 3: Week 7
+#### Sprint 3: Week 8
 
-#### Sprint 4: Week 8
+#### Sprint 4: Week 9
 
-#### Sprint 5: Week 9
-
-#### Sprint 6: Week 10+
+#### Sprint 5: Week 10+
 
 - Complete the [project report](#report)
 - Create [project presentation video](#video)
@@ -266,15 +266,15 @@ git add .
 git commit -m "Prepare the application to deploy to Amazon's Elastic Beanstalk"
 ```
 
-### Push changes to github
+### Push changes to GitHub
 
-If you haven't already, add github as a remote:
+If you haven't already, add GitHub as a remote:
 
 ```sh
 git remote add origin git@github.com:scalableinternetservices/PROJECTNAME.git
 ```
 
-If this is your first time pushing to github, then run:
+If this is your first time pushing to GitHub, then run:
 
 ```sh
 git push -u origin HEAD
@@ -362,7 +362,7 @@ your site (the "Yay! You’re on Rails!" doesn't show up in `production` mode).
 ## Updating the application
 
 After making changes and verifying they work with locally, push your changes to
-github, pull them on `ec2.cs291.com` and then update your deployment via:
+GitHub, pull them on `ec2.cs291.com` and then update your deployment via:
 
 ```sh
 eb deploy
@@ -370,7 +370,7 @@ eb deploy
 
 __Note__: Only commited changes are pushed on deployment, so ensure `git
 status` is clean. (You can run `eb deploy --staged` to include staged files,
-but it's preferrable to deploy code that has been pushed to github.
+but it's preferrable to deploy code that has been pushed to GitHub.
 
 ---
 
