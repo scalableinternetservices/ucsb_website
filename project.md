@@ -173,7 +173,7 @@ docker-compose build web
 
 ### Configure the project to talk to the database container
 
-Add the following to lines to the `default` section of `config.database.yml`:
+Add the following to lines to the `default` section of `config/database.yml`:
 
 ```yaml
   host: db
