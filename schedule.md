@@ -101,7 +101,6 @@ the quarter progresses.
 ### Topics
 
 - Server Side Caching ([slides](/slides/2021w/09_server_caching))
-- Deep Dive: Ruby on Rails
 
 ### Tasks
 
@@ -119,8 +118,8 @@ the quarter progresses.
 
 ### Topics
 
+- Deep Dive: Ruby on Rails
 - Deep Dive: Load Testing with Tsung
-- Relational Database
 
 </div>
 <div class="week">
@@ -129,8 +128,8 @@ the quarter progresses.
 
 ### Topics
 
+- Relational Database
 - RDBMS Scaling
-- Service Oriented Architectures
 
 </div>
 <div class="week">
@@ -139,8 +138,8 @@ the quarter progresses.
 
 ### Topics
 
+- Service Oriented Architectures
 - Non-Relational Data Stores
-- Web Security
 
 ### Tasks
 
@@ -150,8 +149,6 @@ the quarter progresses.
 - Read [Eventually
   Consistent](http://www.scalableinternetservices.com/slides/vogels.pdf) by
   Werner Vogels
-- Read chapter [4](https://hpbn.co/transport-layer-security-tls/) of High
-  Performance Browser Networking
 
 </div>
 <div class="week">
@@ -160,17 +157,23 @@ the quarter progresses.
 
 ### Topics
 
+- Web Security
 - HTTP/2
-- QUIC (HTTP/3)
 
 ### Tasks
 
+- Read chapter [4](https://hpbn.co/transport-layer-security-tls/) of High
+  Performance Browser Networking
 - Read chapter [12](https://hpbn.co/http2/) of High Performance Browser Networking
 
 </div>
 <div class="week">
 
 ## Week 10 (March 8-)
+
+### Topics
+
+- QUIC (HTTP/3)
 
 ### Tasks
 
