@@ -129,9 +129,7 @@ Note: This book is only useful once we get to the primary project.</p>
 
     </div>
     <div class="col-md-9">
-      <p class="alert alert-danger">Note: This page has not yet been updated for Winter 2021.</p>
-
-<h1 id="primary-project">Primary Project</h1>
+      <h1 id="primary-project">Primary Project</h1>
 
 <h2 id="objective">Objective</h2>
 
@@ -152,11 +150,20 @@ fundamental web technologies and the Ruby on Rails framework.</p>
 
 <h3 id="report">Report</h3>
 
-<p>…</p>
+<p>Submit a report describing your project, and your data-driven approach to load testing. Consider answering the following questions:</p>
+
+<ul>
+  <li>What bottlenecks did you encounter along the way, and how did you address them?</li>
+  <li>What’s the optimal $ cost per number of users your web service supports?</li>
+  <li>What design or functionality tradeoffs did you have to make in order to support additional load?</li>
+</ul>
 
 <h4 id="stellar-report-examples">Stellar Report Examples</h4>
 
-<p>…</p>
+<ul>
+  <li><a href="/report_samples/gaucho_book.pdf">Gaucho Book</a></li>
+  <li><a href="/report_samples/whatever_chat.pdf">Whatever Chat</a></li>
+</ul>
 
 <h3 id="video">Video</h3>
 
@@ -172,13 +179,13 @@ sprint which does not have an ending lab session.</p>
 <p>At the end of each sprint you will:</p>
 
 <ul>
-  <li>Ensure all your completed stories are integrated on your master branch.</li>
+  <li>Ensure all your completed stories are integrated on your main branch.</li>
   <li>Deploy your project using Elastic Beanstalk.</li>
   <li>Demo your deployed version and share the newly created features.</li>
   <li>Share any new load testing results.</li>
 </ul>
 
-<h4 id="sprint-1-week-5">Sprint 1: Week 5</h4>
+<h4 id="sprint-1-week-6">Sprint 1: Week 6</h4>
 
 <ul>
   <li>Form your team.
@@ -187,12 +194,12 @@ sprint which does not have an ending lab session.</p>
       <li>One person on the team, message me on piazza with:
         <ul>
           <li>Your team name</li>
-          <li>The name, and github username of all the team members</li>
+          <li>The name, and GitHub username of all the team members</li>
         </ul>
       </li>
     </ul>
   </li>
-  <li>Get access to your github respository (I’ll create that after the above)</li>
+  <li>Get access to your GitHub respository (I’ll create that after the above)</li>
   <li>Get a new set of AWS credentials specific to your team.</li>
   <li>Deploy your initial rails code to Elastic Beanstalk.</li>
   <li>Complete <code class="language-plaintext highlighter-rouge">N</code> user stories, where <code class="language-plaintext highlighter-rouge">N</code> is the number of people on your team.</li>
@@ -204,15 +211,13 @@ codes.</li>
   </li>
 </ul>
 
-<h4 id="sprint-2-week-6">Sprint 2: Week 6</h4>
+<h4 id="sprint-2-week-7">Sprint 2: Week 7</h4>
 
-<h4 id="sprint-3-week-7">Sprint 3: Week 7</h4>
+<h4 id="sprint-3-week-8">Sprint 3: Week 8</h4>
 
-<h4 id="sprint-4-week-8">Sprint 4: Week 8</h4>
+<h4 id="sprint-4-week-9">Sprint 4: Week 9</h4>
 
-<h4 id="sprint-5-week-9">Sprint 5: Week 9</h4>
-
-<h4 id="sprint-6-week-10">Sprint 6: Week 10+</h4>
+<h4 id="sprint-5-week-10">Sprint 5: Week 10+</h4>
 
 <ul>
   <li>Complete the <a href="#report">project report</a></li>
@@ -385,14 +390,14 @@ Beanstalk, and then deploy it.</p>
 git commit <span class="nt">-m</span> <span class="s2">"Prepare the application to deploy to Amazon's Elastic Beanstalk"</span>
 </code></pre></div></div>
 
-<h3 id="push-changes-to-github">Push changes to github</h3>
+<h3 id="push-changes-to-github">Push changes to GitHub</h3>
 
-<p>If you haven’t already, add github as a remote:</p>
+<p>If you haven’t already, add GitHub as a remote:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote add origin git@github.com:scalableinternetservices/PROJECTNAME.git
 </code></pre></div></div>
 
-<p>If this is your first time pushing to github, then run:</p>
+<p>If this is your first time pushing to GitHub, then run:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push <span class="nt">-u</span> origin HEAD
 </code></pre></div></div>
@@ -473,14 +478,14 @@ your site (the “Yay! You’re on Rails!” doesn’t show up in <code class="l
 <h2 id="updating-the-application">Updating the application</h2>
 
 <p>After making changes and verifying they work with locally, push your changes to
-github, pull them on <code class="language-plaintext highlighter-rouge">ec2.cs291.com</code> and then update your deployment via:</p>
+GitHub, pull them on <code class="language-plaintext highlighter-rouge">ec2.cs291.com</code> and then update your deployment via:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eb deploy
 </code></pre></div></div>
 
 <p><strong>Note</strong>: Only commited changes are pushed on deployment, so ensure <code class="language-plaintext highlighter-rouge">git
 status</code> is clean. (You can run <code class="language-plaintext highlighter-rouge">eb deploy --staged</code> to include staged files,
-but it’s preferrable to deploy code that has been pushed to github.</p>
+but it’s preferrable to deploy code that has been pushed to GitHub.</p>
 
 <hr />
 
