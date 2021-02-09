@@ -6,9 +6,13 @@ import sys
 
 import requests
 
+failure_count = 0
 
 def assert_equal(lhs, rhs):
+    global failure_count
+
     if lhs != rhs:
+        failure_count += 1
         frame = inspect.stack()[1]
         print(f"Failed: {lhs} != {rhs}")
         print(f"\t{frame[3]} at line {frame[2]}")
@@ -22,10 +26,12 @@ def connect(url, username, last_event_id):
     with requests.get(
         f"{url}/stream/{token}", headers=headers, stream=True
     ) as response:
-        test_message(url, token)
+        new_token = test_message(url, token)
+        test_message(url, token, expected_status=403)
+        test_message(url, new_token, message="How are you?")
 
         for line in read_stream_lines(response):
-            print(line)
+            print(repr(line))
 
 
 def get_token(url, username):
@@ -50,6 +56,8 @@ def main():
         test_login__failed(arguments.url)
         test_message__failed(arguments.url)
         test_stream__failed(arguments.url)
+        if failure_count > 0:
+            return 1
 
     if arguments.user:
         username = arguments.user
@@ -91,13 +99,14 @@ def test_login__failed(url):
     assert_equal(response.status_code, 422)
 
 
-def test_message(url, token):
+def test_message(url, token, *, expected_status=201, message="Hi!"):
     response = requests.post(
         f"{url}/message",
-        data={"message": "Hi!"},
+        data={"message": message},
         headers={"authorization": f"Bearer {token}"},
     )
-    assert_equal(response.status_code, 201)
+    assert_equal(response.status_code, expected_status)
+    return response.headers.get("token")
 
 
 def test_message__failed(url):
@@ -115,6 +124,14 @@ def test_message__failed(url):
         headers={"authorization": f"Bearer {token}"},
     )
     assert_equal(response.status_code, 422)
+
+    token = get_token(url, random.randint(0, 9999999))
+    response = requests.post(
+        f"{url}/message",
+        data={"message": "not connected to stream"},
+        headers={"authorization": f"Bearer {token}"},
+    )
+    assert_equal(response.status_code, 409)
 
 
 def test_stream__failed(url):
