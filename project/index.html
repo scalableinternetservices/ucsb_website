@@ -272,14 +272,11 @@ new rails project using docker.</p>
     <span class="na">command</span><span class="pi">:</span> <span class="s">bash -c "rm -f tmp/pids/server.pid &amp;&amp; bundle exec rails s -p 3000 -b '0.0.0.0'"</span>
     <span class="na">depends_on</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s">db</span>
-    <span class="na">links</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s">db</span>
     <span class="na">ports</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s2">"</span><span class="s">3000:3000"</span>
     <span class="na">volumes</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s">.:/app:delegated</span>
 <span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3'</span>
-
 </code></pre></div></div>
 
 <p>Initialize your git repository and make an initial commit:</p>
