@@ -203,6 +203,11 @@ sprint which does not have an ending lab session.</p>
   <li>Get a new set of AWS credentials specific to your team.</li>
   <li>Deploy your initial rails code to Elastic Beanstalk.</li>
   <li>Complete <code class="language-plaintext highlighter-rouge">N</code> user stories, where <code class="language-plaintext highlighter-rouge">N</code> is the number of people on your team.</li>
+</ul>
+
+<h4 id="sprint-2-week-7">Sprint 2: Week 7</h4>
+
+<ul>
   <li>Write a tsung load test encompassing your existing features.
     <ul>
       <li>Ensure that when it is run, there are no 4XX or 5XX level HTTP status
@@ -210,8 +215,6 @@ codes.</li>
     </ul>
   </li>
 </ul>
-
-<h4 id="sprint-2-week-7">Sprint 2: Week 7</h4>
 
 <h4 id="sprint-3-week-8">Sprint 3: Week 8</h4>
 
@@ -259,6 +262,8 @@ new rails project using docker.</p>
 
 <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
   <span class="na">db</span><span class="pi">:</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">POSTGRES_PASSWORD</span><span class="pi">:</span> <span class="s">postgres</span>
     <span class="na">image</span><span class="pi">:</span> <span class="s">postgres</span>
     <span class="na">volumes</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s">./tmp/db:/var/lib/postgresql/data</span>
@@ -267,11 +272,14 @@ new rails project using docker.</p>
     <span class="na">command</span><span class="pi">:</span> <span class="s">bash -c "rm -f tmp/pids/server.pid &amp;&amp; bundle exec rails s -p 3000 -b '0.0.0.0'"</span>
     <span class="na">depends_on</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s">db</span>
+    <span class="na">links</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">db</span>
     <span class="na">ports</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s2">"</span><span class="s">3000:3000"</span>
     <span class="na">volumes</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s">.:/app:delegated</span>
 <span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3'</span>
+
 </code></pre></div></div>
 
 <p>Initialize your git repository and make an initial commit:</p>
@@ -309,6 +317,7 @@ git commit <span class="nt">-m</span> <span class="s2">"Run 'docker-compose run 
 <p>Add the following to lines to the <code class="language-plaintext highlighter-rouge">default</code> section of <code class="language-plaintext highlighter-rouge">config/database.yml</code>:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">host</span><span class="pi">:</span> <span class="s">db</span>
+  <span class="na">password</span><span class="pi">:</span> <span class="s">postgres</span>
   <span class="na">username</span><span class="pi">:</span> <span class="s">postgres</span>
 </code></pre></div></div>
 
@@ -319,6 +328,25 @@ git commit <span class="nt">-m</span> <span class="s2">"Configure the project to
 </code></pre></div></div>
 
 <h3 id="create-the-development-and-test-databases">Create the development and test databases</h3>
+
+<p>First start up the database container:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose up <span class="nt">--detach</span> db
+</code></pre></div></div>
+
+<p>Then verify that the container is running:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose ps
+</code></pre></div></div>
+
+<p>The output should look like:</p>
+
+<pre><code class="language-txt">      Name                    Command              State    Ports
+-------------------------------------------------------------------
+projectname_db_1   docker-entrypoint.sh postgres   Up      5432/tcp
+</code></pre>
+
+<p>Run the following to create the database:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run web rails db:create
 </code></pre></div></div>
