@@ -67,11 +67,12 @@ At the end of each sprint you will:
 - Get a new set of AWS credentials specific to your team.
 - Deploy your initial rails code to Elastic Beanstalk.
 - Complete `N` user stories, where `N` is the number of people on your team.
+
+#### Sprint 2: Week 7
+
 - Write a tsung load test encompassing your existing features.
   - Ensure that when it is run, there are no 4XX or 5XX level HTTP status
     codes.
-
-#### Sprint 2: Week 7
 
 #### Sprint 3: Week 8
 
@@ -121,6 +122,8 @@ Copy the following contents into `docker-compose.yml`:
 ```yml
 services:
   db:
+    environment:
+      POSTGRES_PASSWORD: postgres
     image: postgres
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
@@ -129,11 +132,14 @@ services:
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     depends_on:
       - db
+    links:
+      - db
     ports:
       - "3000:3000"
     volumes:
       - .:/app:delegated
 version: '3'
+
 ```
 
 Initialize your git repository and make an initial commit:
@@ -177,6 +183,7 @@ Add the following to lines to the `default` section of `config/database.yml`:
 
 ```yaml
   host: db
+  password: postgres
   username: postgres
 ```
 
@@ -188,6 +195,28 @@ git commit -m "Configure the project to talk to the database container"
 ```
 
 ### Create the development and test databases
+
+First start up the database container:
+
+```sh
+docker-compose up --detach db
+```
+
+Then verify that the container is running:
+
+```sh
+docker-compose ps
+```
+
+The output should look like:
+
+```txt
+      Name                    Command              State    Ports
+-------------------------------------------------------------------
+projectname_db_1   docker-entrypoint.sh postgres   Up      5432/tcp
+```
+
+Run the following to create the database:
 
 ```sh
 docker-compose run web rails db:create
