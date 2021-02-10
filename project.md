@@ -132,14 +132,11 @@ services:
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     depends_on:
       - db
-    links:
-      - db
     ports:
       - "3000:3000"
     volumes:
       - .:/app:delegated
 version: '3'
-
 ```
 
 Initialize your git repository and make an initial commit:
