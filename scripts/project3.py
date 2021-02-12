@@ -3,10 +3,12 @@ import argparse
 import inspect
 import random
 import sys
+from inspect import getmembers, isfunction
 
 import requests
 
 failure_count = 0
+
 
 def assert_equal(lhs, rhs):
     global failure_count
@@ -26,9 +28,9 @@ def connect(url, username, last_event_id):
     with requests.get(
         f"{url}/stream/{token}", headers=headers, stream=True
     ) as response:
-        new_token = test_message(url, token)
-        test_message(url, token, expected_status=403)
-        test_message(url, new_token, message="How are you?")
+        new_token = send_message(url, token)
+        send_message(url, token, expected_status=403)
+        send_message(url, new_token, message="How are you?")
 
         for line in read_stream_lines(response):
             print(repr(line))
@@ -44,26 +46,29 @@ def get_token(url, username):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-l", "--last-event-id")
-    parser.add_argument(
-        "-F", "--no-failures", action="store_true", help="Skip failure testing"
-    )
-    parser.add_argument("-u", "--user")
     parser.add_argument("url")
+
+    subparsers = parser.add_subparsers(dest="command", metavar="command", required=True)
+    parser_stream = subparsers.add_parser("stream", help="Connect to stream")
+    parser_stream.add_argument("-l", "--last-event-id")
+    parser_stream.add_argument("-u", "--user")
+
+    parser_test = subparsers.add_parser("test", help="Run tests")
     arguments = parser.parse_args()
 
-    if not arguments.no_failures:
-        test_login__failed(arguments.url)
-        test_message__failed(arguments.url)
-        test_stream__failed(arguments.url)
-        if failure_count > 0:
-            return 1
+    if arguments.command == "test":
+        for name, function in getmembers(sys.modules[__name__], isfunction):
+            if not name.startswith("test_"):
+                continue
+            function(arguments.url)
+        return
 
-    if arguments.user:
-        username = arguments.user
-    else:
-        username = random.randint(0, 9999999)
-    connect(arguments.url, username, arguments.last_event_id)
+    assert arguments.command == "stream"
+    connect(
+        arguments.url,
+        arguments.user if arguments.user else random.randint(0, 9999999),
+        arguments.last_event_id,
+    )
 
 
 def read_stream_lines(response):
@@ -75,6 +80,16 @@ def read_stream_lines(response):
         for part in parts[:-1]:
             yield part
         data = parts[-1]
+
+
+def send_message(url, token, *, expected_status=201, message="Hi!"):
+    response = requests.post(
+        f"{url}/message",
+        data={"message": message},
+        headers={"authorization": f"Bearer {token}"},
+    )
+    assert_equal(response.status_code, expected_status)
+    return response.headers.get("token")
 
 
 def test_login__failed(url):
@@ -97,16 +112,6 @@ def test_login__failed(url):
         f"{url}/login", data={"username": username + 1, "password": ""}
     )
     assert_equal(response.status_code, 422)
-
-
-def test_message(url, token, *, expected_status=201, message="Hi!"):
-    response = requests.post(
-        f"{url}/message",
-        data={"message": message},
-        headers={"authorization": f"Bearer {token}"},
-    )
-    assert_equal(response.status_code, expected_status)
-    return response.headers.get("token")
 
 
 def test_message__failed(url):
