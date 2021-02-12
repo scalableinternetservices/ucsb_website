@@ -313,7 +313,7 @@ git commit <span class="nt">-m</span> <span class="s2">"Run 'docker-compose run 
 
 <p>Add the following to lines to the <code class="language-plaintext highlighter-rouge">default</code> section of <code class="language-plaintext highlighter-rouge">config/database.yml</code>:</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">host</span><span class="pi">:</span> <span class="s">db</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">host</span><span class="pi">:</span> <span class="s">&lt;%= ENV.fetch("PGHOST") { "db" } %&gt;</span>
   <span class="na">password</span><span class="pi">:</span> <span class="s">postgres</span>
   <span class="na">username</span><span class="pi">:</span> <span class="s">postgres</span>
 </code></pre></div></div>
@@ -370,6 +370,80 @@ via <a href="http://localhost:3000">http://localhost:3000</a>.</p>
 
 <hr />
 
+<h2 id="pushing-to-github-and-setting-up-actions">Pushing to GitHub and Setting Up Actions</h2>
+
+<p>If you haven’t already, add GitHub as a remote:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote add origin git@github.com:scalableinternetservices/PROJECTNAME.git
+</code></pre></div></div>
+
+<p>If this is your first time pushing to GitHub, then run:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch <span class="nt">-M</span> main
+git push <span class="nt">-u</span> origin HEAD
+</code></pre></div></div>
+
+<p>Otherwise, you can simply run:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push
+</code></pre></div></div>
+
+<h3 id="github-actions">GitHub Actions</h3>
+
+<p>To trigger automated test runs everytime you push to master, or create a pull request, or push an update to a branch associated with a pull request do the following.</p>
+
+<p>Copy the following contents into the file .github/workflows/ruby.yml:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Ruby</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span> <span class="nv">main</span> <span class="pi">]</span>
+  <span class="na">pull_request</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span> <span class="nv">main</span> <span class="pi">]</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">test</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">services</span><span class="pi">:</span>
+      <span class="na">postgres</span><span class="pi">:</span>
+        <span class="na">env</span><span class="pi">:</span>
+          <span class="na">POSTGRES_PASSWORD</span><span class="pi">:</span> <span class="s">postgres</span>
+        <span class="na">image</span><span class="pi">:</span> <span class="s">postgres</span>
+        <span class="na">ports</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="s">5432:5432</span>
+    <span class="na">steps</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install PostgreSQL client</span>
+      <span class="na">run</span><span class="pi">:</span> <span class="s">sudo apt-get -yqq install libpq-dev</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up Ruby</span>
+      <span class="na">uses</span><span class="pi">:</span> <span class="s">ruby/setup-ruby@v1</span>
+      <span class="na">with</span><span class="pi">:</span>
+        <span class="na">ruby-version</span><span class="pi">:</span> <span class="s">2.7.2</span>
+        <span class="na">bundler-cache</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up yarn</span>
+      <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+        <span class="s">yarn install --pure-lockfile</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Prepare database</span>
+      <span class="na">env</span><span class="pi">:</span>
+        <span class="na">PGHOST</span><span class="pi">:</span> <span class="s">localhost</span>
+        <span class="na">RAILS_ENV</span><span class="pi">:</span> <span class="s">test</span>
+      <span class="na">run</span><span class="pi">:</span> <span class="s">bin/rails db:setup</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Run tests</span>
+      <span class="na">env</span><span class="pi">:</span>
+        <span class="na">PGHOST</span><span class="pi">:</span> <span class="s">localhost</span>
+      <span class="na">run</span><span class="pi">:</span> <span class="s">bin/rails test</span>
+</code></pre></div></div>
+
+<p>Add, commit, and push these changes:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add <span class="nb">.</span>
+git commit <span class="nt">-m</span> <span class="s2">"Configure GitHub actions"</span>
+git push
+</code></pre></div></div>
+
+<hr />
+
 <h2 id="deploying-to-elastic-beanstalk">Deploying to Elastic Beanstalk</h2>
 
 <p>At this point you should have a Rails project that you can successfully run in
@@ -394,6 +468,7 @@ Beanstalk, and then deploy it.</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> .ebextensions
 <span class="nb">touch</span> .ebextensions/01_install_dependencies.config
+<span class="nb">touch</span> .ebextensions/10_nginx_add_packs.config
 </code></pre></div></div>
 
 <p>Copy the following contents into <code class="language-plaintext highlighter-rouge">.ebextensions/01_install_dependencies.config</code>:</p>
@@ -401,35 +476,27 @@ Beanstalk, and then deploy it.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commands:
   install_nodejs:
     command: |
-      curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -
-      yum -y install nodejs
+      curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
+      yum install -y nodejs
   install_yarn:
     command: |
-      sudo wget https://dl.yarnpkg.com/rpm/yarn.repo -O /etc/yum.repos.d/yarn.repo
-      yum -y install yarn
+      curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
+      yum install -y yarn
 </code></pre></div></div>
 
-<h3 id="commit-the-changes">Commit the changes</h3>
+<p>Copy the following contents into <code class="language-plaintext highlighter-rouge">.ebextensions/10_nginx_add_packs.config</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commands:
+  add_packs_location_to_nginx:
+    command: |
+      grep packs /opt/elasticbeanstalk/config/private/nginx/webapp.conf || sed -i '$a\\nlocation /packs {\n    alias /var/app/current/public/packs;\n    gzip_static on;\n    gzip on;\n    expires max;\n    add_header Cache-Control public;\n}' /opt/elasticbeanstalk/config/private/nginx/webapp.conf
+</code></pre></div></div>
+
+<h3 id="commit-and-push-the-changes">Commit and push the changes</h3>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add <span class="nb">.</span>
 git commit <span class="nt">-m</span> <span class="s2">"Prepare the application to deploy to Amazon's Elastic Beanstalk"</span>
-</code></pre></div></div>
-
-<h3 id="push-changes-to-github">Push changes to GitHub</h3>
-
-<p>If you haven’t already, add GitHub as a remote:</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote add origin git@github.com:scalableinternetservices/PROJECTNAME.git
-</code></pre></div></div>
-
-<p>If this is your first time pushing to GitHub, then run:</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push <span class="nt">-u</span> origin HEAD
-</code></pre></div></div>
-
-<p>Otherwise, you can simply run:</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push
+git push
 </code></pre></div></div>
 
 <h3 id="ssh-to-ec2cs291com-and-clone-your-repository">SSH to ec2.cs291.com and clone your repository</h3>
@@ -454,7 +521,7 @@ version of the project):</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>PROJECTNAME
 eb init <span class="nt">--keyname</span> <span class="si">$(</span><span class="nb">whoami</span><span class="si">)</span> <span class="se">\</span>
-  <span class="nt">--platform</span> <span class="s2">"64bit Amazon Linux 2018.03 v2.11.0 running Ruby 2.6 (Puma)"</span> <span class="se">\</span>
+  <span class="nt">--platform</span> <span class="s2">"64bit Amazon Linux 2 v3.2.2 running Ruby 2.7"</span> <span class="se">\</span>
   <span class="nt">--region</span> us-west-2 PROJECTNAME
 </code></pre></div></div>
 
