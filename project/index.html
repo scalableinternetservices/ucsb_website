@@ -492,6 +492,18 @@ Beanstalk, and then deploy it.</p>
       grep packs /opt/elasticbeanstalk/config/private/nginx/webapp.conf || sed -i '$a\\nlocation /packs {\n    alias /var/app/current/public/packs;\n    gzip_static on;\n    gzip on;\n    expires max;\n    add_header Cache-Control public;\n}' /opt/elasticbeanstalk/config/private/nginx/webapp.conf
 </code></pre></div></div>
 
+<h3 id="configure-the-profile">Configure the Profile</h3>
+
+<p>Inform elasticbeanstalk to use your chosen version of puma.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">touch </span>Procfile
+</code></pre></div></div>
+
+<p>Copy the following contents in <code class="language-plaintext highlighter-rouge">Procfile</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web: bundle exec puma -C /opt/elasticbeanstalk/config/private/pumaconf.rb
+</code></pre></div></div>
+
 <h3 id="commit-and-push-the-changes">Commit and push the changes</h3>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add <span class="nb">.</span>
