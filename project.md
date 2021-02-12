@@ -374,6 +374,20 @@ commands:
       grep packs /opt/elasticbeanstalk/config/private/nginx/webapp.conf || sed -i '$a\\nlocation /packs {\n    alias /var/app/current/public/packs;\n    gzip_static on;\n    gzip on;\n    expires max;\n    add_header Cache-Control public;\n}' /opt/elasticbeanstalk/config/private/nginx/webapp.conf
 ```
 
+### Configure the Profile
+
+Inform elasticbeanstalk to use your chosen version of puma.
+
+```sh
+touch Procfile
+```
+
+Copy the following contents in `Procfile`:
+
+```
+web: bundle exec puma -C /opt/elasticbeanstalk/config/private/pumaconf.rb
+```
+
 ### Commit and push the changes
 
 ```sh
