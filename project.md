@@ -179,7 +179,7 @@ docker-compose build web
 Add the following to lines to the `default` section of `config/database.yml`:
 
 ```yaml
-  host: db
+  host: <%= ENV.fetch("PGHOST") { "db" } %>
   password: postgres
   username: postgres
 ```
@@ -243,6 +243,85 @@ via [http://localhost:3000](http://localhost:3000).
 
 ---
 
+## Pushing to GitHub and Setting Up Actions
+
+If you haven't already, add GitHub as a remote:
+
+```sh
+git remote add origin git@github.com:scalableinternetservices/PROJECTNAME.git
+```
+
+If this is your first time pushing to GitHub, then run:
+
+```sh
+git branch -M main
+git push -u origin HEAD
+```
+
+Otherwise, you can simply run:
+
+```sh
+git push
+```
+
+### GitHub Actions
+
+To trigger automated test runs everytime you push to master, or create a pull request, or push an update to a branch associated with a pull request do the following.
+
+Copy the following contents into the file .github/workflows/ruby.yml:
+
+```yaml
+name: Ruby
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        env:
+          POSTGRES_PASSWORD: postgres
+        image: postgres
+        ports:
+          - 5432:5432
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install PostgreSQL client
+      run: sudo apt-get -yqq install libpq-dev
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7.2
+        bundler-cache: true
+    - name: Set up yarn
+      run: |
+        yarn install --pure-lockfile
+    - name: Prepare database
+      env:
+        PGHOST: localhost
+        RAILS_ENV: test
+      run: bin/rails db:setup
+    - name: Run tests
+      env:
+        PGHOST: localhost
+      run: bin/rails test
+```
+
+Add, commit, and push these changes:
+
+```sh
+git add .
+git commit -m "Configure GitHub actions"
+git push
+```
+
+---
+
 ## Deploying to Elastic Beanstalk
 
 At this point you should have a Rails project that you can successfully run in
@@ -269,6 +348,7 @@ Create the directory and file
 ```sh
 mkdir .ebextensions
 touch .ebextensions/01_install_dependencies.config
+touch .ebextensions/10_nginx_add_packs.config
 ```
 
 Copy the following contents into `.ebextensions/01_install_dependencies.config`:
@@ -277,38 +357,28 @@ Copy the following contents into `.ebextensions/01_install_dependencies.config`:
 commands:
   install_nodejs:
     command: |
-      curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -
-      yum -y install nodejs
+      curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
+      yum install -y nodejs
   install_yarn:
     command: |
-      sudo wget https://dl.yarnpkg.com/rpm/yarn.repo -O /etc/yum.repos.d/yarn.repo
-      yum -y install yarn
+      curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
+      yum install -y yarn
 ```
 
-### Commit the changes
+Copy the following contents into `.ebextensions/10_nginx_add_packs.config`:
+
+```
+commands:
+  add_packs_location_to_nginx:
+    command: |
+      grep packs /opt/elasticbeanstalk/config/private/nginx/webapp.conf || sed -i '$a\\nlocation /packs {\n    alias /var/app/current/public/packs;\n    gzip_static on;\n    gzip on;\n    expires max;\n    add_header Cache-Control public;\n}' /opt/elasticbeanstalk/config/private/nginx/webapp.conf
+```
+
+### Commit and push the changes
 
 ```sh
 git add .
 git commit -m "Prepare the application to deploy to Amazon's Elastic Beanstalk"
-```
-
-### Push changes to GitHub
-
-If you haven't already, add GitHub as a remote:
-
-```sh
-git remote add origin git@github.com:scalableinternetservices/PROJECTNAME.git
-```
-
-If this is your first time pushing to GitHub, then run:
-
-```sh
-git push -u origin HEAD
-```
-
-Otherwise, you can simply run:
-
-```sh
 git push
 ```
 
@@ -337,7 +407,7 @@ For each copy of your repository, you'll need to do the following only once:
 ```sh
 cd PROJECTNAME
 eb init --keyname $(whoami) \
-  --platform "64bit Amazon Linux 2018.03 v2.11.0 running Ruby 2.6 (Puma)" \
+  --platform "64bit Amazon Linux 2 v3.2.2 running Ruby 2.7" \
   --region us-west-2 PROJECTNAME
 ```
 
