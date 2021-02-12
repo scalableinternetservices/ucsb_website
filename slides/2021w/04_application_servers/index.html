@@ -450,7 +450,7 @@ benefit from using different interpreters.
 
 - "On MRI, there is a Global VM Lock (GVL) that ensures only one thread can run Ruby code at a time. But if you're doing a lot of blocking IO (such as HTTP calls to external APIs like Twitter), Puma still improves MRI's throughput by allowing IO waiting to be done in parallel."
 
-- "Puma also offers 'clustered mode'. Clustered mode forks workers from a master process."
+- "Puma also offers 'clustered mode'. Clustered mode forks workers from a [main] process."
 
 - "In clustered mode, Puma can 'preload' your application. This loads all the application code prior to forking."
 

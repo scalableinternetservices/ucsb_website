@@ -1004,7 +1004,7 @@ GitHub Flow is simpler and recommended for this class.
 
 # GitHub Flow
 
-1. Ensure your master branch is up-to-date with the remote (often called
+1. Ensure your main branch is up-to-date with the remote (often called
    `origin`)
 
 2. Create a new branch for your feature (often called a `feature branch`)
@@ -1023,7 +1023,7 @@ GitHub Flow is simpler and recommended for this class.
 
 8. If there are test failures (you've set up a CI system, right?) fix them
 
-9. Merge the branch to master when everything is good-to-go
+9. Merge the branch to main when everything is good-to-go
 
 __Note__: We neglected the _deploy_ phase just prior to merging.
 
@@ -1031,7 +1031,7 @@ __Note__: We neglected the _deploy_ phase just prior to merging.
 
 # GitHub Flow Commands
 
-## Ensure your master branch is up-to-date with the remote
+## Ensure your main branch is up-to-date with the remote
 
 ```bash
 git pull
@@ -1063,11 +1063,11 @@ git push -u origin HEAD
 Recall what we want to reconcile our changes regularly. Feature branches should
 be no more than a day or two out-of-sync with their parent branch.
 
-If you want to reconcile your changes without merging to master, a __git
+If you want to reconcile your changes without merging to main, a __git
 rebase__ is very useful:
 
 ```bash
-git rebase master feature_branch
+git rebase main feature_branch
 ```
 
 .center[![git rebase](git_rebase.png)]
@@ -1081,7 +1081,7 @@ If you have been committing frequently and want to squash some commits,
 consider an interactive rebase:
 
 ```bash
-git rebase -i master
+git rebase -i main
 ```
 ]
 .right-column60[

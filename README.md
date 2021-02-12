@@ -15,7 +15,7 @@ To develop locally run:
 
 ## Publishing
 
-Push updates or merge a pull request to the master branch and CircleCI will
+Push updates or merge a pull request to the main branch and GitHub Actions will
 take care of the rest.
 
 
