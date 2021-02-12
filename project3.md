@@ -398,7 +398,7 @@ CORS. A copy of the client, with CSS and JavaScript separated can be found at:
 And, while you can view the source in the browser, it might be more convenient
 to see it on GitHub:
 
-<https://github.com/scalableinternetservices/ucsb_website/tree/master/project3/chat>
+<https://github.com/scalableinternetservices/ucsb_website/tree/main/project3/chat>
 
 __Note__: The logic of this client is written 100% in JavaScript and as such it
 serves as a poor example of code to copy since you can better accomplish the

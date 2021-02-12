@@ -14,8 +14,8 @@ jobs:
 name: super-linter
 on:
   pull_request:
-    branches: [master]
+    branches: [main]
   push:
     branches-ignore:
       - gh-pages
-      - master
+      - main

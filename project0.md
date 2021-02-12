@@ -58,7 +58,7 @@ You webpage must include:
 ### Verification Script
 
 The `project0.py` script in
-<https://github.com/scalableinternetservices/ucsb_website/tree/master/scripts>
+<https://github.com/scalableinternetservices/ucsb_website/tree/main/scripts>
 can be used to automatically verify that your webpage meets the necessary
 requirements.
 

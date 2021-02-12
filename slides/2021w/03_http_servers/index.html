@@ -267,7 +267,7 @@ loop forever
 .right-column[
 Combination of the two techniques.
 
-Master process spawns processes, each with many threads. Master maintains
+Parent process spawns worker processes, each with many threads. Parent maintains
 process pool.
 
 Processes coordinate through shared memory to `accept()` requests.

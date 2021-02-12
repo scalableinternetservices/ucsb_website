@@ -212,7 +212,7 @@ Please review the template project README for development and deployment instruc
 ### Verification Script
 
 Please use the following script to verify your web application:
-[https://github.com/scalableinternetservices/ucsb_website/tree/master/scripts#project-2-verification-script](https://github.com/scalableinternetservices/ucsb_website/tree/master/scripts#project-2-verification-script)
+<https://github.com/scalableinternetservices/ucsb_website/tree/main/scripts#project-2-verification-script>
 
 ## Required Tools
 

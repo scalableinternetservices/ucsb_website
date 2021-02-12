@@ -126,7 +126,7 @@ __Note__: Please do not do any load testing from this machine.
 ### Verification Script
 
 Please use the following script to verify your web application:
-[https://github.com/scalableinternetservices/ucsb_website/tree/master/scripts#project-1-verification-script](https://github.com/scalableinternetservices/ucsb_website/tree/master/scripts#project-1-verification-script)
+<https://github.com/scalableinternetservices/ucsb_website/tree/main/scripts#project-1-verification-script>
 
 ## Questions To Answer
 

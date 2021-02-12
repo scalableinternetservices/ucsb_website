@@ -266,7 +266,7 @@ git push
 
 ### GitHub Actions
 
-To trigger automated test runs everytime you push to master, or create a pull request, or push an update to a branch associated with a pull request do the following.
+To trigger automated test runs everytime you push to main, or create a pull request, or push an update to a branch associated with a pull request do the following.
 
 Copy the following contents into the file .github/workflows/ruby.yml:
 
