@@ -16,7 +16,7 @@ jobs:
           retention-days: 2
 
   deploy:
-    if: ${{ github.ref == 'refs/heads/master' }}
+    if: ${{ github.ref == 'refs/heads/main' }}
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -35,7 +35,7 @@ jobs:
 name: jekyll
 on:
   pull_request:
-    branches: [master]
+    branches: [main]
   push:
     branches-ignore:
       - gh-pages
