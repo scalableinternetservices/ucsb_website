@@ -83,7 +83,6 @@ def main():
     arguments = parser.parse_args()
 
     if arguments.command == "test":
-        # test_message__fails_with_missing_or_blank_fields(arguments.url)
         for name, function in getmembers(sys.modules[__name__], isfunction):
             if not name.startswith("test_"):
                 continue
@@ -95,17 +94,6 @@ def main():
     url = arguments.url
 
     def callback(response, tokens, username):
-        new_token = send_message(
-            url, tokens["message_token"], message="Connected to stream"
-        )
-        send_message(
-            url,
-            tokens["message_token"],
-            expected_status=403,
-            message="This message token should no longer be valid",
-        )
-        send_message(url, new_token, message="Subsequent message using updated token")
-
         for line in read_stream_lines(response):
             print(repr(line))
 
@@ -275,6 +263,22 @@ def test_message__fails_when_not_connected_to_stream(url):
     send_message(
         url, token, expected_status=409, message="fails_when_not_connected_to_stream"
     )
+
+
+def test_message__token_can_be_used_only_once(url):
+    def callback(response, tokens, username):
+        new_token = send_message(
+            url, tokens["message_token"], message="Connected to stream"
+        )
+        send_message(
+            url,
+            tokens["message_token"],
+            expected_status=403,
+            message="This message token should no longer be valid",
+        )
+        send_message(url, new_token, message="Subsequent message using updated token")
+
+    connect(url, callback=callback)
 
 
 def test_stream__fails_when_already_connected_to_stream(url):
