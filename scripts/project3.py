@@ -155,6 +155,15 @@ def test_login__fails_when_user_already_connected_to_stream(url):
     connect(url, tokens=saved_tokens, username=saved_username)
 
 
+def test_login__fails_with_extra_headers(url):
+    username, _tokens = login(url)
+
+    data = {"username": username, "password": username}
+    data[str(random.randint(0, 9999999))] = str(random.randint(0, 9999999))
+    response = requests.post(f"{url}/login", data=data)
+    assert_equal(response.status_code, 422)
+
+
 def test_login__fails_with_invalid_password(url):
     username, _tokens = login(url)
 
@@ -233,6 +242,18 @@ def test_login__new_tokens_are_not_issued_on_failed_subsequent_login(url):
     connect(url, callback=callback, tokens=tokens, username=username)
 
 
+def test_message__fails_with_extra_headers(url):
+    token = login(url)[1]["message_token"]
+    data = {"message": "fails_with_extra_headers"}
+    data[str(random.randint(0, 9999999))] = str(random.randint(0, 9999999))
+    response = requests.post(
+        f"{url}/message",
+        data=data,
+        headers={"authorization": f"Bearer {token}"},
+    )
+    assert_equal(response.status_code, 422)
+
+
 def test_message__fails_with_missing_or_blank_fields(url):
     token = login(url)[1]["message_token"]
 
@@ -301,6 +322,42 @@ def test_stream__fails_without_token(url):
     assert_equal(response.status_code, 404)
 
 
+def test_stream__last_event_id_is_not_in_history(url):
+    event_ids = []
+    has_user_event = None
+
+    def callback(response, tokens, username):
+        nonlocal has_user_event
+        send_message(url, tokens["message_token"], message="/quit")
+        for line in read_stream_lines(response):
+            if line.startswith("id: "):
+                event_ids.append(line[4:])
+            elif line == "event: Users":
+                has_user_event = True
+
+    connect(url, callback=callback)
+    assert_equal(has_user_event, True)
+
+    has_user_event = None
+    reconnect_event_ids = []
+
+    def callback_expect_existing_events(response, tokens, username):
+        nonlocal has_user_event
+        send_message(url, tokens["message_token"], message="/quit")
+        for line in read_stream_lines(response):
+            if line.startswith("id: "):
+                reconnect_event_ids.append(line[4:])
+            elif line == "event: Users":
+                has_user_event = True
+
+    connect(
+        url, callback=callback_expect_existing_events, last_event_id="invalid_event_id"
+    )
+
+    assert_equal(has_user_event, True)
+    assert_not_equal(set(event_ids) & set(reconnect_event_ids), set())
+
+
 def test_stream__last_event_id_returns_subset_of_events(url):
     event_ids = []
 
@@ -315,15 +372,22 @@ def test_stream__last_event_id_returns_subset_of_events(url):
     # Ensure there are no duplicate events
     assert_equal(sorted(event_ids), sorted(set(event_ids)))
 
+    has_user_event = None
     reconnect_event_ids = []
 
     def callback_expect_new_events(response, tokens, username):
+        nonlocal has_user_event
         send_message(url, tokens["message_token"], message="/quit")
         for line in read_stream_lines(response):
             if line.startswith("id: "):
                 reconnect_event_ids.append(line[4:])
+            elif line == "event: Users":
+                has_user_event = True
 
-    connect(url, callback=callback_expect_new_events, last_event_id=event_ids[-1])
+    # The most recent event_id is disconnect which should not be in the history
+    connect(url, callback=callback_expect_new_events, last_event_id=event_ids[-2])
+
+    assert_equal(has_user_event, None)
 
     # Ensure there are no duplicate events
     assert_equal(sorted(reconnect_event_ids), sorted(set(reconnect_event_ids)))
