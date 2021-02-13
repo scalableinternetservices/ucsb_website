@@ -7,7 +7,9 @@ title: Project 3
 
 # Project 3: Chat Server and Corresponding React Front-End
 
-In this project you will write a chat server using the Sinatra framework, as well as a stand-alone React front-end for your chat sever. The server will be packaged into a Docker container.
+In this project you will write a chat server using the Sinatra framework, as
+well as a stand-alone React front-end for your chat sever. The server will be
+packaged into a Docker container.
 
 Your front-end should have the capability to seamlessly work with both your
 server, and my deployed version of the server (reference server). Similarly my
@@ -25,8 +27,8 @@ times the work of [Project 2](/project2/). As a result, this project spans two
 weeks, and you have the option of working with another student of the course.
 
 If you will work in a pair, please have one member of your pair send a private
-message to me on Piazza with both members' names to indicate that the two of you
-will work together. Once you've formed a pair, you and your partner are
+message to me on Piazza with both members' names to indicate that the two of
+you will work together. Once you've formed a pair, you and your partner are
 committing to stick with the pairing.
 
 If you intend to work solo, please also message me on Piazza to indicate your
@@ -53,7 +55,8 @@ The pairing deadline is listed in the side bar.
 
 <https://youtu.be/FutR00lpAfE>
 
-Note: This video is for a former version of this project. The specification has slightly changed.
+Note: This video is for a former version of this project. The specification has
+slightly changed.
 
 ---
 
@@ -77,12 +80,15 @@ In order to submit the form you will need three additional things:
 - The name of a pushed docker container that when invoked runs your chat
   server, e.g., `us.gcr.io/cs291a/project3_YOURNAME`
 
-- A URL to your deployed front-end application with minimized JavaScript (tip: `yarn build`).
+- A URL to your deployed front-end application with minimized JavaScript (tip:
+  `yarn build`).
 
-- A URL to your GitHub repository. Assuming this repository is `private`, please invite me,
-  `bboe` on GitHub so that I can see your code.
+- A URL to your GitHub repository. Assuming this repository is `private`,
+  please invite me, `bboe` on GitHub so that I can see your code.
 
-__Note__: Please do not deploy this project to Google Cloud Run. First, it won't work as expected because Google Cloud Run has a maximum connection timeout. Second, I will run your docker containers locally.
+__Note__: Please do not deploy this project to Google Cloud Run. First, it
+won't work as expected because Google Cloud Run has a maximum connection
+timeout. Second, I will run your docker containers locally.
 {: .alert .alert-danger }
 
 ---
@@ -92,17 +98,24 @@ __Note__: Please do not deploy this project to Google Cloud Run. First, it won't
 You will need to implement the following endpoints for this project.
 
 __Note__: I've intentionally excluded any CORS related headers and endpoints
-from the following list. It's up to you to determine the necessary CORs endpoints.
+from the following list. It's up to you to determine the necessary CORs
+endpoints.
 {: .alert .alert-warning }
 
 ### POST /login
 
-This endpoint is used to grant a user an access token. The endpoint is also used to immediately register a new
-user. Once a user has been created, they must login with the same password. The server should store the user registrations in memory.
+This endpoint is used to grant a user an access token. The endpoint is also
+used to immediately register a new user. Once a user has been created, they
+must login with the same password. The server should store the user
+registrations in memory.
 
 Returns:
 
-- `201` with the JSON body `{"message_token": <SIGNED MESSAGE TOKEN>, "stream_token": <SIGNED STREAM TOKEN>}` on success. The server should invalidate any previous `message_token` and `stream_token` values assigned to the user, resulting in new tokens for each succesful login. No other `/login` response status code should reset the tokens.
+- `201` with the JSON body `{"message_token": <SIGNED MESSAGE TOKEN>,
+  "stream_token": <SIGNED STREAM TOKEN>}` on success. The server should
+  invalidate any previous `message_token` and `stream_token` values assigned to
+  the user, resulting in new tokens for each succesful login. No other `/login`
+  response status code should reset the tokens.
 
 - `403` if the provided `username` and `password` combination does not match
   that of an existing user
@@ -111,7 +124,8 @@ Returns:
 
 - `422` if either `password` or `username` is blank
 
-- `422` if the set of provided fields do not exactly match the two expected fields
+- `422` if the set of provided fields do not exactly match the two expected
+  fields
 
 Expected Request Form Fields:
 
@@ -139,11 +153,16 @@ Send a message to all users of the chat system.
 
 Returns:
 
-- `201` on success. Additionally, the `message_token` value associated with the user should be overwritten and the new one returned via the `Token` HTTP response header. This action is to ensure each `message_token` may be used only once.
+- `201` on success. Additionally, the `message_token` value associated with the
+  user should be overwritten and the new one returned via the `Token` HTTP
+  response header. This action is to ensure each `message_token` may be used
+  only once.
 
 - `403` if `<SIGNED MESSAGE TOKEN>` is not valid
 
-- `409` if there is not a `stream` open for the `username` associated with the message token. Additionally, the `message_token` value should be rotated in the same way as described in `201`.
+- `409` if there is not a `stream` open for the `username` associated with the
+  message token. Additionally, the `message_token` value should be rotated in
+  the same way as described in `201`.
 
 - `422` if `message` is blank
 
@@ -179,7 +198,8 @@ Returns:
 
 - `403` if `<SIGNED STREAM TOKEN>` is not valid
 
-- `409` if there is already a `stream` open for the `username` associated with the stream token
+- `409` if there is already a `stream` open for the `username` associated with
+  the stream token
 
 Example curl command:
 
@@ -213,12 +233,17 @@ __Note__: You might be wondering:
 - Why do we have two separate tokens?
 - Why don't we rotate the stream token, like we do with the message token?
 
-
-Those are great questions. In a nutshell, `EventSource` does not support sending arbitrary HTTP headers with the HTTP requests, and it does not support reading arbitrary HTTP headers from the HTTP response. Additionally the connection URL cannot be modified after the `EventSource` is created. As a result we cannot:
+Those are great questions. In a nutshell, `EventSource` does not support
+sending arbitrary HTTP headers with the HTTP requests, and it does not support
+reading arbitrary HTTP headers from the HTTP response. Additionally the
+connection URL cannot be modified after the `EventSource` is created. As a
+result we cannot:
 
 1. pass an `Authorization: Bearer <TOKEN>` along with the HTTP request
 2. extract a newly generated token from the associated HTTP response
-3. rotate the stream token lest we want to break the `EventSource` automatic reconnect behavior
+3. rotate the stream token lest we want to break the `EventSource` automatic
+   reconnect behavior
+
 </div>
 
 ---
@@ -278,7 +303,8 @@ Fields:
 ### Users
 
 Provides a complete list of users connected to the chat server. This message is
-only sent out on connection of new streams and not on reconnect where the `Last-Event-Id` header would be present.
+only sent out on connection of new streams and not on reconnect where the
+`Last-Event-Id` header would be present.
 
 Fields:
 
@@ -297,7 +323,8 @@ Fields:
 
 - Incoming messages should be broadcast to everyone.
 
-- A `Disconnect` should be sent to a user who messages `/quit`. Their `POST /stream/<TOKEN>` HTTP response should then be closed by the server.
+- A `Disconnect` should be sent to a user who messages `/quit`. Their `POST
+  /stream/<TOKEN>` HTTP response should then be closed by the server.
 
 - The first event in the server should be `ServerStatus` indicating the server
   has started.
@@ -305,29 +332,40 @@ Fields:
 - A history of at least the last 100 broadcast events should be kept.
 
 - All of the `Message` or `ServerStatus` in the history should be sent to a
-  newly connecting user (`JOIN` and `PART` events should not be sent to a newly connecting user).
+  newly connecting user (`JOIN` and `PART` events should not be sent to a newly
+  connecting user).
 
 - A user who is reestablishing its connection (retry after failure) should
   receive all of the messages in the history that have occurred since the
-  provided `Last-Event-Id` header value. If the value of `Last-Event-Id` is not found in the history, then the connection should be treated as a new connection.
+  provided `Last-Event-Id` header value. If the value of `Last-Event-Id` is not
+  found in the history, then the connection should be treated as a new
+  connection.
 
 ---
 
 ## Server Commands
 
-The following `/` commands should be implmented by your server via the `POST /messages` endpoint.
+The following `/` commands should be implmented by your server via the `POST
+/messages` endpoint.
 
 ### /kick &lt;USERNAME&gt;
 
-Like `/reconnect`, but applied to the user respresented by `USERNAME`. If there is no connected user associated with `USERNAME`, or a user tries to kick themselves, the `POST /message` HTTP response status should be `409`. Because no `DISCONNECT` event is sent, the kicked user's client's `EventSource` instance should automatically reconnect to the server.
+Like `/reconnect`, but applied to the user respresented by `USERNAME`. If there
+is no connected user associated with `USERNAME`, or a user tries to kick
+themselves, the `POST /message` HTTP response status should be `409`. Because
+no `DISCONNECT` event is sent, the kicked user's client's `EventSource`
+instance should automatically reconnect to the server.
 
 ### /quit
 
-Messages a `DISCONNECT` to the sending user, broadcasts a `PART` for that user, and ends their HTTP `stream`. The client should not attempt to reconnect.
+Messages a `DISCONNECT` to the sending user, broadcasts a `PART` for that user,
+and ends their HTTP `stream`. The client should not attempt to reconnect.
 
 ### /reconnect
 
-Broadcasts a `PART` for the sending user and ends their HTTP `stream`. Because no `DISCONNECT` event is sent, the client's `EventSource` instance should automatically reconnect to the server.
+Broadcasts a `PART` for the sending user and ends their HTTP `stream`. Because
+no `DISCONNECT` event is sent, the client's `EventSource` instance should
+automatically reconnect to the server.
 
 ---
 
@@ -336,7 +374,8 @@ Broadcasts a `PART` for the sending user and ends their HTTP `stream`. Because n
 Your application need not be anything like the reference application. It
 however, must meet the following requirements:
 
-- Connection status should be visually discernible between being connected and disconnected.
+- Connection status should be visually discernible between being connected and
+  disconnected.
 
 - There should be an easy way to see who is connected.
 
@@ -348,15 +387,16 @@ however, must meet the following requirements:
 
 - `ServerStatus` events should be discoverable.
 
-- For retry-able connection failures (e.g., `/reconnect`, `/kick`), your application should automatically
-  reconnect (`EventSource` should handle this for you).
+- For retry-able connection failures (e.g., `/reconnect`, `/kick`), your
+  application should automatically reconnect (`EventSource` should handle this
+  for you).
 
 - On `Disconnect` your application should not automatically attempt to
   reconnect to the server.
 
 - A user should always be able to take an action (e.g., connect, send
-  message). In other words there should be no client state that requires a
-  page refresh.
+  message). In other words there should be no client state that requires a page
+  refresh.
 
 - Separate browser windows and/or tabs should each be able to have their own
   connection to the server.
@@ -380,7 +420,8 @@ don't want to set up the dependencies on your machine.
 
 ### Clone your copy of the project 3 template repository
 
-Make sure you've make a copy of the [template repository](./#template-project). Then run:
+Make sure you've make a copy of the [template
+repository](./#template-project). Then run:
 
 ```sh
 git clone <YOUR_REPO_URI>
@@ -410,7 +451,9 @@ yarn start
 Once started, you should be able to access your application via:
 <http://localhost:3000>
 
-This template React client will try to establish a trivial `EventSource` connection to <http://localhost:3001> in order to interact with the template server (view the JavaScript console to see a message on connection).
+This template React client will try to establish a trivial `EventSource`
+connection to <http://localhost:3001> in order to interact with the template
+server (view the JavaScript console to see a message on connection).
 
 ### Make Changes
 
@@ -427,7 +470,8 @@ Follow this guide to add more components:
 
 ## Running the Template Server
 
-In a different terminal, change into the `server` directory and then build the template container:
+In a different terminal, change into the `server` directory and then build the
+template container:
 
 ```sh
 cd server
@@ -440,7 +484,8 @@ Then start the the container:
 docker run -it --rm -p 3001:3000 us.gcr.io/cs291a/project3_${CS291_ACCOUNT}
 ```
 
-Note that `thin` runs on container port 3000, but so does webpacker. Thus we'll map host port 3001 to the container port 3000.
+Note that `thin` runs on container port 3000, but so does webpacker. Thus we'll
+map host port 3001 to the container port 3000.
 
 ---
 
