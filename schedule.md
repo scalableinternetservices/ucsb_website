@@ -119,7 +119,6 @@ the quarter progresses.
 ### Topics
 
 - Deep Dive: Ruby on Rails
-- Deep Dive: Load Testing with Tsung
 
 </div>
 <div class="week">
@@ -128,8 +127,8 @@ the quarter progresses.
 
 ### Topics
 
+- Deep Dive: Load Testing with Tsung ([slides](/slides/2021w/10_tsung))
 - Relational Database
-- RDBMS Scaling
 
 </div>
 <div class="week">
@@ -138,8 +137,18 @@ the quarter progresses.
 
 ### Topics
 
+- RDBMS Scaling
 - Service Oriented Architectures
+
+</div>
+<div class="week">
+
+## Week 9 (March 1-)
+
+### Topics
+
 - Non-Relational Data Stores
+- Web Security
 
 ### Tasks
 
@@ -149,22 +158,8 @@ the quarter progresses.
 - Read [Eventually
   Consistent](http://www.scalableinternetservices.com/slides/vogels.pdf) by
   Werner Vogels
-
-</div>
-<div class="week">
-
-## Week 9 (March 1-)
-
-### Topics
-
-- Web Security
-- HTTP/2
-
-### Tasks
-
 - Read chapter [4](https://hpbn.co/transport-layer-security-tls/) of High
   Performance Browser Networking
-- Read chapter [12](https://hpbn.co/http2/) of High Performance Browser Networking
 
 </div>
 <div class="week">
@@ -173,10 +168,12 @@ the quarter progresses.
 
 ### Topics
 
+- HTTP/2
 - QUIC (HTTP/3)
 
 ### Tasks
 
+- Read chapter [12](https://hpbn.co/http2/) of High Performance Browser Networking
 - Complete the [project report](/project/#report)
 
 </div>
