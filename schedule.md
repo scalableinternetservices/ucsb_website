@@ -128,7 +128,6 @@ the quarter progresses.
 ### Topics
 
 - Deep Dive: Load Testing with Tsung ([slides](/slides/2021w/10_tsung))
-- Relational Database
 
 </div>
 <div class="week">
@@ -137,6 +136,7 @@ the quarter progresses.
 
 ### Topics
 
+- Relational Databases ([slides](/slides/2021w/11_relational_databases))
 - RDBMS Scaling
 - Service Oriented Architectures
 
