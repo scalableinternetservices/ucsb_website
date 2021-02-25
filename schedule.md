@@ -137,8 +137,7 @@ the quarter progresses.
 ### Topics
 
 - Relational Databases ([slides](/slides/2021w/11_relational_databases))
-- RDBMS Scaling
-- Service Oriented Architectures
+- RDBMS Scaling ([slides](/slides/2021w/12_rdbms_scaling))
 
 </div>
 <div class="week">
