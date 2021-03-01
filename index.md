@@ -218,7 +218,7 @@ Individual Score would be `106.4%`, Bob's `97.85%`, and Chuck's `80.75%`.
 
 We will confidentially conduct the peer score process twice during the course:
 
-- Friday, February 12
+- Monday, March 1
 - Thursday, March 18
 
 The first peer score is intended to help students see if they need to make any
