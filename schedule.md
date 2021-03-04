@@ -147,7 +147,7 @@ the quarter progresses.
 ### Topics
 
 - Non-Relational Data Stores ([slides](/slides/2021w/13_nosql))
-- Web Security
+- Web Security ([slides](/slides/2021w/14_web_security))
 
 ### Tasks
 
