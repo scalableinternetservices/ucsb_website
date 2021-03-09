@@ -167,8 +167,7 @@ the quarter progresses.
 
 ### Topics
 
-- HTTP/2
-- QUIC (HTTP/3)
+- HTTP/2 and QUIC (HTTP/3) ([slides](/slides/2021w/15_http2_quic))
 
 ### Tasks
 
