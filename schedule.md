@@ -151,6 +151,8 @@ the quarter progresses.
 
 ### Tasks
 
+- Read [How Discord Stores Billions of Messages
+](https://blog.discord.com/how-discord-stores-billions-of-messages-7fa6ec7ee4c7)
 - Read [CAP 12 years
   later](http://www.realtechsupport.org/UB/NP/Numeracy_CAP%2B12Years_2012.pdf)
   by Eric Brewer
