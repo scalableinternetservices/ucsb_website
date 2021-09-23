@@ -176,10 +176,8 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 - TBD
 
-
 </div>
 <div class="week">
-
 
 ## Finals Week (December 7-)
 
