@@ -5,9 +5,14 @@ Quarter: {{ site.quarter }}
 
 ## Instructor
 
-[Dr. Bryce Boe](https://sites.cs.ucsb.edu/~bboe/)  
-<bboe@cs.ucsb.edu>  
-Please use Piazza for correspondance when possible
+[Dr. Bryce Boe](https://www.linkedin.com/in/bryceboe/)
+(<bboe@cs.ucsb.edu>)
+
+## AppFolio Backup
+[Dr. Nevena Golubovic](https://www.linkedin.com/in/nevenagolubovic/)
+(<nevena.golubovic@appfolio.com>)
+
+Please use Piazza for class-related correspondance.
 
 ## Dates
 
@@ -18,39 +23,39 @@ Tuesday and Thursday
 
 ### Initial tasks due before
 
-Wednesday, January 6 9am PST
+Friday, September 24 10am PDT
 
-- Complete the [introduction survey](https://forms.gle/r9ksf1X9k7162mhdA)
+- Complete the [introduction survey](https://forms.gle/h8N5ymVe5ofYA9MK9)
 - Join the class on [Piazza]({{ site.piazza_url }})
-- Enroll in [AWS Educate](https://www.awseducate.com/Registration?apptype=student&courseview=true)
+<!-- - Enroll in [AWS Educate](https://www.awseducate.com/Registration?apptype=student&courseview=true) -->
 
 ### [Project 0](/project0/) due before
 
-Friday, January 8 1pm PST
+Monday, September 27 1pm PDT
 
 ### [Project 1](/project1/) due before
 
-Friday, January 15 1pm PST
+Friday, October 1 1pm PDT
 
 ### [Project 2](/project2/) due before
 
-Friday, January 22 1pm PST
+Friday, October 8 1pm PDT
 
 ### Project 3 Pairing Message due before
 
-Friday, January 29 9am PST
+Friday, October 15 9am PDT
 
 ### [Project 3](/project3/) due before
 
-Friday, February 5 9am PST
+Friday, October 22 9am PDT
 
 ### [Project](/project/#report) report due before
 
-Friday, March 12 9am PST
+Friday, December 3 9am PST
 
 ### [Project](/project/#video) video due before
 
-Thursday, March 18 4pm PDT
+Thursday, December 9 4pm PST
 
 ## Class Resources
 
@@ -61,8 +66,6 @@ access.
 [Piazza]({{ site.piazza_url }}): Use to receive class announcements, ask and
 answer questions, and to communicate with instructor. Access code is available
 in Google Drive.
-
-[Nectir]({{ site.nectir_url }}): Use for real-time chat with classmates.
 
 [Github](https://github.com/{{ site.github_username }}): Contains content for
 this website. Additionally all student projects will live here.

@@ -35,7 +35,7 @@ can `create`, `list`, `read`, and `delete` files.
 
 ## Project Submission
 
-<https://docs.google.com/forms/d/e/1FAIpQLSe-zAfx6DDYiTuRE4E0Mau4SWvuLJveQoRhkvA1TZ-R4TGm0A/viewform>
+...
 
 ## HTTP API Specification
 

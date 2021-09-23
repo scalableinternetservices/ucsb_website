@@ -5,32 +5,24 @@ permalink: /schedule/
 title: Class Schedule
 ---
 
-# Winter 2021 Class Schedule
+# Fall 2021 Class Schedule
 
-Below is the tentative schedule for the course. The weekly topics may change as
-the quarter progresses.
+The following schedule is subject to change, and many slide links are not yet active.
 {: .alert .alert-warning }
 
 <div class="week">
 
-## Week 1 (January 4-)
+## Week 0 (September 23-)
 
 ### Topics
 
-- [Syllabus Overview Video](https://drive.google.com/file/d/1wZsdxVyTPWF2huZG1aizb2jrbf5KekgN/view)
-- [CS291A Welcome Video](https://drive.google.com/file/d/1ehJVHaf1yTtPvLYFJCXCLp2HvrZwwoo4/view)
-- Course Introduction
-  ([video](https://drive.google.com/file/d/1lgO3ikzQ_DUihd8qHb08iljUegC28sBz/view),
-  [slides](/slides/2021w/01_course_introduction/))
-- Hypertext Transfer Protocol (HTTP)
-  ([video](https://drive.google.com/file/d/1gM3hEc9gyBpY0A9aPupNoSUGMJ_aunoe/view),
-  [slides](/slides/2021w/02_http))
+- Course Introduction ([slides](/slides/2021f/01_course_introduction/))
 
 ### Tasks
 
 - Complete the introduction survey
 - Join the class on Piazza
-- Enroll in AWS Educate
+<!-- - Enroll in AWS Educate -->
 - Complete [Project 0](/project0/)
 - Begin [Project 1](/project1/)
 - Read chapters [1](https://hpbn.co/primer-on-latency-and-bandwidth/),
@@ -42,15 +34,14 @@ the quarter progresses.
 </div>
 <div class="week">
 
-## Week 2 (January 11-)
+## Week 1 (September 28-)
 
 ### Topics
 
-- HTTP Servers
-  ([video](https://drive.google.com/file/d/1m_NgJ9dhhAWUpgsylp1ciezgxKVCc5mC/view),
-  [slides](/slides/2021w/03_http_servers/))
-- Application Servers ([slides](/slides/2021w/04_application_servers/))
-- Scaling Web Applications ([slides](/slides/2021w/05_scaling_web_applications/))
+- Hypertext Transfer Protocol (HTTP) ([slides](/slides/2021f/02_http))
+- HTTP Servers ([slides](/slides/2021f/03_http_servers/))
+- Application Servers ([slides](/slides/2021f/04_application_servers/))
+- Scaling Web Applications ([slides](/slides/2021f/05_scaling_web_applications/))
 
 ### Tasks
 
@@ -63,11 +54,11 @@ the quarter progresses.
 </div>
 <div class="week">
 
-## Week 3 (January 18-)
+## Week 2 (October 5-)
 
 ### Topics
 
-- Architecting for High Availability ([slides](/slides/2021w/06_high_availability))
+- Architecting for High Availability ([slides](/slides/2021f/06_high_availability))
 - Frontend Deep Dive: React
 
 ### Tasks
@@ -78,16 +69,16 @@ the quarter progresses.
 </div>
 <div class="week">
 
-## Week 4 (January 25-)
+## Week 3 (October 12-)
 
 ### Topics
 
-- Working in teams ([slides](/slides/2021w/07_agile_tdd_pairing))
+- Working in teams ([slides](/slides/2021f/07_agile_tdd_pairing))
   - Agile Software Development
   - Test Driven Development (TDD)
   - Continuous Integration (CI)
   - Pair Programming / Mobbing
-- Client-side Caching & Content Delivery Networks ([slides](/slides/2021w/08_client_caching_cdn))
+- Client-side Caching & Content Delivery Networks ([slides](/slides/2021f/08_client_caching_cdn))
 
 ### Tasks
 
@@ -96,11 +87,11 @@ the quarter progresses.
 </div>
 <div class="week">
 
-## Week 5 (February 1-)
+## Week 4 (October 19-)
 
 ### Topics
 
-- Server Side Caching ([slides](/slides/2021w/09_server_caching))
+- Server Side Caching ([slides](/slides/2021f/09_server_caching))
 
 ### Tasks
 
@@ -114,7 +105,7 @@ the quarter progresses.
 </div>
 <div class="week">
 
-## Week 6 (February 8-)
+## Week 5 (October 26-)
 
 ### Topics
 
@@ -123,31 +114,31 @@ the quarter progresses.
 </div>
 <div class="week">
 
-## Week 7 (February 15-)
+## Week 6 (November 2-)
 
 ### Topics
 
-- Deep Dive: Load Testing with Tsung ([slides](/slides/2021w/10_tsung))
+- Deep Dive: Load Testing with Tsung ([slides](/slides/2021f/10_tsung))
 
 </div>
 <div class="week">
 
-## Week 8 (February 22-)
+## Week 7 (November 9-)
 
 ### Topics
 
-- Relational Databases ([slides](/slides/2021w/11_relational_databases))
-- RDBMS Scaling ([slides](/slides/2021w/12_rdbms_scaling))
+- Relational Databases ([slides](/slides/2021f/11_relational_databases))
+- RDBMS Scaling ([slides](/slides/2021f/12_rdbms_scaling))
 
 </div>
 <div class="week">
 
-## Week 9 (March 1-)
+## Week 8 (November 16-)
 
 ### Topics
 
-- Non-Relational Data Stores ([slides](/slides/2021w/13_nosql))
-- Web Security ([slides](/slides/2021w/14_web_security))
+- Non-Relational Data Stores ([slides](/slides/2021f/13_nosql))
+- Web Security ([slides](/slides/2021f/14_web_security))
 
 ### Tasks
 
@@ -165,11 +156,11 @@ the quarter progresses.
 </div>
 <div class="week">
 
-## Week 10 (March 8-)
+## Week 9 (November 23-)
 
 ### Topics
 
-- HTTP/2 and QUIC (HTTP/3) ([slides](/slides/2021w/15_http2_quic))
+- HTTP/2 and QUIC (HTTP/3) ([slides](/slides/2021f/15_http2_quic))
 
 ### Tasks
 
@@ -179,7 +170,18 @@ the quarter progresses.
 </div>
 <div class="week">
 
-## Finals Week (March 15-)
+## Week 10 (November 30-)
+
+### Topics
+
+- TBD
+
+
+</div>
+<div class="week">
+
+
+## Finals Week (December 7-)
 
 ### Tasks
 

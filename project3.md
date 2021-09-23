@@ -71,7 +71,8 @@ Please create a new private repository from this template:
 ## Project Submission
 
 Please have each team member submit the following form:
-<https://docs.google.com/forms/d/e/1FAIpQLSccX7Wl0p7NP9C6-Cpwsv_1Zt42cPABnc11VLJWbCrmfuz6Mw/viewform>
+
+...
 
 ### Deliverables
 

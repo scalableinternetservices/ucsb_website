@@ -43,45 +43,14 @@ By the end of this course students will be able to:
 
 ## Class Content and Interactions
 
-### Pre-recorded Videos
-
-All core course topics, covering the essentials of building large scale
-Internet services, will be presented in the form of pre-recorded videos. Links
-to the videos and associated material for each topic should be made available
-at the beginning of the week the topic is covered.
-
 ### Synchronous Classes
 
+All core course topics, covering the essentials of building large scale
+Internet services, will be presented via in-person lectures.
+
 Class will meet twice a week during the scheduled class time unless otherwise
-mentioned. Students are expected to watch the week's videos prior to the
-scheduled class times in order to leverage this time to ask and answer
+mentioned. Students are encouraged to attend in order to ask and answer
 questions, and explore the material in more depth.
-
-These classes will be held via Zoom. The Zoom classes will be recorded and
-shared only with enrolled students. Students are strongly encouraged, but not
-required, to turn on their web cameras when speaking and interacting in
-break-out rooms with their peers.
-
-Should the instructor experience any technical difficulties during synchronous
-classes, students may check Piazza for updates.
-
-Should a student experience any technical difficulties during synchronous
-classes, they can visit the [LSIT Help
-Center](https://help.lsit.ucsb.edu/hc/en-us), or they can send an email to
-<help@collaborate.ucsb.edu>.
-
-<div class="well">
-Please read the following UCSB notice regarding class Zoom recordings:
-
-> This live Zoom session will be recorded for students who may not be able to
-> attend at this time. By default, your microphone and camera will be muted
-> when you join the session. If you do not want to be included in the
-> recording, simply keep your camera and microphone off. You may ask questions
-> in the chat window. NOTE: Student participants are prohibited from recording
-> of any kind. Only the instructor is permitted to record.
-
-Source: <https://keepteaching.id.ucsb.edu/?page_id=113>
-</div>
 
 ### Piazza
 
@@ -97,29 +66,14 @@ questions as a follow up to an existing post. Follow-ups are useful to obtain
 more information necessary to answer a question, or to work through possible
 solutions to a question.
 
-Piazza is used for one-on-one communication with the instructor for content
-pertaining to this class. Please do not reach out to the instructor via email,
-nor Nectir for class related communications.
-
-### Nectir
-
-Nectir is a real-time chat service available to UCSB students and faculty. A
-channel, `#cs291a_w2021`, has been created for this class to support
-student-to-student discussion. Initially the `#cs291a_w2021` channel will be
-open to all UCSB students, but once the course roster is finalized, the channel
-will be made available only to enrolled students.
-
-Additionally, Nectir allows students to create private groups, and direct
-message others. Private groups can be used to facilitate real-time team
-communication.
-
-Please do not direct message the course instructor on Nectir for class-related
-matters. Please use Piazza for such correspondance.
+All one-on-one offline communication with the instructors for content
+pertaining to this class should be conducted via Piazza. Please do not reach
+out to the instructor via email for class related communications.
 
 ### Team Check-ins
 
-Once the primary project has started in week 5, teams will meet with the
-instructor once each week, via Zoom. These meetings will be scheduled for
+Once the primary project has started in week 5, teams will meet with either
+Bryce or Nevena once each week, via Zoom. These meetings will be scheduled for
 approximately 15 minutes.
 
 ## Projects

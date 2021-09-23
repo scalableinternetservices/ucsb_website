@@ -30,7 +30,7 @@ HTTP API. Your code will be deployed using a single AWS Lambda function.
 
 ## Project Submission
 
-<https://docs.google.com/forms/d/e/1FAIpQLSdk1OZ4XvpEp4_-pufCpyjgCFro9OfVheOQ4cZIt3mtO884nw/viewform>
+...
 
 ## API Specification
 
