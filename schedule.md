@@ -25,11 +25,8 @@ The following schedule is subject to change, and many slide links are not yet ac
 <!-- - Enroll in AWS Educate -->
 - Complete [Project 0](/project0/)
 - Begin [Project 1](/project1/)
-- Read chapters [1](https://hpbn.co/primer-on-latency-and-bandwidth/),
-  [2](https://hpbn.co/building-blocks-of-tcp/),
-  [9](https://hpbn.co/brief-history-of-http/),
-  [10](https://hpbn.co/primer-on-web-performance/), and
-  [11](https://hpbn.co/http1x/) of High Performance Browser Networking
+- Read chapters [1](https://hpbn.co/primer-on-latency-and-bandwidth/), and
+  [2](https://hpbn.co/building-blocks-of-tcp/) of High Performance Browser Networking
 
 </div>
 <div class="week">
@@ -41,12 +38,14 @@ The following schedule is subject to change, and many slide links are not yet ac
 - Hypertext Transfer Protocol (HTTP) ([slides](/slides/2021f/02_http))
 - HTTP Servers ([slides](/slides/2021f/03_http_servers/))
 - Application Servers ([slides](/slides/2021f/04_application_servers/))
-- Scaling Web Applications ([slides](/slides/2021f/05_scaling_web_applications/))
 
 ### Tasks
 
 - Complete [Project 1](/project1/)
 - Begin [Project 2](/project2/)
+- Read chapters [9](https://hpbn.co/brief-history-of-http/),
+  [10](https://hpbn.co/primer-on-web-performance/), and
+  [11](https://hpbn.co/http1x/) of High Performance Browser Networking
 - Read [Dynamic Load Balancing on Web-server
   Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf) by Cardellini,
   Colajanni, and Yu.
@@ -58,6 +57,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
+- Scaling Web Applications ([slides](/slides/2021f/05_scaling_web_applications/))
 - Architecting for High Availability ([slides](/slides/2021f/06_high_availability))
 - Frontend Deep Dive: React
 
