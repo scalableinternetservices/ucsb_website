@@ -30,7 +30,7 @@ is accomplished.
 
 ## Project Submission
 
-<https://forms.gle/3ui9iggNoETA7bX28>
+<{{site.project0_submission}}>
 
 ## Page Requirements
 

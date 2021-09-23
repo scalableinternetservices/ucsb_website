@@ -1,6 +1,6 @@
 # Site settings
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "https://cs291.com" # the base hostname & protocol for your site
+url: https://cs291.com # the base hostname & protocol for your site
 
 # User settings
 course_number: CS291A
@@ -9,11 +9,15 @@ title: Scalable Internet Services
 
 github_username: scalableinternetservices
 
-instructor: "Bryce Boe"
-instructor_url: "https://bryceboe.com"
+instructor: Dr. Bryce Boe
+instructor_email: bboe@cs.ucsb.edu
+instructor_url: https://www.linkedin.com/in/bryceboe/
 
-drive_url: "https://drive.google.com/drive/folders/1gR2i40_QGN0TfK4CjLZMGaQGNcTyj2P_"
-piazza_url: "https://piazza.com/ucsb/fall2021/cs291a"
+drive_url: https://drive.google.com/drive/folders/17mWzDGfDk1mlNdtblPFWDSmpXVonx9qA
+piazza_url: https://piazza.com/ucsb/fall2021/cs291a
+
+intro_survey: https://forms.gle/h8N5ymVe5ofYA9MK9
+project0_submission: https://forms.gle/3ui9iggNoETA7bX28
 
 kramdown:
   parse_block_html: true

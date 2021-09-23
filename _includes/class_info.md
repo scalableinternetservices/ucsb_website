@@ -1,32 +1,35 @@
 # Course Info
 
-Course Number: {{ site.course_number }}  
-Quarter: {{ site.quarter }}
+- Course Number: {{site.course_number}}
+- Quarter: {{site.quarter}}
 
 ## Instructor
 
-[Dr. Bryce Boe](https://www.linkedin.com/in/bryceboe/)
-(<bboe@cs.ucsb.edu>)
+- [{{site.instructor}}]({{site.instructor_url}})
+- <{{site.instructor_email}}>
 
 ## AppFolio Backup
-[Dr. Nevena Golubovic](https://www.linkedin.com/in/nevenagolubovic/)
-(<nevena.golubovic@appfolio.com>)
 
-Please use Piazza for class-related correspondance.
+- [Dr. Nevena Golubovic](https://www.linkedin.com/in/nevenagolubovic/)
+- <nevena.golubovic@appfolio.com>
+
+Please use [Piazza]({{site.piazza_url}}) for class-related correspondance.
 
 ## Dates
 
-### Synchronous Classes
+### Classes
 
-Tuesday and Thursday  
-3:00pm -- 4:50pm PST
+- Tuesday and Thursday
+- 3:00pm -- 4:50pm PST
+- Phelps 3526
+
 
 ### Initial tasks due before
 
 Friday, September 24 10am PDT
 
-- Complete the [introduction survey](https://forms.gle/h8N5ymVe5ofYA9MK9)
-- Join the class on [Piazza]({{ site.piazza_url }})
+- Complete the [introduction survey]({{site.intro_survey}})
+- Join the class on [Piazza]({{site.piazza_url}})
 <!-- - Enroll in [AWS Educate](https://www.awseducate.com/Registration?apptype=student&courseview=true) -->
 
 ### [Project 0](/project0/) due before
@@ -59,15 +62,15 @@ Thursday, December 9 4pm PST
 
 ## Class Resources
 
-[Google Drive]({{ site.drive_url }}): Download lecture videos, and obtain other
-class content. You must be logged in to your UCSB Google account in order to
-access.
+[Google Drive]({{site.drive_url}}): Contains some class content, such as
+project overview videos. You must be logged in to your UCSB Google account and
+added to a specific Google Group in order to access.
 
-[Piazza]({{ site.piazza_url }}): Use to receive class announcements, ask and
+[Piazza]({{site.piazza_url}}): Use to receive class announcements, ask and
 answer questions, and to communicate with instructor. Access code is available
-in Google Drive.
+in Google Drive and will be shared in the first class.
 
-[Github](https://github.com/{{ site.github_username }}): Contains content for
+[Github](https://github.com/{{site.github_username}}): Contains content for
 this website. Additionally all student projects will live here.
 
 ## Textbooks
