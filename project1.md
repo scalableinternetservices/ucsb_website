@@ -10,7 +10,7 @@ title: Project 1
 In this project you will write ruby code to provide a semi-trivial
 HTTP API. Your code will be deployed using a single AWS Lambda function.
 
-## Learning Outcomes:
+## Learning Outcomes
 
 - Student has leveraged JWTs to provide authorization protection to HTTP
   endpoints.
@@ -30,7 +30,7 @@ HTTP API. Your code will be deployed using a single AWS Lambda function.
 
 ## Project Submission
 
-...
+<https://forms.gle/cuz3nP8zszaDfv9t5>
 
 ## API Specification
 
@@ -50,7 +50,6 @@ be enforced on an endpoint.
 
 - Responds `403` if a proper `Authorization: Bearer <TOKEN>` header is not
   provided.
-
 
 ### POST /token
 
@@ -77,7 +76,6 @@ the authentication step and will always return a token for a valid request.
 
 - Responds `422` if the body of the request is not actually json.
 
-
 ### Other Specifications
 
 - All HTTP responses should have the content type `application/json`. You
@@ -87,7 +85,6 @@ the authentication step and will always return a token for a valid request.
 
 - Requests to `/` or `/token` which do not use the appropriate HTTP method must
   respond with status code `405`.
-
 
 ## Resources
 
@@ -140,14 +137,13 @@ Please use the following script to verify your web application:
 - What do you suspect accounts for the difference in performance between GitHub
   pages and your AWS Lambda web service?
 
-
-## Required Tools:
+## Required Tools
 
 - [JSON Web Tokens](https://jwt.io/introduction/)
 
 - [Ruby](https://www.ruby-lang.org/en/)
 
-## Other Resources:
+## Other Resources
 
 - [AWS API
   Gateway](https://us-west-2.console.aws.amazon.com/apigateway/home?region=us-west-2#/apis)

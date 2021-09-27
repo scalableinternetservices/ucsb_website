@@ -72,7 +72,7 @@ Please create a new private repository from this template:
 
 Please have each team member submit the following form:
 
-...
+<https://forms.gle/RUyjZxor1U9JzGuA9>
 
 ### Deliverables
 
