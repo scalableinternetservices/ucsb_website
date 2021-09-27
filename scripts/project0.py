@@ -18,7 +18,7 @@ def main():
     if len(sys.argv) == 1:
         local_file = "example.html"
         print(f"No args given, scoring local file {local_file}")
-        with open(local_file, "r") as fp:
+        with open(local_file, mode="r", encoding="utf-8") as fp:
             content = fp.read()
         return page_issues(content, "file:///" + local_file)
 
@@ -181,7 +181,7 @@ def score(url):
     if response.status_code != 200:
         print(f"URL responded with non 200 status: {response.status_code}")
         return failures + 1  # Cannot continue
-    content = response.content
+    content = response.content.decode("utf-8")
 
     if response.history:
         print("URL redirected more than 0 times:")
