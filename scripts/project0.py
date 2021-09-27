@@ -181,7 +181,7 @@ def score(url):
     if response.status_code != 200:
         print(f"URL responded with non 200 status: {response.status_code}")
         return failures + 1  # Cannot continue
-    content = response.content.decode('utf-8')
+    content = response.content.decode("utf-8")
 
     if response.history:
         print("URL redirected more than 0 times:")
