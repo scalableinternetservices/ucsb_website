@@ -272,8 +272,10 @@ into the jump box via:</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh -i &lt;ACCOUNT_NAME&gt;.pem &lt;ACCOUNT_NAME&gt;@ec2.cs291.com
 </code></pre></div></div>
 
-<p>For example, if your account name is <code class="language-plaintext highlighter-rouge">some-student</code>, you should have the file
-<code class="language-plaintext highlighter-rouge">some-student.pem</code>, and you will run the command:</p>
+<p>Please note that if you have an underscore <code class="language-plaintext highlighter-rouge">_</code> in your UCSBNetId, then you’ll
+need to replace that with a hyphen <code class="language-plaintext highlighter-rouge">-</code>. For example, if your UCSBNetId is
+<code class="language-plaintext highlighter-rouge">some_student</code>, you should have the file <code class="language-plaintext highlighter-rouge">some-student.pem</code>, and you will run
+the command:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh -i some-student.pem some-student@ec2.cs291.com
 </code></pre></div></div>
