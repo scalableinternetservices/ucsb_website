@@ -96,8 +96,10 @@ into the jump box via:
 
     ssh -i <ACCOUNT_NAME>.pem <ACCOUNT_NAME>@ec2.cs291.com
 
-For example, if your account name is `some-student`, you should have the file
-`some-student.pem`, and you will run the command:
+Please note that if you have an underscore `_` in your UCSBNetId, then you'll
+need to replace that with a hyphen `-`. For example, if your UCSBNetId is
+`some_student`, you should have the file `some-student.pem`, and you will run
+the command:
 
     ssh -i some-student.pem some-student@ec2.cs291.com
 
