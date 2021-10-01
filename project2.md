@@ -182,7 +182,7 @@ bucket = storage.bucket 'cs291project2', skip_lookup: true
 Uploaded files are to be saved into GCS using object names derived from the
 lower-case SHA256 hex digest of the file's contents.
 
-For example, the follow shows a file, `test.txt`, that has a SHA256 hex digest of
+For example, the following shows a file, `test.txt`, that has a SHA256 hex digest of
 `3fd48de5c648bce27acaa6ddda51f35a0c69f07075ac472a4347c66502bb0d48`:
 
 ```sh

@@ -172,14 +172,14 @@ Individual Score would be `106.4%`, Bob's `97.85%`, and Chuck's `80.75%`.
 
 We will confidentially conduct the peer score process twice during the course:
 
-- Monday, March 1
-- Thursday, March 18
+- Monday, November 8
+- Monday, November 22
 
-The first peer score is intended to help students see if they need to make any
-adjustments to their team contributions.  Only the outcome of the final peer
-score will be used to compute an individual's score. Any moderate deviations of
-more than two points from equal contribution will require justification, and
-may be followed up on by the instructor.
+The first two peer scores are intended to help students see if they need to
+make any adjustments to their team contributions. Only the outcome of the final
+peer score will be used to compute an individual's score. Any moderate
+deviations of more than two points from equal contribution will require
+justification, and may be followed up on by the instructor.
 
 ### Letter Grades
 
