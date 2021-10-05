@@ -98,7 +98,7 @@ https://aws.amazon.com/ec2/instance-types/
 
 # Scaling Test: Simulated Users
 
-We will use the same test setup explained in the last lecture.
+We will use the same test setup explained in the previous set of slides.
 
 Using Tsung (erlang-based test framework) we will simulate multiple users
 visiting the Demo App web service. Each user will:
@@ -447,7 +447,7 @@ HTTP HTTP/1.1 200 OK
 
 * More control over which requests go to which servers
 
-* Works fine with HTTPs
+* Works fine with HTTPS
 
 ## Weaknesses
 
@@ -491,7 +491,7 @@ This is the most popular technique in use (#3 is also used).
 
 * Load balancer needs to do more work
 
-* HTTPs is more complicated
+* HTTPS is more complicated
 
 ---
 
@@ -576,9 +576,9 @@ A few options:
 * Affinity based on client IP address (concerns: client IPs change, and IPs are
 shared)
 
-* HTTP Cookie (works but requires proxy configuration) [_HTTPS?_]
+* HTTP Cookie (works but requires proxy configuration)
 
-* Session ID in URL (not a great solution) [_HTTPS?_]
+* Session ID in URL (not a great solution)
 
 ---
 
@@ -587,7 +587,8 @@ shared)
 We're used to the idea that one client reuses a TCP connection for many HTTP
 requests.
 
-We can reuse this mechanism for distinct clients.
+We can reuse this mechanism for handling many clients over a handful of TCP
+connections between a load balancer and the application servers.
 
 Saves on repeated TCP setup between the load balancer and application servers.
 
@@ -635,8 +636,8 @@ and us-west-2). Consider using Route 53 DNS for region failover.
 In the vertical scaling tests, the database application ran on the same machine
 as the web server application.
 
-For these tests we are going to use a single machine for the database. This
-will make it easy to scale up the number of application servers.
+For these tests we are going to use a separate EC2 instance for the database. This
+will make it easy to scale up the number of application server instances.
 
 .center[![Single Server Load Balanced Topology](load_balanced_topology_single.png)]
 
@@ -737,7 +738,7 @@ per month. There was no clear scaling path after that point.
 
 Horizontal scaling handled 45 new users per second at a cost of about $600 per
 month. The scaling path is clear. Add more servers for a linear increase in
-cost.
+cost up to some point.
 
 ---
 
