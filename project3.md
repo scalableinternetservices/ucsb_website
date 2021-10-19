@@ -536,7 +536,7 @@ accompanied with component unit tests.
 
 - [React](https://reactjs.org)
 
-- [Server-Sent Events](https://www.w3.org/TR/eventsource/) (SSE)
+- [Server-Sent Events](https://html.spec.whatwg.org/multipage/server-sent-events.html) (SSE)
 
 - [Sinatra](http://sinatrarb.com/)
 
