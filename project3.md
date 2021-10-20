@@ -85,7 +85,8 @@ In order to submit the form you will need three additional things:
   `yarn build`).
 
 - A URL to your GitHub repository. Assuming this repository is `private`,
-  please invite me, `bboe` on GitHub so that I can see your code.
+  please invite me, `bboe`, and Nevena, `nevenag`, on GitHub so that we can see
+  your code.
 
 __Note__: Please do not deploy this project to Google Cloud Run. First, it
 won't work as expected because Google Cloud Run has a maximum connection
@@ -400,7 +401,11 @@ however, must meet the following requirements:
   refresh.
 
 - Separate browser windows and/or tabs should each be able to have their own
-  connection to the server.
+  connection to the server (under different accounts).
+
+- Your code may not use `getElementById` (other than as used in the template
+  code for finding the root `div` for `ReactDOM.render`) as doing so means you
+  are not properly utilizing React.
 
 ### Components
 
@@ -429,7 +434,7 @@ git clone <YOUR_REPO_URI>
 cd <YOUR_REPO_DIRECTORY>
 ```
 
-### Run the react development server
+### Run the React development server
 
 Change into the `client` directory and start the Docker container by running:
 
