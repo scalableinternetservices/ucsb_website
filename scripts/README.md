@@ -52,7 +52,7 @@ part of the command.
 Usage:
 
 ```sh
-docker run -it cs291_scripts ./project0.py GITHUB_WEBSITE_URL
+docker run -it --rm cs291_scripts ./project0.py GITHUB_WEBSITE_URL
 ```
 
 ### Project 1 Verification Script
@@ -60,7 +60,7 @@ docker run -it cs291_scripts ./project0.py GITHUB_WEBSITE_URL
 Usage:
 
 ```sh
-docker run -it cs291_scripts ./project1.py LAMBDA_APP_URL
+docker run -it --rm cs291_scripts ./project1.py LAMBDA_APP_URL
 ```
 
 ### Project 2 Verification Script
@@ -68,25 +68,33 @@ docker run -it cs291_scripts ./project1.py LAMBDA_APP_URL
 Usage:
 
 ```sh
-docker run -it cs291_scripts ./project2.py GOOGLE_CLOUD_RUN_URL
+docker run -it --rm cs291_scripts ./project2.py GOOGLE_CLOUD_RUN_URL
 ```
 
 ### Project 3 Server-Side Partial Verification Script
 
-Run the error-case tests, and connect to the stream:
+In order to run these scripts via a container and talk to your container you'll
+need to set up a user defined network. Run this one time:
 
 ```sh
-docker run -it cs291_scripts ./project3.py URL
+docker network create cs291
+
 ```
 
-Skip the error-case tests, and just connect to the stream:
+Run the error-case tests:
 
 ```sh
-docker run -it cs291_scripts ./project3.py --no-failures URL
+docker run -it --rm --net cs291 cs291_scripts ./project3.py test http://server:3000/
 ```
 
-Test re-connect by copying an event ID, and then run:
+Connect to the stream:
 
 ```sh
-docker run -it cs291_scripts ./project3.py --no-failures --last-event-id LASTID URL
+docker run -it --rm --net cs291 cs291_scripts ./project3.py stream http://server:3000/
+```
+
+Verify stream re-connect behavior by copying an event ID, and then run:
+
+```sh
+docker run -it --rm --net cs291 cs291_scripts ./project3.py stream http://server:3000/ --last-event-id LASTID
 ```
