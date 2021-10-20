@@ -482,8 +482,10 @@ docker build -t us.gcr.io/cs291a/project3_${CS291_ACCOUNT} .
 Then start the the container:
 
 ```sh
-docker run -it --rm -p 3001:3000 us.gcr.io/cs291a/project3_${CS291_ACCOUNT}
+docker run -it -p 3001:3000 --name server --net cs291 --rm us.gcr.io/cs291a/project3_${CS291_ACCOUNT}
 ```
+
+Note: Ensure you've run `docker network create cs291` before running the above.
 
 Note that `thin` runs on container port 3000, but so does webpacker. Thus we'll
 map host port 3001 to the container port 3000.
