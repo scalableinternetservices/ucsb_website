@@ -452,7 +452,6 @@ the bash shell in the container run (this may take a little while):
 
 ```sh
 yarn
-
 ```
 
 Then, start up the development server:
