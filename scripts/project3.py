@@ -4,6 +4,7 @@ import collections
 import inspect
 import random
 import sys
+import time
 from inspect import getmembers, isfunction
 
 import requests
@@ -120,6 +121,7 @@ def read_stream_lines(response):
 
 
 def send_message(url, token, *, expected_status=201, message):
+    time.sleep(0.1)
     response = requests.post(
         f"{url}/message",
         data={"message": message},
