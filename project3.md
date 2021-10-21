@@ -447,10 +447,17 @@ The above maps local port `3000` to container port `3000`. Synchronizes the
 contents of the current local directory with `/app` in the container, and
 starts up `bash`.
 
-Once in bash, start up the development server:
+On the first run you'll need to install all the required node packages. From
+the bash shell in the container run (this may take a little while):
 
 ```sh
-cd chat_client
+yarn
+
+```
+
+Then, start up the development server:
+
+```sh
 yarn start
 ```
 
