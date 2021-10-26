@@ -71,7 +71,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ## Week 3 (October 12-)
 
-### Topics
+### Topics (Covered by Nevena)
 
 - Working in teams ([slides](/slides/2021f/07_agile_tdd_pairing))
   - Agile Software Development
@@ -110,22 +110,14 @@ The following schedule is subject to change, and many slide links are not yet ac
 ### Topics
 
 - Deep Dive: Ruby on Rails
+- Deep Dive: Load Testing with Tsung ([slides](/slides/2021f/10_tsung))
 
 </div>
 <div class="week">
 
 ## Week 6 (November 2-)
 
-### Topics
-
-- Deep Dive: Load Testing with Tsung ([slides](/slides/2021f/10_tsung))
-
-</div>
-<div class="week">
-
-## Week 7 (November 9-)
-
-### Topics
+### Topics (Covered by Nevena)
 
 - Relational Databases ([slides](/slides/2021f/11_relational_databases))
 - RDBMS Scaling ([slides](/slides/2021f/12_rdbms_scaling))
@@ -133,12 +125,25 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
+## Week 7 (November 9-)
+
+Note: November 11 is Veterans Day, which is an observed UCSB day off.
+{: .alert .alert-warning }
+
+### Tuesday November 9: Zoom Guest Lecturer
+
+- Brian Dunlay
+- Former Software Engineer for AWS Lambda
+- Zoom link will be sent out via Piazza
+
+</div>
+<div class="week">
+
 ## Week 8 (November 16-)
 
-### Topics
+### Tuesday November 16:
 
 - Non-Relational Data Stores ([slides](/slides/2021f/13_nosql))
-- Web Security ([slides](/slides/2021f/14_web_security))
 
 ### Tasks
 
@@ -150,13 +155,37 @@ The following schedule is subject to change, and many slide links are not yet ac
 - Read [Eventually
   Consistent](http://www.scalableinternetservices.com/slides/vogels.pdf) by
   Werner Vogels
+
+
+### Thursday November 18: Zoom Guest Lecturer
+
+- [Sean Maloney](https://www.linkedin.com/in/seanmaloney/)
+- General Manager of AWS CodeCommit, Former Engineering Manager at Riot Games
+- Zoom link will be sent out via Piazza
+
+
+</div>
+<div class="week">
+
+## Week 9 (November 23-)
+
+Note: November 25 is Thanksgiving, which is an observed UCSB day off.
+{: .alert .alert-warning }
+
+
+### Topics
+
+- Web Security ([slides](/slides/2021f/14_web_security))
+
+### Tasks
+
 - Read chapter [4](https://hpbn.co/transport-layer-security-tls/) of High
   Performance Browser Networking
 
 </div>
 <div class="week">
 
-## Week 9 (November 23-)
+## Week 10 (November 30-)
 
 ### Topics
 
@@ -167,14 +196,6 @@ The following schedule is subject to change, and many slide links are not yet ac
 - Read chapter [12](https://hpbn.co/http2/) of High Performance Browser Networking
 - Complete the [project report](/project/#report)
 
-</div>
-<div class="week">
-
-## Week 10 (November 30-)
-
-### Topics
-
-- TBD
 
 </div>
 <div class="week">
