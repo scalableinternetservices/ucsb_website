@@ -249,14 +249,14 @@ new rails project using docker.</p>
 
 <h3 id="prepare-the-project-directory">Prepare the project directory</h3>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>PROJECTNAME
-<span class="nb">cd </span>PROJECTNAME
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>TEAMNAME
+<span class="nb">cd </span>TEAMNAME
 <span class="nb">touch </span>Dockerfile Gemfile Gemfile.lock docker-compose.yml
 </code></pre></div></div>
 
 <p>Copy the following contents into <code class="language-plaintext highlighter-rouge">Dockerfile</code>:</p>
 
-<div class="language-docker highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ruby</span>
+<div class="language-docker highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ruby:2.7.4</span>
 
 <span class="k">RUN </span>curl <span class="nt">-sS</span> https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add <span class="se">\
 </span>  <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">"deb https://dl.yarnpkg.com/debian/ stable main"</span> <span class="o">&gt;</span> /etc/apt/sources.list.d/yarn.list <span class="se">\
@@ -351,14 +351,20 @@ git commit <span class="nt">-m</span> <span class="s2">"Configure the project to
 
 <p>The output should look like:</p>
 
-<pre><code class="language-txt">      Name                    Command              State    Ports
--------------------------------------------------------------------
-projectname_db_1   docker-entrypoint.sh postgres   Up      5432/tcp
+<pre><code class="language-txt">NAME               COMMAND                  SERVICE             STATUS              PORTS
+TEAMNAME-db-1      "docker-entrypoint.s…"   db                  running             5432/tcp
 </code></pre>
 
-<p>Run the following to create the database:</p>
+<p>Run the following to create and the database:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run web rails db:create
+</code></pre></div></div>
+
+<p>Run the following to create and commit the empty schema file.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run web rails db:migrate
+git add db/schema.rb
+git commit <span class="nt">-m</span> <span class="s2">"Add empty schema file"</span>
 </code></pre></div></div>
 
 <h3 id="ensure-dependencies-are-up-to-date">Ensure dependencies are up-to-date</h3>
@@ -387,7 +393,7 @@ via <a href="http://localhost:3000">http://localhost:3000</a>.</p>
 
 <p>If you haven’t already, add GitHub as a remote:</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote add origin git@github.com:scalableinternetservices/PROJECTNAME.git
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote add origin git@github.com:scalableinternetservices/TEAMNAME.git
 </code></pre></div></div>
 
 <p>If this is your first time pushing to GitHub, then run:</p>
@@ -405,7 +411,13 @@ git push <span class="nt">-u</span> origin HEAD
 
 <p>To trigger automated test runs everytime you push to main, or create a pull request, or push an update to a branch associated with a pull request do the following.</p>
 
-<p>Copy the following contents into the file .github/workflows/ruby.yml:</p>
+<p>Run the following:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> .github/workflows
+<span class="nb">touch</span> .github/workflows/ruby.yml
+</code></pre></div></div>
+
+<p>Then copy the following contents into the file <code class="language-plaintext highlighter-rouge">.github/workflows/ruby.yml</code>:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Ruby</span>
 
@@ -432,7 +444,7 @@ git push <span class="nt">-u</span> origin HEAD
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up Ruby</span>
       <span class="na">uses</span><span class="pi">:</span> <span class="s">ruby/setup-ruby@v1</span>
       <span class="na">with</span><span class="pi">:</span>
-        <span class="na">ruby-version</span><span class="pi">:</span> <span class="s">3.0.2</span>
+        <span class="na">ruby-version</span><span class="pi">:</span> <span class="s">2.7.4</span>
         <span class="na">bundler-cache</span><span class="pi">:</span> <span class="no">true</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up yarn</span>
       <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
@@ -466,7 +478,7 @@ Beanstalk, and then deploy it.</p>
 
 <h3 id="configure-the-production-database">Configure the production database</h3>
 
-<p>Update the lines in the <code class="language-plaintext highlighter-rouge">production</code> section of <code class="language-plaintext highlighter-rouge">config.database.yml</code> to include:</p>
+<p>Update the lines in the <code class="language-plaintext highlighter-rouge">production</code> section of <code class="language-plaintext highlighter-rouge">config/database.yml</code> to include:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">database</span><span class="pi">:</span> <span class="s">&lt;%= ENV['RDS_DB_NAME'] %&gt;</span>
   <span class="na">host</span><span class="pi">:</span> <span class="s">&lt;%= ENV['RDS_HOSTNAME'] %&gt;</span>
@@ -537,17 +549,17 @@ following:</p>
 <p>Once logged in, clone your repository using HTTPS (this will be a read-only
 version of the project):</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/scalableinternetservices/PROJECTNAME.git
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/scalableinternetservices/TEAMNAME.git
 </code></pre></div></div>
 
 <h3 id="configure-elastic-beanstalk">Configure Elastic Beanstalk</h3>
 
 <p>For each copy of your repository, you’ll need to do the following only once:</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>PROJECTNAME
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>TEAMNAME
 eb init <span class="nt">--keyname</span> <span class="si">$(</span><span class="nb">whoami</span><span class="si">)</span> <span class="se">\</span>
-  <span class="nt">--platform</span> <span class="s2">"64bit Amazon Linux 2 v3.2.2 running Ruby 2.7"</span> <span class="se">\</span>
-  <span class="nt">--region</span> us-west-2 PROJECTNAME
+  <span class="nt">--platform</span> <span class="s2">"64bit Amazon Linux 2 v3.3.7 running Ruby 2.7"</span> <span class="se">\</span>
+  <span class="nt">--region</span> us-west-2 TEAMNAME
 </code></pre></div></div>
 
 <h3 id="create-a-deployment-using-the-minimum-necessary-resources">Create a deployment using the minimum necessary resources</h3>
@@ -567,7 +579,7 @@ create).</p>
 something like the following:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Environment details for: YOURNAME
-  Application name: PROJECTNAME
+  Application name: TEAMNAME
   Region: us-west-2
   Deployed Version: app-6360-191104_223036
   Environment ID: e-yetvigtxpz
