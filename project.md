@@ -158,14 +158,14 @@ docker-compose build web
 Then run `rails new` to create the initial rails project:
 
 ```sh
-docker-compose run web rails new . --force --no-deps --database=postgresql
+docker-compose run --no-deps web rails new . --force --database=postgresql --skip-action-cable --skip-turbolinks --skip-jbuilder --skip-system-test
 ```
 
 Add everything to git and make a new commit:
 
 ```sh
 git add .
-git commit -m "Run 'docker-compose run web rails new . --force --no-deps --database=postgresql'"
+git commit -m "Run 'docker-compose run --no-deps web rails new . ...'"
 ```
 
 Finally, re-build the `web` container so that it now includes the project dependencies:
