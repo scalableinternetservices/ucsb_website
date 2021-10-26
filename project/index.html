@@ -308,13 +308,13 @@ git commit <span class="nt">-m</span> <span class="s2">"Prepare the project dire
 
 <p>Then run <code class="language-plaintext highlighter-rouge">rails new</code> to create the initial rails project:</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run web rails new <span class="nb">.</span> <span class="nt">--force</span> <span class="nt">--no-deps</span> <span class="nt">--database</span><span class="o">=</span>postgresql
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run <span class="nt">--no-deps</span> web rails new <span class="nb">.</span> <span class="nt">--force</span> <span class="nt">--database</span><span class="o">=</span>postgresql <span class="nt">--skip-action-cable</span> <span class="nt">--skip-turbolinks</span> <span class="nt">--skip-jbuilder</span> <span class="nt">--skip-system-test</span>
 </code></pre></div></div>
 
 <p>Add everything to git and make a new commit:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add <span class="nb">.</span>
-git commit <span class="nt">-m</span> <span class="s2">"Run 'docker-compose run web rails new . --force --no-deps --database=postgresql'"</span>
+git commit <span class="nt">-m</span> <span class="s2">"Run 'docker-compose run --no-deps web rails new . ...'"</span>
 </code></pre></div></div>
 
 <p>Finally, re-build the <code class="language-plaintext highlighter-rouge">web</code> container so that it now includes the project dependencies:</p>
