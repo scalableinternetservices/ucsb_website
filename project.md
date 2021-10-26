@@ -94,8 +94,8 @@ new rails project using docker.
 
 
 ```sh
-mkdir PROJECTNAME
-cd PROJECTNAME
+mkdir TEAMNAME
+cd TEAMNAME
 touch Dockerfile Gemfile Gemfile.lock docker-compose.yml
 ```
 
@@ -208,15 +208,22 @@ docker-compose ps
 The output should look like:
 
 ```txt
-      Name                    Command              State    Ports
--------------------------------------------------------------------
-projectname_db_1   docker-entrypoint.sh postgres   Up      5432/tcp
+NAME               COMMAND                  SERVICE             STATUS              PORTS
+TEAMNAME-db-1      "docker-entrypoint.s…"   db                  running             5432/tcp
 ```
 
-Run the following to create the database:
+Run the following to create and the database:
 
 ```sh
 docker-compose run web rails db:create
+```
+
+Run the following to create and commit the empty schema file.
+
+```sh
+docker-compose run web rails db:migrate
+git add db/schema.rb
+git commit -m "Add empty schema file"
 ```
 
 ### Ensure dependencies are up-to-date
@@ -248,7 +255,7 @@ via [http://localhost:3000](http://localhost:3000).
 If you haven't already, add GitHub as a remote:
 
 ```sh
-git remote add origin git@github.com:scalableinternetservices/PROJECTNAME.git
+git remote add origin git@github.com:scalableinternetservices/TEAMNAME.git
 ```
 
 If this is your first time pushing to GitHub, then run:
@@ -268,7 +275,14 @@ git push
 
 To trigger automated test runs everytime you push to main, or create a pull request, or push an update to a branch associated with a pull request do the following.
 
-Copy the following contents into the file .github/workflows/ruby.yml:
+Run the following:
+
+```sh
+mkdir -p .github/workflows
+touch .github/workflows/ruby.yml
+```
+
+Then copy the following contents into the file `.github/workflows/ruby.yml`:
 
 ```yaml
 name: Ruby
@@ -331,7 +345,7 @@ Beanstalk, and then deploy it.
 
 ### Configure the production database
 
-Update the lines in the `production` section of `config.database.yml` to include:
+Update the lines in the `production` section of `config/database.yml` to include:
 
 ```yaml
   database: <%= ENV['RDS_DB_NAME'] %>
@@ -411,7 +425,7 @@ Once logged in, clone your repository using HTTPS (this will be a read-only
 version of the project):
 
 ```sh
-git clone https://github.com/scalableinternetservices/PROJECTNAME.git
+git clone https://github.com/scalableinternetservices/TEAMNAME.git
 ```
 
 ### Configure Elastic Beanstalk
@@ -419,10 +433,10 @@ git clone https://github.com/scalableinternetservices/PROJECTNAME.git
 For each copy of your repository, you'll need to do the following only once:
 
 ```sh
-cd PROJECTNAME
+cd TEAMNAME
 eb init --keyname $(whoami) \
-  --platform "64bit Amazon Linux 2 v3.2.2 running Ruby 2.7" \
-  --region us-west-2 PROJECTNAME
+  --platform "64bit Amazon Linux 2 v3.3.7 running Ruby 2.7" \
+  --region us-west-2 TEAMNAME
 ```
 
 ### Create a deployment using the minimum necessary resources
@@ -444,7 +458,7 @@ something like the following:
 
 ```
 Environment details for: YOURNAME
-  Application name: PROJECTNAME
+  Application name: TEAMNAME
   Region: us-west-2
   Deployed Version: app-6360-191104_223036
   Environment ID: e-yetvigtxpz
