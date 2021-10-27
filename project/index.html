@@ -536,6 +536,30 @@ git commit <span class="nt">-m</span> <span class="s2">"Prepare the application 
 git push
 </code></pre></div></div>
 
+<h3 id="optimize-deployment">Optimize Deployment</h3>
+
+<p>The latest versions of the <code class="language-plaintext highlighter-rouge">sassc</code> gem don’t provide pre-compiled native
+versions necessitating each deployment to manually compile its native extension
+which is rather time consuming. However, we can leverage an old version of
+<code class="language-plaintext highlighter-rouge">sassc</code> to take advantage of its available pre-compiled native gems.</p>
+
+<p>Add the following line to your <code class="language-plaintext highlighter-rouge">Gemfile</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem 'sassc', '~&gt; 2.1.0'
+</code></pre></div></div>
+
+<p>Run the following to downgrade the version of <code class="language-plaintext highlighter-rouge">sassc</code> in your <code class="language-plaintext highlighter-rouge">Gemfile.lock</code>:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run <span class="nt">--no-deps</span> web bundle update sassc
+</code></pre></div></div>
+
+<p>Commit and push the changes:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add <span class="nb">.</span>
+git commit <span class="nt">-m</span> <span class="s2">"Downgrade sassc gem to 2.1.0"</span>
+git push
+</code></pre></div></div>
+
 <h3 id="ssh-to-ec2cs291com-and-clone-your-repository">SSH to ec2.cs291.com and clone your repository</h3>
 
 <p>In order to most easily create an elastic beanstalk deployment, we need to SSH
