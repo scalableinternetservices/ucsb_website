@@ -410,6 +410,34 @@ git commit -m "Prepare the application to deploy to Amazon's Elastic Beanstalk"
 git push
 ```
 
+### Optimize Deployment
+
+The latest versions of the `sassc` gem don't provide pre-compiled native
+versions necessitating each deployment to manually compile its native extension
+which is rather time consuming. However, we can leverage an old version of
+`sassc` to take advantage of its available pre-compiled native gems.
+
+Add the following line to your `Gemfile`:
+
+```
+gem 'sassc', '~> 2.1.0'
+```
+
+Run the following to downgrade the version of `sassc` in your `Gemfile.lock`:
+
+```sh
+docker-compose run --no-deps web bundle update sassc
+```
+
+Commit and push the changes:
+
+```sh
+git add .
+git commit -m "Downgrade sassc gem to 2.1.0"
+git push
+```
+
+
 ### SSH to ec2.cs291.com and clone your repository
 
 In order to most easily create an elastic beanstalk deployment, we need to SSH
