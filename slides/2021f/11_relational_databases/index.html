@@ -1,0 +1,1169 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Relational Databases</title>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 2.5em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      blockquote {
+        border-left: 0.3em solid rgba(0,0,0,0.5);
+        padding: 0 15px;
+        font-style: italic;
+      }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      img {
+        max-height: 100%;
+        max-width: 100%;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .clear { clear: both; }
+      #slideshow .slide .content code { font-size: 0.8em; }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 1em;
+      }
+      .background-blue {
+        background-color: deepskyblue;
+      }
+      .background-green {
+        background-color: springgreen;
+      }
+      .background-pink {
+        background-color: deeppink;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        width: 49%;
+        float: left;
+      }
+      .right-column {
+        width: 49%;
+        float: right;
+      }
+      .left-column20 {
+        width: 20%;
+        float: left;
+      }
+      .right-column80 {
+        width: 79%;
+        float: right;
+      }
+      .left-column30 {
+        width: 30%;
+        float: left;
+      }
+      .right-column70 {
+        width: 69%;
+        float: right;
+      }
+      .left-column40 {
+        width: 40%;
+        float: left;
+      }
+      .right-column60 {
+        width: 59%;
+        float: right;
+      }
+
+      /* Table layout */
+      table {
+        background: #f5f5f5;
+        margin: 30px auto;
+        text-align: left;
+        width: 100%;
+      }
+      th {
+        background: linear-gradient(#777, #444);
+        color: #fff;
+        font-weight: bold;
+        padding: 10px 15px;
+      }
+      td {
+        border-right: 1px solid #fff;
+        border-left: 1px solid #e8e8e8;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #e8e8e8;
+        padding: 10px 15px;
+      }
+
+    </style>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle
+
+# Relational Databases
+
+## CS291A: Scalable Internet Services
+
+### Dr. Bryce Boe
+
+---
+
+# Relational Databases
+
+After today you should...
+
+* understand the importance of relational databases in architecting scalable
+  Internet systems
+
+--
+
+* understand how to design with concurrency in mind
+
+--
+
+* have a basic idea regarding how to speed up your data layer
+
+    * determining where to start
+
+    * using rails-specific techniques
+
+    * being able to identity the source of slowness in an SQL query
+
+---
+
+# Stateful Requests
+
+.left-column[
+We have many stateless application servers responding to requests.
+
+Clients can be served by any application servers.
+
+Client requests regularly include data updates.
+]
+.right-column[
+![Database connectivity](app_server_to_database.png)
+]
+
+---
+
+# Application Server _Needs_
+
+.left-column[
+* Data needs to be shared between requests and servers
+
+* Access to data shouldn't be slow
+
+* High availability of shared data
+
+* Utilizing the data layer should be intuitive:
+
+```ruby
+if david.balance > 100
+  david.withdrawal(100)
+  mary.deposit(100)
+end
+```
+]
+.right-column[
+![Database connectivity](app_server_to_database.png)
+]
+
+---
+
+# Data Layer Options
+
+.left-column[
+There are quite a few existing solutions for a _stable_ data layer.
+
+## Relational (SQL)
+
+* MySQL (MariaDB, Percona)
+* PostgreSQL
+* Oracle
+* MS SQL
+
+## Non-relational (NoSQL)
+
+* Cassandra
+* MongoDB
+* Redis
+]
+.right-column[
+![Database connectivity](app_server_to_database.png)
+]
+
+---
+
+# SQL v. NoSQL
+
+.left-column[
+## Relational Databases...
+
+* are a general-purpose persistence layer
+* offer more features
+* have a limited ability to scale horizontally
+
+## Non-relational Databases...
+
+* often are more specialized
+* require more from the application layer
+* are better at scaling horizontally
+
+If your needs fit within a RDBMS's (relational database management system)
+ability to scale, they tend to be best. If your scaling needs exceed RDBMS
+capabilities, go non-relational.
+]
+.right-column[
+![Database connectivity](app_server_to_database.png)
+]
+
+---
+
+# Database Outline
+
+.left-column[
+## Today we will discuss:
+
+* Relational databases
+  * Concurrency control
+  * SQL query analysis
+
+## Later we will discuss:
+
+* Scaling options for relational databases:
+    * Sharding
+    * Service Oriented Architectures (SOA)
+    * Distinguishing reads from writes
+* A survey of NoSQL options
+]
+.right-column[
+![Database connectivity](app_server_to_database.png)
+]
+
+---
+
+# Database Transactions
+
+Transactions are a database concept that allows a system to guarantee certain
+semantic properties.
+
+Transactions provide control over concurrency.
+
+Having rigorously defined guarantees means we can build correct systems using
+these databases.
+
+---
+
+# Database ACID Properties
+
+__Atomicity__
+
+* Complete everything, or do nothing
+* No partial application of a transaction
+
+--
+
+__Consistency__
+
+* The database should be consistent both at the beginning and end of a
+  transaction
+* Consistency is defined by the integrity constraints (e.g., foreign keys, `NOT
+  NULL`, etc.)
+
+--
+
+__Isolation__
+
+* A transaction should not see the effects of other uncommitted transactions
+
+--
+
+__Durability__
+
+* Once committed, the transaction's effects should not disappear
+
+---
+
+# Overlapping Concerns
+
+__Atomicity__ and __Durability__ are related and are generally provided by
+_journaling_.
+
+__Consistency__ and __Isolation__ are provided by concurrency control (usually
+implemented via locking).
+
+---
+
+# Definition: Schedule
+
+A __schedule__ is an abstract model used to describe the execution of
+transactions that run in a database.
+
+
+| T1     | T2     | T3     |
+|:------:|:------:|:------:|
+| R(X)   |        |        |
+| W(X)   |        |        |
+| Commit |        |        |
+|        | R(Y)   |        |
+|        | W(Y)   |        |
+|        | Commit |        |
+|        |        | R(Z)   |
+|        |        | W(Z)   |
+|        |        | Commit |
+
+---
+
+# Conflicting Actions
+
+Two actions are said to be in conflict if:
+
+* the actions belong to different transactions
+
+* at least one of the actions is a write operation
+
+* the actions access the same object (read or write)
+
+## Conflicting Actions
+
+| T1     | T2     |
+|:------:|:------:|
+| R(X)   |        |
+|        | W(X)   |
+
+---
+
+# Non-Conflicting Examples
+
+## All reads
+
+| T1     | T2     |
+|:------:|:------:|
+| R(X)   |        |
+|        | R(X)   |
+
+--
+
+## Write to different object
+
+| T1     | T2     |
+|:------:|:------:|
+| R(X)   |        |
+|        | W(Y)   |
+
+---
+
+# Question
+
+> Can we blindly execute transactions in parallel?
+
+--
+
+# Answer
+
+__No__
+
+* Dirty Read Problem
+
+* Incorrect Summary Problem
+
+---
+
+# Dirty Read Problem
+
+A transaction (T2) reads a value written by another transaction (T1) that is
+later _aborted_ (its actions are rolled back).
+
+The result of the T2 transaction will put the database in an incorrect state.
+
+| T1     | T2     |
+|:------:|:------:|
+| W(X)   |        |
+|        | R(X)   |
+| Abort  |        |
+|        | W(Y)   |
+|        | Commit |
+
+---
+
+# Incorrect Summary Problem
+
+A transaction (T1) computes a summary over the values of all the instances of a
+repeated data-item. While that occurs, another transaction (T2) updates some
+instances of data-item.
+
+The resulting summary will not reflect a correct result for any deterministic
+order of the transactions (T1 then T2, or T2 then T1).
+
+| T1     | T2     |
+|:------:|:------:|
+| R(X*)  |        |
+|        | W(X^n) |
+|        | Commit |
+| R(X*)  |        |
+| W(Y)   |        |
+| Commit |        |
+
+---
+
+# Schedule Types
+
+## A schedule is _serial_ if
+
+* the transactions are executed non-interleaved
+
+## Two schedules are _conflict equivalent_ if
+
+* they involve the same set of transactions
+* every pair of conflicting actions are ordered in the same way
+
+## A schedule is _conflict serializable_ if
+
+* the schedule is __conflict equivalent__ to a __serial__ schedule
+
+## A schedule is _recoverable_ if
+
+* transactions commit only after all transactions whose changes they read,
+  commit
+
+---
+
+# Not Conflict Serializable
+
+.left-column20[
+| T1     | T2     |
+|:------:|:------:|
+| R(A)   |        |
+| W(A)   |        |
+|        | R(A)   |
+|        | W(A)   |
+|        | R(B)   |
+|        | W(B)   |
+| R(B)   |        |
+| W(B)   |        |
+]
+.left-column20.center[
+When transactions are serialized, the schedule on the left is conflict equivalent to neither of:
+]
+.left-column20[
+| T1     | T2     |
+|:------:|:------:|
+| R(A)   |        |
+| W(A)   |        |
+| R(B)   |        |
+| W(B)   |        |
+|        | R(A)   |
+|        | W(A)   |
+|        | R(B)   |
+|        | W(B)   |
+]
+.left-column20.center[
+or
+]
+.left-column20[
+
+| T1     | T2     |
+|:------:|:------:|
+|        | R(A)   |
+|        | W(A)   |
+|        | R(B)   |
+|        | W(B)   |
+| R(A)   |        |
+| W(A)   |        |
+| R(B)   |        |
+| W(B)   |        |
+]
+
+---
+
+# Why Serializable?
+
+.left-column[
+> Why is it important that we have a serializable schedule?
+
+> Why not simply execute serially?
+]
+.right-column[
+![Database connectivity](app_server_to_database.png)
+]
+
+---
+
+# Serial Schedule
+
+Having a serial schedule is important for consistent results. For example it is
+good when you are keeping track of your bank balance in the database.
+
+A serial execution of transactions is safe but _slow_.
+
+Most general purpose relational databases default to employing
+conflict-serializable and recoverable schedules.
+
+> How do these RDBMS employ conflict-serializable and recoverable schedules?
+
+---
+
+# Database Locks
+
+In order to implement a database whose schedules are both conflict serializable
+and recoverable locks are used.
+
+* A lock is a system object associated with a shared resource such as a data
+  item, a row, or a page in memory.
+
+* A database lock may need to be acquired by a transaction before accessing the
+  object.
+
+* Locks prevent undesired, incorrect, or inconsistent operations on shared
+resources by concurrent transactions.
+
+---
+
+# Types of Database Locks
+
+## Write-lock
+
+* Blocks writes and reads
+
+* Also called __exclusive lock__
+
+--
+
+## Read-lock
+
+* Blocks writes
+
+* Also called __shared lock__ (other reads can happen concurrently)
+
+---
+
+# Two-Phase Locking
+
+Two-phase locking (2PL) is a concurrency control method that guarantees
+serializability.
+
+The two phases are:
+
+* Acquire Locks
+
+* Release Locks
+
+--
+
+## Two-phase locking Protocol
+
+* Each transaction must obtain a _shared_ lock on an object before __reading__.
+
+* Each transaction must obtain an _exclusive_ lock on an object before
+  __writing__.
+
+* If a transaction holds an exclusive lock on an object, no other transaction
+  can obtain any lock on that object.
+
+* A transaction cannot request additional locks once it releases any locks.
+
+---
+
+# Two-Phase Locking: Potential Issue
+
+During the second phase locks can be released as soon as they are no longer
+needed. This permits other transactions to obtain those locks.
+
+| T1        | T2     |
+|:---------:|:------:|
+| R(A)      |        |
+| W(A)      |        |
+| unlock(A) |        |
+|           | R(A)   |
+| ...       | ...    |
+| abort     |        |
+
+--
+
+> What happens to T2 when T1 aborts the transaction?
+
+---
+
+# Strong Strict Two-Phase Locking
+
+2PL can result in cascading aborts.
+
+SS2PL allows only conflict serializable schedules.
+
+--
+
+# Strong Strict Two-Phase Locking Protocol
+
+* Each transaction must obtain a _shared_ lock on an object before __reading__.
+
+* Each transaction must obtain an _exclusive_ lock on an object before
+__writing__.
+
+* If a transaction holds an exclusive lock on an object, no other transaction
+  can obtain any lock on that object.
+* __All locks held by a transaction are released when the transaction
+  completes.__
+
+This approach avoids the problem with cascading aborts.
+
+--
+
+> What is the downside to SS2PL?
+
+---
+
+# Concurrency Control in Rails
+
+.left-column[
+We have many application servers running our application.
+
+We are using a relational database to ensure that each request observes a
+consistent view of the database.
+
+> What is required in rails to obtain this consistency?
+]
+.right-column[
+![Database connectivity](app_server_to_database.png)
+]
+
+
+---
+
+# Concurrency Control in Rails
+
+Rails uses two types of concurrency control:
+
+## Optimistic Locking
+
+Assume that database modifications are going to succeed. Throw an exception
+when they do not.
+
+--
+
+## Pessimistic Locking
+
+Ensure that database modifications will succeed by explicitly avoiding
+conflict.
+
+---
+
+# Optimistic Locking in Rails
+
+Any ActiveRecord model will automatically utilize optimistic locking if an
+integer `lock_version` field is added to the object's table.
+
+Whenever such an ActiveRecord object is read from the database, that object
+contains its associated `lock_version`.
+
+When an update for the object occurs, Rails compares the object's
+`lock_version` to the most recent one in the database.
+
+--
+
+If they differ a `StaleObjectException` is thrown.
+
+Otherwise, the data is written to the database, and the `lock_version` value is
+incremented.
+
+--
+
+This optimistic locking is an application-level construct. The database does
+nothing more than storing the `lock_version` values.
+
+<https://api.rubyonrails.org/classes/ActiveRecord/Locking/Optimistic.html>
+
+---
+
+# Optimistic Locking Example
+
+```ruby
+c1 = Person.find(1)
+c1.name = "X Æ A-12"
+
+c2 = Person.find(1)
+c2.gender = "X-Ash-A-12"
+
+c1.save!  # Succeeds
+c2.save!  # throws StaleObjectException
+```
+
+--
+
+## Strengths
+
+* Predictable performance
+* Lightweight
+
+--
+
+## Weaknesses
+
+* Have to write error handling code
+* (or) errors will propagate to your users
+
+---
+
+# Pessimistic Locking in Rails
+
+Easily done by calling `lock` along with ActiveRecord `find`.
+
+Whenever an ActiveRecord object is read from the database with that option an
+exclusive lock is acquired for the object.
+
+While this lock is held, the database prevents others from obtaining the lock,
+reading from, and writing to the object. The others are blocked until the
+object is unlocked.
+
+Implemented using the `SELECT FOR UPDATE` SQL.
+
+https://api.rubyonrails.org/classes/ActiveRecord/Locking/Pessimistic.html
+
+---
+
+# Pessimistic Locking Example
+
+Request 1
+
+```ruby
+transaction do
+  person = Person.lock.find(1)
+  person.name = "X Æ A-12"
+  person.save!  # works fine
+end
+```
+
+Request 2
+
+```ruby
+transaction do
+  person = Person.lock.find(1)
+  person.name = "X-Ash-A-12"
+  person.save!  # works fine
+end
+```
+
+This approach works great, yet it is not commonly used.
+
+> What could go wrong?
+
+---
+
+# Pessimistic Locking Issue: Blocking
+
+```ruby
+transaction do
+  person = Person.lock.find(1)
+  person.name = "X Æ A-12"
+* my_long_procedure
+  person.save!
+end
+```
+
+Request 2
+
+```ruby
+transaction do
+  person = Person.lock.find(1)
+  person.name = "X-Ash-A-12"
+* my_long_procedure
+  person.save!
+end
+```
+
+---
+
+# Pessimistic Locking Issue: Deadlock
+
+```ruby
+transaction do
+* family = Family.lock.find(3)
+* family.count += 1
+* family.save!
+  person = Person.lock.find(1)
+  person.name = "X Æ A-12"
+  person.save!
+end
+```
+
+Request 2
+
+```ruby
+transaction do
+  person = Person.lock.find(1)
+  person.name = "X-Ash-A-12"
+  person.save!
+* family = Family.lock.find(3)
+* family.count += 1
+* family.save!
+end
+```
+
+---
+
+# Pessimistic Locking: Summary
+
+## Strengths
+
+* Failed transactions are incredibly rare or nonexistent
+
+--
+
+## Weaknesses
+
+* Have to worry about deadlocks and avoiding them
+
+* Performance is less predictable
+
+---
+
+# Next Steps
+
+We now have a Rails app connected to PostgreSQL and it is slower than you'd
+like.
+
+You think the bottleneck may be the database.
+
+> How do we find out?
+
+---
+
+# Demo App Database Optimizations
+
+.left-column30[
+Let's use an example from the Demo app!
+
+By changing the way you interact with the Rails ORM (ActiveRecord) you can
+significantly improve performance.
+
+The following examples are all contained in the _database_optimizations_ branch
+on github.
+]
+.right-column70[
+![Submissions Index View](demo_submissions_index.png)
+]
+
+---
+
+# Demo App ActiveRecord Time
+
+.left-column30[
+With the Demo app's _master_ branch deployed on a `m3_medium` instance
+with:
+
+* 20 Communities
+* 400 Submissions
+* 8000 Comments
+
+A request to `/` resulted in:
+
+Completed 200 OK
+ActiveRecord: 220.6ms.
+
+> Why so slow?
+]
+.right-column70[
+![Submissions Index View](demo_submissions_index.png)
+]
+
+---
+
+# Demo App Investigation
+
+__First Step__: Find out what Rails is doing.
+
+In _development_ mode, Rails will output the SQL it generates and executes to
+the application server log.
+
+To (temporarily) enable this in _production_ mode, change
+`config/environments/production.rb` to contain:
+
+```ruby
+config.log_level = :debug
+```
+
+---
+
+# Submission Index Controller and View
+
+Controller
+
+```ruby
+class SubmissionsController < ApplicationController
+  def index
+    @submissions = Submission.all
+  end
+end
+```
+
+View
+
+```erb
+<% @submissions.each do |submission| %>
+  <tr>
+    <td><%= link_to(submission.title, submission.url) %></td>
+    <td><%= submission.url %></td>
+    <td><%= submission.community.name %></td>
+    <td>
+      <%= link_to("#{submission.comments.size} comments",
+                  submission, class: 'btn btn-primary btn-xs') %>
+    </td>
+  </tr>
+<% end %>
+```
+
+---
+
+# Generated SQL Statements
+
+```
+Processing by SubmissionsController#index as HTML
+Submission Load (0.5ms)  SELECT `submissions`.* FROM `submissions`
+Community Load (0.3ms)  SELECT  `communities`.* FROM `communities` WHERE `communities`.`id` = 1 LIMIT 1
+SELECT COUNT(*) FROM `comments` WHERE `comments`.`submission_id` = 1
+SELECT  `communities`.* FROM `communities` WHERE `communities`.`id` = 1 LIMIT 1  [["id", 1]]
+SELECT COUNT(*) FROM `comments` WHERE `comments`.`submission_id` = 2
+SELECT  `communities`.* FROM `communities` WHERE `communities`.`id` = 1 LIMIT 1  [["id", 1]]
+SELECT COUNT(*) FROM `comments` WHERE `comments`.`submission_id` = 3
+SELECT  `communities`.* FROM `communities` WHERE `communities`.`id` = 1 LIMIT 1  [["id", 1]]
+...
+SELECT  `communities`.* FROM `communities` WHERE `communities`.`id` = 20 LIMIT 1  [["id", 20]]
+SELECT COUNT(*) FROM `comments` WHERE `comments`.`submission_id` = 400
+```
+
+--
+
+## That is a lot of `SELECT` queries!
+
+---
+
+# Number of Queries Bottleneck
+
+We are issuing a ton of `SELECT` queries. The overhead associated with each is
+slowing us down.
+
+> How can we fix this problem?
+
+--
+
+## Issue fewer queries.
+
+* Do not ask for the community each time
+
+* Do not ask for the number of comments each time
+
+---
+
+# Reducing Queries in Rails
+
+(__Before__) Without `includes`
+
+```ruby
+class SubmissionsController < ApplicationController
+  def index
+    @submissions = Submission.all
+  end
+end
+```
+
+--
+
+(__After__) With `includes`
+
+```ruby
+class SubmissionsController < ApplicationController
+  def index
+    @submissions = Submission.includes(:comments)
+                             .includes(:community).all
+  end
+end
+```
+
+--
+
+Result
+
+```
+Result: ActiveRecord 39.6ms
+
+Submission Load (0.9ms)  SELECT `submissions`.* FROM `submissions`
+Comment Load (38.3ms)  SELECT `comments`.* FROM `comments` WHERE `comments`.`submission_id` IN (1, 2,... 399, 400)
+Community Load (0.4ms)  SELECT `communities`.* FROM `communities` WHERE `communities`.`id` IN (1, 2, ...19, 20)
+```
+
+
+---
+
+# SQL Explain
+
+Sometimes things are still slow even when the number of queries is minimized.
+
+SQL provides an `EXPLAIN` statement that can be used to analyze individual
+queries.
+
+When a query starts with `EXPLAIN`...
+
+* the query is not actually executed
+
+* the produced output will help us identify potential improvements
+
+https://www.postgresql.org/docs/9.1/sql-explain.html
+
+---
+
+# SQL Optimizations
+
+There are three primary ways to optimize SQL queries:
+
+* Add or modify indexes
+
+* Modify the table structure
+
+* Directly optimize the query
+
+---
+
+# SQL Indexes
+
+> What is an index?
+
+An index is a fast, ordered, compact structure (B-tree) for identifying row
+locations.
+
+When an index is provided on a column that is to be filtered (searching for a
+particular item), the database is able to quickly find that information.
+
+Indexes can exist on a single column, or across multiple columns. Multi-column
+indexes are useful when filtering on two columns (e.g., CS classes that are not
+full).
+
+---
+
+# Adding Indexes in Rails
+
+To add an index on the `name` field of the `Product` table, create a migration
+containing:
+
+```ruby
+class AddNameIndexProducts < ActiveRecord::Migration
+  def change
+    add_index :products, :name
+  end
+end
+```
+
+---
+
+# Related: Foreign Keys
+
+By default, when dealing with relationships between ActiveRecord objects, Rails
+will validate the constraints in the application layer.
+
+For example, an `Employee` object should have a `Company` that they work for.
+
+Assuming the relationship is defined properly, Rails will enforce that when
+creating an `Employee`, the associated `Company` exists.
+
+Many databases, have built-in support for enforcing such constraints. With
+rails, one can also take advantage of the database's foreign key support via
+[add_foreign_key](http://guides.rubyonrails.org/active_record_migrations.html#foreign-keys).
+
+```ruby
+class AddForeignKeyToOrders < ActiveRecord::Migration
+  def change
+    add_foreign_key :employees, :companies
+  end
+end
+```
+
+---
+
+# Optimize the Table Structure
+
+Indexes work best when they can be kept in memory.
+
+Sometimes changing the field type, or index length can provide significant
+memory savings.
+
+If appropriate some options are:
+
+* Reduce the length of a VARCHAR index if appropriate
+
+* Use a smaller unsigned integer type
+
+* Use an integer or enum field for statuses rather than a text-based value
+
+---
+
+# Directly Optimize the Query
+
+Before
+
+```sql
+explain select count(*) from txns where parent_id - 1600 = 16340;
+
+select_type: SIMPLE
+table: txns
+type: index
+key: index_txns_on_reverse_txn_id
+rows: 439186
+Extra: Using where; Using index
+```
+
+--
+
+After
+
+```sql
+explain select count(*) from txns where parent_id = 16340 + 1600
+
+select_type: SIMPLE
+table: txns
+type: const
+key: index_txns_on_reverse_txn_id
+rows: 1
+Extra: Using index
+```
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"
+            type="text/javascript"></script>
+    <script type="text/javascript">
+      var hljs = remark.highlighter.engine;
+      var slideshow = remark.create({
+          highlightLanguage: 'ruby',
+          highlightLines: true,
+          hightlightSpans: true,
+          highlightStyle: 'monokai'
+        }) ;
+    </script>
+  </body>
+</html>
