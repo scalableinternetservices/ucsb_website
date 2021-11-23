@@ -161,7 +161,7 @@ Note: November 11 is Veterans Day, which is an observed UCSB day off.
 
 - [Sean Maloney](https://www.linkedin.com/in/seanmaloney/)
 - General Manager of AWS CodeCommit, Former Engineering Manager at Riot Games
-- Zoom link will be sent out via Piazza
+- Event-Based Architecture ([pdf](/slides/2021f/sean_maloney.pdf))
 
 
 </div>
