@@ -28,9 +28,6 @@ By the end of this course students will be able to:
 - write and deploy highly scalable web functions using [AWS
   Lambda](https://aws.amazon.com/lambda/)
 
-- create and deploy [Docker](https://www.docker.com/get-started) containers
-  using [Google's Cloud Run](https://cloud.google.com/run/)
-
 - write a modern front end client application using
   [React](https://reactjs.org)
 
@@ -103,9 +100,9 @@ may not be comprised of more than two undergraduate or BS/MS students.
 | Percent | Item |
 |--:|:--|
 | 3 | [Project 0](/project0/) (Static Web Page) |
-| 6 | [Project 1](/project1/) (AWS Lambda) |
-| 9 | [Project 2](/project2/) (Google's Cloud Run) |
-| 12 | [Project 3](/project3/) (Chat Server and Client) |
+| 6 | [Project 1](/project1/) (RubyKoans) |
+| 9 | [Project 2](/project2/) (AWS Lambda) |
+| 12 | [Project 3](/project3/) (Rails demo app) |
 | 65 | [Primary Project](/project/) Individual Score |
 | 5 | Participation |
 {: class="table table-striped"}
@@ -172,8 +169,8 @@ Individual Score would be `106.4%`, Bob's `97.85%`, and Chuck's `80.75%`.
 
 We will confidentially conduct the peer score process twice during the course:
 
-- Monday, November 8
-- Monday, November 22
+- Monday, November 7
+- Monday, November 21
 
 The first two peer scores are intended to help students see if they need to
 make any adjustments to their team contributions. Only the outcome of the final
