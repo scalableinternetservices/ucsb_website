@@ -25,7 +25,7 @@ Please use [Piazza]({{site.piazza_url}}) for class-related correspondance.
 
 ### Initial tasks due before
 
-Friday, September 23 10am PDT
+Friday, September 23 1pm PDT
 
 - Complete the [introduction survey]({{site.intro_survey}})
 - Join the class on [Piazza]({{site.piazza_url}})
@@ -37,27 +37,27 @@ Monday, September 26 4pm PDT
 
 ### [Project 1](/project1/) due before
 
-Friday, September 30 4pm PDT
+Friday, September 30 1pm PDT
 
 ### [Project 2](/project2/) due before
 
-Friday, October 7 4pm PDT
+Friday, October 7 1pm PDT
 
 ### Project 3 Pairing Message due before
 
-Friday, October 14 9am PDT
+Friday, October 14 1pm PDT
 
 ### [Project 3](/project3/) due before
 
-Friday, October 21 9am PDT
+Friday, October 21 1pm PDT
 
 ### [Project](/project/#report) report due before
 
-Friday, December 2 9am PST
+Friday, December 2 1pm PST
 
 ### [Project](/project/#video) video due before
 
-Thursday, December 8 4pm PST
+Thursday, December 8 1pm PST
 
 ## Class Resources
 
