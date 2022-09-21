@@ -8,10 +8,10 @@
 - [{{site.instructor}}]({{site.instructor_url}})
 - <{{site.instructor_email}}>
 
-## AppFolio Backup
+## Teaching Assistant
 
-- [Dr. Nevena Golubovic](https://www.linkedin.com/in/nevenagolubovic/)
-- <nevena.golubovic@appfolio.com>
+- [Samridhi Maheshwari](https://www.linkedin.com/in/samridhim)
+- <samridhimaheshwari@ucsb.edu>
 
 Please use [Piazza]({{site.piazza_url}}) for class-related correspondance.
 
@@ -20,13 +20,12 @@ Please use [Piazza]({{site.piazza_url}}) for class-related correspondance.
 ### Classes
 
 - Tuesday and Thursday
-- 3:00pm -- 4:50pm PST
+- 1:00pm -- 2:50pm PST
 - Phelps 3526
-
 
 ### Initial tasks due before
 
-Friday, September 24 10am PDT
+Friday, September 23 10am PDT
 
 - Complete the [introduction survey]({{site.intro_survey}})
 - Join the class on [Piazza]({{site.piazza_url}})
@@ -34,31 +33,31 @@ Friday, September 24 10am PDT
 
 ### [Project 0](/project0/) due before
 
-Monday, September 27 1pm PDT
+Monday, September 26 4pm PDT
 
 ### [Project 1](/project1/) due before
 
-Friday, October 1 1pm PDT
+Friday, September 30 4pm PDT
 
 ### [Project 2](/project2/) due before
 
-Friday, October 8 1pm PDT
+Friday, October 7 4pm PDT
 
 ### Project 3 Pairing Message due before
 
-Friday, October 15 9am PDT
+Friday, October 14 9am PDT
 
 ### [Project 3](/project3/) due before
 
-Friday, October 22 9am PDT
+Friday, October 21 9am PDT
 
 ### [Project](/project/#report) report due before
 
-Friday, December 3 9am PST
+Friday, December 2 9am PST
 
 ### [Project](/project/#video) video due before
 
-Thursday, December 9 4pm PST
+Thursday, December 8 4pm PST
 
 ## Class Resources
 
@@ -70,8 +69,8 @@ added to a specific Google Group in order to access.
 answer questions, and to communicate with instructor. Access code is available
 in Google Drive and will be shared in the first class.
 
-[Github](https://github.com/{{site.github_username}}): Contains content for
-this website. Additionally all student projects will live here.
+[GitHub](https://github.com/{{site.github_username}}): Contains content for
+this site. Additionally all student projects will live here.
 
 ## Textbooks
 
@@ -83,4 +82,3 @@ Note: The online version is slightly more up-to-date.
 [The Ruby On Rails Tutorial](https://www.railstutorial.org/book)  
 _[Complete 3rd edition available online](https://3rd-edition.railstutorial.org/book)_  
 Note: This book is only useful once we get to the primary project.
-

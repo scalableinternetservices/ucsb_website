@@ -72,8 +72,8 @@ out to the instructor via email for class related communications.
 
 ### Team Check-ins
 
-Once the primary project has started in week 5, teams will meet with either
-Bryce or Nevena once each week, via Zoom. These meetings will be scheduled for
+Once the primary project has started in week 5, teams will meet with
+instructors once each week, via Zoom. These meetings will be scheduled for
 approximately 15 minutes.
 
 ## Projects
