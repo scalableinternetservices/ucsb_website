@@ -10,7 +10,7 @@ jobs:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_ALL_CODEBASE: false
-        uses: github/super-linter@v3
+        uses: github/super-linter@v4
 
 name: super-linter
 on:
