@@ -23,7 +23,6 @@ Please use [Piazza]({{site.piazza_url}}) for class-related correspondance.
 - 1:00pm -- 2:50pm PST
 - Phelps 3526
 
-
 ### Initial tasks due before
 
 Friday, September 23 10am PDT
@@ -70,8 +69,8 @@ added to a specific Google Group in order to access.
 answer questions, and to communicate with instructor. Access code is available
 in Google Drive and will be shared in the first class.
 
-[Github](https://github.com/{{site.github_username}}): Contains content for
-this website. Additionally all student projects will live here.
+[GitHub](https://github.com/{{site.github_username}}): Contains content for
+this site. Additionally all student projects will live here.
 
 ## Textbooks
 
@@ -83,4 +82,3 @@ Note: The online version is slightly more up-to-date.
 [The Ruby On Rails Tutorial](https://www.railstutorial.org/book)  
 _[Complete 3rd edition available online](https://3rd-edition.railstutorial.org/book)_  
 Note: This book is only useful once we get to the primary project.
-

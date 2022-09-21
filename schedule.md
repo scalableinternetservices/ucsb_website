@@ -95,7 +95,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- Server Side Caching ([slides](/slides/2022/09_server_caching))
+- Server-Side Caching ([slides](/slides/2022/09_server_caching))
 
 ### Tasks
 
@@ -126,15 +126,12 @@ The following schedule is subject to change, and many slide links are not yet ac
 - Relational Databases ([slides](/slides/2022/11_relational_databases))
 - RDBMS Scaling ([slides](/slides/2022/12_rdbms_scaling))
 
-
 </div>
 <div class="week">
 
 ## Week 7 (November 8-10)
 
 - Non-Relational Data Stores ([slides](/slides/2022/13_nosql))
-
-
 
 - ### Thursday November 10: Zoom Guest Lecturer (TBA)
 
@@ -161,13 +158,7 @@ Note: November -- is Veterans Day, which is an observed UCSB day off.
 ### Topics
 - Non-Relational Data Stores (cont.) ([slides](/slides/2022/13_nosql))
 
-
 ### Tasks
-
-
-
-
-
 
 </div>
 <div class="week">
@@ -176,7 +167,6 @@ Note: November -- is Veterans Day, which is an observed UCSB day off.
 
 Note: November 24 is Thanksgiving, which is an observed UCSB day off.
 {: .alert .alert-warning }
-
 
 ### Topics
 
@@ -202,7 +192,6 @@ Note: November 24 is Thanksgiving, which is an observed UCSB day off.
 
 - Read chapter [12](https://hpbn.co/http2/) of High Performance Browser Networking
 - Complete the [project report](/project/#report)
-
 
 </div>
 <div class="week">
