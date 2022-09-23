@@ -26,7 +26,7 @@ is accomplished.
 
 ## Overview Video
 
-<https://drive.google.com/file/d/1lp-hixCQucLdXq-Ug37SyASnce9csF7i/view>
+<https://drive.google.com/file/d/1fHRYG8Jq_rjpKxfNxoDTsbS3ZM8mR42T/view?usp=sharing>
 
 ## Project Submission
 
