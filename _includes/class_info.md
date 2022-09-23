@@ -33,31 +33,31 @@ Friday, September 23 1pm PDT
 
 ### [Project 0](/project0/) due before
 
-Monday, September 26 4pm PDT
+Monday, September 26 EoD AoE
 
 ### [Project 1](/project1/) due before
 
-Friday, September 30 1pm PDT
+Friday, September 30 EoD AoE
 
 ### [Project 2](/project2/) due before
 
-Friday, October 7 1pm PDT
+Friday, October 7 EoD AoE
 
 ### Project 3 Pairing Message due before
 
-Friday, October 14 1pm PDT
+Friday, October 14 EoD AoE
 
 ### [Project 3](/project3/) due before
 
-Friday, October 21 1pm PDT
+Friday, October 21 EoD AoE
 
 ### [Project](/project/#report) report due before
 
-Friday, December 2 1pm PST
+Friday, December 2 EoD AoE
 
 ### [Project](/project/#video) video due before
 
-Thursday, December 8 1pm PST
+Thursday, December 8 EoD AoE
 
 ## Class Resources
 
