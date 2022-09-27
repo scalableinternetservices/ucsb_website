@@ -18,6 +18,7 @@ piazza_url: https://piazza.com/ucsb/fall2022/cs291a
 
 intro_survey: https://forms.gle/djDdAYQoJyA9w3mn9
 project0_submission: https://forms.gle/YemRRvN47DH98j6P9
+project1_submission: https://forms.gle/u7Q66zVZJ2CyuQVw5
 
 kramdown:
   parse_block_html: true
