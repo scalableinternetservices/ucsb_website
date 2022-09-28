@@ -14,7 +14,7 @@ To complete this project follow the instructions on the
 [RubyKoans page](http://rubykoans.com/).
 You will need to download the project, run the script as
 `ruby path_to_enlightenment.rb` to see which file to change next in order to
-make the test pass. Once you update all the required files and all 282 test
+make the tests pass. Once you update all the required files and all 282 tests
 pass, upload the result to GitHub and fill in the submission form below.
 
 ## Project Submission
@@ -23,7 +23,8 @@ pass, upload the result to GitHub and fill in the submission form below.
 
 ## Requirements
 
-Provide a link to the GitHub repo with the solutions to ~40 quick tests.
+Provide a link to the GitHub repo which contains the ruby-koans folder with the
+files updated so that all tests pass.
 
 ### Verification Script
 
