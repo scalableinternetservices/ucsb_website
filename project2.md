@@ -5,7 +5,7 @@ permalink: /project2/
 title: Project 2
 ---
 
-# Project 1: AWS Lambda and JSON Web Tokens (JWT)
+# Project 2: AWS Lambda and JSON Web Tokens (JWT)
 
 In this project you will write ruby code to provide a semi-trivial
 HTTP API. Your code will be deployed using a single AWS Lambda function.
