@@ -47,6 +47,10 @@ Friday, October 7 EoD AoE
 
 Friday, October 14 EoD AoE
 
+### Final Project Team Message due before
+
+Friday, October 14 EoD AoE
+
 ### [Project 3](/project3/) due before
 
 Friday, October 21 EoD AoE
