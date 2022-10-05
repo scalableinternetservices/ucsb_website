@@ -145,25 +145,81 @@ Note: This book is only useful once we get to the primary project.</p>
 
     </div>
     <div class="col-md-9">
-      <h1 id="2018-lectures">2018 Lectures</h1>
+      <h1 id="project-3-demo-rails-app">Project 3: Demo Rails App</h1>
+
+<p>In this project you will learn how to setup a basic Ruby on Rails app.
+The app will be a small twitter-like app with the list of users who can create
+new posts and comment on the existing posts. One user will have many posts, and
+one post can have many comments. Each comment belongs to the user and the post.</p>
+
+<h2 id="learning-outcomes">Learning Outcomes</h2>
 
 <ul>
-  <li><a href="01_course_introduction/">01_course_introduction</a></li>
-  <li><a href="02_http/">02_http</a></li>
-  <li><a href="03_html_css_agile/">03_html_css_agile</a></li>
-  <li><a href="04_tdd_ci_pairing_servers/">04_tdd_ci_pairing_servers</a></li>
-  <li><a href="05_web_and_application_servers/">05_web_and_application_servers</a></li>
-  <li><a href="06_vertical_and_horizontal_scaling/">06_vertical_and_horizontal_scaling</a></li>
-  <li><a href="07_high_availability/">07_high_availability</a></li>
-  <li><a href="08_caching/">08_caching</a></li>
-  <li><a href="09_relational_databases_db_concurrency_and_query_analysis/">09_relational_databases_db_concurrency_and_query_analysis</a></li>
-  <li><a href="10_rdbms_scaling/">10_rdbms_scaling</a></li>
-  <li><a href="11_nosql/">11_nosql</a></li>
-  <li><a href="12_tsung/">12_tsung</a></li>
-  <li><a href="13_web_security/">13_web_security</a></li>
-  <li><a href="14_http2_quic/">14_http2_quic</a></li>
-  <li><a href="15_serverless/">15_serverless</a></li>
+  <li>
+    <p>Student was able to create a functional RoR app</p>
+  </li>
+  <li>
+    <p>Student used MVC pattern to create three interconnected resources</p>
+  </li>
+  <li>
+    <p>Student has implemented CRUD operations</p>
+  </li>
+  <li>
+    <p>Student demonstrated the app and its functionality in a 3min video</p>
+  </li>
 </ul>
+
+<h2 id="project-submission">Project Submission</h2>
+
+<p><a href="https://forms.gle/mSu7dsF1MJiYHx7X7">https://forms.gle/mSu7dsF1MJiYHx7X7</a></p>
+
+<h2 id="list-of-supported-endpoints">List of supported endpoints</h2>
+
+<p>Each one of the three supported resources enables CRUD operations</p>
+
+<ul>
+  <li>
+    <p>Navigating to the <code class="language-plaintext highlighter-rouge">/posts</code> endpoint will list all <code class="language-plaintext highlighter-rouge">posts</code> in your app</p>
+  </li>
+  <li>
+    <p>Navigating to the <code class="language-plaintext highlighter-rouge">/posts/:id</code> will show the page with the information
+about the <code class="language-plaintext highlighter-rouge">post</code> with the given <code class="language-plaintext highlighter-rouge">id</code></p>
+
+    <ul>
+      <li>Returns 404 if the id was not found.</li>
+    </ul>
+  </li>
+  <li>
+    <p>From the browser, you can update the post</p>
+  </li>
+  <li>
+    <p>From the browser, you can delete the post</p>
+  </li>
+  <li>From the browser, you can create the post
+    <ul>
+      <li>Each post has to have a user and an error is displayed if this required
+value is not provided</li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">/users</code> and <code class="language-plaintext highlighter-rouge">/comments</code> support the same set of operations.</p>
+  </li>
+  <li>
+    <p>A user’s page shows the list of all posts that belong to the given user</p>
+  </li>
+  <li>A post’s page shows the list of all of its comments</li>
+</ul>
+
+<h2 id="resources">Resources</h2>
+
+<p><a href="https://guides.rubyonrails.org/">Ruby on Rails Guides</a></p>
+
+<p><a href="https://www.railstutorial.org/book">The Ruby On Rails Tutorial</a><br />
+<em><a href="https://3rd-edition.railstutorial.org/book">Complete 3rd edition available online</a></em></p>
+
+<p><a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">MVC</a></p>
+
+<p><a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD</a></p>
 
     </div>
   </div>
