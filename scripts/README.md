@@ -31,6 +31,16 @@ docker build -t cs291_scripts .
 
 Note: Re-run this command to rebuild the container image when any of the files change.
 
+Side Note: If you don't want to rebuild the container you can also expose a directory as a volume in docker. Can do so by modifying the run command as
+
+```sh
+docker run -v /home/exampleusername/ucsb_website/scripts:/app --rm -it cs291_scripts ./PROJECT_SCRIPT.py ADDITIONAL_ARGUMENTS
+```
+
+This allows any changes made in the scripts (that are in the script directory) to be automatically reflected instead of rebuilding the docker image. 
+
+(Also find out more about volumes here: https://www.baeldung.com/ops/docker-volumes)
+
 ### Direct Installation
 
 __Step 3__ Install python dependencies:
