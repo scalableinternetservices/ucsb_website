@@ -179,35 +179,31 @@ one post can have many comments. Each comment belongs to the user and the post.<
 
 <ul>
   <li>
-    <p>Navigating to the <code class="language-plaintext highlighter-rouge">/posts</code> endpoint will list all <code class="language-plaintext highlighter-rouge">posts</code> in your app</p>
+    <p>Navigating to the <code class="language-plaintext highlighter-rouge">/users</code> endpoint will list all <code class="language-plaintext highlighter-rouge">users</code> in your app</p>
   </li>
   <li>
-    <p>Navigating to the <code class="language-plaintext highlighter-rouge">/posts/:id</code> will show the page with the information
-about the <code class="language-plaintext highlighter-rouge">post</code> with the given <code class="language-plaintext highlighter-rouge">id</code></p>
+    <p>Navigating to the <code class="language-plaintext highlighter-rouge">/users/:id</code> will show the page with the information
+about the <code class="language-plaintext highlighter-rouge">user</code> with the given <code class="language-plaintext highlighter-rouge">id</code></p>
 
     <ul>
       <li>Returns 404 if the id was not found.</li>
     </ul>
   </li>
   <li>
-    <p>From the browser, you can update the post</p>
+    <p>From the browser, you can update the user</p>
   </li>
   <li>
-    <p>From the browser, you can delete the post</p>
+    <p>From the browser, you can delete the user</p>
   </li>
-  <li>From the browser, you can create the post
+  <li>From the browser, you can create the user
     <ul>
-      <li>Each post has to have a user and an error is displayed if this required
+      <li>Each user has to have a user and an error is displayed if this required
 value is not provided</li>
     </ul>
   </li>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">/users</code> and <code class="language-plaintext highlighter-rouge">/comments</code> support the same set of operations.</p>
-  </li>
-  <li>
-    <p>A user’s page shows the list of all posts that belong to the given user</p>
-  </li>
-  <li>A post’s page shows the list of all of its comments</li>
+  <li>A user’s index page shows the list of all the users; for each user it shows
+the list of all posts that belong to the given user 
+and all the post’s comments nested under each post.</li>
 </ul>
 
 <h2 id="resources">Resources</h2>
