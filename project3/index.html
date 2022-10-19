@@ -175,8 +175,6 @@ one post can have many comments. Each comment belongs to the user and the post.<
 
 <h2 id="list-of-supported-endpoints">List of supported endpoints</h2>
 
-<p>Each one of the three supported resources enables CRUD operations</p>
-
 <ul>
   <li>
     <p>Navigating to the <code class="language-plaintext highlighter-rouge">/users</code> endpoint will list all <code class="language-plaintext highlighter-rouge">users</code> in your app</p>
@@ -190,20 +188,23 @@ about the <code class="language-plaintext highlighter-rouge">user</code> with th
     </ul>
   </li>
   <li>
+    <p>From the browser, you can create the user</p>
+  </li>
+  <li>
     <p>From the browser, you can update the user</p>
   </li>
   <li>
     <p>From the browser, you can delete the user</p>
   </li>
-  <li>From the browser, you can create the user
+  <li>There is a validation error for incorrect create or update action
     <ul>
-      <li>Each user has to have a user and an error is displayed if this required
+      <li>E.g. Each user has to have an email and an error is displayed if this required
 value is not provided</li>
     </ul>
   </li>
-  <li>A user’s index page shows the list of all the users; for each user it shows
-the list of all posts that belong to the given user 
-and all the post’s comments nested under each post.</li>
+  <li>Users index page (<code class="language-plaintext highlighter-rouge">/users</code>) shows the list of all the users; for each user it shows
+the list of all posts that belong to the given user and for each post
+it shows all the comments that belong to the post.</li>
 </ul>
 
 <h2 id="resources">Resources</h2>
