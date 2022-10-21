@@ -109,13 +109,17 @@
 
 <p>Friday, October 21 EoD AoE</p>
 
-<h3 id="projectprojectreport-report-due-before"><a href="/project/#report">Project</a> report due before</h3>
+<h3 id="projectprojectvideo-video-due-before"><a href="/project/#video">Project</a> video due before</h3>
 
 <p>Friday, December 2 EoD AoE</p>
 
-<h3 id="projectprojectvideo-video-due-before"><a href="/project/#video">Project</a> video due before</h3>
+<h3 id="final-project-presentations">Final Project Presentations</h3>
 
-<p>Thursday, December 8 EoD AoE</p>
+<p>Tuesday, December 6 during class</p>
+
+<h3 id="projectprojectreport-report-due-before"><a href="/project/#report">Project</a> report due before</h3>
+
+<p>Wednesday, December 7 EoD AoE</p>
 
 <h2 id="class-resources">Class Resources</h2>
 
@@ -185,11 +189,11 @@ fundamental web technologies and the Ruby on Rails framework.</p>
 
 <p>Record a video presentation of your final project to share with the class. The video must be under 10 minutes in duration.</p>
 
-<p>The video should emphasize your key results from your report.</p>
+<p>The video should emphasize your key features of your application.</p>
 
 <h2 id="project-sprint-schedule">Project Sprint Schedule</h2>
 
-<p>All sprints end and begin with each week’s lab session, save for the last
+<p>All sprints end and begin with each week’s lab session, except for the last
 sprint which does not have an ending lab session.</p>
 
 <p>At the end of each sprint you will:</p>
@@ -207,7 +211,7 @@ sprint which does not have an ending lab session.</p>
   <li>Form your team.
     <ul>
       <li>Decide on a team name</li>
-      <li>One person on the team, message me on piazza with:
+      <li>One person on the team, submits Google form with:
         <ul>
           <li>Your team name</li>
           <li>The name, and GitHub username of all the team members</li>
@@ -215,7 +219,7 @@ sprint which does not have an ending lab session.</p>
       </li>
     </ul>
   </li>
-  <li>Get access to your GitHub respository (I’ll create that after the above)</li>
+  <li>Get access to your GitHub repository</li>
   <li>Get a new set of AWS credentials specific to your team.</li>
   <li>Deploy your initial rails code to Elastic Beanstalk.</li>
   <li>Complete <code class="language-plaintext highlighter-rouge">N</code> user stories, where <code class="language-plaintext highlighter-rouge">N</code> is the number of people on your team.</li>
@@ -232,15 +236,20 @@ codes.</li>
   </li>
 </ul>
 
-<h4 id="sprint-3-week-8">Sprint 3: Week 8</h4>
+<h4 id="sprints-345-weeks-8910">Sprints 3,4,5: Weeks 8,9,10</h4>
 
-<h4 id="sprint-4-week-9">Sprint 4: Week 9</h4>
+<ul>
+  <li>Iterate between load testing, finding the bottlenecks, and addressing them
+with techniques we discuss in the class</li>
+</ul>
 
 <h4 id="sprint-5-week-10">Sprint 5: Week 10+</h4>
 
 <ul>
   <li>Complete the <a href="#report">project report</a></li>
   <li>Create <a href="#video">project presentation video</a></li>
+  <li>Deliver the final presentation on Dec. 6th during class</li>
+  <li>Plan for 12min presentation and 3min Q&amp;A</li>
 </ul>
 
 <hr />
@@ -259,7 +268,7 @@ new rails project using docker.</p>
 
 <p>Copy the following contents into <code class="language-plaintext highlighter-rouge">Dockerfile</code>:</p>
 
-<div class="language-docker highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ruby:2.7.4</span>
+<div class="language-docker highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ruby:3.0</span>
 
 <span class="k">RUN </span>curl <span class="nt">-sS</span> https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add <span class="se">\
 </span>  <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">"deb https://dl.yarnpkg.com/debian/ stable main"</span> <span class="o">&gt;</span> /etc/apt/sources.list.d/yarn.list <span class="se">\
@@ -387,7 +396,7 @@ commit at this time.</p>
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose up
 </code></pre></div></div>
 
-<p>At this point you <em>should</em> be able to access the “Yay! You’re on Rails!” page
+<p>At this point you <em>should</em> be able to access the “Rails” page
 via <a href="http://localhost:3000">http://localhost:3000</a>.</p>
 
 <hr />
@@ -447,7 +456,6 @@ git push <span class="nt">-u</span> origin HEAD
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up Ruby</span>
       <span class="na">uses</span><span class="pi">:</span> <span class="s">ruby/setup-ruby@v1</span>
       <span class="na">with</span><span class="pi">:</span>
-        <span class="na">ruby-version</span><span class="pi">:</span> <span class="s">2.7.4</span>
         <span class="na">bundler-cache</span><span class="pi">:</span> <span class="no">true</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up yarn</span>
       <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
@@ -539,30 +547,6 @@ git commit <span class="nt">-m</span> <span class="s2">"Prepare the application 
 git push
 </code></pre></div></div>
 
-<h3 id="optimize-deployment">Optimize Deployment</h3>
-
-<p>The latest versions of the <code class="language-plaintext highlighter-rouge">sassc</code> gem don’t provide pre-compiled native
-versions necessitating each deployment to manually compile its native extension
-which is rather time consuming. However, we can leverage an old version of
-<code class="language-plaintext highlighter-rouge">sassc</code> to take advantage of its available pre-compiled native gems.</p>
-
-<p>Add the following line to your <code class="language-plaintext highlighter-rouge">Gemfile</code>:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem 'sassc', '~&gt; 2.1.0'
-</code></pre></div></div>
-
-<p>Run the following to downgrade the version of <code class="language-plaintext highlighter-rouge">sassc</code> in your <code class="language-plaintext highlighter-rouge">Gemfile.lock</code>:</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run <span class="nt">--no-deps</span> web bundle update sassc
-</code></pre></div></div>
-
-<p>Commit and push the changes:</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add <span class="nb">.</span>
-git commit <span class="nt">-m</span> <span class="s2">"Downgrade sassc gem to 2.1.0"</span>
-git push
-</code></pre></div></div>
-
 <h3 id="ssh-to-ec2cs291com-and-clone-your-repository">SSH to ec2.cs291.com and clone your repository</h3>
 
 <p>In order to most easily create an elastic beanstalk deployment, we need to SSH
@@ -573,10 +557,21 @@ following:</p>
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh <span class="nt">-i</span> ~/Downloads/TEAMNAME.pem TEAMNAME@ec2.cs291.com
 </code></pre></div></div>
 
-<p>Once logged in, clone your repository using HTTPS (this will be a read-only
-version of the project):</p>
+<p>Once logged in, setup your ssh keys to access GitHub repo.
+Generate the key pair:</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/scalableinternetservices/TEAMNAME.git
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh-keygen <span class="nt">-t</span> ed25519 <span class="nt">-C</span> <span class="s2">"your_email@example.com"</span>
+</code></pre></div></div>
+
+<p>Then upload the key pair with read-only permissions to GitHub.</p>
+
+<p>For more info see <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account">Adding a new SSH key to your GitHub account
+</a></p>
+
+<p>After uploading your public key to GitHub, clone your repository using SSH 
+(this will be a read-only version of the project):</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git@github.com:scalableinternetservices/TEAMNAME.git
 </code></pre></div></div>
 
 <h3 id="configure-elastic-beanstalk">Configure Elastic Beanstalk</h3>
@@ -585,7 +580,7 @@ version of the project):</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>TEAMNAME
 eb init <span class="nt">--keyname</span> <span class="si">$(</span><span class="nb">whoami</span><span class="si">)</span> <span class="se">\</span>
-  <span class="nt">--platform</span> <span class="s2">"64bit Amazon Linux 2 v3.3.7 running Ruby 2.7"</span> <span class="se">\</span>
+  <span class="nt">--platform</span> <span class="s2">"64bit Amazon Linux 2 v3.5.0 running Ruby 3.0"</span> <span class="se">\</span>
   <span class="nt">--region</span> us-west-2 TEAMNAME
 </code></pre></div></div>
 
@@ -714,7 +709,7 @@ updates to existing content.</p>
 so that I can see content specific to me.</p>
   </li>
   <li>
-    <p>As as authenicated user, my posts and comments are attributable to me so
+    <p>As as authenticated user, my posts and comments are attributable to me so
 that others know what I’ve shared.</p>
   </li>
 </ol>
@@ -779,7 +774,7 @@ others the details of the event I am hosting.</p>
 for said event.</p>
   </li>
   <li>
-    <p>As an authenticated user, I can RSVP yes/no to events that I do [not] indend
+    <p>As an authenticated user, I can RSVP yes/no to events that I do [not] intend
 to attend so that the host can better estimate how many people will show up.</p>
   </li>
   <li>
