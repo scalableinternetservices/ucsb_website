@@ -55,13 +55,17 @@ Friday, October 14 EoD AoE
 
 Friday, October 21 EoD AoE
 
-### [Project](/project/#report) report due before
+### [Project](/project/#video) video due before
 
 Friday, December 2 EoD AoE
 
-### [Project](/project/#video) video due before
+### Final Project Presentations
 
-Thursday, December 8 EoD AoE
+Tuesday, December 6 during class
+
+### [Project](/project/#report) report due before
+
+Wednesday, December 7 EoD AoE
 
 ## Class Resources
 

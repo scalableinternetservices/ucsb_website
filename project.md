@@ -41,11 +41,11 @@ Submit a report describing your project, and your data-driven approach to load t
 
 Record a video presentation of your final project to share with the class. The video must be under 10 minutes in duration.
 
-The video should emphasize your key results from your report.
+The video should emphasize your key features of your application.
 
 ## Project Sprint Schedule
 
-All sprints end and begin with each week's lab session, save for the last
+All sprints end and begin with each week's lab session, except for the last
 sprint which does not have an ending lab session.
 
 At the end of each sprint you will:
@@ -60,10 +60,10 @@ At the end of each sprint you will:
 
 - Form your team.
   - Decide on a team name
-  - One person on the team, message me on piazza with:
+  - One person on the team, submits Google form with:
     - Your team name
     - The name, and GitHub username of all the team members
-- Get access to your GitHub respository (I'll create that after the above)
+- Get access to your GitHub repository
 - Get a new set of AWS credentials specific to your team.
 - Deploy your initial rails code to Elastic Beanstalk.
 - Complete `N` user stories, where `N` is the number of people on your team.
@@ -74,14 +74,17 @@ At the end of each sprint you will:
   - Ensure that when it is run, there are no 4XX or 5XX level HTTP status
     codes.
 
-#### Sprint 3: Week 8
+#### Sprints 3,4,5: Weeks 8,9,10
 
-#### Sprint 4: Week 9
+- Iterate between load testing, finding the bottlenecks, and addressing them
+with techniques we discuss in the class
 
 #### Sprint 5: Week 10+
 
 - Complete the [project report](#report)
 - Create [project presentation video](#video)
+- Deliver the final presentation on Dec. 6th during class
+- Plan for 12min presentation and 3min Q&A 
 
 ---
 
@@ -102,7 +105,7 @@ touch Dockerfile Gemfile Gemfile.lock docker-compose.yml
 Copy the following contents into `Dockerfile`:
 
 ```docker
-FROM ruby:2.7.4
+FROM ruby:3.0
 
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add \
   && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
@@ -245,7 +248,7 @@ commit at this time.
 docker-compose up
 ```
 
-At this point you _should_ be able to access the "Yay! You’re on Rails!" page
+At this point you _should_ be able to access the "Rails" page
 via [http://localhost:3000](http://localhost:3000).
 
 ---
@@ -310,7 +313,6 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.7.4
         bundler-cache: true
     - name: Set up yarn
       run: |
@@ -410,34 +412,6 @@ git commit -m "Prepare the application to deploy to Amazon's Elastic Beanstalk"
 git push
 ```
 
-### Optimize Deployment
-
-The latest versions of the `sassc` gem don't provide pre-compiled native
-versions necessitating each deployment to manually compile its native extension
-which is rather time consuming. However, we can leverage an old version of
-`sassc` to take advantage of its available pre-compiled native gems.
-
-Add the following line to your `Gemfile`:
-
-```
-gem 'sassc', '~> 2.1.0'
-```
-
-Run the following to downgrade the version of `sassc` in your `Gemfile.lock`:
-
-```sh
-docker-compose run --no-deps web bundle update sassc
-```
-
-Commit and push the changes:
-
-```sh
-git add .
-git commit -m "Downgrade sassc gem to 2.1.0"
-git push
-```
-
-
 ### SSH to ec2.cs291.com and clone your repository
 
 In order to most easily create an elastic beanstalk deployment, we need to SSH
@@ -449,11 +423,23 @@ following:
 ssh -i ~/Downloads/TEAMNAME.pem TEAMNAME@ec2.cs291.com
 ```
 
-Once logged in, clone your repository using HTTPS (this will be a read-only
-version of the project):
+Once logged in, setup your ssh keys to access GitHub repo.
+Generate the key pair:
 
 ```sh
-git clone https://github.com/scalableinternetservices/TEAMNAME.git
+ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+
+Then upload the key pair with read-only permissions to GitHub.
+
+For more info see [Adding a new SSH key to your GitHub account
+](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
+
+After uploading your public key to GitHub, clone your repository using SSH 
+(this will be a read-only version of the project):
+
+```sh
+git clone git@github.com:scalableinternetservices/TEAMNAME.git
 ```
 
 ### Configure Elastic Beanstalk
@@ -463,7 +449,7 @@ For each copy of your repository, you'll need to do the following only once:
 ```sh
 cd TEAMNAME
 eb init --keyname $(whoami) \
-  --platform "64bit Amazon Linux 2 v3.3.7 running Ruby 2.7" \
+  --platform "64bit Amazon Linux 2 v3.5.0 running Ruby 3.0" \
   --region us-west-2 TEAMNAME
 ```
 
@@ -591,7 +577,7 @@ Initial user stories:
 0. As an authenticated user, my front page shows only posts made on my profile
    so that I can see content specific to me.
 
-0. As as authenicated user, my posts and comments are attributable to me so
+0. As as authenticated user, my posts and comments are attributable to me so
    that others know what I've shared.
 
 
@@ -641,7 +627,7 @@ Initial user stories:
 0. As an unauthenticated user, I can comment on an event to share my enthusiasm
    for said event.
 
-0. As an authenticated user, I can RSVP yes/no to events that I do [not] indend
+0. As an authenticated user, I can RSVP yes/no to events that I do [not] intend
    to attend so that the host can better estimate how many people will show up.
 
 0. As an authenticated user, I can see the list of events that I have

@@ -83,7 +83,7 @@ The following schedule is subject to change, and many slide links are not yet ac
   - Continuous Integration (CI)
   - Pair Programming / Mobbing
 - Client-side Caching & Content Delivery Networks ([slides](/slides/2022/08_client_caching_cdn))
-
+- Deep Dive: Ruby on Rails
 ### Tasks
 
 - Make progress on [Project 3](/project3/)
@@ -96,10 +96,12 @@ The following schedule is subject to change, and many slide links are not yet ac
 ### Topics
 
 - Server-Side Caching ([slides](/slides/2022/09_server_caching))
+- Relational Databases ([slides](/slides/2022/11_relational_databases))
 
 ### Tasks
 
 - Complete [Project 3](/project3/)
+- Read [Kafka](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/09/Kafka.pdf)
 - Begin [Primary Project](/project/)
   - form a team -- merge with two project 3 teams (max 6 people)
   - develop initial features
@@ -112,9 +114,9 @@ The following schedule is subject to change, and many slide links are not yet ac
 ## Week 5 (October 25-27)
 
 ### Topics
-
-- Deep Dive: Ruby on Rails
-- Deep Dive: Load Testing with Tsung ([slides](/slides/2022/10_tsung))
+- ### Tuesday October 15: Zoom Guest Lecture with Dr. Alexander Pucher
+- Relational Databases and Rails ([slides](/slides/2022/11_relational_databases))
+- RDBMS Scaling ([slides](/slides/2022/12_rdbms_scaling))
 
 </div>
 <div class="week">
@@ -123,17 +125,23 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- Relational Databases ([slides](/slides/2022/11_relational_databases))
-- RDBMS Scaling ([slides](/slides/2022/12_rdbms_scaling))
+- Deep Dive: Load Testing with Tsung ([slides](/slides/2022/10_tsung))
+
+- Non-Relational Data Stores ([slides](/slides/2022/13_nosql))
+
+### Tasks
+
+- Read [Unifying Consensus and Atomic Commitment for Effective
+  Cloud Data Management](http://www.vldb.org/pvldb/vol12/p611-maiyya.pdf)
 
 </div>
 <div class="week">
 
 ## Week 7 (November 8-10)
 
-- Non-Relational Data Stores ([slides](/slides/2022/13_nosql))
+- ### Thursday November 10: Zoom Guest Lecture with Dr. Sujaya Maiyya
 
-- ### Thursday November 10: Zoom Guest Lecturer (TBA)
+- Non-Relational Data Stores (cont.) ([slides](/slides/2022/13_nosql))
 
 ### Tasks
 
@@ -153,12 +161,19 @@ Note: November -- is Veterans Day, which is an observed UCSB day off.
 
 ## Week 8 (November 15-17)
 
-- ### Tuesday November 15: Zoom Guest Lecturer (TBA)
-
 ### Topics
-- Non-Relational Data Stores (cont.) ([slides](/slides/2022/13_nosql))
+
+- ### Tuesday November 15: Zoom Guest Lecture with Dr. Andrew Mutz
+- SEDA and Kafka paper discussion
 
 ### Tasks
+
+- (Optional) Read [Dynamo: Amazon’s Highly Available Key-value Store 
+](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf)
+- (Optional) Read [Amazon DynamoDB: A Scalable, Predictably
+  Performant, and Fully Managed NoSQL
+  Database Service](https://www.usenix.org/system/files/atc22-elhemali.pdf)
+  
 
 </div>
 <div class="week">
@@ -182,9 +197,9 @@ Note: November 24 is Thanksgiving, which is an observed UCSB day off.
 
 ## Week 10 (November 29 - December 1)
 
-- ### Zoom Guest Lecturer (TBA)
-
 ### Topics
+
+- ### November 29: Zoom Guest Lecture with Dr. Bryce Boe
 
 - HTTP/2 and QUIC (HTTP/3) ([slides](/slides/2022/15_http2_quic))
 
