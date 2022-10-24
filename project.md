@@ -336,6 +336,30 @@ git commit -m "Configure GitHub actions"
 git push
 ```
 
+### Setting up compatible pg gem version
+
+PG gem version from the generated Gem file is not supported by the newest Amazon Ruby image. To solve this issue, update the Gemfile, rerun the build, submit the changes to github
+
+Edit `Gemfile`'s pg line to look like this:
+
+```sh
+gem "pg", "~> 1.1.0"
+```
+
+### Install the gem version
+
+```sh
+docker-compose build web
+```
+
+### Commit and push the changes
+
+```sh
+git add .
+git commit -m "Update Gemfile to a compatible PG version"
+git push
+```
+
 ---
 
 ## Deploying to Elastic Beanstalk
@@ -474,12 +498,12 @@ something like the following:
 Environment details for: YOURNAME
   Application name: TEAMNAME
   Region: us-west-2
-  Deployed Version: app-6360-191104_223036
-  Environment ID: e-yetvigtxpz
-  Platform: arn:aws:elasticbeanstalk:us-west-2::platform/Puma with Ruby 2.6 running on 64bit Amazon Linux/2.11.0
+  Deployed Version: app-f1ab-221021_194424258658
+  Environment ID: e-7fm2cwv55t
+  Platform: arn:aws:elasticbeanstalk:us-west-2::platform/Ruby 3.0 running on 64bit Amazon Linux 2/3.5.0
   Tier: WebServer-Standard-1.0
-  CNAME: YOURNAME.yxhf954iam.us-west-2.elasticbeanstalk.com
-  Updated: 2019-11-04 22:40:16.929000+00:00
+  CNAME: TEAMNAME.eba-6k3duymc.us-west-2.elasticbeanstalk.com
+  Updated: 2022-10-21 19:45:40.487000+00:00
   Status: Ready
   Health: Green
 ```
