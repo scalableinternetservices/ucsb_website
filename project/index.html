@@ -478,6 +478,27 @@ git commit <span class="nt">-m</span> <span class="s2">"Configure GitHub actions
 git push
 </code></pre></div></div>
 
+<h3 id="setting-up-compatible-pg-gem-version">Setting up compatible pg gem version</h3>
+
+<p>PG gem version from the generated Gem file is not supported by the newest Amazon Ruby image. To solve this issue, update the Gemfile, rerun the build, submit the changes to github</p>
+
+<p>Edit <code class="language-plaintext highlighter-rouge">Gemfile</code>’s pg line to look like this:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem <span class="s2">"pg"</span>, <span class="s2">"~&gt; 1.1.0"</span>
+</code></pre></div></div>
+
+<h3 id="install-the-gem-version">Install the gem version</h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose build web
+</code></pre></div></div>
+
+<h3 id="commit-and-push-the-changes">Commit and push the changes</h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add <span class="nb">.</span>
+git commit <span class="nt">-m</span> <span class="s2">"Update Gemfile to a compatible PG version"</span>
+git push
+</code></pre></div></div>
+
 <hr />
 
 <h2 id="deploying-to-elastic-beanstalk">Deploying to Elastic Beanstalk</h2>
@@ -540,7 +561,7 @@ Beanstalk, and then deploy it.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web: bundle exec puma -C /opt/elasticbeanstalk/config/private/pumaconf.rb
 </code></pre></div></div>
 
-<h3 id="commit-and-push-the-changes">Commit and push the changes</h3>
+<h3 id="commit-and-push-the-changes-1">Commit and push the changes</h3>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add <span class="nb">.</span>
 git commit <span class="nt">-m</span> <span class="s2">"Prepare the application to deploy to Amazon's Elastic Beanstalk"</span>
@@ -603,12 +624,12 @@ something like the following:</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Environment details for: YOURNAME
   Application name: TEAMNAME
   Region: us-west-2
-  Deployed Version: app-6360-191104_223036
-  Environment ID: e-yetvigtxpz
-  Platform: arn:aws:elasticbeanstalk:us-west-2::platform/Puma with Ruby 2.6 running on 64bit Amazon Linux/2.11.0
+  Deployed Version: app-f1ab-221021_194424258658
+  Environment ID: e-7fm2cwv55t
+  Platform: arn:aws:elasticbeanstalk:us-west-2::platform/Ruby 3.0 running on 64bit Amazon Linux 2/3.5.0
   Tier: WebServer-Standard-1.0
-  CNAME: YOURNAME.yxhf954iam.us-west-2.elasticbeanstalk.com
-  Updated: 2019-11-04 22:40:16.929000+00:00
+  CNAME: TEAMNAME.eba-6k3duymc.us-west-2.elasticbeanstalk.com
+  Updated: 2022-10-21 19:45:40.487000+00:00
   Status: Ready
   Health: Green
 </code></pre></div></div>
