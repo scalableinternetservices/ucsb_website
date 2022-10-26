@@ -152,10 +152,10 @@ git commit -m "Prepare the project directory"
 
 ### Create the rails project
 
-**If on M1 MAC run the following command - **
+**If on M1 MAC run the following command**
 
-```export 
-DOCKER_DEFAULT_PLATFORM=linux/amd64
+```
+export DOCKER_DEFAULT_PLATFORM=linux/amd64
 ```
 
 First build the `web` container image using `docker-compose`:
