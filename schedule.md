@@ -114,7 +114,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 ## Week 5 (October 25-27)
 
 ### Topics
-- ### Tuesday October 15: Zoom Guest Lecture with Dr. Alexander Pucher
+- ### Tuesday October 15: Zoom Guest Lecture with Alexander Pucher
 - Relational Databases and Rails ([slides](/slides/2022/11_relational_databases))
 - RDBMS Scaling ([slides](/slides/2022/12_rdbms_scaling))
 
@@ -125,9 +125,11 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- Deep Dive: Load Testing with Tsung ([slides](/slides/2022/10_tsung))
+### Thursday November 3: Guest Lecture with David Acevedo
 
-- Non-Relational Data Stores ([slides](/slides/2022/13_nosql))
+- Deep Dive: Load Testing with Tsung ([slides](/slides/2022/10_tsung))
+- Visiting [North Hall Data Center](https://www.it.ucsb.edu/enterprise-technology-services/north-hall-data-center)
+- Deep Dive: React
 
 ### Tasks
 
@@ -139,14 +141,14 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ## Week 7 (November 8-10)
 
-- ### Thursday November 10: Zoom Guest Lecture with Dr. Sujaya Maiyya
+- ### Thursday November 10: Zoom Guest Lecture with Sujaya Maiyya
 
-- Non-Relational Data Stores (cont.) ([slides](/slides/2022/13_nosql))
+- Non-Relational Data Stores ([slides](/slides/2022/13_nosql))
 
 ### Tasks
 
 - Read [How Discord Stores Billions of Messages
-](https://blog.discord.com/how-discord-stores-billions-of-messages-7fa6ec7ee4c7)
+](https://discord.com/blog/how-discord-stores-billions-of-messages)
 - Read [CAP 12 years
   later](http://www.realtechsupport.org/UB/NP/Numeracy_CAP%2B12Years_2012.pdf)
   by Eric Brewer
@@ -163,7 +165,7 @@ Note: November -- is Veterans Day, which is an observed UCSB day off.
 
 ### Topics
 
-- ### Tuesday November 15: Zoom Guest Lecture with Dr. Andrew Mutz
+- ### Tuesday November 15: Zoom Guest Lecture with Andrew Mutz
 - SEDA and Kafka paper discussion
 
 ### Tasks
@@ -184,7 +186,7 @@ Note: November 24 is Thanksgiving, which is an observed UCSB day off.
 {: .alert .alert-warning }
 
 ### Topics
-
+- ### November 22: Zoom Guest Lecture with Victor Zakhary
 - Web Security ([slides](/slides/2022/14_web_security))
 
 ### Tasks
@@ -199,7 +201,7 @@ Note: November 24 is Thanksgiving, which is an observed UCSB day off.
 
 ### Topics
 
-- ### November 29: Zoom Guest Lecture with Dr. Bryce Boe
+- ### November 29: Zoom Guest Lecture with Bryce Boe
 
 - HTTP/2 and QUIC (HTTP/3) ([slides](/slides/2022/15_http2_quic))
 
