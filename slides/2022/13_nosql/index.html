@@ -1,0 +1,837 @@
+---
+layout: presentation
+title: Non-Relational Data Stores
+---
+
+class: center, middle
+
+# {{page.title}}
+
+## CS291A: Scalable Internet Services
+
+---
+
+# NoSQL Motivation
+
+After today's lecture you will understand how NoSQL can be used to build
+scalable Internet services.
+
+NoSQL data stores are not likely to be part of your project, nevertheless,
+after this lecture you should understand where you might use them in practice.
+
+---
+
+# Application Growth
+
+.center[
+![Database Symbol](database_symbol.svg)
+![Database Symbol](database_symbol.svg)
+![Database Symbol](database_symbol.svg)
+]
+
+As our application experiences greater and greater popularity, the data
+layer proves difficult to scale horizontally.
+
+Without a scaling path for our data layer, our growing data set and/or our usage
+of the database will become a bottleneck limiting our application.
+
+---
+
+# Scaling Relational Databases
+
+Relational Databases are great tools for our data layer. Unfortunately, there
+is no simple way to spread load across multiple RDBMSes.
+
+We've looked a ta few techniques for scaling RDBMSes:
+
+* Distinguishing Reads from Writes
+
+* Service Oriented Architectures
+
+* Sharding
+
+---
+
+# RDBMS Scaling Limitations
+
+> What if these techniques aren't sufficient for our application?
+
+* We are already using read-replicas, and it's not enough.
+
+* We've already broken our application out via SOA, and still have load
+  hotspots.
+
+* There's no good way to shard our application.
+
+When relational databases fail to scale to our needs, we need to turn to
+non-relational solutions.
+
+---
+
+# NoSQL
+
+.left-column30[
+![Database Symbol](database_symbol.svg)
+]
+.right-column70[
+Non-relational databases are often referred to as NoSQL databases.
+
+This is an umbrella term for many types of databases:
+
+* Key-value stores
+
+* Column-oriented data stores
+
+* Document-oriented stores
+
+* Graph databases
+]
+
+---
+
+# NoSQL: Horizontal Scaling
+
+.center[
+![Database Symbol](database_symbol.svg)
+![Database Symbol](database_symbol.svg)
+![Database Symbol](database_symbol.svg)
+]
+
+Most NoSQL solutions are good at horizontal scaling.
+
+In exchange for better horizontal scaling, NoSQL databases provide applications
+fewer guarantees.
+
+---
+
+# NoSQL: Synchronizing Writes
+
+.left-column[
+![NoSQL Scaling](NoSQL-base.svg)
+]
+.right-column[
+Let's say we want a database to span multiple machines.
+
+We can send writes to both nodes, and the nodes will keep each other in sync.
+]
+
+---
+
+# NoSQL: Write Conflicts
+
+.left-column[
+![NoSQL Scaling: Write Conflict](NoSQL-email.svg)
+]
+.right-column[
+Let's say:
+
+* We have two clients sending writes.
+
+* There's a uniqueness constraint on the email field.
+
+If both try to write the same email address to different rows, and the
+databases can communicate, they can resolve the conflict in some manner.
+
+For example: One succeeds, the other fails.
+]
+
+---
+
+# NoSQL: Network Partitions
+
+.left-column[
+![NoSQL Scaling: Network Partition](NoSQL-partition.svg)
+]
+.right-column[
+> How do we handle a network partition?
+]
+
+---
+
+# NoSQL: Network Partitions
+
+.left-column[
+![NoSQL Scaling: Network Partition](NoSQL-partition.svg)
+]
+.right-column[
+> How do we handle a network partition?
+
+If the databases cannot communicate, they cannot determine if an update
+violates database consistency.
+
+Solutions:
+
+* Allow the the write and hope for the best.
+
+* Reject writes during a network partition.
+]
+
+---
+
+# NoSQL: Network Partitions
+
+.left-column[
+![NoSQL Scaling: Network Partition](NoSQL-partition.svg)
+]
+.right-column[
+If we allow both writes, our database is not __consistent__.
+
+If we do not allow the writes, our database is not __available__.
+
+If we only operate where network __partitions__ cannot occur, we are not a
+distributed service.
+]
+
+---
+
+# CAP Theorem
+
+.left-column[
+![CAP](CAP.png)
+]
+.right-column[
+
+]
+
+---
+
+# CAP Theorem
+
+.left-column[
+![CAP](CAP.png)
+]
+.right-column[
+Situations like these motivated the CAP Theorem.
+
+Formalized by Eric Brewer, late 90s.
+
+Theorem: You can have at most two of these properties for any shared-data
+system.
+]
+
+---
+
+# Consistent and Partition Tolerant
+
+.left-column[
+![CAP](CAP.png)
+]
+.right-column[
+* Always consistent
+
+* Can handle network partitions
+
+* Not always available to clients
+
+In the earlier example, a CP solution would not allow any writes.
+]
+
+---
+
+# Available and Partition Tolerant
+
+.left-column[
+![CAP](CAP.png)
+]
+.right-column[
+* Always accessible
+
+* Can handle network partitions
+
+* Not always consistent
+
+In the earlier example, an AP solution would accept the conflicting writes.
+]
+
+---
+
+# Consistent and Available
+
+.left-column[
+![CAP](CAP.png)
+]
+.right-column[
+* Always accessible
+
+* Always consistent
+
+* Assumes no network partitions
+
+A CA system would never get into the earlier scenario because it would not be
+deployed where partitions occur.
+]
+
+---
+
+# Partition (In)Tolerance
+
+.left-column[
+![CAP](CAP.png)
+]
+.right-column[
+Assuming no partitions is very limiting:
+
+* For high availability and latency reasons, supporting multiple data
+  centers are desirable
+
+* Even within a single datacenter, partitions occur
+
+As a result, scalable Internet services require partition tolerance, and thus
+have to choose between consistency, or availability.  ]
+
+---
+
+# ACID vs. BASE
+
+The BASE acronym was created to describe these NoSQL solutions that make
+tradeoffs between Availability and Consistency.
+
+| ACID        | BASE                  |
+|:------------|:----------------------|
+| Atomicity   | Basically             |
+| Consistency | Available             |
+| Isolation   | Soft State            |
+| Durability  | Eventually Consistent |
+
+---
+
+# Consistency
+
+Consistency comes in many forms:
+
+## Strong Consistency
+
+* After update, everyone sees the updated value
+
+## Eventual Consistency
+
+* Eventually the system will converge on the updated value
+
+* Read-your-writes consistency
+
+  * Writer immediately sees written values
+
+* Causal consistency
+
+  * Writer, and those they communicate with, sees written values
+
+* Session consistency
+
+  * Within a session writer sees written values
+
+---
+
+# NWR: Nodes
+
+.left-column40[
+.left-column[
+![Database Symbol](database_symbol.svg)
+
+![Database Symbol](database_symbol.svg)
+
+![Database Symbol](database_symbol.svg)
+]
+.right-column[
+![Database Symbol](database_symbol.svg)
+
+![Database Symbol](database_symbol.svg)
+]
+]
+.right-column60[
+N, W, & R are a useful shorthand for describing the read/write strategy of a
+data store.
+
+_N_ refers to the number of separate nodes that retain a copy of the data. Here
+`N=5`.
+]
+
+---
+
+# NWR: Write
+
+.left-column40[
+  .left-column[
+  .background-pink[
+      ![Database Symbol](database_symbol.svg)]
+
+  ![Database Symbol](database_symbol.svg)
+  .background-pink[
+      ![Database Symbol](database_symbol.svg)]
+  ]
+  .right-column[
+    ![Database Symbol](database_symbol.svg)
+  .background-pink[
+      ![Database Symbol](database_symbol.svg)]
+  ]
+]
+.right-column60[
+_W_ refers to the number of separate nodes that must receive writes of some
+data. Here .background-pink[W=3].
+]
+
+---
+
+# NWR: Read
+
+.left-column40[
+.left-column[
+![Database Symbol](database_symbol.svg)
+.background-green[
+![Database Symbol](database_symbol.svg)
+]
+![Database Symbol](database_symbol.svg)
+]
+.right-column[
+![Database Symbol](database_symbol.svg)
+.background-green[
+![Database Symbol](database_symbol.svg)]
+]
+]
+.right-column60[
+_R_ refers to the number of nodes consulted when reading. Here
+.background-green[R=2].
+]
+
+---
+
+# Using NWR: `W + R &lt;= N`
+
+.left-column40[
+.left-column[
+.background-pink[
+![Database Symbol](database_symbol.svg)
+]
+.background-pink[
+![Database Symbol](database_symbol.svg)
+]
+.background-green[
+![Database Symbol](database_symbol.svg)
+]
+]
+.right-column[
+.background-green[
+![Database Symbol](database_symbol.svg)
+]
+.background-pink[
+![Database Symbol](database_symbol.svg)]
+]
+]
+.right-column60[
+When `W + R &lt;= N` no general guarantees can be made pertaining to
+consistency.
+
+## `3 + 2 &lt;= 5`
+]
+
+---
+
+# Using NWR: `W + R &gt; N`
+
+.left-column40[
+.left-column[
+.background-pink[
+![Database Symbol](database_symbol.svg)
+]
+.background-pink[
+![Database Symbol](database_symbol.svg)
+]
+.background-green[
+![Database Symbol](database_symbol.svg)
+]
+]
+.right-column[
+.background-green[
+![Database Symbol](database_symbol.svg)
+]
+.background-blue[
+![Database Symbol](database_symbol.svg)]
+]
+]
+.right-column60[
+When `W + R &gt; N` all writes are captured by .background-blue[at least one]
+of the read nodes.
+
+Any two size-3 subsets of five nodes must have an overlap.
+
+## `3 + 3 &gt; 5`
+]
+
+---
+
+# NWR: Strong Consistency
+
+For strong consistency, many combinations can work.
+
+## .background-pink[W=1], .background-green[R=N]
+
+Write to any one node, consult all nodes on reads. Use the _newest_ value.
+
+--
+
+## .background-pink[W=N], .background-green[R=1]
+
+Write to all nodes, consult any node on read.
+
+--
+
+## .background-pink[W=N/2 + 1], .background-green[R=N/2 + 1]
+
+Write to a quorum, read from a quorum. Use the _newest_ value.
+
+---
+
+# NWR: Weak Consistency
+
+For weaker notions of consistency, we choose `W + R &lt;= N`.
+
+Sticky sessions can be used to implement __session consistency__, which is a
+form of __read-your-writes consistency__.
+
+* Use a cookie, or other information to ensure a single user talks to the same
+node(s) for both reads and writes.
+
+---
+
+class: center inverse middle
+
+# NoSQL
+
+---
+
+# NoSQL Stores
+
+There are different types of NoSQL stores:
+
+### Document-oriented stores
+
+* We will look at MongoDB
+
+### Key-value stores
+
+* We will look at Redis
+
+### Column-oriented data stores
+
+* We will look at Cassandra
+
+### Graph databases
+
+* Specialized data stores, not always horizontally scalable
+* We won't be looking at these
+
+---
+
+# ![MongoDB](MongoDB-Logo.svg)
+
+.left-column[
+![MongoDB Collection](crud-annotated-collection.png)
+]
+.right-column[
+MongoDB is a Document-oriented data store.
+
+* Stores "Documents" that are nested hash-like structures.
+
+* These Documents are stored in "Collections" (similar to RDBMS table).
+
+* Documents do not have fixed schema.
+
+* Documents can have references to other documents.
+]
+
+---
+
+# ![MongoDB](MongoDB-Logo.svg) Insert
+
+.left-column30[
+Query language is not SQL.
+]
+.right-column70[
+![Mongo Insert](crud-insert-stages.svg)
+]
+
+---
+
+# ![MongoDB](MongoDB-Logo.svg) Query
+
+.left-column30[
+Query language is not SQL.
+]
+.right-column70[
+![Mongo Query](crud-query-stages.svg)
+]
+
+---
+
+# ![MongoDB](MongoDB-Logo.svg) JSONB
+
+Documents are stored in JSONB
+
+* Binary version of JSON
+
+* Can nest other JSON documents
+
+---
+
+# ![MongoDB](MongoDB-Logo.svg) Trade-offs
+
+## Provides no notion of transaction
+
+* Unit of atomicity is the Document
+
+* Inserting multiple documents can fail individually
+
+--
+
+## No notion of joins
+
+* Computation based on relations between documents must be done in the
+  application.
+
+
+---
+
+# ![MongoDB](MongoDB-Logo.svg) Sharding
+
+.left-column40[
+Collections can be sharded.
+
+* Each shard can have a replica set.
+
+* Config servers manage the mapping between shards and data.
+
+* Mongos routes queries to the appropriate shard.
+]
+.right-column60[
+![MongoDB Sharded Cluster](sharded-cluster-production-architecture.svg)
+]
+
+---
+
+# ![MongoDB](MongoDB-Logo.svg) Sharding
+
+.left-column40[
+Replica sets use asynchronous replication.
+
+You can configure your driver to read from the primary only, or to read from
+the read-replicas. Additionally, you can configure the number of nodes to write to.
+
+* [Read Preference](https://docs.mongodb.com/manual/core/read-preference/)
+
+* [Write Concern](https://docs.mongodb.com/manual/core/replica-set-write-concern/)
+]
+.right-column60[
+![MongoDB Sharded Cluster](sharded-cluster-production-architecture.svg)
+]
+
+---
+
+# ![Redis](Redis_Logo.svg) Overview
+
+Redis is a key-value data store.
+
+* Also called a data structure store
+
+* Supports many data structures
+
+  * Lists
+
+  * Sorted Sets
+
+  * Hashes
+
+  * Bitmaps
+
+* Primarily keeps data structures in memory
+
+  * Persistence to disk is optional
+
+---
+
+# ![Redis](Redis_Logo.svg) Interface
+
+* Each data type allows similar mechanisms to what you would do in memory.
+
+* Access hashes by key
+
+* Access lists by index
+
+* Sorted sets can return top-K
+
+* Push/pop on lists
+
+---
+
+# ![Redis](Redis_Logo.svg) Transactions
+
+A series of commands can be executed within a transaction.
+
+These transactions are atomic -- no other operations can occur during a
+transaction -- however, failures do not rollback previous operations in the
+transaction.
+
+> Errors happening after EXEC instead are not handled in a special way: all the
+  other commands will be executed even if some command fails during the
+  transaction [[reference](https://redis.io/topics/transactions)].
+
+In other words consistency is not maintained in the event of a failure.
+
+---
+
+# ![Redis](Redis_Logo.svg) Persistence
+
+## RDF: Redis Database File
+
+* Forks process and saves a dump
+
+## AOF: Append Only File
+
+* Saves updates to a log
+
+* Log is replayed upon start
+
+---
+
+# ![Redis](Redis_Logo.svg) Sharding
+
+.left-column[
+![Redis Sharding](redis_sharding.png)
+]
+.right-column[
+Redis cluster supports sharding.
+
+* Single primary for writes
+
+* Replicas for failover.
+]
+
+---
+
+# ![Redis](Redis_Logo.svg) Sharding
+
+.left-column[
+![Redis Sharding with Failures](redis_sharding_failures.png)
+]
+.right-column[
+Cluster can handle all reads if up to two nodes are down.
+
+It's possible to read from replicas -- the default configuration sends all read
+and write operations to the primaries.
+]
+
+---
+
+# ![Redis](Redis_Logo.svg) Rebalancing
+
+.center[![Redis Shard Rebalancing](redis_rebalancing.png)]
+
+Redis cluster can also dynamically rebalance after adding hardware.
+
+---
+
+# ![Cassandra](Cassandra_logo.svg)
+
+Of those discussed, most similar to a RDBMS.
+
+Cassandra has table-like structures called ColumnFamilies.
+
+* ColumnFamilies have many rows.
+
+* Rows are like a big hash, with many keys and values.
+
+  * Rows can be very long
+
+* Rows are heterogeneous, and can be schemaless.
+
+
+---
+
+# ![Cassandra](Cassandra_logo.svg) Column Families
+
+![Cassandra Static Column Family](cassandra_static_column_family.png)
+__Static Column Family__
+
+
+![Cassandra Dynamic Column Family](cassandra_dynamic_column_family.png)
+__Dynamic Column Family__
+
+---
+
+# ![Cassandra](Cassandra_logo.svg) CQL
+
+Interface is called CQL, similar to SQL:
+
+```cql
+SELECT * WHERE KEY=11194251 AND startdate='2016-11-08-0500';
+```
+
+Features are very limited:
+
+* Most queries are key-value
+
+* Secondary indicies are allowed
+
+* Sorting is very limited
+
+---
+
+# ![Cassandra](Cassandra_logo.svg) Limitations
+
+## No Transactions
+
+* Atomic batches exist (with ~30% performance penalty)
+
+* Non-atomic batches provide no isolation from other batches
+
+## No Joins
+
+* Join data in your application
+
+---
+
+# ![Cassandra](Cassandra_logo.svg)
+
+* Cassandra is a primary-less system
+
+* It is distributed and highly available
+
+* Data is automatically split across nodes
+
+* Reads are eventually consistent
+
+  * Can be made strictly consistent on a per-statement basis
+
+---
+
+# ![Cassandra](Cassandra_logo.svg) Statement Consistency
+
+```python
+SELECT * WHERE KEY=11194251 ...
+  CONSISTENCY LEVEL ONE     # (R=1)
+  CONSISTENCY LEVEL ALL     # (R=N)
+  CONSISTENCY LEVEL QUORUM  # (R=N/2 + 1)
+  ```
+
+
+```python
+UPDATE ... WHERE KEY=11194251 ...
+  CONSISTENCY LEVEL ONE     # (W=1)
+  CONSISTENCY LEVEL ALL     # (W=N)
+  CONSISTENCY LEVEL QUORUM  # (W=N/2 + 1)
+```
+
+---
+
+# ![Cassandra](Cassandra_logo.svg) Distributed Keyspace
+
+.left-column[
+Cassandra distributes its keyspace across a virtual ring of nodes.
+
+* This ring can be randomized, or ordered.
+
+* Ordered allowes faster range queries.
+
+* Randomized avoids hotspots.
+]
+.right-column[
+![Cassandra Ring](cassandra-ring.png)
+]

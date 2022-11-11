@@ -55,6 +55,10 @@ Friday, October 14 EoD AoE
 
 Friday, October 21 EoD AoE
 
+### [Project](/project/#report) report draft for feedback due before
+
+Friday, December 2nd 9am PST
+
 ### [Project](/project/#video) video due before
 
 Friday, December 2 EoD AoE
