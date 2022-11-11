@@ -187,6 +187,7 @@ Note: November 24 is Thanksgiving, which is an observed UCSB day off.
 
 ### Topics
 - ### November 22: Zoom Guest Lecture with Victor Zakhary
+- Final Project Demo from Team Antisocial 
 - Web Security ([slides](/slides/2022/14_web_security))
 
 ### Tasks
