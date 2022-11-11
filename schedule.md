@@ -208,7 +208,8 @@ Note: November 24 is Thanksgiving, which is an observed UCSB day off.
 ### Tasks
 
 - Read chapter [12](https://hpbn.co/http2/) of High Performance Browser Networking
-- Complete the [project report](/project/#report)
+- Complete the [project presentation video](/project/#video)
+- Send [project report](/project/#report) for feedback before the final submission
 
 </div>
 <div class="week">
@@ -217,6 +218,7 @@ Note: November 24 is Thanksgiving, which is an observed UCSB day off.
 
 ### Tasks
 
-- Complete the [project presentation video](/project/#video)
+- Final Project Presentations on Tuesday December 6th
+- Complete the [project report](/project/#report)
 
 </div>
