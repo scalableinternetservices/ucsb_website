@@ -165,8 +165,8 @@ Note: November -- is Veterans Day, which is an observed UCSB day off.
 
 ### Topics
 
-- ### Tuesday November 15: Zoom Guest Lecture with Andrew Mutz
-- SEDA and Kafka paper discussion
+- ### Tuesday November 15: Guest Lecture with Andrew Mutz
+- Web Security ([slides](/slides/2022/14_web_security))
 
 ### Tasks
 
@@ -186,9 +186,8 @@ Note: November 24 is Thanksgiving, which is an observed UCSB day off.
 {: .alert .alert-warning }
 
 ### Topics
-- ### November 22: Zoom Guest Lecture with Victor Zakhary
-- Final Project Demo from Team Antisocial 
-- Web Security ([slides](/slides/2022/14_web_security))
+- ### November 22: Guest Lecture with Victor Zakhary
+- ### Final Project Demo from Team Antisocial
 
 ### Tasks
 
@@ -202,7 +201,7 @@ Note: November 24 is Thanksgiving, which is an observed UCSB day off.
 
 ### Topics
 
-- ### November 29: Zoom Guest Lecture with Bryce Boe
+- ### November 29: Guest Lecture with Bryce Boe
 
 - HTTP/2 and QUIC (HTTP/3) ([slides](/slides/2022/15_http2_quic))
 
