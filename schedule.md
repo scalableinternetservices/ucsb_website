@@ -201,8 +201,7 @@ Note: November 24 is Thanksgiving, which is an observed UCSB day off.
 
 ### Topics
 
-- ### November 29: Guest Lecture with Bryce Boe
-- ### December 1: Guest Lecture with Shyr-Shea Chang
+- ### November 29: Guest Lecture with Shyr-Shea Chang
 
 - HTTP/2 and QUIC (HTTP/3) ([slides](/slides/2022/15_http2_quic))
 
