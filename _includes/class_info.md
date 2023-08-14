@@ -8,10 +8,10 @@
 - [{{site.instructor}}]({{site.instructor_url}})
 - <{{site.instructor_email}}>
 
-## Teaching Assistant
+## AppFolio Backup
 
-- [Samridhi Maheshwari](https://www.linkedin.com/in/samridhim)
-- <samridhimaheshwari@ucsb.edu>
+- [Dr. Nevena Golubovic](https://www.linkedin.com/in/nevenagolubovic/)
+- <nevena.golubovic@appfolio.com>
 
 Please use [Piazza]({{site.piazza_url}}) for class-related correspondance.
 
@@ -19,13 +19,13 @@ Please use [Piazza]({{site.piazza_url}}) for class-related correspondance.
 
 ### Classes
 
-- Tuesday and Thursday
-- 1:00pm -- 2:50pm PST
-- Phelps 3526
+- Monday and Wednesday
+- 11:00am -- 12:50pm PT
+- Phelps 2510
 
 ### Initial tasks due before
 
-Friday, September 23 1pm PDT
+Tuesday, September 26 1pm PT
 
 - Complete the [introduction survey]({{site.intro_survey}})
 - Join the class on [Piazza]({{site.piazza_url}})
@@ -33,43 +33,43 @@ Friday, September 23 1pm PDT
 
 ### [Project 0](/project0/) due before
 
-Monday, September 26 EoD AoE
+Friday, September 29 4pm PT
 
 ### [Project 1](/project1/) due before
 
-Friday, September 30 EoD AoE
+Friday, October 6 4pm PT
 
 ### [Project 2](/project2/) due before
 
-Friday, October 7 EoD AoE
+Friday, October 13 4pm PT
 
 ### Project 3 Pairing Message due before
 
-Friday, October 14 EoD AoE
+Friday, October 20 4pm PT
 
 ### Final Project Team Message due before
 
-Friday, October 14 EoD AoE
+Friday, October 27 4pm PT
 
 ### [Project 3](/project3/) due before
 
-Friday, October 21 EoD AoE
+Friday, November 3 4pm PT
 
 ### [Project](/project/#report) report draft for feedback due before
 
-Friday, December 2nd 9am PST
+Friday, December 8 4pm PT
 
 ### [Project](/project/#video) video due before
 
-Friday, December 2 EoD AoE
+Friday, December 8 4pm PT
 
 ### Final Project Presentations
 
-Tuesday, December 6 during class
+Monday, December 11 during class
 
 ### [Project](/project/#report) report due before
 
-Wednesday, December 7 EoD AoE
+Wednesday, December 13 4pm PT
 
 ## Class Resources
 

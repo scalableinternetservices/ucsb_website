@@ -4,23 +4,20 @@ url: https://cs291.com # the base hostname & protocol for your site
 
 # User settings
 course_number: CS291A
-quarter: Fall 2022
+quarter: Fall 2023
 title: Scalable Internet Services
 
 github_username: scalableinternetservices
 
-instructor: Dr Nevena Golubovic
-instructor_email: nevena@cs.ucsb.edu
-instructor_url: https://www.linkedin.com/in/nevenagolubovic/
+instructor: Dr. Shyr-Shea Chang
+instructor_email: shyr-shea.chang@appfolio.com
+instructor_url: https://www.linkedin.com/in/shyr-shea-chang-6426271b8/
 
 drive_url: https://drive.google.com/drive/folders/11ZU37_a1Yc6pTBNo9uIcsCKV422Ypdyf?usp=sharing
 piazza_url: https://piazza.com/ucsb/fall2022/cs291a
 
-intro_survey: https://forms.gle/djDdAYQoJyA9w3mn9
-project0_submission: https://forms.gle/YemRRvN47DH98j6P9
-project1_submission: https://forms.gle/u7Q66zVZJ2CyuQVw5
-project2_submission: https://forms.gle/4VxZbsLEEHPPQQ7F6
-project3_submission: https://forms.gle/mSu7dsF1MJiYHx7X7
+intro_survey: https://forms.gle/k3opDdFPjQRjWFV98
+project0_submission: https://forms.gle/7Nafh5e9PM28b3H79
 
 kramdown:
   parse_block_html: true
