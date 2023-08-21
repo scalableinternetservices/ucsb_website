@@ -35,9 +35,9 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- Hypertext Transfer Protocol (HTTP) ([slides](/slides/2022/02_http))
-- HTTP Servers ([slides](/slides/2022/03_http_servers/))
-- Application Servers ([slides](/slides/2022/04_application_servers/))
+- Hypertext Transfer Protocol (HTTP)
+- HTTP Servers
+- Application Servers
 
 ### Tasks
 
@@ -57,8 +57,8 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- Scaling Web Applications ([slides](/slides/2022/05_scaling_web_applications/))
-- Architecting for High Availability ([slides](/slides/2022/06_high_availability))
+- Scaling Web Applications
+- Architecting for High Availability
 - Frontend Deep Dive: React
 - Read [SEDA: An architecture for well-conditioned, scalable internet services](http://nms.lcs.mit.edu/~kandula/projects/killbots/killbots_files/seda-sosp01.pdf) by M Welsh, D Culler, E Brewer
 - Read [A Retrospective on SEDA](https://matt-welsh.blogspot.com/2010/07/retrospective-on-seda.html)
@@ -75,12 +75,12 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- Working in teams ([slides](/slides/2022/07_agile_tdd_pairing))
+- Working in teams
   - Agile Software Development
   - Test Driven Development (TDD)
   - Continuous Integration (CI)
   - Pair Programming / Mobbing
-- Client-side Caching & Content Delivery Networks ([slides](/slides/2022/08_client_caching_cdn))
+- Client-side Caching & Content Delivery Networks
 - Deep Dive: Ruby on Rails
 
 ### Tasks
@@ -94,8 +94,8 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- Server-Side Caching ([slides](/slides/2022/09_server_caching))
-- Relational Databases ([slides](/slides/2022/11_relational_databases))
+- Server-Side Caching
+- Relational Databases
 
 ### Tasks
 
@@ -114,9 +114,9 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- ### Tuesday October 15: Zoom Guest Lecture with Alexander Pucher
-- Relational Databases and Rails ([slides](/slides/2022/11_relational_databases))
-- RDBMS Scaling ([slides](/slides/2022/12_rdbms_scaling))
+- ### Wednesday November 1: Zoom Guest Lecture
+- Relational Databases and Rails
+- RDBMS Scaling
 
 </div>
 <div class="week">
@@ -125,9 +125,9 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-### Wednesday November 8: Guest Lecture with David Acevedo
+### Wednesday November 8: Guest Lecture
 
-- Deep Dive: Load Testing with Tsung ([slides](/slides/2022/10_tsung))
+- Deep Dive: Load Testing with Tsung
 - Visiting [North Hall Data Center](https://www.it.ucsb.edu/enterprise-technology-services/north-hall-data-center)
 - Deep Dive: React
 
@@ -141,9 +141,9 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ## Week 7 (November 13-15)
 
-- ### Thursday November 10: Zoom Guest Lecture with Sujaya Maiyya
+- ### Wednesday November 15: Zoom Guest Lecture
 
-- Non-Relational Data Stores ([slides](/slides/2022/13_nosql))
+- Non-Relational Data Stores
 
 ### Tasks
 
@@ -163,8 +163,8 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- ### Tuesday November 15: Guest Lecture with Andrew Mutz
-- Web Security ([slides](/slides/2022/14_web_security))
+- ### Wednesday November 22: Guest Lecture
+- Web Security
 
 ### Tasks
 
@@ -181,7 +181,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- ### November 22: Guest Lecture with Victor Zakhary
+- ### Wednesday November 29: Guest Lecture
 - ### Final Project Demo from Team Antisocial
 
 ### Tasks
@@ -196,9 +196,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- ### November 29: Guest Lecture with Shyr-Shea Chang
-
-- HTTP/2 and QUIC (HTTP/3) ([slides](/slides/2022/15_http2_quic))
+- ### Wednesday December 6: Guest Lecture
 
 ### Tasks
 
