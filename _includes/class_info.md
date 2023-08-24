@@ -20,7 +20,7 @@ Please use [Piazza]({{site.piazza_url}}) for class-related correspondance.
 ### Classes
 
 - Monday and Wednesday
-- 11:00am -- 12:50pm PT
+- 11:00am -- 12:15pm PT
 - Phelps 2510
 
 ### Initial tasks due before
@@ -33,35 +33,35 @@ Tuesday, September 26 1pm PT
 
 ### [Project 0](/project0/) due before
 
-Friday, September 29 4pm PT
+Friday, September 29 1pm PT
 
 ### [Project 1](/project1/) due before
 
-Friday, October 6 4pm PT
+Friday, October 6 1pm PT
 
 ### [Project 2](/project2/) due before
 
-Friday, October 13 4pm PT
+Friday, October 13 1pm PT
 
 ### Project 3 Pairing Message due before
 
-Friday, October 20 4pm PT
+Friday, October 20 1pm PT
 
 ### Final Project Team Message due before
 
-Friday, October 27 4pm PT
+Friday, October 27 1pm PT
 
 ### [Project 3](/project3/) due before
 
-Friday, November 3 4pm PT
+Friday, November 3 1pm PT
 
 ### [Project](/project/#report) report draft for feedback due before
 
-Friday, December 8 4pm PT
+Friday, December 8 1pm PT
 
 ### [Project](/project/#video) video due before
 
-Friday, December 8 4pm PT
+Friday, December 8 1pm PT
 
 ### Final Project Presentations
 
@@ -69,7 +69,7 @@ Monday, December 11 during class
 
 ### [Project](/project/#report) report due before
 
-Wednesday, December 13 4pm PT
+Wednesday, December 13 1pm PT
 
 ## Class Resources
 

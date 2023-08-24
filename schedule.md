@@ -128,7 +128,6 @@ The following schedule is subject to change, and many slide links are not yet ac
 ### Wednesday November 8: Guest Lecture
 
 - Deep Dive: Load Testing with Tsung
-- Visiting [North Hall Data Center](https://www.it.ucsb.edu/enterprise-technology-services/north-hall-data-center)
 - Deep Dive: React
 
 ### Tasks

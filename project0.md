@@ -5,6 +5,7 @@ navigation_weight: 2
 permalink: /project0/
 title: Project 0
 ---
+
 # Project 0: Static Web Page
 
 Build, deploy, and load test a static web page hosted on GitHub Pages.
@@ -23,10 +24,6 @@ is accomplished.
 - Student can build and deploy a simple static web page.
 - Student can measure average page load time.
 - Student can measure server's rate limit.
-
-## Overview Video
-
-<https://drive.google.com/file/d/1fHRYG8Jq_rjpKxfNxoDTsbS3ZM8mR42T/view?usp=sharing>
 
 ## Project Submission
 

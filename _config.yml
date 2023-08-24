@@ -13,11 +13,11 @@ instructor: Dr. Shyr-Shea Chang
 instructor_email: shyr-shea.chang@appfolio.com
 instructor_url: https://www.linkedin.com/in/shyr-shea-chang-6426271b8/
 
-drive_url: https://drive.google.com/drive/folders/11ZU37_a1Yc6pTBNo9uIcsCKV422Ypdyf?usp=sharing
-piazza_url: https://piazza.com/ucsb/fall2022/cs291a
+drive_url: https://drive.google.com/drive/folders/1gXSc42m6tDJMPPxE486C0YQ5KXxB92J2?usp=sharing
+piazza_url: https://piazza.com/class/lllfmvbxvh83oq
 
-intro_survey: https://forms.gle/k3opDdFPjQRjWFV98
-project0_submission: https://forms.gle/7Nafh5e9PM28b3H79
+intro_survey: https://forms.gle/93PrP7Td5tmvAqAFA
+project0_submission: https://forms.gle/vzB1UtGre5Psg5pr8
 
 kramdown:
   parse_block_html: true
