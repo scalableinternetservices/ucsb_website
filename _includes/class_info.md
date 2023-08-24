@@ -57,19 +57,15 @@ Friday, November 3 1pm PT
 
 ### [Project](/project/#report) report draft for feedback due before
 
-Friday, December 8 1pm PT
+Friday, December 1 1pm PT
 
 ### [Project](/project/#video) video due before
 
 Friday, December 8 1pm PT
 
-### Final Project Presentations
-
-Monday, December 11 during class
-
 ### [Project](/project/#report) report due before
 
-Wednesday, December 13 1pm PT
+Friday, December 8 1pm PT
 
 ## Class Resources
 

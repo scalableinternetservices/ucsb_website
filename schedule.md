@@ -181,7 +181,6 @@ The following schedule is subject to change, and many slide links are not yet ac
 ### Topics
 
 - ### Wednesday November 29: Guest Lecture
-- ### Final Project Demo from Team Antisocial
 
 ### Tasks
 
