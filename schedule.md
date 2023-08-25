@@ -5,14 +5,14 @@ permalink: /schedule/
 title: Class Schedule
 ---
 
-# Fall 2022 Class Schedule
+# Fall 2023 Class Schedule
 
 The following schedule is subject to change, and many slide links are not yet active.
 {: .alert .alert-warning }
 
 <div class="week">
 
-## Week 0 (September 22)
+## Week 0 (September 25)
 
 ### Topics
 
@@ -31,13 +31,13 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 1 (September 27-29)
+## Week 1 (October 2-4)
 
 ### Topics
 
-- Hypertext Transfer Protocol (HTTP) ([slides](/slides/2022/02_http))
-- HTTP Servers ([slides](/slides/2022/03_http_servers/))
-- Application Servers ([slides](/slides/2022/04_application_servers/))
+- Hypertext Transfer Protocol (HTTP)
+- HTTP Servers
+- Application Servers
 
 ### Tasks
 
@@ -53,16 +53,14 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 2 (October 4-6)
+## Week 2 (October 9-11)
 
 ### Topics
 
-- Scaling Web Applications ([slides](/slides/2022/05_scaling_web_applications/))
-- Architecting for High Availability ([slides](/slides/2022/06_high_availability))
+- Scaling Web Applications
+- Architecting for High Availability
 - Frontend Deep Dive: React
-- Read [SEDA: An architecture for well-conditioned, scalable internet services](
-  http://nms.lcs.mit.edu/~kandula/projects/killbots/killbots_files/seda-sosp01.pdf
-  ) by M Welsh, D Culler, E Brewer
+- Read [SEDA: An architecture for well-conditioned, scalable internet services](http://nms.lcs.mit.edu/~kandula/projects/killbots/killbots_files/seda-sosp01.pdf) by M Welsh, D Culler, E Brewer
 - Read [A Retrospective on SEDA](https://matt-welsh.blogspot.com/2010/07/retrospective-on-seda.html)
 
 ### Tasks
@@ -73,17 +71,18 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 3 (October 11-13)
+## Week 3 (October 16-18)
 
 ### Topics
 
-- Working in teams ([slides](/slides/2022/07_agile_tdd_pairing))
+- Working in teams
   - Agile Software Development
   - Test Driven Development (TDD)
   - Continuous Integration (CI)
   - Pair Programming / Mobbing
-- Client-side Caching & Content Delivery Networks ([slides](/slides/2022/08_client_caching_cdn))
+- Client-side Caching & Content Delivery Networks
 - Deep Dive: Ruby on Rails
+
 ### Tasks
 
 - Make progress on [Project 3](/project3/)
@@ -91,12 +90,12 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 4 (October 18-20)
+## Week 4 (October 23-25)
 
 ### Topics
 
-- Server-Side Caching ([slides](/slides/2022/09_server_caching))
-- Relational Databases ([slides](/slides/2022/11_relational_databases))
+- Server-Side Caching
+- Relational Databases
 
 ### Tasks
 
@@ -111,24 +110,24 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 5 (October 25-27)
+## Week 5 (October 30-November 1)
 
 ### Topics
-- ### Tuesday October 15: Zoom Guest Lecture with Alexander Pucher
-- Relational Databases and Rails ([slides](/slides/2022/11_relational_databases))
-- RDBMS Scaling ([slides](/slides/2022/12_rdbms_scaling))
+
+- ### Wednesday November 1: Zoom Guest Lecture
+- Relational Databases and Rails
+- RDBMS Scaling
 
 </div>
 <div class="week">
 
-## Week 6 (November 1-3)
+## Week 6 (November 6-8)
 
 ### Topics
 
-### Thursday November 3: Guest Lecture with David Acevedo
+### Wednesday November 8: Guest Lecture
 
-- Deep Dive: Load Testing with Tsung ([slides](/slides/2022/10_tsung))
-- Visiting [North Hall Data Center](https://www.it.ucsb.edu/enterprise-technology-services/north-hall-data-center)
+- Deep Dive: Load Testing with Tsung
 - Deep Dive: React
 
 ### Tasks
@@ -139,16 +138,16 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 7 (November 8-10)
+## Week 7 (November 13-15)
 
-- ### Thursday November 10: Zoom Guest Lecture with Sujaya Maiyya
+- ### Wednesday November 15: Zoom Guest Lecture
 
-- Non-Relational Data Stores ([slides](/slides/2022/13_nosql))
+- Non-Relational Data Stores
 
 ### Tasks
 
 - Read [How Discord Stores Billions of Messages
-](https://discord.com/blog/how-discord-stores-billions-of-messages)
+  ](https://discord.com/blog/how-discord-stores-billions-of-messages)
 - Read [CAP 12 years
   later](http://www.realtechsupport.org/UB/NP/Numeracy_CAP%2B12Years_2012.pdf)
   by Eric Brewer
@@ -156,38 +155,32 @@ The following schedule is subject to change, and many slide links are not yet ac
   Consistent](http://www.scalableinternetservices.com/slides/vogels.pdf) by
   Werner Vogels
 
-Note: November -- is Veterans Day, which is an observed UCSB day off.
-{: .alert .alert-warning }
 </div>
 <div class="week">
 
-## Week 8 (November 15-17)
+## Week 8 (November 20-22)
 
 ### Topics
 
-- ### Tuesday November 15: Guest Lecture with Andrew Mutz
-- Web Security ([slides](/slides/2022/14_web_security))
+- ### Wednesday November 22: Guest Lecture
+- Web Security
 
 ### Tasks
 
-- (Optional) Read [Dynamo: Amazon’s Highly Available Key-value Store 
-](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf)
+- (Optional) Read [Dynamo: Amazon’s Highly Available Key-value Store
+  ](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf)
 - (Optional) Read [Amazon DynamoDB: A Scalable, Predictably
   Performant, and Fully Managed NoSQL
   Database Service](https://www.usenix.org/system/files/atc22-elhemali.pdf)
-  
 
 </div>
 <div class="week">
 
-## Week 9 (November 22)
-
-Note: November 24 is Thanksgiving, which is an observed UCSB day off.
-{: .alert .alert-warning }
+## Week 9 (November 27-29)
 
 ### Topics
-- ### November 22: Guest Lecture with Victor Zakhary
-- ### Final Project Demo from Team Antisocial
+
+- ### Wednesday November 29: Guest Lecture
 
 ### Tasks
 
@@ -197,13 +190,11 @@ Note: November 24 is Thanksgiving, which is an observed UCSB day off.
 </div>
 <div class="week">
 
-## Week 10 (November 29 - December 1)
+## Week 10 (December 4-6)
 
 ### Topics
 
-- ### November 29: Guest Lecture with Shyr-Shea Chang
-
-- HTTP/2 and QUIC (HTTP/3) ([slides](/slides/2022/15_http2_quic))
+- ### Wednesday December 6: Guest Lecture
 
 ### Tasks
 
@@ -214,7 +205,7 @@ Note: November 24 is Thanksgiving, which is an observed UCSB day off.
 </div>
 <div class="week">
 
-## Finals Week (December 6-8)
+## Finals Week (December 11-13)
 
 ### Tasks
 

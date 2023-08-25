@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+
 # Scalable Internet Services Syllabus
 
 ## Course Description
@@ -97,14 +98,15 @@ may not be comprised of more than two undergraduate or BS/MS students.
 
 ## Grading
 
-| Percent | Item |
-|--:|:--|
-| 3 | [Project 0](/project0/) (Static Web Page) |
-| 6 | [Project 1](/project1/) (RubyKoans) |
-| 9 | [Project 2](/project2/) (AWS Lambda) |
-| 12 | [Project 3](/project3/) (Rails demo app) |
-| 65 | [Primary Project](/project/) Individual Score |
-| 5 | Participation |
+| Percent |                                          Item |
+| :------ | --------------------------------------------: |
+| 3       |     [Project 0](/project0/) (Static Web Page) |
+| 6       |           [Project 1](/project1/) (RubyKoans) |
+| 9       |          [Project 2](/project2/) (AWS Lambda) |
+| 12      |      [Project 3](/project3/) (Rails demo app) |
+| 65      | [Primary Project](/project/) Individual Score |
+| 5       |                                 Participation |
+
 {: class="table table-striped"}
 
 Participation is an important part of keeping a class engaging. Participation
@@ -129,13 +131,14 @@ iterative approach to load testing and scaling their web service as described
 in their project report and highlighted in their project video. Objectively
 these components break down into:
 
-| Percent | Item |
-|--:|:--|
-| 50 | iterative approach to load testing and scaling
-| 20 | web service complexity |
-| 10 | quality of project report |
-| 10 | quality of project video |
-| 10 | quality of project presentation in class |
+| Percent |                                           Item |
+| :------ | ---------------------------------------------: |
+| 50      | iterative approach to load testing and scaling |
+| 20      |                         web service complexity |
+| 10      |                      quality of project report |
+| 10      |                       quality of project video |
+| 10      |       quality of project presentation in class |
+
 {: class="table table-striped"}
 
 ### Primary Project Individual Score
@@ -146,13 +149,14 @@ of _work_ each individual's teammates confidentially assigns them.
 
 For example, a three person team may assign the following peer scores:
 
-|           | Alice     | Bob      | Chuck     |
-|:---------:|:---------:|:--------:|:---------:|
-| Alice     | -         | 55%      | 45%       |
-| Bob       | 60%       | -        | 40%       |
-| Chuck     | 52%       | 48%      | -         |
-|===========|===========|==========|===========|
-| __Total__ | __112%__  | __103%__ | __85%__   |
+|             |    Alice    |    Bob     |    Chuck    |
+| :---------: | :---------: | :--------: | :---------: |
+|    Alice    |      -      |    55%     |     45%     |
+|     Bob     |     60%     |     -      |     40%     |
+|    Chuck    |     52%     |    48%     |      -      |
+| =========== | =========== | ========== | =========== |
+|  **Total**  |  **112%**   |  **103%**  |   **85%**   |
+
 {: class="table table-striped"}
 
 The observations from the data in the table above are:
@@ -170,8 +174,8 @@ Individual Score would be `106.4%`, Bob's `97.85%`, and Chuck's `80.75%`.
 
 We will confidentially conduct the peer score process twice during the course:
 
-- Monday, November 7
-- Monday, November 21
+- Tuesday, November 9
+- Tuesday, November 28
 
 The first two peer scores are intended to help students see if they need to
 make any adjustments to their team contributions. Only the outcome of the final
@@ -184,16 +188,17 @@ justification, and may be followed up on by the instructor.
 Letter grades will be assigned as follows:
 
 | Percent | Grade |
-|:-------:|:------|
-|   96 ⅔  |   A+  |
-|   93 ⅓  |   A   |
-|   90    |   A-  |
-|   86 ⅔  |   B+  |
-|   83 ⅓  |   B   |
-|   80    |   B-  |
-|   76 ⅔  |   C+  |
-|   73 ⅓  |   C   |
-|    0    |   F   |
+| :-----: | :---- |
+|  96 ⅔   | A+    |
+|  93 ⅓   | A     |
+|   90    | A-    |
+|  86 ⅔   | B+    |
+|  83 ⅓   | B     |
+|   80    | B-    |
+|  76 ⅔   | C+    |
+|  73 ⅓   | C     |
+|    0    | F     |
+
 {: class="table table-striped"}
 
 The number listed is the lower bound of the percent grade for the given
