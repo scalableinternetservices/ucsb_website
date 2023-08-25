@@ -1,0 +1,471 @@
+---
+layout: presentation
+title: Load Testing with Tsung
+---
+
+class: center, middle
+
+# {{page.title}}
+
+## CS291A: Scalable Internet Services
+
+---
+
+# Load Testing
+
+Process where we simulate concurrent users' interaction with the application
+and observe its performance.
+
+--
+
+With load testing we can establish a baseline of expected performance of our
+application.
+
+We can then compare the results of previous load tests to those obtained after
+making our changes.
+
+> What should we observe?
+
+--
+
+* Response times
+
+* Error rates
+
+* Synthetic user success rate
+
+---
+
+# Modeling User Behavior
+
+Ideally _real_ users would be used to compare an application's
+performance.
+
+Short of that, we want to create load-test flows that resemble
+real traffic. There are a few things to consider:
+
+* Ensuring flows contain a mixture of reads and writes
+
+* Ensuring variance within the flows themselves (not all users have the same
+  habits)
+
+* The test framework should be able to utilize data returned from prior
+  requests (e.g., create a submission and make a comment on it)
+
+> Why are these considerations important?
+
+---
+
+# Load Testing Tools
+
+## High Performance Tools
+
+* [apachebench](https://httpd.apache.org/docs/2.4/programs/ab.html) (ab)
+* [Apache JMeter](https://jmeter.apache.org/)
+* [httperf](https://github.com/httperf/httperf)
+* [Tsung](http://tsung.erlang-projects.org/)
+
+## Feature-rich Tools
+
+* [Funkload](https://github.com/nuxeo/FunkLoad/)
+* [Tsung](http://tsung.erlang-projects.org/)
+
+## Others
+
+* [k6](https://k6.io/docs/test-types/load-testing)
+* [Locust](https://locust.io/)
+* [Bees with Machine Guns](https://github.com/newsapps/beeswithmachineguns)
+
+Tsung is a good choice as it is extremely configurable and delivers high
+performance.
+
+---
+
+# Testing EC2 instances from EC2
+
+We should the test instances in the same region as our elastic beanstalk
+deployment. This decision provides us with:
+
+* Lower cost: AWS charges for bandwidth outside of the region
+
+* Predictability: fewer moving parts between the test instance and the stack
+
+* Less representative testing: none of our real users will be in the data
+  center
+
+The first two points are positive.
+
+The third point could be a concern, but since we are essentially using these
+sort of tests for comparison between code changes, we're less concerned with
+being completely representative.
+
+---
+
+# Launching the Tsung Instance
+
+Connect to the jump-box:
+
+```bash
+ssh -i TEAMNAME.pem TEAMNAME@ec2.cs291.com
+```
+
+Create an instance:
+
+```bash
+/bin/launch_tsung.sh
+```
+
+You can manually run the script commands in case you want to update any params.
+
+```bash
+cat /bin/launch_tsung.sh
+```
+
+The output will provide you with the ssh command to access the instance.
+
+---
+
+# The Tsung Instance
+
+The home directory of the Tsung instance contains one file and a symlink:
+
+```bash
+[ec2-user@ip-10-140-200-96 ~]$ ls
+tsung_example.xml
+```
+
+`tsung_example.xml` is a sample Tsung load-test configuration file that
+establishes various connections to https://cs291.com.
+
+Run this Tsung test via:
+
+```bash
+tsung -f tsung_example.xml -k start
+```
+
+Once Tsung starts, visit the URL listed in the output.
+
+---
+
+# Tsung Server
+
+While Tsung runs (and continues to run after testing with the `-k` option) it
+provides a simple web interface.
+
+![Tsung Web Interface](tsung_interface.png)
+
+---
+
+# Tsung Interface
+
+Out of the box, Tsung generates a report `/es/ts_web:report`, and a handful of
+graphs `/es/ts_web:graph`.
+
+The server, and web-based access to these files ceases to be accessible once
+the Tsung process is stopped. Restarting Tsung only makes the graphs from the
+current run available via the web interface.
+
+---
+
+# Fetching Tsung results
+
+Aside from fetching files through the web interface. You may want to obtain all
+of the Tsung results.
+
+Assuming your Tsung instance IP address is `54.166.5.220` then the following
+command will synchronize the Tsung result files from all runs to your
+ec2.cs291.com account:
+
+```sh
+rsync -auvL ec2-user@54.166.5.220:tsung_logs .
+```
+
+Running that command a second time will only fetch any new files (assuming you
+run it from the same path). `rsync` is awesome!
+
+---
+
+# The Tsung XML File Structure
+
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE tsung SYSTEM "/usr/local/share/tsung/tsung-1.0.dtd" [] >
+<tsung loglevel="notice">
+
+  <clients>...</clients>
+  <servers>...</servers>
+  <load>...</load>
+  <options>...</options>
+  <sessions>...</sessions>
+  ...
+
+</tsung>
+```
+
+For a more complete
+discussion please see Tsung's documentation:
+[http://tsung.erlang-projects.org/user_manual/configuration.html](http://tsung.erlang-projects.org/user_manual/configuration.html)
+
+---
+
+# Tsung Clients Section
+
+Reference: [http://tsung.erlang-projects.org/user_manual/conf-client-server.html](http://tsung.erlang-projects.org/user_manual/conf-client-server.html)
+
+```xml
+<clients>
+  <client host="localhost" use_controller_vm="true" maxusers='30000'/>
+</clients>
+```
+
+The clients section specifies the clients to generate load from. You can
+use multiple tsung clients as part of a single test, and you may need to for
+your final load tests.
+
+---
+
+# Tsung Servers Section
+
+Reference: [http://tsung.erlang-projects.org/user_manual/conf-client-server.html](http://tsung.erlang-projects.org/user_manual/conf-client-server.html)
+
+```xml
+<servers>
+  <server host="cs291.com" port="443" type="ssl"></server>
+</servers>
+```
+
+The servers section specifies where you intend to connect to. For your tests
+you will always want to modify the `host` value to match your deployment's
+domain.
+
+---
+
+# Tsung Load Section
+
+Reference: [http://tsung.erlang-projects.org/user_manual/conf-load.html](http://tsung.erlang-projects.org/user_manual/conf-load.html)
+
+```xml
+<load>
+  <arrivalphase phase="1" duration="60" unit="second">
+    <users arrivalrate="2" unit="second"></users>
+  </arrivalphase>
+  <arrivalphase phase="2" duration="1" unit="minute">
+    <users interarrival="2" unit="second"></users>
+  </arrivalphase>
+</load>
+```
+
+Here we describe two phases.
+
+The first phase lasts 60 seconds where 2 new users arrive (`arrivalrate`) each
+second.
+
+The second phase also lasts 60 seconds. Here 1 new user arrives
+(`interarrival`) every two seconds.
+
+---
+
+# Tsung Options Section
+
+Reference: [http://tsung.erlang-projects.org/user_manual/conf-options.html](http://tsung.erlang-projects.org/user_manual/conf-options.html)
+
+```xml
+<options>
+  <!-- Set connection timeout to 2 seconds -->
+  <option name="global_ack_timeout" value="2000"></option>
+</options>
+```
+
+---
+
+# Tsung Sessions Section
+
+Reference: [http://tsung.erlang-projects.org/user_manual/conf-sessions.html](http://tsung.erlang-projects.org/user_manual/conf-sessions.html)
+
+```xml
+<sessions>
+  <session name="http-example" type="ts_http" weight="1">
+    <request>
+      <http method="GET" url="/" version="1.1"></http>
+    </request>
+    <thinktime random="true" value="2"></thinktime>
+    <request>
+      <http contents="user=foo" method="POST" url="/login" version="1.1"></http>
+    </request>
+  </session>
+</sessions>
+```
+
+You can define multiple sessions and for each user one will be chosen according
+to the weights.
+
+---
+
+# Load Testing Your Server
+
+* Modify the `server` tag's `host` section to point to your deployment's
+  domain.
+
+* Add a `request` tag for each resource fetched when you load your
+  application's home page.
+
+* Group requests to discrete _pages_ in `<transaction>` if you want statistics
+  on the individual pages.
+
+---
+
+# Obtaining Dynamic Variables
+
+Reference: [http://tsung.erlang-projects.org/user_manual/conf-advanced-features.html](http://tsung.erlang-projects.org/user_manual/conf-advanced-features.html)
+
+Assume this HTML form:
+
+```html
+<form action="/create" method="POST">
+  <input name="auth_token" type="hidden" value="gDTI=" />
+</form>
+```
+
+The value `gDTI=` can be obtained from the response via:
+
+```xml
+<request>
+  <dyn_variable name="auth_token"></dyn_variable>
+  <http method="GET" url="/new" version="1.1"></http>
+</request>
+```
+
+---
+
+# Using Dynamic Variables
+
+We previously set a variable named `auth_token`. Let's use it.
+
+```xml
+<request subst="true">
+  <http content_type="application/x-www-form-urlencoded"
+        contents="user=bboe&amp;amp;auth_token=%%_auth_token%%"
+        method="POST"
+        url="/create"
+        version="1.1">
+  </http>
+</request>
+```
+
+Substitution is done via `%%_VARIABLE_NAME%%`.
+
+In rails CSRF protection values are usually stored in a hidden field named
+`authenticity_token`.
+
+__Note__: The `&` character must be encoded like `&amp;amp;`. This causes a problem
+with the CSRF token.
+
+---
+
+# Other Dynamic Variables
+
+The above example shows how to extract a variable from a form field. They can
+also be extracted from:
+
+* HTML using [XPath](http://tsung.erlang-projects.org/user_manual/conf-advanced-features.html#xpath)
+
+* arbitrary text using [Regexp](http://tsung.erlang-projects.org/user_manual/conf-advanced-features.html#regexp)
+
+* JSON via [JSONPath](http://tsung.erlang-projects.org/user_manual/conf-advanced-features.html#jsonpath)
+
+---
+
+# Generating Random Variables
+
+Variables can be explicitly set via a few functions and occur anywhere in a
+`<session>`.
+([ref](http://tsung.erlang-projects.org/user_manual/conf-advanced-features.html#set-dynvars))
+
+## Random Number as `rndint`
+
+```xml
+<setdynvars sourcetype="random_number" start="3" end="32">
+  <var name="rndint" />
+</setdynvars>
+```
+
+## Random String as `rndstring1`
+
+```xml
+<setdynvars sourcetype="random_string" length="13">
+  <var name="rndstring1" />
+</setdynvars>
+```
+
+For a more complete example please see:
+[Demo App's load_tests/critical.xml](https://github.com/scalableinternetservices/demo/blob/master/load_tests/critical.xml)
+
+---
+
+class: center, middle, inverse
+
+# Understanding Tsung's Output
+
+---
+
+# Tsung Output
+
+* __connect__: The duration of the connection establishment
+* __page__: Response time for each set of requests (a page is a group of
+  requests not separated by a thinktime)
+* __request__: Response time for each request
+* __session__: The duration of a user's session
+
+![Tsung Statistics](tsung_statistics.png)
+
+---
+
+# Response Time Graph
+
+![Tsung Response Time Graph](tsung_response_time.png)
+
+---
+
+# Tsung HTTP Return Codes
+
+Inspect the HTTP return code section:
+
+* 2XX and 3XX status codes are good
+
+* 4XX and 5XX status codes can indicate problems:
+    * Too many requests?
+
+    * Server-side bugs?
+
+    * Bug in testing code?
+
+Ideally you shouldn't see any 4XX and 5XX status codes in your tests unless you
+are certain they are due to exceeding the load on your web server's stack.
+
+---
+
+# Error Rate Graph
+
+![Tsung Error Rate Graph](tsung_error_rate.png)
+
+---
+
+# Users Graph
+
+![Tsung Users Graph](tsung_users.png)
+
+---
+
+# Advice
+
+## Reminder: Fetch your Tsung data as soon as it is available
+
+```bash
+rsync -auvL ec2-user@54.166.5.220:tsung_logs .
+```
+
+## Use tsplot to compare separate runs:
+
+```bash
+tsplot -d graphs m3_medium tsung_logs/20171108-2133/tsung.log m3_large tsung_logs/20171108-2146/tsung.log
+```
