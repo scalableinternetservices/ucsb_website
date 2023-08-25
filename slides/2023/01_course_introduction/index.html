@@ -1,0 +1,437 @@
+---
+layout: presentation
+title: Course Introduction
+---
+
+class: center, middle
+
+# {{page.title}}
+
+## CS291A: Scalable Internet Services
+
+---
+  
+# Nevena Golubovic
+
+* UCSB CS Alumna (MS & Ph.D in 2019)
+ - BS in CS from Univ. of Belgrade (2009)
+
+* Software Engineer at AppFolio since 2020
+ - Software developer experience in industry
+ - AppFolio, Cisco, Google, Sony Mobile
+
+* First time teaching this course
+ - Helped out with some lectures and projects last year
+ - Credit to Bryce Boe et al. for the materials for the class
+ - Took the same class in 2013 (CS290B)
+
+---
+
+# Samridhi Maheshwari
+
+* Currently in my second year of CS Master’s at UCSB
+* I am from Pune, India. I completed my bachelor’s degree in 2019.
+* Took this course last fall quarter (Fall 2021)
+* Previously worked at Uber (Summer 22 Intern) and PhonePe (2019 - 2021)
+* Responsibilities: Assisting Nevena with course structure, grading projects and holding office hours
+
+---
+
+# Course web page and GitHub repo
+
+Website: https://cs291.com/
+
+Website source:
+<https://github.com/scalableinternetservices/ucsb_website/>
+
+Slide source:
+<https://github.com/scalableinternetservices/ucsb_website/tree/main/slides/2022/>
+
+If you notice an issue with or wish to make an improvement to any of the course
+content (e.g., slides, web pages) please edit them and make a pull request.
+
+---
+
+# Questions and Feedback
+
+At any point during this course:
+
+Stop me to:
+
+* ask a question
+* ask for clarification
+* provide an additional example*
+
+Communicate to me:
+
+* how I can help you succeed in this course
+* ideas for making the course more engaging
+* any other feedback you may have
+
+---
+
+# Topics for today
+
+* Course Motivation
+
+* Course Structure
+
+---
+
+class: center inverse middle
+
+# Course Motivation
+
+---
+
+class: center middle
+
+# How do you find a place to rent?
+
+---
+
+# ...How do you find a place to rent?
+
+* [Rent.com](http://www.rent.com/)
+* [Apartment Guide](http://www.apartmentguide.com/)
+* [Rental Houses](http://www.rentalhouses.com/search/Goleta-CA)
+* [Zillow](http://www.zillow.com/homes/for_rent/)
+* [Realtor](http://www.realtor.com/apartments/Goleta_CA)
+* [Trulia](http://www.trulia.com/for_rent/Goleta,CA)
+* [PadMapper](http://www.padmapper.com/)
+* [Craigslist](https://santabarbara.craigslist.org/)
+
+---
+
+class: center middle
+
+# How do you find your way in a new city?
+
+---
+
+# ...How do you find your way in a new city?
+
+* [Google Maps](https://www.google.com/maps)
+* [mapquest](http://www.mapquest.com/maps?city=Goleta&amp;state=CA)
+* [tripadvisor](http://www.tripadvisor.com/LocalMaps-g32438-Goleta-Area.html)
+* [Yelp](http://www.yelp.com/c/goleta-ca-us/restaurants)
+* [Lyft](https://www.lyft.com)
+* [Uber](https://www.uber.com)
+
+---
+
+class: center middle
+
+# How do you find someone to date?
+
+---
+
+# ...How do you find someone to date?
+
+* [Tinder](https://www.tinder.com/)
+* [OkCupid](https://www.okcupid.com/)
+* [Coffee Meets Bagel](https://site.coffeemeetsbagel.com/)
+* [EliteSingles](https://www.elitesingles.com/)
+* [Match](http://www.match.com/)
+* [Bumble](https://bumble.com/)
+* [eHarmony](http://www.eharmony.com/)
+* [Zoosk](https://www.zoosk.com/)
+* [HER](https://weareher.com/)
+* [Grindr](https://www.grindr.com/)
+* [Jdate](https://www.jdate.com/en-us)
+* [Christian Mingle](http://www.christianmingle.com/)
+* [Facebook](https://newsroom.fb.com/news/2019/09/facebook-dating/)
+* and many more!
+
+---
+
+# Internet (or Web) Services
+
+Each of the previous problems can be solved by a variety of Internet services.
+
+Every day billions of people use various Internet services to solve such
+problems.
+
+> What other every day problems are solved by Internet services?
+
+> Do services use other services?
+
+---
+
+class: center inverse middle
+
+# As an Internet service grows in popularity, supporting the increased amount of Internet traffic results in increased complexity of the Internet service
+
+---
+
+class: center middle
+
+![Reddit downs North Korea's web sites](reddit_nk.png)
+
+![Stephen Fry takes down websites with single tweet](stephen_fry_tweet.png)
+
+---
+
+class: center inverse middle
+
+# Complex Services Can Also Fail
+
+---
+
+class: center middle
+
+![Cloudflare November 2, 2020](cloudflare_1120.png)
+
+<https://blog.cloudflare.com/a-byzantine-failure-in-the-real-world/>
+
+---
+
+class: center middle
+
+![Slack May 12, 2020](slack_0520.png)
+
+<https://slack.engineering/a-terrible-horrible-no-good-very-bad-day-at-slack/>
+
+---
+
+class: center middle
+
+![Cloudflare Outage July 2, 2019](cloudflare_0719.png)
+
+<https://twitter.com/cloudflare/status/1146086417971499010>
+
+---
+
+class: center middle
+
+![Facebook Outage March 14, 2019](facebook_0319.png)
+
+<https://twitter.com/facebook/status/1106229690069442560>
+
+---
+
+
+# Internet Services, what's that?
+
+- What are the characteristics of an internet service?
+
+.center[![Question Mark](question_mark.jpg)]
+
+---
+
+# ...Internet Services, what's that?
+
+There are many application-level protocols that are used to build out Internet
+Services.
+
+For this class, Internet services will refer to HTTP-based services.
+
+The interface to your web service may be the web browser (e.g., Chrome,
+Firefox), an API client (via REST, GraphQL, etc), or both.
+
+---
+
+# What about mobile?
+
+- Many native mobile apps are backed by Internet services via an API.
+- Concerns of mobile app/service development
+- In app purchases
+
+![Mobile v. Desktop from 2010 through 2014](mobile_v_desktop.png)
+
+ High Performance Browser networking details issues with mobile users and
+ offers some optimizations designed for them
+ ([HPBN chapters 5 through 8](https://hpbn.co/#toc)). However, these topics
+ won't be covered in this class.
+
+---
+
+# Scalable, what does that mean?
+
+.center[![Question Mark](question_mark.jpg)]
+
+---
+
+# ...Scalable, what does that mean?
+
+An Internet service is scalable if increasing demands can be effectively met
+with increasing capacity.
+
+Demands could be:
+
+* Web traffic quantity (typical association)
+
+* Dataset size
+
+---
+
+# Effectively meet demands: Explanation
+
+* Internet service remains available
+
+* Response time does not excessively degrade
+
+## Think about it
+
+You have a web service designed to run on a single server. What do you do when
+you can no longer effectively meet demand.
+
+__Is your solution scalable?__
+
+---
+
+class: center inverse middle
+
+# Course Structure
+
+---
+
+# First Five Weeks
+
+* The basics (HTTP and HTML)
+
+* HTTP Application Server architectures
+
+* High availability via load balancing
+
+* Client-side and server-side caching
+
+* Content-delivery networks
+
+* Software engineering techniques: _Agile_, _TDD_, _Continuous Integration_
+  (CI), Pair Programming
+
+---
+
+# Later Course Topics
+
+* Relational databases with web applications: concurrency control and query
+  analysis
+
+* Scaling via:
+
+  * Sharding
+
+  * Service-Oriented-Architecture (SOA)
+
+  * Read-followers
+
+* Non-relational data stores (NoSQL)
+
+* Web security: _firewalls_, _https_, _XSS_, _CSRF_
+
+* HTTP 2.0
+
+---
+
+# Course Skills
+
+__This course is fairly demanding, but is one of the most industry-applicable
+courses you can take.__ You will develop the following skills:
+
+* Programming in __Ruby__
+
+* Building web services using the __Rails__ framework
+
+* Working with __Docker__
+
+* Experience with Amazon Web Services (__AWS__): __EC2__, __Elastic
+  Beanstalk__, __Lambda__, __S3__
+
+* Load testing Internet services via __Tsung__, and __ab__
+
+* __Agile__/__Scrum__ software development
+
+* Development using __Git__ with a _feature-branch_ flow via __github__ _pull
+  requests_
+
+---
+
+# This course is _not_
+
+a deep-dive into:
+
+* Cloud Computing
+
+* Distributed Systems
+
+* Networking
+
+* Relational Databases
+
+* Security
+
+But we will touch on all of the above.
+
+---
+
+# Industry Focused
+
+The skills you should develop through this course are the same that I use
+everyday at work.
+
+The projects will all be open source so if you're proud of your team's work
+(you should be) then put a link to the project on your résumé.
+
+Industry related tools you will use:
+
+* Git via Github (project source version control)
+
+* Ruby on Rails (development stack)
+
+* GitHub actions (automated testing)
+---
+
+# What you will do
+
+In this course you will learn and utilize some of the technologies behind
+building large-scale Internet services.
+
+You will test and support to the best of your abilities:
+
+* Exponential growth in the amount of traffic to your web service
+
+* Exponential growth in the dataset your web service relies upon
+
+---
+
+# In Summary
+
+This course won't teach you how to build a web application that obtains
+worldwide attention and usage.
+
+However, this course will teach you how to build a web application __that can
+respond to__ worldwide attention and usage.
+
+---
+
+---
+
+# Why Ruby on Rails?
+
+Ruby is an interpreted language, thus it is not terribly __fast__, nor is very
+__memory efficient__.
+
+However, it is very easily scalable, and for most Internet services, developer
+time ($$$) is going to be much more significant than the efficiency of the
+service.
+
+Building Rails Internet services quickly with zero prior experience makes this
+class possible.
+
+Consistency in frameworks across teams allows us to better support each other.
+
+
+---
+
+# Assignments
+
+Due tomorrow 1pm
+- Piazza
+- Intro survey
+
+Due Monday EoD AoE
+- Project 0
+
+Due next Friday EoD AoE
+- http://rubykoans.com/
