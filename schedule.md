@@ -12,11 +12,11 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 <div class="week">
 
-## Week 0 (September 25)
+## Week 1 (October 2-4)
 
 ### Topics
 
-- Course Introduction ([slides](/slides/2022/01_course_introduction/))
+- Course Introduction
 
 ### Tasks
 
@@ -31,7 +31,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 1 (October 2-4)
+## Week 2 (October 9-11)
 
 ### Topics
 
@@ -53,7 +53,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 2 (October 9-11)
+## Week 3 (October 16-18)
 
 ### Topics
 
@@ -71,7 +71,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 3 (October 16-18)
+## Week 4 (October 23-25)
 
 ### Topics
 
@@ -90,7 +90,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 4 (October 23-25)
+## Week 5 (October 30-November 1)
 
 ### Topics
 
@@ -100,6 +100,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 ### Tasks
 
 - Complete [Project 3](/project3/)
+- Complete Final Project Team Message
 - Read [Kafka](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/09/Kafka.pdf)
 - Begin [Primary Project](/project/)
   - form a team -- merge with two project 3 teams (max 6 people)
@@ -110,22 +111,22 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 5 (October 30-November 1)
+## Week 6 (November 6-8)
 
 ### Topics
 
-- ### Wednesday November 1: Zoom Guest Lecture
+- ### Wednesday November 8: Guest lecture: React Demo
 - Relational Databases and Rails
 - RDBMS Scaling
 
 </div>
 <div class="week">
 
-## Week 6 (November 6-8)
+## Week 7 (November 13-15)
 
 ### Topics
 
-### Wednesday November 8: Guest Lecture
+- ### Wednesday November 15: Zoom Guest Lecture
 
 - Deep Dive: Load Testing with Tsung
 - Deep Dive: React
@@ -138,9 +139,9 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 7 (November 13-15)
+## Week 8 (November 20-22)
 
-- ### Wednesday November 15: Zoom Guest Lecture
+- ### Wednesday November 22: Zoom Guest Lecture
 
 - Non-Relational Data Stores
 
@@ -158,15 +159,18 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 8 (November 20-22)
+## Week 9 (November 27-29)
 
 ### Topics
 
-- ### Wednesday November 22: Guest Lecture
+- ### Wednesday November 29: Zoom Guest Lecture
 - Web Security
 
 ### Tasks
 
+- Send [project report](/project/#report) for feedback before the final submission
+- Read chapter [4](https://hpbn.co/transport-layer-security-tls/) of High
+  Performance Browser Networking
 - (Optional) Read [Dynamo: Amazon’s Highly Available Key-value Store
   ](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf)
 - (Optional) Read [Amazon DynamoDB: A Scalable, Predictably
@@ -176,31 +180,17 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 9 (November 27-29)
-
-### Topics
-
-- ### Wednesday November 29: Guest Lecture
-
-### Tasks
-
-- Read chapter [4](https://hpbn.co/transport-layer-security-tls/) of High
-  Performance Browser Networking
-
-</div>
-<div class="week">
-
 ## Week 10 (December 4-6)
 
 ### Topics
 
-- ### Wednesday December 6: Guest Lecture
+- ### Wednesday December 6: Zoom Guest Lecture
+- Scalable Machine Learning Inference
 
 ### Tasks
 
 - Read chapter [12](https://hpbn.co/http2/) of High Performance Browser Networking
-- Complete the [project presentation video](/project/#video)
-- Send [project report](/project/#report) for feedback before the final submission
+- Complete the [project report](/project/#report)
 
 </div>
 <div class="week">
@@ -209,7 +199,6 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Tasks
 
-- Final Project Presentations on Tuesday December 6th
-- Complete the [project report](/project/#report)
+- Complete the [project presentation video](/project/#video)
 
 </div>
