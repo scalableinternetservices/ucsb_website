@@ -33,23 +33,23 @@ Tuesday, September 26 1pm PT
 
 ### [Project 0](/project0/) due before
 
-Friday, September 29 1pm PT
+Friday, October 6 1pm PT
 
 ### [Project 1](/project1/) due before
 
-Friday, October 6 1pm PT
+Friday, October 13 1pm PT
 
 ### [Project 2](/project2/) due before
 
-Friday, October 13 1pm PT
+Friday, October 20 1pm PT
 
 ### Project 3 Pairing Message due before
 
-Friday, October 20 1pm PT
+Friday, October 27 1pm PT
 
 ### Final Project Team Message due before
 
-Friday, October 27 1pm PT
+Friday, November 3 1pm PT
 
 ### [Project 3](/project3/) due before
 
@@ -57,15 +57,15 @@ Friday, November 3 1pm PT
 
 ### [Project](/project/#report) report draft for feedback due before
 
-Friday, December 1 1pm PT
-
-### [Project](/project/#video) video due before
-
-Friday, December 8 1pm PT
+Monday, November 27 1pm PT
 
 ### [Project](/project/#report) report due before
 
-Friday, December 8 1pm PT
+Monday, December 4 1pm PT
+
+### [Project](/project/#video) video due before
+
+Monday, December 11 1pm PT
 
 ## Class Resources
 
