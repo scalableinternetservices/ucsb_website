@@ -8,6 +8,11 @@
 - [{{site.instructor}}]({{site.instructor_url}})
 - <{{site.instructor_email}}>
 
+## TA
+
+- Shubham Talbar
+- <shubham_talbar@ucsb.edu>
+
 ## AppFolio Backup
 
 - [Dr. Nevena Golubovic](https://www.linkedin.com/in/nevenagolubovic/)
@@ -23,9 +28,14 @@ Please use [Piazza]({{site.piazza_url}}) for class-related correspondance.
 - 11:00am -- 12:15pm PT
 - Phelps 2510
 
+### Office Hours
+
+- In-person: Wednesday 10:00am -- 11:00am, Phelps 2510
+- Virtual: Thursday 2:00pm -- 3:00pm, link in [Piazza]({{site.piazza_url}})
+
 ### Initial tasks due before
 
-Tuesday, September 26 1pm PT
+Friday, October 6 2pm PT
 
 - Complete the [introduction survey]({{site.intro_survey}})
 - Join the class on [Piazza]({{site.piazza_url}})
@@ -33,39 +43,39 @@ Tuesday, September 26 1pm PT
 
 ### [Project 0](/project0/) due before
 
-Friday, October 6 1pm PT
+Monday, October 9 2pm PT
 
 ### [Project 1](/project1/) due before
 
-Friday, October 13 1pm PT
+Monday, October 16 2pm PT
 
 ### [Project 2](/project2/) due before
 
-Friday, October 20 1pm PT
+Monday, October 23 2pm PT
 
 ### Project 3 Pairing Message due before
 
-Friday, October 27 1pm PT
+Monday, October 30 2pm PT
 
 ### Final Project Team Message due before
 
-Friday, November 3 1pm PT
+Monday, November 6 2pm PT
 
 ### [Project 3](/project3/) due before
 
-Friday, November 3 1pm PT
+Monday, November 6 2pm PT
 
 ### [Project](/project/#report) report draft for feedback due before
 
-Monday, November 27 1pm PT
+Monday, November 27 2pm PT
 
 ### [Project](/project/#report) report due before
 
-Monday, December 4 1pm PT
+Monday, December 4 2pm PT
 
 ### [Project](/project/#video) video due before
 
-Monday, December 11 1pm PT
+Monday, December 11 2pm PT
 
 ## Class Resources
 
