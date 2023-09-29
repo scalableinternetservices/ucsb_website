@@ -16,7 +16,8 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- Course Introduction
+- Course Introduction ([slides](/slides/2023/01_course_introduction))
+- Hypertext Transfer Protocol (HTTP) ([slides](/slides/2023/02_http))
 
 ### Tasks
 
@@ -35,7 +36,6 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- Hypertext Transfer Protocol (HTTP)
 - HTTP Servers
 - Application Servers
 
