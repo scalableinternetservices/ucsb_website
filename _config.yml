@@ -18,6 +18,7 @@ piazza_url: https://piazza.com/class/lllfmvbxvh83oq
 
 intro_survey: https://forms.gle/93PrP7Td5tmvAqAFA
 project0_submission: https://forms.gle/vzB1UtGre5Psg5pr8
+project1_submission: https://forms.gle/GEj7s15jfG6xERjc8
 
 kramdown:
   parse_block_html: true

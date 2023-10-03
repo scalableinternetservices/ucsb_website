@@ -8,7 +8,12 @@
 - [{{site.instructor}}]({{site.instructor_url}})
 - <{{site.instructor_email}}>
 
-## TA
+## UCSB TA
+
+- Bhavye Jain
+- <bhavyejain@ucsb.edu>
+
+## Appfolio TA
 
 - Shubham Talbar
 - <shubham_talbar@ucsb.edu>
@@ -30,8 +35,15 @@ Please use [Piazza]({{site.piazza_url}}) for class-related correspondance.
 
 ### Office Hours
 
-- In-person: Wednesday 10:00am -- 11:00am, Phelps 2510
-- Virtual: Thursday 2:00pm -- 3:00pm, link in [Piazza]({{site.piazza_url}})
+In-person
+
+- Wednesday 10 -- 11am, Phelps 2510
+- Thursday 3 -- 4pm, Phelps 2510
+
+Virtual
+
+- Thursday 2 -- 3pm, link in [Piazza]({{site.piazza_url}})
+- Friday 1 -- 2pm, link in [Piazza]({{site.piazza_url}})
 
 ### Initial tasks due before
 
