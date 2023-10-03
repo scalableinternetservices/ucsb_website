@@ -8,7 +8,12 @@
 - [{{site.instructor}}]({{site.instructor_url}})
 - <{{site.instructor_email}}>
 
-## TA
+## UCSB TA
+
+- Bhavye Jain
+- <bhavyejain@ucsb.edu>
+
+## Appfolio TA
 
 - Shubham Talbar
 - <shubham_talbar@ucsb.edu>
