@@ -135,9 +135,8 @@ these components break down into:
 | :------ | ---------------------------------------------: |
 | 50      | iterative approach to load testing and scaling |
 | 20      |                         web service complexity |
-| 10      |                      quality of project report |
-| 10      |                       quality of project video |
-| 10      |       quality of project presentation in class |
+| 15      |                      quality of project report |
+| 15      |                       quality of project video |
 
 {: class="table table-striped"}
 
