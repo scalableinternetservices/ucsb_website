@@ -181,8 +181,14 @@ def score(url):
     if response.status_code != 200:
         print(f"URL responded with non 200 status: {response.status_code}")
         return failures + 1  # Cannot continue
-    content = response.content.decode("utf-8")
-
+    
+    try:
+        content = response.content.decode("utf-8")
+    except:
+        print("URL could not be decoded with utf-8 format")
+        print("Attempting to decode with utf-16 format")
+        content = response.content.decode("utf-16")
+    
     if response.history:
         print("URL redirected more than 0 times:")
         for history in response.history:
