@@ -36,8 +36,8 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- HTTP Servers
-- Application Servers
+- HTTP Servers ([slides](/slides/2023/03_http_servers))
+- Application Servers ([slides](/slides/2023/04_application_servers))
 
 ### Tasks
 
@@ -59,7 +59,6 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 - Scaling Web Applications
 - Architecting for High Availability
-- Frontend Deep Dive: React
 - Read [SEDA: An architecture for well-conditioned, scalable internet services](http://nms.lcs.mit.edu/~kandula/projects/killbots/killbots_files/seda-sosp01.pdf) by M Welsh, D Culler, E Brewer
 - Read [A Retrospective on SEDA](https://matt-welsh.blogspot.com/2010/07/retrospective-on-seda.html)
 
@@ -81,6 +80,7 @@ The following schedule is subject to change, and many slide links are not yet ac
   - Continuous Integration (CI)
   - Pair Programming / Mobbing
 - Client-side Caching & Content Delivery Networks
+- Frontend Deep Dive: React
 - Deep Dive: Ruby on Rails
 
 ### Tasks
