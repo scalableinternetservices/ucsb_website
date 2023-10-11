@@ -36,8 +36,8 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- HTTP Servers
-- Application Servers
+- HTTP Servers ([slides](/slides/2023/03_http_servers))
+- Application Servers ([slides](/slides/2023/04_application_servers))
 
 ### Tasks
 
