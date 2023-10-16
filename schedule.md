@@ -57,7 +57,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- Scaling Web Applications
+- Scaling Web Applications ([slides](/slides/2023/05_scaling_web_applications))
 - Architecting for High Availability
 - Read [SEDA: An architecture for well-conditioned, scalable internet services](http://nms.lcs.mit.edu/~kandula/projects/killbots/killbots_files/seda-sosp01.pdf) by M Welsh, D Culler, E Brewer
 - Read [A Retrospective on SEDA](https://matt-welsh.blogspot.com/2010/07/retrospective-on-seda.html)
@@ -115,7 +115,6 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- ### Wednesday November 8: Guest lecture: React Demo
 - Relational Databases and Rails
 - RDBMS Scaling
 
@@ -126,7 +125,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- ### Wednesday November 15: Zoom Guest Lecture
+- ## Wednesday November 15: Zoom Guest Lecture
 
 - Deep Dive: Load Testing with Tsung
 - Deep Dive: React
@@ -141,7 +140,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ## Week 8 (November 20-22)
 
-- ### Wednesday November 22: Zoom Guest Lecture
+- ## Wednesday November 22: Zoom Guest Lecture
 
 - Non-Relational Data Stores
 
@@ -163,7 +162,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- ### Wednesday November 29: Zoom Guest Lecture
+- ## Wednesday November 29: Zoom Guest Lecture
 - Web Security
 
 ### Tasks
@@ -184,7 +183,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- ### Wednesday December 6: Zoom Guest Lecture
+- ## Wednesday December 6: Zoom Guest Lecture
 - Scalable Machine Learning Inference
 
 ### Tasks
