@@ -84,6 +84,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Tasks
 
+- (Optional) Find a teammate for [Project 3](/project3/)
 - Make progress on [Project 3](/project3/)
 
 </div>
@@ -93,6 +94,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
+- Frontend Deep Dive: React
 - Server-Side Caching
 - Relational Databases
 
@@ -114,7 +116,6 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- Frontend Deep Dive: React
 - Relational Databases and Rails
 - RDBMS Scaling
 
