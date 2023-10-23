@@ -80,7 +80,6 @@ The following schedule is subject to change, and many slide links are not yet ac
   - Continuous Integration (CI)
   - Pair Programming / Mobbing
 - Client-side Caching & Content Delivery Networks
-- Deep Dive: Ruby on Rails
 
 ### Tasks
 
