@@ -63,7 +63,7 @@ Monday, October 16 2pm PT
 
 ### [Project 2](/project2/) due before
 
-Monday, October 23 2pm PT
+Tuesday, October 24 2pm PT
 
 ### Project 3 Pairing Message due before
 
