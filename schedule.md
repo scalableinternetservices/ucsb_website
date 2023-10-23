@@ -93,7 +93,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- Frontend Deep Dive: React
+- #### Monday: Frontend React Deep Dive by David Acevedo
 - Server-Side Caching
 - Relational Databases
 
@@ -125,7 +125,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- ## Wednesday November 15: Zoom Guest Lecture
+- #### Wednesday November 15: Zoom Guest Lecture
 
 - Deep Dive: Load Testing with Tsung
 - Deep Dive: React
@@ -140,7 +140,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ## Week 8 (November 20-22)
 
-- ## Wednesday November 22: Zoom Guest Lecture
+- #### Wednesday November 22: Zoom Guest Lecture
 
 - Non-Relational Data Stores
 
@@ -162,7 +162,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- ## Wednesday November 29: Zoom Guest Lecture
+- #### Wednesday November 29: Zoom Guest Lecture
 - Web Security
 
 ### Tasks
@@ -183,7 +183,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- ## Wednesday December 6: Zoom Guest Lecture
+- #### Wednesday December 6: Zoom Guest Lecture
 - Scalable Machine Learning Inference
 
 ### Tasks
