@@ -74,13 +74,12 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- Working in teams
+- Working in teams ([slides](/slides/2023/07_agile_tdd_pairing))
   - Agile Software Development
   - Test Driven Development (TDD)
   - Continuous Integration (CI)
   - Pair Programming / Mobbing
 - Client-side Caching & Content Delivery Networks
-- Frontend Deep Dive: React
 - Deep Dive: Ruby on Rails
 
 ### Tasks
@@ -115,6 +114,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
+- Frontend Deep Dive: React
 - Relational Databases and Rails
 - RDBMS Scaling
 
