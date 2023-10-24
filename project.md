@@ -22,6 +22,10 @@ fundamental web technologies and the Ruby on Rails framework.
 
 Throughout the project, you might find it helpful to go through a ruby on rails tutorial. The Ruby on Rails Tutorial (see sidebar) is an amazing resource. Rail's own tutorial is quite good as well: [Getting Started with Rails](https://guides.rubyonrails.org/getting_started.html)
 
+## Submissions
+
+[Team message]({{site.primary_project_team_message}})
+
 ## Deliverables
 
 ### Report
@@ -55,7 +59,6 @@ At the end of each sprint you will:
 - Demo your deployed version and share the newly created features.
 - Share any new load testing results.
 
-
 #### Sprint 1: Week 6
 
 - Form your team.
@@ -77,14 +80,14 @@ At the end of each sprint you will:
 #### Sprints 3,4,5: Weeks 8,9,10
 
 - Iterate between load testing, finding the bottlenecks, and addressing them
-with techniques we discuss in the class
+  with techniques we discuss in the class
 
 #### Sprint 5: Week 10+
 
 - Complete the [project report](#report)
 - Create [project presentation video](#video)
 - Deliver the final presentation on Dec. 6th during class
-- Plan for 12min presentation and 3min Q&A 
+- Plan for 12min presentation and 3min Q&A
 
 ---
 
@@ -94,7 +97,6 @@ Assuming you have docker installed locally, follow the steps below to create a
 new rails project using docker.
 
 ### Prepare the project directory
-
 
 ```sh
 mkdir TEAMNAME
@@ -140,7 +142,7 @@ services:
       - "3000:3000"
     volumes:
       - .:/app:delegated
-version: '3'
+version: "3"
 ```
 
 Initialize your git repository and make an initial commit:
@@ -189,9 +191,9 @@ docker-compose build web
 Add the following to lines to the `default` section of `config/database.yml`:
 
 ```yaml
-  host: <%= ENV.fetch("PGHOST") { "db" } %>
-  password: postgres
-  username: postgres
+host: <%= ENV.fetch("PGHOST") { "db" } %>
+password: postgres
+username: postgres
 ```
 
 Make a commit:
@@ -299,9 +301,9 @@ name: Ruby
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test:
@@ -314,25 +316,25 @@ jobs:
         ports:
           - 5432:5432
     steps:
-    - uses: actions/checkout@v2
-    - name: Install PostgreSQL client
-      run: sudo apt-get -yqq install libpq-dev
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        bundler-cache: true
-    - name: Set up yarn
-      run: |
-        yarn install --pure-lockfile
-    - name: Prepare database
-      env:
-        PGHOST: localhost
-        RAILS_ENV: test
-      run: bin/rails db:setup
-    - name: Run tests
-      env:
-        PGHOST: localhost
-      run: bin/rails test
+      - uses: actions/checkout@v2
+      - name: Install PostgreSQL client
+        run: sudo apt-get -yqq install libpq-dev
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Set up yarn
+        run: |
+          yarn install --pure-lockfile
+      - name: Prepare database
+        env:
+          PGHOST: localhost
+          RAILS_ENV: test
+        run: bin/rails db:setup
+      - name: Run tests
+        env:
+          PGHOST: localhost
+        run: bin/rails test
 ```
 
 Add, commit, and push these changes:
@@ -381,11 +383,11 @@ Beanstalk, and then deploy it.
 Update the lines in the `production` section of `config/database.yml` to include:
 
 ```yaml
-  database: <%= ENV['RDS_DB_NAME'] %>
-  host: <%= ENV['RDS_HOSTNAME'] %>
-  password: <%= ENV['RDS_PASSWORD'] %>
-  port: <%= ENV['RDS_PORT'] %>
-  username: <%= ENV['RDS_USERNAME'] %>
+database: <%= ENV['RDS_DB_NAME'] %>
+host: <%= ENV['RDS_HOSTNAME'] %>
+password: <%= ENV['RDS_PASSWORD'] %>
+port: <%= ENV['RDS_PORT'] %>
+username: <%= ENV['RDS_USERNAME'] %>
 ```
 
 ### Add ebextensions to install nodejs and yarn on each application server instance:
@@ -466,7 +468,7 @@ Then upload the key pair with read-only permissions to GitHub.
 For more info see [Adding a new SSH key to your GitHub account
 ](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
 
-After uploading your public key to GitHub, clone your repository using SSH 
+After uploading your public key to GitHub, clone your repository using SSH
 (this will be a read-only version of the project):
 
 ```sh
@@ -537,7 +539,7 @@ GitHub, pull them on `ec2.cs291.com` and then update your deployment via:
 eb deploy
 ```
 
-__Note__: Only commited changes are pushed on deployment, so ensure `git
+**Note**: Only commited changes are pushed on deployment, so ensure `git
 status` is clean. (You can run `eb deploy --staged` to include staged files,
 but it's preferrable to deploy code that has been pushed to GitHub.
 
@@ -563,12 +565,11 @@ eb ssh -i "ssh -i ~/$(whoami).pem"
 
 When you know you're done, clean up your deployment:
 
-
 ```
 eb terminate
 ```
 
-__Note__: Deployments will automatically be cleaned up ~110 minutes after their
+**Note**: Deployments will automatically be cleaned up ~110 minutes after their
 last update.
 
 ---
@@ -599,18 +600,17 @@ Initial user stories:
 0. As an unauthenticated user I can make a post so that I can share whatever
    cool things I want.
 
-0. As an unauthenticated user I can view all the posts on the front page in
+1. As an unauthenticated user I can view all the posts on the front page in
    descending order so that I can see what new things people are sharing.
 
-0. As an unauthenticated user, I can comment on a post so that I can add
+2. As an unauthenticated user, I can comment on a post so that I can add
    updates to existing content.
 
-0. As an authenticated user, my front page shows only posts made on my profile
+3. As an authenticated user, my front page shows only posts made on my profile
    so that I can see content specific to me.
 
-0. As as authenticated user, my posts and comments are attributable to me so
+4. As as authenticated user, my posts and comments are attributable to me so
    that others know what I've shared.
-
 
 ### An Online Store
 
@@ -626,18 +626,17 @@ Initial user stories:
 0. As an unauthenticated user I can list my item on the store so that I can
    sell my products.
 
-0. As an unauthenticated user I can purchase an item from the store so that I
+1. As an unauthenticated user I can purchase an item from the store so that I
    can obtain the things I desire.
 
-0. As an unauthenticated user I can view all the purchase histories so that I
+2. As an unauthenticated user I can view all the purchase histories so that I
    can see what others have bought.
 
-0. As an unauthenticated user, I can rate an item that has been purchased so
+3. As an unauthenticated user, I can rate an item that has been purchased so
    that I can share my opinions of the item with others.
 
-0. As an authenticated user, only I can see my own orders in my order history
+4. As an authenticated user, only I can see my own orders in my order history
    because I don't want others to see what I've purchased.
-
 
 ### An Event Sharing Service
 
@@ -651,19 +650,16 @@ Minimum necessary models:
 
 Initial user stories:
 
-
 0. As an unauthenticated user, I can create an event so that I can share with
    others the details of the event I am hosting.
 
-0. As an unauthenticated user, I can comment on an event to share my enthusiasm
+1. As an unauthenticated user, I can comment on an event to share my enthusiasm
    for said event.
 
-0. As an authenticated user, I can RSVP yes/no to events that I do [not] intend
+2. As an authenticated user, I can RSVP yes/no to events that I do [not] intend
    to attend so that the host can better estimate how many people will show up.
 
-0. As an authenticated user, I can see the list of events that I have
+3. As an authenticated user, I can see the list of events that I have
    previously attended so that I can recall my fond memories.
 
-0. As an event host, I can proactively invite users to my event, so that I can help spread the word.
-
-
+4. As an event host, I can proactively invite users to my event, so that I can help spread the word.
