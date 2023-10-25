@@ -196,6 +196,10 @@ fundamental web technologies and the Ruby on Rails framework.</p>
 
 <p>Throughout the project, you might find it helpful to go through a ruby on rails tutorial. The Ruby on Rails Tutorial (see sidebar) is an amazing resource. Rail’s own tutorial is quite good as well: <a href="https://guides.rubyonrails.org/getting_started.html">Getting Started with Rails</a></p>
 
+<h2 id="submissions">Submissions</h2>
+
+<p><a href="https://forms.gle/Ye3tfx2AYE6KDnFm9">Team message</a></p>
+
 <h2 id="deliverables">Deliverables</h2>
 
 <h3 id="report">Report</h3>
@@ -332,7 +336,7 @@ new rails project using docker.</p>
       <span class="pi">-</span> <span class="s2">"</span><span class="s">3000:3000"</span>
     <span class="na">volumes</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s">.:/app:delegated</span>
-<span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3'</span>
+<span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3"</span>
 </code></pre></div></div>
 
 <p>Initialize your git repository and make an initial commit:</p>
@@ -374,9 +378,9 @@ git commit <span class="nt">-m</span> <span class="s2">"Run 'docker-compose run 
 
 <p>Add the following to lines to the <code class="language-plaintext highlighter-rouge">default</code> section of <code class="language-plaintext highlighter-rouge">config/database.yml</code>:</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">host</span><span class="pi">:</span> <span class="s">&lt;%= ENV.fetch("PGHOST") { "db" } %&gt;</span>
-  <span class="na">password</span><span class="pi">:</span> <span class="s">postgres</span>
-  <span class="na">username</span><span class="pi">:</span> <span class="s">postgres</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">host</span><span class="pi">:</span> <span class="s">&lt;%= ENV.fetch("PGHOST") { "db" } %&gt;</span>
+<span class="na">password</span><span class="pi">:</span> <span class="s">postgres</span>
+<span class="na">username</span><span class="pi">:</span> <span class="s">postgres</span>
 </code></pre></div></div>
 
 <p>Make a commit:</p>
@@ -471,9 +475,9 @@ git push <span class="nt">-u</span> origin HEAD
 
 <span class="na">on</span><span class="pi">:</span>
   <span class="na">push</span><span class="pi">:</span>
-    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span> <span class="nv">main</span> <span class="pi">]</span>
+    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">main</span><span class="pi">]</span>
   <span class="na">pull_request</span><span class="pi">:</span>
-    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span> <span class="nv">main</span> <span class="pi">]</span>
+    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">main</span><span class="pi">]</span>
 
 <span class="na">jobs</span><span class="pi">:</span>
   <span class="na">test</span><span class="pi">:</span>
@@ -486,25 +490,25 @@ git push <span class="nt">-u</span> origin HEAD
         <span class="na">ports</span><span class="pi">:</span>
           <span class="pi">-</span> <span class="s">5432:5432</span>
     <span class="na">steps</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
-    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install PostgreSQL client</span>
-      <span class="na">run</span><span class="pi">:</span> <span class="s">sudo apt-get -yqq install libpq-dev</span>
-    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up Ruby</span>
-      <span class="na">uses</span><span class="pi">:</span> <span class="s">ruby/setup-ruby@v1</span>
-      <span class="na">with</span><span class="pi">:</span>
-        <span class="na">bundler-cache</span><span class="pi">:</span> <span class="kc">true</span>
-    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up yarn</span>
-      <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-        <span class="s">yarn install --pure-lockfile</span>
-    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Prepare database</span>
-      <span class="na">env</span><span class="pi">:</span>
-        <span class="na">PGHOST</span><span class="pi">:</span> <span class="s">localhost</span>
-        <span class="na">RAILS_ENV</span><span class="pi">:</span> <span class="s">test</span>
-      <span class="na">run</span><span class="pi">:</span> <span class="s">bin/rails db:setup</span>
-    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Run tests</span>
-      <span class="na">env</span><span class="pi">:</span>
-        <span class="na">PGHOST</span><span class="pi">:</span> <span class="s">localhost</span>
-      <span class="na">run</span><span class="pi">:</span> <span class="s">bin/rails test</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install PostgreSQL client</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">sudo apt-get -yqq install libpq-dev</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up Ruby</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">ruby/setup-ruby@v1</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">bundler-cache</span><span class="pi">:</span> <span class="kc">true</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up yarn</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">yarn install --pure-lockfile</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Prepare database</span>
+        <span class="na">env</span><span class="pi">:</span>
+          <span class="na">PGHOST</span><span class="pi">:</span> <span class="s">localhost</span>
+          <span class="na">RAILS_ENV</span><span class="pi">:</span> <span class="s">test</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">bin/rails db:setup</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Run tests</span>
+        <span class="na">env</span><span class="pi">:</span>
+          <span class="na">PGHOST</span><span class="pi">:</span> <span class="s">localhost</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">bin/rails test</span>
 </code></pre></div></div>
 
 <p>Add, commit, and push these changes:</p>
@@ -548,11 +552,11 @@ Beanstalk, and then deploy it.</p>
 
 <p>Update the lines in the <code class="language-plaintext highlighter-rouge">production</code> section of <code class="language-plaintext highlighter-rouge">config/database.yml</code> to include:</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">database</span><span class="pi">:</span> <span class="s">&lt;%= ENV['RDS_DB_NAME'] %&gt;</span>
-  <span class="na">host</span><span class="pi">:</span> <span class="s">&lt;%= ENV['RDS_HOSTNAME'] %&gt;</span>
-  <span class="na">password</span><span class="pi">:</span> <span class="s">&lt;%= ENV['RDS_PASSWORD'] %&gt;</span>
-  <span class="na">port</span><span class="pi">:</span> <span class="s">&lt;%= ENV['RDS_PORT'] %&gt;</span>
-  <span class="na">username</span><span class="pi">:</span> <span class="s">&lt;%= ENV['RDS_USERNAME'] %&gt;</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">database</span><span class="pi">:</span> <span class="s">&lt;%= ENV['RDS_DB_NAME'] %&gt;</span>
+<span class="na">host</span><span class="pi">:</span> <span class="s">&lt;%= ENV['RDS_HOSTNAME'] %&gt;</span>
+<span class="na">password</span><span class="pi">:</span> <span class="s">&lt;%= ENV['RDS_PASSWORD'] %&gt;</span>
+<span class="na">port</span><span class="pi">:</span> <span class="s">&lt;%= ENV['RDS_PORT'] %&gt;</span>
+<span class="na">username</span><span class="pi">:</span> <span class="s">&lt;%= ENV['RDS_USERNAME'] %&gt;</span>
 </code></pre></div></div>
 
 <h3 id="add-ebextensions-to-install-nodejs-and-yarn-on-each-application-server-instance">Add ebextensions to install nodejs and yarn on each application server instance:</h3>
@@ -625,7 +629,7 @@ Generate the key pair:</p>
 <p>For more info see <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account">Adding a new SSH key to your GitHub account
 </a></p>
 
-<p>After uploading your public key to GitHub, clone your repository using SSH 
+<p>After uploading your public key to GitHub, clone your repository using SSH
 (this will be a read-only version of the project):</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git@github.com:scalableinternetservices/TEAMNAME.git
@@ -842,7 +846,6 @@ previously attended so that I can recall my fond memories.</p>
     <p>As an event host, I can proactively invite users to my event, so that I can help spread the word.</p>
   </li>
 </ol>
-
 
     </div>
   </div>
