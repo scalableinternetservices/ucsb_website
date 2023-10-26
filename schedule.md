@@ -79,7 +79,6 @@ The following schedule is subject to change, and many slide links are not yet ac
   - Test Driven Development (TDD)
   - Continuous Integration (CI)
   - Pair Programming / Mobbing
-- Client-side Caching & Content Delivery Networks
 
 ### Tasks
 
@@ -94,6 +93,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 ### Topics
 
 - #### Monday: Frontend React Deep Dive by David Acevedo
+- Client-side Caching & Content Delivery Networks ([slides](/slides/2023/08_client_caching_cdn))
 - Server-Side Caching
 - Relational Databases
 
@@ -128,7 +128,6 @@ The following schedule is subject to change, and many slide links are not yet ac
 - #### Wednesday November 15: Zoom Guest Lecture
 
 - Deep Dive: Load Testing with Tsung
-- Deep Dive: React
 
 ### Tasks
 
