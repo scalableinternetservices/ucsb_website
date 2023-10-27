@@ -18,11 +18,6 @@
 - Shubham Talbar
 - <shubham_talbar@ucsb.edu>
 
-## AppFolio Backup
-
-- [Dr. Nevena Golubovic](https://www.linkedin.com/in/nevenagolubovic/)
-- <nevena.golubovic@appfolio.com>
-
 Please use [Piazza]({{site.piazza_url}}) for class-related correspondance.
 
 ## Dates
@@ -30,7 +25,7 @@ Please use [Piazza]({{site.piazza_url}}) for class-related correspondance.
 ### Classes
 
 - Monday and Wednesday
-- 11:00am -- 12:15pm PT
+- 11:00am -- 12:50pm PT
 - Phelps 2510
 
 ### Office Hours
@@ -77,9 +72,17 @@ Monday, November 6 2pm PT
 
 Monday, November 6 2pm PT
 
+### [Project](/project/#proposal) initial peer score message due before
+
+Monday, November 13 2pm PT
+
 ### [Project](/project/#report) report draft for feedback due before
 
 Monday, November 27 2pm PT
+
+### [Project](/project/#proposal) final peer score message due before
+
+Monday, December 4 2pm PT
 
 ### [Project](/project/#report) report due before
 
