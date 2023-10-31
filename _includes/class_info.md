@@ -60,7 +60,7 @@ Monday, October 16 2pm PT
 
 Tuesday, October 24 2pm PT
 
-### Project 3 Pairing Message due before
+### [Project 3](/project3/) Pairing Message due before
 
 Monday, October 30 2pm PT
 
