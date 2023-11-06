@@ -95,7 +95,6 @@ The following schedule is subject to change, and many slide links are not yet ac
 - #### Monday: Frontend React Deep Dive by David Acevedo
 - Client-side Caching & Content Delivery Networks ([slides](/slides/2023/08_client_caching_cdn))
 - Server-Side Caching [slides](/slides/2023/09_server_caching))
-- Relational Databases
 
 ### Tasks
 
@@ -115,6 +114,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
+- Relational Databases [slides](/slides/2023/11_relational_databases))
 - Relational Databases and Rails
 - RDBMS Scaling
 
