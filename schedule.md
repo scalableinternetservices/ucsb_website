@@ -94,7 +94,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 - #### Monday: Frontend React Deep Dive by David Acevedo
 - Client-side Caching & Content Delivery Networks ([slides](/slides/2023/08_client_caching_cdn))
-- Server-Side Caching [slides](/slides/2023/09_server_caching))
+- Server-Side Caching ([slides](/slides/2023/09_server_caching))
 
 ### Tasks
 
@@ -114,9 +114,9 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- Relational Databases [slides](/slides/2023/11_relational_databases))
-- Relational Databases and Rails
-- RDBMS Scaling
+- Relational Databases ([slides](/slides/2023/11_relational_databases))
+- Relational Databases and Rails ([slides](/slides/2023/11_relational_databases))
+- RDBMS Scaling ([slides](/slides/2023/12_rdbms_scaling))
 
 </div>
 <div class="week">
@@ -127,7 +127,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 - #### Wednesday November 15: Zoom Guest Lecture
 
-- Deep Dive: Load Testing with Tsung
+- Deep Dive: Load Testing with Tsung ([slides](/slides/2023/10_tsung))
 
 ### Tasks
 
@@ -141,7 +141,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 - #### Wednesday November 22: Zoom Guest Lecture
 
-- Non-Relational Data Stores
+- Non-Relational Data Stores ([slides](/slides/2023/13_nosql))
 
 ### Tasks
 
@@ -162,7 +162,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 ### Topics
 
 - #### Wednesday November 29: Zoom Guest Lecture
-- Web Security
+- Web Security ([slides](/slides/2023/14_web_security))
 
 ### Tasks
 
