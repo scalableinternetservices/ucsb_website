@@ -74,7 +74,7 @@ Monday, November 6 2pm PT
 
 ### [Project](/project/#proposal) initial peer score message due before
 
-Monday, November 13 2pm PT
+Monday, November 20 2pm PT
 
 ### [Project](/project/#report) report draft for feedback due before
 
