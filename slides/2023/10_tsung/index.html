@@ -115,6 +115,18 @@ Create an instance:
 /bin/launch_tsung.sh
 ```
 
+To fix security group names, replace
+
+```bash
+--security-groups='["tsung"]' \
+```
+
+by
+
+```bash
+--security-groups allow_http allow_ssh outbound_http outbound_tls \
+```
+
 You can manually run the script commands in case you want to update any params.
 
 ```bash
@@ -177,7 +189,7 @@ command will synchronize the Tsung result files from all runs to your
 ec2.cs291.com account:
 
 ```sh
-rsync -auvL ec2-user@54.166.5.220:tsung_logs .
+rsync -auvLe 'ssh -i demo.pem' ec2-user@54.166.5.220:tsung_logs .
 ```
 
 Running that command a second time will only fetch any new files (assuming you
@@ -461,7 +473,7 @@ are certain they are due to exceeding the load on your web server's stack.
 ## Reminder: Fetch your Tsung data as soon as it is available
 
 ```bash
-rsync -auvL ec2-user@54.166.5.220:tsung_logs .
+rsync -auvLe 'ssh -i demo.pem' ec2-user@54.166.5.220:tsung_logs .
 ```
 
 ## Use tsplot to compare separate runs:
