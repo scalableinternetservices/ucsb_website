@@ -74,19 +74,19 @@ Monday, November 6 2pm PT
 
 ### [Project](/project/#proposal) initial peer score message due before
 
-Monday, November 20 2pm PT
+Monday, November 27 2pm PT
 
 ### [Project](/project/#report) report draft for feedback due before
 
-Monday, November 27 2pm PT
+Monday, December 4 2pm PT
 
 ### [Project](/project/#proposal) final peer score message due before
 
-Monday, December 4 2pm PT
+Monday, December 11 2pm PT
 
 ### [Project](/project/#report) report due before
 
-Monday, December 4 2pm PT
+Monday, December 11 2pm PT
 
 ### [Project](/project/#video) video due before
 
