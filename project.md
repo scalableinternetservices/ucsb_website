@@ -26,6 +26,8 @@ Throughout the project, you might find it helpful to go through a ruby on rails 
 
 [Team message]({{site.primary_project_team_message}})
 
+[initial_peer_review]({{site.initial_peer_review}})
+
 ## Deliverables
 
 ### Report
