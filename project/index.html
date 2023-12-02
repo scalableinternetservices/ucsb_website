@@ -296,34 +296,61 @@ with techniques we discuss in the class</li>
 <p>Assuming you have docker installed locally, follow the steps below to create a
 new rails project using docker.</p>
 
-<h3 id="prepare-the-project-directory">Prepare the project directory</h3>
+<h3 id="create-the-rails-project">Create the rails project</h3>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>TEAMNAME
 <span class="nb">cd </span>TEAMNAME
-<span class="nb">touch </span>Dockerfile Gemfile Gemfile.lock docker-compose.yml
 </code></pre></div></div>
 
-<p>Copy the following contents into <code class="language-plaintext highlighter-rouge">Dockerfile</code>:</p>
+<p>Assuming you have rails &gt;=7.1.2 installed on your system:</p>
 
-<div class="language-docker highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ruby:3.0</span>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rails new <span class="nb">.</span> <span class="nt">--force</span> <span class="nt">--database</span><span class="o">=</span>postgresql <span class="nt">--skip-action-cable</span> <span class="nt">--skip-turbolinks</span> <span class="nt">--skip-jbuilder</span> <span class="nt">--skip-system-test</span>
+</code></pre></div></div>
 
-<span class="k">RUN </span>curl <span class="nt">-fsSL</span> https://deb.nodesource.com/setup_16.x | bash -
-<span class="k">RUN </span>curl <span class="nt">-sS</span> https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add <span class="se">\
-</span>  <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">"deb https://dl.yarnpkg.com/debian/ stable main"</span> <span class="o">&gt;</span> /etc/apt/sources.list.d/yarn.list <span class="se">\
-</span>  <span class="o">&amp;&amp;</span> apt-get update <span class="o">&amp;&amp;</span> apt-get <span class="nb">install</span> <span class="nt">-y</span> nodejs yarn <span class="nt">--no-install-recommends</span> <span class="se">\
-</span>  <span class="o">&amp;&amp;</span> gem <span class="nb">install </span>rails
+<p>This should generate a Dockerfile, Gemfile and Gemfile.lock in addition to a standard rails project.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">touch </span>docker-compose.yml
+</code></pre></div></div>
+
+<p>Now you should have the Dockerfile, docker-compose.yml, Gemfile and Gemfile.lock files at the root of your project. (You can tough the files if they were not created automatically)</p>
+
+<p>Copy the following contents into <code class="language-plaintext highlighter-rouge">Dockerfile</code> (replace all content):</p>
+
+<div class="language-docker highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax = docker/dockerfile:1</span>
+
+<span class="c"># Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile</span>
+<span class="k">ARG</span><span class="s"> RUBY_VERSION=3.2.2</span>
+<span class="k">FROM</span><span class="s"> ruby:$RUBY_VERSION</span>
+
+<span class="c"># throw errors if Gemfile has been modified since Gemfile.lock</span>
+<span class="k">RUN </span>bundle config <span class="nt">--global</span> frozen 1
 
 <span class="k">WORKDIR</span><span class="s"> /app</span>
 
-<span class="k">COPY</span><span class="s"> Gemfile Gemfile.lock /app/</span>
+<span class="c"># Install packages needed to build gems</span>
+<span class="k">RUN </span>apt-get update <span class="nt">-qq</span> <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    apt-get <span class="nb">install</span> <span class="nt">--no-install-recommends</span> <span class="nt">-y</span> build-essential git libpq-dev libvips pkg-config
+
+<span class="k">RUN </span>curl <span class="nt">-sS</span> https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add <span class="se">\
+</span>  <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">"deb https://dl.yarnpkg.com/debian/ stable main"</span> <span class="o">&gt;</span> /etc/apt/sources.list.d/yarn.list <span class="se">\
+</span>  <span class="o">&amp;&amp;</span> apt-get update <span class="o">&amp;&amp;</span> apt-get <span class="nb">install</span> <span class="nt">-y</span> nodejs yarn <span class="nt">--no-install-recommends</span>
+
+<span class="c"># Install application gems</span>
+<span class="k">COPY</span><span class="s"> Gemfile Gemfile.lock ./</span>
 <span class="k">RUN </span>bundle <span class="nb">install</span>
 
+<span class="c"># Copy application code</span>
+<span class="k">COPY</span><span class="s"> . .</span>
+
+<span class="c"># Start the server by default, this can be overwritten at runtime</span>
+<span class="c"># EXPOSE 3000</span>
 <span class="k">CMD</span><span class="s"> ["/bin/bash"]</span>
 </code></pre></div></div>
 
 <p>Copy the following contents into <code class="language-plaintext highlighter-rouge">docker-compose.yml</code>:</p>
 
-<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3"</span>
+<span class="na">services</span><span class="pi">:</span>
   <span class="na">db</span><span class="pi">:</span>
     <span class="na">environment</span><span class="pi">:</span>
       <span class="na">POSTGRES_PASSWORD</span><span class="pi">:</span> <span class="s">postgres</span>
@@ -339,7 +366,45 @@ new rails project using docker.</p>
       <span class="pi">-</span> <span class="s2">"</span><span class="s">3000:3000"</span>
     <span class="na">volumes</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s">.:/app:delegated</span>
-<span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3"</span>
+</code></pre></div></div>
+
+<p>Replace the contents of the <code class="language-plaintext highlighter-rouge">Gemfile</code> with:</p>
+
+<pre><code class="language-gem">source "https://rubygems.org"
+
+ruby "3.2.2"
+
+gem "rails", "~&gt; 7.1.2"
+
+gem "sprockets-rails"
+
+gem "pg", "~&gt; 1.1.0"
+
+# Check the latest supported [https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html#platforms-supported.ruby]
+gem "puma", "&gt;= 5.0"
+
+gem "importmap-rails"
+
+gem "turbo-rails"
+
+gem "stimulus-rails"
+
+gem "tzinfo-data", platforms: %i[ windows jruby ]
+
+gem "bootsnap", require: false
+
+group :development, :test do
+  gem "debug", platforms: %i[ mri windows ]
+end
+
+group :development do
+  gem "web-console"
+end
+</code></pre>
+
+<p>Every time you make changes to the <code class="language-plaintext highlighter-rouge">Gemfile</code>, you will need to create a new <code class="language-plaintext highlighter-rouge">Gemfile.lock</code>:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--rm</span> <span class="nt">-v</span> <span class="s2">"</span><span class="nv">$PWD</span><span class="s2">"</span>:/app <span class="nt">-w</span> /app ruby:3.2.2 bundle <span class="nb">install</span>
 </code></pre></div></div>
 
 <p>Initialize your git repository and make an initial commit:</p>
@@ -349,30 +414,14 @@ git add <span class="nb">.</span>
 git commit <span class="nt">-m</span> <span class="s2">"Prepare the project directory"</span>
 </code></pre></div></div>
 
-<h3 id="create-the-rails-project">Create the rails project</h3>
+<h3 id="build-the-rails-project">Build the rails project</h3>
 
 <p><strong>If on M1 MAC run the following command</strong></p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export DOCKER_DEFAULT_PLATFORM=linux/amd64
 </code></pre></div></div>
 
-<p>First build the <code class="language-plaintext highlighter-rouge">web</code> container image using <code class="language-plaintext highlighter-rouge">docker-compose</code>:</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose build web
-</code></pre></div></div>
-
-<p>Then run <code class="language-plaintext highlighter-rouge">rails new</code> to create the initial rails project:</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run <span class="nt">--no-deps</span> web rails new <span class="nb">.</span> <span class="nt">--force</span> <span class="nt">--database</span><span class="o">=</span>postgresql <span class="nt">--skip-action-cable</span> <span class="nt">--skip-turbolinks</span> <span class="nt">--skip-jbuilder</span> <span class="nt">--skip-system-test</span>
-</code></pre></div></div>
-
-<p>Add everything to git and make a new commit:</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add <span class="nb">.</span>
-git commit <span class="nt">-m</span> <span class="s2">"Run 'docker-compose run --no-deps web rails new . ...'"</span>
-</code></pre></div></div>
-
-<p>Finally, re-build the <code class="language-plaintext highlighter-rouge">web</code> container so that it now includes the project dependencies:</p>
+<p>Build the <code class="language-plaintext highlighter-rouge">web</code> container image using <code class="language-plaintext highlighter-rouge">docker-compose</code>:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose build web
 </code></pre></div></div>
@@ -521,29 +570,6 @@ git commit <span class="nt">-m</span> <span class="s2">"Configure GitHub actions
 git push
 </code></pre></div></div>
 
-<h3 id="setting-up-compatible-pg-gem-version">Setting up compatible pg gem version</h3>
-
-<p>PG gem version from the generated Gem file is not supported by the newest Amazon Ruby image. To solve this issue, update the Gemfile, rerun the build, submit the changes to github</p>
-
-<p>Edit <code class="language-plaintext highlighter-rouge">Gemfile</code>’s pg line to look like this:</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem <span class="s2">"pg"</span>, <span class="s2">"~&gt; 1.1.0"</span>
-</code></pre></div></div>
-
-<h3 id="install-the-gem-version">Install the gem version</h3>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose build web
-</code></pre></div></div>
-
-<h3 id="commit-and-push-the-changes">Commit and push the changes</h3>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add <span class="nb">.</span>
-git commit <span class="nt">-m</span> <span class="s2">"Update Gemfile to a compatible PG version"</span>
-git push
-</code></pre></div></div>
-
-<hr />
-
 <h2 id="deploying-to-elastic-beanstalk">Deploying to Elastic Beanstalk</h2>
 
 <p>At this point you should have a Rails project that you can successfully run in
@@ -576,7 +602,7 @@ Beanstalk, and then deploy it.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commands:
   install_nodejs:
     command: |
-      curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
+      curl --silent --location https://rpm.nodesource.com/setup_14.x | bash -
       yum install -y nodejs
   install_yarn:
     command: |
@@ -604,7 +630,7 @@ Beanstalk, and then deploy it.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web: bundle exec puma -C /opt/elasticbeanstalk/config/private/pumaconf.rb
 </code></pre></div></div>
 
-<h3 id="commit-and-push-the-changes-1">Commit and push the changes</h3>
+<h3 id="commit-and-push-the-changes">Commit and push the changes</h3>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add <span class="nb">.</span>
 git commit <span class="nt">-m</span> <span class="s2">"Prepare the application to deploy to Amazon's Elastic Beanstalk"</span>
@@ -644,7 +670,7 @@ Generate the key pair:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>TEAMNAME
 eb init <span class="nt">--keyname</span> <span class="si">$(</span><span class="nb">whoami</span><span class="si">)</span> <span class="se">\</span>
-  <span class="nt">--platform</span> <span class="s2">"64bit Amazon Linux 2 v3.5.0 running Ruby 3.0"</span> <span class="se">\</span>
+  <span class="nt">--platform</span> <span class="s2">"64bit Amazon Linux 2023 v4.0.1 running Ruby 3.2"</span> <span class="se">\</span>
   <span class="nt">--region</span> us-west-2 TEAMNAME
 </code></pre></div></div>
 
