@@ -98,36 +98,65 @@ At the end of each sprint you will:
 Assuming you have docker installed locally, follow the steps below to create a
 new rails project using docker.
 
-### Prepare the project directory
+### Create the rails project
 
 ```sh
 mkdir TEAMNAME
 cd TEAMNAME
-touch Dockerfile Gemfile Gemfile.lock docker-compose.yml
 ```
 
-Copy the following contents into `Dockerfile`:
+Assuming you have rails >=7.1.2 installed on your system:
+
+```sh
+rails new . --force --database=postgresql --skip-action-cable --skip-turbolinks --skip-jbuilder --skip-system-test
+```
+
+This should generate a Dockerfile, Gemfile and Gemfile.lock in addition to a standard rails project.
+
+```sh
+touch docker-compose.yml
+```
+
+Now you should have the Dockerfile, docker-compose.yml, Gemfile and Gemfile.lock files at the root of your project. (You can tough the files if they were not created automatically)
+
+Copy the following contents into `Dockerfile` (replace all content):
 
 ```docker
-FROM ruby:3.0
+# syntax = docker/dockerfile:1
 
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add \
-  && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
-  && apt-get update && apt-get install -y nodejs yarn --no-install-recommends \
-  && gem install rails
+# Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
+ARG RUBY_VERSION=3.2.2
+FROM ruby:$RUBY_VERSION
+
+# throw errors if Gemfile has been modified since Gemfile.lock
+RUN bundle config --global frozen 1
 
 WORKDIR /app
 
-COPY Gemfile Gemfile.lock /app/
+# Install packages needed to build gems
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y build-essential git libpq-dev libvips pkg-config
+
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add \
+  && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
+  && apt-get update && apt-get install -y nodejs yarn --no-install-recommends
+
+# Install application gems
+COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
+# Copy application code
+COPY . .
+
+# Start the server by default, this can be overwritten at runtime
+# EXPOSE 3000
 CMD ["/bin/bash"]
 ```
 
 Copy the following contents into `docker-compose.yml`:
 
 ```yml
+version: "3"
 services:
   db:
     environment:
@@ -144,7 +173,47 @@ services:
       - "3000:3000"
     volumes:
       - .:/app:delegated
-version: "3"
+```
+
+Replace the contents of the `Gemfile` with:
+
+```gem
+source "https://rubygems.org"
+
+ruby "3.2.2"
+
+gem "rails", "~> 7.1.2"
+
+gem "sprockets-rails"
+
+gem "pg", "~> 1.1.0"
+
+# Check the latest supported [https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html#platforms-supported.ruby]
+gem "puma", ">= 5.0"
+
+gem "importmap-rails"
+
+gem "turbo-rails"
+
+gem "stimulus-rails"
+
+gem "tzinfo-data", platforms: %i[ windows jruby ]
+
+gem "bootsnap", require: false
+
+group :development, :test do
+  gem "debug", platforms: %i[ mri windows ]
+end
+
+group :development do
+  gem "web-console"
+end
+```
+
+Every time you make changes to the `Gemfile`, you will need to create a new `Gemfile.lock`:
+
+```sh
+docker run --rm -v "$PWD":/app -w /app ruby:3.2.2 bundle install
 ```
 
 Initialize your git repository and make an initial commit:
@@ -155,7 +224,7 @@ git add .
 git commit -m "Prepare the project directory"
 ```
 
-### Create the rails project
+### Build the rails project
 
 **If on M1 MAC run the following command**
 
@@ -163,26 +232,7 @@ git commit -m "Prepare the project directory"
 export DOCKER_DEFAULT_PLATFORM=linux/amd64
 ```
 
-First build the `web` container image using `docker-compose`:
-
-```sh
-docker-compose build web
-```
-
-Then run `rails new` to create the initial rails project:
-
-```sh
-docker-compose run --no-deps web rails new . --force --database=postgresql --skip-action-cable --skip-turbolinks --skip-jbuilder --skip-system-test
-```
-
-Add everything to git and make a new commit:
-
-```sh
-git add .
-git commit -m "Run 'docker-compose run --no-deps web rails new . ...'"
-```
-
-Finally, re-build the `web` container so that it now includes the project dependencies:
+Build the `web` container image using `docker-compose`:
 
 ```sh
 docker-compose build web
@@ -347,32 +397,6 @@ git commit -m "Configure GitHub actions"
 git push
 ```
 
-### Setting up compatible pg gem version
-
-PG gem version from the generated Gem file is not supported by the newest Amazon Ruby image. To solve this issue, update the Gemfile, rerun the build, submit the changes to github
-
-Edit `Gemfile`'s pg line to look like this:
-
-```sh
-gem "pg", "~> 1.1.0"
-```
-
-### Install the gem version
-
-```sh
-docker-compose build web
-```
-
-### Commit and push the changes
-
-```sh
-git add .
-git commit -m "Update Gemfile to a compatible PG version"
-git push
-```
-
----
-
 ## Deploying to Elastic Beanstalk
 
 At this point you should have a Rails project that you can successfully run in
@@ -408,7 +432,7 @@ Copy the following contents into `.ebextensions/01_install_dependencies.config`:
 commands:
   install_nodejs:
     command: |
-      curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
+      curl --silent --location https://rpm.nodesource.com/setup_14.x | bash -
       yum install -y nodejs
   install_yarn:
     command: |
@@ -484,7 +508,7 @@ For each copy of your repository, you'll need to do the following only once:
 ```sh
 cd TEAMNAME
 eb init --keyname $(whoami) \
-  --platform "64bit Amazon Linux 2 v3.5.0 running Ruby 3.0" \
+  --platform "64bit Amazon Linux 2023 v4.0.1 running Ruby 3.2" \
   --region us-west-2 TEAMNAME
 ```
 
