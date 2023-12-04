@@ -28,6 +28,8 @@ Throughout the project, you might find it helpful to go through a ruby on rails 
 
 [initial_peer_review]({{site.initial_peer_review}})
 
+[peer_review]({{site.peer_review}})
+
 ## Deliverables
 
 ### Report
@@ -88,8 +90,7 @@ At the end of each sprint you will:
 
 - Complete the [project report](#report)
 - Create [project presentation video](#video)
-- Deliver the final presentation on Dec. 6th during class
-- Plan for 12min presentation and 3min Q&A
+- Submit [peer_review]({{site.peer_review}})
 
 ---
 
