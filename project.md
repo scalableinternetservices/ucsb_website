@@ -3,6 +3,7 @@ layout: default
 navigation_weight: 10
 permalink: /project/
 title: Primary Project
+show_in_nav: false
 ---
 
 # Primary Project
@@ -24,11 +25,15 @@ Throughout the project, you might find it helpful to go through a ruby on rails 
 
 ## Submissions
 
+{% if site.primary_project_team_message and site.initial_peer_review and site.peer_review %}
 [Team message]({{site.primary_project_team_message}})
 
 [initial_peer_review]({{site.initial_peer_review}})
 
 [peer_review]({{site.peer_review}})
+{% else %}
+- Submission link will be posted at start of quarter
+{% endif %}
 
 ## Deliverables
 

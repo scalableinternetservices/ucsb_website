@@ -3,41 +3,42 @@ layout: default
 navigation_weight: 1
 permalink: /schedule/
 title: Class Schedule
+show_in_nav: true
 ---
 
-# Fall 2023 Class Schedule
+# Fall 2024 Class Schedule
 
 The following schedule is subject to change, and many slide links are not yet active.
 {: .alert .alert-warning }
 
 <div class="week">
 
-## Week 1 (October 2-4)
+## Week 0 (September 26)
 
 ### Topics
 
-- Course Introduction ([slides](/slides/2023/01_course_introduction))
-- Hypertext Transfer Protocol (HTTP) ([slides](/slides/2023/02_http))
+- Course Introduction
 
 ### Tasks
 
 - Complete the introduction survey
 - Join the class on Piazza
-<!-- - Enroll in AWS Educate -->
 - Complete [Project 0](/project0/)
 - Begin [Project 1](/project1/)
 - Read chapters [1](https://hpbn.co/primer-on-latency-and-bandwidth/), and
   [2](https://hpbn.co/building-blocks-of-tcp/) of High Performance Browser Networking
 
 </div>
+
 <div class="week">
 
-## Week 2 (October 9-11)
+## Week 1 (October 1-3)
 
 ### Topics
 
-- HTTP Servers ([slides](/slides/2023/03_http_servers))
-- Application Servers ([slides](/slides/2023/04_application_servers))
+- Hypertext Transfer Protocol (HTTP)
+- HTTP Servers
+- Application Servers
 
 ### Tasks
 
@@ -53,12 +54,12 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 3 (October 16-18)
+## Week 2 (October 8-10)
 
 ### Topics
 
-- Scaling Web Applications ([slides](/slides/2023/05_scaling_web_applications))
-- Architecting for High Availability ([slides](/slides/2023/06_high_availability))
+- Scaling Web Applications
+- Architecting for High Availability
 - Read [SEDA: An architecture for well-conditioned, scalable internet services](http://nms.lcs.mit.edu/~kandula/projects/killbots/killbots_files/seda-sosp01.pdf) by M Welsh, D Culler, E Brewer
 - Read [A Retrospective on SEDA](https://matt-welsh.blogspot.com/2010/07/retrospective-on-seda.html)
 
@@ -70,11 +71,11 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 4 (October 23-25)
+## Week 3 (October 15-17)
 
 ### Topics
 
-- Working in teams ([slides](/slides/2023/07_agile_tdd_pairing))
+- Working in teams
   - Agile Software Development
   - Test Driven Development (TDD)
   - Continuous Integration (CI)
@@ -88,13 +89,13 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 5 (October 30-November 1)
+## Week 4 (October 22-24)
 
 ### Topics
 
-- #### Monday: Frontend React Deep Dive by David Acevedo
-- Client-side Caching & Content Delivery Networks ([slides](/slides/2023/08_client_caching_cdn))
-- Server-Side Caching ([slides](/slides/2023/09_server_caching))
+<!-- - #### Monday: Frontend React Deep Dive by David Acevedo -->
+- Client-side Caching & Content Delivery Networks
+- Server-Side Caching
 
 ### Tasks
 
@@ -110,24 +111,24 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 6 (November 6-8)
+## Week 5 (October 29-31)
 
 ### Topics
 
-- Relational Databases ([slides](/slides/2023/11_relational_databases))
-- Relational Databases and Rails ([slides](/slides/2023/11_relational_databases))
-- RDBMS Scaling ([slides](/slides/2023/12_rdbms_scaling))
+- Relational Databases
+- Relational Databases and Rails
+- RDBMS Scaling
 
 </div>
 <div class="week">
 
-## Week 7 (November 13-15)
+## Week 6 (November 5-7)
 
 ### Topics
 
-- #### Wednesday November 15: Zoom Guest Lecture
+<!-- - #### Wednesday November 15: Zoom Guest Lecture -->
 
-- Deep Dive: Load Testing with Tsung ([slides](/slides/2023/10_tsung))
+- Deep Dive: Load Testing with Tsung
 
 ### Tasks
 
@@ -137,11 +138,11 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 8 (November 20-22)
+## Week 7 (November 12-14)
 
-- #### Wednesday November 22: Zoom Guest Lecture
+<!-- - #### Wednesday November 22: Zoom Guest Lecture -->
 
-- Non-Relational Data Stores ([slides](/slides/2023/13_nosql))
+- Non-Relational Data Stores
 
 ### Tasks
 
@@ -157,12 +158,12 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 9 (November 27-29)
+## Week 8 (November 19-21)
 
 ### Topics
 
-- #### Wednesday November 29: Zoom Guest Lecture
-- Web Security ([slides](/slides/2023/14_web_security))
+<!-- - #### Wednesday November 29: Zoom Guest Lecture -->
+- Web Security
 
 ### Tasks
 
@@ -178,11 +179,26 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 10 (December 4-6)
+## Week 9 (November 26)
 
 ### Topics
 
-- #### Wednesday December 6: Zoom Guest Lecture
+<!-- - #### Wednesday December 6: Zoom Guest Lecture -->
+- TBD
+
+### Tasks
+
+- Read chapter [12](https://hpbn.co/http2/) of High Performance Browser Networking
+- Complete the [project report](/project/#report)
+
+</div>
+<div class="week">
+
+## Week 10 (December 3-5)
+
+### Topics
+
+<!-- - #### Wednesday December 6: Zoom Guest Lecture -->
 - Scalable Machine Learning Inference
 
 ### Tasks
@@ -193,7 +209,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Finals Week (December 11-13)
+## Finals Week (December 10-12)
 
 ### Tasks
 

@@ -4,27 +4,27 @@ url: https://cs291.com # the base hostname & protocol for your site
 
 # User settings
 course_number: CS291A
-quarter: Fall 2023
+quarter: Fall 2024
 title: Scalable Internet Services
 
 github_username: scalableinternetservices
 
-instructor: Dr. Shyr-Shea Chang
-instructor_email: shyr-shea.chang@appfolio.com
-instructor_url: https://www.linkedin.com/in/shyr-shea-chang-6426271b8/
+instructor: Zach Walker
+instructor_email: zach.walker@appfolio.com
+instructor_url: https://www.linkedin.com/in/zachary-walker-6a219059/
 
-drive_url: https://drive.google.com/drive/folders/1gXSc42m6tDJMPPxE486C0YQ5KXxB92J2?usp=sharing
-piazza_url: https://piazza.com/class/lllfmvbxvh83oq
+drive_url:
+piazza_url:
 
-intro_survey: https://forms.gle/93PrP7Td5tmvAqAFA
-project0_submission: https://forms.gle/vzB1UtGre5Psg5pr8
-project1_submission: https://forms.gle/GEj7s15jfG6xERjc8
-project2_submission: https://forms.gle/RhsrS5CQHR4NY5oV8
-project3_submission: https://forms.gle/jY5u11UGuskAfN7r7
-project3_team_message: https://forms.gle/V5qHuDgm2NbZtTJH9
-primary_project_team_message: https://forms.gle/Ye3tfx2AYE6KDnFm9
-initial_peer_review: https://forms.gle/kHNkc83qzDqCxNqr7
-peer_review: https://forms.gle/86W5Qe9VberPEguX6
+intro_survey:
+project0_submission:
+project1_submission:
+project2_submission:
+project3_submission:
+project3_team_message:
+primary_project_team_message:
+initial_peer_review:
+peer_review:
 
 kramdown:
   parse_block_html: true

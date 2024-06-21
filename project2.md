@@ -3,6 +3,7 @@ layout: default
 navigation_weight: 4
 permalink: /project2/
 title: Project 2
+show_in_nav: false
 ---
 
 # Project 2: AWS Lambda and JSON Web Tokens (JWT)
@@ -30,7 +31,11 @@ HTTP API. Your code will be deployed using a single AWS Lambda function.
 
 ## Project Submission
 
+{% if site.project2_submission %}
 <{{site.project2_submission}}>
+{% else %}
+- Submission link will be posted at start of quarter
+{% endif %}
 
 ## API Specification
 

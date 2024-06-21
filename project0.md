@@ -4,6 +4,7 @@ layout: default
 navigation_weight: 2
 permalink: /project0/
 title: Project 0
+show_in_nav: true
 ---
 
 # Project 0: Static Web Page
@@ -27,7 +28,11 @@ is accomplished.
 
 ## Project Submission
 
+{% if site.project0_submission %}
 <{{site.project0_submission}}>
+{% else %}
+- Submission link will be posted at start of quarter
+{% endif %}
 
 ## Page Requirements
 

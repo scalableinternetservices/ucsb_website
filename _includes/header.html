@@ -28,7 +28,7 @@
             <ul class="nav navbar-nav">
               {%- assign navigation_pages = site.html_pages | sort: 'navigation_weight' -%}
               {%- for page in navigation_pages -%}
-              {% if page.navigation_weight and page.title %}
+              {% if page.show_in_nav and page.navigation_weight and page.title %}
               <li class="active"><a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a></li>
               {%- endif -%}
               {%- endfor -%}
