@@ -3,6 +3,7 @@ layout: default
 navigation_weight: 4
 permalink: /project2/
 title: Project 2
+show_in_nav: false
 ---
 
 # Project 2: AWS Lambda and JSON Web Tokens (JWT)
@@ -22,7 +23,7 @@ HTTP API. Your code will be deployed using a single AWS Lambda function.
 
 - Student can deploy code to AWS Lambda.
 
-- Student has compared the performance of a static website to that of a dynamic website.
+- Student has compared the performance of a static site to that of a dynamic site.
 
 ## Overview Video
 
@@ -30,7 +31,13 @@ HTTP API. Your code will be deployed using a single AWS Lambda function.
 
 ## Project Submission
 
+{% if site.project2_submission %}
+
 <{{site.project2_submission}}>
+
+{% else %}
+- Submission link will be posted at start of quarter
+{% endif %}
 
 ## API Specification
 
@@ -61,16 +68,16 @@ the authentication step and will always return a token for a valid request.
 - On success, returns a json document of the format `{"token": <GENERATED_JWT>}`
   with status code `201` where `<GENERATED_JWT>`:
 
-    - uses a `HS256` signature (the symmetric key to use is in the environment
-      variable `JWT_SECRET`)
+  - uses a `HS256` signature (the symmetric key to use is in the environment
+    variable `JWT_SECRET`)
 
-    - contains exactly three fields
+  - contains exactly three fields
 
-        - `data` which includes the request body from the HTTP requst
+    - `data` which includes the request body from the HTTP requst
 
-        - `exp` which is set to 5 seconds after the generation time
+    - `exp` which is set to 5 seconds after the generation time
 
-        - `nbf` which is set to 2 seconds after the generation time
+    - `nbf` which is set to 2 seconds after the generation time
 
 - Responds `415` if the request content type is not `application/json`.
 
@@ -133,7 +140,7 @@ Please use the following script to verify your web application:
   seconds with various power-of-two concurrency levels between 1 and 256?
 
 - Using data you've collected, describe how this service's performance compares
-  to that of your static webpage from Project 0 (remeasure those results if
+  to that of your static page from Project 0 (remeasure those results if
   necessary).
 
 - What do you suspect accounts for the difference in performance between GitHub

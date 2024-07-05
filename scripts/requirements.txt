@@ -3,4 +3,7 @@ beautifulsoup4
 google-cloud-storage
 html5-parser
 requests
+# Uncommnet the following two lines if you get an error about
+# lxml and html5-parser not using the same version of libxml2
+# --no-binary=lxml
 

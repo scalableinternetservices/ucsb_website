@@ -3,6 +3,7 @@ layout: default
 navigation_weight: 10
 permalink: /project/
 title: Primary Project
+show_in_nav: false
 ---
 
 # Primary Project
@@ -15,30 +16,44 @@ technologies while learning how to tackle the scalability and fault-tolerance
 concerns. This is a "learn by doing" course: the course project will form the
 primary focus of the course with the lectures and discussion of research papers
 providing background material. Each project will be conducted in an agile team
-where students will build their own scalable, redundant web site using
+where students will build their own scalable, redundant site using
 fundamental web technologies and the Ruby on Rails framework.
 
 ## Resources
 
-Throughout the project, you might find it helpful to go through a ruby on rails tutorial. The Ruby on Rails Tutorial (see sidebar) is an amazing resource. Rail's own tutorial is quite good as well: [Getting Started with Rails](https://guides.rubyonrails.org/getting_started.html)
+Throughout the project, you might find it helpful to go through a ruby on rails
+tutorial. The Ruby on Rails Tutorial (see sidebar) is an amazing resource.
+Rail's own tutorial is quite good as well:
+[Getting Started with Rails](https://guides.rubyonrails.org/getting_started.html)
 
 ## Submissions
 
+{% if site.primary_project_team_message
+  and site.initial_peer_review
+  and site.peer_review %}
 [Team message]({{site.primary_project_team_message}})
 
 [initial_peer_review]({{site.initial_peer_review}})
 
 [peer_review]({{site.peer_review}})
+{% else %}
+
+- Submission link will be posted at start of quarter
+
+{% endif %}
 
 ## Deliverables
 
 ### Report
 
-Submit a report describing your project, and your data-driven approach to load testing. Consider answering the following questions:
+Submit a report describing your project, and your data-driven approach to load
+testing. Consider answering the following questions:
 
-- What bottlenecks did you encounter along the way, and how did you address them?
+- What bottlenecks did you encounter along the way, and how did you address
+them?
 - What's the optimal $ cost per number of users your web service supports?
-- What design or functionality tradeoffs did you have to make in order to support additional load?
+- What design or functionality tradeoffs did you have to make in order to
+support additional load?
 
 #### Stellar Report Examples
 
@@ -47,7 +62,8 @@ Submit a report describing your project, and your data-driven approach to load t
 
 ### Video
 
-Record a video presentation of your final project to share with the class. The video must be under 10 minutes in duration.
+Record a video presentation of your final project to share with the class.
+The video must be under 10 minutes in duration.
 
 The video should emphasize your key features of your application.
 
@@ -63,7 +79,7 @@ At the end of each sprint you will:
 - Demo your deployed version and share the newly created features.
 - Share any new load testing results.
 
-#### Sprint 1: Week 6
+### Sprint 1: Week 6
 
 - Form your team.
   - Decide on a team name
@@ -75,18 +91,18 @@ At the end of each sprint you will:
 - Deploy your initial rails code to Elastic Beanstalk.
 - Complete `N` user stories, where `N` is the number of people on your team.
 
-#### Sprint 2: Week 7
+### Sprint 2: Week 7
 
 - Write a tsung load test encompassing your existing features.
   - Ensure that when it is run, there are no 4XX or 5XX level HTTP status
     codes.
 
-#### Sprints 3,4,5: Weeks 8,9,10
+### Sprints 3,4,5: Weeks 8,9,10
 
 - Iterate between load testing, finding the bottlenecks, and addressing them
   with techniques we discuss in the class
 
-#### Sprint 5: Week 10+
+### Sprint 5: Week 10+
 
 - Complete the [project report](#report)
 - Create [project presentation video](#video)
@@ -112,13 +128,16 @@ Assuming you have rails >=7.1.2 installed on your system:
 rails new . --force --database=postgresql --skip-action-cable --skip-turbolinks --skip-jbuilder --skip-system-test
 ```
 
-This should generate a Dockerfile, Gemfile and Gemfile.lock in addition to a standard rails project.
+This should generate a Dockerfile, Gemfile and Gemfile.lock in addition to a
+standard rails project.
 
 ```sh
 touch docker-compose.yml
 ```
 
-Now you should have the Dockerfile, docker-compose.yml, Gemfile and Gemfile.lock files at the root of your project. (You can tough the files if they were not created automatically)
+Now you should have the Dockerfile, docker-compose.yml, Gemfile and Gemfile.lock
+files at the root of your project. (You can tough the files if they were not
+created automatically)
 
 Copy the following contents into `Dockerfile` (replace all content):
 
@@ -211,7 +230,8 @@ group :development do
 end
 ```
 
-Every time you make changes to the `Gemfile`, you will need to create a new `Gemfile.lock`:
+Every time you make changes to the `Gemfile`, you will need to create a new
+`Gemfile.lock`:
 
 ```sh
 docker run --rm -v "$PWD":/app -w /app ruby:3.2.2 bundle install
@@ -227,9 +247,9 @@ git commit -m "Prepare the project directory"
 
 ### Build the rails project
 
-**If on M1 MAC run the following command**
+If on M1 MAC run the following command:
 
-```
+```sh
 export DOCKER_DEFAULT_PLATFORM=linux/amd64
 ```
 
@@ -301,8 +321,8 @@ docker-compose run web bundle install
 docker-compose run web yarn install
 ```
 
-If your project has outstanding changes as shown via `git status`, consider making a
-commit at this time.
+If your project has outstanding changes as shown via `git status`, consider
+making a commit at this time.
 
 ### Start the development server
 
@@ -338,7 +358,9 @@ git push
 
 ### GitHub Actions
 
-To trigger automated test runs everytime you push to main, or create a pull request, or push an update to a branch associated with a pull request do the following.
+To trigger automated test runs everytime you push to main, or create a pull
+request, or push an update to a branch associated with a pull request do the
+following.
 
 Run the following:
 
@@ -417,7 +439,7 @@ port: <%= ENV['RDS_PORT'] %>
 username: <%= ENV['RDS_USERNAME'] %>
 ```
 
-### Add ebextensions to install nodejs and yarn on each application server instance:
+### Add ebextensions to install nodejs and yarn on each application server instance
 
 Create the directory and file
 
@@ -429,7 +451,7 @@ touch .ebextensions/10_nginx_add_packs.config
 
 Copy the following contents into `.ebextensions/01_install_dependencies.config`:
 
-```
+```yaml
 commands:
   install_nodejs:
     command: |
@@ -443,7 +465,7 @@ commands:
 
 Copy the following contents into `.ebextensions/10_nginx_add_packs.config`:
 
-```
+```yaml
 commands:
   add_packs_location_to_nginx:
     command: |
@@ -460,7 +482,7 @@ touch Procfile
 
 Copy the following contents in `Procfile`:
 
-```
+```yaml
 web: bundle exec puma -C /opt/elasticbeanstalk/config/private/pumaconf.rb
 ```
 
@@ -515,7 +537,7 @@ eb init --keyname $(whoami) \
 
 ### Create a deployment using the minimum necessary resources
 
-```
+```sh
 eb create --envvars SECRET_KEY_BASE=BADSECRET \
   -db.engine postgres -db.i db.t3.micro -db.user u \
   -i t3.micro --single YOURNAME
@@ -530,7 +552,7 @@ create).
 Run `eb status` to see the state of your deployment. The output should look
 something like the following:
 
-```
+```yaml
 Environment details for: YOURNAME
   Application name: TEAMNAME
   Region: us-west-2
@@ -592,7 +614,7 @@ eb ssh -i "ssh -i ~/$(whoami).pem"
 
 When you know you're done, clean up your deployment:
 
-```
+```sh
 eb terminate
 ```
 
@@ -689,4 +711,5 @@ Initial user stories:
 3. As an authenticated user, I can see the list of events that I have
    previously attended so that I can recall my fond memories.
 
-4. As an event host, I can proactively invite users to my event, so that I can help spread the word.
+4. As an event host, I can proactively invite users to my event, so that I can
+   help spread the word.

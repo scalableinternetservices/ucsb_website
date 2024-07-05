@@ -4,6 +4,7 @@ layout: default
 navigation_weight: 2
 permalink: /project0/
 title: Project 0
+show_in_nav: true
 ---
 
 # Project 0: Static Web Page
@@ -14,7 +15,7 @@ This project will ensure that students can deploy and load test a simple web
 page prior to working with more complicated web applications.
 
 Static web pages are fast to serve, and are relatively trivial to scale. Anyone
-with access to a free GitHub account can deploy a static web site that can
+with access to a free GitHub account can deploy a static site that can
 scale to thousands of users without requring any knowledge of how such scaling
 is accomplished.
 
@@ -27,11 +28,19 @@ is accomplished.
 
 ## Project Submission
 
+{% if site.project0_submission %}
+
 <{{site.project0_submission}}>
+
+{% else %}
+
+- Submission link will be posted at start of quarter
+
+{% endif %}
 
 ## Page Requirements
 
-Your static webpage must:
+Your static page must:
 
 - be hosted on [GitHub Pages](https://pages.github.com)
 - be served via HTTPS
@@ -42,7 +51,7 @@ Your static webpage must:
 - utilize an external style sheet to provide style changes (no inline styles,
   i.e., provided via `style` attributes)
 
-You webpage must include:
+You page must include:
 
 - a page title
 - a page heading
@@ -56,7 +65,7 @@ You webpage must include:
 
 The `project0.py` script in
 <https://github.com/scalableinternetservices/ucsb_website/tree/main/scripts>
-can be used to automatically verify that your webpage meets the necessary
+can be used to automatically verify that your page meets the necessary
 requirements.
 
 Follow the directions in the README to clone the repository, install the python
@@ -69,7 +78,7 @@ dependencies, and run the verification script.
   64, 128, 256)?
 - Why are there diminishing returns at higher concurrency levels?
 - What's the performance difference when requesting HTTP and HTTPS?
-- How can github respond so quickly?
+- How can GitHub respond so quickly?
 - What is your site's "Total Blocking Time" (TBT) according to PageSpeed Insights?
 
 ## Required Tools

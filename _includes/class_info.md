@@ -10,27 +10,34 @@
 
 ## UCSB TA
 
-- Bhavye Jain
-- <bhavyejain@ucsb.edu>
+- TBD
+<!-- - Bhavye Jain -->
+<!-- - <bhavyejain@ucsb.edu> -->
 
 ## Appfolio TA
 
-- Shubham Talbar
-- <shubham_talbar@ucsb.edu>
+- TBD
+<!-- - Shubham Talbar -->
+<!-- - <shubham_talbar@ucsb.edu> -->
 
+{% if site.piazza_url %}
 Please use [Piazza]({{site.piazza_url}}) for class-related correspondance.
+{% endif %}
 
 ## Dates
 
 ### Classes
 
-- Monday and Wednesday
-- 11:00am -- 12:50pm PT
-- Phelps 2510
+- Tues and Thurs
+- 9:00am -- 10:50am PT
+- Building/Room TBD
+<!-- - Phelps 2510 -->
 
 ### Office Hours
 
-In-person
+- TBD
+
+<!-- In-person
 
 - Wednesday 10 -- 11am, Phelps 2510
 - Thursday 3 -- 4pm, Phelps 2510
@@ -38,21 +45,23 @@ In-person
 Virtual
 
 - Thursday 2 -- 3pm, link in [Piazza]({{site.piazza_url}})
-- Friday 1 -- 2pm, link in [Piazza]({{site.piazza_url}})
+- Friday 1 -- 2pm, link in [Piazza]({{site.piazza_url}}) -->
 
 ### Initial tasks due before
 
-Friday, October 6 2pm PT
+{% if site.site.intro_survey and site.piazza_url %}
+Monday, September 30 2pm PT
 
 - Complete the [introduction survey]({{site.intro_survey}})
 - Join the class on [Piazza]({{site.piazza_url}})
+{% endif %}
 <!-- - Enroll in [AWS Educate](https://www.awseducate.com/Registration?apptype=student&courseview=true) -->
 
 ### [Project 0](/project0/) due before
 
-Monday, October 9 2pm PT
+Monday, October 7 2pm PT
 
-### [Project 1](/project1/) due before
+<!-- ### [Project 1](/project1/) due before
 
 Monday, October 16 2pm PT
 
@@ -90,17 +99,21 @@ Monday, December 15 2pm PT
 
 ### [Project](/project/#video) video due before
 
-Monday, December 15 2pm PT
+Monday, December 15 2pm PT -->
 
 ## Class Resources
 
+{% if site.drive_url %}
 [Google Drive]({{site.drive_url}}): Contains some class content, such as
 project overview videos. You must be logged in to your UCSB Google account and
 added to a specific Google Group in order to access.
+{% endif %}
 
+{% if site.piazza_url %}
 [Piazza]({{site.piazza_url}}): Use to receive class announcements, ask and
 answer questions, and to communicate with instructor. Access code is available
 in Google Drive and will be shared in the first class.
+{% endif %}
 
 [GitHub](https://github.com/{{site.github_username}}): Contains content for
 this site. Additionally all student projects will live here.

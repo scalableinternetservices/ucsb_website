@@ -4,6 +4,7 @@ layout: default
 navigation_weight: 3
 permalink: /project1/
 title: Project 1
+show_in_nav: false
 ---
 # Project 1: Learning Ruby with RubyKoans
 
@@ -19,16 +20,22 @@ pass, upload the result to GitHub and fill in the submission form below.
 
 ## Project Submission
 
+{% if site.project1_submission %}
 <{{site.project1_submission}}>
+{% else %}
+
+- Submission link will be posted at start of quarter
+
+{% endif %}
 
 ## Requirements
 
-Provide a link to the GitHub repo which contains the ruby-koans folder with the
-files updated so that all tests pass.
+Provide a link to the GitHub repository which contains the ruby-koans folder
+with the files updated so that all tests pass.
 
 ### Verification Script
 
-`ruby path_to_enlightenment.rb` should pass all 282 asserts. 
+`ruby path_to_enlightenment.rb` should pass all 282 asserts.
 
 ## Other Resources
 
