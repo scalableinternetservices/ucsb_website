@@ -30,7 +30,9 @@ one post can have many comments. Each comment belongs to the user and the post.
 
 [Submission]({{site.project3_submission}})
 {% else %}
+
 - Submission link will be posted at start of quarter
+
 {% endif %}
 
 ## List of supported endpoints
@@ -50,12 +52,12 @@ one post can have many comments. Each comment belongs to the user and the post.
 
 - There is a validation error for incorrect create or update action
 
-  - E.g. Each user has to have an email and an error is displayed if this required
-    value is not provided
+  - E.g. Each user has to have an email and an error is displayed if this
+  required value is not provided
 
-- Users index page (`/users`) shows the list of all the users; for each user it shows
-  the list of all posts that belong to the given user and for each post
-  it shows all the comments that belong to the post.
+- Users index page (`/users`) shows the list of all the users; for each user
+  it shows the list of all posts that belong to the given user and for each
+  post it shows all the comments that belong to the post.
 
 ## Resources
 

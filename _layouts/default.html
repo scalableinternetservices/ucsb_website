@@ -1,14 +1,35 @@
-{% include header.html %}
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="container container-left">
-  <div class="row">
-    <div class="col-md-3">
-      {% include sidebar.html %}
-    </div>
-    <div class="col-md-9">
-      {{ content }}
-    </div>
-  </div>
-</div>
+  <head>
+    <meta charset="UTF-8">
+    <title>{{ site.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ site.baseurl }}/css/theme.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  </head>
 
-{% include footer.html %}
+  <body>
+
+    {% include header.html %}
+
+    <div class="container container-left">
+      <div class="row">
+        <div class="col-md-3">
+          {% include sidebar.html %}
+        </div>
+        <div class="col-md-9">
+          {{ content }}
+        </div>
+      </div>
+    </div>
+
+    {% include footer.html %}
+
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  </body>
+
+</html>

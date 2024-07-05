@@ -9,11 +9,13 @@
 - <{{site.instructor_email}}>
 
 ## UCSB TA
+
 - TBD
 <!-- - Bhavye Jain -->
 <!-- - <bhavyejain@ucsb.edu> -->
 
 ## Appfolio TA
+
 - TBD
 <!-- - Shubham Talbar -->
 <!-- - <shubham_talbar@ucsb.edu> -->
