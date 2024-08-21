@@ -47,7 +47,7 @@ This protected endpoint is used to simply reflect the content contained within
 the `data` field of a valid JWT. It is a demonstration of how authorization can
 be enforced on an endpoint.
 
-- Requires a valid token from `POST /token` passed via the HTTP Header
+- Requires a valid token from `POST /auth/token` passed via the HTTP Header
   `Authorization` whose value is `Bearer <TOKEN>`.
 
 - On success, returns a json document containing the contents of the `data`
@@ -58,7 +58,7 @@ be enforced on an endpoint.
 - Responds `403` if a proper `Authorization: Bearer <TOKEN>` header is not
   provided.
 
-### POST /token
+### POST /auth/token
 
 This endpoint is used to obtain the JWT necessary to request `/`. Normally such
 an endpoint would be used to authenticate a user (e.g., verify a username and
@@ -90,7 +90,7 @@ the authentication step and will always return a token for a valid request.
 
 - Requests to any other resources must respond with status code `404`.
 
-- Requests to `/` or `/token` which do not use the appropriate HTTP method must
+- Requests to `/` or `/auth/token` which do not use the appropriate HTTP method must
   respond with status code `405`.
 
 ## Resources
@@ -136,7 +136,7 @@ Please use the following script to verify your web application:
 
 ## Questions To Answer
 
-- On average, how many successful requests can `ab` complete to `/token` in 8
+- On average, how many successful requests can `ab` complete to `/auth/token` in 8
   seconds with various power-of-two concurrency levels between 1 and 256?
 
 - Using data you've collected, describe how this service's performance compares

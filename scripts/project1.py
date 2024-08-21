@@ -61,12 +61,13 @@ def score(url):
         print(count_format("Failure", failures))
         return failures
 
+    token_url = urljoin(url,  "auth/token")
     failures += test_invalid_urls(url)
     failures += test_invalid_verbs(url, set(HTTP_VERBS) - {"GET"})
-    failures += test_invalid_verbs(urljoin(url, "token"), set(HTTP_VERBS) - {"POST"})
-    failures += test_token__invalid_content_type(urljoin(url, "token"))
-    failures += test_token__invalid_json_body(urljoin(url, "token"))
-    failures += test_token__success(urljoin(url, "token"))
+    failures += test_invalid_verbs(token_url, set(HTTP_VERBS) - {"POST"})
+    failures += test_token__invalid_content_type(token_url)
+    failures += test_token__invalid_json_body(token_url)
+    failures += test_token__success(token_url)
     failures += test_root__invalid_header_specification(url)
     failures += test_root__invalid_tokens(url)
 
@@ -117,7 +118,7 @@ def test_root__invalid_header_specification(url):
 
     try:
         token = requests.post(
-            urljoin(url, "token"),
+            urljoin(url, "auth/token"),
             allow_redirects=False,
             headers={mix_case("content-type"): "application/json"},
             json={},
@@ -140,7 +141,7 @@ def test_root__invalid_header_specification(url):
 def test_root__invalid_timeliness(url):
     failures = 0
     token = requests.post(
-        urljoin(url, "token"),
+        urljoin(url, "auth/token"),
         allow_redirects=False,
         headers={mix_case("content-type"): "application/json"},
         json={},
@@ -192,7 +193,7 @@ def test_root__success(url):
     failures = 0
     for payload in [{}, 1, ["a", 1, "b"], {"user_id": "12345"}]:
         token = requests.post(
-            urljoin(url, "token"),
+            urljoin(url, "auth/token"),
             allow_redirects=False,
             headers={mix_case("content-type"): "application/json"},
             json=payload,
