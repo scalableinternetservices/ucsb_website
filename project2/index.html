@@ -210,7 +210,7 @@ be enforced on an endpoint.</p>
 
 <ul>
   <li>
-    <p>Requires a valid token from <code class="language-plaintext highlighter-rouge">POST /token</code> passed via the HTTP Header
+    <p>Requires a valid token from <code class="language-plaintext highlighter-rouge">POST /auth/token</code> passed via the HTTP Header
 <code class="language-plaintext highlighter-rouge">Authorization</code> whose value is <code class="language-plaintext highlighter-rouge">Bearer &lt;TOKEN&gt;</code>.</p>
   </li>
   <li>
@@ -226,7 +226,7 @@ provided.</p>
   </li>
 </ul>
 
-<h3 id="post-token">POST /token</h3>
+<h3 id="post-authtoken">POST /auth/token</h3>
 
 <p>This endpoint is used to obtain the JWT necessary to request <code class="language-plaintext highlighter-rouge">/</code>. Normally such
 an endpoint would be used to authenticate a user (e.g., verify a username and
@@ -279,7 +279,7 @@ variable <code class="language-plaintext highlighter-rouge">JWT_SECRET</code>)</
     <p>Requests to any other resources must respond with status code <code class="language-plaintext highlighter-rouge">404</code>.</p>
   </li>
   <li>
-    <p>Requests to <code class="language-plaintext highlighter-rouge">/</code> or <code class="language-plaintext highlighter-rouge">/token</code> which do not use the appropriate HTTP method must
+    <p>Requests to <code class="language-plaintext highlighter-rouge">/</code> or <code class="language-plaintext highlighter-rouge">/auth/token</code> which do not use the appropriate HTTP method must
 respond with status code <code class="language-plaintext highlighter-rouge">405</code>.</p>
   </li>
 </ul>
@@ -334,7 +334,7 @@ ruby function.rb
 
 <ul>
   <li>
-    <p>On average, how many successful requests can <code class="language-plaintext highlighter-rouge">ab</code> complete to <code class="language-plaintext highlighter-rouge">/token</code> in 8
+    <p>On average, how many successful requests can <code class="language-plaintext highlighter-rouge">ab</code> complete to <code class="language-plaintext highlighter-rouge">/auth/token</code> in 8
 seconds with various power-of-two concurrency levels between 1 and 256?</p>
   </li>
   <li>
