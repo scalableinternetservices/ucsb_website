@@ -3,7 +3,7 @@ layout: default
 navigation_weight: 10
 permalink: /project/
 title: Primary Project
-show_in_nav: false
+show_in_nav: true
 ---
 
 # Primary Project
@@ -31,11 +31,11 @@ Rail's own tutorial is quite good as well:
 {% if site.primary_project_team_message
   and site.initial_peer_review
   and site.peer_review %}
-[Team message]({{site.primary_project_team_message}})
+* [Team message]({{site.primary_project_team_message}})
 
-[initial_peer_review]({{site.initial_peer_review}})
+* [Mid Project Peer Review]({{site.initial_peer_review}})
 
-[peer_review]({{site.peer_review}})
+* [Final Peer Review]({{site.peer_review}})
 {% else %}
 
 - Submission link will be posted at start of quarter

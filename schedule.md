@@ -23,8 +23,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 - Complete the introduction survey
 - Join the class on Piazza
-- Complete [Project 0](/project0/)
-- Begin [Project 1](/project1/)
+- Begin [Project 0](/project0/)
 - Read chapters [1](https://hpbn.co/primer-on-latency-and-bandwidth/), and
   [2](https://hpbn.co/building-blocks-of-tcp/) of High Performance Browser Networking
 
@@ -42,8 +41,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Tasks
 
-- Complete [Project 1](/project1/)
-- Begin [Project 2](/project2/)
+- Complete [Project 0](/project0/)
 - Read chapters [9](https://hpbn.co/brief-history-of-http/),
   [10](https://hpbn.co/primer-on-web-performance/), and
   [11](https://hpbn.co/http1x/) of High Performance Browser Networking
@@ -60,13 +58,12 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 - Scaling Web Applications
 - Architecting for High Availability
-- Read [SEDA: An architecture for well-conditioned, scalable internet services](http://nms.lcs.mit.edu/~kandula/projects/killbots/killbots_files/seda-sosp01.pdf) by M Welsh, D Culler, E Brewer
-- Read [A Retrospective on SEDA](https://matt-welsh.blogspot.com/2010/07/retrospective-on-seda.html)
 
 ### Tasks
-
-- Complete [Project 2](/project2/)
-- Begin [Project 3](/project3/)
+- Complete [Project 1](/project1/)
+- Begin [Project 2](/project2/)
+- Read [SEDA: An architecture for well-conditioned, scalable internet services](http://nms.lcs.mit.edu/~kandula/projects/killbots/killbots_files/seda-sosp01.pdf) by M Welsh, D Culler, E Brewer
+- Read [A Retrospective on SEDA](https://matt-welsh.blogspot.com/2010/07/retrospective-on-seda.html)
 
 </div>
 <div class="week">
@@ -82,9 +79,9 @@ The following schedule is subject to change, and many slide links are not yet ac
   - Pair Programming / Mobbing
 
 ### Tasks
-
+- Complete [Project 2](/project2/)
+- Begin [Project 3](/project3/)
 - (Optional) Find a teammate for [Project 3](/project3/)
-- Make progress on [Project 3](/project3/)
 
 </div>
 <div class="week">
@@ -99,14 +96,8 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Tasks
 
-- Complete [Project 3](/project3/)
-- Complete Final Project Team Message
+- Make progress on [Project 3](/project3/)
 - Read [Kafka](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/09/Kafka.pdf)
-- Begin [Primary Project](/project/)
-  - form a team -- merge with two project 3 teams (max 6 people)
-  - develop initial features
-  - deploy to elastic beanstalk
-  - schedule team meeting time with instructor
 
 </div>
 <div class="week">
@@ -118,6 +109,17 @@ The following schedule is subject to change, and many slide links are not yet ac
 - Relational Databases
 - Relational Databases and Rails
 - RDBMS Scaling
+
+### Tasks
+
+- Complete [Project 3](/project3/)
+- Complete Final Project Team Message
+- Form a team for [Primary Project](/project/)
+  - Find teammates
+  - Choose a project
+    - Use one of the [project ideas](/project/#project-ideas) (2 to 3 people)
+    - or combine multiple [project ideas](/project/#project-ideas) (4 - 6) people
+    - or design your own (complexity should be similar to provided project ideas)
 
 </div>
 <div class="week">
@@ -132,6 +134,10 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Tasks
 
+- Begin Primary Project [Sprint 1](/project/#sprint-1-week-6)
+  - develop initial features
+  - deploy to elastic beanstalk
+  - schedule team meeting time with instructor
 - Read [Unifying Consensus and Atomic Commitment for Effective
   Cloud Data Management](http://www.vldb.org/pvldb/vol12/p611-maiyya.pdf)
 
@@ -146,6 +152,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Tasks
 
+- Primary Project [Sprint 2](/project/#sprint-2-week-7)
 - Read [How Discord Stores Billions of Messages
   ](https://discord.com/blog/how-discord-stores-billions-of-messages)
 - Read [CAP 12 years
@@ -167,7 +174,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Tasks
 
-- Send [project report](/project/#report) for feedback before the final submission
+- Primary Project [Sprint 3](/project/#sprints-345-weeks-8910)
 - Read chapter [4](https://hpbn.co/transport-layer-security-tls/) of High
   Performance Browser Networking
 - (Optional) Read [Dynamo: Amazon’s Highly Available Key-value Store
@@ -188,8 +195,8 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Tasks
 
+- Primary Project [Sprint 4](/project/#sprints-345-weeks-8910)
 - Read chapter [12](https://hpbn.co/http2/) of High Performance Browser Networking
-- Complete the [project report](/project/#report)
 
 </div>
 <div class="week">
@@ -203,6 +210,8 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Tasks
 
+- Primary Project [Sprint 5](/project/#sprints-345-weeks-8910)
+- Send draft of [project report](/project/#report) for feedback before the final submission
 - Read chapter [12](https://hpbn.co/http2/) of High Performance Browser Networking
 - Complete the [project report](/project/#report)
 
@@ -213,6 +222,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Tasks
 
-- Complete the [project presentation video](/project/#video)
+- Primary Project [Complete Report](/project/#report)
+- Primary Project [Complete Presentation Video](/project/#video)
 
 </div>
