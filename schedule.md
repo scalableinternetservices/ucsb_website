@@ -171,6 +171,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 <!-- - #### Wednesday November 29: Zoom Guest Lecture -->
 - Web Security
+- Guest Lecture (Th 11/21)
 
 ### Tasks
 
