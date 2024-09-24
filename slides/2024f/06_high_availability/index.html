@@ -1,0 +1,561 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Architecting for High Availability</title>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 2.5em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      blockquote {
+        border-left: 0.3em solid rgba(0,0,0,0.5);
+        padding: 0 15px;
+        font-style: italic;
+      }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      img {
+        max-height: 100%;
+        max-width: 100%;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .clear { clear: both; }
+      #slideshow .slide .content code { font-size: 0.8em; }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 1em;
+      }
+      .background-blue {
+        background-color: deepskyblue;
+      }
+      .background-green {
+        background-color: springgreen;
+      }
+      .background-pink {
+        background-color: deeppink;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        width: 49%;
+        float: left;
+      }
+      .right-column {
+        width: 49%;
+        float: right;
+      }
+      .left-column20 {
+        width: 20%;
+        float: left;
+      }
+      .right-column80 {
+        width: 79%;
+        float: right;
+      }
+      .left-column30 {
+        width: 30%;
+        float: left;
+      }
+      .right-column70 {
+        width: 69%;
+        float: right;
+      }
+      .left-column40 {
+        width: 40%;
+        float: left;
+      }
+      .right-column60 {
+        width: 59%;
+        float: right;
+      }
+
+      /* Table layout */
+      table {
+        background: #f5f5f5;
+        margin: 30px auto;
+        text-align: left;
+        width: 100%;
+      }
+      th {
+        background: linear-gradient(#777, #444);
+        color: #fff;
+        font-weight: bold;
+        padding: 10px 15px;
+      }
+      td {
+        border-right: 1px solid #fff;
+        border-left: 1px solid #e8e8e8;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #e8e8e8;
+        padding: 10px 15px;
+      }
+
+    </style>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle
+
+# Architecting for High Availability
+
+## CS291A: Scalable Internet Services
+
+---
+
+# High Availability Motivation
+
+Modern web applications power important parts of our lives
+
+--
+
+* Banking
+
+* Medical
+
+* Communications
+
+--
+
+Having access to these services (high availability) at any time is increasingly
+important.
+
+---
+
+# Expressing Availability
+
+Services advertise availability as a "number of nines":
+
+* Three nines: 99.9% uptime, 525.6 minutes of downtime a year (43.8/month)
+
+* Four nines: 99.99% uptime, 52.6 minutes of downtime a year (4.38/month)
+    * Desired by many business applications
+
+* Five nines: 99.999% uptime, 5.3 minutes of downtime a year (26.5s/month)
+    * Desired by communication companies
+
+Downtime usually only includes unplanned outages. Scheduled outages, no matter
+how frequent, are usually not incorporated in marketing material.
+
+[Availability Table](https://sre.google/sre-book/availability-table/#tablea1)
+
+---
+
+# Measuring Availability SLIs/SLOs/SLAs
+
+Service Level Indicators - SLIa
+- In order to provide a HA service we need to agree on a metric
+- Come up with a set of metrics that will measure and indicate availability
+of your service
+
+--
+
+Service Level Objectives - SLOs
+- Come up with with a list of goals based on metrics that you want to be achieved
+by your service
+
+--
+
+Service Level Agreements - SLAs
+- Making sure your clients can rely on your service to keep the agreed level
+of availability and metrics
+
+---
+
+class: center, middle
+
+# What are possible causes of failures?
+
+![Full network topology](full_stack.png)
+
+---
+
+# Possible causes of failures. What if?
+
+* a server process hangs?
+
+--
+
+* a server process dies?
+
+--
+
+* an application server fails?
+
+--
+
+* a load balancer fails?
+
+--
+
+* a switch fails?
+
+--
+
+* a router fails?
+
+--
+
+* a connection to the Internet fails?
+
+--
+
+* DNS fails?
+
+--
+
+* the Internet fails?
+
+--
+
+* a database fails?
+
+--
+
+* an entire data center fails?
+
+---
+
+# Single point of failure
+
+Can we identify service components which failure would bring down the whole service?
+
+---
+
+# Handling Application Server Failure
+
+.left-column40.center[
+![Single application server](application_server.png)
+]
+.right-column60[
+We've already discussed the components of this sort of failure.
+
+* Process-level isolation reduces hanging, or dead processes by having other
+  processes to pick up the slack.
+
+* A process in an infinite loop may add unnecessary load to the server, so it's
+  important to have monitoring to detect such issues.
+
+* Having a load-balanced configuration permits failing servers (high load or
+  dead) by having a pool of other servers to direct traffic to.
+]
+
+---
+
+class: center, middle
+
+# How do we Handle Load Balancer Failure?
+
+![Single load balancer](single_load_balancer.png)
+
+---
+
+# Redundant Load Balancers
+
+.left-column40[
+Use two load balancers.
+
+One is the primary, and the other is the failover.
+
+Load balancers communicate via a heartbeat to determine the health of each
+other.
+]
+.right-column60.center[
+![Redundant load balancers](redundant_load_balancers.png)
+]
+
+--
+
+.clear[
+> During a failover, what happens to established flows?
+]
+
+--
+
+> During a failover, what happens to the IP address?
+
+
+---
+
+# Load Balancer Failover
+
+When the failover load balancer determines it needs to become the primary
+(detected via lack of heartbeat), it issues a gratuitous ARP for the load
+balancer's IP.
+
+The gratuitous ARP (layer 2) will inform the switch that traffic should be
+delivered to the port that leads to the new primary (formerly the failover).
+
+All new packets will be transparently delivered to the new primary load
+balancer.
+
+Established flows can be supported depending on how much information sharing
+occurs between the load balancers.
+
+---
+
+class: center, middle
+
+# How do we Handle Switch Failure?
+
+![Redundant load balancers](redundant_load_balancers.png)
+
+
+---
+
+# Redundant Switches
+
+Use two switches!
+
+Again, both a primary and failover are necessary using a heartbeat between them.
+
+During failover similar issues occur but layer 2 should be stateless so less or
+even no synchronization is needed.
+
+.center[![Redundant switches](redundant_switches.png)]
+
+---
+
+class: center, middle
+
+# How do we Handle Router Failure?
+
+![Redundant switches](redundant_switches.png)
+
+---
+
+# Redundant Routers
+
+Use two!
+
+This includes a similar heartbeat and failover system, but is not as trivial to switch between.
+
+
+.center[![Redundant routers](redundant_routers.png)]
+
+---
+
+class: center, middle
+
+# How do we Handle Access to the Internet Failure?
+
+![Redundant routers](redundant_routers.png)
+
+---
+
+# How do we Handle Access to the Internet Failure?
+
+Use two!
+
+Use separate internet service providers (ISPs).
+
+.center[![High Availability Topology](high_availability.png)]
+
+---
+
+# Routing with Two ISPs
+
+> How do we handle routing when we have two ISPs?
+
+--
+
+## Outgoing Traffic (easy)
+
+We control how we send outbound traffic so we have some options:
+
+* Pick the cheapest or most reliable link
+* Pick the _closer_ link
+
+--
+
+## Incoming Traffic (hard)
+
+We cannot inform clients by which path to reach our IP.
+
+However, we can give hints by using BGP (Border Gateway Protocol) to persuade
+networks to prefer one path over another. (Path prepending, Community values)
+
+---
+
+class: center, middle
+
+# High Availability
+
+![High Availability Topology](high_availability.png)
+
+---
+
+# Redundancy Everywhere!
+
+So we have redundant systems in place.
+
+> Can anything go wrong?
+
+---
+
+class: center, middle
+
+# Disaster Strikes!
+
+![Hurricane Sandy from Satellite](hurricane_sandy_satellite.png)
+
+---
+
+class: center, middle
+
+# Hurricane Sandy via Ars Technica
+
+![Hurricane Sandy Headline](hurricane_sandy_article.png)
+
+---
+
+class: center, middle
+
+# 2017 Hurricanes
+
+![2017 Hurricanes Headline](2017_hurricanes.png)
+
+> Yet another data center, west of Houston, was so well prepared for the storm
+  — with backup generators, bunks and showers — that employees’ displaced
+  family members took up residence and United States marshals used it as a
+  headquarters until the weather passed.
+
+---
+
+# Availability Axiom (Pete Tenereillo)
+
+Source: [http://www.tenereillo.com/GSLBPageOfShame.htm](http://www.tenereillo.com/GSLBPageOfShame.htm)
+
+> The only way to achieve high-availability for browser based clients is to
+> include the use of multiple A records.
+
+
+An "A record" is an IPv4 address associated with a DNS host (AAAA for IPv6
+addresses).
+
+--
+
+## Problem
+
+The order of DNS responses with multiple A records is often not preserved by a
+client's DNS server.
+
+## Result
+
+* For performance we want to send the browser to one data center.
+* For availability we want to send the browser multiple A records.
+
+We end up having to make a choice between performance and availability.
+
+---
+
+class: center, middle
+
+# Multi-site High Availability
+
+![High Availability in Two Sites](dual_site_availability.png)
+
+What about the database?
+
+
+---
+
+What if your service is failing due to excessive load?
+
+How can your service be highly available when under heavy load?
+
+--
+
+* Rate Limiting
+
+--
+
+* Client backoffs
+
+--
+
+* Client retry logic/limits
+
+--
+
+* Request Deadlines
+
+--
+
+* Degraded Server Responses
+
+--
+
+* Server Load Shedding
+
+[Google SRE Book - Handling Overload](https://sre.google/sre-book/handling-overload/)
+
+[Google SRE Book - Handling Cascading Failures](https://sre.google/sre-book/addressing-cascading-failures/)
+---
+
+# Rate Limiting and Algorithms
+
+- Prevent some users (mostly other services) from consuming too much of your resources
+- Provide similar performance to all users
+- Respond with status code 429 and appropriate header
+
+--
+
+## Popular rate limiting algorithms
+- Fixed Window
+- Sliding Window
+- Leaky Bucket
+
+---
+
+# Monitoring and Alerting Tools Examples
+
+- NewRelic
+- DataDog
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"
+            type="text/javascript"></script>
+    <script type="text/javascript">
+      var hljs = remark.highlighter.engine;
+      var slideshow = remark.create({
+          highlightLanguage: 'ruby',
+          highlightLines: true,
+          hightlightSpans: true,
+          highlightStyle: 'monokai'
+        }) ;
+    </script>
+  </body>
+</html>
