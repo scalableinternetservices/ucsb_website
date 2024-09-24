@@ -9,7 +9,7 @@ jobs:
           ruby-version: 3.0
       - run: bundle exec jekyll build
       - run: tar -cvzf _site.tar.gz _site
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: site
           path: _site.tar.gz
@@ -25,7 +25,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-python@v2
       - run: pip install ghp-import
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4
         with:
           name: site
       - run: tar -xzf _site.tar.gz

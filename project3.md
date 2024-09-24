@@ -3,7 +3,7 @@ layout: default
 navigation_weight: 5
 permalink: /project3/
 title: Project 3
-show_in_nav: false
+show_in_nav: true
 ---
 
 # Project 3: Demo Rails App
@@ -26,9 +26,9 @@ one post can have many comments. Each comment belongs to the user and the post.
 ## Project Submission
 
 {% if site.project3_team_message and site.project3_submission %}
-[Team message]({{site.project3_team_message}})
+- [Team message]({{site.project3_team_message}})
 
-[Submission]({{site.project3_submission}})
+- [Submission]({{site.project3_submission}})
 {% else %}
 
 - Submission link will be posted at start of quarter

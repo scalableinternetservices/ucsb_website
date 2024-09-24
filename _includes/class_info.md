@@ -30,8 +30,8 @@ Please use [Piazza]({{site.piazza_url}}) for class-related correspondance.
 
 - Tues and Thurs
 - 9:00am -- 10:50am PT
-- Building/Room TBD
-<!-- - Phelps 2510 -->
+- {{site.class_location}}
+
 
 ### Office Hours
 
@@ -49,7 +49,7 @@ Virtual
 
 ### Initial tasks due before
 
-{% if site.site.intro_survey and site.piazza_url %}
+{% if site.intro_survey and site.piazza_url %}
 Monday, September 30 2pm PT
 
 - Complete the [introduction survey]({{site.intro_survey}})
@@ -61,25 +61,25 @@ Monday, September 30 2pm PT
 
 Monday, October 7 2pm PT
 
-<!-- ### [Project 1](/project1/) due before
+### [Project 1](/project1/) due before
 
-Monday, October 16 2pm PT
+Monday, October 14 2pm PT
 
 ### [Project 2](/project2/) due before
 
-Tuesday, October 24 2pm PT
+Tuesday, October 21 2pm PT
 
-### [Project 3](/project3/) Pairing Message due before
+### [Project 3](/project3/) Team Message due before
 
-Monday, October 30 2pm PT
+Monday, October 4 2pm PT
 
-### Final Project Team Message due before
+### [Final Project Team Message](/project) due before
 
-Monday, November 6 2pm PT
+Monday, November 4 2pm PT
 
 ### [Project 3](/project3/) due before
 
-Monday, November 6 2pm PT
+Monday, November 4 2pm PT
 
 ### [Project](/project/#proposal) initial peer score message due before
 
@@ -99,7 +99,7 @@ Monday, December 15 2pm PT
 
 ### [Project](/project/#video) video due before
 
-Monday, December 15 2pm PT -->
+Monday, December 15 2pm PT
 
 ## Class Resources
 
