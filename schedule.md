@@ -17,7 +17,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- Course Introduction
+- Course Introduction - [slides](/slides/2024f/01_course_introduction/index.html)
 
 ### Tasks
 
@@ -35,7 +35,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- Hypertext Transfer Protocol (HTTP)
+- Hypertext Transfer Protocol (HTTP) - [slides](/slides/2024f/02_http/index.html)
 - HTTP Servers
 - Application Servers
 
@@ -206,7 +206,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-<!-- - #### Wednesday December 6: Zoom Guest Lecture -->
+- Guest Lecture (Tu 12/3)
 - Scalable Machine Learning Inference
 
 ### Tasks
