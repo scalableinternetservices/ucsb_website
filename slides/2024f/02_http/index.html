@@ -323,6 +323,12 @@ class: center inverse middle
 
 > When might you want to use HTTP HEAD?
 
+???
+
+* To check if a resource exists
+* CHeck the size of a resource
+* To check if a resource has changed (last-modified)
+
 ---
 
 # HTTP Method/Verb Misuse
@@ -334,6 +340,14 @@ Correct HTTP method/verb usage is not enforced, and is often misused.
 ```http
 GET /post/5?action=hide
 ```
+???
+
+Common Problems:
+* Using GET for actions that change server state
+* Using POST for idempotent actions
+* Using PUT for creating resources
+* Using DELETE for non-idempotent actions
+* Using GET to send data to the server, not prohibited but not recommended
 
 --
 
@@ -549,6 +563,23 @@ A request header containing the data previously set by the server via a
 
 > What security concerns may exist with cookies?
 
+???
+
+Uses of cookies:
+* Authentication
+* Session state
+* Personalization
+* Tracking
+* User preferences
+* Shopping cart
+* Advertising
+* Analytics
+
+Security concerns:
+* Cross-site scripting
+* Stolen cookies (stolen session)
+
+
 ---
 
 # Other HTTP Headers
@@ -569,6 +600,18 @@ A request header containing the data previously set by the server via a
 
 `X-` prefixed headers are not part of the official specification and may later
 become _standardized_.
+
+???
+
+* ETAG - Entity Tag, a unique identifier for the resource used for caching
+* Date - Date of the response
+* Last-Modified - Date the resource was last modified
+* Cache-Control - Cache control directives, used to indicate boundaries of caching (e.g., no-cache, max-age)
+* Age - Age of the resource in the cache
+
+* Content-Security-Policy - specifies where resources can be loaded from
+* Strict-Transport-Security - Forces the browser to use HTTPS
+* X-Frame-Options - Prevents the resource from being embedded in an iframe
 
 ---
 
@@ -804,7 +847,7 @@ making the feature less appealing.
 
 # More Speed
 
-A single web page may have tens of resources. In practice obtaining each
+A single web page may have tens or even hundreds of resources. In practice obtaining each
 resource serially over the same TCP connection is too slow.
 
 > What can be done to get more speed?
@@ -869,6 +912,16 @@ HTTP/2 solves some of these problems, but not all
 Does this table make sense now?
 
 .center[![Chrome Network Table](developer_tools_waterfall.png)]
+
+???
+
+Stop here for demo of chrome developer tools and network tab:
+
+Visit a website and open the developer tools. Look at the network tab
+
+* /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --user-data-dir="/tmp/no_http_3_profile"
+* chrome://flags/
+* /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --user-data-dir="/tmp/no_http_2_profile" --disable-http2
 
 ---
 
