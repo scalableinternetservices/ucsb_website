@@ -29,7 +29,6 @@ Please use [Piazza]({{site.piazza_url}}) for class-related correspondance.
 - 9:00am -- 10:50am PT
 - {{site.class_location}}
 
-
 ### Office Hours
 
 <!-- - TBD

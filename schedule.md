@@ -60,6 +60,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 - Architecting for High Availability
 
 ### Tasks
+
 - Complete [Project 1](/project1/)
 - Begin [Project 2](/project2/)
 - Read [SEDA: An architecture for well-conditioned, scalable internet services](http://nms.lcs.mit.edu/~kandula/projects/killbots/killbots_files/seda-sosp01.pdf) by M Welsh, D Culler, E Brewer
@@ -79,6 +80,7 @@ The following schedule is subject to change, and many slide links are not yet ac
   - Pair Programming / Mobbing
 
 ### Tasks
+
 - Complete [Project 2](/project2/)
 - Begin [Project 3](/project3/)
 - (Optional) Find a teammate for [Project 3](/project3/)
