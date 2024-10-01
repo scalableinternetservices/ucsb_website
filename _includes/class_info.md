@@ -6,19 +6,16 @@
 ## Instructor
 
 - [{{site.instructor}}]({{site.instructor_url}})
-- <{{site.instructor_email}}>
+- [email](mailto:{{site.instructor_email}})
 
 ## UCSB TA
 
 - TBD
-<!-- - Bhavye Jain -->
-<!-- - <bhavyejain@ucsb.edu> -->
 
 ## Appfolio TA
 
-- TBD
-<!-- - Shubham Talbar -->
-<!-- - <shubham_talbar@ucsb.edu> -->
+- Maximilian Medearis
+- [email](mailto:maximilian.medearis@appfolio.com)
 
 {% if site.piazza_url %}
 Please use [Piazza]({{site.piazza_url}}) for class-related correspondance.
@@ -32,20 +29,19 @@ Please use [Piazza]({{site.piazza_url}}) for class-related correspondance.
 - 9:00am -- 10:50am PT
 - {{site.class_location}}
 
-
 ### Office Hours
 
-- TBD
+<!-- - TBD
 
-<!-- In-person
+In-person
 
-- Wednesday 10 -- 11am, Phelps 2510
-- Thursday 3 -- 4pm, Phelps 2510
+- Tuesday 8am -- 9am, Phelps 3526
+- Thursday 8am -- 9am, Phelps 3526 -->
 
 Virtual
 
-- Thursday 2 -- 3pm, link in [Piazza]({{site.piazza_url}})
-- Friday 1 -- 2pm, link in [Piazza]({{site.piazza_url}}) -->
+- Tuesday 4 -- 5pm, link in [Piazza]({{site.piazza_url}})
+- Friday 4 -- 5pm, link in [Piazza]({{site.piazza_url}})
 
 ### Initial tasks due before
 
@@ -126,5 +122,6 @@ _[Available online](https://hpbn.co/)._
 Note: The online version is slightly more up-to-date.
 
 [The Ruby On Rails Tutorial](https://www.railstutorial.org/book)  
-_[Complete 3rd edition available online](https://3rd-edition.railstutorial.org/book)_  
+<!-- _[Complete 3rd edition available online](https://3rd-edition.railstutorial.org/book)_   -->
+Optional
 Note: This book is only useful once we get to the primary project.

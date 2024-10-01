@@ -17,7 +17,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- Course Introduction
+- Course Introduction - [slides](/slides/2024f/01_course_introduction/index.html)
 
 ### Tasks
 
@@ -35,7 +35,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- Hypertext Transfer Protocol (HTTP)
+- Hypertext Transfer Protocol (HTTP) - [slides](/slides/2024f/02_http/index.html)
 - HTTP Servers
 - Application Servers
 
@@ -60,6 +60,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 - Architecting for High Availability
 
 ### Tasks
+
 - Complete [Project 1](/project1/)
 - Begin [Project 2](/project2/)
 - Read [SEDA: An architecture for well-conditioned, scalable internet services](http://nms.lcs.mit.edu/~kandula/projects/killbots/killbots_files/seda-sosp01.pdf) by M Welsh, D Culler, E Brewer
@@ -79,6 +80,7 @@ The following schedule is subject to change, and many slide links are not yet ac
   - Pair Programming / Mobbing
 
 ### Tasks
+
 - Complete [Project 2](/project2/)
 - Begin [Project 3](/project3/)
 - (Optional) Find a teammate for [Project 3](/project3/)
@@ -206,7 +208,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-<!-- - #### Wednesday December 6: Zoom Guest Lecture -->
+- Guest Lecture (Tu 12/3)
 - Scalable Machine Learning Inference
 
 ### Tasks
