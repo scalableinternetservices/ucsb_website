@@ -63,11 +63,11 @@ Monday, October 14 2pm PT
 
 ### [Project 2](/project2/) due before
 
-Tuesday, October 21 2pm PT
+Monday, October 21 2pm PT
 
 ### [Project 3](/project3/) Team Message due before
 
-Monday, October 4 2pm PT
+Monday, October 21 2pm PT
 
 ### [Final Project Team Message](/project) due before
 

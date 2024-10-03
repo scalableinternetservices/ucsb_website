@@ -36,8 +36,8 @@ The following schedule is subject to change, and many slide links are not yet ac
 ### Topics
 
 - Hypertext Transfer Protocol (HTTP) - [slides](/slides/2024f/02_http/index.html)
-- HTTP Servers
-- Application Servers
+- HTTP Servers - [slides](/slides/2024f/03_http_servers/index.html)
+- Application Servers - [slides](/slides/2024f/04_application_servers/index.html)
 
 ### Tasks
 
