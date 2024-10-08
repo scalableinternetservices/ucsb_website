@@ -1,0 +1,1543 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Agile, TDD, CI, and Pairing</title>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 2.5em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      blockquote {
+        border-left: 0.3em solid rgba(0,0,0,0.5);
+        padding: 0 15px;
+        font-style: italic;
+      }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      img {
+        max-height: 100%;
+        max-width: 100%;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .clear { clear: both; }
+      #slideshow .slide .content code { font-size: 0.8em; }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 1em;
+      }
+      .background-blue {
+        background-color: deepskyblue;
+      }
+      .background-green {
+        background-color: springgreen;
+      }
+      .background-pink {
+        background-color: deeppink;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        width: 49%;
+        float: left;
+      }
+      .right-column {
+        width: 49%;
+        float: right;
+      }
+      .left-column20 {
+        width: 20%;
+        float: left;
+      }
+      .right-column80 {
+        width: 79%;
+        float: right;
+      }
+      .left-column30 {
+        width: 30%;
+        float: left;
+      }
+      .right-column70 {
+        width: 69%;
+        float: right;
+      }
+      .left-column40 {
+        width: 40%;
+        float: left;
+      }
+      .right-column60 {
+        width: 59%;
+        float: right;
+      }
+
+      /* Table layout */
+      table {
+        background: #f5f5f5;
+        margin: 30px auto;
+        text-align: left;
+        width: 100%;
+      }
+      th {
+        background: linear-gradient(#777, #444);
+        color: #fff;
+        font-weight: bold;
+        padding: 10px 15px;
+      }
+      td {
+        border-right: 1px solid #fff;
+        border-left: 1px solid #e8e8e8;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #e8e8e8;
+        padding: 10px 15px;
+      }
+
+    </style>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle
+
+# Agile, TDD, CI, and Pairing
+
+## CS291A: Scalable Internet Services
+
+---
+
+class: center inverse middle
+
+# Agile Software Development
+
+---
+
+# Talent Shortage
+
+![TC Talent Shortage Snippet](job_projection_gov.png)
+
+Source:
+https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm
+
+???
+
+Engineering is a scarce resource. The demand for software engineers is high
+and you are one of those scarce resources.
+
+Is AI, most recently LLMs, going to accelerate or decelerate this trend?
+Maybe too early to tell, but my guess is it will accelerate it for a while
+before any deceleration.
+
+---
+
+# Talent Shortage
+
+> Technology is no longer just driving tech companies — it is such an economic
+force that it has a hand in how nearly every other sector grows.
+
+> Since 2010, the number of tech-related jobs in the U.S. has increased by
+around 200,000 every year, and it is projected to keep increasing
+the same way over the next decade.
+
+
+Source:
+https://readwrite.com/2019/07/04/today-the-tech-talent-shortage-is-everybodys-problem/
+
+Book:
+[Developers are the New Kingmakers - Stephen O'Grady](https://www.oreilly.com/library/view/the-new-kingmakers/9781449368036/)
+
+---
+
+# Scarce Resources
+
+Software Engineering requires judicious use of scarce resources.
+
+__You__ are one of those scarce resources.
+
+Modern techniques are designed to optimize for your time.
+
+## Modern Software Development Techniques
+
+* Agile and Scrum
+
+* Test Driven Development (TDD)
+
+* Continuous Integration (CI)
+
+* Github work flow
+
+* Pair programming (pairing)
+
+???
+
+* In a shortage of resources, we need to optimize for the resources we have.
+* How can we make teams opperate more efficiently?
+* These techniques are designed to help teams work together more efficiently
+* This isn't just about programmers
+* Other disciplines are needed to run a tech company
+  - QA
+  - Product Managers
+  - Designers
+  - Data Scientists
+  - DevOps
+  - Security
+
+---
+
+# Understanding Agile
+
+Soon guidelines like this one should make complete sense:
+
+> ## Sprint 2: Starts October 12
+
+> * Conduct a __retrospective__ on how the last sprint went and how your group
+>   can improve.
+
+> * Decide on a sprint commitment.
+
+> * Implement stories from the current sprint.
+
+???
+
+* As you begin your team projects, you will need to cooridinate how you work
+  together.
+* This is a high level example of what a period of week or sprint might look like
+
+---
+
+# Agile and Scrum
+
+.left-column[
+  > What is Agile software development?
+
+--
+
+  __Agile__ is a collection of different approaches for developing software
+    that has emerged as dominant over the last 15+ years.
+
+  __Scrum__ is a popular form of Agile software development.
+]
+
+.right-column.center[
+  ![Modern Agile](modern_agile_wheel_english.png)
+
+  [Modern Agile](http://modernagile.org/)
+]
+
+???
+
+* Agile is a collection of different approaches for developing software that has
+  emerged as dominant over the last 15+ years.
+* Scrum is a popular form of Agile software development.
+* This is more of a guideline than a strict set of rules.
+* Adopting something too strict intiitively might not be "Agile"
+
+---
+
+class: center inverse middle
+
+# The World Before Agile
+
+---
+
+# Waterfall
+
+Waterfall model - __A sequential management process for complex projects__
+
+* Predates Agile 
+* Often used in hardware design and was adopted in software as well
+
+* An artifact of a time when releases of a product were infrequest and expensive
+  - In these cases defects often needed to wait until the next release to be fixed
+  - Could be a long time between releases
+  - Fixes between releases were disruptive and expensive
+  - Example -  software released on physical media (CDs, DVDs) prior to the internet
+
+* Modern harware design is attempting to move away from this model
+  - Attempt to treat iterations of hardware as opportunities to learn and improve rather than a final product
+      - SpaceX
+      - Planet Labs
+
+???
+
+The origin of the _Waterfall_ model is generally misattributed to Winston
+Royce, from his paper: "Managing the Development of Large Software Systems"
+
+In reality, he wasn't the first, and didn't advocate for what became Waterfall
+software engineering.
+
+Herbert Benington would be a more accurate attribution.
+
+Reference: *1970, Proceedings of IEEE WESCON 26 (August): 1–9.
+
+---
+
+# Waterfall Diagram
+
+.center[![Waterfall](waterfall.png)]
+
+This diagram from Royce's paper is frequently cited.
+
+
+
+---
+
+# Waterfall Process
+
+Each stage performs its role and then passes its deliverable to the next stage.
+
+--
+
+E.g., Design must be completed before coding, which in-turn must be completed
+before testing.
+
+--
+
+## Strengths
+
+- This approach allows for deep specialization.
+- Works great for areas like manufacturing where it is _expensive_ to
+alter the design due to issues detected in latter stages.
+
+---
+
+# Waterfall Continued
+
+- Works best when you have complete knowledge wrt software development:
+  - Requirements team understands the impact on design and development
+  - Designers have complete understanding of the difficulty of each design
+decision
+  - Software developers and testers know everything about how the software will
+be deployed
+  - Software developers have few if any _surprises_ during testing
+
+In practice most of these items are not met, thus the waterfall model inhibits
+the software development process.
+
+--
+
+__With software it's incredibly cheap to adapt the process along the way.__
+
+???
+
+* Remember software/tech resources are scarce
+* Having deep upfront knowledge of the domain and technology is rare and expensive
+  - Possible for the leading tech companies who can head hunt very specific talent
+  - Think Apple
+* To build complex software systems without full upfront knowledge we must
+   - Be able to use resources we have with incomplete knowledge
+      - Less experienced developers
+      - People with no domain knowledge
+      - A team with no experience working together
+   - Learn as we go
+   - Adapt to new information
+
+---
+
+# Agile Manifesto
+
+In 2001, the “Agile Software Manifesto” was written by Kent Beck, Ken Schwaber,
+Jeff Sutherland, and Dave Thomas.
+
+## Agile Values
+
+* __Individuals and interactions__ over processes and tools
+
+* __Working software__ over comprehensive documentation
+
+* __Customer collaboration__ over contract negotiation
+
+* __Responding to change__ over following a plan
+
+???
+
+* Doesn't mean their is no process
+  - it means that process is fluid to meet the needs of the project and Team
+* Doesn't mean there is no documentation
+  - it means that documentation is not intended to single that completion of a project and a handoff to another team
+* Doesn't mean there is no contract( or specification of requirements )
+  - it means that the requirements may be discovered as the project progresses
+* Doesn't mean there is no plan
+  - it means that the plan is only as good as the information available at the time it was made and new information should be used to update the plan
+  - If a plan is perfect from the start, you get something like the waterfall model
+  - Acknowledge imperfection from the start and be prepared for change, that makes for a more realistic "plan"
+
+---
+
+# Individuals and Interactions
+
+... over processes and tools
+
+.center[![Rugby Scrum](rugby_scrum.jpg)]
+
+???
+
+* What does this look like in practice?
+  - Process:
+      - If the team needs an adhoc meeting to discuss a problem, they have it
+      - If a normal meeting is not productive this week, they skip it
+      - A single owner of a problem is not as important as solving the problem
+      - If a team member is stuck on a problem, they ask for help from another team member
+      - If the team learns something new that would make completing a task a waste of time, they stop working on that task
+  - Tools:
+      - The framework we normally develop in isn't suited to the project, consider alternatives
+      - If (Trello, JIRA, Pivitol, Redmine) is not working for the team, they consider alternatives
+
+---
+
+# Working Software
+
+... over comprehensive documentation
+
+## Agile
+
+* Focus on deliverable features
+* Automated acceptance, unit, functional, and integration tests
+
+## Waterfall
+
+* Extensive documented requirements (before any prototype)
+    * Style guide
+    * Commenting rules
+    * Component interaction
+    * User interface requirements
+
+???
+
+* When developing a new product, your initial understanding of the problem is
+  likely to be incomplete
+  - Delivering something that solves the customers need is more important than
+      - Following a specification exactly
+      - Documenting exactly what was built to handoff to another stakeholder (like waterfall)
+
+---
+
+# Customer Collaboration
+
+... over contract negotiation
+
+.left-column.center[
+  ![Three people looking at computer](stock_collaboration.png)
+
+  "Here's what we've got so far."
+
+  "That's great, but it doesn't quite fit my workflow."
+
+  "No problem, what's your workflow so we can suit your needs."
+]
+
+.right-column.center[
+  ![Software Developer](cartoon_programmer.png)
+
+  "I'm sure if I just build what they've asked for, they'll love it."
+]
+
+???
+
+* We aren't talking about a contract like "How much will this cost?"
+* More like "What does this product need to do"
+* Regularly show the customer what has been built and get feedback
+  - helps ensure the product meets the customers needs
+* In contrast to a where the customer might describe what they want
+  - the developer might build it without further feedback
+  - Often
+      - customer knows their problem
+      - customer has an idea of how to solve it (what to build)
+      - customers original idea is not what they actually need
+---
+
+# Tree Swing Cartoon
+
+.center[![Tree Swing](tree-swing-project-management-large.png)]
+
+---
+
+# Responding to Change
+
+... over following a plan
+
+* Unexpected issues will occur during the product development.
+
+* Responding to change involves deciding how to best proceed when such issues
+  occur.
+
+* This can be true at many levels
+  - Plan for the entire project
+  - Plan for a sprint
+  - Plan for an individual task
+
+---
+
+# Examples of responding to change
+
+* Plan for the entire project
+  - What we thought the customer needed is not what they actually need
+  - What our cusotomer wants isn't aligned with our buisness goals
+* Plan for a sprint
+  - What we thought would take a week would actually take months
+  - We found a significant bug in the code that needs to be fixed before we can continue
+  - The QA engineer is out sick and we still need to test before we can release so we can't accommplish as much as planned
+* Plan for an individual task
+   - We overlooked a challenge in the task that will take longer than expected
+   - We discovered another team is working on a similar task and we should coordinate with them
+   - The library we are using doesn't have the feature we need and we need to find an alternative
+   - We showed the customer a feature and it didn't meet their needs
+
+---
+
+# How might these things come up in your team projects?
+
+* Your initial plan is overly ambitions and you need to scale back
+* Your initial plan isn't ambitious enough and you need to do more
+* One of your team members isn't contributing becasue:
+  - They are sick
+  - They are overwhelmed
+  - They are working on a different project
+  - Unreliable
+* You discover a bug in the code that makes your test results invalid
+  - Need to fix the bug and re-run your tests
+* You expect an optimization to allow you to scale and it doesn't work as expected
+  - Need to debug why it didn't work
+  - May need to find an alternative
+
+
+
+---
+
+# Scrum
+
+Scrum is a specific type of Agile software development.
+
+It was developed in the early 1990s by Ken Schwaber and Jeff Sutherland.
+
+Consider using a simplified version of Scrum for project 3 and the primary project.
+
+## Other Agile Alternatives
+
+* __Kanban__: Focus on controlling WIP (work in progress), no __sprints__
+
+* Extreme Programming (XP): Emphasis on feedback systems through automated
+  testing and pair programming
+
+* Lean Software Development: Focus on reducing waste in the software development
+
+
+
+---
+
+# Scrum Roles
+
+## Product Owner
+
+Understands the needs of the customer and prioritizes those needs.
+
+## The Team
+
+Comprised of people building the software. Individual roles are intentionally
+vague.
+
+## Scrum Master
+
+Responsible for making sure the _Scrum_ process is followed and helps to
+resolve blocking issues (e.g., between members of the team, with the product
+owner, or with external dependencies)
+
+???
+
+* Product owner
+  - Not neccessarily a people or project manager
+  - Sometimes called a product manager
+  - Represents the customer need
+      - Sometimes works in collaboration with a user experience designer
+  - Communicates with other stakeholders
+      - Marketing
+      - Sales
+      - Support
+      - Other teams
+      - Executives
+* Is this a process?  I though Agile was about individuals and interactions over processes and tools
+* The process can take a wide variety of forms and is what the team has decided is best for them
+* The Scrum Master is not a manager, but a facilitator of the decided process
+* The produce owner and scrum master roles may be:
+  - The same persion 
+  - Different people
+  - Shared between multiple people
+
+---
+
+# Scrum Values
+
+## Commitment
+
+The team commits to a set of stories for the sprint.
+
+## Focus
+
+The team focuses on the stories they have committed to.
+
+## Openness
+
+The team is open about what they are working on and any issues they are facing.
+
+## Respect
+
+The team respects each other and the roles they play.  A good book [Team Geek](https://www.oreilly.com/library/view/team-geek/9781449329839/)
+
+## Courage
+
+The team has the courage to take on difficult problems
+
+
+???
+
+* Commitment
+  - Also implies that the team agrees on what they won't prioiritize for the sprint.
+* Focus
+  - If something comes up that is not part of the sprint, there would likely be a discussion about whether it should be added to the sprint or deferred to a future sprint.
+* Openness
+  - If something is blocking progress on a story, the team should be open about it so that the team can help resolve the issue.
+  - If a story is taking longer than expected, the team should be open about it so that the product owner can decide if the story should be deferred to a future sprint.
+* Respect
+  - Works best in combination with humility and trust. 
+* Courage
+  - Team members have the courage to ask tough questions, admit when they are wrong, say not to a request that isn't reasonable, and to ask for help when they need it.
+
+---
+
+# Scrum User Story Defined
+
+A __story__ is a unit of functionality that exposes something new to the user
+(customer). Stories are often written like:
+
+> As a \_\_\_\_\_\_\_\_\_\_, I can \_\_\_\_\_\_\_\_\_\_, in order to
+> \_\_\_\_\_\_\_\_\_\_.
+
+For example:
+
+> As a github gold organization, I am permitted up to 50 private repositories,
+> in order to securely maintain a large number of distinct projects.
+
+> As an authenticated student user, I am able to post a question such that my
+> instructor knows I am asking the question but my classmates do not, in order
+> to ask a question my peers might not appreciate.
+
+???
+
+* If you can't write a story for a feature, you probably don't understand the feature well enough to build it
+* If you can't describe the feature in a way that is useful to the customer
+  - you probably don't understand the feature well enough
+  - or the feature may not useful to the customer
+* What if the story not user facing? Ex. Dev Ops, Intrastructure
+  - The story should still be written from the perspective of the user
+  - The user might be another developer
+  - An internal buisness stackeholder
+  - An data scientist or analyst
+* Can this be considered a process that should be avoided?
+  - If the team is not getting value from the process, they should consider changing it
+  - If the team is getting value from the process, they should continue to use it
+  - In my experience, teams don't see the value of this until they have tried it and seen the benefits
+    - A scrum master can help the team understand the value of the process, but should not force the team to use it
+---
+
+# Scrum Sprint Defined
+
+A __sprint__ is a specific length of time to accomplish some work.
+
+Sprints may operate on the same schedule as product releases (e.g., 2-week
+Sprints immediately followed by releasing whatever was accomplished) however,
+it's not necessary.
+
+???
+
+* May be tied to a release cycle
+* May just be a cadence that works well for the team
+
+---
+
+# Scrum Process
+
+![Scrum Process](scrum_process.png)
+
+
+???
+
+Mention the artifacts/meetings of the scrum process
+  - Product backlog
+  - Grooming
+  - Estimation
+  - Story splitting
+  - Sprint planning
+  - Sprint backlog
+  - Standup
+  - Review - Demo of what was produced
+  - Velocity
+  - Retrospective
+
+---
+
+# Example of a typical Scrum Process
+
+## Spring Planning
+
+Frequency - Once per sprint
+
+A meeting at the start of each sprint is the to decide the "sprint commitment".
+
+## Grooming
+
+Frequency - As often as needed when the team is running low work to pull into a sprint
+
+A meeting to get team input and form alignment on what it would mean to complete a story.
+
+
+
+## Standup
+
+Frequency - Daily
+
+Each day the team has a __stand up__ meeting to discuss what is currently being
+worked on, and to discover any _blocking_ issues.
+
+???
+
+* Sprint Planning
+  - Stories are pulled from the prioritized product backlog into the sprint
+    backlog. The team may decide to pull stories in a slightly different order
+    depending on various constraints. So _agile_.
+
+* Grooming
+  - The team decides how many stories to pull based on their prior estimate of
+  those stories.  Try to avoid too many technical details, rather, try to uncover
+  any areas of uncertainty that may make this story more or less work than previously
+  understood.
+  -  This is where _estimation_ happens and estimation is done with respect to teams
+  measured _velocity_.   The two used together give a meanigful way of talking about
+  how if can fit into a sprint.
+
+---
+
+# Example of a typical Scrum Process continued
+
+## Demo
+
+Frequency - As often as useful, but usually once at the end of a sprint
+
+Show teammates, stakeholders, and possibly customers what was accomplished during the sprint and get feedback
+
+
+## Retrospective
+
+Frequency - Once per sprint, or every few sprints
+
+A meeting for the team to reflect on how the team worked together. Not what was built or what will be built
+
+???
+
+* Demo
+  - A __sprint review__ conducted at the end of the sprint to demo what was
+  accomplished. Everything considered completed should be ready to be released to
+  customers (also referred to as __shippable__).
+
+* Retrospective
+  - The team discusses how they can improve their process and comes out of the meeting with concrete
+  ideas to modify the team process to be acted upon in the next sprint.
+
+---
+
+# CS291A Simplified Scrum
+
+- No product owner / No scrum master
+
+- Once per week:
+
+  - Conduct a brief retrospective
+
+  - Determine commitment for the next sprint
+
+  - Demo your sprint (last week's worth of) progress to us
+
+--
+
+- Repeat this process for 5 weeks
+
+---
+
+class: center, middle, inverse
+# Collaborating on Code
+
+---
+
+# Integration
+
+Taking independently developed changes and reconciling their conflicts.
+
+When multiple engineers work on the common code base they need to
+synchronize the code updates.
+
+At some scale, it is impossible for everyone to know what everyone else is doing.
+
+Integration can be very difficult and painful.
+
+
+> Should we perform integration as rarely as possible or as frequently as
+> possible?
+
+---
+
+# Martin Fowler
+
+.left-column40[
+.center[
+![Martin Fowler](martin_fowler.jpg)
+
+Chief Scientist, ThoughtWorks
+]
+]
+.right-column60[
+
+> The effort of integration is exponentially proportional to the amount of time
+between integrations.]
+
+---
+
+# Reconcile Early and Often
+
+If we never let our changes diverge too much from the rest of the group,
+reconciling our changes will never be too hard.
+
+__Conclusion__: commit early and often, and merge others' changes early and
+often
+
+> How do we ensure we have successfully reconciled?
+
+--
+
+> How do we discover when errors occur?
+
+---
+
+# Discovering Errors
+
+* Humans can be used to check for defects, but this is expensive.
+
+* Type systems and compilers work well to statically check for defects, but can
+  only discover certain classes of errors.
+    * Formal verification tools exist, but are not widely used in industry.
+        - Imagine writting a mathematical proof for every line of code you write
+        - [AWS Paper on Model Checking](https://www.amazon.science/publications/model-checking-as-a-human-endeavor)
+
+--
+
+* Automated testing
+
+---
+
+# Automated testing...
+
+* ... is writing testing code to execute your production code and make
+  assertions about how it should behave.
+
+* ... can be measured by code coverage tools that determine which code paths
+  are executed by your tests.
+
+* ... allows you to build large and complex systems with very permissive
+  languages.
+
+    * For a dynamically typed language like Ruby, automated testing can make up
+      for the lack of static checks normally done by a compiler.
+
+* ... allows engineers working in unfamiliar code bases to make changes with
+  confidence.
+
+---
+
+# Types of Tests
+
+The previous FizzBuzz example demonstrated __unit__ tests. Other types of tests
+are:
+
+* Functional
+
+* Integration
+
+* System
+
+* Acceptance
+
+* Performance
+
+## Regression (testing)
+
+Whenever you discover a bug, the first thing you _should_ do is write a test
+that demonstrates the failure caused by the bug. Then fix the code and observe
+it passing. Building this set of tests helps prevent the introduction of a
+_regression_.
+
+???
+
+* Functional
+  - Tests a function or method, also called a unit test
+* Integration
+  - Tests how multiple functions or methods work together
+* System
+  - Tests how the entire system works together
+* Acceptance
+  - Tests how the system works from the perspective of the user
+  - Often called end-to-end tests
+  - Simulates a user interacting with the system
+
+---
+
+# Testing Pyramid
+
+.center[![Test Pyramid](test-pyramid.png)]
+
+There should be significantly more unit tests than higher-level tests.
+
+Source: https://martinfowler.com/bliki/TestPyramid.html
+
+---
+
+# Workflow
+
+We know that we do not want our changes to diverge too far from the rest of
+the group.
+
+> What's the right way to use our source control system to accomplish this
+> goal?
+
+> How do you reconcile code conflicts?
+
+--
+
+There are two popular git-based workflow systems:
+
+* [Git-flow](http://nvie.com/posts/a-successful-git-branching-model/)
+
+* [GitHub Flow](https://guides.github.com/introduction/flow/)
+
+GitHub Flow is simpler and recommended for this class.
+
+---
+
+# GitHub Flow
+
+1. Ensure your main branch is up-to-date with the remote (often called
+   `origin`)
+
+2. Create a new branch for your feature (often called a `feature branch`)
+
+3. Make regular
+   [atomic commits](https://www.freshconsulting.com/atomic-commits/) to the
+   feature branch
+
+4. Regularly push your local changes to the remote branch on github
+
+5. Open a github pull request when the work on the feature branch is complete, or when you want feedback
+
+6. Have a group member perform a _code review_ of your changes
+
+7. If there are issues to address from _code review_, resolve them
+
+8. If there are test failures (you've set up a CI system, right?) fix them
+
+9. Merge the branch to main when everything is good-to-go
+
+__Note__: We neglected the _deploy_ phase just prior to merging.
+
+---
+
+# GitHub Flow Commands
+
+## Ensure your main branch is up-to-date with the remote
+
+```bash
+git pull
+```
+
+## Create a new branch for your feature
+
+```bash
+git checkout -b feature_name
+```
+
+## Commit to the feature branch regularly
+
+```bash
+git add [files...]
+git commit -m "Add a brief useful description of changes"
+```
+
+## Push local changes to the remote
+
+``` bash
+git push -u origin HEAD
+```
+
+---
+
+# Integration with Git
+
+Recall what we want to reconcile our changes regularly. Feature branches should
+be no more than a day or two out-of-sync with their parent branch.
+
+If you want to reconcile your changes without merging to main, a __git
+rebase__ is very useful:
+
+```bash
+git rebase main feature_branch
+```
+
+.center[![git rebase](git_rebase_v13_5.png)]
+
+---
+
+# Git Interactive Rebase
+
+.left-column40[
+If you have been committing frequently and want to squash some commits,
+consider an interactive rebase:
+
+```bash
+git rebase -i main
+```
+]
+.right-column60[
+.center[![git interactive rebase](git_interactive_rebase.png)]
+]
+
+How to Write a Git Commit Message: https://chris.beams.io/posts/git-commit/
+
+---
+
+# So you think you are ready to merge?
+
+* We have fullfield the requirements of the story
+* We have written tests the exercise the new code
+* We have rebased our branch on the main branch and resolved any conflicts
+* We have a code review
+* We have manually tested our feature
+
+
+> Are we ready to merge?
+
+--
+
+*  In a small project with a small team, maybe
+*  In a large project with a large team, probably not
+  - Are you familiar enough with the code base to know if your changes will break something else?
+  - Can you test the full application on your local machine?
+  - Will other engineers be able to test the full application on their local machine?
+  - How long would it take to run all the tests on your local machine?
+
+--
+
+As a project grows, we use a __Continuous Integration__ server to help us with these concerns
+
+
+---
+
+# Continuous Integration
+
+__Making automated testing a part of your development workflow__
+
+Utilize a __Continuous Integration__ server (CI) that will monitor changes to
+your source code.
+
+Whenever anyone checks in new code, run all the tests.
+
+* The sooner you find and fix integration problems, the better.
+
+* This also prevents defects unrelated to integration.
+
+The CI server can also test code quality and security, among other things.
+
+---
+
+# CI via GitHub Actions
+
+.center[![PRAW GitHub Actions](praw_github_actions.png)]
+
+---
+
+# GitHub Actions
+
+You will configure your primary project to use [GitHub Actions](https://github.com/features/actions)
+
+Consider using GitHub Actions for Project 3 too.
+
+GitHub actions is free for open-source projects.
+
+If you are doing TDD and creating automated tests, GitHub Actions will provide you
+with immediate feedback on your changes through GitHub:
+
+.center[![Github Pull Request "All is well"](github_pr_all_is_well.png)]
+
+---
+
+# Other Related Tools
+
+## Coveralls
+
+Web service that provides view into code coverage that occurs during the
+testing phase. Integrates with GitHub and can be configured to
+_fail_ pull requests that decrease code coverage.
+
+https://coveralls.io/
+
+Free for open source projects.
+
+## Rubocop
+
+A static analysis tool for ruby that suggests source code improvements
+encompassing code style, unused variables, visually ambiguous statements, and
+more.
+
+https://github.com/bbatsov/rubocop
+
+---
+
+# Pair Programming
+
+.left-column[
+.center[![Pair programming](pair_programming.png)]
+Two developers share one computer and discuss all code that is being written.
+]
+.right-column[
+### Driver-Navigator
+
+One person does most of the implementation while the other watches, discusses,
+thinks of consequences, and looks forward.
+
+### Ping-pong pairing
+
+One person writes the test, the other makes it pass. This approach is
+frequently used while learning TDD and pair programming.
+
+In both approaches, pairs should regularly switch roles (e.g., every twenty
+minutes).
+]
+
+---
+
+# Pairing in this class
+
+Pair programming is __strongly__ encouraged, but not required.
+
+When you pair you will inevitably experience more of your project. This means
+you can claim you worked on that component in an interview, and as a result
+should be able to sufficiently explain what was done.
+
+On the other hand, it is possible for there to be bad pairings among your
+group. If you don't feel it is working out, then simply don't do it.
+
+---
+
+# Pairing: Problem Complexity
+
+.center[![pairing usefulness as a function of problem complexity](pairing_and_problem_complexity.png)]
+
+Source: Dr. Andrew Mutz
+
+---
+
+# Pairing: Code Reading
+
+.center[![pairing usefulness as a function of amount of time spent reading code](pairing_and_code_reading.png)]
+
+Source: Dr. Andrew Mutz
+
+---
+
+# Pairing: Expertise Disparity
+
+.center[![pairing usefulness as a function of expertise_disparity](pairing_and_expertise_disparity.png)]
+
+Source: Dr. Andrew Mutz
+
+
+---
+
+# Mob Programming (aka Mobbing)
+
+Like pair programming, but involving 3+ people.
+
+- <https://www.agilealliance.org/resources/sessions/mob-programming-aatc2017/>
+
+---
+
+# Remote Pair Programming
+.center[![Remote Pair Programming](remote_mob_programming.png)]
+
+.bottom-row20[
+- Source: <https://www.remotemobprogramming.org/>
+]
+---
+
+class: center, middle, inverse
+# Test Driven Development
+
+---
+
+# Test Driven Development: How?
+
+How to provide significant code coverage (not necessarily 100%)?
+
+--
+
+* Don't write any production code, until there is test code that tests the
+  desired functionality.
+
+--
+
+* Write the minimal amount of production code to make the test(s) pass.
+
+--
+
+## Steps
+
+1. (__RED__) Write the simplest test case to observe a failure -- actually
+observe it!
+
+--
+
+2. (__GREEN__) Write the least amount of code to observe the test pass.
+
+--
+
+3. (__REFACTOR__) Clean up your design of both the code and tests.
+
+???
+
+Whether following TDD or not, it is important to make your test fail to ensure it is testing what you think it is testing.
+
+---
+
+# TDD Example: FizzBuzz
+
+* If the argument is divisible by three, return "Fizz"
+
+* If the argument is divisible by five, return "Buzz"
+
+* If the argument is divisible by both return "FizzBuzz"
+
+* Otherwise return the argument
+
+---
+
+# Test Fizz (red)
+
+## Test
+
+```ruby
+def test_divisible_by_3
+  assert_equal 'Fizz', fizzbuzz(3)
+end
+```
+
+--
+
+## Program
+
+```ruby
+def fizzbuzz(n)
+  # test_divisible_by_3 fails
+end
+```
+
+---
+
+# Test Fizz (green)
+
+## Test
+
+```ruby
+def test_divisible_by_3
+  assert_equal 'Fizz', fizzbuzz(3)
+end
+```
+
+## Program
+
+```ruby
+def fizzbuzz(n)
+  'Fizz'
+  # test_divisible_by_3 passes
+end
+```
+
+---
+
+# Test Buzz (red)
+
+## Test
+
+```ruby
+def test_divisible_by_5
+  assert_equal 'Buzz', fizzbuzz(5)
+end
+```
+
+--
+
+## Program
+
+```ruby
+def fizzbuzz(n)
+  'Fizz'
+  # test_divisible_by_3 passes
+  # test_divisible_by_5 fails
+end
+```
+
+---
+
+# Test Buzz (green)
+
+## Test
+
+```ruby
+def test_divisible_by_5
+  assert_equal 'Buzz', fizzbuzz(5)
+end
+```
+
+## Program
+
+```ruby
+def fizzbuzz(n)
+  if n % 3 == 0
+    'Fizz'
+  else
+    'Buzz'
+  end
+  # test_divisible_by_3 passes
+  # test_divisible_by_5 passes
+end
+```
+
+---
+
+# Test FizzBuzz (red)
+
+## Test
+
+```ruby
+def test_divisible_by_both
+  assert_equal 'FizzBuzz', fizzbuzz(15)
+end
+```
+
+--
+
+## Program
+
+```ruby
+def fizzbuzz(n)
+  if n % 3 == 0
+    'Fizz'
+  else
+    'Buzz'
+  end
+  # test_divisible_by_3 passes
+  # test_divisible_by_5 passes
+  # test_divisible_by_both fails
+end
+```
+
+---
+
+# Test FizzBuzz (green)
+
+## Test
+
+```ruby
+def test_divisible_by_both
+  assert_equal 'FizzBuzz', fizzbuzz(15)
+end
+```
+
+## Program
+
+```ruby
+def fizzbuzz(n)
+  if n % 3 == 0
+    if n % 5 == 0
+      'FizzBuzz'
+    else
+      'Fizz'
+    end
+  else
+    'Buzz'
+  end
+  # test_divisible_by_3 passes
+  # test_divisible_by_5 passes
+  # test_divisible_by_both passes
+end
+```
+
+---
+
+# Test Other (red)
+
+## Test
+
+```ruby
+def test_divisible_by_neither
+  assert_equal 17, fizzbuzz(17)
+end
+```
+
+--
+
+## Program
+
+```ruby
+def fizzbuzz(n)
+  if n % 3 == 0
+    if n % 5 == 0
+      'FizzBuzz'
+    else
+      'Fizz'
+    end
+  else
+    'Buzz'
+  end
+  # test_divisible_by_3 passes
+  # test_divisible_by_5 passes
+  # test_divisible_by_both passes
+  # test_divisible_by_neither fails
+end
+```
+
+---
+
+# Test Other (green)
+
+## Program
+
+```ruby
+def fizzbuzz(n)
+  if n % 3 == 0
+    if n % 5 == 0
+      'FizzBuzz'
+    else
+      'Fizz'
+    end
+  elsif n % 5 == 0
+    'Buzz'
+  else
+    n
+  end
+  # test_divisible_by_3 passes
+  # test_divisible_by_5 passes
+  # test_divisible_by_both passes
+  # test_divisible_by_neither passes
+end
+```
+
+---
+
+# FizzBuzz Refactor
+
+## Program
+
+```ruby
+def fizzbuzz(n)
+  if n % 15 == 0
+    'FizzBuzz'
+  elsif n % 3 == 0
+    'Fizz'
+  elsif n % 5 == 0
+    'Buzz'
+  else
+    n
+  end
+  # test_divisible_by_3 passes
+  # test_divisible_by_5 passes
+  # test_divisible_by_both passes
+  # test_divisible_by_neither passes
+end
+```
+
+---
+
+# TDD Encouragement
+
+When working on your projects it is strongly recommend that you begin by trying
+out test driven development.
+
+--
+
+High test coverage can help you avoid getting stuck on bugs
+  - even more important as more people are working on the same code
+
+--
+
+Your grade does not depend on your code coverage (!)
+
+--
+
+However, significant code coverage will ...
+
+--
+
+  - help ensure a bug is not introduced later in the project or
+prior to your team's presentation
+
+--
+
+  - help reduce the time to __integrate__ feature branch changes
+
+--
+
+See chapter 3 in the RoR book.
+
+---
+
+
+
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"
+            type="text/javascript"></script>
+    <script type="text/javascript">
+      var hljs = remark.highlighter.engine;
+      var slideshow = remark.create({
+          highlightLanguage: 'ruby',
+          highlightLines: true,
+          hightlightSpans: true,
+          highlightStyle: 'monokai'
+        }) ;
+    </script>
+  </body>
+</html>
