@@ -57,7 +57,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 ### Topics
 
 - Scaling Web Applications - [slides](/slides/2024f/05_scaling_web_applications/index.html)
-- Architecting for High Availability
+- Architecting for High Availability [slides](/slides/2024f/06_high_availability/index.html)
 
 ### Tasks
 
