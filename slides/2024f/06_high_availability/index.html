@@ -152,6 +152,13 @@ Modern web applications power important parts of our lives
 Having access to these services (high availability) at any time is increasingly
 important.
 
+???
+
+As a user of these services, we expect them to be available at all times.
+When they are not, it can be frustrating and even dangerous.
+When we build these services, we need to think about how customers will depend on them
+and what level of availability we need to provide.
+
 ---
 
 # Expressing Availability
@@ -170,6 +177,14 @@ Downtime usually only includes unplanned outages. Scheduled outages, no matter
 how frequent, are usually not incorporated in marketing material.
 
 [Availability Table](https://sre.google/sre-book/availability-table/#tablea1)
+
+???
+
+What is considered downtime?
+* Unplanned outages
+* Are scheduled outages considered downtime? Usually not,
+  but we can arhitect our system to minimuze downtime during
+  certain types of maintenance, like software updates
 
 ---
 
@@ -205,45 +220,15 @@ class: center, middle
 # Possible causes of failures. What if?
 
 * a server process hangs?
-
---
-
 * a server process dies?
-
---
-
 * an application server fails?
-
---
-
 * a load balancer fails?
-
---
-
 * a switch fails?
-
---
-
 * a router fails?
-
---
-
 * a connection to the Internet fails?
-
---
-
 * DNS fails?
-
---
-
 * the Internet fails?
-
---
-
 * a database fails?
-
---
-
 * an entire data center fails?
 
 ---
@@ -271,6 +256,13 @@ We've already discussed the components of this sort of failure.
 * Having a load-balanced configuration permits failing servers (high load or
   dead) by having a pool of other servers to direct traffic to.
 ]
+
+???
+
+A load balanced system can handle a server failure by directing traffic to others.
+However, if the system is already operating at capacity, the loss of a server could cause a cascading failure.
+Part of high availability is ensuring that the system can handle the loss of a server without causing a failure.
+To do this we need to monitor the load on the servers and have a method to add capacity when needed.
 
 ---
 
@@ -306,7 +298,6 @@ other.
 
 > During a failover, what happens to the IP address?
 
-
 ---
 
 # Load Balancer Failover
@@ -323,6 +314,17 @@ balancer.
 
 Established flows can be supported depending on how much information sharing
 occurs between the load balancers.
+
+???
+
+There are different ways to handle load balancer failure.
+One way is to have two load balancers, one primary and one failover using a heartbeat to determine the health of each other.
+If this is a proxy load balancer layer 4 or 7, the load balancers may share session information so that if one fails, the other can take over the session.
+
+For a layer 4 packet re-writing load balancer, the load balancers may not need to share session information.
+Another way is to have a router that implements ECMP (Equal Cost Multi-Path) routing to distribute traffic to multiple load balancers.
+In this case, the load balancers do not need to communicate with each other.
+The router will distribute traffic to the load balancers based on a hash of the packet header, like the source IP address.
 
 ---
 
@@ -439,6 +441,10 @@ class: center, middle
 
 ![Hurricane Sandy Headline](hurricane_sandy_article.png)
 
+???
+
+2012 Hurricane took AWS data center offline.
+
 ---
 
 class: center, middle
@@ -479,6 +485,13 @@ client's DNS server.
 
 We end up having to make a choice between performance and availability.
 
+
+???
+
+What is the performance problem with multiple A records?
+* The backend state would need to be replicated across data centers in near real-time.
+  - This is a difficult problem to solve.
+  - CAP theorem says we can't have consistency and availability and performance in a distributed system.
 ---
 
 class: center, middle
@@ -492,9 +505,13 @@ What about the database?
 
 ---
 
-What if your service is failing due to excessive load?
+# Now that we have architecture for high availability
 
-How can your service be highly available when under heavy load?
+We have redundant systems in place to handle failures
+
+> What if your service is failing due to excessive load?
+
+> How can your service be highly available when under heavy load?
 
 --
 
