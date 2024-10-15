@@ -73,7 +73,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- Working in teams
+- Working in teams [slides](/slides/2024f/07_agile_tdd_pairing/index.html)
   - Agile Software Development
   - Test Driven Development (TDD)
   - Continuous Integration (CI)
