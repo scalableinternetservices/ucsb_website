@@ -148,15 +148,6 @@ class: center inverse middle
 Source:
 https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm
 
-???
-
-Engineering is a scarce resource. The demand for software engineers is high
-and you are one of those scarce resources.
-
-Is AI, most recently LLMs, going to accelerate or decelerate this trend?
-Maybe too early to tell, but my guess is it will accelerate it for a while
-before any deceleration.
-
 ---
 
 # Talent Shortage
@@ -174,6 +165,12 @@ https://readwrite.com/2019/07/04/today-the-tech-talent-shortage-is-everybodys-pr
 
 Book:
 [Developers are the New Kingmakers - Stephen O'Grady](https://www.oreilly.com/library/view/the-new-kingmakers/9781449368036/)
+
+???
+
+Is AI, most recently LLMs, going to accelerate or decelerate this trend?
+Maybe too early to tell, but my guess is it will accelerate it for a while
+before any deceleration.
 
 ---
 
@@ -199,8 +196,12 @@ Modern techniques are designed to optimize for your time.
 
 ???
 
+Engineering is a scarce resource. The demand for software engineers is high
+and you are one of those scarce resources.
 * In a shortage of resources, we need to optimize for the resources we have.
 * How can we make teams opperate more efficiently?
+
+Techniques/Tools like Agile, TDD, CI, and Pairing are designed to help teams work
 * These techniques are designed to help teams work together more efficiently
 * This isn't just about programmers
 * Other disciplines are needed to run a tech company
@@ -217,7 +218,7 @@ Modern techniques are designed to optimize for your time.
 
 Soon guidelines like this one should make complete sense:
 
-> ## Sprint 2: Starts October 12
+> ## Sprint 2: Starts November 11th
 
 > * Conduct a __retrospective__ on how the last sprint went and how your group
 >   can improve.
@@ -255,10 +256,7 @@ Soon guidelines like this one should make complete sense:
 
 ???
 
-* Agile is a collection of different approaches for developing software that has
-  emerged as dominant over the last 15+ years.
-* Scrum is a popular form of Agile software development.
-* This is more of a guideline than a strict set of rules.
+* This is more of a suggested playbook than a strict set of rules.
 * Adopting something too strict intiitively might not be "Agile"
 
 ---
@@ -305,7 +303,7 @@ Reference: *1970, Proceedings of IEEE WESCON 26 (August): 1–9.
 
 .center[![Waterfall](waterfall.png)]
 
-This diagram from Royce's paper is frequently cited.
+This diagram from Winston Royce's paper "Managing the Development of Large Software Systems"
 
 
 
@@ -325,14 +323,18 @@ before testing.
 ## Strengths
 
 - This approach allows for deep specialization.
-- Works great for areas like manufacturing where it is _expensive_ to
+- Can reduce waste from repeating steps with long lead times in areas like manufacturing where it is _expensive_ to
 alter the design due to issues detected in latter stages.
+
+???
+
+A specialist at one layer in the process can focus on their area of expertise and prepare an artifact for handoff to the next layer.
 
 ---
 
 # Waterfall Continued
 
-- Works best when you have complete knowledge wrt software development:
+- In Software: works best when you have complete knowledge of the problem and technology:
   - Requirements team understands the impact on design and development
   - Designers have complete understanding of the difficulty of each design
 decision
@@ -383,7 +385,7 @@ Jeff Sutherland, and Dave Thomas.
 * Doesn't mean their is no process
   - it means that process is fluid to meet the needs of the project and Team
 * Doesn't mean there is no documentation
-  - it means that documentation is not intended to single that completion of a project and a handoff to another team
+  - it means that documentation is not intended to signal that completion of a project and a handoff to another team
 * Doesn't mean there is no contract( or specification of requirements )
   - it means that the requirements may be discovered as the project progresses
 * Doesn't mean there is no plan
@@ -495,7 +497,7 @@ Jeff Sutherland, and Dave Thomas.
   - Plan for a sprint
   - Plan for an individual task
 
----
+???
 
 # Examples of responding to change
 
@@ -584,7 +586,7 @@ owner, or with external dependencies)
       - Support
       - Other teams
       - Executives
-* Is this a process?  I though Agile was about individuals and interactions over processes and tools
+* I thought Agile was about individuals and interactions over processes and tools?
 * The process can take a wide variety of forms and is what the team has decided is best for them
 * The Scrum Master is not a manager, but a facilitator of the decided process
 * The produce owner and scrum master roles may be:
@@ -704,13 +706,13 @@ Mention the artifacts/meetings of the scrum process
 
 ---
 
-# Example of a typical Scrum Process
+# Example of a Typical Scrum Process
 
 ## Spring Planning
 
 Frequency - Once per sprint
 
-A meeting at the start of each sprint is the to decide the "sprint commitment".
+A meeting at the start of each sprint to decide the "sprint commitment".
 
 ## Grooming
 
@@ -811,6 +813,10 @@ Integration can be very difficult and painful.
 > Should we perform integration as rarely as possible or as frequently as
 > possible?
 
+???
+
+This can even be difficult for a single engineer working on single project with multiple feature branches
+
 ---
 
 # Martin Fowler
@@ -882,8 +888,7 @@ often
 
 # Types of Tests
 
-The previous FizzBuzz example demonstrated __unit__ tests. Other types of tests
-are:
+* Unit tests
 
 * Functional
 
@@ -903,17 +908,16 @@ it passing. Building this set of tests helps prevent the introduction of a
 _regression_.
 
 ???
-
-* Functional
+* Unit tests
   - Tests a function or method, also called a unit test
+* Functional
+  - Tests the business logic of the application
 * Integration
-  - Tests how multiple functions or methods work together
-* System
+  - Tests how multiple paths of the application work together
+* System / End to End / Acceptance
   - Tests how the entire system works together
-* Acceptance
   - Tests how the system works from the perspective of the user
-  - Often called end-to-end tests
-  - Simulates a user interacting with the system
+  - May simulate how a user interacting with the system
 
 ---
 
@@ -1097,10 +1101,15 @@ Consider using GitHub Actions for Project 3 too.
 
 GitHub actions is free for open-source projects.
 
-If you are doing TDD and creating automated tests, GitHub Actions will provide you
+If you are doing Test Driven Development (TDD) and creating automated tests, GitHub Actions will provide you
 with immediate feedback on your changes through GitHub:
 
 .center[![Github Pull Request "All is well"](github_pr_all_is_well.png)]
+
+???
+
+When I see that all checks have passed, I know that the code is ready to merge
+This can help your team scale by allowing you to merge code with a higher level of confidence
 
 ---
 
@@ -1124,6 +1133,10 @@ more.
 
 https://github.com/bbatsov/rubocop
 
+???
+
+You might add these as separate checks in your CI system
+
 ---
 
 # Pair Programming
@@ -1146,19 +1159,6 @@ frequently used while learning TDD and pair programming.
 In both approaches, pairs should regularly switch roles (e.g., every twenty
 minutes).
 ]
-
----
-
-# Pairing in this class
-
-Pair programming is __strongly__ encouraged, but not required.
-
-When you pair you will inevitably experience more of your project. This means
-you can claim you worked on that component in an interview, and as a result
-should be able to sufficiently explain what was done.
-
-On the other hand, it is possible for there to be bad pairings among your
-group. If you don't feel it is working out, then simply don't do it.
 
 ---
 
@@ -1201,6 +1201,20 @@ Like pair programming, but involving 3+ people.
 .bottom-row20[
 - Source: <https://www.remotemobprogramming.org/>
 ]
+
+---
+
+# Pairing in this class
+
+Pair programming is __strongly__ encouraged, but not required.
+
+When you pair you will inevitably experience more of your project. This means
+you can claim you worked on that component in an interview, and as a result
+should be able to sufficiently explain what was done.
+
+On the other hand, it is possible for there to be bad pairings among your
+group. If you don't feel it is working out, then simply don't do it.
+
 ---
 
 class: center, middle, inverse
@@ -1518,7 +1532,7 @@ prior to your team's presentation
 
   - help reduce the time to __integrate__ feature branch changes
 
---
+???
 
 See chapter 3 in the RoR book.
 
