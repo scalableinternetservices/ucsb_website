@@ -216,38 +216,61 @@ one post can have many comments. Each comment belongs to the user and the post.<
 
 <ul>
   <li>
-    <p>Navigating to the <code class="language-plaintext highlighter-rouge">/users</code> endpoint will list all <code class="language-plaintext highlighter-rouge">users</code> in your app</p>
+    <p>Navigating to <code class="language-plaintext highlighter-rouge">/login</code> will provide you with a simple form where you can enter
+your username.  No password is required.  When you submit the login form a new
+user should be created if no user matches the username or an exiting user should
+be logged in if the username exists.  Either way, you should be re-directed to
+the root of the application <code class="language-plaintext highlighter-rouge">/</code>.  This should initialized a user session and
+store the identity of the user in the session.</p>
   </li>
   <li>
-    <p>Navigating to the <code class="language-plaintext highlighter-rouge">/users/:id</code> will show the page with the information
-about the <code class="language-plaintext highlighter-rouge">user</code> with the given <code class="language-plaintext highlighter-rouge">id</code></p>
-
+    <p>Navigating to <code class="language-plaintext highlighter-rouge">/logout</code> should remove the user information from the session</p>
+  </li>
+  <li>
+    <p>Navigating to any page other than <code class="language-plaintext highlighter-rouge">/login</code> without a user session should result
+in a re-direct to <code class="language-plaintext highlighter-rouge">/login</code></p>
+  </li>
+  <li>Navigating to the root of the application <code class="language-plaintext highlighter-rouge">/</code> when you are logged in will show
+a list of all the posts from all users in chrolological order with the most
+recently created post at the top.  Each post should include:
     <ul>
+      <li>The content of the post</li>
+      <li>The username of the user who created the post</li>
+      <li>The number of comments on a post (linkable to <code class="language-plaintext highlighter-rouge">/posts/:id</code> described below)</li>
+      <li>The time the post was last updated
+If the user is not logged in, they should be re-directed to the <code class="language-plaintext highlighter-rouge">/login</code></li>
+      <li>(Not Required) - Consider adding a search filter form input that allows you to
+filter the list of posts to just those for the specified username</li>
+    </ul>
+  </li>
+  <li>Navigating to the <code class="language-plaintext highlighter-rouge">/posts/:id</code> will show the page with the information
+about the <code class="language-plaintext highlighter-rouge">post</code> with the given <code class="language-plaintext highlighter-rouge">id</code> including
+    <ul>
+      <li>The content of the post</li>
+      <li>The author of the post</li>
+      <li>The list of comments for the post</li>
+      <li>
+        <p>A form to add a new comment to a post.  Submitting this form should
+show keep the browser on the same page but show the newly posted comment</p>
+      </li>
       <li>Returns 404 if the id was not found.</li>
     </ul>
   </li>
   <li>
-    <p>From the browser, you can create the user</p>
+    <p>From the browser, you can create a post</p>
   </li>
   <li>
-    <p>From the browser, you can update the user</p>
+    <p>From the browser, you can update a post but only if you are the author</p>
   </li>
   <li>
-    <p>From the browser, you can delete the user</p>
+    <p>From the browser, you can delete a post but only if you are the author</p>
   </li>
   <li>
-    <p>There is a validation error for incorrect create or update action</p>
-
-    <ul>
-      <li>E.g. Each user has to have an email and an error is displayed if this
-required value is not provided</li>
-    </ul>
+    <p>From the browser, you can comment on any post</p>
   </li>
-  <li>
-    <p>Users index page (<code class="language-plaintext highlighter-rouge">/users</code>) shows the list of all the users; for each user
-it shows the list of all posts that belong to the given user and for each
-post it shows all the comments that belong to the post.</p>
-  </li>
+  <li>There should be a validation error for posts or comments that are attempting to influence the election.
+Have fun with this.  A simple example might be a validation error for posts that include
+the words “Trump” or “Harris”</li>
 </ul>
 
 <h2 id="resources">Resources</h2>

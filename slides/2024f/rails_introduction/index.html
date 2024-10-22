@@ -1,0 +1,446 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Introduction to Ruby on Rails</title>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 2.5em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      blockquote {
+        border-left: 0.3em solid rgba(0,0,0,0.5);
+        padding: 0 15px;
+        font-style: italic;
+      }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      img {
+        max-height: 100%;
+        max-width: 100%;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .clear { clear: both; }
+      #slideshow .slide .content code { font-size: 0.8em; }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 1em;
+      }
+      .background-blue {
+        background-color: deepskyblue;
+      }
+      .background-green {
+        background-color: springgreen;
+      }
+      .background-pink {
+        background-color: deeppink;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        width: 49%;
+        float: left;
+      }
+      .right-column {
+        width: 49%;
+        float: right;
+      }
+      .left-column20 {
+        width: 20%;
+        float: left;
+      }
+      .right-column80 {
+        width: 79%;
+        float: right;
+      }
+      .left-column30 {
+        width: 30%;
+        float: left;
+      }
+      .right-column70 {
+        width: 69%;
+        float: right;
+      }
+      .left-column40 {
+        width: 40%;
+        float: left;
+      }
+      .right-column60 {
+        width: 59%;
+        float: right;
+      }
+
+      /* Table layout */
+      table {
+        background: #f5f5f5;
+        margin: 30px auto;
+        text-align: left;
+        width: 100%;
+      }
+      th {
+        background: linear-gradient(#777, #444);
+        color: #fff;
+        font-weight: bold;
+        padding: 10px 15px;
+      }
+      td {
+        border-right: 1px solid #fff;
+        border-left: 1px solid #e8e8e8;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #e8e8e8;
+        padding: 10px 15px;
+      }
+
+    </style>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle
+
+# Introduction to Ruby on Rails
+
+## CS291A: Scalable Internet Services
+
+---
+
+## History of Ruby on Rails
+
+- Created in 2004 by David Heinemeier Hansson (DHH)
+- Extracted from Basecamp project management tool
+- Released as open-source
+- Major release dates:
+  - 2004: Initial release (0.5)
+  - 2005: Rails 1.0
+  - 2007: Rails 2.0
+  - 2010: Rails 3.0
+  - 2013: Rails 4.0
+  - 2016: Rails 5.0
+  - 2020: Rails 6.0
+  - 2021: Rails 7.0
+
+???
+
+**Speaker Notes:**
+- Emphasize the origin of Rails from practical needs at Basecamp.
+- Highlight how it became popular quickly due to its simplicity and productivity for web applications.
+- Rails versions usually introduce major enhancements, focus on 6 and 7 being recent with performance improvements and modern JavaScript support.
+
+---
+
+## Key Benefits of Ruby on Rails
+
+- **Convention over Configuration (CoC)**
+- **Don’t Repeat Yourself (DRY)**
+- **Built-in Scalability**
+- **Full-stack solution**: Includes everything from front-end to database interaction
+- **Active community**: Constant improvements and large ecosystem
+- **RESTful Architecture**: Favors design of modern web apps
+
+???
+
+**Speaker Notes:**
+- CoC minimizes configuration; most things work "out of the box."
+- DRY ensures you write less code by abstracting common patterns.
+- Rails handles web, database, and background jobs, providing an all-in-one framework.
+
+---
+
+## Ruby on Rails vs. Other Frameworks
+
+| Feature                | Ruby on Rails         | Django              | Express.js       |
+|------------------------|-----------------------|---------------------|------------------|
+| Language               | Ruby                  | Python              | JavaScript (Node)|
+| Philosophy             | CoC, DRY              | Explicit is better  | Minimalist       |
+| Full-stack             | Yes                   | Yes                 | No               |
+| ORM                    | ActiveRecord          | Django ORM          | None (MongoDB popular)|
+| Performance            | High (Recent versions)| High                | High             |
+| Ecosystem              | Large                 | Large               | Moderate         |
+
+???
+
+**Speaker Notes:**
+- Discuss how Rails compares to Django in terms of philosophy—Rails focuses more on conventions, Django on explicit configuration.
+- Express.js is more lightweight, used primarily in Node.js ecosystems where developers want more control over the stack.
+
+---
+
+## Convention over Configuration
+
+- Rails uses **default conventions** to simplify configuration
+  - Default folder structures: `app/models`, `app/views`, `app/controllers`
+  - Convention-based file names, e.g., `UserController` automatically maps to `users` table
+  - Migrations manage database schema changes
+- Opinionated framework: makes assumptions to reduce decision fatigue
+
+???
+
+**Speaker Notes:**
+- Explain that CoC leads to faster development, reducing the number of choices developers need to make.
+- Emphasize that while opinionated, Rails allows flexibility through customization if necessary.
+
+---
+
+## Core Concepts of a Rails Application
+
+### 1. Model-View-Controller (MVC)
+
+- **Model**: Business logic and database interaction (ActiveRecord ORM)
+- **View**: User-facing templates (ERB, Haml, etc.)
+- **Controller**: Manages request-response lifecycle
+
+---
+
+### 2. Models
+
+- Represent database tables as Ruby classes
+- Utilize **ActiveRecord** ORM to abstract SQL interactions
+  - Example: `User.find(1)` instead of `SELECT * FROM users WHERE id = 1`
+
+---
+
+### 3. Views
+
+- Present data to users through templates
+- Can include logic (not recommended) and helpers for DRY
+
+---
+
+### 4. Controllers
+
+- Handle incoming requests and responses
+- Route logic to appropriate actions
+- E.g., `def show` method for displaying user data
+
+---
+
+### 5. Migrations
+
+- Version control for database schema
+- Create, update, or drop tables with simple Ruby commands
+  - Example: `rails generate migration AddEmailToUsers email:string`
+
+???
+
+**Speaker Notes:**
+- Break down the MVC architecture and emphasize how each piece interacts.
+- Mention that the model uses ActiveRecord, and migrations manage schema changes.
+- Give examples of each concept and how it ties into building a real-world application.
+
+---
+
+## Rails Application Structure
+
+- **app/**: Core components (models, views, controllers)
+- **db/**: Database files and migrations
+- **config/**: Application configurations, routes
+- **lib/**: Custom libraries and reusable code
+- **public/**: Static files (images, JS, CSS)
+
+???
+
+**Speaker Notes:**
+- Walk through the folder structure of a typical Rails application.
+- Focus on how conventions organize files and directories to make them predictable and easy to navigate.
+
+---
+
+## Rails Command Line Interface (CLI)
+
+- **`rails new app_name`**: Create a new Rails application
+- **`rails generate scaffold ModelName`**: Generate MVC components
+- **`rails db:migrate`**: Run pending migrations
+- **`rails server`**: Start the development server
+- **`rails console`**: Interactive Ruby console for testing
+- **`rails routes`**: Display application routes
+- **`rails dbconsole`**: Access the database console
+- **`rails test`**: Run test suite
+
+---
+
+## Rails Validations
+
+- Ensure data integrity and consistency
+- Built-in helpers for common validations
+  - Presence, uniqueness, format, length, etc.
+
+```ruby
+class User < ApplicationRecord
+  validates :email, presence: true, uniqueness: true
+end
+```
+
+???
+
+**Speaker Notes:**
+- Explain how validations ensure data quality and prevent invalid data from entering the database.
+
+---
+
+## Rails Associations
+
+- Define relationships between models
+- Common associations:
+  - `has_many`, `belongs_to`, `has_one`, `has_and_belongs_to_many`
+
+```ruby
+class User < ApplicationRecord
+  has_many :posts
+end
+
+class Post < ApplicationRecord
+  belongs_to :user
+end
+```
+
+???
+
+**Speaker Notes:**
+- Discuss how associations simplify querying and managing relationships between models.
+
+---
+
+## Rails Routing
+
+- Maps URLs to controller actions
+- RESTful routes: `GET`, `POST`, `PUT`, `DELETE`
+- Define routes in `config/routes.rb`
+
+```ruby
+Rails.application.routes.draw do
+  resources :users
+end
+```
+
+
+???
+
+**Speaker Notes:**
+- Explain how routing connects URLs to controller actions and RESTful conventions simplify API design.
+
+---
+
+## Rails Testing
+
+- **Minitest**: Default testing framework
+- **RSpec**: Popular alternative for BDD
+- **Fixtures**: Sample data for testing
+- **Factories**: Generate test data dynamically
+- **System tests**: End-to-end testing with Capybara
+
+---
+
+## Rails Controller Test Example
+
+Test that the `users#index` action returns the users list:
+```ruby
+class UsersControllerTest < ActionDispatch::IntegrationTest
+  test "should get index" do
+    get users_url
+    assert_response :success
+    assert_select "h1", "Users"
+    assert_select "li", User.count
+    assert_select "li", User.first.name
+  end
+end
+```
+
+or if it is a API endoint:
+```ruby
+class UsersControllerTest < ActionDispatch::IntegrationTest
+  test "should get index" do
+    get users_url, as: :json
+    assert_response :success
+    assert_equal User.count, JSON.parse(response.body).size
+    assert_equal User.first.name, JSON.parse(response.body).first["name"]
+  end
+end
+```
+---
+
+## Cookies and Sessions
+
+- **Cookies**: Store small pieces of data on the client side
+- **Sessions**: Store user data on the server side
+- Rails provides helpers for managing cookies and sessions
+
+```ruby
+# Set a cookie
+cookies[:user_id] = current_user.id
+
+# Access session data
+session[:user_id]
+```
+
+---
+
+## Before Action Callbacks
+
+- Run code before controller actions
+- Common uses:
+  - Authenticate users
+  - Set instance variables
+  - Redirect if conditions are not met
+
+```ruby
+class PostsController < ApplicationController
+  before_action :authenticate_user!
+
+    def index
+      @posts = Post.all
+    end
+
+  private
+
+  def authenticate_user!
+    @curent_user = User.find(session[:user_id])
+    redirect_to login_path unless @current_user
+  end
+end
+```
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"
+            type="text/javascript"></script>
+    <script type="text/javascript">
+      var hljs = remark.highlighter.engine;
+      var slideshow = remark.create({
+          highlightLanguage: 'ruby',
+          highlightLines: true,
+          hightlightSpans: true,
+          highlightStyle: 'monokai'
+        }) ;
+    </script>
+  </body>
+</html>
