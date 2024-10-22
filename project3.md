@@ -17,6 +17,8 @@ one post can have many comments. Each comment belongs to the user and the post.
 
 - Student was able to create a functional RoR app
 
+- Optional (Student was able to use React for the front end in combination with RoR backend)
+
 - Student used MVC pattern to create three interconnected resources
 
 - Student has implemented CRUD operations
@@ -56,7 +58,6 @@ one post can have many comments. Each comment belongs to the user and the post.
   - The username of the user who created the post
   - The number of comments on a post (linkable to `/posts/:id` described below)
   - The time the post was last updated
-  If the user is not logged in, they should be re-directed to the `/login`
   - (Not Required) - Consider adding a search filter form input that allows you to
     filter the list of posts to just those for the specified username
 
@@ -82,6 +83,15 @@ one post can have many comments. Each comment belongs to the user and the post.
   Have fun with this.  A simple example might be a validation error for posts that include
   the words "Trump" or "Harris"
 
+## React Considerations
+
+Using React is optional.
+
+If you plan to do a React front end for your application, you may want to create
+an API implementation for your controller actions. See [Rails API-only application guide](https://guides.rubyonrails.org/api_app.html).
+The main difference would be that your RoR controller actions would likely take JSON as input
+and return JSON as output.  All or at least some of applications UI would be implemented
+in javascript using React rather than using Rails views.
 
 ## Resources
 
