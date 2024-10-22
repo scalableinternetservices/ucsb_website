@@ -37,27 +37,51 @@ one post can have many comments. Each comment belongs to the user and the post.
 
 ## List of supported endpoints
 
-- Navigating to the `/users` endpoint will list all `users` in your app
+- Navigating to `/login` will provide you with a simple form where you can enter
+  your username.  No password is required.  When you submit the login form a new
+  user should be created if no user matches the username or an exiting user should
+  be logged in if the username exists.  Either way, you should be re-directed to
+  the root of the application `/`.  This should initialized a user session and
+  store the identity of the user in the session.
 
-- Navigating to the `/users/:id` will show the page with the information
-  about the `user` with the given `id`
+- Navigating to `/logout` should remove the user information from the session
+
+- Navigating to any page other than `/login` without a user session should result
+  in a re-direct to `/login`
+
+- Navigating to the root of the application `/` when you are logged in will show
+  a list of all the posts from all users in chrolological order with the most
+  recently created post at the top.  Each post should include:
+  - The content of the post
+  - The username of the user who created the post
+  - The number of comments on a post (linkable to `/posts/:id` described below)
+  - The time the post was last updated
+  If the user is not logged in, they should be re-directed to the `/login`
+  - (Not Required) - Consider adding a search filter form input that allows you to
+    filter the list of posts to just those for the specified username
+
+- Navigating to the `/posts/:id` will show the page with the information
+  about the `post` with the given `id` including
+  - The content of the post
+  - The author of the post
+  - The list of comments for the post
+  - A form to add a new comment to a post.  Submitting this form should
+    show keep the browser on the same page but show the newly posted comment
 
   - Returns 404 if the id was not found.
 
-- From the browser, you can create the user
+- From the browser, you can create a post
 
-- From the browser, you can update the user
+- From the browser, you can update a post but only if you are the author
 
-- From the browser, you can delete the user
+- From the browser, you can delete a post but only if you are the author
 
-- There is a validation error for incorrect create or update action
+- From the browser, you can comment on any post
 
-  - E.g. Each user has to have an email and an error is displayed if this
-  required value is not provided
+- There should be a validation error for posts or comments that are attempting to influence the election.
+  Have fun with this.  A simple example might be a validation error for posts that include
+  the words "Trump" or "Harris"
 
-- Users index page (`/users`) shows the list of all the users; for each user
-  it shows the list of all posts that belong to the given user and for each
-  post it shows all the comments that belong to the post.
 
 ## Resources
 
