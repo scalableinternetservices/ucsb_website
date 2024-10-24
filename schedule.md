@@ -94,7 +94,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 <!-- - #### Monday: Frontend React Deep Dive by David Acevedo -->
 - Rails Intro [slides](/slides/2024f/rails_introduction/index.html)
-- Server-Side Caching
+- Server-Side Caching [slides](/slides/2024f/09_server_caching/)
 
 ### Tasks
 
@@ -109,9 +109,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 ### Topics
 
 - Guest Lecture on React (Tu 10/29)
-- Relational Databases
-- Relational Databases and Rails
-- RDBMS Scaling
+- Client-Side Caching
 
 ### Tasks
 
@@ -132,7 +130,9 @@ The following schedule is subject to change, and many slide links are not yet ac
 ### Topics
 
 <!-- - #### Wednesday November 15: Zoom Guest Lecture -->
-
+- Relational Databases
+- Relational Databases and Rails
+- RDBMS Scaling
 - Deep Dive: Load Testing with Tsung
 
 ### Tasks
