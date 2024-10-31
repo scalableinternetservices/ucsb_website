@@ -109,7 +109,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 ### Topics
 
 - Guest Lecture on React (Tu 10/29)
-- Client-Side Caching
+- Client-Side Caching - [slides](/slides/2024f/08_client_caching_cdn/index.html)
 
 ### Tasks
 
