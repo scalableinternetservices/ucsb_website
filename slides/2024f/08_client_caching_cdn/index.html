@@ -1,0 +1,727 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Client-side Caching and CDNs</title>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 2.5em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      blockquote {
+        border-left: 0.3em solid rgba(0,0,0,0.5);
+        padding: 0 15px;
+        font-style: italic;
+      }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      img {
+        max-height: 100%;
+        max-width: 100%;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .clear { clear: both; }
+      #slideshow .slide .content code { font-size: 0.8em; }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 1em;
+      }
+      .background-blue {
+        background-color: deepskyblue;
+      }
+      .background-green {
+        background-color: springgreen;
+      }
+      .background-pink {
+        background-color: deeppink;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        width: 49%;
+        float: left;
+      }
+      .right-column {
+        width: 49%;
+        float: right;
+      }
+      .left-column20 {
+        width: 20%;
+        float: left;
+      }
+      .right-column80 {
+        width: 79%;
+        float: right;
+      }
+      .left-column30 {
+        width: 30%;
+        float: left;
+      }
+      .right-column70 {
+        width: 69%;
+        float: right;
+      }
+      .left-column40 {
+        width: 40%;
+        float: left;
+      }
+      .right-column60 {
+        width: 59%;
+        float: right;
+      }
+
+      /* Table layout */
+      table {
+        background: #f5f5f5;
+        margin: 30px auto;
+        text-align: left;
+        width: 100%;
+      }
+      th {
+        background: linear-gradient(#777, #444);
+        color: #fff;
+        font-weight: bold;
+        padding: 10px 15px;
+      }
+      td {
+        border-right: 1px solid #fff;
+        border-left: 1px solid #e8e8e8;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #e8e8e8;
+        padding: 10px 15px;
+      }
+
+    </style>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle
+
+# Client-side Caching and CDNs
+
+## CS291A: Scalable Internet Services
+
+---
+
+# Client-side Caching Motivation
+
+We want our important application data persisted safely in our data center.
+
+This data will be regularly read and updated by geographically distributed
+clients.
+
+Our access to the data needs to be fast.
+
+---
+
+# Response Time and Human Perception
+
+| Delay         | User Reaction                |
+| -------------:|:----------------------------:|
+|   0 -  100 ms | Instant                      |
+| 100 -  300 ms | Small perceptible delay      |
+| 300 - 1000 ms | Machine is working           |
+|      1000+ ms | Likely mental context switch |
+|    10,000+ ms | Task is abandoned            |
+
+Source: [High Performance Browser
+Networking](https://hpbn.co/primer-on-web-performance/)
+
+---
+
+# Minimum Latencies
+
+| Route                    | Distance  | Time, light in vacuum | Time, light in fiber |
+| ------------------------ | --------- | --------------------- | -------------------- |
+| NYC to SF                | 4,148 km  | 14 ms                 | 21 ms                |
+| NYC to London            | 5,585 km  | 19 ms                 | 28 ms                |
+| NYC to Sydney            | 15,993 km | 53 ms                 | 80 ms                |
+| Equatorial circumference | 40,075 km | 133.7 ms              | 200 ms               |
+
+Source: [High Performance Browser
+Networking](https://hpbn.co/primer-on-web-performance/)
+
+???
+
+* Light travels at 299,792 km/s in a vacuum
+* Light travels at 200,000 km/s in fiber
+* These times are one-way
+* Double the time for round-trip
+  * 42 ms NYC to SF
+  * 56 ms NYC to London
+  * 160 ms NYC to Sydney
+
+---
+
+class: center middle
+
+# Multiple HTTP Requests per Page
+
+![Total Requests Per Page](http_archive_requests_per_page_2024.png)
+
+Source: <https://httparchive.org/interesting.php#reqTotal>
+
+---
+
+# Caching
+
+The fastest request is one that never happens.
+
+--
+
+Cache - a component that transparently stores data so that future requests
+for the same data can be served faster
+
+--
+
+> Where can we introduce caching?
+
+--
+
+* Inside the browser
+
+* In "front" of the server (CDNs, ISP cache, etc.)
+
+* Inside the application server
+
+* Inside the database (query cache)
+
+---
+
+# Client-side Caching
+
+> How does the browser cache data?
+
+--
+
+> How does the browser know when it can or cannot use cached data?
+
+--
+
+The building blocks of caching are all provided via HTTP headers:
+
+* cache-control
+    * no-store
+    * no-cache
+    * max-age
+    * public | private
+
+* etag
+
+* last-modified
+
+* if-none-match
+
+* if-modified-since
+
+---
+
+# cache-control: no-store
+
+When `cache-control: no-store` is provided as a header to an HTTP response the
+browser and intermediate proxy-caches:
+
+* must not save the information in any non-volatile storage
+
+* must make a best effort attempt to remove the information from volatile
+  storage as promptly as possible
+
+__Note__: The browser may retain a copy in memory (volatile storage) for use
+with the browser's back/forward buttons.
+
+Generally used for sensitive information.
+
+---
+
+# cache-control: no-cache
+
+When `cache-control: no-cache` is provided as a header to an HTTP response the
+browser and intermediate proxy-caches:
+
+* must not use the response to satisfy a subsequent request without successful
+  revalidation with the origin server
+
+Useful to force the browser and intermediate caches to check for updated
+content.
+
+---
+
+# cache-control: private
+
+When `cache-control: private` is provided as a header to an HTTP response the
+browser is free to cache the response (for the current user) but, intermediate
+proxy-caches should discard the data.
+
+This is the opposite of `cache-control: public`.
+
+Rails built-in caching securely defaults to `cache-control: private`.
+
+---
+
+# cache-control: max-age=120
+
+
+When `cache-control: max-age=120` is provided as a header to an HTTP response
+the browser and intermediate proxy-caches should consider the information to be
+fresh until the specified number of seconds (`120` in this case) has passed.
+
+This is the modern version of the `expires` and `date` headers.
+
+---
+
+# etag: "5bf444d26f9f1c74"
+
+When an etag (entity tag) header is provided as a header to an HTTP response
+the browser will keep an association between the request, the etag, and the
+response.
+
+When requesting the same resource in the future, the browser may add an
+`if-none-match` header along with the etag in the HTTP request.
+
+---
+
+# last-modified: Thu, 31 Oct 2024 16:15:36 GMT
+
+When a `last-modified` header is provided in an HTTP response the browser may
+save the information to use in future requests for the same resource.
+
+When requesting the same resource in the future, the browser may add an
+`if-modified-since` header along with the datetime in the HTTP request.
+
+---
+
+# First GET Example
+
+```
+$ curl -I https://cs291.com
+
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+Last-Modified: Mon, 21 Oct 2019 21:41:43 GMT
+ETag: "5dae2617-48a8"
+Cache-Control: max-age=600
+```
+
+---
+
+# if-none-match: "5bf444d26f9f1c74"
+
+When accompanying an HTTP request, the `if-none-match` HTTP header indicates
+that the client has a cached copy with the associated tag.  Multiple etags can
+be provided.
+
+If the server's current version of the resource maps to one of the provided
+etags, the server will return 304 (not modified) with the etag of the current
+resource included.
+
+Otherwise the server will return the full response body along with the
+appropriate etag for the updated resource.
+
+
+```sh
+$ curl -I https://cs291.com --header 'if-none-match: "5dae2617-48a8"'
+
+HTTP/1.1 304 Not Modified
+```
+
+---
+
+# if-modified-since: Thu, 31 Oct 2024 16:15:36 GMT
+
+When accompanying an HTTP request, the `if-modified-since` HTTP header
+indicates that the client already has a copy that was fresh as of the specified
+datetime.
+
+If the server's copy is newer than the specified datetime, it will be served to
+the client along with a new `last-modified` HTTP response header.
+
+If the server's copy has not changed since the specified date, the server will
+return 304 (not modified).
+
+
+```sh
+$ curl -I https://cs291.com --header 'if-modified-since: Mon, 21 Oct 2019 21:41:43 GMT'
+
+HTTP/1.1 304 Not Modified
+```
+
+---
+
+class: center middle
+
+# HTTP Caching Summary
+
+![Defining optimal Cache-Control policy](http-cache-decision-tree.png)
+
+[Source](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching)
+
+---
+
+# Applying Client-side Caching #1
+
+Assume we want to serve JavaScript that won't change over the next day, but it
+contains user-specific code.
+
+> What headers should the HTTP response include?
+
+--
+
+## Caching Reusable, Private Resources
+
+```http
+Cache-control: private, max-age=86400
+```
+
+Intermediate proxy-caches should not save a copy, and the browser can consider
+the resource fresh for up to a day since it was retrieved.
+
+---
+
+# Applying Client-side Caching #2
+
+Assume we are serving an image that may change in the future, and we never want
+a stale version shown. The image is not specific to the requester.
+
+> What headers should the HTTP response include?
+
+--
+
+## Caching Reusable, Public Resources
+
+```http
+Cache-control: public, no-cache
+ETag: 4d7a6ca05b5df656
+```
+
+Browser will store a copy to be used if a 304 (not modified) response is
+sent. In subsequent HTTP requests for the resource the browser will include:
+
+```http
+if-none-match: 4d7a6ca05b5df656
+```
+
+---
+
+# Applying Client-side Caching #3
+
+Assume we are serving an image containing the user's social security and credit
+card numbers.
+
+> What headers should the HTTP response include?
+
+--
+
+## No Caching!
+
+```http
+Cache-control: no-store
+```
+
+The browser may keep a copy in memory for browser navigation, but __must__
+not save a copy to a non-volatile location.
+
+---
+
+# Implementing Caching In Rails
+
+Let's start with implementation client-side HTTP caching on the New Submission
+page in the demo app:
+
+.center[![Demo App New Submission View](demo_new_submission.png)]
+
+---
+
+# Initial Request: New Submission Page
+
+Initial page load fetches every resource (indicated via 200 response).
+
+.center[![Initial Demo App New Submission Resources](demo_new_submission_resources.png)]
+
+
+---
+
+# Subsequent Request: New Submission
+
+Refreshing the page doesn't require sending the asset bodies (304 responses),
+but the server sends the complete /submissions/new response body (200
+response).
+
+.center[![Subsequent Demo App New Submissions Resources](demo_new_submission_resources_subsequent.png)]
+
+---
+
+# Determining Staleness
+
+> When can this page be out-of-date?
+
+.center[![Demo App New Submission View](demo_new_submission.png)]
+
+---
+
+# SubmissionsController.new
+
+## Without Caching
+
+```ruby
+class SubmissionsController < ApplicationController
+
+  def new
+    @submission = Submission.new
+  end
+
+end
+```
+
+## With Caching
+
+```ruby
+class SubmissionsController < ApplicationController
+
+  def new
+*   @submission = Submission.new if stale?(Community.all)
+  end
+
+end
+```
+
+---
+
+# ActionController::ConditionalGet.stale?
+
+[stale? Documentation](https://guides.rubyonrails.org/v7.0/caching_with_rails.html#conditional-get-support)
+
+> What is `if stale?(Community.all)` actually doing?
+
+* Informs Rails to base the `etag` and/or `last_modified` response header on
+  all communities.
+
+* Compares the `last_modified` or `etag` value against `if-modified-since`
+  and/or `if-none-match` request headers.
+
+* `stale?` returns true when `Communities.all` is newer and/or differs
+
+* `stale?` implicitly affects the response such that a 304 HTTP status and no
+  body is returned when `stale?` returns false
+
+---
+
+# Cached: New Submission Page
+
+After making the above change, a second request to `/submissions/new` results
+in a 304 (not modified) response.
+
+If the list of communities change subsequent
+responses will return a 200 along with the body of the response.
+
+.center[![Cached Demo App New Submissions Resources](demo_new_submission_resources_cached.png)]
+
+???
+
+
+
+---
+
+# Submission View
+
+.left-column30[
+> What on the submission view can make the page stale?
+]
+.right-column70.center[
+.center[![Submission View](demo_submission_view.png)]
+]
+
+---
+
+# SubmissionsController.show
+
+## Without Caching
+
+```ruby
+class SubmissionsController < ApplicationController
+  before_action :set_submission, only: [:show, ...]
+
+  def show
+  end
+
+  private
+
+  def set_submission
+    @submission = Submission.find(params[:id])
+  end
+end
+```
+
+---
+
+# SubmissionsController.show
+
+## With Caching
+
+```ruby
+class SubmissionsController < ApplicationController
+  before_action :set_submission, only: [:show, ...]
+
+  def show
+*   fresh_when([@submission, @submission.community,
+*               @submission.comments])
+  end
+
+  private
+
+  def set_submission
+    @submission = Submission.find(params[:id])
+  end
+end
+```
+
+---
+
+# Cached: SubmissionsController.show
+
+The web console indicates our caching was successful.
+
+Adding a new comment, modifying the community or submission causes a 200
+response.
+
+.center[![Cached Demo App Submission Show](demo_submission_view_cached.png)]
+
+---
+
+# Submissions Index
+
+> What on the submissions index can make the page stale?
+
+.center[![Submissions Index View](demo_submissions_index.png)]
+
+---
+
+# SubmissionsController.index
+
+## Without Caching
+
+```ruby
+class SubmissionsController < ApplicationController
+
+  def index
+    @submissions = Submission.all
+  end
+
+end
+```
+
+## With Caching
+
+```ruby
+class SubmissionsController < ApplicationController
+
+  def index
+*   if stale?([Submission.all, Community.all, Comments.all])
+      @submissions = Submission.all
+*   end
+  end
+
+end
+```
+
+---
+
+# Client Caching Example
+
+These changes can be viewed on the `client_side_caching` branch on the demo app
+repository:
+
+[https://github.com/scalableinternetservices/demo/compare/client_side_caching](https://github.com/scalableinternetservices/demo/compare/client_side_caching)
+
+
+---
+
+class: center, inverse, middle
+
+# Content (Delivery|Distribution) Networks
+
+---
+
+# CDN Overview
+
+![CDN Overview](cdn.png)
+
+---
+
+# CDN Benefits
+
+--
+
+1. Reduce latency from client to server and back
+
+--
+
+2. Provide "protection" to the origin server (e.g., DDoS protection)
+
+--
+
+3. Reduce requests handled by origin server.
+
+--
+
+And more!
+
+---
+
+# CDN Providers
+
+* [AWS CloudFront](https://aws.amazon.com/cloudfront/)
+* [Akamai](https://www.akamai.com)
+* [CloudFlare](https://www.cloudflare.com/cdn/)
+* [Fastly](https://www.fastly.com)
+* [Google Cloud CDN](https://cloud.google.com/cdn/)
+* [Microsoft Azure CDN](https://azure.microsoft.com/en-us/services/cdn/)
+
+
+[AND MORE!](https://www.globaldots.com/content-delivery-network-explained#content-delivery-network-companies)
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"
+            type="text/javascript"></script>
+    <script type="text/javascript">
+      var hljs = remark.highlighter.engine;
+      var slideshow = remark.create({
+          highlightLanguage: 'ruby',
+          highlightLines: true,
+          hightlightSpans: true,
+          highlightStyle: 'monokai'
+        }) ;
+    </script>
+  </body>
+</html>
