@@ -130,10 +130,9 @@ The following schedule is subject to change, and many slide links are not yet ac
 ### Topics
 
 <!-- - #### Wednesday November 15: Zoom Guest Lecture -->
-- Relational Databases
+- Relational Databases [slides](/slides/2024f/11_relational_databases/index.html)
 - Relational Databases and Rails
 - RDBMS Scaling
-- Deep Dive: Load Testing with Tsung
 
 ### Tasks
 
@@ -151,6 +150,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 <!-- - #### Wednesday November 22: Zoom Guest Lecture -->
 
+- Deep Dive: Load Testing with Tsung
 - Non-Relational Data Stores
 
 ### Tasks
