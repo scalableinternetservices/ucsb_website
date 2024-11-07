@@ -132,7 +132,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 <!-- - #### Wednesday November 15: Zoom Guest Lecture -->
 - Relational Databases [slides](/slides/2024f/11_relational_databases/index.html)
 - Relational Databases and Rails
-- RDBMS Scaling
+- RDBMS Scaling [slides](/slides/2024f/12_rdbms_scaling/index.html)
 
 ### Tasks
 
