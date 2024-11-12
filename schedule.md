@@ -150,7 +150,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 <!-- - #### Wednesday November 22: Zoom Guest Lecture -->
 
-- Deep Dive: Load Testing with Tsung
+- Deep Dive: Load Testing with Tsung [slides](/slides/2024f/10_tsung/index.html)
 - Non-Relational Data Stores
 
 ### Tasks
