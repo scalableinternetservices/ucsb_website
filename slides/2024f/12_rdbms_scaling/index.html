@@ -628,6 +628,11 @@ both the data and the code based on type and function.
 
 Like with partitioning, no joins can automatically be performed across these partitions.
 
+???
+
+* Parttion splits data sets of the same schema
+* SOA splits segments of the application based on function
+
 ---
 
 # SOA Stack
@@ -640,6 +645,13 @@ When a front-end application server needs data to satisfy a request, instead of
 speaking to a database, it will request data from the appropriate service.
 
 .center[![Service Oriented Architecture](soa_stack.png)]
+
+???
+
+* Front end application server talks to services
+* Services may talk to other services
+* Services may talk to databases
+* Front end application server may talk to databases
 
 ---
 
@@ -654,6 +666,12 @@ Each service is broken out by logical function. E.g.:
 * Account subsystem that tracks invoices
 
 .center[![Service Oriented Architecture](soa_stack.png)]
+
+???
+
+* Contrast this with sharding where the data is split by some criteria
+* Ex: SaaS application where Users, Billing and Acconts are sharded by customer
+* vs. SOA where Users, Billing and Accounts are separate services
 
 ---
 
@@ -702,16 +720,10 @@ single monolithic application.
 
 1. Comments service can track comments and replies for each submission.
 
---
-
 2. Submissions service can be responsible for all the links that are submitted.
-
---
 
 3. Communities service can store the list of communities along with their
    creator.
-
---
 
 4. Users service can manage the users in the system.
 
@@ -763,8 +775,6 @@ end
 - Via Async message passing (message brokers: RabbitMQ,
 ActiveMQ, Apache Kafka, Amazon SQS, Google Pub/Sub, etc.)
 
---
-
 [Source: Designing Data-Intensive Applications: The Big Ideas Behind Reliable,
 Scalable, and Maintainable Systems
 by Martin Kleppmann](https://dataintensive.net/)
@@ -785,14 +795,14 @@ by Martin Kleppmann](https://dataintensive.net/)
 
 ## Weaknesses
 
-* May not scale with the number of users (e.g., increased load to
-  authentication service)
-
 * Transactions across services do not exist
 
 * Consistent DB snapshots across services do not exist
 
 * Application logic required to join data
+
+* Some service may grow disproportionately to others
+  * sharding / partitioning might still be neccessary
 
 ---
 
@@ -808,6 +818,10 @@ class: center inverse middle
 
 This graph shows significantly more _reads_ than _writes_. This may be the case
 for your application.
+
+???
+
+* More reads than writes
 
 ---
 
@@ -825,6 +839,10 @@ horizontally scale.
   each _replica_ and apply it
 ]
 .right-column[![Database Primary Replica](database_master_replica.png)]
+
+???
+
+* Horizontal scaling is easy for read-only copies
 
 ---
 
@@ -846,6 +864,11 @@ When a transaction is committed to the primary, the primary sends the
 transaction to its replicas but does not wait to see if the transaction is
 applied.]
 
+???
+
+* Wait until all replicas have applied the transaction
+* Wait until some replicas have applied the transaction
+* Don't wait for any replicas to apply the transaction
 ---
 
 # Database Replication Trade-offs
@@ -951,6 +974,16 @@ Such values must be communicated from the primary to its replicas.
 > standby.
 
 https://www.postgresql.org/docs/9.1/warm-standby.html#SYNCHRONOUS-REPLICATION
+
+
+???
+
+* What is the use case for replication
+Tradeoff between consistency and performance
+* High availability with zero data loss?
+  * Synchronous replication
+* High availability with some data loss?
+  * Asynchronous replication
 
 ---
 
