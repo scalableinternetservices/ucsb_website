@@ -151,7 +151,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 <!-- - #### Wednesday November 22: Zoom Guest Lecture -->
 
 - Deep Dive: Load Testing with Tsung [slides](/slides/2024f/10_tsung/index.html)
-- Non-Relational Data Stores
+- Non-Relational Data Stores [slides](/slides/2024f/13_nosql/index.html)
 
 ### Tasks
 
@@ -174,7 +174,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 <!-- - #### Wednesday November 29: Zoom Guest Lecture -->
 - Web Security
-- Guest Lecture (Th 11/21)
+- Guest Lecture w/ Andrew Mutz (Th 11/21)
 
 ### Tasks
 
