@@ -173,7 +173,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 ### Topics
 
 <!-- - #### Wednesday November 29: Zoom Guest Lecture -->
-- Web Security
+- Web Security [slides](/slides/2024f/14_web_security/index.html)
 - Guest Lecture w/ Andrew Mutz (Th 11/21)
 
 ### Tasks
