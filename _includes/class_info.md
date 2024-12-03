@@ -83,19 +83,19 @@ Monday, November 27 2pm PT
 
 ### [Project](/project/#report) report draft for feedback due before
 
-Monday, December 4 2pm PT
+Friday, December 6 2pm PT
 
 ### [Project](/project/#proposal) final peer score message due before
 
-Monday, December 15 2pm PT
+Monday, December 13 2pm PT
 
 ### [Project](/project/#report) report due before
 
-Monday, December 15 2pm PT
+Monday, December 13 2pm PT
 
 ### [Project](/project/#video) video due before
 
-Monday, December 15 2pm PT
+Monday, December 13 2pm PT
 
 ## Class Resources
 
