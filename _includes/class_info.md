@@ -87,15 +87,15 @@ Friday, December 6 2pm PT
 
 ### [Project](/project/#proposal) final peer score message due before
 
-Monday, December 13 2pm PT
+Friday, December 13 2pm PT
 
 ### [Project](/project/#report) report due before
 
-Monday, December 13 2pm PT
+Friday, December 13 2pm PT
 
 ### [Project](/project/#video) video due before
 
-Monday, December 13 2pm PT
+Friday, December 13 2pm PT
 
 ## Class Resources
 

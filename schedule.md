@@ -210,7 +210,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 ### Topics
 
 - Guest Lecture (Tu 12/3) - Scalable Machine Learning Inference (Part 1) Shyr-Shea Chang
-- Guest Lecture (Tu 12/5) - Scalable Machine Learning Inference (Part 1) Matt Schofield
+- Guest Lecture (Th 12/5) - Scalable Machine Learning Inference (Part 1) Matt Schofield
 
 
 ### Tasks
@@ -223,7 +223,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Finals Week (December 10-12)
+## Finals Week (December 9-13)
 
 ### Tasks
 
