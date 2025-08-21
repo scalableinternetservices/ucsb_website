@@ -4,9 +4,9 @@ url: https://cs291.com # the base hostname & protocol for your site
 
 # User settings
 course_number: CS291A
-quarter: Fall 2024
+quarter: Fall 2025
 title: Scalable Internet Services
-class_location: Phelps 3526
+class_location: Phelps 2510
 
 github_username: scalableinternetservices
 
@@ -15,7 +15,7 @@ instructor_email: zach_walker@ucsb.edu
 instructor_url: https://www.linkedin.com/in/zachary-walker-6a219059/
 
 drive_url:
-piazza_url: https://piazza.com/ucsb/fall2024/cs291a
+piazza_url: https://piazza.com/ucsb/fall2025/cs291a
 
 intro_survey: https://forms.gle/ypmAEJnCnS4EHgpW6
 project0_submission: https://forms.gle/Vjj8sUGVbtJC4VMs8

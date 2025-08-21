@@ -29,7 +29,7 @@ By the end of this course students will be able to:
 - write and deploy highly scalable web functions using [AWS
   Lambda](https://aws.amazon.com/lambda/)
 
-- write a modern front end client application using
+- (Optional) write a modern front end client application using
   [React](https://reactjs.org)
 
 - create a [Ruby on Rails](http://rubyonrails.org/) web service and deploy it
