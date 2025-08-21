@@ -4,7 +4,7 @@ layout: default
 navigation_weight: 2
 permalink: /project0/
 title: Project 0
-show_in_nav: true
+show_in_nav: false
 ---
 
 # Project 0: Static Web Page

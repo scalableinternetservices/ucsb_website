@@ -3,7 +3,7 @@ layout: default
 navigation_weight: 10
 permalink: /project/
 title: Primary Project
-show_in_nav: true
+show_in_nav: false
 ---
 
 # Primary Project

@@ -4,7 +4,7 @@ layout: default
 navigation_weight: 3
 permalink: /project1/
 title: Project 1
-show_in_nav: true
+show_in_nav: false
 ---
 # Project 1: Learning Ruby with RubyKoans
 

@@ -3,7 +3,7 @@ layout: default
 navigation_weight: 5
 permalink: /project3/
 title: Project 3
-show_in_nav: true
+show_in_nav: false
 ---
 
 # Project 3: Demo Rails App
