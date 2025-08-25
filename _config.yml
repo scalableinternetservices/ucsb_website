@@ -27,6 +27,14 @@ primary_project_team_message: https://forms.gle/2X8Po3KNVBvRqFGZ8
 initial_peer_review: https://forms.gle/jjHBnisnaxhg3kEJ7
 peer_review: https://forms.gle/GoSHQ74jxN5oP3Xu7
 
+# Page visibility settings
+navigable_pages:
+  project0: false
+  project1: false
+  project2: false
+  project3: false
+  primary_project: false
+
 kramdown:
   parse_block_html: true
 

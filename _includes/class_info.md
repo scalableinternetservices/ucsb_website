@@ -53,32 +53,41 @@ Wednesday, Oct 1 12pm PT
 {% endif %}
 <!-- - Enroll in [AWS Educate](https://www.awseducate.com/Registration?apptype=student&courseview=true) -->
 
+{% if site.navigable_pages.project0 %}
 ### [Project 0](/project0/) due before
 
 Monday, October 6 2pm PT
+{% endif %}
 
+{% if site.navigable_pages.project1 %}
 ### [Project 1](/project1/) due before
 
 Monday, October 13 2pm PT
+{% endif %}
 
+{% if site.navigable_pages.project2 %}
 ### [Project 2](/project2/) due before
 
 Monday, October 20 2pm PT
+{% endif %}
 
+{% if site.navigable_pages.project3 %}
 ### [Project 3](/project3/) Team Message due before
 
 Monday, October 20 2pm PT
 
+### [Project 3](/project3/) due before
+
+Monday, November 3 2pm PT
+{% endif %}
+
+{% if site.navigable_pages.primary_project %}
 ### [Final Project Team Message](/project) due before
 
 Monday, November 3 2pm PT
 
-### [Project 3](/project3/) due before
-
-Monday, November 3 2pm PT
-
 ### [Project](/project/#proposal) initial peer score message due before
-<!-- This should be moved earlier in the quarter -->
+
 Friday, November 21 2pm PT
 
 ### [Project](/project/#report) report draft for feedback due before
@@ -96,6 +105,7 @@ Friday, December 12 2pm PT
 ### [Project](/project/#video) video due before
 
 Friday, December 12 2pm PT
+{% endif %}
 
 ## Class Resources
 

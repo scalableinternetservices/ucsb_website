@@ -3,7 +3,7 @@ layout: default
 navigation_weight: 4
 permalink: /project2/
 title: Project 2
-show_in_nav: false
+navigable_page_name: project2
 ---
 
 # Project 2: AWS Lambda and JSON Web Tokens (JWT)
