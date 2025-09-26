@@ -194,11 +194,205 @@ class: center inverse middle
 
 ---
 
-class: center middle
+# Internet Services, what's that?
 
-![Reddit downs North Korea's web sites](reddit_nk.png)
+- What are the characteristics of an internet service?
 
-![Stephen Fry takes down websites with single tweet](stephen_fry_tweet.png)
+.center[![Question Mark](question_mark.jpg)]
+
+---
+
+# ...Internet Services, what's that?
+
+There are many application-level protocols that are used to build out Internet
+Services.
+
+For this class, Internet services will refer to HTTP-based services.
+
+The interface to your web service may be the web browser (e.g., Chrome,
+Firefox), an API client (via REST, GraphQL, etc), or both.
+
+---
+
+# Scalable, what does that mean?
+
+.center[![Question Mark](question_mark.jpg)]
+
+---
+
+# ...Scalable, what does that mean?
+
+An Internet service is scalable if increasing demands can be effectively met
+with increasing capacity.
+
+Demands could be:
+
+* Web traffic quantity (typical association)
+
+* Dataset size
+
+---
+
+# Effectively meet demands: Explanation
+
+* Internet service remains available
+
+* Response time does not excessively degrade
+
+## Think about it
+
+You have a web service designed to run on a single server. What do you do when
+you can no longer effectively meet demand.
+
+__Is your solution scalable?__
+
+---
+
+class: center, middle
+
+# Is Scalability of Web Services a Solved Problem?
+
+---
+
+# The Fail Whale Era
+
+- Startups in the 2000s–2010s often **collapsed under sudden growth**
+![Twitter Fail Whale](fail-whale.webp)
+
+---
+
+# Examples
+- Twitter’s *Fail Whale* (2007–2013)
+- Reddit/Digg outages
+- Netflix scaling pains pre-cloud migration
+--
+
+- Common issues:
+  - DB bottlenecks
+  - No elastic infra
+  - Weak caching/CDN
+
+**Learn more:**
+- [How Twitter Slayed the Fail Whale](https://business.time.com/2013/11/06/how-twitter-slayed-the-fail-whale/)
+- [2010 - The beginning of netflix cloud migration](https://medium.com/netflix-techblog/four-reasons-we-choose-amazons-cloud-as-our-computing-platform-4aceb692afec)
+- [2016 - Netflix Cloud Migration Story](https://about.netflix.com/en/news/completing-the-netflix-cloud-migration)
+
+
+???
+
+Speaker Notes:  
+This is the “pain” context. Show how scaling was the existential bottleneck.  
+Students should recognize that outages were *commonplace* when demand spiked.  
+Emphasize the mismatch between fast user growth and limited infra tooling.
+
+---
+
+# The Rise of Cloud-Native Infrastructure
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" style="width: 200px; height: auto; margin: 10px;">
+<img src="https://cloud.google.com/static/images/cloud-logo.svg" style="width: 200px; height: auto; margin: 10px;">
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Microsoft_Azure_Logo.svg" style="width: 200px; height: auto; margin: 10px;">
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg" style="width: 200px; height: auto; margin: 10px;">
+<img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Docker_Logo.png" style="width: 200px; height: auto; margin: 10px;">
+<img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Cloudflare_Logo.svg" style="width: 200px; height: auto; margin: 10px;">
+
+- Last 15 years saw **commoditization of scaling tools**
+--
+
+- Key developments:
+  - Cloud elasticity (AWS EC2 → Lambda, GCP Bigtable, DynamoDB)
+  - Container orchestration (Kubernetes, Docker)
+  - Global load balancers & CDNs (Cloudflare, Akamai)
+--
+
+- Scaling = **one API call away**
+
+???
+
+Speaker Notes:
+Here’s the contrast — cloud vendors made infrastructure scaling “boring.”
+No more hand-rolling load balancers or racks of servers.
+The point: we moved from “scaling as art” to “scaling as service.”
+
+---
+background-image: url(https://upload.wikimedia.org/wikipedia/commons/1/14/Emojione_1F914.svg)
+background-position: right bottom
+background-size: 50%
+
+# The Big Question
+
+--
+
+## If cloud makes scaling easy…
+### Is scalability a solved problem?
+
+--
+
+Discuss in pairs/groups.
+
+**Framing resource:**
+- [Martin Kleppmann on Distributed Systems Tradeoffs](https://notebooklm.google.com/notebook/e03bf12d-1718-4ab5-b990-75a26c1056e4?authuser=2)
+
+???
+
+Speaker Notes:
+Pause and let students *argue this out*.
+Encourage them to think: “Solved for *what*?” Infrastructure? Data? Cost?
+This primes them for the nuance in the next slide.
+
+---
+
+# Solved vs. Unsolved
+
+- **What’s solved**
+
+  - Architecture patterns (monolithic, microservices, message queues, job frameworks)
+  - Elastic infra (autoscaling groups, serverless)
+  - Traffic distribution (CDNs, load balancers)
+  - Observability (OpenTelemetry, Prometheus)
+  - Standard practices (caching, sharding)
+  - Infrastructure as code (Terraform, CloudFormation, etc.)
+
+--
+
+- **What’s not solved**
+
+  - Choosing the right architecture pattern (tradeoffs between complexity and cost and ease of development)
+  - Cost efficiency at scale
+  - Distributed data latency vs consistency tradeoffs
+  - Workload diversity (AI inference, IoT, real-time collab)
+  - Operational pitfalls (retry storms, hot keys, backpressure)
+
+???
+
+Speaker Notes:
+Stress the phrase: *“scaling is commoditized but not free.”*
+Students should understand the patterns are known, but tradeoffs remain.
+Use examples: Cloud bills blowing up, retries melting down Kafka, etc.
+
+---
+
+# Why This Still Matters to You
+
+- **Architectural basics still matter**
+  - Caching, partitioning, async processing = foundations of cloud services
+--
+
+  - **Code still matters**
+      - Inefficient queries, algorithms, and hot loops still sink systems
+--
+
+- **Judgment still matters**
+    - Multi-region, consistency vs latency, cost vs performance
+
+
+???
+
+Speaker Notes:
+Close by motivating them:
+- Cloud gives you the *tools* but not the *wisdom*.
+- You need the historical context to know which tool to use when.
+- Code-level efficiency + architectural tradeoffs = still YOUR responsibility.
 
 ---
 
@@ -247,76 +441,6 @@ class: center middle
 These are happening all the time...
 
 [List of post mortems for service failures](https://github.com/danluu/post-mortems)
-
----
-
-
-# Internet Services, what's that?
-
-- What are the characteristics of an internet service?
-
-.center[![Question Mark](question_mark.jpg)]
-
----
-
-# ...Internet Services, what's that?
-
-There are many application-level protocols that are used to build out Internet
-Services.
-
-For this class, Internet services will refer to HTTP-based services.
-
-The interface to your web service may be the web browser (e.g., Chrome,
-Firefox), an API client (via REST, GraphQL, etc), or both.
-
----
-
-# What about mobile?
-
-- Many native mobile apps are backed by Internet services via an API.
-- Concerns of mobile app/service development
-- In app purchases
-
-![Mobile v. Desktop from 2010 through 2014](mobile_v_desktop.png)
-
- High Performance Browser networking details issues with mobile users and
- offers some optimizations designed for them
- ([HPBN chapters 5 through 8](https://hpbn.co/#toc)). However, these topics
- won't be covered in this class.
-
----
-
-# Scalable, what does that mean?
-
-.center[![Question Mark](question_mark.jpg)]
-
----
-
-# ...Scalable, what does that mean?
-
-An Internet service is scalable if increasing demands can be effectively met
-with increasing capacity.
-
-Demands could be:
-
-* Web traffic quantity (typical association)
-
-* Dataset size
-
----
-
-# Effectively meet demands: Explanation
-
-* Internet service remains available
-
-* Response time does not excessively degrade
-
-## Think about it
-
-You have a web service designed to run on a single server. What do you do when
-you can no longer effectively meet demand.
-
-__Is your solution scalable?__
 
 ---
 
@@ -417,9 +541,14 @@ Industry related tools you will use:
 
 * Git via Github (project source version control)
 
-* Ruby on Rails (development stack)
+* React (frontend framework)
 
-* GitHub actions (automated testing)
+* Ruby on Rails (backend framework)
+
+* AWS (cloud platform)
+
+* Load testing tools (Tsung, ab, ...)
+
 ---
 
 # What you will do
@@ -540,12 +669,12 @@ Due Sunday (10/5) 2pm
 - Piazza signup
 
 Due Tuesday (10/7) 2pm
-- [Project 0](/project0)
+- Project 1
   - Building a simple website using Github Pages
   - Will be introduced next lecure
 
 Due Sunday (10/19) 2pm
-- [Project 1](/project1)
+- Project 2
   - Clone a reference react web application
   - Extend the reference app by implementing the API layer making HTTP requests
   - Deploy to github pages
