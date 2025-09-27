@@ -6,7 +6,7 @@ layout: default
 
 ## Course Description
 
-This course explores advanced topics in highly scalable Internet services and
+This course explores advanced topics in highly scalable internet services and
 their underlying systems' architecture. Software today is primarily delivered
 as a service: accessible globally via web browsers and mobile applications, and
 backed by millions of servers. Modern web frameworks (e.g., [Ruby on
@@ -17,19 +17,16 @@ Platform](https://cloud.google.com), and [Microsoft
 Azure](https://azure.microsoft.com/en-us/)) make it increasingly easier to
 build and deploy these systems.
 
-Despite these advances, building scalable Internet services today still
+Despite these advances, building scalable internet services today still
 requires an understanding of topics like caching, load balancing, security, and
 monitoring. In this course we will examine these topics and more: the state of
-the art in building scalable Internet services.
+the art in building scalable internet services.
 
 ## Learning Outcomes
 
 By the end of this course students will be able to:
 
-- write and deploy highly scalable web functions using [AWS
-  Lambda](https://aws.amazon.com/lambda/)
-
-- write a modern front end client application using
+- contritbute to a  modern frontend client application using
   [React](https://reactjs.org)
 
 - create a [Ruby on Rails](http://rubyonrails.org/) web service and deploy it
@@ -38,6 +35,9 @@ By the end of this course students will be able to:
 - measure the performance of various components of a web service
 
 - discover and resolve bottlenecks in a web service
+
+- write and deploy highly scalable web functions using [AWS
+  Lambda](https://aws.amazon.com/lambda/)
 
 ## Class Content and Interactions
 
@@ -76,36 +76,39 @@ approximately 15 minutes.
 
 ## Projects
 
+The projects for this course will build on each other.  The first 3 projects
+will be completed individually.  Projects 4 will be completed in groups of 2 or
+3.
+Project 5 will be completed as a group of 5-7.  No more than 5 project groups will
+be allowed to keep the number of team meetings managable for the instructor(s).
+
 ### Initial Projects
 
-There will be four projects in the first five weeks of the course, one per week
-with the fourth project spanning two weeks. These projects will ensure students
-have the basic knowledge to build and deploy modern, simple, and scalable web
-services without needing a deep understanding of how the underlying systems
-enable scalability. The first three projects are to be completed individually,
-and the fourth completed as a pair.
+There will be three projects in the first five weeks of the course.
+These projects will ensure students have the basic knowledge to build and
+deploy modern, simple, and scalable web services without needing a deep
+understanding of how the underlying systems enable scalability.
 
 ### Primary Project
 
 The goal of the course's primary project is for students to experience and
 resolve pain points encountered when building and deploying a moderate-sized
-scalable web service. Students will do this using some of the latest web
+scalable web service. Students will do this using some of the AWS building block
 technologies in order to learn how to tackle scalability and fault-tolerance
-concerns. Projects will be conducted in agile teams of four to six students,
-and each team will build their own scalable web site using fundamental web
-technologies and the [Ruby on Rails](http://rubyonrails.org/) framework. A team
-may not be comprised of more than two undergraduate or BS/MS students.
+concerns. Projects will be conducted in agile teams of five to seven students,
+and each team will build their own scalable site using fundamental web
+technologies. A team may not be comprised of more than two undergraduate or BS/MS students.
 
 ## Grading
 
-| Percent |                                          Item |
-| :------ | --------------------------------------------: |
-| 3       |     [Project 0](/project0/) (Static Web Page) |
-| 6       |           [Project 1](/project1/) (RubyKoans) |
-| 9       |          [Project 2](/project2/) (AWS Lambda) |
-| 12      |      [Project 3](/project3/) (Rails demo app) |
-| 65      | [Primary Project](/project/) Individual Score |
-| 5       |                                 Participation |
+| Percent |                                                           Item |
+| :------ | ------------------------------------------------------------ : |
+| 6       |                      [Project 1](/project1/) (Static Web Page) |
+| 9       |                        [Project 2](/project2/) (Chat Frontend) |
+| 15      |                         [Project 3](/project3/) (Chat Backend)|
+| 20      |      [Project 4](/project4/) (Intro to Load Testing / Scaling) |
+| 45      |          [Primary Project](/project/) (Group Project + Report) |
+| 5       |                                                  Participation |
 
 {: class="table table-striped"}
 
@@ -115,7 +118,7 @@ asking or answering public questions on Piazza. Note that neither private
 conversations with the instructor, nor participation during team check-ins
 count toward the participation score.
 
-Projects 0 through 3 are scored as either complete (`100%`) or incomplete
+Projects 0 through 4 are scored as either complete (`100%`) or incomplete
 (`0%`); there is no fractional score other than as described below for late
 submissions.
 
@@ -133,8 +136,9 @@ these components break down into:
 
 | Percent |                                           Item |
 | :------ | ---------------------------------------------: |
-| 50      | iterative approach to load testing and scaling |
-| 20      |                         web service complexity |
+| 30      | iterative approach to load testing and scaling |
+| 25      |                         web service complexity |
+| 15      |                        use of languange models |
 | 15      |                      quality of project report |
 | 15      |                       quality of project video |
 
@@ -173,8 +177,9 @@ Individual Score would be `106.4%`, Bob's `97.85%`, and Chuck's `80.75%`.
 
 We will confidentially conduct the peer score process once during the course:
 
-- Monday, November 18
+- Sunday, November 23 before 2pm
 
+We will review these scores in the team meeting on Monday 11/24.
 The first peer score is intended to help students see if they need to
 make any adjustments to their team contributions. Only the outcome of the final
 peer score will be used to compute an individual's score. Any moderate

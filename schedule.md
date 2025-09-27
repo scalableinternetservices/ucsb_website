@@ -6,14 +6,14 @@ title: Class Schedule
 show_in_nav: true
 ---
 
-# Fall 2024 Class Schedule
+# Fall 2025 Class Schedule
 
 The following schedule is subject to change, and many slide links are not yet active.
 {: .alert .alert-warning }
 
 <div class="week">
 
-## Week 0 (September 26)
+## Week 0 (September 29)
 
 ### Topics
 
@@ -31,7 +31,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 <div class="week">
 
-## Week 1 (October 1-3)
+## Week 1 (October 6)
 
 ### Topics
 
@@ -52,7 +52,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 2 (October 8-10)
+## Week 2 (October 13)
 
 ### Topics
 
@@ -69,7 +69,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 3 (October 15-17)
+## Week 3 (October 20)
 
 ### Topics
 
@@ -88,7 +88,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 4 (October 22-24)
+## Week 4 (October 27)
 
 ### Topics
 
@@ -104,7 +104,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 5 (October 29-31)
+## Week 5 (November 3)
 
 ### Topics
 
@@ -125,7 +125,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 6 (November 5-7)
+## Week 6 (November 10)
 
 ### Topics
 
@@ -146,7 +146,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 7 (November 12-14)
+## Week 7 (November 17)
 
 <!-- - #### Wednesday November 22: Zoom Guest Lecture -->
 
@@ -168,7 +168,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 8 (November 19-21)
+## Week 8 (November 24)
 
 ### Topics
 
@@ -190,7 +190,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 9 (November 26)
+## Week 9 (December 1)
 
 ### Topics
 
@@ -205,7 +205,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 10 (December 3-5)
+## Week 10 (December 8)
 
 ### Topics
 
@@ -223,7 +223,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Finals Week (December 9-13)
+## Finals Week (December 15)
 
 ### Tasks
 

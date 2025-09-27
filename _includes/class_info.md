@@ -8,7 +8,7 @@
 - [{{site.instructor}}]({{site.instructor_url}})
 - [email](mailto:{{site.instructor_email}})
 
-## UCSB TA
+<!-- ## UCSB TA
 
 - TBD
 
@@ -19,14 +19,14 @@
 
 {% if site.piazza_url %}
 Please use [Piazza]({{site.piazza_url}}) for class-related correspondance.
-{% endif %}
+{% endif %} -->
 
 ## Dates
 
 ### Classes
 
-- Tues and Thurs
-- 9:00am -- 10:50am PT
+- Mon and Wed
+- 1:00pm -- 2:50am PT
 - {{site.class_location}}
 
 ### Office Hours
@@ -36,66 +36,81 @@ Please use [Piazza]({{site.piazza_url}}) for class-related correspondance.
 In-person
 
 - Tuesday 8am -- 9am, Phelps 3526
-- Thursday 8am -- 9am, Phelps 3526 -->
+- Thursday 8am -- 9am, Phelps 3526
 
 Virtual
 
 - Tuesday 4 -- 5pm, link in [Piazza]({{site.piazza_url}})
-- Friday 4 -- 5pm, link in [Piazza]({{site.piazza_url}})
+- Friday 4 -- 5pm, link in [Piazza]({{site.piazza_url}}) -->
 
 ### Initial tasks due before
 
 {% if site.intro_survey and site.piazza_url %}
-Monday, September 30 2pm PT
+Wednesday, Oct 1 12pm PT
 
 - Complete the [introduction survey]({{site.intro_survey}})
 - Join the class on [Piazza]({{site.piazza_url}})
 {% endif %}
 <!-- - Enroll in [AWS Educate](https://www.awseducate.com/Registration?apptype=student&courseview=true) -->
 
+{% if site.navigable_pages.project0 %}
+
 ### [Project 0](/project0/) due before
 
-Monday, October 7 2pm PT
+Monday, October 6 2pm PT
+{% endif %}
+
+{% if site.navigable_pages.project1 %}
 
 ### [Project 1](/project1/) due before
 
-Monday, October 14 2pm PT
+Monday, October 13 2pm PT
+{% endif %}
+
+{% if site.navigable_pages.project2 %}
 
 ### [Project 2](/project2/) due before
 
-Monday, October 21 2pm PT
+Monday, October 20 2pm PT
+{% endif %}
+
+{% if site.navigable_pages.project3 %}
 
 ### [Project 3](/project3/) Team Message due before
 
-Monday, October 21 2pm PT
-
-### [Final Project Team Message](/project) due before
-
-Monday, November 4 2pm PT
+Monday, October 20 2pm PT
 
 ### [Project 3](/project3/) due before
 
-Monday, November 4 2pm PT
+Monday, November 3 2pm PT
+{% endif %}
+
+{% if site.navigable_pages.primary_project %}
+
+### [Final Project Team Message](/project) due before
+
+Monday, November 3 2pm PT
 
 ### [Project](/project/#proposal) initial peer score message due before
 
-Monday, November 27 2pm PT
+Friday, November 21 2pm PT
 
 ### [Project](/project/#report) report draft for feedback due before
 
-Friday, December 6 2pm PT
+Friday, November 28 2pm PT
 
 ### [Project](/project/#proposal) final peer score message due before
 
-Friday, December 13 2pm PT
+Friday, December 12 2pm PT
 
 ### [Project](/project/#report) report due before
 
-Friday, December 13 2pm PT
+Friday, December 12 2pm PT
 
 ### [Project](/project/#video) video due before
 
-Friday, December 13 2pm PT
+Friday, December 12 2pm PT
+{% endif %}
 
 ## Class Resources
 
@@ -116,7 +131,8 @@ this site. Additionally all student projects will live here.
 
 ## Textbooks
 
-[High Performance Browser Networking](https://www.amazon.com/High-Performance-Browser-Networking-performance/dp/1449344763)  
+[High Performance Browser Networking](
+https://www.amazon.com/High-Performance-Browser-Networking-performance/dp/1449344763)  
 ISBN: 9781449344764  
 _[Available online](https://hpbn.co/)._  
 Note: The online version is slightly more up-to-date.
