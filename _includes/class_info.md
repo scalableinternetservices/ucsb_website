@@ -54,24 +54,28 @@ Wednesday, Oct 1 12pm PT
 <!-- - Enroll in [AWS Educate](https://www.awseducate.com/Registration?apptype=student&courseview=true) -->
 
 {% if site.navigable_pages.project0 %}
+
 ### [Project 0](/project0/) due before
 
 Monday, October 6 2pm PT
 {% endif %}
 
 {% if site.navigable_pages.project1 %}
+
 ### [Project 1](/project1/) due before
 
 Monday, October 13 2pm PT
 {% endif %}
 
 {% if site.navigable_pages.project2 %}
+
 ### [Project 2](/project2/) due before
 
 Monday, October 20 2pm PT
 {% endif %}
 
 {% if site.navigable_pages.project3 %}
+
 ### [Project 3](/project3/) Team Message due before
 
 Monday, October 20 2pm PT
@@ -82,6 +86,7 @@ Monday, November 3 2pm PT
 {% endif %}
 
 {% if site.navigable_pages.primary_project %}
+
 ### [Final Project Team Message](/project) due before
 
 Monday, November 3 2pm PT
@@ -126,7 +131,8 @@ this site. Additionally all student projects will live here.
 
 ## Textbooks
 
-[High Performance Browser Networking](https://www.amazon.com/High-Performance-Browser-Networking-performance/dp/1449344763)  
+[High Performance Browser Networking](
+https://www.amazon.com/High-Performance-Browser-Networking-performance/dp/1449344763)  
 ISBN: 9781449344764  
 _[Available online](https://hpbn.co/)._  
 Note: The online version is slightly more up-to-date.

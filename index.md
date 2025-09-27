@@ -6,7 +6,7 @@ layout: default
 
 ## Course Description
 
-This course explores advanced topics in highly scalable Internet services and
+This course explores advanced topics in highly scalable internet services and
 their underlying systems' architecture. Software today is primarily delivered
 as a service: accessible globally via web browsers and mobile applications, and
 backed by millions of servers. Modern web frameworks (e.g., [Ruby on
@@ -17,16 +17,16 @@ Platform](https://cloud.google.com), and [Microsoft
 Azure](https://azure.microsoft.com/en-us/)) make it increasingly easier to
 build and deploy these systems.
 
-Despite these advances, building scalable Internet services today still
+Despite these advances, building scalable internet services today still
 requires an understanding of topics like caching, load balancing, security, and
 monitoring. In this course we will examine these topics and more: the state of
-the art in building scalable Internet services.
+the art in building scalable internet services.
 
 ## Learning Outcomes
 
 By the end of this course students will be able to:
 
-- contritbute to a  modern front end client application using
+- contritbute to a  modern frontend client application using
   [React](https://reactjs.org)
 
 - create a [Ruby on Rails](http://rubyonrails.org/) web service and deploy it
@@ -76,8 +76,9 @@ approximately 15 minutes.
 
 ## Projects
 
-The projects for this course will build on each other.  The first 3 projects will be
-completed individually.  Projects 4 will be completed in groups of 2 or 3.
+The projects for this course will build on each other.  The first 3 projects
+will be completed individually.  Projects 4 will be completed in groups of 2 or
+3.
 Project 5 will be completed as a group of 5-7.  No more than 5 project groups will
 be allowed to keep the number of team meetings managable for the instructor(s).
 
@@ -85,7 +86,7 @@ be allowed to keep the number of team meetings managable for the instructor(s).
 
 There will be three projects in the first five weeks of the course.
 These projects will ensure students have the basic knowledge to build and
-deploy modern, simple, and scalable web services without needing a deep 
+deploy modern, simple, and scalable web services without needing a deep
 understanding of how the underlying systems enable scalability.
 
 ### Primary Project
@@ -95,7 +96,7 @@ resolve pain points encountered when building and deploying a moderate-sized
 scalable web service. Students will do this using some of the AWS building block
 technologies in order to learn how to tackle scalability and fault-tolerance
 concerns. Projects will be conducted in agile teams of five to seven students,
-and each team will build their own scalable web site using fundamental web
+and each team will build their own scalable site using fundamental web
 technologies. A team may not be comprised of more than two undergraduate or BS/MS students.
 
 ## Grading
