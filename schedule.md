@@ -13,149 +13,82 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 <div class="week">
 
-## Week 0 (September 29)
+## Week 1 (September 29)
 
 ### Topics
 
-- Course Introduction - [slides](/slides/2024f/01_course_introduction/index.html)
+- Course Introduction - [slides](/slides/2025f/01_course_introduction/index.html)
+- Hypertext Transfer Protocol (HTTP) - slides
+- Load Testing Basics
 
 ### Tasks
 
 - Complete the introduction survey
 - Join the class on Piazza
-- Begin [Project 0](/project0/)
+- Begin Project 1
 - Read chapters [1](https://hpbn.co/primer-on-latency-and-bandwidth/), and
-  [2](https://hpbn.co/building-blocks-of-tcp/) of High Performance Browser Networking
+  [2](https://hpbn.co/building-blocks-of-tcp/) of High Performance Browser Networking,
+  [9](https://hpbn.co/brief-history-of-http/)
 
 </div>
-
 <div class="week">
 
-## Week 1 (October 6)
+
+## Week 2 (October 6)
 
 ### Topics
 
-- Hypertext Transfer Protocol (HTTP) - [slides](/slides/2024f/02_http/index.html)
-- HTTP Servers - [slides](/slides/2024f/03_http_servers/index.html)
-- Application Servers - [slides](/slides/2024f/04_application_servers/index.html)
+- HTTP Servers - slides
+- Application Servers - slides
+- Javascript/Typescript Intro
+- React Intro
 
 ### Tasks
 
-- Complete [Project 0](/project0/)
-- Read chapters [9](https://hpbn.co/brief-history-of-http/),
-  [10](https://hpbn.co/primer-on-web-performance/), and
+- Complete Project 1
+- Begin Project 2
+- Read chapters [10](https://hpbn.co/primer-on-web-performance/), and
   [11](https://hpbn.co/http1x/) of High Performance Browser Networking
-- Read [Dynamic Load Balancing on Web-server
-  Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf) by Cardellini,
-  Colajanni, and Yu.
+  [12](https://hpbn.co/http2/) of High Performance Browser Networking
 
 </div>
+
+<!-- 
+
 <div class="week">
 
-## Week 2 (October 13)
+## Week 3 (October 13)
 
 ### Topics
 
-- Scaling Web Applications - [slides](/slides/2024f/05_scaling_web_applications/index.html)
-- Architecting for High Availability [slides](/slides/2024f/06_high_availability/index.html)
-
-### Tasks
-
-- Complete [Project 1](/project1/)
-- Begin [Project 2](/project2/)
-- Read [SEDA: An architecture for well-conditioned, scalable internet services](http://nms.lcs.mit.edu/~kandula/projects/killbots/killbots_files/seda-sosp01.pdf) by M Welsh, D Culler, E Brewer
-- Read [A Retrospective on SEDA](https://matt-welsh.blogspot.com/2010/07/retrospective-on-seda.html)
-
-</div>
-<div class="week">
-
-## Week 3 (October 20)
-
-### Topics
-
-- Working in teams [slides](/slides/2024f/07_agile_tdd_pairing/index.html)
-  - Agile Software Development
-  - Test Driven Development (TDD)
-  - Continuous Integration (CI)
-  - Pair Programming / Mobbing
+- Client Side Caching
+  - Document Object Model (DOM)
+  - In Memory (javascript / Typescript)
+  - Session Storage
+  - Local Storage
+  - Other (IndexedDB, Service Workers, Cache API, Cookies)
+- Ruby and Rails Intro [slides](/slides/2024f/rails_introduction/index.html)
 
 ### Tasks
 
 - Complete [Project 2](/project2/)
-- Begin [Project 3](/project3/)
-- (Optional) Find a teammate for [Project 3](/project3/)
+
 
 </div>
 <div class="week">
 
-## Week 4 (October 27)
+## Week 4 (October 20)
 
 ### Topics
 
-<!-- - #### Monday: Frontend React Deep Dive by David Acevedo -->
-- Rails Intro [slides](/slides/2024f/rails_introduction/index.html)
-- Server-Side Caching [slides](/slides/2024f/09_server_caching/)
-
-### Tasks
-
-- Make progress on [Project 3](/project3/)
-- Read [Kafka](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/09/Kafka.pdf)
-
-</div>
-<div class="week">
-
-## Week 5 (November 3)
-
-### Topics
-
-- Guest Lecture on React (Tu 10/29)
-- Client-Side Caching - [slides](/slides/2024f/08_client_caching_cdn/index.html)
-
-### Tasks
-
-- Complete [Project 3](/project3/)
-- Complete Final Project Team Message
-- Form a team for [Primary Project](/project/)
-  - Find teammates
-  - Choose a project
-    - Use one of the [project ideas](/project/#project-ideas) (2 to 3 people)
-    - or combine multiple [project ideas](/project/#project-ideas) (4 - 6) people
-    - or design your own (complexity should be similar to provided project ideas)
-
-</div>
-<div class="week">
-
-## Week 6 (November 10)
-
-### Topics
-
-<!-- - #### Wednesday November 15: Zoom Guest Lecture -->
-- Relational Databases [slides](/slides/2024f/11_relational_databases/index.html)
+- Relational Databases
 - Relational Databases and Rails
-- RDBMS Scaling [slides](/slides/2024f/12_rdbms_scaling/index.html)
+- Relational Database Scaling
+- Non Relational Datastores [slides](/slides/2024f/13_nosql/index.html)
 
 ### Tasks
 
-- Begin Primary Project [Sprint 1](/project/#sprint-1-week-6)
-  - develop initial features
-  - deploy to elastic beanstalk
-  - schedule team meeting time with instructor
-- Read [Unifying Consensus and Atomic Commitment for Effective
-  Cloud Data Management](http://www.vldb.org/pvldb/vol12/p611-maiyya.pdf)
-
-</div>
-<div class="week">
-
-## Week 7 (November 17)
-
-<!-- - #### Wednesday November 22: Zoom Guest Lecture -->
-
-- Deep Dive: Load Testing with Tsung [slides](/slides/2024f/10_tsung/index.html)
-- Non-Relational Data Stores [slides](/slides/2024f/13_nosql/index.html)
-
-### Tasks
-
-- Primary Project [Sprint 2](/project/#sprint-2-week-7)
+- Begin [Project 3](/project3/)
 - Read [How Discord Stores Billions of Messages
   ](https://discord.com/blog/how-discord-stores-billions-of-messages)
 - Read [CAP 12 years
@@ -168,19 +101,84 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 8 (November 24)
+## Week 5 (October 27)
 
 ### Topics
 
-<!-- - #### Wednesday November 29: Zoom Guest Lecture -->
-- Web Security [slides](/slides/2024f/14_web_security/index.html)
-- Guest Lecture w/ Andrew Mutz (Th 11/21)
+- Web Performance Metrics
+- Load Testing
+- Scaling Web Applications - [slides](/slides/2024f/05_scaling_web_applications/index.html)
 
 ### Tasks
 
-- Primary Project [Sprint 3](/project/#sprints-345-weeks-8910)
-- Read chapter [4](https://hpbn.co/transport-layer-security-tls/) of High
-  Performance Browser Networking
+- Complete [Project 3](/project3/)
+- Begin [Project 4](/project4/)
+- Read [Dynamic Load Balancing on Web-server
+  Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf) by Cardellini,
+  Colajanni, and Yu.
+
+</div>
+<div class="week">
+
+## Week 6 (November 3)
+
+### Topics
+
+- Architecting for High Availability [slides](/slides/2024f/06_high_availability/index.html)
+- Working in teams [slides](/slides/2024f/07_agile_tdd_pairing/index.html)
+  - Agile Software Development
+  - Test Driven Development (TDD)
+  - Continuous Integration (CI)
+  - Pair Programming / Mobbing
+
+### Tasks
+
+- Complete [Project4](/project4/)
+- Form a team for [Project5](/project5/)
+  - Find teammates
+  - Submit your team
+
+</div>
+<div class="week">
+
+## Week 7 (November 10)
+
+- No class on Mon Nov 10
+- Regular class meeting on Wed Nov 12th
+
+
+- Server-Side Caching [slides](/slides/2024f/09_server_caching/)
+- Serverless Architecture
+
+- Deep Dive: Load Testing with Tsung [slides](/slides/2024f/10_tsung/index.html)
+- Non-Relational Data Stores [slides](/slides/2024f/13_nosql/index.html)
+
+### Tasks
+
+- Begin Primary Project [Sprint 1](/project/#sprint-1-week-6)
+  - develop initial features
+  - deploy to elastic beanstalk
+  - schedule team meeting time with instructor
+
+
+
+</div>
+<div class="week">
+
+## Week 8 (November 17)
+
+### Topics
+
+- Microservices
+- Event Streaming and Message Queues (New)
+
+
+### Tasks
+
+- Primary Project [Sprint 2](/project/#sprint-2-week-7)
+- Read [Kafka](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/09/Kafka.pdf)
+- Read [Unifying Consensus and Atomic Commitment for Effective
+  Cloud Data Management](http://www.vldb.org/pvldb/vol12/p611-maiyya.pdf)
 - (Optional) Read [Dynamo: Amazon’s Highly Available Key-value Store
   ](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf)
 - (Optional) Read [Amazon DynamoDB: A Scalable, Predictably
@@ -190,40 +188,40 @@ The following schedule is subject to change, and many slide links are not yet ac
 </div>
 <div class="week">
 
-## Week 9 (December 1)
+## Week 9 (November 24)
 
-### Topics
+- Thanksgiving week
+- Team Meetings during class time on Mon 11/24
+- No class on Wed 11/26
 
-<!-- - #### Wednesday December 6: Zoom Guest Lecture -->
-- TBD
 
 ### Tasks
 
-- Primary Project [Sprint 4](/project/#sprints-345-weeks-8910)
-- Read chapter [12](https://hpbn.co/http2/) of High Performance Browser Networking
+- Primary Project [Sprint 3](/project/#sprints-345-weeks-8910)
+- Read chapter [4](https://hpbn.co/transport-layer-security-tls/) of High
+  Performance Browser Networking
+
 
 </div>
 <div class="week">
 
-## Week 10 (December 8)
+## Week 10 (December 1)
 
-### Topics
-
-- Guest Lecture (Tu 12/3) - Scalable Machine Learning Inference (Part 1) Shyr-Shea Chang
-- Guest Lecture (Th 12/5) - Scalable Machine Learning Inference (Part 1) Matt Schofield
+- Final week of classes
+- Team Meetings during class time on Mon 12/1
+- Team Meetings during class time on Wed 12/3
 
 
 ### Tasks
 
 - Primary Project [Sprint 5](/project/#sprints-345-weeks-8910)
 - Send draft of [project report](/project/#report) for feedback before the final submission
-- Read chapter [12](https://hpbn.co/http2/) of High Performance Browser Networking
 - Complete the [project report](/project/#report)
 
 </div>
 <div class="week">
 
-## Finals Week (December 15)
+## Finals Week (December 8)
 
 ### Tasks
 
@@ -231,3 +229,5 @@ The following schedule is subject to change, and many slide links are not yet ac
 - Primary Project [Complete Presentation Video](/project/#video)
 
 </div>
+
+-->
