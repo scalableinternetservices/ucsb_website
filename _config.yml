@@ -29,6 +29,7 @@ peer_review: https://forms.gle/GoSHQ74jxN5oP3Xu7
 
 # Page visibility settings
 navigable_pages:
+  schedule: true
   project0: false
   project1: false
   project2: false

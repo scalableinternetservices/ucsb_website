@@ -3,7 +3,7 @@ layout: default
 navigation_weight: 1
 permalink: /schedule/
 title: Class Schedule
-show_in_nav: true
+navigable_page_name: schedule
 ---
 
 # Fall 2025 Class Schedule
