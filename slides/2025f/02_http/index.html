@@ -400,7 +400,8 @@ Compare the responses to the following:
 
 ```bash
 curl -I http://185.199.109.153 --header 'Host: cs291.com'
-curl -I http://185.199.109.153 --header 'Host: twitter.github.io'
+curl -I http://185.199.109.153 --header 'Host: square.github.io'
+curl -I http://185.199.109.153 --header 'Host: zwalker.github.io'
 ```
 
 ---
@@ -546,19 +547,20 @@ type.
 Example:
 
 ```bash
-curl --trace-ascii - http://httpbin.org/post \
-  --data 'username=bboe&amp;comment=Hi There'
+curl --trace-ascii - -X POST "http://postman-echo.com/post" \
+-H "accept: application/json" \
+--data 'username=bboe&comment=Hi There'
 ```
 
 ```http
 POST /post HTTP/1.1
-Host: httpbin.org
-User-Agent: curl/7.43.0
-Accept: */*
-Content-Length: 30
+Host: postman-echo.com
+User-Agent: curl/8.7.1
+accept: application/json
+Content-Length: 33
 Content-Type: application/x-www-form-urlencoded
 
-username=bboe&amp;comment=Hi There
+username=zwalker&comment=Hi There
 ```
 
 ---
@@ -569,13 +571,25 @@ The body of a response usually contains the requested resource content.
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: text/html; charset=utf-8
-Content-Length: 9973
+Date: Wed, 01 Oct 2025 19:13:01 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 627
+Connection: keep-alive
+Server: nginx
+ETag: W/"273-OHP2cBhIm3spg3TjqHQWg1j6WrA"
+Set-Cookie: sails.sid=s%3A0DqcbHV81Mh4nMPmUYDZP9sQIghD3S16.Kxnva
+tN1gwWBRTcJ8ZRFkzaUxHHjOWNz3moPpJAkhvE; Path=/; HttpOnly
 
-<!DOCTYPE html>
-<html lang="en">
-...
-</html>
+{.  "args": {},.  "data": "",.  "files": {},.  "form": {.    "us
+ername": "zwalker",.    "comment": "Hi There".  },.  "headers":
+{.    "host": "postman-echo.com",.    "x-request-start": "t17593
+45981.102",.    "connection": "close",.    "content-length": "33
+",.    "x-forwarded-proto": "http",.    "x-forwarded-port": "80"
+,.    "x-amzn-trace-id": "Root=1-68dd7d3d-11f56ccf65716f955f3095
+cd",.    "user-agent": "curl/8.7.1",.    "accept": "application/
+json",.    "content-type": "application/x-www-form-urlencoded".
+ },.  "json": {.    "username": "zwalker",.    "comment": "Hi Th
+ere".  },.  "url": "http://postman-echo.com/post".}
 ```
 
 ---
