@@ -26,7 +26,8 @@
           </div>
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="/schedule/">Class Schedule</a></li></ul>
+              <li class="active"><a href="/schedule/">Class Schedule</a></li>
+              <li class="active"><a href="/project1/">Project 1</a></li></ul>
           </div>
         </div>
       </div>
@@ -99,6 +100,10 @@ Virtual
 
 <!-- - Enroll in [AWS Educate](https://www.awseducate.com/Registration?apptype=student&courseview=true) -->
 
+<h3 id="project-1project1-due-before"><a href="/project1/">Project 1</a> due before</h3>
+
+<p>Wednesday, October 8th 10am PT</p>
+
 <h2 id="class-resources">Class Resources</h2>
 
 <p><a href="https://piazza.com/ucsb/fall2025/cs291a">Piazza</a>: Use to receive class announcements, ask and
@@ -124,40 +129,109 @@ Note: This book is only useful once we get to the primary project.</p>
 
         </div>
         <div class="col-md-9">
-          <h1 id="project-1-learning-ruby-with-rubykoans">Project 1: Learning Ruby with RubyKoans</h1>
+          <h1 id="project-1-static-web-page">Project 1: Static Web Page</h1>
 
-<p>The goal is to learn the Ruby language, syntax, structure, and some common
-functions and libraries.</p>
+<p>Build, deploy, and load test a static web page hosted on GitHub Pages.</p>
 
-<p>To complete this project follow the instructions on the
-<a href="http://rubykoans.com/">RubyKoans page</a>.
-You will need to download the project, run the script as
-<code class="language-plaintext highlighter-rouge">ruby path_to_enlightenment.rb</code> to see which file to change next in order to
-make the tests pass. Once you update all the required files and all 282 tests
-pass, upload the result to GitHub and fill in the submission form below.</p>
+<p>This project will ensure that students can deploy and load test a simple web
+page prior to working with more complicated web applications.</p>
+
+<p>Static web pages are fast to serve, and are relatively trivial to scale. Anyone
+with access to a free GitHub account can deploy a static site that can
+scale to thousands of users without requring any knowledge of how such scaling
+is accomplished.</p>
+
+<h2 id="learning-outcomes">Learning Outcomes</h2>
+
+<ul>
+  <li>Student can setup a git repository and use it for version control.</li>
+  <li>Student can build and deploy a simple static web page.</li>
+  <li>Student can measure average page load time.</li>
+  <li>Student can measure server’s rate limit.</li>
+</ul>
 
 <h2 id="project-submission">Project Submission</h2>
 
-<p><a href="https://forms.gle/EJApvBycSDVDJy3m7">https://forms.gle/EJApvBycSDVDJy3m7</a></p>
+<p><a href="https://forms.gle/8Z3TVU6kKxmX5Nro7">https://forms.gle/8Z3TVU6kKxmX5Nro7</a></p>
 
-<h2 id="requirements">Requirements</h2>
+<h2 id="page-requirements">Page Requirements</h2>
 
-<p>Provide a link to the GitHub repository which contains the ruby-koans folder
-with the files updated so that all tests pass.</p>
+<p>Your static page must:</p>
+
+<ul>
+  <li>be hosted on <a href="https://pages.github.com">GitHub Pages</a></li>
+  <li>be served via HTTPS</li>
+  <li>be created by hand – go nuts, but don’t use a page generator, i.e., no more
+markup than necessary (ok to use language models to help with generation)</li>
+  <li>contain 100% valid HTML5</li>
+  <li>contain 100% valid CSS</li>
+  <li>utilize an external style sheet to provide style changes (no inline styles,
+i.e., provided via <code class="language-plaintext highlighter-rouge">style</code> attributes)</li>
+</ul>
+
+<p>You page must include:</p>
+
+<ul>
+  <li>an external CSS file written by you and hosted on the same domain</li>
+  <li>an index page including the following
+    <ul>
+      <li>a page title</li>
+      <li>a page heading</li>
+      <li>a paragraph of bio text telling me a bit about you</li>
+      <li>an image of you hosted on the same domain (helps me get to know your faces/names)
+If you object to putting your face on a public website, it is ok to skip this but please email me a photo of yourself so that I can create my own class roster with faces and add some other photo to your site.</li>
+      <li>a hyperlink to the GitHub repository containing the source code</li>
+      <li>A div with the id attribute set to “expert-topics” containing an unordered list with at least three</li>
+      <li>a hyperlink to at least one page named /interest/<your_interest> Ex: /interests/airplanes</your_interest></li>
+    </ul>
+  </li>
+  <li>a page for at least one of your interests accessible at /interest/<your_interest> Ex: /interests/airplanes
+</your_interest>    <ul>
+      <li>a page title</li>
+      <li>a page heading</li>
+      <li>a paragraph of text describing the content of this page</li>
+      <li>a table with at least 2 columns and at least 10 rows formatted as an FAQ about your topic of interest</li>
+    </ul>
+  </li>
+</ul>
 
 <h3 id="verification-script">Verification Script</h3>
 
-<p><code class="language-plaintext highlighter-rouge">ruby path_to_enlightenment.rb</code> should pass all 282 asserts.</p>
+<p>The <code class="language-plaintext highlighter-rouge">project1.py</code> script in
+<a href="https://github.com/scalableinternetservices/ucsb_website/tree/main/scripts">https://github.com/scalableinternetservices/ucsb_website/tree/main/scripts</a>
+can be used to automatically verify that your page meets the necessary
+requirements.</p>
+
+<p>Follow the directions in the README to clone the repository, install the python
+dependencies, and run the verification script.</p>
+
+<h2 id="questions-to-answer">Questions To Answer</h2>
+
+<ul>
+  <li>On average, how many requests can <code class="language-plaintext highlighter-rouge">ab</code> complete in 10 seconds with all the
+power of two concurrency levels between 1 and 256 (i.e., 1, 2, 4, 8, 16, 32,
+64, 128, 256)?</li>
+  <li>Why are there diminishing returns at higher concurrency levels?</li>
+  <li>What’s the performance difference when requesting HTTP and HTTPS?</li>
+  <li>How can GitHub respond so quickly?</li>
+  <li>What is your site’s “Total Blocking Time” (TBT) according to PageSpeed Insights?</li>
+</ul>
+
+<h2 id="required-tools">Required Tools</h2>
+
+<ul>
+  <li><a href="https://httpd.apache.org/docs/2.4/programs/ab.html">ab</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS</a></li>
+  <li>git via <a href="https://help.github.com/en#dotcom">GitHub</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5">HTML5</a></li>
+</ul>
 
 <h2 id="other-resources">Other Resources</h2>
 
 <ul>
-  <li><a href="https://www.ruby-lang.org/en/">The Ruby Language</a></li>
-  <li><a href="https://try.ruby-lang.org/">Try Ruby in your browser</a></li>
-  <li><a href="http://rubykoans.com/">RubyKoans</a></li>
-  <li><a href="https://www.railstutorial.org/book">Ruby on Rails Tutorial by Michael Hartl</a></li>
-  <li><a href="https://www.manning.com/books/the-well-grounded-rubyist-third-edition">The Well Grounded Rubyist</a></li>
-  <li><a href="https://headfirstruby.com/">Head First Ruby</a></li>
+  <li><a href="https://developers.google.com/speed/pagespeed/insights/">Google PageSpeed Insights</a></li>
+  <li><a href="https://validator.w3.org">W3C Markup Validation Service</a></li>
+  <li><a href="https://jigsaw.w3.org/css-validator/">W3C CSS Validation Service</a></li>
 </ul>
 
         </div>

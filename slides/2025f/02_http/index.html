@@ -1,0 +1,1117 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>HTTP</title>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 2.5em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      blockquote {
+        border-left: 0.3em solid rgba(0,0,0,0.5);
+        padding: 0 15px;
+        font-style: italic;
+      }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      img {
+        max-height: 100%;
+        max-width: 100%;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .clear { clear: both; }
+      #slideshow .slide .content code { font-size: 0.8em; }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 1em;
+      }
+      .background-blue {
+        background-color: deepskyblue;
+      }
+      .background-green {
+        background-color: springgreen;
+      }
+      .background-pink {
+        background-color: deeppink;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        width: 49%;
+        float: left;
+      }
+      .right-column {
+        width: 49%;
+        float: right;
+      }
+      .left-column20 {
+        width: 20%;
+        float: left;
+      }
+      .right-column80 {
+        width: 79%;
+        float: right;
+      }
+      .left-column30 {
+        width: 30%;
+        float: left;
+      }
+      .right-column70 {
+        width: 69%;
+        float: right;
+      }
+      .left-column40 {
+        width: 40%;
+        float: left;
+      }
+      .right-column60 {
+        width: 59%;
+        float: right;
+      }
+
+      /* Table layout */
+      table {
+        background: #f5f5f5;
+        margin: 30px auto;
+        text-align: left;
+        width: 100%;
+      }
+      th {
+        background: linear-gradient(#777, #444);
+        color: #fff;
+        font-weight: bold;
+        padding: 10px 15px;
+      }
+      td {
+        border-right: 1px solid #fff;
+        border-left: 1px solid #e8e8e8;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #e8e8e8;
+        padding: 10px 15px;
+      }
+
+    </style>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle
+
+# HTTP
+
+## CS291A: Scalable Internet Services
+
+---
+
+# Agenda
+
+* History of HTTP
+
+* HTTP Basics
+
+* HTTP/2
+
+* HTTP/3
+
+* Intro Project 0
+
+* Demo ab tool
+
+---
+
+class: center inverse middle
+
+# HTTP
+
+---
+
+# Chrome Network Table
+
+By the end of this lecture, you should understand this output:
+
+.center[![Chrome Network Table](developer_tools_waterfall.png)]
+
+---
+
+# History
+
+> When was HTTP created?
+
+--
+
+The year is 1990. The Internet has existed for ~20 years, email for ~8.
+
+Tim Berners-Lee has the idea to combine __HyperText__ and the __Internet__. He
+creates the first version of __HTTP__ and __HTML__.
+
+__HyperText__: Links documents together via __HyperLinks__
+
+> When was the first web browser created?
+
+--
+
+* 1993: Mosaic, the first web browser, is created at UIUC
+
+* 1994: Marc Andreessen leaves UIUC and founds Netscape with Jim Clark
+
+---
+
+# The First Web Server
+
+![The First Web Server](first_web_server.png)
+
+---
+
+# HTTP Explained
+
+In its original, simplest version:
+
+* Open a TCP socket (standard port is 80)
+
+* Send an ASCII request for a resource (`GET mypage.html`)
+
+* Response comes back containing only the content of `mypage.html`
+
+* Close the TCP socket
+
+--
+
+HTTP was originally designed to:
+
+* Send HTML (was later extended to send anything)
+
+* To facilitate interaction between a web browser and a web server (now also
+  used heavily for server-to-server communication)
+
+---
+
+class: center inverse middle
+
+# HTTP Request/Response Components
+
+---
+
+# HTTP Request
+
+* __Method/Verb__: What do you want to do (e.g., __GET__, __POST__)
+
+* __Resource__: What is the logical path of the resource you want
+
+* __HTTP Version__: What version of HTTP are you using?
+
+* __Headers__: Standard way to specify or request optional behavior
+
+* __Body__: Content that is being sent to the server (e.g., a file upload)
+
+---
+
+# HTTP Response
+
+* __HTTP Version__: Indicates the HTTP version the server is "speaking"
+
+* __Status Code__: Indicates success, failure, or other possible [response
+  codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
+
+* __Headers__: Provides meta data about the response.
+
+* __Body__: The primary payload of the response (for a successful _GET_
+  request, this contains the resource content)
+
+---
+
+# HTTP Components Example
+
+![Components of HTTP request and response](http_components.png)
+
+---
+
+class: center inverse middle
+
+# HTTP Methods/Verbs
+
+---
+
+# GET
+
+* Request a copy of a _resource_
+
+* The request should have no side-effects (i.e., doesn't change server state)
+
+* __GOOD__: `GET /fluffy_kitty.jpg`
+
+* __BAD__: `GET /users/sign_out`
+
+---
+
+# POST
+
+* Sends data to the server
+
+* Generally used to create a _resource_
+
+* Has side-effects (e.g., creates a resource)
+
+* Not idempotent (i.e., making the same request twice creates two
+  separate, but similar resources)
+
+  * "Do you want to submit your form again?"
+
+  * "Please do not refresh this page."
+
+---
+
+# PUT
+
+* Sends data to the server
+
+* Often used to update an existing resource
+
+* Has side-effects
+
+* Should be idempotent (e.g., updating a resource twice should result in the
+  same effect to the resource)
+
+---
+
+# DELETE
+
+* Destroys a resource
+
+* Has side-effects
+
+* Should be idempotent
+
+* __GOOD__: `DELETE /session/<id>` (for log out)
+
+---
+
+# HEAD
+
+* Exactly like GET but excludes the body in the response
+
+> When might you want to use HTTP HEAD?
+
+???
+
+* To check if a resource exists
+* CHeck the size of a resource
+* To check if a resource has changed (last-modified)
+
+---
+
+# HTTP Method/Verb Misuse
+
+Correct HTTP method/verb usage is not enforced, and is often misused.
+
+> What do you think the following is supposed to do?
+
+```http
+GET /post/5?action=hide
+```
+???
+
+Common Problems:
+* Using GET for actions that change server state
+* Using POST for idempotent actions
+* Using PUT for creating resources
+* Using DELETE for non-idempotent actions
+* Using GET to send data to the server, not prohibited but not recommended
+
+--
+
+> What other problem do you think can occur with the misuse of HTTP methods/verbs?
+
+---
+
+# Other HTTP Methods/Verbs
+
+* CONNECT
+
+  * Establish a connection through a proxy server
+
+* OPTIONS
+
+  * See which methods/verbs are available for a resource
+
+  * Used for [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) requests
+
+* TRACE
+
+  * Used to reflect the HTTP request back
+
+---
+
+# HTTP Resource
+
+Specifies a logical hierarchy to access a resource:
+
+* __GOOD__: `/gp/product/1565925092/`
+
+* __BAD__: `/index.jsp?page_id=4251`
+
+--
+
+## Query String
+
+* The portion of the resource after a _question mark_ (`?`)
+
+* Used to assist in locating the resource
+
+* Values are assigned using the equal token (e.g., `sort=top`)
+
+* Multiple values can be concatenated via _ampersand_ (`&amp;`)
+
+> What do you think the following returns?
+
+<https://www.reddit.com/user/spez/?sort=top&amp;t=all>
+
+---
+
+# HTTP Version
+
+Version strings are often used in protocols to make it easy to evolve the
+protocol.
+
+With HTTP different versions have different behavior:
+
+* (1991) HTTP 0.9 (retroactively versioned): Single line protocol with no
+  headers. Only __GET__ supported: `GET index.html`
+
+* (1996) HTTP 1.0: Added headers, and a version string
+
+* (1999) HTTP 1.1: Connection keep-alive by default, additional caching
+  mechanisms. __Primary HTTP version used today__
+
+* (2015) HTTP 2.0: Binary framing, header compression, many other
+  optimizations. Discussed in more detail in a future lecture
+
+* (2022) HTTP 3.0: QUIC/UDP. Lower latency. Packet Loss.
+  Discussed in more detail in a future lecture.
+
+---
+
+class: center inverse middle
+
+# HTTP Headers
+
+---
+
+# HTTP Headers Overview
+
+Provides metadata for the request and response.
+
+HTTP Header keys are case _InSenSiTiVe_.
+
+> What HTTP headers do you know of?
+
+---
+
+# HTTP Headers: Accept (request)
+
+Indicates the desired format of the requested resource.
+
+```http
+Accept: text/html
+```
+
+I desire the resource in html format.
+
+```http
+Accept: application/json
+```
+
+I desire the resource as a JSON document.
+
+```http
+Accept: application/json,application/xml
+```
+
+I prefer a JSON document, but an XML document will do.
+
+---
+
+# HTTP Headers: Content-Type (request/response)
+
+Indicates the format of the request or response body.
+
+```http
+Content-Type: text/html
+```
+
+The body of this request/response is an HTML document.
+
+```http
+Content-Type: application/json
+```
+
+The body of this request/response is a JSON document.
+
+Other common request content-types:
+
+* `application/x-www-form-urlencoded` (HTTP form)
+* `multipart/form-data` (HTTP form with file upload)
+
+---
+
+# HTTP Headers: Accept-* (request)
+
+## Accept-Encoding
+
+Indicates preferred encoding for the response body.
+
+```http
+Accept-Encoding: bzip2,gzip
+```
+
+I prefer the data compressed via bzip2. If that cannot be done, please gzip the
+response.
+
+## Accept-Language
+
+Indicates the preferred language for the resource
+
+```http
+Accept-Language: es,en-US
+```
+
+I prefer Spanish, but will accept US-English.
+
+---
+
+# HTTP Headers: Host (request)
+
+Indicates the DNS hostname associated with the desired resource.
+
+Required in an HTTP 1.1 request.
+
+> Why is the HOST header required?
+
+--
+
+Compare the responses to the following:
+
+```bash
+curl -I http://185.199.109.153 --header 'Host: cs291.com'
+curl -I http://185.199.109.153 --header 'Host: square.github.io'
+curl -I http://185.199.109.153 --header 'Host: zwalker.github.io'
+```
+
+---
+
+# HTTP Headers: User-Agent (request)
+
+Indicates information about the client (web browser, crawler, tool) to the web
+server.
+
+```http
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.99 Safari/537.36
+```
+
+Can be used to serve different content to different clients. However, try to
+avoid doing so.
+
+---
+
+# HTTP Headers: Set-Cookie, Cookie
+
+## Set-Cookie (response)
+
+A response header informing the browser to use the provided cookies in
+subsequent requests to the server.
+
+## Cookie (request)
+
+A request header containing the data previously set by the server via a
+`Set-Cookie` header.
+
+--
+
+> What kind of information might one put in a cookie?
+
+--
+
+> What security concerns may exist with cookies?
+
+???
+
+Uses of cookies:
+* Authentication
+* Session state
+* Personalization
+* Tracking
+* User preferences
+* Shopping cart
+* Advertising
+* Analytics
+
+Security concerns:
+* Cross-site scripting
+* Stolen cookies (stolen session)
+
+
+---
+
+# Other HTTP Headers
+
+## Caching Related Headers
+
+* ETag
+* Date
+* Last-Modified
+* Cache-Control
+* Age
+
+## Security Related Headers
+
+* Content-Security-Policy
+* Strict-Transport-Security
+* X-Frame-Options
+
+`X-` prefixed headers are not part of the official specification and may later
+become _standardized_.
+
+???
+
+* ETAG - Entity Tag, a unique identifier for the resource used for caching
+* Date - Date of the response
+* Last-Modified - Date the resource was last modified
+* Cache-Control - Cache control directives, used to indicate boundaries of caching (e.g., no-cache, max-age)
+* Age - Age of the resource in the cache
+
+* Content-Security-Policy - specifies where resources can be loaded from
+* Strict-Transport-Security - Forces the browser to use HTTPS
+* X-Frame-Options - Prevents the resource from being embedded in an iframe
+
+---
+
+class: center inverse middle
+
+# HTTP Statuses
+
+---
+
+# HTTP Statuses Overview
+
+The HTTP response status indicates the outcome of the request. Status codes
+fall into one of five categories:
+
+* 1XX - Informational
+* 2XX - Successful
+* 3XX - Redirection
+* 4XX - Client Error
+* 5XX - Server Error
+
+Ref: [HTTP Status Code Definitions](https://www.rfc-editor.org/rfc/rfc9110.html#name-status-codes)
+
+---
+
+# Common HTTP Statuses
+
+* __200 OK__: The requested resource is being returned.
+
+* __301 Moved Permanently__: The resource has been moved and the browser should
+  always use the new URL provided via the `Location: https://...` header.
+
+* __302 Found__: The resource can be found at another location via the
+  `Location` header.
+
+* __304 Not Modified__: When request includes a cache header (e.g.,
+  `If-Modified-Since`) this status indicates the content hasn't changed saving
+  resources from being fetched, rendered, and sent.
+
+* __403 Forbidden__: The request is not authorized to access the resource.
+
+* __404 Not Found__: The resource does not exist.
+
+* __500 Internal Server Error__: Something unexpected happened on the server.
+
+* __503 Service Unavailable__: Temporary failure on the server-side possibly
+  with an upstream server.
+
+---
+
+# HTTP Request Body
+
+HTTP PUT and POST requests typically have a body associated with them. HTML
+_form_ elements usually result in a POST request with a `x-www-form-urlencoded`
+type.
+
+Example:
+
+```bash
+curl --trace-ascii - -X POST "http://postman-echo.com/post" \
+-H "accept: application/json" \
+--data 'username=bboe&comment=Hi There'
+```
+
+```http
+POST /post HTTP/1.1
+Host: postman-echo.com
+User-Agent: curl/8.7.1
+accept: application/json
+Content-Length: 33
+Content-Type: application/x-www-form-urlencoded
+
+username=zwalker&comment=Hi There
+```
+
+---
+
+# HTTP Response Body
+
+The body of a response usually contains the requested resource content.
+
+```http
+HTTP/1.1 200 OK
+Date: Wed, 01 Oct 2025 19:13:01 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 627
+Connection: keep-alive
+Server: nginx
+ETag: W/"273-OHP2cBhIm3spg3TjqHQWg1j6WrA"
+Set-Cookie: sails.sid=s%3A0DqcbHV81Mh4nMPmUYDZP9sQIghD3S16.Kxnva
+tN1gwWBRTcJ8ZRFkzaUxHHjOWNz3moPpJAkhvE; Path=/; HttpOnly
+
+{.  "args": {},.  "data": "",.  "files": {},.  "form": {.    "us
+ername": "zwalker",.    "comment": "Hi There".  },.  "headers":
+{.    "host": "postman-echo.com",.    "x-request-start": "t17593
+45981.102",.    "connection": "close",.    "content-length": "33
+",.    "x-forwarded-proto": "http",.    "x-forwarded-port": "80"
+,.    "x-amzn-trace-id": "Root=1-68dd7d3d-11f56ccf65716f955f3095
+cd",.    "user-agent": "curl/8.7.1",.    "accept": "application/
+json",.    "content-type": "application/x-www-form-urlencoded".
+ },.  "json": {.    "username": "zwalker",.    "comment": "Hi Th
+ere".  },.  "url": "http://postman-echo.com/post".}
+```
+
+---
+
+# Try it! Direct Input Server
+
+## Listen for a TCP connection
+
+```bash
+nc -l localhost 5000
+```
+
+## Browse to: <http://localhost:5000>
+
+## Paste the following into your terminal
+
+```http
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+Content-Length: 111
+
+<!DOCTYPE html>
+<html lang="en">
+  <h1>HTTP is easy!</h1>
+  <img src="https://i.imgur.com/oXxTj5g.gif">
+</html>
+```
+
+__Note__: Ensure the newline gets copied between the headers and the body.
+
+---
+
+# HTTP Performance
+
+Prior to HTTP 1.1, one TCP connection was used for a single HTTP request.
+
+> What performance flaws exist in this design?
+
+---
+
+# TCP Connection Delay
+
+Establishing a TCP connection requires 1 round-trip.
+
+![TCP round trip visualized](tcp_round_trip.png)
+
+Image Source: “High Performance Browser Networking,” by Ilya Grigorik
+
+---
+
+# Slow Start and Congestion Avoidance
+
+The early phases of a TCP connection are bandwidth constrained.
+
+.center[![TCP congestion mechanisms](tcp_congestion.png)]
+
+Image Source: “High Performance Browser Networking,” by Ilya Grigorik
+
+---
+
+# TCP Congestion Window Size (cwnd)
+
+It takes a fair amount of time to get up-to-speed. Making new connections per
+HTTP request is not terribly efficient.
+
+.center[![TCP connection window size](tcp_cwnd.png)]
+
+Image Source: “High Performance Browser Networking,” by Ilya Grigorik
+
+---
+
+# HTTP Keep-Alive
+
+HTTP 1.1 officially added support for the `Connection` header most commonly
+used as:
+
+`Connection: keep-alive`
+
+In fact, with HTTP 1.1, the default is `keep-alive`. The alternative, and the
+way to signal the end of the HTTP session is:
+
+`Connection: close`
+
+With a keep-alive HTTP session, the server waits some amount of time for
+an additional request after processing the most recent request.
+
+---
+
+# HTTP Keep-Alive Session
+
+.center[![HTTP Session with Two Requests](http_session.png)]
+
+Image Source: “High Performance Browser Networking,” by Ilya Grigorik
+
+---
+
+# HTTP Pipelining
+
+With HTTP keep-alive, we can make multiple requests on a single TCP connection. Success!
+
+But, we're still waiting for the current response before we can issue the next
+request. Why wait?
+
+---
+
+# HTTP Pipelining Session
+
+.center[![HTTP Session with Two Requests](http_pipelining.png)]
+
+Image Source: “High Performance Browser Networking,” by Ilya Grigorik
+
+---
+
+# Think About it
+
+> What sort of issues might occur with HTTP pipelining?
+
+---
+
+# Pipelining Issues
+
+## Head of Line Blocking
+
+Head of line blocking means that a request that takes a long time is blocking
+another request from occurring.
+
+--
+
+## Extra work for the server
+
+Pipeling may require the server to buffer future responses while blocked on the
+head of the line. These extra resources can exhaust the server.
+
+Furthermore, if an error occurs the server may end up doing the same _work_
+twice.
+
+--
+
+## Adoption
+
+Many intermediaries (proxies, caches) simply do not support HTTP pipelining thus
+making the feature less appealing.
+
+---
+
+# More Speed
+
+A single web page may have tens or even hundreds of resources. In practice obtaining each
+resource serially over the same TCP connection is too slow.
+
+> What can be done to get more speed?
+
+---
+
+# Concurrent HTTP Sessions
+
+Most browsers will open up to __six__ concurrent TCP connections to the same
+server.
+
+.center[![Concurrent HTTP Sessions](concurrent_http.png)]
+
+Image Source: “High Performance Browser Networking,” by Ilya Grigorik
+
+---
+
+# Even more speed
+
+According to the HTTP Archive the average number of resources for websites they
+crawled is `~100`. With up to six connections each HTTP session must fetch
+approximately `16` resources. With head-of-line blocking this may still be too
+slow.
+
+> What can we do?
+
+---
+
+# Domain Sharding
+
+_Domain sharding_ is the process of separating resources to different
+domains, e.g., `i.ytimg.com`, `s.ytimg.com`.
+
+The web browser will make up to `6` connections for each domain.
+
+Reduces page load time for some work-loads (test to see if it's right for you).
+
+---
+
+# Hacks that work
+
+Concurrent TCP sessions and domain sharding are hacks to get more performance
+out of an existing system (HTTP/1.1).
+
+Using these hacks makes application development and deployment more
+complicated.
+
+## Other Performance Related Hacks
+
+* CSS/JS concatenation and minimization
+
+* Image spriting
+
+## Is there a better way?
+
+HTTP/2 solves some of these problems, but not all
+
+---
+
+# Chrome Network Table Revisited
+
+Does this table make sense now?
+
+.center[![Chrome Network Table](developer_tools_waterfall.png)]
+
+???
+
+Stop here for demo of chrome developer tools and network tab:
+
+Visit a website and open the developer tools. Look at the network tab
+
+* /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --user-data-dir="/tmp/no_http_3_profile"
+* chrome://flags/
+* /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --user-data-dir="/tmp/no_http_2_profile" --disable-http2
+
+---
+
+class: center middle inverse
+
+# HTTP/2
+
+---
+
+# HTTP/2 History
+
+* Google internally announced the SPDY protocol (Nov 2009).
+
+* Google released SPDY in Chrome for (Sept 2010).
+
+* Google deployed SPDY on all their servers (Jan 2011).
+
+* Twitter deployed SPDY on its servers (March 2012).
+
+* Apache added support for SPDY (April 2012)
+
+* NGINX added support for SPDY (June 2012)
+
+* Firefox added support for SPDY (June 2012)
+
+* First draft of HTTP/2.0 based on SPDY (Nov 2012)
+
+* RFC 7540: HTTP/2.0 published (May 2015)
+
+---
+
+# HTTP/2 Features
+
+* Multiplexing application streams permits concurrent streams over a single TCP
+  connection with the ability to prioritize streams.
+
+* Header compression minimizes request and response overhead.
+
+* Server push provides a way for the server to send responses prior to
+  receiving a request for the associated resource.
+
+--
+  * In practice server push has been effectively "retired"
+    (https://developer.chrome.com/blog/removing-push)
+
+---
+
+# Remember Concurrent Connections in HTTP/1.1
+
+With HTTP/1.1 we would open up to 6 connections per domain to load resources faster.
+
+.center[![Concurrent HTTP Sessions](concurrent_http.png)]
+
+Image Source: “High Performance Browser Networking,” by Ilya Grigorik
+
+--
+
+.center[Now we can use a single connection with concurrent streams]
+
+---
+
+# HTTP/2 and Dropped Packets
+
+.center[
+![HTTP/2 with dropped packet](http2_dropped_packet.png)
+]
+
+HTTP/2 provides excellent multiplexing support. However, any dropped packet
+blocks the entire connection.
+
+TCP cannot differentiate between packets dropped by different streams.
+
+---
+
+# TCP Retransmissions
+
+.center[
+![TCP Retransmissions](tcp_retransmissions.png)
+]
+
+Losing packets results in retransmissions. In high latency networks this
+process is painfully slow.
+
+---
+
+# HTTP/3 and QUIC
+
+
+QUIC is an attempt to use UDP for HTTP.
+
+QUIC's primary goal is to reduce latency.
+
+In fact, you are already using QUIC on many intenet scale services
+
+---
+
+# QUIC and Application Layer TCP
+
+* What's wrong with TCP?
+
+--
+
+* TCP requires a round trip to the server before HTTP requests can begin.  Because of 3 way handshake to establish a connection
+
+* TCP is the reason we have head of line blocking in HTTP/2 even with multiple streams
+
+* UDP is connection less - no handshake
+
+* UDP doesn't care about packet order
+
+---
+
+# QUIC and Packet Loss
+
+.center[
+![QUIC Multiplexing](quic_multiplexing.png)
+]
+
+Packet loss affects only the stream that lost the resource.
+
+No global head-of-line blocking.
+
+TCP handles packet loss through retransmissions. QUIC can handle _some_ packet
+loss without retransmission.
+
+> How?
+
+---
+
+# QUIC Results
+
+* 75% of requests avoid handshake
+
+* Google search observed a 3% reduction in mean page load time.
+
+* The slowest 1% of users experience a 1 second reduction in page load time.
+
+* YouTube users experience 30% fewer rebuffers.
+
+Overall the most significant results occur under poor network conditions.
+
+(October 2020) 75% of Facebook traffic is over QUIC [[ref](https://engineering.fb.com/2020/10/21/networking-traffic/how-facebook-is-bringing-quic-to-billions/)]
+
+
+---
+
+# HTTP/3
+
+HTTP/3 is proposed as HTTP over QUIC.
+
+https://mailarchive.ietf.org/arch/msg/quic/RLRs4nB1lwFCZ_7k0iuz0ZBa35s
+
+HTTP/3 specification (June 2022)
+
+- https://datatracker.ietf.org/doc/html/rfc9114
+
+Abstract:
+
+> The QUIC transport protocol has several features that are desirable in a
+  transport for HTTP, such as stream multiplexing, per-stream flow control, and
+  low-latency connection establishment.  This document describes a mapping of
+  HTTP semantics over QUIC.  This document also identifies HTTP/2 features that
+  are subsumed by QUIC, and describes how HTTP/2 extensions can be ported to
+  HTTP/3.
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"
+            type="text/javascript"></script>
+    <script type="text/javascript">
+      var hljs = remark.highlighter.engine;
+      var slideshow = remark.create({
+          highlightLanguage: 'ruby',
+          highlightLines: true,
+          hightlightSpans: true,
+          highlightStyle: 'monokai'
+        }) ;
+    </script>
+  </body>
+</html>
