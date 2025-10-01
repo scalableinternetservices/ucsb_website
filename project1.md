@@ -71,8 +71,7 @@ You page must include:
 
 ### Verification Script
 
-TODO: update the verification script or remove it from the site
-The `project0.py` script in
+The `project1.py` script in
 <https://github.com/scalableinternetservices/ucsb_website/tree/main/scripts>
 can be used to automatically verify that your page meets the necessary
 requirements.

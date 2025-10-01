@@ -1,11 +1,3 @@
----
-front_matter_title: ""
-layout: default
-navigation_weight: 3
-permalink: /project1/
-title: Project 1
-navigable_page_name: project1
----
 # Project 1: Learning Ruby with RubyKoans
 
 The goal is to learn the Ruby language, syntax, structure, and some common

@@ -1,11 +1,3 @@
----
-layout: default
-navigation_weight: 4
-permalink: /project2/
-title: Project 2
-navigable_page_name: project2
----
-
 # Project 2: AWS Lambda and JSON Web Tokens (JWT)
 
 In this project you will write ruby code to provide a semi-trivial
