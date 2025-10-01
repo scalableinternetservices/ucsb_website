@@ -53,18 +53,12 @@ Wednesday, Oct 1 12pm PT
 {% endif %}
 <!-- - Enroll in [AWS Educate](https://www.awseducate.com/Registration?apptype=student&courseview=true) -->
 
-{% if site.navigable_pages.project0 %}
-
-### [Project 0](/project0/) due before
-
-Monday, October 6 2pm PT
-{% endif %}
 
 {% if site.navigable_pages.project1 %}
 
 ### [Project 1](/project1/) due before
 
-Monday, October 13 2pm PT
+Wednesday, October 8th 10am PT
 {% endif %}
 
 {% if site.navigable_pages.project2 %}

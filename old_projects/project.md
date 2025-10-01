@@ -1,11 +1,3 @@
----
-layout: default
-navigation_weight: 10
-permalink: /project/
-title: Primary Project
-navigable_page_name: primary_project
----
-
 # Primary Project
 
 ## Objective

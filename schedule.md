@@ -18,14 +18,14 @@ The following schedule is subject to change, and many slide links are not yet ac
 ### Topics
 
 - Course Introduction - [slides](/slides/2025f/01_course_introduction/index.html)
-- Hypertext Transfer Protocol (HTTP) - slides
+- Hypertext Transfer Protocol (HTTP) - [slides](/slides/2025f/02_http/index.html)
 - Load Testing Basics
 
 ### Tasks
 
 - Complete the introduction survey
 - Join the class on Piazza
-- Begin Project 1
+- Begin [Project 1](/project1)
 - Read chapters [1](https://hpbn.co/primer-on-latency-and-bandwidth/), and
   [2](https://hpbn.co/building-blocks-of-tcp/) of High Performance Browser Networking,
   [9](https://hpbn.co/brief-history-of-http/)

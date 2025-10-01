@@ -1,12 +1,3 @@
----
-front_matter_title: ""
-layout: default
-navigation_weight: 2
-permalink: /project0/
-title: Project 0
-navigable_page_name: project0
----
-
 # Project 0: Static Web Page
 
 Build, deploy, and load test a static web page hosted on GitHub Pages.

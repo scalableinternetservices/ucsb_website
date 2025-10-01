@@ -18,22 +18,21 @@ drive_url:
 piazza_url: https://piazza.com/ucsb/fall2025/cs291a
 
 intro_survey: https://forms.gle/TyxFWZnkW9qaqBhE7
-project0_submission: https://forms.gle/Vjj8sUGVbtJC4VMs8
-project1_submission: https://forms.gle/EJApvBycSDVDJy3m7
-project2_submission: https://forms.gle/f4rkkde8seDXRFTF6
-project3_submission: https://forms.gle/gkPCYxu4cVLrwPWP6
-project3_team_message: https://forms.gle/727Gi4inpuUC5SYx6
-primary_project_team_message: https://forms.gle/2X8Po3KNVBvRqFGZ8
-initial_peer_review: https://forms.gle/jjHBnisnaxhg3kEJ7
-peer_review: https://forms.gle/GoSHQ74jxN5oP3Xu7
+project1_submission: https://forms.gle/8Z3TVU6kKxmX5Nro7
+project2_submission: 
+project3_submission: 
+project4_submission: 
+project5_team_message: 
+initial_peer_review: 
+peer_review: 
 
 # Page visibility settings
 navigable_pages:
   schedule: true
-  project0: false
-  project1: false
+  project1: true
   project2: false
   project3: false
+  project4: false
   primary_project: false
 
 kramdown:

@@ -1,11 +1,3 @@
----
-layout: default
-navigation_weight: 5
-permalink: /project3/
-title: Project 3
-navigable_page_name: project3
----
-
 # Project 3: Demo Rails App
 
 In this project you will learn how to setup a basic Ruby on Rails app.
