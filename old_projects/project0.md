@@ -2,12 +2,12 @@
 front_matter_title: ""
 layout: default
 navigation_weight: 2
-permalink: /project1/
-title: Project 1
-navigable_page_name: project1
+permalink: /project0/
+title: Project 0
+navigable_page_name: project0
 ---
 
-# Project 1: Static Web Page
+# Project 0: Static Web Page
 
 Build, deploy, and load test a static web page hosted on GitHub Pages.
 
@@ -28,9 +28,9 @@ is accomplished.
 
 ## Project Submission
 
-{% if site.project1_submission %}
+{% if site.project0_submission %}
 
-<{{site.project1_submission}}>
+<{{site.project0_submission}}>
 
 {% else %}
 
@@ -45,7 +45,7 @@ Your static page must:
 - be hosted on [GitHub Pages](https://pages.github.com)
 - be served via HTTPS
 - be created by hand -- go nuts, but don't use a page generator, i.e., no more
-  markup than necessary (ok to use language models to help with generation)
+  markup than necessary
 - contain 100% valid HTML5
 - contain 100% valid CSS
 - utilize an external style sheet to provide style changes (no inline styles,
@@ -53,25 +53,16 @@ Your static page must:
 
 You page must include:
 
+- a page title
+- a page heading
+- an image hosted on the same domain
 - an external CSS file written by you and hosted on the same domain
-- an index page including the following
-  - a page title
-  - a page heading
-  - a paragraph of bio text telling me a bit about you
-  - an image of you hosted on the same domain (helps me get to know your faces/names)
-    If you object to putting your face on a public website, it is ok to skip this but please email me a photo of yourself so that I can create my own class roster with faces and add some other photo to your site.
-  - a hyperlink to the GitHub repository containing the source code
-  - A div with the id attribute set to "expert-topics" containing an unordered list with at least three 
-  - a hyperlink to at least one page named /interest/<your_interest> Ex: /interests/airplanes
-- a page for at least one of your interests accessible at /interest/<your_interest> Ex: /interests/airplanes
-  - a page title
-  - a page heading
-  - a paragraph of text describing the content of this page
-  - a table with at least 2 columns and at least 10 rows formatted as an FAQ about your topic of interest
+- an unordered list with at least three items
+- a table with at least 2 columns and at least 3 rows
+- a hyperlink to the GitHub repository containing the source code
 
 ### Verification Script
 
-TODO: update the verification script or remove it from the site
 The `project0.py` script in
 <https://github.com/scalableinternetservices/ucsb_website/tree/main/scripts>
 can be used to automatically verify that your page meets the necessary
