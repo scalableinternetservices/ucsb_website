@@ -38,8 +38,8 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- HTTP Servers - slides
-- Application Servers - slides
+- HTTP Servers - [slides](/slides/2025f/03_http_servers/index.html)
+- Application Servers - [slides](/slides/2025f/04_application_servers/index.html)
 - Javascript/Typescript Intro
 - React Intro
 
