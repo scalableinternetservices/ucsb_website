@@ -40,7 +40,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 - HTTP Servers - [slides](/slides/2025f/03_http_servers/index.html)
 - Application Servers - [slides](/slides/2025f/04_application_servers/index.html)
-- Javascript/Typescript Intro
+- Javascript/Typescript Intro [slides](/slides/2025f/05_typescript_react/index.html)
 - React Intro
 
 ### Tasks

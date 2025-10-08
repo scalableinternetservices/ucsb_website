@@ -1,0 +1,672 @@
+---
+layout: presentation
+title: TypeScript and React
+---
+
+class: center, middle
+
+# {{page.title}}
+
+## CS291A: Scalable Internet Services
+
+???
+
+Welcome everyone! This is a hands-on workshop where we'll learn TypeScript with React. The goal is to get comfortable with typing React components and building a small project together.
+
+---
+
+# Welcome & Setup (10 minutes)
+
+## Learning Objectives
+- Get comfortable with TypeScript syntax in React
+- Build functional components with proper typing
+- Create a small TODO app as a group project
+- Develop debugging skills for type errors
+
+## Quick Setup
+```bash
+npx create-react-app my-app --template typescript
+cd my-app
+npm start
+```
+
+**Group Icebreaker:** What's one JavaScript project you've worked with?
+
+???
+
+Let's start with a quick icebreaker to get everyone talking. While they're setting up, I'll walk around and help with any setup issues. Make sure everyone can run the create-react-app command successfully.
+
+---
+
+# Part 1: React Basics (10 minutes)
+
+## What is React?
+
+- **JavaScript library** for building user interfaces
+- **Component-based** - UI built from reusable pieces
+- **Declarative** - describe what you want, not how to get it
+- **Virtual DOM** - efficient updates to the real DOM
+
+## Key React Concepts
+
+- **Components** - Functions that return JSX
+- **Props** - Data passed down from parent to child
+- **State** - Data that can change over time
+- **JSX** - JavaScript syntax extension for HTML-like code
+- **Contexts** - A way to share data between components without passing props through multiple levels of the component tree
+- **Hooks** - Functions that allow you to use state and other React features
+
+???
+
+Emphasize that React is just JavaScript - components are functions that return JSX. The key insight is that React makes building UIs more predictable by using components and a virtual DOM.
+
+---
+
+## JSX: JavaScript + HTML
+
+```jsx
+// JSX looks like HTML but it's JavaScript
+const element = <h1>Hello, World!</h1>;
+
+// You can embed JavaScript expressions
+const name = "Alice";
+const greeting = <h1>Hello, {name}!</h1>;
+
+// JSX attributes use camelCase
+const button = <button onClick={handleClick}>Click me</button>;
+
+// Use className instead of class for CSS styling
+const styledDiv = <div className="container highlight">Styled content</div>;
+```
+
+**Key Points:**
+- Use `className` instead of `class`
+- Use `onClick` instead of `onclick`
+- Embed JavaScript with `{expression}`
+
+???
+
+Show the difference between JSX and regular HTML attributes. The most common mistake is using `class` instead of `className`. Point out how JavaScript expressions are embedded with curly braces.
+
+---
+
+## Functional Components
+
+```jsx
+// Simple functional component
+function Welcome() {
+  return <h1>Hello, World!</h1>;
+}
+
+// Arrow function syntax (more common)
+const Welcome = () => {
+  return <h1>Hello, World!</h1>;
+};
+
+// Export for use in other files
+export default Welcome;
+```
+
+**Components are just functions that return JSX!**
+
+???
+
+Demonstrate how components work like functions. Show both function declaration and arrow function syntax. The key point is that components are reusable pieces of UI.
+
+---
+
+## Props: Passing Data to Components
+
+```jsx
+// Component that accepts props
+function Greeting(props) {
+  return <h1>Hello, {props.first_name} {props.last_name}!</h1>;
+}
+
+// Same component using destructuring assignment
+function Greeting({ first_name, last_name }) {
+  return <h1>Hello, {first_name} {last_name}!</h1>;
+}
+
+// Using the component with props
+function App() {
+  return (
+    <div>
+      <Greeting first_name="Alice" last_name="Johnson" />
+      <Greeting first_name="Bob" last_name="Smith" />
+    </div>
+  );
+}
+```
+
+**Props are like function parameters - data passed from parent to child.**
+
+???
+
+Show how props work like function parameters. Demonstrate the destructuring pattern - it's cleaner and more common in modern React. Props flow down from parent to child components.
+
+---
+
+## State: Data That Changes
+
+```jsx
+import { useState } from 'react';
+
+function Counter() {
+  // State variable and setter function
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>
+        Increment
+      </button>
+    </div>
+  );
+}
+```
+
+**useState returns an array: [currentValue, setterFunction]**
+
+???
+
+Highlight the useState hook pattern - [value, setter]. This is React's way of managing component state. The setter function triggers a re-render when called.
+
+---
+
+## Event Handling
+
+```jsx
+function Button() {
+  const [clicked, setClicked] = useState(false);
+
+  // Event handler function
+  const handleClick = () => {
+    setClicked(!clicked);
+  };
+
+  return (
+    <button onClick={handleClick}>
+      {clicked ? 'Clicked!' : 'Click me'}
+    </button>
+  );
+}
+```
+
+**Event handlers are just functions that respond to user interactions.**
+
+???
+
+Show how event handlers are just regular functions. They can be defined inline or as separate functions. The key is that they update state, which triggers re-renders.
+
+---
+
+## Component Composition
+
+```jsx
+// Child component
+function UserCard({ user }) {
+  return (
+    <div>
+      <h3>{user.name}</h3>
+      <p>{user.email}</p>
+    </div>
+  );
+}
+
+// Parent component
+function App() {
+  const users = [
+    { name: "Alice", email: "alice@example.com" },
+    { name: "Bob", email: "bob@example.com" }
+  ];
+
+  return (
+    <div>
+      {users.map(user => (
+        <UserCard key={user.name} user={user} />
+      ))}
+    </div>
+  );
+}
+```
+
+**Build complex UIs by combining simple components!**
+
+???
+
+Emphasize component composition and reusability. Show how you can build complex UIs by combining simple components. The map function is key for rendering lists of components.
+
+---
+
+## React Rendering: The Virtual DOM
+
+```jsx
+// When state or props change, React re-renders
+function Counter() {
+  const [count, setCount] = useState(0);
+  
+  // This function runs on every render
+  console.log('Counter rendered, count is:', count);
+  
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>
+        Increment
+      </button>
+    </div>
+  );
+}
+```
+
+**React creates a virtual representation of the DOM and only updates what actually changed.**
+
+???
+
+Explain Virtual DOM concept - React's efficiency secret. React creates a virtual representation and only updates the real DOM when necessary. This makes React fast even with complex UIs.
+
+---
+
+## What Triggers Re-rendering?
+
+```jsx
+function App() {
+  const [name, setName] = useState("Alice");
+  const [age, setAge] = useState(25);
+
+  return (
+    <div>
+      {/* Re-renders when name changes */}
+      <Greeting name={name} />
+      
+      {/* Re-renders when age changes */}
+      <AgeDisplay age={age} />
+      
+      {/* Re-renders when either name OR age changes */}
+      <UserInfo name={name} age={age} />
+    </div>
+  );
+}
+```
+
+**Re-rendering happens when:**
+- **State changes** (useState setter called)
+- **Props change** (parent passes new data)
+- **Parent re-renders** (cascading effect)
+
+???
+
+Show the three triggers for re-rendering with examples. This is crucial for understanding React's behavior. When a parent re-renders, all its children re-render too.
+
+---
+
+## The React Rendering Loop
+
+```jsx
+function App() {
+  const [count, setCount] = useState(0);
+  
+  const handleClick = () => {
+    setCount(count + 1);
+    // React doesn't update immediately - it schedules a re-render
+  };
+  
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={handleClick}>Click</button>
+    </div>
+  );
+}
+```
+
+**The cycle: User Action → State Change → Re-render → Updated UI**
+
+1. **Initial render** → Component function returns JSX
+2. **UI updates** → Count value 0 appears on screen
+3. **User clicks** → `handleClick` runs
+4. **State changes** → `setCount` updates the state
+5. **React re-renders** → Component function runs again, 
+6. **UI updates** → New count value 1 appears on screen
+
+???
+
+Walk through the complete rendering cycle step by step. This is the heart of how React works. Emphasize that React doesn't update immediately - it schedules re-renders.
+
+---
+
+## Rendering Performance
+
+```jsx
+// ❌ Inefficient - re-renders on every parent update
+function ExpensiveComponent({ data }) {
+  const expensiveValue = data.map(item => 
+    item.value * 2
+  ).reduce((sum, val) => sum + val, 0);
+  
+  return <div>{expensiveValue}</div>;
+}
+
+// ✅ Efficient - only recalculates when data changes
+function OptimizedComponent({ data }) {
+  const expensiveValue = useMemo(() => 
+    data.map(item => item.value * 2)
+        .reduce((sum, val) => sum + val, 0),
+    [data] // Only recalculate if data changes
+  );
+  
+  return <div>{expensiveValue}</div>;
+}
+```
+
+**React is fast, but understanding re-rendering helps you write efficient code.**
+
+???
+
+Introduce performance concepts (don't go too deep). Show the difference between inefficient and optimized code. useMemo is a hook that helps with expensive calculations.
+
+---
+
+# Part 2: TypeScript Essentials for React (25 min)
+
+## Why TypeScript with React?
+
+- **Catch errors early** - before runtime
+- **Better IDE support** - autocomplete, refactoring
+- **Self-documenting code** - types serve as documentation
+- **Easier refactoring** - confidence when changing code
+
+???
+
+Emphasize that TypeScript catches errors at compile time, not runtime. This is a huge advantage - you find bugs before users do. Better IDE support means better developer experience.
+
+---
+
+## Core TypeScript Types
+
+```typescript
+// Basic types
+let name: string = "Alice";
+let age: number = 25;
+let isStudent: boolean = true;
+
+// Arrays
+let numbers: number[] = [1, 2, 3];
+let names: string[] = ["Alice", "Bob"];
+
+// Objects
+let person: { name: string; age: number } = {
+  name: "Alice",
+  age: 25
+};
+```
+
+???
+
+Show the basic TypeScript types. These are the building blocks. Arrays use square brackets, objects use curly braces with property types.
+
+---
+
+## Type vs Interface
+
+```typescript
+// Interface (preferred for objects)
+interface User {
+  id: number;
+  name: string;
+  email?: string; // optional
+}
+
+// Type alias (for unions, primitives)
+type Status = "loading" | "success" | "error";
+type UserId = number | string;
+```
+
+**Rule of thumb:** Use `interface` for object shapes, `type` for everything else.
+
+???
+
+Show the difference between `type` and `interface` in practice. Interface is preferred for objects because it can be extended. Type is better for unions and primitives.
+
+---
+
+## Function Typing
+
+```typescript
+// Function parameters and return types
+function greet(name: string): string {
+  return `Hello, ${name}!`;
+}
+
+// Arrow functions
+const add = (a: number, b: number): number => a + b;
+
+// Function as parameter
+const processUser = (user: User, callback: (u: User) => void) => {
+  callback(user);
+};
+```
+
+???
+
+Show how to type functions properly. Parameters and return types are both important. Function types can be used as parameters too.
+
+---
+
+## Generics Basics
+
+```typescript
+// Generic function
+function identity<T>(arg: T): T {
+  return arg;
+}
+
+// Generic interface
+interface ApiResponse<T> {
+  data: T;
+  status: number;
+}
+
+// Usage
+const userResponse: ApiResponse<User> = {
+  data: { id: 1, name: "Alice" },
+  status: 200
+};
+```
+
+???
+
+Demonstrate how generics provide flexibility while maintaining type safety. Generics let you create reusable components that work with different types.
+
+---
+
+# Exercise: Fix the TypeScript Errors
+
+**Time:** 10 minutes  
+**Format:** Work in pairs
+
+Try exercises at https://typescript-exercises.github.io/
+
+Download [typescript_exercise.zip](typescript_exercise.zip) and extract it. Fix the errors in `typescript_exercise.ts` using `tsc --strict --noEmit` to check.
+
+Open `exercises/typescript_basics/types.ts` and fix the errors using `tsc --noEmit` to check.
+
+**Focus on:**
+- Understanding error messages
+- Choosing between `type` and `interface`
+- Proper function typing
+
+???
+
+Circulate during exercises to help with error interpretation. Encourage students to ask "why is this type wrong?" rather than just fixing. Use pair programming to build confidence.
+
+---
+
+# Part 3: React + TypeScript Basics (25 minutes)
+
+## Functional Components with Props
+
+```typescript
+import React from 'react';
+
+interface GreetingProps {
+  name: string;
+  age?: number;
+}
+
+const Greeting: React.FC<GreetingProps> = ({ name, age }) => {
+  return (
+    <div>
+      <h1>Hello, {name}!</h1>
+      {age && <p>You are {age} years old</p>}
+    </div>
+  );
+};
+
+export default Greeting;
+```
+
+???
+
+Show how props are self-documenting with TypeScript. The interface clearly shows what props the component expects. Optional props use the ? syntax.
+
+---
+
+## State with TypeScript
+
+```typescript
+import React, { useState } from 'react';
+
+const Counter: React.FC = () => {
+  const [count, setCount] = useState<number>(0);
+  const [name, setName] = useState<string>('');
+
+  const handleClick = () => {
+    setCount(prev => prev + 1);
+  };
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={handleClick}>Increment</button>
+    </div>
+  );
+};
+```
+
+???
+
+Show how to type useState with TypeScript. The generic type parameter tells TypeScript what type the state should be. This prevents type errors.
+
+---
+
+## Event Handlers
+
+```typescript
+const Form: React.FC = () => {
+  const [input, setInput] = useState<string>('');
+
+  // Properly typed event handlers
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log('Submitted:', input);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input 
+        type="text" 
+        value={input} 
+        onChange={handleChange} 
+      />
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
+```
+
+???
+
+Highlight the importance of typing event handlers correctly. React provides specific event types for different elements. This prevents runtime errors.
+
+---
+
+## Component Composition
+
+```typescript
+interface UserCardProps {
+  user: User;
+  onEdit: (user: User) => void;
+}
+
+const UserCard: React.FC<UserCardProps> = ({ user, onEdit }) => {
+  return (
+    <div className="user-card">
+      <h3>{user.name}</h3>
+      <p>{user.email}</p>
+      <button onClick={() => onEdit(user)}>
+        Edit
+      </button>
+    </div>
+  );
+};
+```
+
+???
+
+Demonstrate component composition with proper prop typing. Show how to type callback functions passed as props. This is a common pattern in React.
+
+---
+
+# Pair Exercise: UserCard Component
+
+**Time:** 15 minutes  
+**Format:** Work with a partner
+
+1. Create a `UserCard.tsx` component
+2. Add proper TypeScript types for props
+3. Include default values for optional props
+4. Pass the component from a parent component
+
+**Focus on:**
+- Prop validation
+- Component composition
+- Event handler typing
+
+???
+
+This is a hands-on exercise to practice what we've learned. Walk around and help pairs with their implementations. Focus on getting the types right first.
+
+---
+
+# Part 4: Mini Project - TODO App (40 minutes)
+
+## Project Structure
+
+1. Find a partner or two to work with.
+2. Clone repository [typescript_react_intro](https://github.com/scalableinternetservices/typescript_react_intro).
+3. Follow the instructions in the README.md file.
+
+???
+
+Start with the basic structure, then add features incrementally. Focus on getting types right first, then functionality. Encourage students to help each other debug type errors.
+
+---
+
+# Part 5: Share & Wrap-Up (10 minutes)
+
+## What did you learn?
+
+## What was confusing or challenging?
+
+## Resources
+- [TypeScript Handbook - React](https://www.typescriptlang.org/docs/handbook/react.html)
+- [React Learn](https://react.dev/learn)
+- [Total TypeScript Tutorials](https://www.totaltypescript.com/tutorials)
+
