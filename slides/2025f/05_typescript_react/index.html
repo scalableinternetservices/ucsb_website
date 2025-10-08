@@ -1,0 +1,409 @@
+---
+layout: presentation
+title: TypeScript and React
+---
+
+class: center, middle
+
+# {{page.title}}
+
+## CS291A: Scalable Internet Services
+
+---
+
+# Intro to TypeScript + React
+## Graduate CS Course: Scalable Internet Services
+
+**Instructor:** Zach Walker  
+**Duration:** 2 hours  
+**Format:** Hands-on workshop with group collaboration
+
+---
+
+# Welcome & Setup (10 minutes)
+
+## Learning Objectives
+- Get comfortable with TypeScript syntax in React
+- Build functional components with proper typing
+- Create a small TODO app as a group project
+- Develop debugging skills for type errors
+
+## Quick Setup
+```bash
+npx create-react-app my-app --template typescript
+cd my-app
+npm start
+```
+
+**Group Icebreaker:** What's one JavaScript project you've worked with?
+
+---
+
+# Part 1: TypeScript Essentials for React (25 minutes)
+
+## Why TypeScript with React?
+
+- **Catch errors early** - before runtime
+- **Better IDE support** - autocomplete, refactoring
+- **Self-documenting code** - types serve as documentation
+- **Easier refactoring** - confidence when changing code
+
+---
+
+## Core TypeScript Types
+
+```typescript
+// Basic types
+let name: string = "Alice";
+let age: number = 25;
+let isStudent: boolean = true;
+
+// Arrays
+let numbers: number[] = [1, 2, 3];
+let names: string[] = ["Alice", "Bob"];
+
+// Objects
+let person: { name: string; age: number } = {
+  name: "Alice",
+  age: 25
+};
+```
+
+---
+
+## Type vs Interface
+
+```typescript
+// Interface (preferred for objects)
+interface User {
+  id: number;
+  name: string;
+  email?: string; // optional
+}
+
+// Type alias (for unions, primitives)
+type Status = "loading" | "success" | "error";
+type UserId = number | string;
+```
+
+**Rule of thumb:** Use `interface` for object shapes, `type` for everything else.
+
+---
+
+## Function Typing
+
+```typescript
+// Function parameters and return types
+function greet(name: string): string {
+  return `Hello, ${name}!`;
+}
+
+// Arrow functions
+const add = (a: number, b: number): number => a + b;
+
+// Function as parameter
+const processUser = (user: User, callback: (u: User) => void) => {
+  callback(user);
+};
+```
+
+---
+
+## Generics Basics
+
+```typescript
+// Generic function
+function identity<T>(arg: T): T {
+  return arg;
+}
+
+// Generic interface
+interface ApiResponse<T> {
+  data: T;
+  status: number;
+}
+
+// Usage
+const userResponse: ApiResponse<User> = {
+  data: { id: 1, name: "Alice" },
+  status: 200
+};
+```
+
+---
+
+# Exercise: Fix the TypeScript Errors
+
+**Time:** 10 minutes  
+**Format:** Work in pairs
+
+Open `exercises/typescript_basics/types.ts` and fix the errors using `tsc --noEmit` to check.
+
+**Focus on:**
+- Understanding error messages
+- Choosing between `type` and `interface`
+- Proper function typing
+
+---
+
+# Part 2: React + TypeScript Basics (25 minutes)
+
+## Functional Components with Props
+
+```typescript
+import React from 'react';
+
+interface GreetingProps {
+  name: string;
+  age?: number;
+}
+
+const Greeting: React.FC<GreetingProps> = ({ name, age }) => {
+  return (
+    <div>
+      <h1>Hello, {name}!</h1>
+      {age && <p>You are {age} years old</p>}
+    </div>
+  );
+};
+
+export default Greeting;
+```
+
+---
+
+## State with TypeScript
+
+```typescript
+import React, { useState } from 'react';
+
+const Counter: React.FC = () => {
+  const [count, setCount] = useState<number>(0);
+  const [name, setName] = useState<string>('');
+
+  const handleClick = () => {
+    setCount(prev => prev + 1);
+  };
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={handleClick}>Increment</button>
+    </div>
+  );
+};
+```
+
+---
+
+## Event Handlers
+
+```typescript
+const Form: React.FC = () => {
+  const [input, setInput] = useState<string>('');
+
+  // Properly typed event handlers
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log('Submitted:', input);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input 
+        type="text" 
+        value={input} 
+        onChange={handleChange} 
+      />
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
+```
+
+---
+
+## Component Composition
+
+```typescript
+interface UserCardProps {
+  user: User;
+  onEdit: (user: User) => void;
+}
+
+const UserCard: React.FC<UserCardProps> = ({ user, onEdit }) => {
+  return (
+    <div className="user-card">
+      <h3>{user.name}</h3>
+      <p>{user.email}</p>
+      <button onClick={() => onEdit(user)}>
+        Edit
+      </button>
+    </div>
+  );
+};
+```
+
+---
+
+# Pair Exercise: UserCard Component
+
+**Time:** 15 minutes  
+**Format:** Work with a partner
+
+1. Create a `UserCard.tsx` component
+2. Add proper TypeScript types for props
+3. Include default values for optional props
+4. Pass the component from a parent component
+
+**Focus on:**
+- Prop validation
+- Component composition
+- Event handler typing
+
+---
+
+# Break + Project Preview (10 minutes)
+
+## Challenge: Typed TODO App
+
+Build a simple TODO application with:
+- Add new todos
+- Toggle todo completion
+- Display todo list
+- All with proper TypeScript typing
+
+## Planning Questions
+- What should a `Todo` type look like?
+- How will we manage the todos array with `useState`?
+- What event handlers do we need?
+
+---
+
+# Part 3: Mini Project - TODO App (40 minutes)
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── TodoItem.tsx
+│   └── TodoList.tsx
+├── types.ts
+└── App.tsx
+```
+
+## Core Requirements
+1. Define a `Todo` type
+2. Manage todos with `useState<Todo[]>`
+3. Add new todos
+4. Toggle completion status
+5. Type all props and event handlers
+
+---
+
+## Starter Code Structure
+
+```typescript
+// types.ts
+export interface Todo {
+  id: number;
+  text: string;
+  completed: boolean;
+}
+
+// App.tsx
+const App: React.FC = () => {
+  const [todos, setTodos] = useState<Todo[]>([]);
+  
+  // TODO: Implement add, toggle, and render functions
+  
+  return (
+    <div className="App">
+      <h1>My TODO App</h1>
+      {/* TODO: Add form and list components */}
+    </div>
+  );
+};
+```
+
+---
+
+## Stretch Goals
+
+1. **Filter completed todos** - Add a filter state
+2. **Extract TodoItem component** - Create reusable component
+3. **Add delete functionality** - Remove todos from list
+4. **Input validation** - Prevent empty todos
+
+## Group Work Tips
+- Use `tsc --noEmit` to check for errors
+- Ask "why is this type wrong?" when debugging
+- Help each other interpret TypeScript errors
+
+---
+
+# Share & Wrap-Up (10 minutes)
+
+## Demo Time
+Each team shows their TODO app (1 minute each)
+
+## Key Takeaways
+
+1. **TypeScript improves clarity & maintainability**
+   - Self-documenting code
+   - Catch errors early
+   - Better refactoring confidence
+
+2. **Common typing patterns for React**
+   - `React.FC<Props>` for components
+   - `useState<Type>()` for state
+   - Event handler types
+
+3. **Debugging type errors effectively**
+   - Read error messages carefully
+   - Use `tsc --noEmit` for checking
+   - Start with simple types, add complexity gradually
+
+---
+
+# Next Steps
+
+## Homework
+Add localStorage persistence to your TODO app
+
+## Resources
+- [TypeScript Handbook - React](https://www.typescriptlang.org/docs/handbook/react.html)
+- [React Learn](https://react.dev/learn)
+- [Total TypeScript Tutorials](https://www.totaltypescript.com/tutorials)
+
+## Questions?
+Thank you for participating in this hands-on workshop!
+
+---
+
+# Speaker Notes
+
+## Part 1: TypeScript Essentials
+- **Slide 3:** Emphasize that TypeScript catches errors at compile time, not runtime
+- **Slide 5:** Show the difference between `type` and `interface` in practice
+- **Slide 7:** Demonstrate how generics provide flexibility while maintaining type safety
+
+## Part 2: React + TypeScript
+- **Slide 9:** Show how props are self-documenting with TypeScript
+- **Slide 11:** Highlight the importance of typing event handlers correctly
+- **Slide 13:** Demonstrate component composition with proper prop typing
+
+## Exercise Guidance
+- Circulate during exercises to help with error interpretation
+- Encourage students to ask "why is this type wrong?" rather than just fixing
+- Use pair programming to build confidence
+
+## Project Time
+- Start with the basic structure, then add features incrementally
+- Focus on getting types right first, then functionality
+- Encourage students to help each other debug type errors
