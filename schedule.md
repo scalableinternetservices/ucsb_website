@@ -53,13 +53,21 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 </div>
 
-<!-- 
-
 <div class="week">
 
 ## Week 3 (October 13)
 
 ### Topics
+
+- Javascript/Typescript Cont.
+- Project 2
+- Client Side Caching
+
+### Tasks
+
+- Complete Project 2 [Project 2](/project2/)
+
+<!-- 
 
 - Client Side Caching
   - Document Object Model (DOM)
@@ -67,12 +75,6 @@ The following schedule is subject to change, and many slide links are not yet ac
   - Session Storage
   - Local Storage
   - Other (IndexedDB, Service Workers, Cache API, Cookies)
-- Ruby and Rails Intro [slides](/slides/2024f/rails_introduction/index.html)
-
-### Tasks
-
-- Complete [Project 2](/project2/)
-
 
 </div>
 <div class="week">
@@ -81,6 +83,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
+- Ruby and Rails Intro [slides](/slides/2024f/rails_introduction/index.html)
 - Relational Databases
 - Relational Databases and Rails
 - Relational Database Scaling
