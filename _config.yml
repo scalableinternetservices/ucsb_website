@@ -30,7 +30,7 @@ peer_review:
 navigable_pages:
   schedule: true
   project1: true
-  project2: false
+  project2: true
   project3: false
   project4: false
   primary_project: false
