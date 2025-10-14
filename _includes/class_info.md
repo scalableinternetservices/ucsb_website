@@ -65,7 +65,7 @@ Wednesday, October 8th 10am PT
 
 ### [Project 2](/project2/) due before
 
-Monday, October 22 10am PT
+Wednesday, October 22 10am PT
 {% endif %}
 
 {% if site.navigable_pages.project3 %}
