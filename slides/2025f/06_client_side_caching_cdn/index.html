@@ -1,0 +1,375 @@
+---
+layout: presentation
+title: Client-side Caching and CDNs
+---
+
+class: center, middle
+
+# {{page.title}}
+
+## CS291A: Scalable Internet Services
+
+---
+
+# Client-side Caching Motivation
+
+We want our important application data persisted safely in our data center.
+
+This data will be regularly read and updated by geographically distributed
+clients.
+
+Our access to the data needs to be fast.
+
+---
+
+# Response Time and Human Perception
+
+| Delay         | User Reaction                |
+| -------------:|:----------------------------:|
+|   0 -  100 ms | Instant                      |
+| 100 -  300 ms | Small perceptible delay      |
+| 300 - 1000 ms | Machine is working           |
+|      1000+ ms | Likely mental context switch |
+|    10,000+ ms | Task is abandoned            |
+
+Source: [High Performance Browser
+Networking](https://hpbn.co/primer-on-web-performance/)
+
+---
+
+# Minimum Latencies
+
+| Route                    | Distance  | Time, light in vacuum | Time, light in fiber |
+| ------------------------ | --------- | --------------------- | -------------------- |
+| NYC to SF                | 4,148 km  | 14 ms                 | 21 ms                |
+| NYC to London            | 5,585 km  | 19 ms                 | 28 ms                |
+| NYC to Sydney            | 15,993 km | 53 ms                 | 80 ms                |
+| Equatorial circumference | 40,075 km | 133.7 ms              | 200 ms               |
+
+Source: [High Performance Browser
+Networking](https://hpbn.co/primer-on-web-performance/)
+
+???
+
+* Light travels at 299,792 km/s in a vacuum
+* Light travels at 200,000 km/s in fiber
+* These times are one-way
+* Double the time for round-trip
+  * 42 ms NYC to SF
+  * 56 ms NYC to London
+  * 160 ms NYC to Sydney
+
+---
+
+class: center middle
+
+# Multiple HTTP Requests per Page
+
+![Total Requests Per Page](http_archive_requests_per_page_2024.png)
+
+Source: <https://httparchive.org/interesting.php#reqTotal>
+
+---
+
+# Caching
+
+The fastest request is one that never happens.
+
+--
+
+Cache - a component that transparently stores data so that future requests
+for the same data can be served faster
+
+--
+
+> Where can we introduce caching?
+
+--
+
+* Inside the browser
+
+* In "front" of the server (CDNs, ISP cache, etc.)
+
+* Inside the application server
+
+* Inside the database (query cache)
+
+---
+
+# Client-side Caching
+
+> How does the browser cache data?
+
+--
+
+> How does the browser know when it can or cannot use cached data?
+
+--
+
+The building blocks of caching are all provided via HTTP headers:
+
+* cache-control
+    * no-store
+    * no-cache
+    * max-age
+    * public | private
+
+* etag
+
+* last-modified
+
+* if-none-match
+
+* if-modified-since
+
+---
+
+# cache-control: no-store
+
+When `cache-control: no-store` is provided as a header to an HTTP response the
+browser and intermediate proxy-caches:
+
+* must not save the information in any non-volatile storage
+
+* must make a best effort attempt to remove the information from volatile
+  storage as promptly as possible
+
+__Note__: The browser may retain a copy in memory (volatile storage) for use
+with the browser's back/forward buttons.
+
+Generally used for sensitive information.
+
+---
+
+# cache-control: no-cache
+
+When `cache-control: no-cache` is provided as a header to an HTTP response the
+browser and intermediate proxy-caches:
+
+* must not use the response to satisfy a subsequent request without successful
+  revalidation with the origin server
+
+Useful to force the browser and intermediate caches to check for updated
+content.
+
+---
+
+# cache-control: private
+
+When `cache-control: private` is provided as a header to an HTTP response the
+browser is free to cache the response (for the current user) but, intermediate
+proxy-caches should discard the data.
+
+This is the opposite of `cache-control: public`.
+
+Rails built-in caching securely defaults to `cache-control: private`.
+
+---
+
+# cache-control: max-age=120
+
+
+When `cache-control: max-age=120` is provided as a header to an HTTP response
+the browser and intermediate proxy-caches should consider the information to be
+fresh until the specified number of seconds (`120` in this case) has passed.
+
+This is the modern version of the `expires` and `date` headers.
+
+---
+
+# etag: "5bf444d26f9f1c74"
+
+When an etag (entity tag) header is provided as a header to an HTTP response
+the browser will keep an association between the request, the etag, and the
+response.
+
+When requesting the same resource in the future, the browser may add an
+`if-none-match` header along with the etag in the HTTP request.
+
+---
+
+# last-modified: Thu, 31 Oct 2024 16:15:36 GMT
+
+When a `last-modified` header is provided in an HTTP response the browser may
+save the information to use in future requests for the same resource.
+
+When requesting the same resource in the future, the browser may add an
+`if-modified-since` header along with the datetime in the HTTP request.
+
+---
+
+# First GET Example
+
+```
+$ curl -I https://cs291.com
+
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+Last-Modified: Mon, 21 Oct 2019 21:41:43 GMT
+ETag: "5dae2617-48a8"
+Cache-Control: max-age=600
+```
+
+---
+
+# if-none-match: "5bf444d26f9f1c74"
+
+When accompanying an HTTP request, the `if-none-match` HTTP header indicates
+that the client has a cached copy with the associated tag.  Multiple etags can
+be provided.
+
+If the server's current version of the resource maps to one of the provided
+etags, the server will return 304 (not modified) with the etag of the current
+resource included.
+
+Otherwise the server will return the full response body along with the
+appropriate etag for the updated resource.
+
+
+```sh
+$ curl -I https://cs291.com --header 'if-none-match: "5dae2617-48a8"'
+
+HTTP/1.1 304 Not Modified
+```
+
+---
+
+# if-modified-since: Thu, 31 Oct 2024 16:15:36 GMT
+
+When accompanying an HTTP request, the `if-modified-since` HTTP header
+indicates that the client already has a copy that was fresh as of the specified
+datetime.
+
+If the server's copy is newer than the specified datetime, it will be served to
+the client along with a new `last-modified` HTTP response header.
+
+If the server's copy has not changed since the specified date, the server will
+return 304 (not modified).
+
+
+```sh
+$ curl -I https://cs291.com --header 'if-modified-since: Mon, 21 Oct 2019 21:41:43 GMT'
+
+HTTP/1.1 304 Not Modified
+```
+
+---
+
+class: center middle
+
+# HTTP Caching Summary
+
+![Defining optimal Cache-Control policy](http-cache-decision-tree.png)
+
+[Source](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching)
+
+---
+
+# Applying Client-side Caching #1
+
+Assume we want to serve JavaScript that won't change over the next day, but it
+contains user-specific code.
+
+> What headers should the HTTP response include?
+
+--
+
+## Caching Reusable, Private Resources
+
+```http
+Cache-control: private, max-age=86400
+```
+
+Intermediate proxy-caches should not save a copy, and the browser can consider
+the resource fresh for up to a day since it was retrieved.
+
+---
+
+# Applying Client-side Caching #2
+
+Assume we are serving an image that may change in the future, and we never want
+a stale version shown. The image is not specific to the requester.
+
+> What headers should the HTTP response include?
+
+--
+
+## Caching Reusable, Public Resources
+
+```http
+Cache-control: public, no-cache
+ETag: 4d7a6ca05b5df656
+```
+
+Browser will store a copy to be used if a 304 (not modified) response is
+sent. In subsequent HTTP requests for the resource the browser will include:
+
+```http
+if-none-match: 4d7a6ca05b5df656
+```
+
+---
+
+# Applying Client-side Caching #3
+
+Assume we are serving an image containing the user's social security and credit
+card numbers.
+
+> What headers should the HTTP response include?
+
+--
+
+## No Caching!
+
+```http
+Cache-control: no-store
+```
+
+The browser may keep a copy in memory for browser navigation, but __must__
+not save a copy to a non-volatile location.
+
+---
+
+class: center, inverse, middle
+
+# Content (Delivery|Distribution) Networks
+
+---
+
+# CDN Overview
+
+![CDN Overview](cdn.png)
+
+---
+
+# CDN Benefits
+
+--
+
+1. Reduce latency from client to server and back
+
+--
+
+2. Provide "protection" to the origin server (e.g., DDoS protection)
+
+--
+
+3. Reduce requests handled by origin server.
+
+--
+
+And more!
+
+---
+
+# CDN Providers
+
+* [AWS CloudFront](https://aws.amazon.com/cloudfront/)
+* [Akamai](https://www.akamai.com)
+* [CloudFlare](https://www.cloudflare.com/cdn/)
+* [Fastly](https://www.fastly.com)
+* [Google Cloud CDN](https://cloud.google.com/cdn/)
+* [Microsoft Azure CDN](https://azure.microsoft.com/en-us/services/cdn/)
+
+
+[AND MORE!](https://www.globaldots.com/content-delivery-network-explained#content-delivery-network-companies)
