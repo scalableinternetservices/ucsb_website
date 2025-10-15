@@ -59,9 +59,9 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- Javascript/Typescript Cont.
-- Project 2
-- Client Side Caching
+- Review Todo App Excercise Solution
+- Project 2 [Project 2](/project2/)
+- Client Side Caching [slides](/slides/2025f/06_client_side_caching_cdn/index.html)
 
 ### Tasks
 
