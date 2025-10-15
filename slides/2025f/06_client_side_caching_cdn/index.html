@@ -344,21 +344,9 @@ class: center, inverse, middle
 
 # CDN Benefits
 
---
-
 1. Reduce latency from client to server and back
-
---
-
 2. Provide "protection" to the origin server (e.g., DDoS protection)
-
---
-
 3. Reduce requests handled by origin server.
-
---
-
-And more!
 
 ---
 
@@ -371,5 +359,191 @@ And more!
 * [Google Cloud CDN](https://cloud.google.com/cdn/)
 * [Microsoft Azure CDN](https://azure.microsoft.com/en-us/services/cdn/)
 
+---
 
-[AND MORE!](https://www.globaldots.com/content-delivery-network-explained#content-delivery-network-companies)
+# Beyond HTTP Caching
+
+We've covered HTTP-based caching and cookies, but modern web applications need more sophisticated client-side caching strategies.
+
+--
+
+## The Problem with Traditional Approaches
+
+### HTTP Caching Limitations:
+* **Network dependency** - No offline functionality
+* **Server-controlled** - Can't cache user-specific data
+* **Limited to HTTP resources** - Can't cache computed results
+* **No programmatic control** - Browser decides what to cache
+
+### Cookie Limitations:
+* **4KB size limit** - Can't store much data
+* **Sent with every request** - Network overhead
+* **Synchronous API** - Blocks main thread
+* **Security vulnerabilities** - XSS attacks
+* **String-only** - No complex data types
+
+---
+
+## Why We Need Better Client-Side Caching
+
+* **Reduce server load** - Fewer requests = less server processing
+* **Improve scalability** - Handle more users with same server resources
+* **Lower bandwidth costs** - Less data transfer between client and server
+* **Better user experience** - Instant responses, smooth interactions
+* **Offline functionality** - Apps that work without network
+* **Data persistence** - Maintain state across sessions
+
+---
+
+# Client-Side Storage Hierarchy
+
+
+| Storage Type | Size Limit | Persistence | Use Case |
+|-------------|------------|-------------|----------|
+| **Memory** | Limited by available RAM and Configuration | Single page only | Fast access, temporary data |
+| **Session Storage** | ~5-10MB | Tab session | Temporary, tab-specific data |
+| **Local Storage** | ~5-10MB | Until cleared | User preferences, settings |
+| **IndexedDB** | Larger, limited by disk space | Until cleared | Complex data, large datasets |
+| **Service Worker Cache** | Larger, limited by disk space | Until cleared | Offline resources |
+
+---
+
+class: center, inverse, middle
+
+# Browser Storage APIs
+
+---
+
+# Session Storage
+
+```javascript
+// Store temporary data
+sessionStorage.setItem('currentFormData', JSON.stringify({
+  step: 3,
+  formData: { name: 'John', email: 'john@example.com' }
+}));
+
+// Retrieve when user navigates back
+const formData = JSON.parse(sessionStorage.getItem('currentFormData'));
+
+// Automatically cleared when tab closes
+```
+
+## Characteristics:
+* **Session-only** - Cleared when tab closes
+* **Tab-isolated** - Each tab has separate storage
+* **Synchronous** - Blocks main thread
+* **String-only** - Must serialize objects
+* **Same-origin** - Isolated per domain
+* **Use cases** - Multi-step forms, temporary state, things that shouldn't impact other tabs even if they are on the same domain
+
+**Documentation:** [MDN Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API)
+
+---
+
+# Local Storage
+
+```javascript
+// Store data
+localStorage.setItem('userPreferences', JSON.stringify({
+  theme: 'dark',
+  language: 'en',
+  notifications: true
+}));
+
+// Retrieve data
+const preferences = JSON.parse(localStorage.getItem('userPreferences'));
+
+// Remove data
+localStorage.removeItem('userPreferences');
+
+// Clear all
+localStorage.clear();
+```
+
+## Characteristics:
+* **Persistent** - Survives browser restarts
+* **Synchronous** - Blocks main thread
+* **String-only** - Must serialize objects
+* **Same-origin** - Isolated per domain
+* **Same API** - Identical to session storage
+* **Use cases** - User preferences, settings, things that should persist across sessions or be synchronized between tabs
+
+**Documentation:** [MDN Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API)
+
+---
+
+# IndexedDB: For Complex Data
+
+## When to Use IndexedDB:
+* **Large datasets** - More than localStorage can handle
+* **Complex queries** - Need to search/filter data
+* **Binary data** - Images, files, blobs
+* **Offline apps** - Store data when network is unavailable
+
+## Scalability Benefits:
+* **Reduce database queries** - Cache complex query results
+    * Cache more larger complex structures and do further processing on the client
+    * Data may be out of sync with the server at some point in time
+
+## Characteristics:
+* **Asynchronous** - Doesn't block the UI
+* **Large capacity** - Limited by disk space, not fixed size
+* **Complex API** - More setup than localStorage
+* **Persistent** - Survives browser restarts
+
+**Documentation:** [MDN IndexedDB API](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)
+
+---
+
+# Service Workers: Offline Caching
+
+## Service Worker Capabilities:
+* **Intercept network requests** - Control what gets cached
+* **Offline functionality** - App works without internet
+* **Background processing** - Runs even when page is closed (sort of)
+    * Event driven by push events or scheduled tasks
+
+## Scalability Benefits:
+* **Reduce server requests** - Cache static assets and API responses
+    * Pushes the complexity of caching to the client
+    * Possible to prevent more requests to the server that might otherwise result in 304s
+    * Trade-off: more complexity on the client
+
+## When to Use:
+* **Offline-first apps** - Apps that need to work without network
+* **Performance optimization** - Cache static assets
+* **Progressive Web Apps** - Modern web app features
+
+**Documentation:** [MDN Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)
+
+---
+
+# Decision Framework:
+
+1. **How long should data persist?**
+   - Session only → Session Storage
+   - Across sessions → Local Storage / IndexedDB
+
+2. **How large is the data?**
+   - Small (< 5MB) → Local Storage
+   - Large → IndexedDB
+
+3. **Do you need offline access?**
+   - Yes → Service Worker + Cache API
+   - No → HTTP caching + localStorage
+
+4. **Is it user-specific?**
+   - Yes → Client-side storage
+   - No → HTTP caching + CDN
+
+---
+
+# Key Takeaways:
+
+* **Client-side caching reduces server load** - Fewer requests = better scalability
+* **Choose the right tool** for your specific use case
+* **Layer your caching** strategies for maximum performance
+* **Consider offline scenarios** in modern web applications
+* **Caching is a key scalability technique** - Essential for handling growth
+
