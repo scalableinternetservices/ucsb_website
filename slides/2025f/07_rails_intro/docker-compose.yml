@@ -1,0 +1,42 @@
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: rails_development
+      MYSQL_USER: rails_user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    environment:
+      - RAILS_ENV=development
+      - DATABASE_URL=mysql2://rails_user:password@db:3306/rails_development
+      - SECRET_KEY_BASE=development_secret_key_base_that_is_very_long_and_secure_for_development_only
+    volumes:
+      - .:/app:delegated
+      - bundle_cache:/usr/local/bundle
+    depends_on:
+      - db
+    stdin_open: true
+    tty: true
+    command: >
+      sh -c "
+        bundle install &&
+        sleep 10 &&
+        rails db:create db:migrate &&
+        tail -f /dev/null
+      "
+
+volumes:
+  mysql_data:
+  bundle_cache:
