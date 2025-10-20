@@ -67,14 +67,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 - Complete Project 2 [Project 2](/project2/)
 
-<!-- 
 
-- Client Side Caching
-  - Document Object Model (DOM)
-  - In Memory (javascript / Typescript)
-  - Session Storage
-  - Local Storage
-  - Other (IndexedDB, Service Workers, Cache API, Cookies)
 
 </div>
 <div class="week">
@@ -83,15 +76,14 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Topics
 
-- Ruby and Rails Intro [slides](/slides/2024f/rails_introduction/index.html)
-- Relational Databases
-- Relational Databases and Rails
-- Relational Database Scaling
-- Non Relational Datastores [slides](/slides/2024f/13_nosql/index.html)
+- Ruby and Rails Intro [slides](/slides/2025f/07_rails_intro/index.html)
 
 ### Tasks
 
-- Begin [Project 3](/project3/)
+- Complete Projec 2
+- Begin Project 3
+
+<!-- 
 - Read [How Discord Stores Billions of Messages
   ](https://discord.com/blog/how-discord-stores-billions-of-messages)
 - Read [CAP 12 years
