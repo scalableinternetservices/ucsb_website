@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   db:
     image: mysql:8.0
@@ -15,7 +17,7 @@ services:
   web:
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     environment:
@@ -23,7 +25,7 @@ services:
       - DATABASE_URL=mysql2://rails_user:password@db:3306/rails_development
       - SECRET_KEY_BASE=development_secret_key_base_that_is_very_long_and_secure_for_development_only
     volumes:
-      - .:/app:delegated
+      - .:/app
       - bundle_cache:/usr/local/bundle
     depends_on:
       - db
@@ -31,9 +33,7 @@ services:
     tty: true
     command: >
       sh -c "
-        bundle install &&
         sleep 10 &&
-        rails db:create db:migrate &&
         tail -f /dev/null
       "
 
