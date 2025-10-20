@@ -1,0 +1,1013 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Introduction to Ruby on Rails</title>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 2.5em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      blockquote {
+        border-left: 0.3em solid rgba(0,0,0,0.5);
+        padding: 0 15px;
+        font-style: italic;
+      }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      img {
+        max-height: 100%;
+        max-width: 100%;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .clear { clear: both; }
+      #slideshow .slide .content code { font-size: 0.8em; }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 1em;
+      }
+      .background-blue {
+        background-color: deepskyblue;
+      }
+      .background-green {
+        background-color: springgreen;
+      }
+      .background-pink {
+        background-color: deeppink;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        width: 49%;
+        float: left;
+      }
+      .right-column {
+        width: 49%;
+        float: right;
+      }
+      .left-column20 {
+        width: 20%;
+        float: left;
+      }
+      .right-column80 {
+        width: 79%;
+        float: right;
+      }
+      .left-column30 {
+        width: 30%;
+        float: left;
+      }
+      .right-column70 {
+        width: 69%;
+        float: right;
+      }
+      .left-column40 {
+        width: 40%;
+        float: left;
+      }
+      .right-column60 {
+        width: 59%;
+        float: right;
+      }
+
+      /* Table layout */
+      table {
+        background: #f5f5f5;
+        margin: 30px auto;
+        text-align: left;
+        width: 100%;
+      }
+      th {
+        background: linear-gradient(#777, #444);
+        color: #fff;
+        font-weight: bold;
+        padding: 10px 15px;
+      }
+      td {
+        border-right: 1px solid #fff;
+        border-left: 1px solid #e8e8e8;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #e8e8e8;
+        padding: 10px 15px;
+      }
+
+    </style>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle
+
+# Introduction to Ruby on Rails
+
+## CS291A: Scalable Internet Services
+
+---
+
+# Agenda
+
+1. **Web Development Frameworks & MVC**
+2. **Ruby Fundamentals**
+3. **Rails Basics**
+4. **Hands-on Walkthrough**
+
+---
+
+class: center, middle
+
+# Part 1: Web Development Frameworks & MVC
+## (10 minutes)
+
+---
+
+## What is a Web Framework?
+
+- **Framework**: A collection of libraries and tools that provide a foundation for building applications
+- **Web Framework**: Specifically designed for building web applications and APIs
+- **Benefits**:
+  - Faster development
+  - Built-in security features
+  - Standardized patterns
+  - Community support
+
+---
+
+## Popular Web Frameworks
+
+| Language | Framework | Use Case |
+|----------|-----------|----------|
+| Ruby | **Rails** | Full-stack web apps |
+| Python | Django, Flask | Web apps, APIs |
+| JavaScript | Express.js, Next.js | APIs, SPAs |
+| Java | Spring Boot | Enterprise apps |
+| PHP | Laravel, Symfony | Web applications |
+
+---
+
+## Model-View-Controller (MVC) Pattern
+
+.center[![MVC Pattern](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/MVC-Process.svg/300px-MVC-Process.svg.png)]
+
+- **Model**: Data and business logic
+- **View**: User interface and presentation
+- **Controller**: Handles user input and coordinates between Model and View
+
+???
+
+**Speaker Notes:**
+- Explain how MVC separates concerns in web applications
+- Emphasize that this pattern makes code more maintainable and testable
+
+---
+
+## MVC in Web Applications
+
+```
+User Request → Controller → Model → Database
+                ↓
+User Response ← View ← Controller ← Model
+```
+
+- **Controller**: Receives HTTP requests, processes them
+- **Model**: Handles data validation, business rules, database operations
+- **View**: Renders HTML/JSON responses to the user
+
+---
+
+class: center, middle
+
+# Part 2: Ruby Fundamentals
+## (15 minutes)
+
+---
+
+## What is Ruby?
+
+- **Dynamic, object-oriented programming language**
+- Created by Yukihiro "Matz" Matsumoto in 1995
+- **Philosophy**: "Ruby is designed to make programmers happy"
+- **Key features**:
+  - Everything is an object
+  - Dynamic typing
+  - Blocks and closures
+  - Metaprogramming capabilities
+
+---
+
+## Ruby Syntax Basics
+
+```ruby
+# Variables (no type declaration needed)
+name = "Alice"
+age = 25
+is_student = true
+
+# Strings
+greeting = "Hello, #{name}!"  # String interpolation
+multiline = <<~TEXT
+  This is a
+  multiline string
+TEXT
+
+# Arrays
+fruits = ["apple", "banana", "orange"]
+fruits << "grape"  # Add to array
+```
+
+---
+
+## Ruby Classes and Objects
+
+```ruby
+class Person
+  attr_accessor :name, :age  # Creates getter and setter methods
+  
+  def initialize(name, age)
+    @name = name
+    @age = age
+  end
+  
+  def greet
+    "Hello, I'm #{@name} and I'm #{@age} years old"
+  end
+  
+  private
+  
+  def calculate_birth_year
+    Time.now.year - @age
+  end
+end
+
+person = Person.new("Alice", 25)
+puts person.greet
+```
+
+---
+
+## Ruby Blocks and Iteration
+
+```ruby
+# Blocks with each
+numbers = [1, 2, 3, 4, 5]
+numbers.each do |number|
+  puts number * 2
+end
+
+# Blocks with map (returns new array)
+doubled = numbers.map { |n| n * 2 }
+
+# Hash iteration
+person = { name: "Alice", age: 25, city: "Santa Barbara" }
+person.each do |key, value|
+  puts "#{key}: #{value}"
+end
+```
+
+---
+
+## Ruby Gems
+
+- **Gem**: A Ruby package/library
+- **RubyGems**: Package manager for Ruby
+- **Gemfile**: Lists project dependencies
+- **Bundler**: Manages gem versions and dependencies
+
+```ruby
+# Gemfile
+source 'https://rubygems.org'
+gem 'rails', '~> 7.0'
+gem 'mysql2', '~> 0.5'
+gem 'puma', '~> 5.0'
+```
+
+---
+
+## Bundler: Ruby's Dependency Manager
+
+**Purpose**: Bundler provides a consistent environment for Ruby projects by tracking and installing the exact gems and versions that are needed. It ensures that the gems you need are present in development, testing, and production.
+
+**Key Files:**
+- **Gemfile**: Declares your project's dependencies (like `package.json` in Node.js)
+- **Gemfile.lock**: Locks exact versions of all gems and their dependencies (auto-generated)
+
+**Analogous tools in other languages:**
+- **JavaScript**: npm, yarn, pnpm
+- **Java**: Maven, Gradle
+- **Python**: pip, pipenv, poetry
+- **PHP**: Composer
+- **Go**: Go modules
+
+**Official Documentation**: https://bundler.io/
+
+---
+
+## Bundler Commands
+
+```bash
+# Install gems from Gemfile
+bundle install
+
+# Update gems
+bundle update
+
+# Check for outdated gems
+bundle outdated
+
+# Show gem dependency tree
+bundle show
+
+# Run commands with bundled gems
+bundle exec rails server
+bundle exec rails console
+```
+
+---
+
+## Ruby Resources
+
+- **Official Documentation**: https://www.ruby-lang.org/en/documentation/
+- **Try Ruby**: https://try.ruby-lang.org/ (Online tutorial)
+- **Ruby Koans**: https://www.rubykoans.com/ (Interactive learning)
+
+???
+
+**Speaker Notes:**
+- Emphasize that Ruby Koans are excellent for learning Ruby syntax and idioms
+- Mention that Rails Tutorial book covers Ruby basics as well
+
+---
+
+class: center, middle
+
+# Part 3: Rails Basics
+## (25 minutes)
+
+---
+
+## What is Ruby on Rails?
+
+- **Full-stack web framework** built in Ruby
+- Created by David Heinemeier Hansson (DHH) in 2004
+- Extracted from Basecamp project management tool
+- **Current version**: Rails 8.x
+  - [8.0 Release Notes](https://guides.rubyonrails.org/8_0_release_notes.html)
+  - [8.0 Blog Post](https://rubyonrails.org/2024/11/7/rails-8-no-paas-required)
+
+---
+
+## Rails Philosophy
+
+### Convention over Configuration (CoC)
+- Sensible defaults reduce configuration
+- Standard folder structure and naming conventions
+- Less decision fatigue for developers
+
+### Don't Repeat Yourself (DRY)
+- Write code once, use it everywhere
+- Built-in helpers and generators
+- Shared components and partials
+
+---
+
+## Rails Application Structure
+
+```
+myapp/
+├── app/
+│   ├── controllers/     # Handle requests
+│   ├── models/         # Business logic & data
+│   ├── views/          # Templates
+│   └── helpers/        # View helpers
+├── config/
+│   ├── routes.rb       # URL routing
+│   └── database.yml    # DB configuration
+├── db/
+│   ├── migrate/        # Database migrations
+│   └── schema.rb       # Current DB structure
+└── Gemfile             # Dependencies
+```
+
+---
+background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/MVC-Process.svg/300px-MVC-Process.svg.png)
+background-position: top right
+background-size: 300px
+
+## MVC in Rails Applications
+
+
+**Rails MVC Flow:**
+1. **Request** → Routes → Controller
+2. **Controller** → Model (database operations)
+3. **Model** → Controller (data returned)
+4. **Controller** → View (data passed to template)
+5. **View** → Response (HTML rendered to user)
+
+
+**Rails-specific:**
+- **Models**: Use ActiveRecord Object Relational Model (ORM) for database interaction
+- **Views**: ERB templates with embedded Ruby
+- **Controllers**: Handle HTTP requests and coordinate between Model and View
+
+---
+
+## Rails Models (ActiveRecord)
+
+```ruby
+class User < ApplicationRecord
+  # Validations
+  validates :email, presence: true, uniqueness: true
+  validates :name, length: { minimum: 2 }
+  
+  # Associations
+  has_many :posts
+  has_one :profile
+  
+  # Custom methods
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+  
+  def admin?
+    role == 'admin'
+  end
+end
+```
+
+---
+
+## Rails Controllers
+
+```ruby
+class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  
+  def index
+    @users = User.all
+  end
+  
+  def show
+    # @user is set by before_action
+  end
+  
+  def create
+    @user = User.new(user_params)
+    if @user.save
+      redirect_to @user, notice: 'User was created successfully.'
+    else
+      render :new
+    end
+  end
+  
+  private
+  
+  def set_user
+    @user = User.find(params[:id])
+  end
+  
+  def user_params
+    params.require(:user).permit(:name, :email)
+  end
+end
+```
+
+---
+
+## Rails Views (ERB)
+
+```erb
+<!-- app/views/users/index.html.erb -->
+<h1>Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td>
+          <%= link_to 'Show', user %>
+          <%= link_to 'Edit', edit_user_path(user) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New User', new_user_path %>
+```
+
+---
+
+## Rails Routing
+
+```ruby
+# config/routes.rb
+Rails.application.routes.draw do
+  # RESTful routes
+  resources :users do
+    resources :posts  # Nested resource
+  end
+  
+  # Custom routes
+  get 'about', to: 'pages#about'
+  get 'contact', to: 'pages#contact'
+  
+  # Root route
+  root 'pages#home'
+end
+```
+
+**Generated routes:**
+- `GET /users` → `users#index`
+- `GET /users/:id` → `users#show`
+- `POST /users` → `users#create`
+- `PATCH/PUT /users/:id` → `users#update`
+- `DELETE /users/:id` → `users#destroy`
+
+---
+
+## Database Migrations
+
+```ruby
+# db/migrate/20240101120000_create_users.rb
+class CreateUsers < ActiveRecord::Migration[7.0]
+  def change
+    create_table :users do |t|
+      t.string :name, null: false
+      t.string :email, null: false
+      t.string :password_digest
+      t.timestamps
+    end
+    
+    add_index :users, :email, unique: true
+  end
+end
+```
+
+**Migration commands:**
+```bash
+rails generate migration CreateUsers name:string email:string
+rails db:migrate
+rails db:rollback
+```
+
+---
+
+## Rails Testing
+
+```ruby
+# test/models/user_test.rb
+class UserTest < ActiveSupport::TestCase
+  test "should not save user without name" do
+    user = User.new(email: "test@example.com")
+    assert_not user.save
+  end
+  
+  test "should save valid user" do
+    user = User.new(name: "Alice", email: "alice@example.com")
+    assert user.save
+  end
+end
+
+# test/controllers/users_controller_test.rb
+class UsersControllerTest < ActionDispatch::IntegrationTest
+  test "should get index" do
+    get users_url
+    assert_response :success
+  end
+end
+```
+
+---
+
+## Rails Command Line Interface
+
+```bash
+# Create new application
+rails new myapp
+
+# Generate components
+rails generate model User name:string email:string
+rails generate controller Users index show
+rails generate scaffold Post title:string content:text
+
+# Database operations
+rails db:create
+rails db:migrate
+rails db:seed
+
+# Development server
+rails server
+
+# Interactive console
+rails console
+
+# Run tests
+rails test
+```
+
+---
+
+class: center, middle
+
+# Part 4: Hands-on Walkthrough
+## (50 minutes)
+
+---
+
+## Development Environment Setup
+
+We'll use Docker to ensure everyone has the same environment:
+
+```bash
+# Start the development environment
+docker-compose up -d
+
+# Get a terminal in the Rails container
+docker-compose exec web bash
+```
+
+---
+
+## Step 1: Create a New Rails Application
+
+```bash
+# Inside the Docker container
+rails new blog_app --database=mysql --skip-test --skip-system-test
+cd blog_app
+
+# Install dependencies
+bundle install
+```
+
+**What this creates:**
+- Complete Rails application structure
+- Gemfile with dependencies
+- Database configuration
+- Basic routing and controllers
+
+---
+
+## Step 2: Configure Database
+
+```bash
+# Create the database
+rails db:create
+
+# Check database configuration
+cat config/database.yml
+```
+
+**Database setup:**
+- MySQL database for development
+- Separate databases for test and production
+- Connection details in `config/database.yml`
+
+---
+
+## Step 3: Generate a Model
+
+```bash
+# Generate Post model with attributes
+rails generate model Post title:string content:text author:string
+
+# Run the migration
+rails db:migrate
+```
+
+**What this creates:**
+- `app/models/post.rb` - Model class
+- `db/migrate/xxx_create_posts.rb` - Database migration
+- `test/models/post_test.rb` - Model tests
+
+---
+
+## Step 4: Generate a Controller
+
+```bash
+# Generate Posts controller with actions
+rails generate controller Posts index show new create edit update destroy
+```
+
+**What this creates:**
+- `app/controllers/posts_controller.rb` - Controller class
+- `app/views/posts/` - View templates directory
+- `test/controllers/posts_controller_test.rb` - Controller tests
+
+---
+
+## Step 5: Set Up Routes
+
+```ruby
+# config/routes.rb
+Rails.application.routes.draw do
+  resources :posts
+  root 'posts#index'
+end
+```
+
+```bash
+# Check generated routes
+rails routes
+```
+
+**Generated routes:**
+- `GET /posts` → `posts#index`
+- `GET /posts/new` → `posts#new`
+- `POST /posts` → `posts#create`
+- `GET /posts/:id` → `posts#show`
+- etc.
+
+---
+
+## Step 6: Implement Controller Actions
+
+```ruby
+# app/controllers/posts_controller.rb
+class PostsController < ApplicationController
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  
+  def index
+    @posts = Post.all
+  end
+  
+  def show
+  end
+  
+  def new
+    @post = Post.new
+  end
+  
+  def create
+    @post = Post.new(post_params)
+    if @post.save
+      redirect_to @post, notice: 'Post was created successfully.'
+    else
+      render :new
+    end
+  end
+  
+  private
+  
+  def set_post
+    @post = Post.find(params[:id])
+  end
+  
+  def post_params
+    params.require(:post).permit(:title, :content, :author)
+  end
+end
+```
+
+---
+
+## Step 7: Create Views
+
+```erb
+<!-- app/views/posts/index.html.erb -->
+<h1>Blog Posts</h1>
+
+<% @posts.each do |post| %>
+  <div class="post">
+    <h2><%= link_to post.title, post %></h2>
+    <p>By <%= post.author %></p>
+    <p><%= truncate(post.content, length: 100) %></p>
+  </div>
+<% end %>
+
+<%= link_to 'New Post', new_post_path %>
+```
+
+```erb
+<!-- app/views/posts/new.html.erb -->
+<h1>New Post</h1>
+
+<%= form_with model: @post do |form| %>
+  <div>
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+  
+  <div>
+    <%= form.label :author %>
+    <%= form.text_field :author %>
+  </div>
+  
+  <div>
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
+  
+  <%= form.submit %>
+<% end %>
+```
+
+---
+
+## Step 8: Add Validations
+
+```ruby
+# app/models/post.rb
+class Post < ApplicationRecord
+  validates :title, presence: true, length: { minimum: 5 }
+  validates :content, presence: true, length: { minimum: 10 }
+  validates :author, presence: true
+end
+```
+
+```bash
+# Test the validations in Rails console
+rails console
+post = Post.new
+post.save
+post.errors.full_messages
+```
+
+---
+
+## Step 9: Run the Application
+
+```bash
+# Start the Rails server
+rails server -b 0.0.0.0 -p 3000
+```
+
+**Access the application:**
+- Open browser to `http://localhost:3000`
+- Create new posts
+- View existing posts
+- Test form validations
+
+---
+
+## Step 10: Run Tests
+
+```bash
+# Run all tests
+rails test
+
+# Run specific test file
+rails test test/models/post_test.rb
+
+# Run tests with verbose output
+rails test --verbose
+```
+
+**What to expect:**
+- Model tests should pass
+- Controller tests may need implementation
+- System tests for full user workflows
+
+---
+
+## Step 11: Add Sample Data
+
+```ruby
+# db/seeds.rb
+Post.create!([
+  { title: "Getting Started with Rails", content: "Rails is a great framework...", author: "Alice" },
+  { title: "Ruby Basics", content: "Ruby is a dynamic language...", author: "Bob" },
+  { title: "MVC Pattern", content: "Model-View-Controller separates...", author: "Charlie" }
+])
+```
+
+```bash
+# Load sample data
+rails db:seed
+
+# Reset database and reload
+rails db:reset
+```
+
+---
+
+## Step 12: Explore Rails Console
+
+```bash
+# Start Rails console
+rails console
+
+# Try these commands:
+Post.count
+Post.first
+Post.where(author: "Alice")
+post = Post.new(title: "Test", content: "Test content", author: "Test Author")
+post.save
+post.valid?
+post.errors
+```
+
+---
+
+## Docker Environment Usage
+
+### Starting the Environment
+```bash
+# Start all services
+docker-compose up -d
+
+# View logs
+docker-compose logs -f web
+
+# Stop services
+docker-compose down
+```
+
+### Working with the Container
+```bash
+# Get a bash shell in the Rails container
+docker-compose exec web bash
+
+# Run Rails commands directly
+docker-compose exec web rails console
+docker-compose exec web rails test
+docker-compose exec web rails db:migrate
+```
+
+---
+
+## Next Steps & Resources
+
+### Continue Learning
+- **Ruby on Rails Tutorial**: https://learning.oreilly.com/library/view/ruby-on-rails/9780138050061/
+- **Ruby Koans**: https://www.rubykoans.com/
+- **Rails Guides**: https://guides.rubyonrails.org/
+
+### Practice Ideas
+1. Add user authentication
+2. Implement comments on posts
+3. Add image uploads
+4. Create an API version
+5. Add search functionality
+
+---
+
+## Key Takeaways
+
+1. **Rails follows MVC pattern** for clean separation of concerns
+2. **Convention over Configuration** speeds up development
+3. **ActiveRecord ORM** simplifies database operations
+4. **Generators** create boilerplate code quickly
+5. **Testing** is built-in and encouraged
+6. **Docker** provides consistent development environments
+
+---
+
+class: center, middle
+
+# Questions?
+
+## Happy Coding! 🚀
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"
+            type="text/javascript"></script>
+    <script type="text/javascript">
+      var hljs = remark.highlighter.engine;
+      var slideshow = remark.create({
+          highlightLanguage: 'ruby',
+          highlightLines: true,
+          hightlightSpans: true,
+          highlightStyle: 'monokai'
+        }) ;
+    </script>
+  </body>
+</html>
