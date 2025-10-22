@@ -547,7 +547,7 @@ docker-compose exec web bash
 
 ```bash
 # Inside the Docker container
-rails new blog_app --database=mysql --skip-test --skip-system-test
+rails new blog_app --database=mysql --skip-system-test
 cd blog_app
 
 # Install dependencies
@@ -567,9 +567,6 @@ bundle install
 ```bash
 # Create the database
 rails db:create
-
-# Check database configuration
-cat config/database.yml
 ```
 
 **Database setup:**
@@ -675,7 +672,7 @@ end
 
 ---
 
-## Step 7: Create Views
+## Step 7: Create View for Index
 
 ```erb
 <!-- app/views/posts/index.html.erb -->
@@ -691,6 +688,10 @@ end
 
 <%= link_to 'New Post', new_post_path %>
 ```
+
+---
+
+## Step 7: Create View for New
 
 ```erb
 <!-- app/views/posts/new.html.erb -->
@@ -766,11 +767,6 @@ rails test test/models/post_test.rb
 # Run tests with verbose output
 rails test --verbose
 ```
-
-**What to expect:**
-- Model tests should pass
-- Controller tests may need implementation
-- System tests for full user workflows
 
 ---
 
