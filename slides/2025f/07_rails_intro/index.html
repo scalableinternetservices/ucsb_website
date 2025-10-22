@@ -503,7 +503,7 @@ rails new myapp
 # Generate components
 rails generate model User name:string email:string
 rails generate controller Users index show
-rails generate scaffold Post title:string content:text
+rails generate scaffold BlogEntry title:string content:text
 
 # Database operations
 rails db:create
@@ -579,31 +579,31 @@ rails db:create
 ## Step 3: Generate a Model
 
 ```bash
-# Generate Post model with attributes
-rails generate model Post title:string content:text author:string
+# Generate BlogEntry model with attributes
+rails generate model BlogEntry title:string content:text author:string
 
 # Run the migration
 rails db:migrate
 ```
 
 **What this creates:**
-- `app/models/post.rb` - Model class
-- `db/migrate/xxx_create_posts.rb` - Database migration
-- `test/models/post_test.rb` - Model tests
+- `app/models/blog_entry.rb` - Model class
+- `db/migrate/xxx_create_blog_entries.rb` - Database migration
+- `test/models/blog_entry_test.rb` - Model tests
 
 ---
 
 ## Step 4: Generate a Controller
 
 ```bash
-# Generate Posts controller with actions
-rails generate controller Posts index show new create edit update destroy
+# Generate BlogEntries controller with actions
+rails generate controller BlogEntries index show new create edit update destroy
 ```
 
 **What this creates:**
-- `app/controllers/posts_controller.rb` - Controller class
-- `app/views/posts/` - View templates directory
-- `test/controllers/posts_controller_test.rb` - Controller tests
+- `app/controllers/blog_entries_controller.rb` - Controller class
+- `app/views/blog_entries/` - View templates directory
+- `test/controllers/blog_entries_controller_test.rb` - Controller tests
 
 ---
 
@@ -612,8 +612,8 @@ rails generate controller Posts index show new create edit update destroy
 ```ruby
 # config/routes.rb
 Rails.application.routes.draw do
-  resources :posts
-  root 'posts#index'
+  resources :blog_entries
+  root 'blog_entries#index'
 end
 ```
 
@@ -623,10 +623,10 @@ rails routes
 ```
 
 **Generated routes:**
-- `GET /posts` → `posts#index`
-- `GET /posts/new` → `posts#new`
-- `POST /posts` → `posts#create`
-- `GET /posts/:id` → `posts#show`
+- `GET /blog_entries` → `blog_entries#index`
+- `GET /blog_entries/new` → `blog_entries#new`
+- `POST /blog_entries` → `blog_entries#create`
+- `GET /blog_entries/:id` → `blog_entries#show`
 - etc.
 
 ---
@@ -634,25 +634,25 @@ rails routes
 ## Step 6: Implement Controller Actions
 
 ```ruby
-# app/controllers/posts_controller.rb
-class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+# app/controllers/blog_entries_controller.rb
+class BlogEntriesController < ApplicationController
+  before_action :set_blog_entry, only: [:show, :edit, :update, :destroy]
   
   def index
-    @posts = Post.all
+    @blog_entries = BlogEntry.all
   end
   
   def show
   end
   
   def new
-    @post = Post.new
+    @blog_entry = BlogEntry.new
   end
   
   def create
-    @post = Post.new(post_params)
-    if @post.save
-      redirect_to @post, notice: 'Post was created successfully.'
+    @blog_entry = BlogEntry.new(blog_entry_params)
+    if @blog_entry.save
+      redirect_to @blog_entry, notice: 'Blog entry was created successfully.'
     else
       render :new
     end
@@ -660,12 +660,12 @@ class PostsController < ApplicationController
   
   private
   
-  def set_post
-    @post = Post.find(params[:id])
+  def set_blog_entry
+    @blog_entry = BlogEntry.find(params[:id])
   end
   
-  def post_params
-    params.require(:post).permit(:title, :content, :author)
+  def blog_entry_params
+    params.require(:blog_entry).permit(:title, :content, :author)
   end
 end
 ```
@@ -675,18 +675,18 @@ end
 ## Step 7: Create View for Index
 
 ```erb
-<!-- app/views/posts/index.html.erb -->
-<h1>Blog Posts</h1>
+<!-- app/views/blog_entries/index.html.erb -->
+<h1>Blog Entries</h1>
 
-<% @posts.each do |post| %>
-  <div class="post">
-    <h2><%= link_to post.title, post %></h2>
-    <p>By <%= post.author %></p>
-    <p><%= truncate(post.content, length: 100) %></p>
+<% @blog_entries.each do |blog_entry| %>
+  <div class="blog-entry">
+    <h2><%= link_to blog_entry.title, blog_entry %></h2>
+    <p>By <%= blog_entry.author %></p>
+    <p><%= truncate(blog_entry.content, length: 100) %></p>
   </div>
 <% end %>
 
-<%= link_to 'New Post', new_post_path %>
+<%= link_to 'New Blog Entry', new_blog_entry_path %>
 ```
 
 ---
@@ -694,10 +694,10 @@ end
 ## Step 7: Create View for New
 
 ```erb
-<!-- app/views/posts/new.html.erb -->
-<h1>New Post</h1>
+<!-- app/views/blog_entries/new.html.erb -->
+<h1>New Blog Entry</h1>
 
-<%= form_with model: @post do |form| %>
+<%= form_with model: @blog_entry do |form| %>
   <div>
     <%= form.label :title %>
     <%= form.text_field :title %>
@@ -722,8 +722,8 @@ end
 ## Step 8: Add Validations
 
 ```ruby
-# app/models/post.rb
-class Post < ApplicationRecord
+# app/models/blog_entry.rb
+class BlogEntry < ApplicationRecord
   validates :title, presence: true, length: { minimum: 5 }
   validates :content, presence: true, length: { minimum: 10 }
   validates :author, presence: true
@@ -733,9 +733,9 @@ end
 ```bash
 # Test the validations in Rails console
 rails console
-post = Post.new
-post.save
-post.errors.full_messages
+blog_entry = BlogEntry.new
+blog_entry.save
+blog_entry.errors.full_messages
 ```
 
 ---
@@ -749,8 +749,8 @@ rails server -b 0.0.0.0 -p 3000
 
 **Access the application:**
 - Open browser to `http://localhost:3000`
-- Create new posts
-- View existing posts
+- Create new blog entries
+- View existing blog entries
 - Test form validations
 
 ---
@@ -762,7 +762,7 @@ rails server -b 0.0.0.0 -p 3000
 rails test
 
 # Run specific test file
-rails test test/models/post_test.rb
+rails test test/models/blog_entry_test.rb
 
 # Run tests with verbose output
 rails test --verbose
@@ -774,7 +774,7 @@ rails test --verbose
 
 ```ruby
 # db/seeds.rb
-Post.create!([
+BlogEntry.create!([
   { title: "Getting Started with Rails", content: "Rails is a great framework...", author: "Alice" },
   { title: "Ruby Basics", content: "Ruby is a dynamic language...", author: "Bob" },
   { title: "MVC Pattern", content: "Model-View-Controller separates...", author: "Charlie" }
@@ -798,13 +798,13 @@ rails db:reset
 rails console
 
 # Try these commands:
-Post.count
-Post.first
-Post.where(author: "Alice")
-post = Post.new(title: "Test", content: "Test content", author: "Test Author")
-post.save
-post.valid?
-post.errors
+BlogEntry.count
+BlogEntry.first
+BlogEntry.where(author: "Alice")
+blog_entry = BlogEntry.new(title: "Test", content: "Test content", author: "Test Author")
+blog_entry.save
+blog_entry.valid?
+blog_entry.errors
 ```
 
 ---
