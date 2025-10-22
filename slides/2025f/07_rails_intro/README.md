@@ -4,12 +4,10 @@ This directory contains a Docker-based development environment for learning Ruby
 
 ## Quick Start
 
-### 1. Start the Environment
+### 1. Start the Development Environment
 
 ```bash
-# Navigate to the Rails intro directory
-cd slides/2025f/07_rails_intro/
-
+# In a terminal, navigate to the directory whith your Dockerfile and docker-compose.yml file
 # Start the development environment
 docker-compose up -d
 
@@ -17,17 +15,22 @@ docker-compose up -d
 docker-compose ps
 ```
 
-### 2. Get a Terminal in the Rails Container
+### 2. Launch a Terminal in the Rails Container
 
 ```bash
 # Get a bash shell in the Rails container
 docker-compose exec web bash
 ```
 
-### 3. Create Your First Rails App
+### 3. Set Up the App Scaffold
+
 
 ```bash
-# Inside the container, create a new Rails application
+# Inside the container
+# Install rails
+gem install rails
+
+# Now create a new Rails application
 rails new blog_app --database=mysql --skip-test --skip-system-test
 cd blog_app
 
@@ -86,19 +89,6 @@ docker-compose restart
 docker-compose down -v
 ```
 
-### Rails Commands (inside container)
-
-```bash
-# Get a shell in the container
-docker-compose exec web bash
-
-# Run Rails commands directly
-docker-compose exec web rails console
-docker-compose exec web rails generate model Post title:string
-docker-compose exec web rails db:migrate
-docker-compose exec web rails test
-```
-
 ### Rails Development Commands
 
 ```bash
@@ -106,13 +96,15 @@ docker-compose exec web rails test
 rails new myapp --database=mysql
 
 # Generate components
+# Gemerate a new model for a User
 rails generate model User name:string email:string
+# Generate a new controller for interacting with Users
 rails generate controller Users index show
-rails generate scaffold Post title:string content:text
 
 # Database operations
 rails db:create
 rails db:migrate
+rails db:drop
 rails db:seed
 rails db:rollback
 
@@ -129,16 +121,6 @@ rails test
 rails routes
 ```
 
-## Database Configuration
-
-The environment is pre-configured with:
-
-- **Database**: `rails_development`
-- **Username**: `rails_user`
-- **Password**: `password`
-- **Host**: `db` (Docker service name)
-- **Port**: `3306`
-
 ## Troubleshooting
 
 ### Container Won't Start
@@ -147,8 +129,8 @@ The environment is pre-configured with:
 # Check logs
 docker-compose logs web
 
-# Rebuild the container
-docker-compose build --no-cache web
+# Rebuild the containers
+docker-compose build --no-cache
 docker-compose up -d
 ```
 
@@ -180,27 +162,17 @@ lsof -ti:3000 | xargs kill -9
 #   - "3001:3000"  # Use port 3001 instead
 ```
 
-### Permission Issues
+### MySQL DB Connection
+
+See docker-compose file for passwords
 
 ```bash
-# Fix file permissions
-sudo chown -R $USER:$USER .
+# Connection as root user
+mysql -h db --skip-ssl -u root -p
+
+# Connecting as rails user
+mysql -h db --skip-ssl -u rails_user -p
 ```
-
-## Learning Resources
-
-- **Ruby Documentation**: https://www.ruby-lang.org/en/documentation/
-- **Ruby Koans**: https://www.rubykoans.com/ (Interactive Ruby learning)
-- **Ruby on Rails Tutorial**: https://learning.oreilly.com/library/view/ruby-on-rails/9780138050061/
-- **Rails Guides**: https://guides.rubyonrails.org/
-
-## Next Steps
-
-1. Follow the hands-on walkthrough in the slides
-2. Try the Ruby Koans for Ruby syntax practice
-3. Work through the Rails Tutorial book
-4. Experiment with different Rails generators
-5. Add features like user authentication, file uploads, or API endpoints
 
 ## Cleanup
 

@@ -80,7 +80,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 ### Tasks
 
-- Complete Projec 2
+- Complete Project 2
 - Begin Project 3
 
 <!-- 
