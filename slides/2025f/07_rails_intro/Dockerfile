@@ -12,6 +12,7 @@ RUN apt-get update -qq && apt-get install -y \
 
 # Set working directory
 WORKDIR /app
+ENV HOME=/app
 
 # Create a non-root user
 RUN groupadd -r rails && useradd -r -g rails rails
