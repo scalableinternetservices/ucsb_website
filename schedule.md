@@ -83,6 +83,26 @@ The following schedule is subject to change, and many slide links are not yet ac
 - Complete Project 2
 - Begin Project 3
 
+</div>
+<div class="week">
+
+## Week 5 (October 27)
+
+### Topics
+- Project 3
+- Scaling Web Applications - [slides](/slides/2025f/08_scaling_web_applications/index.html)
+- Web Performance Metrics
+- Authentication in Web Applications
+
+### Tasks
+
+- Begin [Project 3](/project3/)
+- Read [Dynamic Load Balancing on Web-server
+  Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf) by Cardellini,
+  Colajanni, and Yu.
+
+</div>
+
 <!-- 
 - Read [How Discord Stores Billions of Messages
   ](https://discord.com/blog/how-discord-stores-billions-of-messages)
@@ -93,32 +113,15 @@ The following schedule is subject to change, and many slide links are not yet ac
   Consistent](http://www.scalableinternetservices.com/slides/vogels.pdf) by
   Werner Vogels
 
-</div>
-<div class="week">
 
-## Week 5 (October 27)
 
-### Topics
-
-- Web Performance Metrics
-- Load Testing
-- Scaling Web Applications - [slides](/slides/2024f/05_scaling_web_applications/index.html)
-
-### Tasks
-
-- Complete [Project 3](/project3/)
-- Begin [Project 4](/project4/)
-- Read [Dynamic Load Balancing on Web-server
-  Systems](http://www.ics.uci.edu/~cs230/reading/DLB.pdf) by Cardellini,
-  Colajanni, and Yu.
-
-</div>
 <div class="week">
 
 ## Week 6 (November 3)
 
 ### Topics
 
+- Load Testing
 - Architecting for High Availability [slides](/slides/2024f/06_high_availability/index.html)
 - Working in teams [slides](/slides/2024f/07_agile_tdd_pairing/index.html)
   - Agile Software Development

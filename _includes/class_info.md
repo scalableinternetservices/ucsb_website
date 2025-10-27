@@ -72,11 +72,11 @@ Wednesday, October 22 10am PT
 
 ### [Project 3](/project3/) Team Message due before
 
-Monday, October 20 2pm PT
+Wednesday, October 29 10am PT
 
 ### [Project 3](/project3/) due before
 
-Monday, November 3 2pm PT
+Monday, November 10 10am PT
 {% endif %}
 
 {% if site.navigable_pages.primary_project %}
