@@ -180,6 +180,18 @@ Note: This book is only useful once we get to the primary project.</p>
 
 <p>Download the starter project: <a href="/project3.zip">project3.zip</a></p>
 
+<p><strong>Starter Contents:</strong></p>
+
+<p><em>API_SPECIFICATION.md</em> - the spec to be implemented <br />
+<em>project3_er_diagram.png</em> - ER diagram for the models and relationships needed to implement the API spec <br />
+<em>docker-compose.yml</em> - basic docker-compose setup for running a db and web container in development <br />
+<em>Dockerfile</em> - Configuration of the web container <br />
+<em>/app/services/jwt_service.rb</em> - Simple service class for creating JWT tokens used for authentication <br />
+<em>/test/requests/auth_test.rb</em> - Test that will validate that your auth endoints work as expected <br />
+<em>/test/requests/cookie_configuration_test.rb</em> - Test that will validate that your session cookie is properly configured <br />
+<em>/test/requests/conversations_test.rb</em> - Test that the conversation api endpoints work as expected <br />
+<em>/test/servuces/jwt_service_test.rb</em> - A test for the provided jwt_service.rb file \</p>
+
 <h2 id="quick-start">Quick Start</h2>
 
 <ol>
@@ -210,6 +222,12 @@ rails new help_desk_backend <span class="nt">--api</span> <span class="nt">--ski
 gem <span class="s2">"rack-cors"</span> <span class="c"># For handling Cross-Origin Resource Sharing (CORS) requests from the frontend</span>
 gem <span class="s2">"jwt"</span> <span class="c"># For JSON Web Token authentication (if you choose JWT over sessions)</span>
 gem <span class="s2">"activerecord-session_store"</span> <span class="c"># For database-backed session storage</span>
+group :test <span class="k">do
+   </span>gem <span class="s2">"mocha"</span>
+end
+
+<span class="c"># Add the following line to help_desk_backend/test/test_helper.rb</span>
+require <span class="s2">"mocha/minitest"</span>
    
 <span class="c"># Install dependencies</span>
 bundle <span class="nb">install</span>
@@ -363,10 +381,25 @@ rails server <span class="nt">-b</span> 0.0.0.0 <span class="nt">-p</span> 3000
       <li>…</li>
     </ul>
   </li>
-  <li>Consider when you want to implement authentication?</li>
+  <li>Consider when you want to implement authentication/authorization
+    <ul>
+      <li>Could you delay implementing authentication or authorization or both until after you have implemented the api functionality?
+        <ul>
+          <li>What are the pros and cons of this?</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
 </ul>
 
 <h2 id="testing-your-implementation">Testing Your Implementation</h2>
+
+<h3 id="writing-request-tests">Writing request tests</h3>
+
+<ul>
+  <li>Use the example test files provided in the starter package to test your AuthController and ConversationsController.</li>
+  <li>Writing additional tests that follow the same structure for your other controllers will help you confirm your code is working without needing to integrate with the front end.</li>
+</ul>
 
 <h3 id="using-the-project-2-frontend">Using the Project 2 Frontend</h3>
 
@@ -386,7 +419,7 @@ rails server <span class="nt">-b</span> 0.0.0.0 <span class="nt">-p</span> 3000
 
 <h3 id="api-testing">API Testing</h3>
 
-<p>You can also test your API directly using tools like:</p>
+<p>If you need to, you can also test your API directly using tools like:</p>
 <ul>
   <li><strong>Postman</strong> for API testing</li>
   <li><strong>curl</strong> commands from the terminal</li>
