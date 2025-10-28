@@ -46,6 +46,20 @@ This team can be completed alone or in teams of 2.  If you choose to work as tea
 
 Download the starter project: [project3.zip](/project3.zip)
 
+**Starter Contents:**
+
+*API_SPECIFICATION.md* - the spec to be implemented \
+*project3_er_diagram.png* - ER diagram for the models and relationships needed to implement the API spec \
+*docker-compose.yml* - basic docker-compose setup for running a db and web container in development \
+*Dockerfile* - Configuration of the web container \
+*/app/services/jwt_service.rb* - Simple service class for creating JWT tokens used for authentication \
+*/test/requests/auth_test.rb* - Test that will validate that your auth endoints work as expected \
+*/test/requests/cookie_configuration_test.rb* - Test that will validate that your session cookie is properly configured \
+*/test/requests/conversations_test.rb* - Test that the conversation api endpoints work as expected \
+*/test/servuces/jwt_service_test.rb* - A test for the provided jwt_service.rb file \
+
+ 
+
 ## Quick Start
 
 1. **Extract the project files**:
@@ -79,6 +93,12 @@ Download the starter project: [project3.zip](/project3.zip)
    gem "rack-cors" # For handling Cross-Origin Resource Sharing (CORS) requests from the frontend
    gem "jwt" # For JSON Web Token authentication (if you choose JWT over sessions)
    gem "activerecord-session_store" # For database-backed session storage
+   group :test do
+      gem "mocha"
+   end
+
+   # Add the following line to help_desk_backend/test/test_helper.rb
+   require "mocha/minitest"
    
    # Install dependencies
    bundle install
@@ -208,10 +228,17 @@ Models:
     - Creating the User Model
     - Adding the UsersController with a registration action for new users
     - ...
-- Consider when you want to implement authentication?
+- Consider when you want to implement authentication/authorization
+    - Could you delay implementing authentication or authorization or both until after you have implemented the api functionality?
+         - What are the pros and cons of this?
 
 
 ## Testing Your Implementation
+
+### Writing request tests
+
+* Use the example test files provided in the starter package to test your AuthController and ConversationsController.
+* Writing additional tests that follow the same structure for your other controllers will help you confirm your code is working without needing to integrate with the front end.
 
 ### Using the Project 2 Frontend
 
@@ -226,7 +253,7 @@ Models:
 
 ### API Testing
 
-You can also test your API directly using tools like:
+If you need to, you can also test your API directly using tools like:
 - **Postman** for API testing
 - **curl** commands from the terminal
 - **Rails console** for database testing
