@@ -91,6 +91,7 @@ The following schedule is subject to change, and many slide links are not yet ac
 ### Topics
 - Project 3
 - Scaling Web Applications - [slides](/slides/2025f/08_scaling_web_applications/index.html)
+- High Availability - [slides](/slides/2025f/09_high_availability/index.html)
 - Web Performance Metrics
 - Authentication in Web Applications
 
