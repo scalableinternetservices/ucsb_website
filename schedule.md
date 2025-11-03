@@ -104,6 +104,20 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 </div>
 
+<div class="week">
+
+## Week 6 (November 3)
+
+### Topics
+
+- Scaling the Database [slides](/slides/2025f/10_database_scalability/index.html)
+
+### Tasks
+
+- Complete [Project3](/project3/)
+
+</div>
+
 <!-- 
 - Read [How Discord Stores Billions of Messages
   ](https://discord.com/blog/how-discord-stores-billions-of-messages)
@@ -115,29 +129,6 @@ The following schedule is subject to change, and many slide links are not yet ac
   Werner Vogels
 
 
-
-<div class="week">
-
-## Week 6 (November 3)
-
-### Topics
-
-- Load Testing
-- Architecting for High Availability [slides](/slides/2024f/06_high_availability/index.html)
-- Working in teams [slides](/slides/2024f/07_agile_tdd_pairing/index.html)
-  - Agile Software Development
-  - Test Driven Development (TDD)
-  - Continuous Integration (CI)
-  - Pair Programming / Mobbing
-
-### Tasks
-
-- Complete [Project4](/project4/)
-- Form a team for [Project5](/project5/)
-  - Find teammates
-  - Submit your team
-
-</div>
 <div class="week">
 
 ## Week 7 (November 10)
