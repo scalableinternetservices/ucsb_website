@@ -1,0 +1,1467 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Database as Scalability Bottleneck</title>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 2.5em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      blockquote {
+        border-left: 0.3em solid rgba(0,0,0,0.5);
+        padding: 0 15px;
+        font-style: italic;
+      }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      img {
+        max-height: 100%;
+        max-width: 100%;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .clear { clear: both; }
+      #slideshow .slide .content code { font-size: 0.8em; }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 1em;
+      }
+      .background-blue {
+        background-color: deepskyblue;
+      }
+      .background-green {
+        background-color: springgreen;
+      }
+      .background-pink {
+        background-color: deeppink;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        width: 49%;
+        float: left;
+      }
+      .right-column {
+        width: 49%;
+        float: right;
+      }
+      .left-column20 {
+        width: 20%;
+        float: left;
+      }
+      .right-column80 {
+        width: 79%;
+        float: right;
+      }
+      .left-column30 {
+        width: 30%;
+        float: left;
+      }
+      .right-column70 {
+        width: 69%;
+        float: right;
+      }
+      .left-column40 {
+        width: 40%;
+        float: left;
+      }
+      .right-column60 {
+        width: 59%;
+        float: right;
+      }
+
+      /* Table layout */
+      table {
+        background: #f5f5f5;
+        margin: 30px auto;
+        text-align: left;
+        width: 100%;
+      }
+      th {
+        background: linear-gradient(#777, #444);
+        color: #fff;
+        font-weight: bold;
+        padding: 10px 15px;
+      }
+      td {
+        border-right: 1px solid #fff;
+        border-left: 1px solid #e8e8e8;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #e8e8e8;
+        padding: 10px 15px;
+      }
+
+    </style>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle
+
+# Database as Scalability Bottleneck
+
+## CS291A: Scalable Internet Services
+
+---
+
+# The Problem
+
+You have built a load-balanced web application with multiple application servers.
+
+Your application is becoming increasingly popular and performance is degrading.
+
+**Symptoms:**
+- Response times increasing across the board
+- Users experiencing timeouts
+- 504 Gateway Timeout errors from load balancer
+- P50, P95, P99 latency percentiles all increasing
+
+> What's the bottleneck?
+
+---
+
+# Application Architecture
+
+.left-column40[
+You have deployed application servers that can serve many concurrent requests.
+
+But as your site's popularity continues to grow, that is not sufficient.
+]
+.right-column60[
+![Load Balanced Topology](load_balanced_topology.png)
+]
+
+---
+
+# Database as Bottleneck
+
+.left-column[
+Many stateless application servers responding to requests
+
+Clients can be served by any application server
+
+But all application servers talk to a single database
+]
+.right-column[
+![Database connectivity](app_server_to_database.png)
+]
+
+---
+
+# Today's Journey
+
+We'll explore solutions to the database bottleneck:
+
+1. **Identifying a Database Performance Problem** (diagnosis and evidence)
+2. **Performance Optimizations** (indexes, query optimization, locking)
+3. **Server-Side Caching** (reduce database load)
+4. **Read Replicas** (scale reads horizontally)
+5. **Sharding** (partition data across databases)
+6. **RDBMS vs NoSQL** (when to choose what)
+
+---
+
+class: center inverse middle
+
+# Identifying a Database Performance Problem
+
+---
+
+# Note: Multiple Diagnosis Paths
+
+**Important:** Different causes can lead to similar observations.
+
+The same symptom (e.g., slow queries) might be caused by:
+* Application-level issues (inefficient queries, missing indexes)
+* Infrastructure-level issues (insufficient DB resources, too much load)
+
+**We'll explore two diagnostic paths:**
+1. **Application-level issues** → Fix by modifying application code
+2. **Infrastructure-level issues** → Fix by scaling or changing architecture
+
+**Often, both paths are needed!**
+
+---
+
+# Diagnosis Step 1: Application Server Metrics
+
+**First, check your application servers:**
+
+Application server resource metrics:
+* CPU utilization: **60-70%** (within acceptable range)
+* Memory usage: **65%** (plenty of headroom)
+* Disk I/O: **Normal**
+* Network: **Normal**
+
+**Observation:** Application servers are **not saturated**.
+
+---
+# Diagnosis Step 2: Try Scaling Application Servers
+
+**Next, add more application servers:**
+
+* Added 2 more application server instances behind load balancer
+* Expected: Performance to improve, latency to decrease
+
+**Result:** 
+* **No improvement** in response times
+
+**Conclusion:** Application servers are **not the bottleneck**.
+
+---
+
+# Diagnosis Step 3: Check Application Logs
+
+**Look at application logs for patterns:**
+
+**1. Large numbers of queries per request:**
+```
+Started GET "/expert/queue" for ::1 at 2025-10-14 09:40:03 -0700
+...
+Completed 200 OK in 2206ms (Views: 0.1ms | ActiveRecord: 2180ms (100 queries, 0 cached) | GC: 0.0ms)
+```
+
+**2. Query count per request:**
+* Normal request: 5-10 queries
+
+**Observation:** Application is making **far too many queries**.
+
+**Specific to:** N+1 query problems, missing eager loading, inefficient data access patterns.
+
+---
+# Diagnosis Step 4: Database Connection Pool
+
+**Check database connection pool metrics:**
+
+**Connection pool status:**
+* Max connections: 100
+* Active connections: **95-100** (near capacity!)
+* Waiting connections: **50+** (requests queued)
+* Connection wait time: **2-5 seconds**
+
+**Even after fixing N+1 queries, pool still exhausted.**
+
+**Observation:** Database connections are **exhausted** - too many concurrent requests.
+
+**Specific to:** High concurrent request volume, need more database capacity or read replicas.  Is the connection pool size too small?
+
+---
+
+# Diagnosis Step 5: Database Server Metrics
+
+**Check database server resource metrics:**
+
+* Database server CPU usage: **85-95%** (high!)
+* Database server memory: **80%** (elevated)
+* Database server disk I/O: **High read/write operations**
+
+**Observation:** Database server resources are **saturated**.
+
+**Contrast with application servers:** App servers at 60-70% CPU, database at 85-95% CPU.
+
+---
+# Diagnosis Step 6: Slow Query Log
+
+**Enable and analyze slow query log:**
+
+**MySQL slow queries (queries > 1 second):**
+```
+SELECT * FROM messages 
+WHERE conversation_id = 456 
+ORDER BY created_at DESC LIMIT 50;
+Duration: 3.2 seconds
+Rows examined: 500,000
+
+SELECT conversations.*, users.username 
+FROM conversations 
+JOIN users ON conversations.user_id = users.id 
+WHERE conversations.status = 'waiting';
+Duration: 4.8 seconds
+Rows examined: 2,000,000
+```
+
+**Observation:** Some queries are taking **seconds**, examining **millions of rows**.
+
+---
+# Diagnosis Step 7: Database Size and Growth
+
+**Check database growth and capacity:**
+
+**Database metrics:**
+* Database size: **500 GB** (approaching instance limit)
+* Growth rate: **50 GB/month**
+* Table sizes: messages table **200 GB**, conversations table **150 GB**
+* Single largest query scans **100+ GB**
+
+**Observation:** Database size is **large and growing**, approaching limits.
+
+**Specific to:** Need for partitioning/sharding, database size limits.
+
+---
+# Diagnosis Step 8: Write Load Distribution
+
+**Analyze write patterns:**
+
+**Write metrics:**
+* Write queries: **3,000/minute** (all to single database)
+* Write latency: **50-200ms** (acceptable but consistent)
+* Write operations: Inserts, updates spread across tables
+
+**Even with optimized queries, write throughput is limiting factor.**
+
+**Observation:** Write load is **centralized** to single database.
+
+**Specific to:** Need for write scaling (sharding) or vertical scaling of database.
+
+---
+# Diagnosis Step 9: Lock Contention (After Optimization)
+
+**Check for locking issues after fixing application problems:**
+
+**Database lock metrics:**
+* Active locks: **150+** (still high after query fixes)
+* Waiting locks: **25+**
+* Lock wait time: **500ms-2s**
+* Deadlock detections: **5 in last hour**
+
+**Locks are from legitimate concurrent transactions, not inefficient queries.**
+
+**Sample lock log:**
+```
+Transaction 12345 waiting for ShareLock on conversation 789
+Transaction 67890 holding ExclusiveLock on conversation 789
+Wait time: 1.8 seconds
+```
+
+**Observation:** Transactions are **blocking each other** - legitimate contention.
+
+**Specific to:** High concurrent transaction volume, may need better locking strategy or write scaling.
+
+---
+
+# Important: Multiple Causes, Multiple Solutions
+
+**Reality Check:**
+
+The same symptom can have **multiple causes**:
+
+**Example: Slow queries**
+* Could be missing indexes (application fix)
+* Could be database CPU saturated (infrastructure fix)
+* Could be **both** (need both fixes!)
+
+**Typical approach:**
+1. **First**: Fix application-level issues (cheaper, faster)
+2. **Then**: If problems persist, scale infrastructure
+3. **Often**: Both are needed as system grows
+
+---
+# Diagnosis: Mapping Observations to Solutions
+
+**Observations more specific to application fixes:**
+* Query count 100x higher than expected → N+1 queries
+* Full table scans on filtered columns → Missing indexes  
+* Queries examining millions of rows for small results → Pagination, indexes
+* Repeatedly fetching the same data → Server-side caching
+* Low cache hit rate → Move to a more appropriate cache location, or modify caching semantics
+* DB CPU normal but queries slow → Query optimization
+
+**Observations more specific to infrastructure fixes:**
+* DB CPU saturated (85%+) with optimized queries → Vertical scaling, read replicas
+* Connection pool exhausted → Read replicas, expand connection pooling
+* High read volume with fast queries → Read replicas
+* Database size approaching limits → Sharding
+* Write throughput limiting → Sharding, vertical scaling
+
+**Often see both:** Application fixes first, then infrastructure as you scale!
+
+---
+
+class: center inverse middle
+
+# Performance Optimizations
+
+---
+
+# Finding Database Bottlenecks
+
+We now have a Rails app connected to MySQL and it is slower than you'd like.
+
+We've diagnosed that the bottleneck is the database.
+
+> How do we fix it?
+
+---
+
+# Demo App Investigation
+
+__First Step__: Find out what Rails is doing.
+
+In _development_ mode, Rails will output the SQL it generates and executes to the application server log.
+
+To (temporarily) enable debugging in _production_ mode, change `config/environments/production.rb`:
+
+```ruby
+config.log_level = :debug
+```
+
+---
+
+# Example: N+1 Query Problem
+
+Controller
+
+```ruby
+class ConversatinosController < ApplicationController
+  def index
+    @conversations = Conversation.all
+    render json: @conversations.map do |conversation|
+      {
+        id: conversation.id,
+        title: conversation.title,
+        messages_count: conversation.messages.count
+      }
+    end
+  end
+end
+```
+
+---
+
+# Generated SQL Statements
+
+```
+Processing by ConversationsController#index as HTML
+Conversation Load (0.5ms)  SELECT `conversations`.* FROM `conversations`
+Message Load (0.3ms)  SELECT COUNT(*) FROM `messages` WHERE
+  `messages`.`conversation_id` = 1
+Message Load (0.3ms)  SELECT COUNT(*) FROM `messages` WHERE
+  `messages`.`conversation_id` = 2
+...
+Message Load (0.3ms)  SELECT COUNT(*) FROM `messages` WHERE
+  `messages`.`conversation_id` = 400
+```
+
+--
+## That is a lot of `SELECT` queries!
+
+---
+
+# Reducing N+1 Queries in Rails
+
+(__Before__) Without `includes` 401 queries
+
+```ruby
+class ConversationsController < ApplicationController
+  def index
+    @conversations = Conversation.all
+    render json: @conversations.map do |conversation|
+      {
+        id: conversation.id,
+        title: conversation.title,
+        messages_count: conversation.messages.count
+      }
+    end
+  end
+end
+```
+
+--
+(__After__) With `includes` 1 query
+
+```ruby
+class ConversationsController < ApplicationController
+  def index
+    @conversations = Conversation.includes(:messages).all
+    render json: @conversations.map do |conversation|
+      {
+        id: conversation.id,
+        title: conversation.title,
+        messages_count: conversation.messages.count
+      }
+    end
+  end
+end
+```
+
+---
+
+# SQL Explain
+
+Sometimes things are still slow even when the number of queries is minimized.
+
+SQL provides an `EXPLAIN` statement that can be used to analyze individual queries.
+
+When a query starts with `EXPLAIN`...
+
+* the query is not actually executed
+* the produced output will help us identify potential improvements
+* e.g. full table scan vs index scan, rows examined, possible indexes
+
+---
+
+# SQL Indexes
+
+> What is an index?
+
+--
+
+An index is a fast, ordered, compact structure (often B-tree) for identifying row
+locations.
+
+--
+
+When an index is provided on a column that is to be filtered (searching for a
+particular item), the database is able to quickly find that information.
+
+--
+
+Indexes can exist on a single column, or across multiple columns. Multi-column
+indexes are useful when filtering on two columns (e.g., CS classes that are not
+full).
+
+---
+
+# Adding Indexes in Rails
+
+To add an index on the `name` field of the `Product` table:
+
+```ruby
+class AddNameIndexProducts < ActiveRecord::Migration
+  def change
+    add_index :products, :name
+  end
+end
+```
+
+---
+
+## Related: Foreign Keys
+
+In general, foreign keys should be indexed to improve query performance.
+```ruby
+class AddForeignKeyToOrders < ActiveRecord::Migration
+  def change
+    add_foreign_key :messages, :conversations
+    add_index :messages, :conversation_id
+  end
+end
+```
+or when creating the table:
+
+```ruby
+class CreateMessages < ActiveRecord::Migration
+  def change
+    create_table :messages do |t|
+      t.text :content
+      t.references :conversation, null: false, foreign_key: true
+    end
+  end
+end
+```
+
+---
+
+class: center inverse middle
+
+# Server-Side Caching
+
+---
+
+# Caching Motivation
+
+A single web server process repeatedly responds to HTTP requests.
+
+Responding to each request requires computation and I/O, both of which can be expensive.
+
+In practice, there may be significant similarity between HTTP responses.
+
+---
+# Caching HTTP Responses
+
+> Which parts of an HTTP response are similar?
+
+--
+* View fragments (header, footer, sidebar)
+
+--
+* Rarely modified ORM objects (user permissions, configuration)
+
+--
+* Expensive to compute data (GitHub commit diffs, LinkedIn suggestions)
+
+---
+
+# Storing Cached Results
+
+**Option 1**: In memory on the application server
+
+**Option 2**: On the file system
+
+**Option 3**: In memory on another machine (Memcached/Redis)
+
+---
+
+# Latency Numbers for Caching
+
+* **Storing in memory**: Random read `0.1μs`, Reading 1MB `4μs`
+
+* **Storing on SSD**: Random read `16μs`, Reading 1MB `62μs`
+
+* **Storing on magnetic disk**: Disk seek `3000μs`, Reading 1MB `947μs`
+
+* **Storing on remote machine**: Round trip within data center `500μs`
+
+---
+# Caching Location Trade-offs
+
+* **In memory**: Highest performance, lowest hit rate (cache per process)
+
+* **On SSD**: Lower performance, higher hit rate (cache per machine)
+
+* **On remote machine**: Lowest performance, highest hit rate (cache per cluster)
+
+---
+
+# Server-side Caching in Rails
+
+Rails provides excellent support for server-side caching:
+
+* **HTTP caching** (already covered)
+* **Fragment caching** (Used in .erb rendering, not applicable for JSON responses)
+* **Low level caching** (Most applicable for JSON responses)
+
+---
+
+# Fragment Caching in Rails
+
+.left-column30[
+We can cache each submission listing.
+
+Regardless of other changes, we can re-render submissions that haven't been updated.
+]
+.right-column70[
+![Submissions Index View](demo_submissions_index.png)
+]
+
+---
+
+# Submission Listing (with cache)
+
+```erb
+<% @submissions.each do |submission| %>
+  <% cache(cache_key_for_submission(submission)) do %>
+    <tr>
+      <td><%= submission.title %></td>
+      <td><%= submission.community.name %></td>
+      <td><%= submission.comments.size %> comments</td>
+    </tr>
+  <% end %>
+<% end %>
+```
+
+---
+
+# Choosing a Cache Key
+
+```ruby
+module SubmissionHelper
+  def cache_key_for_submission(sub)
+    "submission/#{sub.id}/#{sub.updated_at}/#{sub.comments.count}"
+  end
+end
+```
+
+Cache automatically invalidates when:
+* Submission is updated (`updated_at` changes)
+* Number of comments changes
+
+---
+
+# Low-level Rails Caching
+
+You can use the same built-in mechanisms to manually cache anything:
+
+```ruby
+class ConversationController < ApplicationController
+  def index
+    most_recent_conversation_updated_at = Conversation.where(user_id: user_id).maximum(:updated_at)
+    cache_key = "conversations/#{user_id}/#{most_recent_conversation_updated_at}"
+    @conversations = Rails.cache.fetch(cache_key, expires_in: 1.hour) do
+      Conversation.where(user_id: user_id).order(updated_at: :desc).map do |conversation|
+        {
+          id: conversation.id,
+          title: conversation.title,
+          updated_at: conversation.updated_at
+        }
+      end
+    end
+    render json: @conversations
+  end
+end
+```
+
+```ruby
+class LLMPromptCache
+  def self.fetch(prompt)
+    Rails.cache.fetch("llm_prompts/#{prompt}", expires_in: 24.hours) do
+      OpenAI.chat.completions.create(
+        model: "gpt-4o-mini",
+        messages: [{ role: "user", content: prompt }],
+        temperature: 0.7
+      )
+    end
+  end
+end
+```
+
+---
+
+class: center inverse middle
+
+# Separating Reads from Writes
+
+---
+
+# Database Operations
+
+![Graph of Database Reads and Writes](database_reads_writes.png)
+
+This graph shows significantly more _reads_ than _writes_. This may be the case
+for your application.
+
+???
+
+* More reads than writes
+
+---
+
+# Database Horizontal Scaling Problem
+
+![Database Horizontal Scaling Problem](database_horizontal_scaling_problem.png)
+
+Simple load balancing of writes doesn't work: multiple servers could have different views of data.
+
+---
+
+# Database Horizontal Scaling
+
+.left-column[
+In general, a relational database is hard to horizontally scale.
+
+However, when limited to a read-only copies, databases are very easy to
+horizontally scale.
+
+* Set up separate machines to act as __read replicas__
+
+* Whenever any transaction commits to the _primary_ database, send a copy to
+  each _replica_ and apply it
+]
+.right-column[![Database Primary Replica](database_master_replica.png)]
+
+???
+
+* Horizontal scaling is easy for read-only copies
+
+---
+
+# Database Replication
+
+.left-column40[![Database Primary Replica](database_master_replica.png)]
+.right-column60[
+The sending of data from the primary to its replicas (replication) can happen
+either synchronously or asynchronously.
+
+## Synchronous
+
+When a transaction is committed to mater, the primary sends the transaction to
+its replicas and waits until applied by all before completing.
+
+## Asynchronous
+
+When a transaction is committed to the primary, the primary sends the
+transaction to its replicas but does not wait to see if the transaction is
+applied.]
+
+???
+
+* Wait until all replicas have applied the transaction
+* Wait until some replicas have applied the transaction
+* Don't wait for any replicas to apply the transaction
+---
+
+# Database Replication Trade-offs
+
+.left-column[
+> What are the advantages of waiting until writes are applied to all replicas?
+]
+.right-column[![Database Primary Replica](database_master_replica.png)]
+
+---
+
+# Database Replication Trade-offs
+
+.left-column[
+> What are the advantages of waiting until writes are applied to all replicas?
+
+Consistency. Subsequent read requests will see changes.
+
+> What are the disadvantages of waiting until writes are applied to all
+replicas?
+]
+.right-column[![Database Primary Replica](database_master_replica.png)]
+
+
+---
+
+# Database Replication Trade-offs
+
+.left-column[
+> What are the advantages of waiting until writes are applied to all replicas?
+
+Consistency. Subsequent read requests will see changes.
+
+> What are the disadvantages of waiting until writes are applied to all
+replicas?
+
+Performance. There may be many read replicas to apply changes to.
+]
+.right-column[![Database Primary Replica](database_master_replica.png)]
+
+---
+
+# Database Replication Levels
+
+.left-column[![Database Primary Replica](database_master_replica.png)]
+.right-column[
+## Statement-level
+
+Similar to streaming the journal from the primary to its replicas.
+
+## Block-level
+
+Instead of sending the SQL statements to the replicas, send the consequences
+of those statements.
+
+> What are the advantages of each?
+]
+
+---
+
+# Database Statement-level Replication
+
+Statement-level is faster than block-level, with a catch.
+
+An SQL statement is generally more compact than its consequences.
+
+```sql
+UPDATE txns SET amount=5;
+```
+
+The above query acts on all rows which may require a lot of data to transmit
+the consequences.
+
+However, SQL statements must now be deterministic:
+
+```sql
+UPDATE txns SET amount=5, updated_at=NOW();
+```
+
+> What is the value of `NOW()`?
+
+Such values must be communicated from the primary to its replicas.
+
+---
+
+# MySQL Replication
+
+> MySQL replication by default is asynchronous. ... With asynchronous replication, if the source crashes, transactions that it has committed might not have been transmitted to any replica. Failover from source to replica in this case might result in failover to a server that is missing transactions relative to the source.
+
+> ... Fully synchronous replication means failover from the source to any replica is possible at any time. The drawback of fully synchronous replication is that there might be a lot of delay to complete a transaction.
+
+> Semisynchronous replication falls between asynchronous and fully synchronous replication. The source waits until at least one replica has received and logged the events (the required number of replicas is configurable), and then commits the transaction. The source does not wait for all replicas to acknowledge receipt, and it requires only an acknowledgement from the replicas, not that the events have been fully executed and committed on the replica side. Semisynchronous replication therefore guarantees that if the source crashes, all the transactions that it has committed have been transmitted to at least one replica.
+
+https://dev.mysql.com/doc/refman/8.4/en/replication-semisync.html
+
+
+???
+
+* What is the use case for replication
+Tradeoff between consistency and performance
+* High availability with zero data loss?
+  * Synchronous replication
+* High availability with some data loss?
+  * Asynchronous replication
+
+---
+
+# Rails Read Replica Support
+
+Rails 6+ has first-class support for read replicas now. "Automatic switching"
+must be explictly configured and enabled:
+
+> Automatic switching allows the application to switch from the primary to
+> replica or replica to primary based on the HTTP verb and whether there was a
+> recent write.
+
+--
+
+> If the application is receiving a POST, PUT, DELETE, or PATCH request the
+> application will automatically write to the primary. For the specified time
+> after the write the application will read from the primary. For a GET or HEAD
+> request the application will read from the replica unless there was a recent
+> write.
+
+--
+
+> Rails guarantees "read your own write" and will send your GET or HEAD request
+> to the primary if it's within the delay window. By default the delay is set
+> to 2 seconds. You should change this based on your database
+> infrastructure. Rails doesn't guarantee "read a recent write" for other users
+> within the delay window and will send GET and HEAD requests to the replicas
+> unless they wrote recently.
+
+---
+
+# Trade-offs of Read Replicas
+
+## Strengths
+
+For applications with a high read-to-write ratio:
+
+* the load on the primary database can be dramatically reduced.
+
+* read replicas can be horizontally scaled (even with a load balancer)
+
+--
+
+## Weaknesses
+
+Application developer needs to think about reads that affect writes vs. reads
+that do not affect writes as such dependent reads should occur in the same
+transaction as the write.
+
+---
+
+# MySQL Replication
+
+MySQL replication is **asynchronous by default**.
+
+**Replication lag risk**: If the primary crashes and you **failover to a replica**, transactions that were committed on the primary but not yet replicated will be missing from the replica (even though they were successfully committed).
+
+**Semi-synchronous replication** waits for confirmation that at least one replica has received the transaction before the primary acknowledges commit, reducing risk of data loss during failover at the cost of increased response time.
+
+---
+
+class: center inverse middle
+
+# Sharding
+
+---
+
+# Sharding: Idea
+
+Take a single database and __*split/partition/shard*__ it up into multiple smaller
+databases such that everything still works.
+
+* **Partitioning** is a more general term that can be used to describe any way of splitting data into smaller parts
+* Generally, you might **shard** a database into multiple databases each with the same schema
+* A table within a database (or shard) may by **partitioned** into multiple smaller tables
+
+
+--
+
+> How do we handle joins across partitioned data?
+
+---
+
+# Partitioning: Joins
+
+Any particular database join connects a small part of your database. However,
+transitively, database joins could connect everything together.
+
+## E.g. Class Project
+
+* Any user asking questions is only related to their own messages and conversations.
+
+* An expert profile is only related to its own user.
+
+* ExpertAssignments are only related to their own conversation and expert.
+
+* Transitively a user asking questions can be joined to the profile of experts who have answered their questions through ExpertAssignments.
+
+---
+
+# Partitioning: Separating Data
+
+.left-column40[
+Find a separation of your data that ideally produces unrelated (not joined
+across) _partitions_.
+
+Once separated, your application cannot utilize the database to join across
+partitions.
+
+If you need to perform operations across sharded data, you will need to do it
+at the application level.
+
+Consider the performance trade-offs. Could you partition another way?
+]
+.right-column60[
+![Sharding](sharding_app_server.png)
+]
+
+---
+
+# Partitioning: Similar Data
+
+Partitioning involves splitting data of the same type (e.g., the rows of the
+tables).
+
+For instance if we wanted to split our `Messages` table into two partitions, we
+could store messages belonging to half the conversations in _partition1_, and
+those belonging to the other half in _partition2_.
+
+--
+
+> What is not partitioning?
+
+--
+
+Separating tables into their own databases is not partitioning. While this approach
+may work for some applications, the ability to join across tables is lost.
+
+---
+
+# Finding the Data
+
+Assume we have partitioned the data for our application.
+
+> How can we find what partition our data is on?
+
+We need some sort of mapping to determine where to find that data.
+
+---
+
+# Finding the Partition
+
+## At the application server layer?
+
+> How would we implement this?
+
+## At the load balancer?
+
+> How would we implement this?
+
+## Across multiple load balancers?
+
+> How would we implement this?
+
+---
+
+# At the App Server
+
+.left-column40[
+Each application server contains a configuration that informs it of where each
+database is (IP address, DNS name) and how to map data to the database.
+
+The mapping can be arbitrarily complex.
+
+The mapping itself may even be stored in a database.
+]
+.right-column60[
+![App Server Sharding](sharding_app_server.png)
+]
+
+---
+
+# At the load balancer
+
+The load balancer could be configured to route requests to the app servers that
+are configured to _talk_ to the right database.
+
+Such mappings are limited by knowledge that the load balancer can inspect:
+
+* Resource URI
+* Headers
+* Request Payload
+
+.center[![Load Balancer Sharding](sharding_load_balancer.png)]
+
+---
+
+# Across Load Balancers
+
+.left-column40[
+Host names (DNS) can be configured to point to the correct load balancer for a
+given request.
+
+Examples:
+
+* en.wikipedia.org vs. es.wikipedia.org (language based sharding)
+
+* google.com vs. google.co.uk (location based sharding)
+
+* na6.salesforce.com vs. naX.salesforce.com (customer based sharding)
+
+__Note__: The above examples could involve only a single load balancer.
+]
+.right-column60[
+![Sharding Across Load Balancers](sharding_region.png)
+]
+
+
+---
+
+# Finding Data: Trade-offs
+
+The approaches we just described are vary from providing more flexibility to
+providing more scalability.
+
+* App Server (most flexible)
+
+* Load Balancer
+
+* DNS (most scalable)
+
+---
+
+# Partitioning and Growth
+
+Ideally the number of partitions increase as the usage of your application
+increases.
+
+Example:
+
+If each customer's data can be partitioned from the others, then doubling the
+number of customers doubles the number of partitions.
+
+---
+
+# Email Example
+
+The data that represent one user's email conceptually requires no relation to
+the data representing other users' email.
+
+When a request arrives associated with a particular user, the server applies
+some mapping function to determine which database the user's data are located
+in.
+
+Should the email provider need to take down a database, they can relocate the
+partitioned data to another database, and update the mapping with little
+disruption.
+
+---
+
+# Class Project Example
+
+* Users can create and view conversations.
+
+* Users can write messages in these conversations.
+
+* An expert can be assigned to a conversation to answer the question.
+
+---
+
+# Partitioning Demo App
+
+## By Question Asker User?
+
+**Easy For** Viewing the users initiated conversations and their messages.
+
+**Harder For** Viewing all messages in a conversation, viewing conversations from other users in expert mode, ...
+
+--
+
+## By Conversation?
+
+**Easy For** Viewing a single conversation and its messages.
+
+**Harder For** Viewing a list of conversations, viewing all messages sent by a user to any conversation
+
+--
+
+## By Expert?
+
+**Easy For** Viewing a single expert and their assigned conversations.
+
+**Harder For** Re-assigning a conversation to a different expert, Viewing all conversations initiated as a question asker
+
+---
+
+# User Partitioning
+
+> How could we make user based paritioning work?
+
+What if we partiionted the data by the user initiating the conversation?
+We can use information in the url with any of the partitioning approaches.
+
+* http://zwalker.classproject.com (user sub-domain)
+
+* http://classproject.com/zwalker (user path)
+
+Either the application server connects to the right database for the `zwalker`
+community, or DNS/loadbalancer directs the request to an application server
+that always talks to the `zwalker` containing database.
+
+---
+
+# User Partitioning Success
+
+.left-column20[
+![Sharding Asker Conversation List View](asker_conversation_list_view.png)
+]
+.right-column[
+![Sharding Asker Conversation View](asker_conversation_view.png)
+]
+.center.clear[
+![Sharding Expert Conversation View](expert_conversation_view.png)
+]
+
+---
+
+# User Partitioning Difficulty
+
+* The expert list of conversations waiting to be claimed
+
+> What can we do to resolve these issues?
+
+.left-column40[
+![Sharding Expert Conversation List View](expert_conversation_list_view.png)
+]
+---
+
+# Solving Partitioning Problems
+
+* Modify the user interface such that the difficult to partition page does not
+  exist.
+
+    > Can you get by with only providing the list of claimable conversations on the users shard?
+
+* Alternatively, periodically run an expensive background job to keep a
+  semi-up-to-date global conversation list aggregating results from across
+  databases.
+
+---
+
+# Partitioning in Rails
+
+Rails 6+ has built-in support for partitioning:
+https://guides.rubyonrails.org/active_record_multiple_databases.html
+
+```ruby
+def index
+    ...
+    ActiveRecord::Base.connected_to(database: :customer1)
+        ...
+    end
+end
+```
+
+---
+
+# Sharding Trade-offs - Summary
+
+## Strengths
+
+* If you genuinely have zero relations across partitions, this scaling path is very
+  powerful.
+
+* Sharding works best when shards grow with usage.
+
+--
+
+## Weaknesses
+
+* Sharding can inhibit feature development. That is your application may be
+  perfectly partitionable today, but future features may change that.
+
+* Not easy to retroactively add sharding to an existing application.
+
+* Transactions across shards do not exist.
+
+* Consistent DB snapshots across shards do not exist.
+
+---
+class: center inverse middle
+
+# RDBMS vs NoSQL
+
+---
+
+# When RDBMS Techniques Aren't Enough
+
+We've looked at several techniques for scaling RDBMSes:
+
+* Distinguishing Reads from Writes (Read Replicas)
+* Server-Side Caching
+* Query Optimization and Indexes
+* Sharding
+
+> What if these techniques aren't sufficient?
+
+--
+
+When relational databases fail to scale to our needs, we need to consider non-relational solutions.
+
+---
+# NoSQL Overview
+
+Non-relational databases are often referred to as **NoSQL** databases.
+
+This is an umbrella term for many types:
+* **Key-value stores** (Redis)
+* **Column-oriented data stores** (Cassandra)
+* **Document-oriented stores** (MongoDB)
+* **Graph databases**
+
+---
+# NoSQL: Horizontal Scaling
+
+.center[
+![Database Symbol](database_symbol.svg)
+![Database Symbol](database_symbol.svg)
+![Database Symbol](database_symbol.svg)
+]
+
+Most NoSQL solutions are good at horizontal scaling.
+
+**In exchange for better horizontal scaling, NoSQL databases provide applications fewer guarantees.**
+
+---
+# CAP Theorem
+
+.center[![CAP](CAP.png)]
+
+**Theorem**: You can have at most two of these properties for any shared-data system:
+
+* **Consistency**: All nodes see same data simultaneously
+* **Availability**: System remains operational
+* **Partition Tolerance**: System continues despite network failures
+
+---
+# CAP Choices
+
+**CP (Consistent + Partition Tolerant)**: Always consistent, can handle partitions, not always available
+  * Example: Would not allow writes during partition
+
+**AP (Available + Partition Tolerant)**: Always accessible, can handle partitions, not always consistent
+  * Example: Would accept conflicting writes
+
+**CA (Consistent + Available)**: Always accessible, always consistent, assumes no partitions (very limiting)
+
+---
+# Partition Tolerance Required
+
+Assuming no partitions is very limiting:
+* For high availability and latency, multiple data centers are desirable
+* Even within a single datacenter, partitions occur
+
+**As a result, scalable Internet services require partition tolerance, and thus choose between consistency or availability.**
+
+---
+# ACID vs. BASE
+
+The BASE acronym describes NoSQL solutions that tradeoff Availability and Consistency.
+
+| ACID        | BaSE                  |
+|:------------|:----------------------|
+| Atomicity   | Basically Available |
+| Consistency | Soft State |
+| Isolation   | Eventually Consistent |
+| Durability  | |
+
+---
+# SQL vs NoSQL Trade-offs
+
+## Relational Databases (SQL)
+
+* General-purpose persistence layer
+* Offer more features (ACID, joins, transactions)
+* Have limited ability to scale horizontally
+* Best when: You need ACID guarantees, complex queries, relationships
+
+## Non-relational Databases (NoSQL)
+
+* Often more specialized
+* Require more from the application layer
+* Better at scaling horizontally
+* Best when: High write throughput needed, simple access patterns, eventual consistency OK
+
+---
+# When to Use What?
+
+**Use RDBMS when:**
+* You need ACID properties
+* Complex queries with joins
+* Strong consistency requirements
+* Your scaling needs fit within RDBMS capabilities
+
+**Use NoSQL when:**
+* Write throughput exceeds RDBMS capabilities
+* Simple access patterns (key-value lookups)
+* Eventual consistency is acceptable
+* Horizontal scaling is the primary concern
+
+---
+# Summary
+
+1. **Performance Optimizations**: Reduce queries, add indexes, use EXPLAIN
+2. **Server-Side Caching**: Reduce database load with Memcached/Redis
+3. **Read Replicas**: Scale reads horizontally for read-heavy applications
+4. **Sharding**: Partition data when you can cleanly separate it
+5. **RDBMS vs NoSQL**: Choose based on consistency needs vs scaling requirements
+
+There is no silver bullet. Often you'll combine multiple techniques.
+
+---
+
+class: center middle
+
+# Questions?
+
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"
+            type="text/javascript"></script>
+    <script type="text/javascript">
+      var hljs = remark.highlighter.engine;
+      var slideshow = remark.create({
+          highlightLanguage: 'ruby',
+          highlightLines: true,
+          hightlightSpans: true,
+          highlightStyle: 'monokai'
+        }) ;
+    </script>
+  </body>
+</html>
