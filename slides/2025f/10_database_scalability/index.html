@@ -1313,6 +1313,194 @@ end
 * Consistent DB snapshots across shards do not exist.
 
 ---
+
+class: center inverse middle
+
+# Service-Oriented Architecture (SOA)
+
+---
+
+# Service-Oriented Architecture (SOA)
+
+_Partitioning_ splits data of the same type into separate groups.
+
+_SOA_ does something different. It partitions both **data and code** based on **type and function**.
+
+Like with partitioning, no joins can automatically be performed across these partitions.
+
+---
+
+# SOA Stack
+
+The primary concept behind SOA is having many focused mini-applications (microservices).
+
+Each of these focused mini-applications is called a **service**.
+
+When a front-end application server needs data, instead of speaking to a database, it requests data from the appropriate service.
+
+.center[![Service Oriented Architecture](soa_stack.png)]
+
+---
+
+# SOA Functions
+
+Each service is broken out by logical function. Examples:
+
+* **Users service** - handles authentication and authorization
+* **Messaging service** - handles sending messages and notifications
+* **Conversations service** - manages chat conversations
+* **Experts service** - handles expert claiming
+
+.center[![Service Oriented Architecture](soa_stack.png)]
+
+---
+
+# SOA vs Sharding
+
+**Sharding (Partitioning):**
+* Splits data of the same schema by some criteria
+* Example: All user data, split by customer_id
+* Same code, different data
+
+**SOA (Microservices):**
+* Splits application by function
+* Example: Users service, Billing service, Messaging service
+* Different code, different data
+
+---
+
+# SOA Communications
+
+With _sharding_, the application server often only talks to a single partition per request.
+
+With _SOA_, the front-end application server may communicate with **many distinct services**, and some of those services may talk to other services.
+
+.center[![Service Oriented Architecture](soa_stack.png)]
+
+---
+
+# Benefits of SOA
+
+With SOA, the deployment of services is **decoupled**. This means:
+
+* Each service can be **updated independently**
+* Each service can be **scaled independently**
+* **Isolated outages** (billing is down for 5 minutes, but users can still log in)
+* Services lend themselves to **single development teams**
+* Services can be written in **different languages/frameworks**
+
+.center[![Service Oriented Architecture](soa_stack.png)]
+
+---
+
+# SOA and the Help Desk Application
+
+> How could we divide the Help Desk application into services?
+
+**Monolithic approach:**
+* Single Rails app handles: auth, conversations, messages, experts
+
+**SOA approach:**
+1. **Auth Service** - handles user login, registration, JWT tokens
+2. **Conversations Service** - manages conversation lifecycle
+3. **Messages Service** - handles message sending and storage
+4. **Expert Service** - handles expert claiming, availability
+
+---
+
+# Help Desk: Before SOA
+
+```ruby
+class MessagesController < ApplicationController
+  def create
+    # Validate user authentication
+    user = authenticate_user!
+    
+    # Check conversation exists and user has access
+    conversation = Conversation.find(params[:conversation_id])
+    authorize! conversation, :write
+    
+    # Create message
+    message = Message.create!(
+      conversation: conversation,
+      sender: user,
+      content: params[:content]
+    )
+    
+    # Update conversation timestamp
+    conversation.touch
+    
+    render json: message
+  end
+end
+```
+
+**Everything in one controller!**
+
+---
+
+# Help Desk: After SOA
+
+```ruby
+class MessagesController < ApplicationController
+  def create
+    # Authenticate via Auth Service
+    user = AuthService.validate_token(request.headers['Authorization'])
+    
+    # Verify conversation via Conversations Service
+    conversation = ConversationsService.get(user.id, params[:conversation_id])
+    
+    # Send message via Messages Service
+    message = MessagesService.create(
+      conversation_id: params[:conversation_id],
+      sender_id: user.id,
+      content: params[:content]
+    )
+    
+    render json: message
+  end
+end
+```
+
+**Each service handles its own concerns!**
+
+---
+
+# Modes of Dataflow Between Services
+
+Services can communicate in several ways:
+
+**1. Via Databases**
+* Services share a database (tightly coupled)
+
+**2. Via Synchronous Service Calls**
+* REST, GraphQL, gRPC, Thrift
+* Request → wait → response
+
+**3. Via Asynchronous Message Passing**
+* Message brokers: RabbitMQ, ActiveMQ, Apache Kafka, Amazon SQS, Google Pub/Sub
+* Send message → don't wait → process later
+
+---
+
+# SOA Trade-offs
+
+## Strengths
+
+* Small, encapsulated code-bases
+* Scales well as application size scales
+* Scales well as the number of teams scale
+* Independent deployment and scaling
+
+## Weaknesses
+
+* Transactions across services do not exist
+* Consistent DB snapshots across services do not exist
+* Application logic required to join data
+* Some service may grow disproportionately to others
+  * Sharding/partitioning might still be necessary
+
+---
 class: center inverse middle
 
 # RDBMS vs NoSQL
@@ -1440,7 +1628,8 @@ The BASE acronym describes NoSQL solutions that tradeoff Availability and Consis
 2. **Server-Side Caching**: Reduce database load with Memcached/Redis
 3. **Read Replicas**: Scale reads horizontally for read-heavy applications
 4. **Sharding**: Partition data when you can cleanly separate it
-5. **RDBMS vs NoSQL**: Choose based on consistency needs vs scaling requirements
+5. **Service-Oriented Architecture (SOA)**: Decouple application into services
+6. **RDBMS vs NoSQL**: Choose based on consistency needs vs scaling requirements
 
 There is no silver bullet. Often you'll combine multiple techniques.
 
