@@ -164,9 +164,7 @@ Note: This book is only useful once we get to the primary project.</p>
 
 <h2 id="project-submission">Project Submission</h2>
 
-<ul>
-  <li>Submission link will be posted at start of quarter</li>
-</ul>
+<p><a href="https://forms.gle/hicZ2SNaVhb3ApXQ7">https://forms.gle/hicZ2SNaVhb3ApXQ7</a></p>
 
 <h2 id="whats-included">What’s Included</h2>
 
@@ -213,10 +211,7 @@ Note: This book is only useful once we get to the primary project.</p>
 gem <span class="nb">install </span>rails
    
 <span class="c"># Create new Rails API application</span>
-rails new help_desk_backend <span class="nt">--api</span> <span class="nt">--skip-kamal</span> <span class="nt">--skip-thruster</span>  <span class="nt">--database</span><span class="o">=</span>mysql
-   
-<span class="c"># Navigate to the app directory</span>
-<span class="nb">cd </span>help_desk_backend
+rails new <span class="nb">.</span> <span class="nt">--name</span> help_desk_backend <span class="nt">--api</span> <span class="nt">--skip-kamal</span> <span class="nt">--skip-thruster</span>  <span class="nt">--database</span><span class="o">=</span>mysql
    
 <span class="c"># Add required gems to Gemfile</span>
 gem <span class="s2">"rack-cors"</span> <span class="c"># For handling Cross-Origin Resource Sharing (CORS) requests from the frontend</span>
