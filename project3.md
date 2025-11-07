@@ -84,10 +84,7 @@ Download the starter project: [project3.zip](/project3.zip)
    gem install rails
    
    # Create new Rails API application
-   rails new help_desk_backend --api --skip-kamal --skip-thruster  --database=mysql
-   
-   # Navigate to the app directory
-   cd help_desk_backend
+   rails new . --name help_desk_backend --api --skip-kamal --skip-thruster  --database=mysql
    
    # Add required gems to Gemfile
    gem "rack-cors" # For handling Cross-Origin Resource Sharing (CORS) requests from the frontend
