@@ -79,11 +79,19 @@ Wednesday, October 29 10am PT
 Monday, November 10 10am PT
 {% endif %}
 
-{% if site.navigable_pages.primary_project %}
+{% if site.navigable_pages.project4 %}
 
-### [Final Project Team Message](/project) due before
+### Project 4 and 5 Team Message due before
 
-Monday, November 3 2pm PT
+Monday, November 17 10am PT
+
+### [Project 4](/project4/) due before
+
+Monday, November 24 10am PT
+
+{% endif %}
+
+{% if site.navigable_pages.project5 %}
 
 ### [Project](/project/#proposal) initial peer score message due before
 

@@ -118,7 +118,28 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 </div>
 
+<div class="week">
+
+## Week 7 (November 10)
+- Intro to Projects 4 and 5
+- Load Testing with Locust
+- Deployment to Elastic Beanstalk
+
+### Tasks
+
+- Form a team for Projects 4 and 5
+- Begin Project 4
+
+</div>
+
 <!-- 
+
+- Server-Side Caching [slides](/slides/2024f/09_server_caching/)
+- Serverless Architecture
+
+- Deep Dive: Load Testing with Tsung [slides](/slides/2024f/10_tsung/index.html)
+- Non-Relational Data Stores [slides](/slides/2024f/13_nosql/index.html)
+
 - Read [How Discord Stores Billions of Messages
   ](https://discord.com/blog/how-discord-stores-billions-of-messages)
 - Read [CAP 12 years
