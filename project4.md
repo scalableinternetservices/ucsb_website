@@ -214,3 +214,188 @@ class IdleUser(HttpUser, ChatBackend):
         self.last_check_time = datetime.utcnow()
 
 ```
+
+## Deploying to Elastic Beanstalk
+
+At this point you should have a Rails project that you can successfully run in
+development locally using Docker. In the following steps we'll make the
+necessary adjustments to configure the application for Amazon's Elastic
+Beanstalk, and then deploy it.
+
+### Configure the production database
+
+Update the lines in the `production` section of `config/database.yml` to include:
+
+```yaml
+database: <%= ENV['RDS_DB_NAME'] %>
+host: <%= ENV['RDS_HOSTNAME'] %>
+password: <%= ENV['RDS_PASSWORD'] %>
+port: <%= ENV['RDS_PORT'] %>
+username: <%= ENV['RDS_USERNAME'] %>
+```
+
+### Add ebextensions
+
+Create the directory and file
+
+```sh
+mkdir .ebextensions
+touch .ebextensions/01_environment_variables.config
+```
+
+Copy the following contents into `.ebextensions/01_environment_variables.config`:
+```yaml
+option_settings:
+  aws:elasticbeanstalk:application:environment:
+    # Make this the domain you want to server your application front end from.  This examples uses my github pages site
+    # This isn't neccessary if you only want to run the frontend at localhost:5173
+    FRONTEND_URL: "https://zwalker.github.io" 
+    RAILS_ENV: "production"
+    RAILS_SERVE_STATIC_FILES: "true"
+```
+
+### Configure the Profile
+
+Inform elasticbeanstalk to use your chosen version of puma.
+
+```sh
+touch Procfile
+```
+
+Copy the following contents in `Procfile`:
+
+```yaml
+web: bundle exec puma -C /opt/elasticbeanstalk/config/private/pumaconf.rb
+```
+
+### Commit and push the changes
+
+```sh
+git add .
+git commit -m "Prepare the application to deploy to Amazon's Elastic Beanstalk"
+git push
+```
+
+### SSH to ec2.cs291.com and clone your repository
+
+In order to most easily create an elastic beanstalk deployment, we need to SSH
+into `ec2.cs291.com`. You should have received the file `TEAMNAME.pem` via your
+UCSB Google Drive. Assuming that file is in your downloads folder run the
+following:
+
+```sh
+ssh -i ~/Downloads/TEAMNAME.pem TEAMNAME@ec2.cs291.com
+```
+
+Once logged in, setup your ssh keys to access GitHub repo.
+Generate the key pair:
+
+```sh
+ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+
+Then upload the key pair with read-only permissions to GitHub.
+
+For more info see [Adding a new SSH key to your GitHub account
+](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
+
+After uploading your public key to GitHub, clone your repository using SSH
+(this will be a read-only version of the project):
+
+```sh
+git clone git@github.com:scalableinternetservices/TEAMNAME.git
+```
+
+### Configure Elastic Beanstalk
+
+For each copy of your repository, you'll need to do the following only once:
+
+```sh
+eb init --keyname $(whoami) --platform "64bit Amazon Linux 2023 v4.7.1 running Ruby 3.4" --region us-west-2 TEAMNAME
+```
+
+### Create a deployment using the minimum necessary resources
+
+```sh
+eb create --envvars SECRET_KEY_BASE=BADSECRET \
+  -db.engine mysql -db.i db.t3.micro -db.user u \
+  -i t3.micro --single YOURNAME
+```
+
+Enter a database password at the prompt (twice) and then take a break as
+creating a deployment will take about ten minutes (the database is slow to
+create).
+
+### Verify the deployment
+
+Run `eb status` to see the state of your deployment. The output should look
+something like the following:
+
+```yaml
+Environment details for: YOURNAME
+  Application name: TEAMNAME
+  Region: us-west-2
+  Deployed Version: app-f1ab-221021_194424258658
+  Environment ID: e-7fm2cwv55t
+  Platform: arn:aws:elasticbeanstalk:us-west-2::platform/Ruby 3.0 running on 64bit Amazon Linux 2/3.5.0
+  Tier: WebServer-Standard-1.0
+  CNAME: TEAMNAME.eba-6k3duymc.us-west-2.elasticbeanstalk.com
+  Updated: 2022-10-21 19:45:40.487000+00:00
+  Status: Ready
+  Health: Green
+```
+
+The two most important parts are that `Status` is `Ready`, and `Health` is
+`Green`. If not consult the logs `eb logs`.
+
+To test if the deployment is successful copy the CNAME, and paste it into your
+browser:
+[http://YOURNAME.yxhf954iam.us-west-2.elasticbeanstalk.com](http://YOURNAME.yxhf954iam.us-west-2.elasticbeanstalk.com)
+
+If you get a page stating `The page you were looking for doesn't exist.`, that
+likely means things are working, and you have yet to set up a `root_route` on
+your site (the "Yay! You’re on Rails!" doesn't show up in `production` mode).
+
+---
+
+## Updating the application
+
+After making changes and verifying they work with locally, push your changes to
+GitHub, pull them on `ec2.cs291.com` and then update your deployment via:
+
+```sh
+eb deploy
+```
+
+**Note**: Only commited changes are pushed on deployment, so ensure `git
+status` is clean. (You can run `eb deploy --staged` to include staged files,
+but it's preferrable to deploy code that has been pushed to GitHub.
+
+---
+
+## Working with deployments
+
+## Viewing Logs
+
+To view the logs run:
+
+```sh
+eb logs | less -R
+```
+
+## SSH into an application server
+
+```sh
+eb ssh -i "ssh -i ~/$(whoami).pem"
+```
+
+### Cleaning Up
+
+When you know you're done, clean up your deployment:
+
+```sh
+eb terminate
+```
+
+**Note**: Deployments will automatically be cleaned up ~110 minutes after their
+last update.
