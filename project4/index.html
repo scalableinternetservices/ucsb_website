@@ -377,6 +377,175 @@ class IdleUser(HttpUser, ChatBackend):
 
 </code></pre></div></div>
 
+<h2 id="deploying-to-elastic-beanstalk">Deploying to Elastic Beanstalk</h2>
+
+<p>At this point you should have a Rails project that you can successfully run in
+development locally using Docker. In the following steps we’ll make the
+necessary adjustments to configure the application for Amazon’s Elastic
+Beanstalk, and then deploy it.</p>
+
+<h3 id="configure-the-production-database">Configure the production database</h3>
+
+<p>Update the lines in the <code class="language-plaintext highlighter-rouge">production</code> section of <code class="language-plaintext highlighter-rouge">config/database.yml</code> to include:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">database</span><span class="pi">:</span> <span class="s">&lt;%= ENV['RDS_DB_NAME'] %&gt;</span>
+<span class="na">host</span><span class="pi">:</span> <span class="s">&lt;%= ENV['RDS_HOSTNAME'] %&gt;</span>
+<span class="na">password</span><span class="pi">:</span> <span class="s">&lt;%= ENV['RDS_PASSWORD'] %&gt;</span>
+<span class="na">port</span><span class="pi">:</span> <span class="s">&lt;%= ENV['RDS_PORT'] %&gt;</span>
+<span class="na">username</span><span class="pi">:</span> <span class="s">&lt;%= ENV['RDS_USERNAME'] %&gt;</span>
+</code></pre></div></div>
+
+<h3 id="add-ebextensions">Add ebextensions</h3>
+
+<p>Create the directory and file</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> .ebextensions
+<span class="nb">touch</span> .ebextensions/01_environment_variables.config
+</code></pre></div></div>
+
+<p>Copy the following contents into <code class="language-plaintext highlighter-rouge">.ebextensions/01_environment_variables.config</code>:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">option_settings</span><span class="pi">:</span>
+  <span class="na">aws:elasticbeanstalk:application:environment</span><span class="pi">:</span>
+    <span class="c1"># Make this the domain you want to server your application front end from.  This examples uses my github pages site</span>
+    <span class="c1"># This isn't neccessary if you only want to run the frontend at localhost:5173</span>
+    <span class="na">FRONTEND_URL</span><span class="pi">:</span> <span class="s2">"</span><span class="s">https://zwalker.github.io"</span> 
+    <span class="na">RAILS_ENV</span><span class="pi">:</span> <span class="s2">"</span><span class="s">production"</span>
+    <span class="na">RAILS_SERVE_STATIC_FILES</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
+</code></pre></div></div>
+
+<h3 id="configure-the-profile">Configure the Profile</h3>
+
+<p>Inform elasticbeanstalk to use your chosen version of puma.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">touch </span>Procfile
+</code></pre></div></div>
+
+<p>Copy the following contents in <code class="language-plaintext highlighter-rouge">Procfile</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">web</span><span class="pi">:</span> <span class="s">bundle exec puma -C /opt/elasticbeanstalk/config/private/pumaconf.rb</span>
+</code></pre></div></div>
+
+<h3 id="commit-and-push-the-changes">Commit and push the changes</h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add <span class="nb">.</span>
+git commit <span class="nt">-m</span> <span class="s2">"Prepare the application to deploy to Amazon's Elastic Beanstalk"</span>
+git push
+</code></pre></div></div>
+
+<h3 id="ssh-to-ec2cs291com-and-clone-your-repository">SSH to ec2.cs291.com and clone your repository</h3>
+
+<p>In order to most easily create an elastic beanstalk deployment, we need to SSH
+into <code class="language-plaintext highlighter-rouge">ec2.cs291.com</code>. You should have received the file <code class="language-plaintext highlighter-rouge">TEAMNAME.pem</code> via your
+UCSB Google Drive. Assuming that file is in your downloads folder run the
+following:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh <span class="nt">-i</span> ~/Downloads/TEAMNAME.pem TEAMNAME@ec2.cs291.com
+</code></pre></div></div>
+
+<p>Once logged in, setup your ssh keys to access GitHub repo.
+Generate the key pair:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh-keygen <span class="nt">-t</span> ed25519 <span class="nt">-C</span> <span class="s2">"your_email@example.com"</span>
+</code></pre></div></div>
+
+<p>Then upload the key pair with read-only permissions to GitHub.</p>
+
+<p>For more info see <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account">Adding a new SSH key to your GitHub account
+</a></p>
+
+<p>After uploading your public key to GitHub, clone your repository using SSH
+(this will be a read-only version of the project):</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git@github.com:scalableinternetservices/TEAMNAME.git
+</code></pre></div></div>
+
+<h3 id="configure-elastic-beanstalk">Configure Elastic Beanstalk</h3>
+
+<p>For each copy of your repository, you’ll need to do the following only once:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eb init <span class="nt">--keyname</span> <span class="si">$(</span><span class="nb">whoami</span><span class="si">)</span> <span class="nt">--platform</span> <span class="s2">"64bit Amazon Linux 2023 v4.7.1 running Ruby 3.4"</span> <span class="nt">--region</span> us-west-2 TEAMNAME
+</code></pre></div></div>
+
+<h3 id="create-a-deployment-using-the-minimum-necessary-resources">Create a deployment using the minimum necessary resources</h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eb create <span class="nt">--envvars</span> <span class="nv">SECRET_KEY_BASE</span><span class="o">=</span>BADSECRET <span class="se">\</span>
+  <span class="nt">-db</span>.engine mysql <span class="nt">-db</span>.i db.t3.micro <span class="nt">-db</span>.user u <span class="se">\</span>
+  <span class="nt">-i</span> t3.micro <span class="nt">--single</span> YOURNAME
+</code></pre></div></div>
+
+<p>Enter a database password at the prompt (twice) and then take a break as
+creating a deployment will take about ten minutes (the database is slow to
+create).</p>
+
+<h3 id="verify-the-deployment">Verify the deployment</h3>
+
+<p>Run <code class="language-plaintext highlighter-rouge">eb status</code> to see the state of your deployment. The output should look
+something like the following:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">Environment details for</span><span class="pi">:</span> <span class="s">YOURNAME</span>
+  <span class="s">Application name</span><span class="err">:</span> <span class="s">TEAMNAME</span>
+  <span class="s">Region</span><span class="err">:</span> <span class="s">us-west-2</span>
+  <span class="s">Deployed Version</span><span class="err">:</span> <span class="s">app-f1ab-221021_194424258658</span>
+  <span class="s">Environment ID</span><span class="err">:</span> <span class="s">e-7fm2cwv55t</span>
+  <span class="s">Platform</span><span class="err">:</span> <span class="s">arn:aws:elasticbeanstalk:us-west-2::platform/Ruby 3.0 running on 64bit Amazon Linux 2/3.5.0</span>
+  <span class="s">Tier</span><span class="err">:</span> <span class="s">WebServer-Standard-1.0</span>
+  <span class="s">CNAME</span><span class="err">:</span> <span class="s">TEAMNAME.eba-6k3duymc.us-west-2.elasticbeanstalk.com</span>
+  <span class="s">Updated</span><span class="err">:</span> <span class="s">2022-10-21 19:45:40.487000+00:00</span>
+  <span class="s">Status</span><span class="err">:</span> <span class="s">Ready</span>
+  <span class="s">Health</span><span class="err">:</span> <span class="s">Green</span>
+</code></pre></div></div>
+
+<p>The two most important parts are that <code class="language-plaintext highlighter-rouge">Status</code> is <code class="language-plaintext highlighter-rouge">Ready</code>, and <code class="language-plaintext highlighter-rouge">Health</code> is
+<code class="language-plaintext highlighter-rouge">Green</code>. If not consult the logs <code class="language-plaintext highlighter-rouge">eb logs</code>.</p>
+
+<p>To test if the deployment is successful copy the CNAME, and paste it into your
+browser:
+<a href="http://YOURNAME.yxhf954iam.us-west-2.elasticbeanstalk.com">http://YOURNAME.yxhf954iam.us-west-2.elasticbeanstalk.com</a></p>
+
+<p>If you get a page stating <code class="language-plaintext highlighter-rouge">The page you were looking for doesn't exist.</code>, that
+likely means things are working, and you have yet to set up a <code class="language-plaintext highlighter-rouge">root_route</code> on
+your site (the “Yay! You’re on Rails!” doesn’t show up in <code class="language-plaintext highlighter-rouge">production</code> mode).</p>
+
+<hr />
+
+<h2 id="updating-the-application">Updating the application</h2>
+
+<p>After making changes and verifying they work with locally, push your changes to
+GitHub, pull them on <code class="language-plaintext highlighter-rouge">ec2.cs291.com</code> and then update your deployment via:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eb deploy
+</code></pre></div></div>
+
+<p><strong>Note</strong>: Only commited changes are pushed on deployment, so ensure <code class="language-plaintext highlighter-rouge">git
+status</code> is clean. (You can run <code class="language-plaintext highlighter-rouge">eb deploy --staged</code> to include staged files,
+but it’s preferrable to deploy code that has been pushed to GitHub.</p>
+
+<hr />
+
+<h2 id="working-with-deployments">Working with deployments</h2>
+
+<h2 id="viewing-logs">Viewing Logs</h2>
+
+<p>To view the logs run:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eb logs | less <span class="nt">-R</span>
+</code></pre></div></div>
+
+<h2 id="ssh-into-an-application-server">SSH into an application server</h2>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eb ssh <span class="nt">-i</span> <span class="s2">"ssh -i ~/</span><span class="si">$(</span><span class="nb">whoami</span><span class="si">)</span><span class="s2">.pem"</span>
+</code></pre></div></div>
+
+<h3 id="cleaning-up">Cleaning Up</h3>
+
+<p>When you know you’re done, clean up your deployment:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eb terminate
+</code></pre></div></div>
+
+<p><strong>Note</strong>: Deployments will automatically be cleaned up ~110 minutes after their
+last update.</p>
+
         </div>
       </div>
     </div>
