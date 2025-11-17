@@ -132,6 +132,20 @@ The following schedule is subject to change, and many slide links are not yet ac
 
 </div>
 
+<div class="week">
+
+## Week 8 (November 17)
+- Intro to Projects 5
+- Message Queues
+- Guest Lecture w/ Matt Schofield
+
+### Tasks
+
+- Complete Project 4
+- Begin Project 5
+
+</div>
+
 <!-- 
 
 - Server-Side Caching [slides](/slides/2024f/09_server_caching/)
