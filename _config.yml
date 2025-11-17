@@ -33,7 +33,7 @@ navigable_pages:
   project2: true
   project3: true
   project4: true
-  project5: false
+  project5: true
 
 kramdown:
   parse_block_html: true

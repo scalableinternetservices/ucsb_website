@@ -93,25 +93,18 @@ Monday, November 24 10am PT
 
 {% if site.navigable_pages.project5 %}
 
-### [Project](/project/#proposal) initial peer score message due before
+### [Project 5](/project5) intermediate peer feedback score due before
 
-Friday, November 21 2pm PT
+Monday, December 1st 10am PT
 
-### [Project](/project/#report) report draft for feedback due before
-
-Friday, November 28 2pm PT
-
-### [Project](/project/#proposal) final peer score message due before
+### [Project 5](/project5) report due before
 
 Friday, December 12 2pm PT
 
-### [Project](/project/#report) report due before
+### [Project 5](/project) final peer score message due before
 
-Friday, December 12 2pm PT
+Friday, December 12 5pm PT
 
-### [Project](/project/#video) video due before
-
-Friday, December 12 2pm PT
 {% endif %}
 
 ## Class Resources
