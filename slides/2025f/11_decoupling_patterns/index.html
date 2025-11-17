@@ -1,0 +1,392 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Decoupling Patterns</title>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 2.5em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      blockquote {
+        border-left: 0.3em solid rgba(0,0,0,0.5);
+        padding: 0 15px;
+        font-style: italic;
+      }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      img {
+        max-height: 100%;
+        max-width: 100%;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .clear { clear: both; }
+      #slideshow .slide .content code { font-size: 0.8em; }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 1em;
+      }
+      .background-blue {
+        background-color: deepskyblue;
+      }
+      .background-green {
+        background-color: springgreen;
+      }
+      .background-pink {
+        background-color: deeppink;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        width: 49%;
+        float: left;
+      }
+      .right-column {
+        width: 49%;
+        float: right;
+      }
+      .left-column20 {
+        width: 20%;
+        float: left;
+      }
+      .right-column80 {
+        width: 79%;
+        float: right;
+      }
+      .left-column30 {
+        width: 30%;
+        float: left;
+      }
+      .right-column70 {
+        width: 69%;
+        float: right;
+      }
+      .left-column40 {
+        width: 40%;
+        float: left;
+      }
+      .right-column60 {
+        width: 59%;
+        float: right;
+      }
+
+      /* Table layout */
+      table {
+        background: #f5f5f5;
+        margin: 30px auto;
+        text-align: left;
+        width: 100%;
+      }
+      th {
+        background: linear-gradient(#777, #444);
+        color: #fff;
+        font-weight: bold;
+        padding: 10px 15px;
+      }
+      td {
+        border-right: 1px solid #fff;
+        border-left: 1px solid #e8e8e8;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #e8e8e8;
+        padding: 10px 15px;
+      }
+
+    </style>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle
+
+# Decoupling Patterns
+
+## CS291A: Scalable Internet Services
+
+
+---
+
+class: center inverse middle
+
+# Message Queues: Decoupling Request Load from Processing
+
+---
+
+# The Problem:
+
+Your application is working but sees occasional spikes in traffic.
+Sometimes these spikes overwhelm the system and result in errors, lost requests, or slow response times.
+
+You decide that some features of your application require requests to be accepted quickly,
+but the processing of requests can be done at a slower pace without affecting the user experience.
+
+> How can we decouple the acceptance of requests from the processing of requests?
+
+---
+
+# Example Scenarios
+
+- **Email delivery**
+
+- **Ride sharing**
+
+- **Ordering Food**
+
+- **Lining up to buy Concert Tickets**
+
+In all of these scenarios, the request can be accepted quickly, but the processing of the request can be done at a slower pace without affecting the user experience.
+
+> But how are these systems implemented in practice?
+
+> If web requests return quickly, what processes are actually doing the work?
+
+---
+
+# Imagine for a moment
+
+... that these requests had to be handled synchronously
+
+> What would the user experience be like if ...
+
+* I have to wait for my email to be delivered before I can go back to my inbox?
+* Uber didn't accept my ride request until a driver accepted it?
+* Doordash didn't confirm my order until the kitchen in some restaurant confirmed it?
+* I just saw a spinning wheel while waiting for the purchase page to load for concert tickets?
+
+--
+
+> What would the client and server experience be like in these synchronous scenarios?
+
+--
+
+> How would that impact the systems scalability?
+
+---
+
+# CheapEats a Grubhub Clone
+
+Lets imagine we make a Grubhub clone name CheapEats.
+We started with a fully synchronous application and we discover our users hate the experience and we are losing money.
+
+![CheapEats Synchronous Service](cheap_eats_synchronous.png)
+
+---
+
+# Possible Solution: Extract the Slow Part into a Separate Service
+
+What if we extracted the CheapEats restaurant confirmation into a separate service?
+
+> How would this work?
+
+--
+
+1. The client places their order.
+2. CheapEats main application receives the request
+3. CheapEats main application makes a request to the restraunt confirmation service
+
+**But now what?** 
+* Do we still wait for the confirmation service to respond before we reply to the client?
+
+> What do you think?
+> How does the main application learn about status of the confirmation?
+> When would we reply to the client?
+
+---
+
+![CheapEats Synchronous Service](cheap_eats_synchronous_service.png)
+
+--
+
+> Did extracting a service solve any problems?
+
+---
+
+# Alternative Solution: Background Processes
+
+> What is a background process?
+
+Idea: Do the restaurant confirmation in a process outside of the one handing the web request
+
+---
+
+![CheapEats Background Process](cheap_eats_background_process.png)
+
+* Assume the background process and the request process are co-located and using the same resources
+
+---
+
+# Background Process Evaluation
+
+**What are the pros/cons of this approach?**
+
+--
+
+**Pros:**
+
+* The request process can return immediately
+* The background process(es) can run at its own pace
+
+--
+
+**Cons:**
+* The background process(es) may not be able to keep up with the request rate
+* We need to handle the case where the background process(es) fails
+* The background process(es) takes resources away from fullfilling other requests
+
+---
+
+# Alternative Solution: Background Process Pool
+
+> What is a background process pool?
+
+--
+
+* A pool of background processes that can be used to handle requests
+* Instead of the main application starting the background processes, the main application can just add the work to be done to the database
+* The background processes pull work from the DB
+* We can limit the number of processes in the pool to prevent resource exhaustion
+
+--
+
+**KEY IDEA**: Inverting the responsibility for triggering the confirmation process from the user request to the application
+
+
+---
+
+![CheapEats Background Process Pool](cheap_eats_background_process_pool.png)
+
+---
+
+# Background Process Pool Evaluation
+
+> What are the pros/cons of this approach?
+
+**Pros:**
+* The request process can return immediately
+* The background processes can run at thier own pace
+* A worker process can implement logic to retry failed requests
+
+**Cons:**
+* Handling a large backlog of requests can be slow with limited pool size
+* Scaling up the pool size to handle a backlog still takes away resources from other requests
+
+---
+
+![Service with process pool](cheap_eats_service_with__process_pool.png)
+
+---
+
+# Service with process pool Evaluation
+
+> What are the pros/cons of this approach?
+
+**Pros:**
+* The request process can return immediately
+* The background processes can run at thier own pace
+* A worker process can implement logic to retry failed requests
+* Scaling of the pool can be done independently from the app to handle a backlog or other spike in traffic
+
+**Cons:**
+* Handling a large backlog of requests while scaled up may put a large load on the shared database
+
+---
+
+Alternative Solution: Use a separate database to store the confirmation requests
+
+> How does the main app learn about the confirmation?
+
+--
+
+* Main app could poll this service, but right now this service is not initiated by web requests
+
+--
+
+* We could use a callback to notify the main app when the confirmation is complete
+
+> How would we implement a callback in this scenario?
+
+
+---
+
+![Service with separate database](cheap_eats_service_with_two_worker_pools.png)
+
+> Does this solve the problem?
+
+---
+
+# Service with separate database Evaluation
+
+> What are the pros/cons of this approach?
+
+**Pros:**
+* The request process can return immediately
+* The background processes can run at thier own pace
+* A worker process can implement logic to retry failed requests
+* Scaling of the confirm worker pool can be done independently from the app to handle a backlog or other spike in traffic
+* Scaling of the callback worker pool can be done independelty from the app
+* We can prevent overloading the main app by controlling the rate of callbacks
+
+**Cons:**
+* We are still polling the Main App DB to learn about pending confirmations
+
+--
+
+**Thought** The databases we are polling from our worker pools don't have the same requirements as the DB backing our applications
+
+> Is there a better way to handle this?
+
+---
+
+![Message Queues](cheap_eats_service_message_queue.png)
+
+---
+
+class: center middle
+
+# Questions?
+
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"
+            type="text/javascript"></script>
+    <script type="text/javascript">
+      var hljs = remark.highlighter.engine;
+      var slideshow = remark.create({
+          highlightLanguage: 'ruby',
+          highlightLines: true,
+          hightlightSpans: true,
+          highlightStyle: 'monokai'
+        }) ;
+    </script>
+  </body>
+</html>
