@@ -135,14 +135,14 @@ The following schedule is subject to change, and many slide links are not yet ac
 <div class="week">
 
 ## Week 8 (November 17)
-- Intro to Projects 5
-- Message Queues
+- Intro to [Projects 5](/project5)
+- Message Queues [slides](/slides/2025f/11_decoupling_patterns/index.html)
 - Guest Lecture w/ Matt Schofield
 
 ### Tasks
 
-- Complete Project 4
-- Begin Project 5
+- Complete [Project 4](/project4)
+- Begin [Project 5](/project5)
 
 </div>
 
