@@ -426,6 +426,14 @@ Beanstalk, and then deploy it.</p>
     <span class="na">RAILS_SERVE_STATIC_FILES</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
 </code></pre></div></div>
 
+<p>Copy the following contents into <code class="language-plaintext highlighter-rouge">.ebextensions/healthcheck.config</code>:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">option_settings</span><span class="pi">:</span>
+  <span class="na">aws:elasticbeanstalk:application</span><span class="pi">:</span>
+    <span class="na">Application Healthcheck URL</span><span class="pi">:</span> <span class="s">/health</span>
+  <span class="na">aws:elasticbeanstalk:environment:process:default</span><span class="pi">:</span>
+    <span class="na">HealthCheckPath</span><span class="pi">:</span> <span class="s">/health</span>
+</code></pre></div></div>
+
 <h3 id="configure-the-profile">Configure the Profile</h3>
 
 <p>Inform elasticbeanstalk to use your chosen version of puma.</p>
