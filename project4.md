@@ -254,6 +254,15 @@ option_settings:
     RAILS_SERVE_STATIC_FILES: "true"
 ```
 
+Copy the following contents into `.ebextensions/healthcheck.config`:
+```yaml
+option_settings:
+  aws:elasticbeanstalk:application:
+    Application Healthcheck URL: /health
+  aws:elasticbeanstalk:environment:process:default:
+    HealthCheckPath: /health
+```
+
 ### Configure the Profile
 
 Inform elasticbeanstalk to use your chosen version of puma.
