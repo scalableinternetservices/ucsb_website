@@ -320,7 +320,7 @@ class BedrockClient
   # Usage:
   #
   #   client = BedrockClient.new(
-  #     model_id: "anthropic.claude-3-5-sonnet-20241022-v2:0",
+  #     model_id: "anthropic.claude-3-5-haiku-20241022-v1:0",
   #     region: "us-west-2"
   #   )
   #
@@ -395,7 +395,7 @@ class BedrockClient
   private
 
   def should_fake_llm_call?
-    !(ENV["ALLOW_BEDROCK_CALL"] == "true") or Current.load_test_request
+    !(ENV["ALLOW_BEDROCK_CALL"] == "true") or Current.might_be_locust_request
   end
 
   # Converse can return multiple content blocks; we’ll just join all text.
