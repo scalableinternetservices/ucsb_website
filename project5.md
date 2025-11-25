@@ -103,3 +103,184 @@ This team must be comleted as part of a team.  You should be using the same team
     - A Pull Request (either merged or closed) for each scalability change discussed in the report
 - **Report**: A report as described above.  Make sure to read the full project description to get an undersaning of what is expected in the report.
 
+
+## Instructions for using an LLM in your application
+
+
+### Setup your project
+
+Add the following gem to your Gemfile, then run `bundle install` 
+```
+gem "aws-sdk-bedrockruntime"
+```
+
+Add this file to you application in app/models/current.rb
+```
+class Current < ActiveSupport::CurrentAttributes
+  attribute :might_be_locust_request
+end
+```
+
+Add the following code to app/controllers/application_controller.rb
+```
+class ApplicationController < ActionController::API
+  include ActionController::Cookies
+
+  before_action :detect_locust_request
+
+  private
+
+  def detect_locust_request
+    ua = request.user_agent.to_s
+
+    if ua.include?("python-requests")
+      Current.might_be_locust_request = true
+    else
+      Current.might_be_locust_request = false
+    end
+  end
+end
+```
+
+Add the following code to app/services/bedrock_client.rb
+```
+# frozen_string_literal: true
+
+require "aws-sdk-bedrockruntime"
+
+class BedrockClient
+  # Simple wrapper for calling an LLM on Amazon Bedrock (Converse API).
+  #
+  # Usage:
+  #
+  #   client = BedrockClient.new(
+  #     model_id: "anthropic.claude-3-5-sonnet-20241022-v2:0",
+  #     region: "us-west-2"
+  #   )
+  #
+  #   response = client.call(
+  #     system_prompt: "You are a helpful assistant.",
+  #     user_prompt:   "Explain eventual consistency in simple terms."
+  #   )
+  #
+  #   puts response[:output_text]
+  #
+  def initialize(model_id:, region: ENV["AWS_REGION"] || "us-west-2")
+    @model_id = model_id
+    @client   = Aws::BedrockRuntime::Client.new(region: region)
+  end
+
+  # Calls the LLM with the given system and user prompts.
+  #
+  # Params:
+  # - system_prompt: String
+  # - user_prompt:   String
+  # - max_tokens:    Integer (optional)
+  # - temperature:   Float   (optional)
+  #
+  # Returns a Hash like:
+  # {
+  #   output_text: "model response...",
+  #   raw_response: <Aws::BedrockRuntime::Types::ConverseResponse>
+  # }
+  #
+  def call(system_prompt:, user_prompt:, max_tokens: 1024, temperature: 0.7)
+
+    if should_fake_llm_call?
+      sleep(rand(0.8..3.5)) # Simulate a delay
+      return {
+        output_text: "This is a fake response from the LLM.",
+        raw_response: nil
+      }
+    end
+
+    response = @client.converse(
+      model_id: @model_id,
+      messages: [
+        {
+          role: "user",
+          content: [
+            { text: user_prompt }
+          ]
+        }
+      ],
+      system: [
+        {
+          text: system_prompt
+        }
+      ],
+      inference_config: {
+        max_tokens: max_tokens,
+        temperature: temperature
+      }
+    )
+
+    output_text = extract_text_from_converse_response(response)
+
+    {
+      output_text: output_text,
+      raw_response: response
+    }
+  rescue Aws::BedrockRuntime::Errors::ServiceError => e
+    # You can customize error handling however you like.
+    raise "Bedrock LLM call failed: #{e.message}"
+  end
+
+  private
+
+  def should_fake_llm_call?
+    !(ENV["ALLOW_BEDROCK_CALL"] == "true") or Current.load_test_request
+  end
+
+  # Converse can return multiple content blocks; we’ll just join all text.
+  def extract_text_from_converse_response(response)
+    return "" unless response&.output&.message&.content
+
+    response.output.message.content
+            .select { |c| c.respond_to?(:text) && c.text }
+            .map(&:text)
+            .join("\n")
+  end
+end
+```
+
+### Instructions for local development
+
+**KEEP THESE SECURE**
+
+To use this this in local development, you will need to setup the AWS credentials in your localmachine.
+To do this copy the ~/.aws/credentials file from the jump box to your localhost and put them in the same
+location
+
+**DO NOT CHECK THESE VALUSE INTO GITHUB**
+```
+scp project2backend@ec2.cs291.com:~/.aws/credentials ~/.aws/cs291_credentials
+```
+
+You will need to mount this as a volume in your docker compose to make the credentials work in local development
+
+Add a new env var and volume to your web container in the docker compose to make the credentials available to the
+app when running in your docker container
+```
+web:
+    environment:
+        - AWS_SHARED_CREDENTIALS_FILE=/app/.aws/cs291_credentials
+    volumes:
+        - ${HOME}/.aws:/app/.aws:ro   # 👈 mount your host AWS creds here
+```
+
+
+### Instructions for using the LLM when deployed to Elastic Beanstalk
+
+I've added a few layers of protection to prevent calling the LLM in the load testing environment.
+
+To be allowed access to call the LLM on bedrock from Elastic Beanstalk you will need to set the instance profile
+to be used by your EC2 instances at the time you create your environment and set an ENV variable that will allow
+the LLM to be called.  These protections are implmented in the BedrockClient shown above.
+
+```
+ eb create <env_name_goes_here> \
+   --envvars "ALLOW_BEDROCK_CALL=true" \
+   --profile eb-with-bedrock-ec2-profile \
+   <Other parameters normally used>
+```
